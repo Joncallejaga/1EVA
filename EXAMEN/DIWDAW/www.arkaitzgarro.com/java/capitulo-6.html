@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="15/04/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Sentencias repetitivas o bucles | Java</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">Java</a></h1>
+        <p class="span3">
+                        <a href="capitulo-5.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-7.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="sentencias-repetitivas-o-bucles"><span>Capítulo 6</span> Sentencias repetitivas o bucles</h1>
+        <p>Los bucles, iteraciones o sentencias repetitivas modifican el flujo secuencial de un programa permitiendo la ejecución reiterada de una sentencia o sentencias. En Java hay tres tipos diferentes de bucles: <code>for</code>, <code>while</code> y <code>do-while</code>.</p>
+
+<h2 id="sentencia-for">6.1 Sentencia for</h2>
+
+<p>Es un bucle o sentencia repetitiva que</p>
+
+<ul>
+<li>ejecuta la sentencia de inicio.</li>
+<li>verifica la expresión booleana de término.</li>
+</ul>
+
+<p>Sintaxis:</p>
+
+<ul>
+<li>si es cierta, ejecuta la sentencia entre llaves y la sentencia de iteración para volver a verificar la expresión booleana de término.</li>
+<li>si es falsa, sale del bucle.</li>
+</ul>
+
+<div class="figure" id="figure-6-1">
+    <img src="images/cap06/sentencia-for.png" alt="Flujograma de la sentencia for" />
+
+    <p class="caption"><strong>Figura 6.1</strong> Flujograma de la sentencia for</p>
+</div>
+
+
+<p>Sintaxis:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">for</span> <span class="br0">&#40;</span>inicio<span class="sy0">;</span> termino<span class="sy0">;</span> iteracion<span class="br0">&#41;</span>
+    sentencia<span class="sy0">;</span></pre>
+</div>
+
+<p>O si se desean repetir varias sentencias:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">for</span> <span class="br0">&#40;</span>inicio<span class="sy0">;</span> termino<span class="sy0">;</span> iteracion<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    sentencia_1<span class="sy0">;</span> 
+    sentencia_2<span class="sy0">;</span> 
+    sentencia_n<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Las llaves sólo son necesarias si se quieren repetir varias sentencias, aunque se recomienda su porque facilita la lectura del código fuente y ayuda a evitar errores al modificarlo. Habitualmente, en la expresión lógica de término se verifica que la variable de control alcance un uso determinado valor. Por ejemplo:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">for</span> <span class="br0">&#40;</span>i <span class="sy0">=</span> valor_inicial<span class="sy0">;</span> i <span class="sy0">&lt;=</span> valor_final<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    sentencia<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Es completamente legal en Java declarar una variable dentro de la cabecera de un bucle <code>for</code>. De esta forma la variable (local) sólo tiene ámbito dentro del bucle. Ejemplo sencillo:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Tabla de multiplicar del 5&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span><span class="nu0">0</span> <span class="sy0">;</span> i <span class="sy0">&lt;=</span> <span class="nu0">10</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="nu0">5</span> <span class="sy0">+</span> <span class="st0">&quot; * &quot;</span> <span class="sy0">+</span> i <span class="sy0">+</span> <span class="st0">&quot; = &quot;</span> <span class="sy0">+</span> <span class="nu0">5</span> <span class="sy0">*</span> i<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Salida por pantalla al ejecutar el código anterior:</p>
+
+<div class="code java">
+<pre class="java"><span class="nu0">5</span> <span class="sy0">*</span> <span class="nu0">0</span> <span class="sy0">=</span> <span class="nu0">0</span>
+<span class="nu0">5</span> <span class="sy0">*</span> <span class="nu0">1</span> <span class="sy0">=</span> <span class="nu0">5</span>
+<span class="nu0">5</span> <span class="sy0">*</span> <span class="nu0">2</span> <span class="sy0">=</span> <span class="nu0">10</span>
+<span class="nu0">5</span> <span class="sy0">*</span> <span class="nu0">3</span> <span class="sy0">=</span> <span class="nu0">15</span>
+<span class="nu0">5</span> <span class="sy0">*</span> <span class="nu0">4</span> <span class="sy0">=</span> <span class="nu0">20</span>
+<span class="nu0">5</span> <span class="sy0">*</span> <span class="nu0">5</span> <span class="sy0">=</span> <span class="nu0">25</span>
+<span class="nu0">5</span> <span class="sy0">*</span> <span class="nu0">6</span> <span class="sy0">=</span> <span class="nu0">30</span>
+<span class="nu0">5</span> <span class="sy0">*</span> <span class="nu0">7</span> <span class="sy0">=</span> <span class="nu0">35</span>
+<span class="nu0">5</span> <span class="sy0">*</span> <span class="nu0">8</span> <span class="sy0">=</span> <span class="nu0">40</span>
+<span class="nu0">5</span> <span class="sy0">*</span> <span class="nu0">9</span> <span class="sy0">=</span> <span class="nu0">45</span>
+<span class="nu0">5</span> <span class="sy0">*</span> <span class="nu0">10</span> <span class="sy0">=</span> <span class="nu0">50</span></pre>
+</div>
+
+<h2 id="sentencia-while">6.2 Sentencia while</h2>
+
+<p>Es un bucle o sentencia repetitiva con una condicion al principio. Se ejecuta una sentencia mientras sea cierta una condición. La sentencia puede que no se ejecute ni una sola vez.</p>
+
+<p>Sintaxis:</p>
+
+<div class="code java">
+<pre class="java"><span class="br0">&#91;</span>inicializacion<span class="sy0">;</span><span class="br0">&#93;</span> 
+<span class="kw1">while</span> <span class="br0">&#40;</span>expresionLogica<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    sentencias<span class="sy0">;</span>
+    <span class="br0">&#91;</span>iteracion<span class="sy0">;</span><span class="br0">&#93;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="figure" id="figure-6-2">
+    <img src="images/cap06/sentencia-while.png" alt="Flujograma de la sentencia while" />
+
+    <p class="caption"><strong>Figura 6.2</strong> Flujograma de la sentencia while</p>
+</div>
+
+
+<p>Se recuerda que el vector <code>args</code> contiene todos los parámetros o argumentos indicados en la línea de comandos. El primer elemento de este vector es <code>args[0]</code>. El tamaño del vector puede determinarse añadiendo <code>.length</code> a su identificador. Como el índice del primer elemento del vector es <code>0</code>, si el tamaño del vector es n, entonces el último elemento del vector tiene índice <code>n-1</code>. En el ejemplo anterior de ejecución del programa <code>eco, args[0]</code> toma como valor la cadena "<code>Esto</code>", <code>args[1]</code> vale "es", <code>args[2]</code> vale "una" y <code>args[3]</code> vale "<code>prueba</code>".</p>
+
+<h2 id="sentencia-do-while">6.3 Sentencia do-while</h2>
+
+<p>Es un bucle o sentencia repetitiva con una condicion al final. Se ejecuta una sentencia mientras sea cierta una condición. En este caso, la sentencia se ejecuta al menos una vez.</p>
+
+<div class="figure" id="figure-6-3">
+    <img src="images/cap06/sentencia-do-while.png" alt="Flujograma de la sentencia do/while" />
+
+    <p class="caption"><strong>Figura 6.3</strong> Flujograma de la sentencia do/while</p>
+</div>
+
+
+<p>Sintaxis:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">do</span> <span class="br0">&#123;</span>
+    sentencias<span class="sy0">;</span>
+    <span class="br0">&#91;</span>iteracion<span class="sy0">;</span><span class="br0">&#93;</span> 
+<span class="br0">&#125;</span> <span class="kw1">while</span> <span class="br0">&#40;</span>expresionLogica<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-6.html#sentencias-repetitivas-o-bucles">Sentencias repetitivas o bucles</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>6.1</span>
+                        <a class="internal" href="capitulo-6.html#sentencia-for">Sentencia for</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>6.2</span>
+                        <a class="internal" href="capitulo-6.html#sentencia-while">Sentencia while</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>6.3</span>
+                        <a class="internal" href="capitulo-6.html#sentencia-do-while">Sentencia do-while</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

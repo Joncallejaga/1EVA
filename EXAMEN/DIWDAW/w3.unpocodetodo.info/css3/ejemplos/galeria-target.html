@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>:target</title>
+<meta name="description" content="Selectores CSS3. Presentaci&oacute;n realizada utilizando HTML5 y CSS3." />
+  <meta name="keywords" content="tutorial, html5, css, css3, selectores CSS3, , chuleta css, propiedades css"/>
+  <meta name="author" content="enxaneta.info" />
+  <meta property="og:title" content="Referencia CSS3" /> 
+  <meta property="og:type" content="website" /> 
+  <meta property="og:image" content="http://w3.unpocodetodo.info/images/w3_og.png" /> 
+  <meta property="og:url" content="http://w3.unpocodetodo.info/css3/ejemplos/galeria-target.html" /> 
+  <meta property="og:site_name" content="w3.unpocodetodo.info" /> 
+  <meta property="og:description" content="Selectores CSS3. Presentaci&oacute;n realizada utilizando HTML5 y CSS3." />
+  
+  <link rel="icon" type="image/png" href="../../images/w3.png" />
+  <!-- 57x57 older iPhone and Android devices -->
+ <!-- <link rel="apple-touch-icon-precomposed" href="http://w3.unpocodetodo.info/images/apple-touch-icon-precomposed.png">-->
+  <!-- iPad 1 and 2 & iPad mini -->
+  <link rel="apple-touch-icon" sizes="72x72" href="../../images/apple-touch-icon-72x72.png">
+  <!-- iPhone 4, 4S, 5 and iPod Touch -->
+  <link rel="apple-touch-icon" sizes="114x114" href="../../images/apple-touch-icon-114x114.png">
+  <!-- iPad 3rd gen -->
+  <link rel="apple-touch-icon" sizes="144x144" href="../../images/apple-touch-icon-144x144.png"> 
+<style>
+body{ margin:0; padding:0; width:100%;}
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+    box-sizing: border-box; 
+}
+#contenido{ 
+	width:390px; 
+	padding:0; 
+	margin:0 auto;
+}  
+  
+  
+#botones article{ 
+	display:inline-block; 
+	text-align:center; 
+	width:15.75%; 
+	height:62px; 
+	padding:0; 
+	padding-top:5px; 
+	margin:0; 
+	margin-bottom:1em; 
+	border:1px solid #d9d9d9;
+} 
+
+#botones img{
+  -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+  -webkit-transition: box-shadow 1.5s ease;
+  -moz-transition: box-shadow 1.5s ease;
+  transition: box-shadow 1.5s ease; 
+}
+
+#botones article:hover{
+    -webkit-box-shadow: 0 0 6px 1px rgba(43, 166, 203, 0.5);
+    box-shadow: 0 0 6px 1px rgba(43, 166, 203, 0.5); }
+
+div#galeria{ 
+	height:690px; 
+	padding-top:30px; 
+	width:390px; 
+	position:relative;
+}
+div#galeria h1{ margin:0;}
+div#galeria article[id|=flor]{ text-align:center;}
+div#galeria article.image{
+	height:690px;/* la misma altura que la de #galeria !!! */
+	width:390px;
+	pointer-events:none;
+	
+	/*pointer-events:  none;
+	El elemento no es nunca el objetivo de los eventos de raton.
+    The element is never the target of mouse events;
+	*/ 
+	
+	position:absolute; 
+	top:0; 
+	right:0; }
+
+div#galeria article.image img{ 
+	position:absolute; 
+	bottom:0; 
+	right:0;
+	opacity:0; 
+	-webkit-transition: opacity 1.5s ease;
+	-moz-transition: opacity 1.5s ease;
+	transition: opacity 1.5s ease;
+}
+
+div#galeria article:target img, 
+div#galeria article.target img{opacity:1;}
+
+</style>
+</head>
+
+<body>
+<div id="contenido">
+
+
+  
+<div id="galeria">
+<h1>El pseudo-selector :target</h1>
+<p>Presentaci&oacute;n realizada utilizando solo HTML y CSS3.<br>
+Haz clic en una de las miniaturas para ver la imagen.</p>
+<div id="botones">
+<article> 
+  <a href="galeria-target.html#flor1"><img src="images/flor1_vistaprevia.jpg" width="50" height="50" alt="vista previa flor"></a>
+</article>
+<article>
+  <a href="galeria-target.html#flor2"><img src="images/flor2_vistaprevia.jpg" width="50" height="50" alt="vista previa flor"></a>
+</article>
+<article>
+  <a href="galeria-target.html#flor3"><img src="images/flor3_vistaprevia.jpg" width="50" height="50" alt="vista previa flor"></a>
+</article>
+<article>
+  <a href="galeria-target.html#flor4"><img src="images/flor4_vistaprevia.jpg" width="50" height="50" alt="vista previa flor"></a>
+</article>
+<article>
+  <a href="galeria-target.html#flor5"><img src="images/flor5_vistaprevia.jpg" width="50" height="50" alt="vista previa flor"></a>
+</article>
+<article>
+  <a href="galeria-target.html#flor6"><img src="images/flor6_vistaprevia.jpg" width="50" height="50" alt="vista previa flor"></a>
+</article>
+<article>
+  <a href="galeria-target.html#flor7"><img src="images/flor7_vistaprevia.jpg" width="50" height="50" alt="vista previa flor"></a>
+</article>
+<article>
+  <a href="galeria-target.html#flor8"><img src="images/flor8_vistaprevia.jpg" width="50" height="50" alt="vista previa flor"></a>
+</article>
+<article>
+  <a href="galeria-target.html#flor9"><img src="images/flor9_vistaprevia.jpg" width="50" height="50" alt="vista previa flor"></a>
+</article>
+<article>
+  <a href="galeria-target.html#flor10"><img src="images/flor10_vistaprevia.jpg" width="50" height="50" alt="vista previa flor"></a>
+</article>
+<article>
+  <a href="galeria-target.html#flor11"><img src="images/flor11_vistaprevia.jpg" width="50" height="50" alt="vista previa flor"></a>
+</article>
+<article>
+  <a href="galeria-target.html#flor12"><img src="images/flor12_vistaprevia.jpg" width="50" height="50" alt="vista previa flor"></a>
+</article>
+</div>
+
+  <article id="flor1" class="target image"><img src="images/flor1.jpg" width="390" height="390" alt="flor"></article> 
+  <article id="flor2" class="image"><img src="images/flor2.jpg" width="390" height="390" alt="flor"></article> 
+  <article id="flor3" class="image"><img src="images/flor3.jpg" width="390" height="390" alt="flor"></article> 
+  <article id="flor4" class="image"><img src="images/flor4.jpg" width="390" height="390" alt="flor"></article> 
+  <article id="flor5" class="image"><img src="images/flor5.jpg" width="390" height="390" alt="flor"></article> 
+  <article id="flor6" class="image"><img src="images/flor6.jpg" width="390" height="390" alt="flor"></article> 
+  <article id="flor7" class="image"><img src="images/flor7.jpg" width="390" height="390" alt="flor"></article> 
+  <article id="flor8" class="image"><img src="images/flor8.jpg" width="390" height="390" alt="flor"></article> 
+  <article id="flor9" class="image"><img src="images/flor9.jpg" width="390" height="390" alt="flor"></article> 
+  <article id="flor10" class="image"><img src="images/flor10.jpg" width="390" height="390" alt="flor"></article> 
+  <article id="flor11" class="image"><img src="images/flor11.jpg" width="390" height="390" alt="flor"></article> 
+  <article id="flor12" class="image"><img src="images/flor12.jpg" width="390" height="390" alt="flor"></article> 
+
+</div>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+
+</div>
+</body>
+</html>

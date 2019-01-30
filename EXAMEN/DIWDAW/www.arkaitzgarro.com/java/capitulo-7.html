@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="15/04/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Otras sentencias | Java</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">Java</a></h1>
+        <p class="span3">
+                        <a href="capitulo-6.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-8.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="otras-sentencias"><span>Capítulo 7</span> Otras sentencias</h1>
+        <h2 id="sentencia-break">7.1 Sentencia break</h2>
+
+<p>La sentencia <code>break</code> puede encontrarse en sentencias switch o en bucles. Al ejecutarse, deja el ámbito de la sentencia en la que se encuentra y pasa a la siguiente sentencia.
+Puede emplearse con etiquetas, especificando sobre qué sentencia se aplica si hay varias anidadas.</p>
+
+<div class="code java">
+<pre class="java">etiqueta<span class="sy0">:</span> sentencia<span class="sy0">;</span>
+<span class="kw1">break</span> <span class="br0">&#91;</span>etiqueta<span class="br0">&#93;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>En la siguiente figura se muestra el diagrama de flujo de un bucle while que contiene una sentencia <code>break</code>:</p>
+
+<div class="figure" id="figure-7-1">
+    <img src="images/cap07/bucle-while.png" alt="Diagrama de flujo de un bucle <code>while</code> que incluye una sentencia <code>break</code>" />
+
+    <p class="caption"><strong>Figura 7.1</strong> Diagrama de flujo de un bucle <code>while</code> que incluye una sentencia <code>break</code></p>
+</div>
+
+
+<h2 id="sentencia-continue">7.2 Sentencia continue</h2>
+
+<p>La sentencia <code>continue</code> se emplea sólo en bucles. Al ejecutarse la iteración en la que se encuentra, el bucle finaliza y se inicia la siguiente. También puede emplearse con etiquetas, especificando sobre que sentencia se aplica si hay varias anidadas.</p>
+
+<div class="code java">
+<pre class="java">etiqueta<span class="sy0">:</span> sentencia<span class="sy0">;</span>
+<span class="kw1">continue</span> <span class="br0">&#91;</span>etiqueta<span class="br0">&#93;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>En la siguiente figura se muestra el diagrama de flujo de un bucle while que contiene una sentencia continue:</p>
+
+<div class="figure" id="figure-7-2">
+    <img src="images/cap07/bucle-while2.png" alt="Diagrama de flujo de un bucle <code>while</code> que incluye una sentencia <code>continue</code>" />
+
+    <p class="caption"><strong>Figura 7.2</strong> Diagrama de flujo de un bucle <code>while</code> que incluye una sentencia <code>continue</code></p>
+</div>
+
+
+<p>Ejemplo de utilización combinada de <code>break</code> y <code>continue</code> con y sin etiquetas:</p>
+
+<div class="code java">
+<pre class="java">uno<span class="sy0">:</span> <span class="kw1">for</span><span class="br0">&#40;</span> ... <span class="sy0">;</span> ... <span class="sy0">;</span> ... <span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    dos<span class="sy0">:</span> <span class="kw1">for</span><span class="br0">&#40;</span> ... <span class="sy0">;</span> ... <span class="sy0">;</span> ... <span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="co1">// Grupo de sentencias A </span>
+        sentenciasA<span class="sy0">;</span> 
+        <span class="kw1">continue</span><span class="sy0">;</span> <span class="co1">// sigue en el bucle interno</span>
+        <span class="co1">// Grupo de sentencias B </span>
+        sentenciasB<span class="sy0">;</span> 
+        <span class="kw1">continue</span> uno<span class="sy0">;</span>
+        <span class="co1">// sigue en el principal </span>
+        <span class="co1">// Grupo de sentencias C </span>
+        sentenciasC<span class="sy0">;</span> 
+        <span class="kw1">break</span> uno<span class="sy0">;</span>
+        <span class="co1">// sale del principal </span>
+        <span class="co1">// Grupo de sentencias D </span>
+        sentenciasD<span class="sy0">;</span> 
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="tratamiento-de-excepciones">7.3 Tratamiento de excepciones</h2>
+
+<p>Una excepción es una situación anómala a la que llega la ejecución de un programa. Estas situaciones anómalas pueden ser el intento de abrir un fichero que no existe, la división por cero o el acceso a un objeto no inicializado.</p>
+
+<p>Java proporciona un mecanismo para detectar y solucionar las excepciones que se puede llegar a producir durante la ejecución de un programa. En Java estamos obligados a tratar las excepciones cuando se producen, bien gestionándolas directamente o bien desentendiéndonos de ellas, pero hasta esto último debemos hacerlo explicitamente.</p>
+
+<p>En Java existen dos grandes tipos de excepciones: los Errores y las Excepciones propiamente dichas:</p>
+
+<ul>
+<li>Los Errores son situaciones irrecuperables, por ejemplo fallos de la máquina vitual. Ante ellos no hay más alternativa que cerrar la aplicación, y no estamos obligados a gestionarlas.</li>
+<li>Las excepciones son situaciones anómales ante las cuales bien debemos reaccionar o bien nos desentendemos explítamente. Cuando una excepción se produce se acompaña de toda la información relevante para que podamos gestionarla.</li>
+</ul>
+
+<p>Un caso particular son las excepciones que derivan de <code>RuntimeException</code>, como por ejemplo <code>NullPointerException</code>.</p>
+
+<p>Para gestionar una excepción debe emplearse una sentencia <code>try</code>. La sintaxis de la sentencia se muestra a continuación:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">try</span> <span class="br0">&#123;</span>
+    sentencia_1<span class="sy0">;</span>
+    sentencia_2<span class="sy0">;</span>
+    ...
+<span class="br0">&#125;</span>  <span class="kw1">catch</span> <span class="br0">&#40;</span>ClaseExcepcion objetoExcepcion<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    sentencia_a<span class="sy0">;</span>
+    sentencia_b<span class="sy0">;</span>
+    ...
+<span class="br0">&#125;</span> <span class="kw1">catch</span><span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+   <span class="co1">//Aquí tratamos otro tipo de expeción</span>
+<span class="br0">&#125;</span> <span class="kw1">finally</span> <span class="br0">&#123;</span>
+    <span class="co1">//Aquí realizamos las tareas comunes.</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La sentencia comienza por la palabra reservada <code>try</code> seguida de una o más sentencias agrupadas entre paréntesis. Dichas sentencias son las que, en principio, pueden dar lugar a una excepción durante su ejecución. La clase <code>Exception</code>, que incluye todos los tipos de excepciones de interés, recoge cualquier excepción generada por el bloque <code>try</code>. Por ejemplo, determinados métodos como <code>readLine</code> generan una excepción si se produce un problema con la entrada o salida de datos. En este caso, se necesita recoger las excepciones de tipo <code>IOException</code>. La ejecución de otros metódos, como parseInt, genera un error si la cadena dada como parámetro no puede convertirse en un entero. En este caso, la excepción es de tipo <code>NumberFormatException</code>.</p>
+
+<p>A continuación aparece una o más clausulas <code>catch</code> que son las <em>manejadoras</em> de las excepciones. En cada una de ellas, se necesita especificar lo que hacer cuando ocurre una excepción en particular. Esta parte del código sólo se ejecuta si se ha producido una excepción.</p>
+
+<p>En Java existen muchos tipos de excepciones estándar. Algunas de las excepciones más comunes se muestran en la siguiente tabla.</p>
+
+<div class="figure" id="figure-7-3">
+    <img src="images/cap07/excepciones.png" alt="Excepciones y significados" />
+
+    <p class="caption"><strong>Figura 7.3</strong> Excepciones y significados</p>
+</div>
+
+
+<p>Como hemos comentado antes, no es necesario que tratemos las excepciones, pero si no lo vamos a hacer, debemos indicarlo explicitamente. El modo de hacerlo es indicando que el método dentro del cual se puede lanzar una excepción a su vez la <em>relanza</em>, como en el siguiente ejemplo:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw4">void</span> metodoLanzador<span class="br0">&#40;</span><span class="kw4">int</span> a<span class="br0">&#41;</span> <span class="kw1">throws</span> <span class="kw3">IOException</span>, <span class="kw3">ClassNotFoundException</span> <span class="br0">&#123;</span>...<span class="br0">&#125;</span></pre>
+</div>
+
+<h3 id="creacion-de-excepciones-propias">7.3.1 Creación de excepciones propias.</h3>
+
+<p>Para crear una excepción propia basta extender la clase Exception o la excepción más adecuada, y en el constructor de la clase llamar a la clase padre con el mensaje que se desee mostrar cuando se produzca la excepción.</p>
+
+<p>Para lanzar una excepción explicitamente, utilizamos la palabra reservada <code>throw</code> e indicamos en la declaración del método que puede lanzar la excepción deseada. En el siguiente código se muestra un ejemplo.</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> MiExcepcion <span class="kw1">extends</span> Excepcion <span class="br0">&#123;</span>
+    <span class="kw1">public</span> MiExcepcion<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">super</span><span class="br0">&#40;</span><span class="st0">&quot;Texto de la excepcion&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> LanzaExcepcion <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> metodo<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="kw1">throws</span> MiExcepcion <span class="br0">&#123;</span>
+        <span class="co1">//...</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span>a <span class="sy0">&lt;</span> b<span class="br0">&#41;</span> <span class="kw1">throw</span> <span class="kw1">new</span> MiExcepcion<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="co1">//...</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> OtraClase <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> metodo<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        LanzaExcepcion le <span class="sy0">=</span> <span class="kw1">new</span> LanzaExcepcion<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">try</span> <span class="br0">&#123;</span>
+            le.<span class="me1">metodo</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span>MiExcepcion e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw3">System</span>.<span class="me1">err</span>.<span class="me1">println</span><span class="br0">&#40;</span>e.<span class="me1">getMessage</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="operaciones-de-entrada-y-salida-de-datos">7.4 Operaciones de entrada y salida de datos</h2>
+
+<p>Como se ha mostrado en el ejemplo anterior las operaciones de entrada y salida de datos en un programa se llevan a cabo utilizando el paquete <code>java.io</code>. La sentencia import <code>java.io.*</code>; da acceso a la librería de Java necesaria para cualquier operación de este tipo. Los canales o dispositivos predefinidos para realizar entradas o salidas de datos son los siguientes:</p>
+
+<ul>
+<li><code>System.in</code>:entrada estándar</li>
+<li><code>System.out</code>:salida estándar</li>
+<li><code>System.err</code>:salida de errores</li>
+</ul>
+
+<p>Los métodos <code>print</code> y <code>println</code> se emplean para la salida de datos en formato de concatenación de <code>Strings</code>. El método <code>readLine</code> facilita una forma sencilla para realizar la entrada de datos mediante un objeto <code>String</code>. Este objeto toma el valor de la cadena de caracteres que acaben en un final de línea o en un final de archivo. Para poder emplear el método <code>readLine</code> es necesario construir un objeto <code>BufferedReader</code> sobre un objeto <code>InputStreamReader</code>, que a su vez se crea a partir de <code>System.in</code>.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-7.html#otras-sentencias">Otras sentencias</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.1</span>
+                        <a class="internal" href="capitulo-7.html#sentencia-break">Sentencia break</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.2</span>
+                        <a class="internal" href="capitulo-7.html#sentencia-continue">Sentencia continue</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.3</span>
+                        <a class="internal" href="capitulo-7.html#tratamiento-de-excepciones">Tratamiento de excepciones</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.4</span>
+                        <a class="internal" href="capitulo-7.html#operaciones-de-entrada-y-salida-de-datos">Operaciones de entrada y salida de datos</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

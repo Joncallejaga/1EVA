@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="08/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Funciones | JavaScript</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">JavaScript</a></h1>
+        <p class="span3">
+                        <a href="capitulo-6.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-8.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="funciones"><span>Capítulo 7</span> Funciones</h1>
+        <p>Las funciones son la base de la modularidad en JavaScript. Son utilizadas para reutilizar código, ocultar información y abstracción. Por norma general, las funciones son utilizadas para especificar el comportamiento de los objetos, aunque pueden definirse funciones al margen de los objetos.</p>
+
+<p>Las funciones en JavaScript se definen mediante la palabra reservada <code>function</code>, seguida del nombre de la función. Su definición formal es la siguiente:</p>
+
+<p><img src="images/diagrams/function-literal.png" alt="Diagrama de definición de una función"></p>
+
+<p><img src="images/diagrams/function-body.png" alt="Diagrama de definición del cuerpo de una función"></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> nombre_funcion<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  ...
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>El nombre de la función se utiliza para <em>llamar</em> a esa función cuando sea necesario. El concepto es el mismo que con las variables, a las que se les asigna un nombre único para poder utilizarlas dentro del código. Después del nombre de la función, se incluyen dos paréntesis donde indicaremos los parámetros de la función. Por último, los símbolos <code>{</code> y <code>}</code> se utilizan para encerrar todas las instrucciones que pertenecen a la función.</p>
+
+<h2 id="funciones-objeto">7.1 Funciones objeto</h2>
+
+<p>Las funciones en Javascript son objetos. Las funciones son objetos enlazados con <code>Function.prototype</code> (que a su vez enlaza con <code>Object.prototype</code>), que incluyen dos propiedades ocultas: el contexto de la función y el código que implementa su comportamiento.</p>
+
+<p>Toda función en JavaScript es creada con una propiedad <code>protoype</code>. Su valor es un objeto con una propiedad <em>constructor</em> cuyo valor es la propia función. Esto es diferente al enlace oculto a <code>Function.prototype</code>. Veremos el significado de esta complicada construcción más adelante. Como las funciones son objetos, pueden ser utilizadas como cualquier otro valor. Pueden ser almacenadas en variables, objetos o arrays. Pueden ser pasadas como argumentos a otras funciones, y pueden ser retornadas por otras funciones. Además, al ser objetos, también pueden tener métodos. Lo que las hace realmente especiales es que pueden ser llamadas.</p>
+
+<h2 id="argumentos-y-valores-de-retorno">7.2 Argumentos y valores de retorno</h2>
+
+<p>Las funciones más sencillas no necesitan ninguna información para producir sus resultados, aunque lo normal es que necesiten de datos para producir resultados. Las variables que necesitan las funciones se llaman <em>argumentos</em>. Antes de que pueda utilizarlos, la función debe indicar cuántos argumentos necesita y cuál es el nombre de cada argumento. Además, al llamar a la función, se deben incluir los valores (o expresiones) que se le van a pasar a la función. Los argumentos se indican dentro de los paréntesis que van detrás del nombre de la función y se separan con una coma (<code>,</code>).</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> s <span class="sy0">=</span> <span class="kw1">function</span> suma_y_muestra<span class="br0">&#40;</span>n1<span class="sy0">,</span> n2<span class="br0">&#41;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span></pre>
+</div>
+
+<p>A continuación, para utilizar el valor de los argumentos dentro de la función, se debe emplear el mismo nombre con el que se definieron los argumentos:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> s <span class="sy0">=</span> <span class="kw1">function</span> suma_y_muestra<span class="br0">&#40;</span>n1<span class="sy0">,</span> n2<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">var</span> resultado <span class="sy0">=</span> n1 <span class="sy0">+</span> n2<span class="sy0">;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;El resultado es &quot;</span> <span class="sy0">+</span> resultado<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Dentro de la función, el valor de la variable <code>n1</code> será igual al primer valor que se le pase a la función y el valor de la variable <code>n2</code> será igual al segundo valor que se le pasa.</p>
+
+<p>Las funciones no solamente puede recibir variables y datos, sino que también pueden devolver los valores que han calculado. Para devolver valores dentro de una función, se utiliza la palabra reservada <code>return</code>. Aunque las funciones pueden devolver valores de cualquier tipo, solamente pueden devolver un valor cada vez que se ejecutan.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> c <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">&#40;</span>precio<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">var</span> impuestos <span class="sy0">=</span> <span class="nu0">1.21</span><span class="sy0">;</span>
+  <span class="kw1">var</span> gastosEnvio <span class="sy0">=</span> <span class="nu0">10</span><span class="sy0">;</span>
+  <span class="kw1">var</span> precioTotal <span class="sy0">=</span> <span class="br0">&#40;</span> precio <span class="sy0">*</span> impuestos <span class="br0">&#41;</span> <span class="sy0">+</span> gastosEnvio<span class="sy0">;</span>
+&nbsp;
+  <span class="kw1">return</span> precioTotal<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Para que la función devuelva un valor, solamente es necesario escribir la palabra reservada <code>return</code> junto con el nombre de la variable que se quiere devolver. En el ejemplo anterior, la ejecución de la función llega a la instrucción <code>return precioTotal;</code> y en ese momento, devuelve el valor que contenga la variable <code>precioTotal</code>.</p>
+
+<p>Como la función devuelve un valor, en el punto en el que se realiza la llamada, debe indicarse el nombre de una variable en el que se guarda el valor devuelto:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> precioTotal <span class="sy0">=</span> c<span class="br0">&#40;</span><span class="nu0">23.34</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Si no se indica el nombre de ninguna variable, JavaScript no muestra ningún error y el valor devuelto por la función simplemente se pierde y por tanto, no se utilizará en el resto del programa. Si la función llega a una instrucción de tipo <code>return</code>, se devuelve el valor indicado y finaliza la ejecución de la función. Por tanto, todas las instrucciones que se incluyen después de un <code>return</code> se ignoran y por ese motivo la instrucción <code>return</code> suele ser la última de la mayoría de funciones.</p>
+
+<h2 id="llamadas">7.3 Llamadas</h2>
+
+<p>Llamar a una función suspende la ejecución de la función actual, pasando el control y los parámetros a la nueva función. Además de los argumentos declarados, todas las funciones reciben dos argumentos extra: <code>this</code> y <code>arguments</code>. El parámetro <code>this</code> es muy importante la programación orientada a objetos, y su valor viene determinado por el patrón de llamada utilizado. Existen cuatro patrones de llamada en JavaScript: el patrón de llamada <code>method</code>, el patrón de llamada <code>function</code>, el patrón de llamada <code>constructor</code> y el patrón de llamada <code>apply</code>.</p>
+
+<h3 id="argumentos">7.3.1 Argumentos</h3>
+
+<p>El parámetro extra disponible en las funciones es el array <code>arguments</code>. Da a la función acceso a todas los argumentos pasados en la llamada, incluidos los argumentos extra que no coinciden con los parámetros definidos en la función. Esto hace posible escribir funciones que toman un número indefinido de parámetros.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> sum <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> i<span class="sy0">,</span> sum <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="kw1">for</span> <span class="br0">&#40;</span>i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> arguments.<span class="me1">length</span><span class="sy0">;</span> i <span class="sy0">+=</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        sum <span class="sy0">+=</span> arguments<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">return</span> sum<span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+document.<span class="me1">writeln</span><span class="br0">&#40;</span>sum<span class="br0">&#40;</span><span class="nu0">4</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> <span class="nu0">15</span><span class="sy0">,</span> <span class="nu0">16</span><span class="sy0">,</span> <span class="nu0">23</span><span class="sy0">,</span> <span class="nu0">42</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// 108</span></pre>
+</div>
+
+<p>Debido a un problema de diseño, <code>arguments</code> no es realmente un array, sino un objeto que se comporta como un array. Dispone de la propiedad <code>length</code>, pero no incluye el resto de métodos de los arrays.</p>
+
+<h2 id="funciones-anonimas-autoejecutables">7.4 Funciones Anónimas Autoejecutables</h2>
+
+<p>Un patrón común en JavaScript son las funciones anónimas autoejecutables. Este patrón consiste en crear una expresión de función e inmediatamente ejecutarla.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+  <span class="kw1">var</span> foo <span class="sy0">=</span> <span class="st0">'Hola mundo'</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+console.<span class="me1">log</span><span class="br0">&#40;</span>foo<span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// indefinido (undefined)</span></pre>
+</div>
+
+<h2 id="funciones-como-argumentos">7.5 Funciones como argumentos</h2>
+
+<p>En JavaScript, las funciones pueden ser asignadas a variables o pasadas a otras funciones como argumentos. En <em>frameworks</em> como jQuery por ejemplo, pasar funciones como argumentos es una práctica muy común.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myFn <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>fn<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">var</span> result <span class="sy0">=</span> fn<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span>result<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+myFn<span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="kw1">return</span> <span class="st0">'hola mundo'</span><span class="sy0">;</span> <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// muestra en la consola 'hola mundo'</span>
+&nbsp;
+<span class="kw1">var</span> myOtherFn <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="st0">'hola mundo'</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+myFn<span class="br0">&#40;</span>myOtherFn<span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// muestra en la consola 'hola mundo'</span></pre>
+</div>
+
+<h2 id="alcance">7.6 Alcance</h2>
+
+<p>El alcance en un lenguaje de programación controla la visibilidad y el ciclo de vida de las variables y los parámetros. Por ejemplo:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> foo <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> a <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">,</span> b <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+    <span class="kw1">var</span> bar <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">var</span> b <span class="sy0">=</span> <span class="nu0">7</span><span class="sy0">,</span> c <span class="sy0">=</span> <span class="nu0">11</span><span class="sy0">;</span>
+        <span class="co1">// En este punto, a es 3, b es 7, y c es 11</span>
+&nbsp;
+        a <span class="sy0">+=</span> b <span class="sy0">+</span> c<span class="sy0">;</span>
+        <span class="co1">// En este punto, a es 21, b es 7, y c es 11</span>
+    <span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="co1">// En este punto, a es 3, b es 5, y c es undefined</span>
+&nbsp;
+    bar<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="co1">// En este punto, a es 21, b es 5</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>La mayoría de los lenguajes, con sintaxis de C, tienen un alcance de bloque. Todas las variables definidas en un bloque (sentencias definidas entre llaves) no son visibles fuera de ese bloque. Desafortunadamente, JavaScript no tiene esa visibilidad de bloque, a pesar de que su sintaxis así pueda sugerirlo, y esto puede ser una fuente de problemas. JavaScript tiene un alcance de función: esto quiere decir que los parámetros y variables definidos dentro de una función no son visibles fuera de esa función, y que una variable definida en cualquier lugar de la función, es visible desde cualquier lugar dentro de esa función.</p>
+
+<h2 id="funciones-de-cierre">7.7 Funciones de cierre</h2>
+
+<p>La buena noticia sobre la visibilidad, es que las funciones internas pueden tener acceso a los parámetros y variables de las funciones donde han sido definidas (con la excepción de <code>this</code> y <code>arguments</code>). Antes hemos definido un objeto que tenía una propieda <code>value</code> y un método <code>increment</code>. Supongamos que queremos proteger ese valor cambios no autorizados. En lugar de inicializar ese objeto como un literal, vamos a inicializarlo llamando a una función que devuelva un objeto literal. Vamos a definir una variable <code>value</code> y un objeto de retorno con los métodos <code>increment</code> y <code>getValue</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myObject <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw1">function</span> <span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> value <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">return</span> <span class="br0">&#123;</span>
+        increment<span class="sy0">:</span> <span class="kw1">function</span> <span class="br0">&#40;</span>inc<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            value <span class="sy0">+=</span> <span class="kw1">typeof</span> inc <span class="sy0">===</span> <span class="st0">'number'</span> <span class="sy0">?</span> inc <span class="sy0">:</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span><span class="sy0">,</span>
+        getValue<span class="sy0">:</span> <span class="kw1">function</span> <span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">return</span> value<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>En este caso, tanto el método <code>increment</code> como <code>getValue</code> tienen acceso a la variable <code>value</code>, pero debido a su alcance de función, el resto de la aplicación no tiene acceso a su valor.</p>
+
+<h2 id="callbacks">7.8 Callbacks</h2>
+
+<p>Las funciones pueden facilitar el trabajo con métodos asíncronos. Supongamos el siguiente caso en el que hacemos una petición al servidor:</p>
+
+<div class="code javascript">
+<pre class="javascript">request <span class="sy0">=</span> prepare_the_request<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+response <span class="sy0">=</span> send_request_synchronously<span class="br0">&#40;</span>request<span class="br0">&#41;</span><span class="sy0">;</span>
+display<span class="br0">&#40;</span>response<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>El problema aquí, es que esperamos la respuesta del servidor, por lo que bloqueamos la ejecución del script hasta obtener una respuesta. Una estrategia mucho mejor es realizar una llamada asíncrona, proporcionando una función de respuesta (<code>callback</code>) que se ejecutará cuando la respuesta esté disponible:</p>
+
+<div class="code javascript">
+<pre class="javascript">request <span class="sy0">=</span> prepare_the_request<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+send_request_asynchronously<span class="br0">&#40;</span>request<span class="sy0">,</span> <span class="kw1">function</span> <span class="br0">&#40;</span>response<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    display<span class="br0">&#40;</span>response<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="ejecuciones-en-cascada">7.9 Ejecuciones en cascada</h2>
+
+<p>Algunos métodos no devuelven ningún tipo de dato, ya simplemente pueden modificar el estado de algún tipo de dato. Si hacemos que estos métodos devuelvan <code>this</code> en lugar de <code>undefined</code>, podemos encadenar la ejecución de esos métodos en cascada. Las funciones en cascada pueden permitirnos escribir sentencias de este tipo:</p>
+
+<div class="code javascript">
+<pre class="javascript">getElement<span class="br0">&#40;</span><span class="st0">'myBoxDiv'</span><span class="br0">&#41;</span>
+    .<span class="me1">move</span><span class="br0">&#40;</span><span class="nu0">350</span><span class="sy0">,</span> <span class="nu0">150</span><span class="br0">&#41;</span>
+    .<span class="me1">width</span><span class="br0">&#40;</span><span class="nu0">100</span><span class="br0">&#41;</span>
+    .<span class="me1">height</span><span class="br0">&#40;</span><span class="nu0">100</span><span class="br0">&#41;</span>
+    .<span class="me1">color</span><span class="br0">&#40;</span><span class="st0">'red'</span><span class="br0">&#41;</span>
+    .<span class="me1">border</span><span class="br0">&#40;</span><span class="st0">'10px outset'</span><span class="br0">&#41;</span>
+    .<span class="me1">padding</span><span class="br0">&#40;</span><span class="st0">'4px'</span><span class="br0">&#41;</span>
+    .<span class="me1">appendText</span><span class="br0">&#40;</span><span class="st0">&quot;Please stand by&quot;</span><span class="br0">&#41;</span>
+    .<span class="me1">on</span><span class="br0">&#40;</span><span class="st0">'mousedown'</span><span class="sy0">,</span> <span class="kw1">function</span> <span class="br0">&#40;</span>m<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">startDrag</span><span class="br0">&#40;</span>m<span class="sy0">,</span> <span class="kw1">this</span>.<span class="me1">getNinth</span><span class="br0">&#40;</span>m<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span>
+    .<span class="me1">on</span><span class="br0">&#40;</span><span class="st0">'mousemove'</span><span class="sy0">,</span> <span class="st0">'drag'</span><span class="br0">&#41;</span>
+    .<span class="me1">on</span><span class="br0">&#40;</span><span class="st0">'mouseup'</span><span class="sy0">,</span> <span class="st0">'stopDrag'</span><span class="br0">&#41;</span>
+    .<span class="me1">tip</span><span class="br0">&#40;</span><span class="st0">'This box is resizeable'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 6</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej06">Ver enunciado</a></p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 7</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej07">Ver enunciado</a></p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 8</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej08">Ver enunciado</a></p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 9</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej09">Ver enunciado</a></p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 10</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej10">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-7.html#funciones">Funciones</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.1</span>
+                        <a class="internal" href="capitulo-7.html#funciones-objeto">Funciones objeto</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.2</span>
+                        <a class="internal" href="capitulo-7.html#argumentos-y-valores-de-retorno">Argumentos y valores de retorno</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.3</span>
+                        <a class="internal" href="capitulo-7.html#llamadas">Llamadas</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.4</span>
+                        <a class="internal" href="capitulo-7.html#funciones-anonimas-autoejecutables">Funciones Anónimas Autoejecutables</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.5</span>
+                        <a class="internal" href="capitulo-7.html#funciones-como-argumentos">Funciones como argumentos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.6</span>
+                        <a class="internal" href="capitulo-7.html#alcance">Alcance</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.7</span>
+                        <a class="internal" href="capitulo-7.html#funciones-de-cierre">Funciones de cierre</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.8</span>
+                        <a class="internal" href="capitulo-7.html#callbacks">Callbacks</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.9</span>
+                        <a class="internal" href="capitulo-7.html#ejecuciones-en-cascada">Ejecuciones en cascada</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

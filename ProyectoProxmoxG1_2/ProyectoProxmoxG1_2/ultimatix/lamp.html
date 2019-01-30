@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="title" content="Ultimatix">
+	<meta name="description" content="Grupo 1 de DAW 2.">
+	<link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
+    <title>Ultimatix</title>
+    <link rel="stylesheet" href="fonts/styles.css">
+    <script>
+        <!--
+        function getStylesheet() {
+            var currentTime = new Date().getHours();
+            if (0 <= currentTime&&currentTime < 5) {
+                document.write("<link rel='stylesheet' href='css/night.css' type='text/css'>");
+            }
+            if (5 <= currentTime&&currentTime < 11) {
+                document.write("<link rel='stylesheet' href='css/main.css' type='text/css'>");
+            }
+            if (11 <= currentTime&&currentTime < 16) {
+                document.write("<link rel='stylesheet' href='css/main.css' type='text/css'>");
+            }
+            if (16 <= currentTime&&currentTime < 22) {
+                document.write("<link rel='stylesheet' href='css/main.css' type='text/css'>");
+            }
+            if (22 <= currentTime&&currentTime <= 24) {
+                document.write("<link rel='stylesheet' href='css/night.css' type='text/css'>");
+            }
+        }
+
+        getStylesheet();
+        -->
+    </script>
+
+    <noscript><link rel="stylesheet" href="css/main.css"></noscript>
+</head>
+<body>
+    <div id="loader">
+	    <div class="loader_circle loader_animation"></div>
+    </div>
+	<section id="menu">
+		<ul>
+			<li><a href="index.html">Introducción</a></li>
+			<li><a href="wordpress.html">Wordpress</a></li>
+			<li><a href="prestashop.html">Prestashop</a></li>
+			<li><a href="lamp.html">LAMP</a></li>
+			<li><a href="owncloud.html">Owncloud</a></li>
+		</ul>
+	</section>
+	<div id="intro">
+		<img src="img/ultimatix-logo.png" class="logo">
+	</div>
+	<a href="#menu" class="up-button"><img src="img/menu-button.png"></a>
+	<section>
+		<h1>LAMP:</h1>
+		<p>Es un conjunto de sistemas, lenguajes o tecnologías que se utilizan muy habitualmente, de manera conjunta, en el desarrollo de aplicaciones web.</p>
+		<p>En concreto, LAMP hace referencia a Linux, Apache, MySQL y PHP/Perl/Python.</p>
+
+		<h2>Apache</h2>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/LAMP/lamp1.png" class="bounceIn">
+			</div>
+			<div class="column">
+				<p>Introducimos la siguientes instrucción en el terminal para poder instalar Apache:
+					<b>sudo apt install apache2</b></p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<p>Podemos pulsar la techa “Y” y presionar “Enter” o directamente pulsar “Enter” para aceptar y continuar la instalación.</p>
+			</div>
+			<div class="column">
+				<img src="img/LAMP/lamp2.png" class="bounceIn">
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/LAMP/lamp3.png" class="bounceIn">
+			</div>
+			<div class="column">
+				<p>Si tenemos habilitado el cortafuegos (fireware) del servidor, el siguiente paso es confirmar si permite el trafico HTTP y HTTPS:
+
+					<b>Sudo uwf app list</b></p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<p>Solicitamos información del perfil de “Apache Full” para verificar que puertos están habilitados:
+					<b>sudo ufw app into “Apache Full”</b>.
+					Para permitir el trafico HTTP y HTTPS deberemos ejecutar la siguiente instrucción:
+					ufw allow in “Apache Full”</p>
+			</div>
+			<div class="column">
+				<img src="img/LAMP/lamp4.png" class="bounceIn">
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/LAMP/lamp5.png" class="bounceIn">
+			</div>
+			<div class="column">
+				<p>Una vez que hayamos configurado todo, ya podremos acceder a nuestro servidor desde un navegador externo introduciendo la IP del servidor.</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<p>Con la siguiente instrucción podremos ver la ip de nuestro servidor:
+					<b>ip addr show eth0</b><</p>
+			</div>
+			<div class="column">
+				<img src="img/LAMP/lamp5.png" class="bounceIn">
+			</div>
+		</div>
+
+		<h2>MySQL</h2>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/LAMP/lamp6.png" class="bounceIn">
+			</div>
+			<div class="column">
+				<p>Introduciremos en el terminal la siguiente instrucción para instalar MySQL:
+					<b>pt install mysql server</b>
+
+					El siguiente paso es configurar la seguridad en MySQL. Para ello introducimos la siguiente instrucción y elegimos una nueva contraseña para el acceso:
+					<b>mysql_secure_installation</b></p>
+			</div>
+		</div>
+
+		<h2>PHP</h2>
+		<div class="column-wrapper">
+			<div class="column">
+				<p>Para instalar PHP en nuestro servidor deberemos introducir en el terminal la siguiente instrucción:
+					<b>sudo apt install php libapache2-mod-php php-mysql</b></p>
+			</div>
+			<div class="column">
+				<img src="img/LAMP/lamp7.png" class="bounceIn">
+			</div>
+		</div>
+
+	</section>
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>

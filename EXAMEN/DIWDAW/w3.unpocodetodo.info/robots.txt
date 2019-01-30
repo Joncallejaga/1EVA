@@ -1,0 +1,6 @@
+User-agent:  * # Applies to all!
+Disallow: / *?
+Disallow: includes/ # Don't scan the includes directory.
+Disallow: layouts/ # Don't scan the layouts directory.
+Disallow: staff/ # Don't scan the administrative directory, if it exists.
+Sitemap: http://w3.unpocodetodo.info/sitemap_xml.php

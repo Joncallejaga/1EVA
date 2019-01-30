@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="15/04/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Clases estándar de Java (II) | Java</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">Java</a></h1>
+        <p class="span3">
+                        <a href="capitulo-10.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-12.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="clases-estandar-de-java-ii"><span>Capítulo 11</span> Clases estándar de Java (II)</h1>
+        <p>Otra clase estándar muy emplea en Java es la clase <em>array</em> o <em>vector</em>. El término español <em>vector</em> para referirse a esta clase de objetos puede dar lugar a confusión ya que, como se verá más adelante, existe una clase <code>Vector</code> predefinida en Java. En este caso y sin que sirva de precedente, es conveniente emplear el término inglés <em>array</em>.</p>
+
+<h2 id="objetos-de-la-clase-array">11.1 Objetos de la clase array</h2>
+
+<p>Un <strong>objeto</strong> de la clase predefinida <em>array</em> permite representar una secuencia lineal y finita de elementos del mismo tipo. Estos elementos pueden ser de tipo primitivo o pertenecientes a otras clases. Los arrays son objetos con características propias. Además del conjunto de elementos del mismo tipo, un objeto de tipo <em>array</em> almacena en memoria una constante numérica entera que representa el número de elementos o tamaño del <em>array</em>.</p>
+
+<p>La declaración de un puntero o referencia a un <em>array</em> se lleva a cabo de la siguiente manera:</p>
+
+<div class="code java">
+<pre class="java">tipoElemento <span class="br0">&#91;</span><span class="br0">&#93;</span> identificadorInstancia<span class="sy0">;</span></pre>
+</div>
+
+<p>Por ejemplo, la declaración de un puntero o referencia a un <em>array</em> de números enteros:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw4">int</span> <span class="br0">&#91;</span><span class="br0">&#93;</span> p<span class="sy0">;</span> <span class="co1">// se declara el puntero o referencia del array de enteros</span></pre>
+</div>
+
+<p>Como ocurre con los demás objetos, la ejecución de la sentencia anterior sólo crea la referencia del <em>array</em>, pero no el <em>array</em> en sí.</p>
+
+<div class="figure" id="figure-11-1">
+    <img src="images/cap11/referencia-p.png" alt="Creación de la referencia <code>p</code>" />
+
+    <p class="caption"><strong>Figura 11.1</strong> Creación de la referencia <code>p</code></p>
+</div>
+
+
+<p>En la declaración del identificador de la variable tampoco se especifica el tamaño del <em>array</em> a referenciar. El tamaño del <em>array</em> se declara y establece cuando se crea la instancia <em>array</em>. La creación de un vector o <em>array</em>, una vez declarado su referencia se hace de la siguiente forma:</p>
+
+<div class="code java">
+<pre class="java">identificadorInstancia <span class="sy0">=</span> <span class="kw1">new</span> tipoElemento <span class="br0">&#91;</span>numeroElementos<span class="br0">&#93;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Por ejemplo:</p>
+
+<div class="code java">
+<pre class="java">p <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span> <span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span><span class="sy0">;</span> <span class="co1">// se crea el array de 5 enteros referenciado por p</span></pre>
+</div>
+
+<p>De esta manera, se reserva espacio para todos los elementos del <em>array</em>: 5 valores enteros.</p>
+
+<div class="figure" id="figure-11-2">
+    <img src="images/cap11/array-enteros.png" alt="Creación del array de enteros cuya dirección de memoria es almacenada en la referencia <code>p</code>" />
+
+    <p class="caption"><strong>Figura 11.2</strong> Creación del array de enteros cuya dirección de memoria es almacenada en la referencia <code>p</code></p>
+</div>
+
+
+<p>La creación de una referencia/puntero y del <em>array</em> de enteros al que apunta puede llevarse a cabo de forma simultánea en la misma sentencia:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw4">int</span> <span class="br0">&#91;</span><span class="br0">&#93;</span> p <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span> <span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span><span class="sy0">;</span> <span class="co1">// se declara el puntero y se crea el vector</span></pre>
+</div>
+
+<h2 id="operaciones-con-arrays">11.2 Operaciones con arrays</h2>
+
+<p>Puede accederse al tamaño en el código fuente del programa mediante el <strong>atributo</strong> <code>length</code> que devuelve el número de elementos de un <em>array</em> (<code>identificadorArray.length</code>).</p>
+
+<p>El acceso a cada elemento del <em>array</em> se realiza con el identificador de la instancia, la pareja de corchetes y su índice (un valor numérico <strong>entero</strong>), considerando que el primer elemento tiene índice 0:</p>
+
+<div class="code java">
+<pre class="java"><span class="co1">// Al primer elemento del array se le asigna el valor -15</span>
+p<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="sy0">-</span><span class="nu0">15</span><span class="sy0">;</span>
+<span class="co1">// Al segundo elemento del array se le asigna el valor 26</span>
+p<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">26</span><span class="sy0">;</span>
+<span class="co1">// Al tercer elemento del array se le asigna el valor 34</span>
+p<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">34</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="figure" id="figure-11-3">
+    <img src="images/cap11/elementos-array.png" alt="Identificación y asignación de valores a algunos elementos del *array*" />
+
+    <p class="caption"><strong>Figura 11.3</strong> Identificación y asignación de valores a algunos elementos del *array*</p>
+</div>
+
+
+<p>Por lo tanto, a un <em>array</em> de n elementos le corresponde siempre un índice válido dentro del intervalo [0 ... n-1]. Un error muy común es intentar acceder al elemento de índice <code>n</code>, que no existe (se producirá un error de ejecución <em>out of bounds</em>). Para especificar el índice de un elemento pueden emplearse tanto constantes como variables de tipo entero.</p>
+
+<p>Otro error es tratar de emplear el identificador del <em>array</em> como si fuera un dato de tipo primitivo. Por ejemplo, la sentencia</p>
+
+<div class="code java">
+<pre class="java">p <span class="sy0">=</span> p <span class="sy0">+</span> <span class="nu0">34</span><span class="sy0">;</span></pre>
+</div>
+
+<p>generará un error de compilación.</p>
+
+<p>Se suelen emplear bucles cuando se quiere trabajar con todos los elementos de un <em>array</em>. El siguiente ejemplo muestra como trabajar con todos los elementos de dos <em>arrays</em> de números (uno de valores enteros y otro de valores reales). El segundo de ellos almacena la raiz cuadrada de los valores almacenados en el primero:</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/** 
+ * ArrayRaices: Ejemplo de uso de arrays
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> ArrayRaices <span class="br0">&#123;</span> 
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main <span class="br0">&#40;</span><span class="kw3">String</span> <span class="br0">&#91;</span><span class="br0">&#93;</span> args <span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> <span class="br0">&#91;</span><span class="br0">&#93;</span> numero <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">10</span><span class="br0">&#93;</span><span class="sy0">;</span> <span class="co1">// Array de valores enteros</span>
+        <span class="kw4">double</span> <span class="br0">&#91;</span><span class="br0">&#93;</span> raiz <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">double</span><span class="br0">&#91;</span><span class="nu0">10</span><span class="br0">&#93;</span><span class="sy0">;</span> <span class="co1">// Array de valores reales</span>
+&nbsp;
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;</span>numero.<span class="me1">length</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            numero<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> i<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span> 
+            raiz<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw3">Math</span>.<span class="me1">sqrt</span><span class="br0">&#40;</span>numero<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>numero<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">+</span> <span class="st0">&quot; : &quot;</span> <span class="sy0">+</span> raiz<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+</div>
+
+<p>Es importante ver que el bucle <code>for</code> emplea la expresión <code>i&lt;numero.length</code> como condición de término.</p>
+
+<p>También puede llevarse a cabo la declaración e inicialización simultánea de un <em>array</em> (con los valores correspondientes separados por comas y entre llaves) en la misma sentencia de código. Por ejemplo:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw4">double</span> <span class="br0">&#91;</span><span class="br0">&#93;</span> x <span class="sy0">=</span> <span class="br0">&#123;</span><span class="nu0">1.5</span>, <span class="nu0">2.3</span>, <span class="sy0">-</span><span class="nu0">0.6</span>, <span class="nu0">4.8</span><span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Este tipo de inicialización sólo es válida en la sentencia de declaración de la referencia del <em>array</em>. El resultado de la ejecución de la sentencia anterior se muestra en la siguiente figura.</p>
+
+<div class="figure" id="figure-11-4">
+    <img src="images/cap11/referencia-array.png" alt="Creación de la referencia, del array de números reales e inicialización de los valores de sus elementos al ejecutarse una única sentencia" />
+
+    <p class="caption"><strong>Figura 11.4</strong> Creación de la referencia, del array de números reales e inicialización de los valores de sus elementos al ejecutarse una única sentencia</p>
+</div>
+
+
+<h2 id="array-de-objetos">11.3 Array de objetos</h2>
+
+<p>El uso de vectores no tiene por qué restringirse a elementos de tipo primitivo. Por ejemplo, pueden crearse sendas referencias a <em>arrays</em> de referencias de la clase <code>precio</code> (tal y como se declaró esta clase en un ejemplo anterior) o de la clase <code>String</code>:</p>
+
+<div class="code java">
+<pre class="java">precio <span class="br0">&#91;</span><span class="br0">&#93;</span> catalogo<span class="sy0">;</span> catalogo <span class="sy0">=</span> <span class="kw1">new</span> precio <span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span><span class="sy0">;</span> catalogo<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw1">new</span> precio<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">// Creacion de la referencia // Creación del array de referencias // Creación del primer elemento/instancia precio</span></pre>
+</div>
+
+<p>El resultado de la ejecución de las sentencias anteriores se muestra en la siguiente figura. Primero se crea la referencia al array de punteros, luego se crea el array de punteros y, finalmente, se crea la instancia de la clase precio y se almacena su dirección de memoria en el primer elemento del array de punteros.</p>
+
+<div class="figure" id="figure-11-5">
+    <img src="images/cap11/referencia-array2.png" alt="Creación de la referencia, del *array* de referencias y de la instancia de la clase precio referenciada por el primer elemento del *array*" />
+
+    <p class="caption"><strong>Figura 11.5</strong> Creación de la referencia, del *array* de referencias y de la instancia de la clase precio referenciada por el primer elemento del *array*</p>
+</div>
+
+
+<p>En el caso de trabajar con un <em>array</em> de <code>String</code> entonces podrían emplearse las siguientes sentencias:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw3">String</span> <span class="br0">&#91;</span><span class="br0">&#93;</span> Tabla<span class="sy0">;</span>            <span class="co1">// Creacion de la referencia </span>
+Tabla <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">String</span> <span class="br0">&#91;</span><span class="nu0">10</span><span class="br0">&#93;</span><span class="sy0">;</span>    <span class="co1">// Creación del array de referencias </span>
+Tabla<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">String</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>    <span class="co1">// Creación del primer elemento/instancia String</span></pre>
+</div>
+
+<p>En el siguiente código se muestra un ejemplo de cómo trabajar con el <em>array</em> de objetos de la clase <code>precio</code>:</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/**
+ * ArrayPrecios: Ejemplo de uso de arrays de objetos
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> ArrayPrecios <span class="br0">&#123;</span> 
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main <span class="br0">&#40;</span><span class="kw3">String</span> <span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        Precio <span class="br0">&#91;</span><span class="br0">&#93;</span> catalogo<span class="sy0">;</span> <span class="co1">// Creacion de la referencia </span>
+        catalogo <span class="sy0">=</span> <span class="kw1">new</span> Precio <span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span><span class="sy0">;</span> <span class="co1">// Creacion array de referencias precio</span>
+&nbsp;
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;</span>catalogo.<span class="me1">length</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> 
+            catalogo<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw1">new</span> precio<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Creacion del elemento i-esimo</span>
+            catalogo<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">pone</span><span class="br0">&#40;</span><span class="nu0">10</span><span class="sy0">*</span><span class="kw3">Math</span>.<span class="me1">random</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Producto &quot;</span><span class="sy0">+</span> i <span class="sy0">+</span> <span class="st0">&quot; : &quot;</span> <span class="sy0">+</span> catalogo<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">da</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        <span class="co1">// Busqueda del maximo precio </span>
+        <span class="kw4">double</span> maximo<span class="sy0">=</span>catalogo<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">da</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span> i<span class="sy0">&lt;</span>catalogo.<span class="me1">length</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>maximo<span class="sy0">&lt;</span>catalogo<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">da</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                maximo<span class="sy0">=</span>catalogo<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">da</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+         <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;El mas caro vale &quot;</span><span class="sy0">+</span> maximo <span class="sy0">+</span><span class="st0">&quot; euros&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="arrays-multidimensionales">11.4 Arrays multidimensionales</h2>
+
+<p>En Java también se puede trabajar con arrays multidimensionales, llamados comúnmente matrices. Por ejemplo, la declaración de un puntero a una matriz bidimensional de números enteros se puede realizar de la siguiente manera incluyendo un par de corchetes adicionales en la declararación de la referencia:</p>
+
+<div class="figure" id="figure-11-6">
+    <img src="images/cap11/referencia-m.png" alt="Creación de la referencia <code>m</code>" />
+
+    <p class="caption"><strong>Figura 11.6</strong> Creación de la referencia <code>m</code></p>
+</div>
+
+
+<p>La creación de la matriz (una vez declarado su puntero) puede hacerse según muestra la siguiente sentencia:</p>
+
+<div class="code java">
+<pre class="java">m <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span> <span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span><span class="sy0">;</span> <span class="co1">// Crea una matriz para almacenar 5 x 4 enteros</span></pre>
+</div>
+
+<p>En este caso se indican en el par de cochetes adicional el número de elementos según la segunda dimensión. El resultado de la ejecución de la sentencia anterior se muestra en la siguiente figura.</p>
+
+<div class="figure" id="figure-11-7">
+    <img src="images/cap11/array-bidimensional.png" alt="Creación de un array bidimensional de 5 x 4 enteros" />
+
+    <p class="caption"><strong>Figura 11.7</strong> Creación de un array bidimensional de 5 x 4 enteros</p>
+</div>
+
+
+<p>La ejecución del código anterior reserva espacio en memoria durante la ejecución del programa para una matriz de 5 x 8 valores numéricos enteros. En realidad se reserva espacio en memoria para un array de cinco punteros que, a su vez, almacenan la dirección de memoria de otros tantos arrays de cuatro números enteros. Para referenciar a cada uno de los elementos de los arrays de enteros es necesario utilizar el identificador del puntero seguido de los correspondientes índices entre corchetes. Por ejemplo, como en las siguientes sentencias:</p>
+
+<div class="code java">
+<pre class="java">m<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">34</span><span class="sy0">;</span>
+m<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">46</span><span class="sy0">;</span>
+m<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">13</span><span class="sy0">;</span>
+m<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="sy0">-</span><span class="nu0">8</span><span class="sy0">;</span>
+m<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+m<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">56</span><span class="sy0">;</span>
+m<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="sy0">-</span><span class="nu0">3</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Por otro lado, también puede llevarse a cabo la declaración de la referencia, creación del array multidimensional e inicialización simultánea de sus elementos. Por ejemplo, la siguiente sentencia genera una matriz 2 x 3 de números enteros:</p>
+
+<div class="code java">
+<pre class="java"><span class="co1">// Matriz de dos filas y tres columnas </span>
+<span class="kw4">int</span> <span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> a <span class="sy0">=</span> <span class="br0">&#123;</span> <span class="br0">&#123;</span><span class="nu0">1</span>, <span class="nu0">2</span>, <span class="nu0">3</span><span class="br0">&#125;</span>, <span class="br0">&#123;</span><span class="nu0">4</span>, <span class="nu0">5</span>, <span class="nu0">6</span><span class="br0">&#125;</span> <span class="br0">&#125;</span><span class="sy0">;</span> 
+<span class="co1">// Por ejemplo, el elemento a[1][0] contiene el valor 4</span></pre>
+</div>
+
+<div class="figure" id="figure-11-8">
+    <img src="images/cap11/array-bidimensional2.png" alt="Creación de un array bidimensional de 2 x 3 números enteros e inicialización de sus elementos" />
+
+    <p class="caption"><strong>Figura 11.8</strong> Creación de un array bidimensional de 2 x 3 números enteros e inicialización de sus elementos</p>
+</div>
+
+
+<p>El número de elementos de los <em>arrays</em> referenciados puede especificarse para cada uno de ellos y ser diferente entre sí. Por ejemplo, la ejecución de la sentencia:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw4">int</span> <span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> b <span class="sy0">=</span> <span class="br0">&#123;</span> <span class="br0">&#123;</span><span class="nu0">1</span>, <span class="nu0">2</span>, <span class="nu0">3</span><span class="br0">&#125;</span>, <span class="br0">&#123;</span><span class="nu0">4</span>, <span class="nu0">5</span>, <span class="nu0">6</span>, <span class="nu0">7</span><span class="br0">&#125;</span>, <span class="br0">&#123;</span><span class="nu0">8</span>, <span class="nu0">9</span><span class="br0">&#125;</span> <span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>genera la estructura de datos representada en la siguiente figura. En dicha estructura no existen, por ejemplo, los elementos <code>b[0][3]</code> ni <code>b[2][2]</code>.</p>
+
+<div class="figure" id="figure-11-9">
+    <img src="images/cap11/array-bidimensional3.png" alt="Creación de un array bidimensional no rectangular" />
+
+    <p class="caption"><strong>Figura 11.9</strong> Creación de un array bidimensional no rectangular</p>
+</div>
+
+
+<p>En Java es posible trabajar con estructuras de tipo <em>array</em> con más de dos dimensiones añadiendo simplemente los índices (y corchetes o llaves) que sean necesarios. Por ejemplo, la siguiente sentencia crea una matriz tridimensional 2 x 2 x 3 de números enteros:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw4">int</span> <span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> c <span class="sy0">=</span> <span class="br0">&#123;</span> <span class="br0">&#123;</span> <span class="br0">&#123;</span><span class="nu0">1</span>, <span class="nu0">2</span>, <span class="nu0">3</span><span class="br0">&#125;</span>, <span class="br0">&#123;</span><span class="nu0">4</span>, <span class="nu0">5</span>, <span class="nu0">6</span><span class="br0">&#125;</span> <span class="br0">&#125;</span>, <span class="br0">&#123;</span> <span class="br0">&#123;</span><span class="nu0">7</span>, <span class="nu0">8</span>, <span class="nu0">9</span><span class="br0">&#125;</span>, <span class="br0">&#123;</span><span class="nu0">10</span>, <span class="nu0">11</span>, <span class="nu0">12</span><span class="br0">&#125;</span> <span class="br0">&#125;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>El número de pares de <strong>corchetes</strong> en el término de la izquierda y de <strong>niveles de llaves</strong> en el término de la derecha debe coincidir e indica el de dimensiones de la matriz. En principio, en Java no hay límite para el número de dimensiones que pueden utilizarse en una matriz.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-11.html#clases-estandar-de-java-ii">Clases estándar de Java (II)</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>11.1</span>
+                        <a class="internal" href="capitulo-11.html#objetos-de-la-clase-array">Objetos de la clase array</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>11.2</span>
+                        <a class="internal" href="capitulo-11.html#operaciones-con-arrays">Operaciones con arrays</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>11.3</span>
+                        <a class="internal" href="capitulo-11.html#array-de-objetos">Array de objetos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>11.4</span>
+                        <a class="internal" href="capitulo-11.html#arrays-multidimensionales">Arrays multidimensionales</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

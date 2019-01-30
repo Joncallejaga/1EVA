@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="18/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Formularios | XHTML</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">XHTML</a></h1>
+        <p class="span3">
+                        <a href="capitulo-8.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-10.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="formularios"><span>Capítulo 9</span> Formularios</h1>
+        <p>Como ya hemos mencionado en numerosas ocasiones, <strong>HTML</strong> es un <strong>lenguaje de marcado</strong> cuyo propósito principal consiste en <strong>estructurar los contenidos</strong> de los documentos y páginas web. Sin embargo, HTML también incluye elementos para crear <strong>aplicaciones web</strong>. El estándar HTML/XHTML permite crear <strong>formularios</strong> para que los usuarios interactúen con las aplicaciones web.</p>
+
+<p><strong>HTML/XHTML</strong> incluye los suficientes elementos de formulario para crear desde los formularios sencillos que utilizan los buscadores hasta los formularios complejos de las aplicaciones más avanzadas.</p>
+
+<h2 id="formularios-basicos">9.1 Formularios básicos</h2>
+
+<p>Los formularios más sencillos se pueden crear utilizando solamente dos etiquetas: <code>&lt;form&gt;</code> y <code>&lt;input&gt;</code>.</p>
+
+<p>Un ejemplo de <strong>código HTML</strong> con ambas etiquetas sería:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">html</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Ejemplo de formulario sencillo<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">h3</span>&gt;</span>Formulario muy sencillo<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h3</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">form</span> <span class="kw3">action</span><span class="sy0">=</span><span class="st0">&quot;http://www.enlace.es/formulario.php&quot;</span> <span class="kw3">method</span><span class="sy0">=</span><span class="st0">&quot;post&quot;</span>&gt;</span>
+            Escribe tu nombre:
+            <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;nombre&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="sy0">/</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;submit&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;Enviar&quot;</span> <span class="sy0">/</span>&gt;</span>
+        <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">form</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>Y un navegador lo visualizaría de esta manera:</p>
+
+<div class="figure" id="figure-9-1">
+    <img src="images/cap09/formulario_sencillo.png" alt="Formulario sencillo definido con las etiquetas form e input" />
+
+    <p class="caption"><strong>Figura 9.1</strong> Formulario sencillo definido con las etiquetas form e input</p>
+</div>
+
+
+<p>La etiqueta <code>&lt;form&gt;</code> encierra todos los contenidos del formulario (botones, cuadros de texto, listas desplegables) y la etiqueta <code>&lt;input&gt;</code> permite definir varios tipos diferentes de elementos (botones y cuadros de texto).</p>
+
+<div class="table" id="table-9-1">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;form&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left"><code>action="url"</code> Indica la URL que se encarga de procesar los datos del formulario<br /><code>method="POST o GET"</code> Método HTTP empleado al enviar el formulario<br /><code>enctype="application/x-www-form-urlencoded o multipart/form-data"</code> Tipo de codificación empleada al enviar el formulario al servidor (sólo se indica de forma explícita en los formularios que permiten adjuntar archivos)<br /><code>accept="tipo"</code> Lista separada por comas de todos los tipos de archivos aceptados por el servidor (sólo para los formularios que permiten adjuntar archivos)<br />Otros: <code>accept-charset</code>, <code>onsubmit</code>, <code>onreset</code></td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En bloque</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplea para insertar un formulario en la página</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>La mayoría de formularios utilizan sólo los atributos <code>action</code> y <code>method</code>. El atributo <code>action</code> indica la URL de la aplicación del servidor que se encarga de <strong>procesar los datos</strong> introducidos por los usuarios. Esta aplicación también se encarga de generar la <strong>respuesta</strong> que muestra el navegador.</p>
+
+<p>El atributo <code>method</code> establece la <strong>forma en la que se envían los datos</strong> del formulario al servidor. Este atributo hace referencia al <strong>método HTTP</strong>, por lo que no es algo propio de HTML. Los dos valores que se utilizan en los formularios son <code>GET</code> y <code>POST</code>. De esta forma, casi todos los formularios incluyen el atributo <code>method="get"</code> o el atributo <code>method="post"</code>.</p>
+
+<p>Al margen de otras diferencias técnicas, el método <code>POST</code> permite el envío de mucha más información que el método <code>GET</code>. En general, el método <code>GET</code> admite como máximo el envío de unos 500 bytes de información. La otra gran limitación del método <code>GET</code> es que no permite el envío de archivos adjuntos con el formulario. Además, los datos enviados mediante <code>GET</code> se ven en la barra de direcciones del navegador (se añaden al final de la URL de la página), mientras que los datos enviados mediante <code>POST</code> no se pueden ver tan fácilmente.</p>
+
+<p>Si no sabes que método elegir para un formulario, existe una regla general que dice que el <strong>método <code>GET</code></strong> se debe utilizar en los <strong>formularios que no modifican la información</strong> (por ejemplo en un formulario de búsqueda). Por su parte, el <strong>método <code>POST</code></strong> se debería utilizar cuando el <strong>formulario modifica la información original</strong> (insertar, modificar o borrar alguna información).</p>
+
+<p>El ejemplo más común de formulario con método <code>GET</code> es el de los buscadores. Si realizas una búsqueda con tu buscador favorito, verás que las palabras que has introducido en tu búsqueda aparecen como parte de la URL de la página de resultados.</p>
+
+<p>Del resto de atributos de la etiqueta <code>&lt;form&gt;</code>, el único que se utiliza ocasionalmente es enctype. Como se explica más adelante, este atributo es imprescindible en los formularios que permiten adjuntar archivos.</p>
+
+<h2 id="elementos-de-formulario">9.2 Elementos de formulario</h2>
+
+<p>Los <strong>elementos de formulario</strong> como botones y cuadros de texto también se denominan "campos de formulario" y "controles de formulario". La mayoría de controles se crean con la etiqueta <code>&lt;input&gt;</code>, por lo que su definición formal y su lista de atributos es muy extensa:</p>
+
+<div class="table" id="table-9-2">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;input&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left"><code>type="text | password | checkbox | radio | submit | reset | file | hidden | image | button"</code> Indica el tipo de control que se incluye en el formulario<br /><code>name="texto"</code> Asigna un nombre al control (es imprescindible para que el servidor pueda procesar el formulario)<br /><code>value="texto"</code> Valor inicial del control<br /><code>size="unidad"</code> Tamaño inicial del control (para los campos de texto y de password se refiere al número de caracteres, en el resto de controles se refiere a su tamaño en píxel)<br /><code>maxlength="numero"</code> Máximo número de caracteres para los controles de texto y de password<br /><code>checked="checked"</code> Para los controles checkbox y radiobutton permite indicar qué opción aparece preseleccionada<br /><code>disabled="disabled"</code> El control aparece deshabilitado y su valor no se envía al servidor junto con el resto de datos<br /><code>readonly="readonly"</code> El contenido del control no se puede modificar<br /><code>src="url"</code> Para el control que permite crear botones con imágenes, indica la URL de la imagen que se emplea como botón de formulario<br /><code>alt="texto"</code> Descripción del control</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En línea y etiqueta vacía</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplean para insertar un control en un formulario</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>A continuación se muestran ejemplos para los diez controles que se pueden crear con la etiqueta <code>&lt;input&gt;</code>.</p>
+
+<h3 id="cuadro-de-texto">9.2.1 Cuadro de texto</h3>
+
+<p>Se trata del elemento más utilizado en los formularios. En el caso más sencillo, se muestra un cuadro de texto vacío en el que el usuario puede escribir cualquier texto:</p>
+
+<div class="figure" id="figure-9-2">
+    <img src="images/cap09/input_text.png" alt="Ejemplo de etiqueta input (type=text)" />
+
+    <p class="caption"><strong>Figura 9.2</strong> Ejemplo de etiqueta input (type=text)</p>
+</div>
+
+
+<div class="code html">
+<pre class="html5">Nombre <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;nombre&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="sy0">/</span>&gt;</span></pre>
+</div>
+
+<p><strong>El atributo <code>type</code></strong> diferencia a cada uno de los diez controles que se pueden crear con la etiqueta <code>&lt;input&gt;</code>. Para los cuadros de texto, su valor es <code>text</code>. El atributo <code>name</code> es el más importante en los campos del formulario. De hecho, si un campo no incluye el atributo <code>name</code>, sus datos no se envían al servidor. El valor que se indica en el atributo <code>name</code> es el nombre que utiliza la aplicación del servidor para obtener el valor de este campo de formulario.</p>
+
+<p>Cuando el usuario pulsa el <strong>botón de envío</strong> del formulario, el navegador envía los datos a una aplicación del servidor para que procese la información y genere una <strong>respuesta adecuada</strong>. En el servidor, la aplicación que procesa los datos debe obtener en primer lugar toda la información introducida por el usuario. Para ello, utiliza el valor del atributo <code>name</code> para obtener los datos de cada control del formulario.</p>
+
+<p>Como el valor del atributo <code>name</code> se utiliza en aplicaciones programadas, es esencial ponerse de acuerdo con el programador de la aplicación, no se debe modificar su valor sin modificar la aplicación y no se deben utilizar caracteres problemáticos en programación (espacios en blanco, acentos y caracteres como <code>ñ</code> o <code>ç</code>).</p>
+
+<p><strong>El atributo <code>value</code></strong> se emplea para establecer el valor inicial del cuadro de texto. Si se crea un formulario para insertar datos, los cuadros de texto deberían estar vacíos. Por lo tanto, o no se añade el atributo <code>value</code> o se incluye con un valor vacío <code>value=""</code>. Si por el contrario se crea un formulario para modificar datos, lo lógico es que se muestren inicialmente los datos guardados en el sistema. En este caso, el atributo <code>value</code> incluirá el valor que se desea mostrar: <code>&lt;input type="text" name="nombre" value="Juan Pérez" /&gt;</code></p>
+
+<p>Si no se especifica un tamaño, el navegador muestra el cuadro de texto con un tamaño predeterminado. <strong>El atributo <code>size</code></strong> permite establecer el tamaño, en caracteres, con el que se muestra el cuadro de texto. Su uso es imprescindible en muchos formularios, en los que algunos campos como la dirección deben mostrar más caracteres de lo normal (<code>&lt;input size="100" ...</code>) y otros campos como el código postal deben mostrar menos caracteres de lo normal (<code>&lt;input size="5"...</code>).</p>
+
+<p>Además de controlar el tamaño con el que se muestra un cuadro de texto, también se puede limitar el tamaño del texto introducido. El <strong>atributo <code>maxlength</code></strong> permite establecer el máximo número de caracteres que el usuario puede introducir en un cuadro de texto. Su uso es imprescindible para campos como el código postal, el número de la Seguridad Social y cualquier otro dato con formato predefinido y limitado.</p>
+
+<p>Por último, el <strong>atributo <code>readonly</code></strong> permite que el usuario pueda ver los contenidos del cuadro de texto pero no pueda modificarlos y el atributo <code>disabled</code> deshabilita un cuadro de texto de forma que el usuario no pueda modificarlo y además, el navegador no envía sus datos al servidor.</p>
+
+<h3 id="cuadro-de-contrasena">9.2.2 Cuadro de contraseña</h3>
+
+<p>La única diferencia entre este control y el cuadro de texto normal es que el texto que el usuario escribe en un cuadro de contraseña no se ve en la pantalla. En su lugar, los navegadores ocultan el texto utilizando asteriscos o círculos, por lo que es ideal para escribir contraseñas y otros datos sensibles.</p>
+
+<div class="figure" id="figure-9-3">
+    <img src="images/cap09/input_password.png" alt="Ejemplo de etiqueta input (type=password)" />
+
+    <p class="caption"><strong>Figura 9.3</strong> Ejemplo de etiqueta input (type=password)</p>
+</div>
+
+
+<div class="code html">
+<pre class="html5">Contraseña <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;password&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;contrasena&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="sy0">/</span>&gt;</span></pre>
+</div>
+
+<p>Cambiando el valor del atributo <code>type</code> por <code>password</code> se transforma el cuadro de texto normal en un cuadro de contraseña. Todos los demás atributos se utilizan de la misma forma y tienen el mismo significado.</p>
+
+<h3 id="checkbox">9.2.3 Checkbox</h3>
+
+<p>Los <em>checkbox</em> o "casillas de verificación" son controles de formulario que permiten al usuario seleccionar y deseleccionar opciones individualmente. Aunque en ocasiones se muestran varios <em>checkbox</em> juntos, cada uno de ellos es completamente independiente del resto. Por este motivo, se utilizan cuando el usuario puede activar y desactivar varias opciones relacionadas pero no excluyentes.</p>
+
+<div class="figure" id="figure-9-4">
+    <img src="images/cap09/input_checkbox.png" alt="Ejemplo de etiqueta input (type=checkbox)" />
+
+    <p class="caption"><strong>Figura 9.4</strong> Ejemplo de etiqueta input (type=checkbox)</p>
+</div>
+
+
+<div class="code html">
+<pre class="html5">Puestos de trabajo buscados <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;puesto_direct&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;checkbox&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;direccion&quot;</span><span class="sy0">/</span>&gt;</span> Dirección
+<span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;puesto_tecnico&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;checkbox&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;tecnico&quot;</span><span class="sy0">/</span>&gt;</span> Técnico
+<span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;puesto_empleado&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;checkbox&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;empleado&quot;</span><span class="sy0">/</span>&gt;</span> Empleado</pre>
+</div>
+
+<p>El valor del atributo <code>type</code> para estos controles de formulario es <code>checkbox</code>. Como se muestra en el ejemplo anterior, el texto que se encuentra al lado de cada <em>checkbox</em> no se puede establecer mediante ningún atributo, por lo que es necesario añadirlo manualmente fuera del control del formulario. Si no se añade un texto al lado de la etiqueta <code>&lt;input /&gt;</code> del <em>checkbox</em>, el usuario sólo ve un pequeño cuadrado sin ninguna información relativa a la finalidad de ese <em>checkbox</em>.</p>
+
+<p>El valor del atributo <code>value</code>, junto con el valor del atributo <code>name</code>, es la información que llega al servidor cuando el usuario envía el formulario.</p>
+
+<p>Si se quiere mostrar un <em>checkbox</em> seleccionado por defecto, se utiliza el atributo <code>checked</code>. Si el valor del atributo es <code>checked</code>, el <em>checkbox</em> se muestra seleccionado. En cualquier otro caso, el <em>checkbox</em> permanece sin seleccionar. Aunque resulta redundante que el nombre y el valor del atributo sean idénticos, es obligatorio indicarlo de esta forma porque los atributos en XHTML no pueden tener valores vacíos:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;checkbox&quot;</span> <span class="kw3">checked</span><span class="sy0">=</span><span class="st0">&quot;checked&quot;</span> <span class="sy0">/</span>&gt;</span> Checkbox seleccionado</pre>
+</div>
+
+<h3 id="radiobutton">9.2.4 Radiobutton</h3>
+
+<p>Los controles de tipo <code>radiobutton</code> son similares a los controles de tipo <code>checkbox</code>, pero presentan una diferencia muy importante: son mutuamente excluyentes. Los <code>radiobutton</code> se utilizan cuando el usuario solamente puede escoger una opción entre las distintas opciones relacionadas que se le presentan. Cada vez que se selecciona una opción, automáticamente se deselecciona la otra opción que estaba seleccionaba.</p>
+
+<div class="figure" id="figure-9-5">
+    <img src="images/cap09/input_radio.png" alt="Ejemplo de etiqueta input (type=radio)" />
+
+    <p class="caption"><strong>Figura 9.5</strong> Ejemplo de etiqueta input (type=radio)</p>
+</div>
+
+
+<div class="code html">
+<pre class="html5">Sexo <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;radio&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;sexo&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;hombre&quot;</span> <span class="kw3">checked</span><span class="sy0">=</span><span class="st0">&quot;checked&quot;</span> <span class="sy0">/</span>&gt;</span> Hombre
+<span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;radio&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;sexo&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;mujer&quot;</span> <span class="sy0">/</span>&gt;</span> Mujer</pre>
+</div>
+
+<p>El valor del atributo <code>type</code> para estos controles de formulario es <code>radio</code>. El atributo <code>name</code> se emplea para indicar los <em>radiobutton</em> que están relacionados. Por lo tanto, cuando varios radiobutton tienen el mismo valor en su atributo <code>name</code>, el navegador sabe que están relacionados y puede deseleccionar una opción del grupo de <em>radiobutton</em> cuando se seleccione otra opción.</p>
+
+<h3 id="boton-de-envio-de-formulario">9.2.5 Botón de envío de formulario</h3>
+
+<p>La mayoría de formularios dispone de un botón para enviar al servidor los datos introducidos por el usuario:</p>
+
+<div class="figure" id="figure-9-6">
+    <img src="images/cap09/input_submit.png" alt="Ejemplo de etiqueta input (type=submit)" />
+
+    <p class="caption"><strong>Figura 9.6</strong> Ejemplo de etiqueta input (type=submit)</p>
+</div>
+
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;submit&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;buscar&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;Buscar&quot;</span> <span class="sy0">/</span>&gt;</span></pre>
+</div>
+
+<p>El valor del atributo <code>type</code> para este control de formulario es <code>submit</code>. El navegador se encarga de enviar automáticamente los datos cuando el usuario pincha sobre este tipo de botón. El valor del atributo <code>value</code> es el texto que muestra el botón. Si no se establece el atributo <code>value</code>, el navegador muestra el texto predefinido <code>Enviar consulta</code>.</p>
+
+<h3 id="boton-de-reseteo-del-formulario">9.2.6 Botón de reseteo del formulario</h3>
+
+<p>Aunque su uso era muy popular hace unos años, la mayoría de formularios modernos ya no utilizan este tipo de botón. Se trata de un botón especial que borra todos los datos introducidos por el usuario y devuelve el formulario a su estado original:</p>
+
+<div class="figure" id="figure-9-7">
+    <img src="images/cap09/input_reset.png" alt="Ejemplo de etiqueta input (type=reset)" />
+
+    <p class="caption"><strong>Figura 9.7</strong> Ejemplo de etiqueta input (type=reset)</p>
+</div>
+
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;reset&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;limpiar&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;Borrar datos del formulario&quot;</span> <span class="sy0">/</span>&gt;</span></pre>
+</div>
+
+<p>El valor del atributo <code>type</code> para este control de formulario es <code>reset</code>. Cuando el usuario pulsa este botón, el navegador borra toda la información introducida y muestra el formulario en su estado original. Si el formulario no contenía originalmente ningún valor, el botón de <code>reset</code> lo vuelve a mostrar vacío. Si el formulario contenía información, el botón <code>reset</code> vuelve a mostrar la misma información original.</p>
+
+<p>Como es habitual en los botones de formulario, el atributo <code>value</code> permite establecer el texto que muestra el botón. Si no es utiliza este atributo, el navegador muestra el texto predefinido del botón, que en este caso es <code>Restablecer</code>.</p>
+
+<h3 id="ficheros-adjuntos">9.2.7 Ficheros adjuntos</h3>
+
+<p>Los formularios también permiten adjuntar archivos para subirlos al servidor. Aunque desde el punto de vista de HTML y del navegador no existe ninguna limitación sobre el número, tipo o tamaño total de los archivos que se pueden adjuntar, todos los servidores añaden restricciones por motivos de seguridad.</p>
+
+<div class="figure" id="figure-9-8">
+    <img src="images/cap09/input_file.png" alt="Ejemplo de etiqueta input (type=file)" />
+
+    <p class="caption"><strong>Figura 9.8</strong> Ejemplo de etiqueta input (type=file)</p>
+</div>
+
+
+<div class="code html">
+<pre class="html5">Fichero adjunto
+<span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;file&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;adjunto&quot;</span> <span class="sy0">/</span>&gt;</span></pre>
+</div>
+
+<p>El valor del atributo <code>type</code> para este control de formulario es <code>file</code>. El navegador se encarga de mostrar un cuadro de texto donde aparece el nombre del archivo seleccionado y un botón que permite navegar por los directorios y archivos del ordenador del usuario.</p>
+
+<p>Si se incluye un control para adjuntar archivos, es obligatorio añadir el atributo <code>enctype</code> en la etiqueta <code>&lt;form&gt;</code> del formulario. El valor del atributo enctype debe ser <code>multipart/form-data</code>, por lo que la etiqueta <code>&lt;form&gt;</code> de los formularios que permiten adjuntar archivos siempre es:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">form</span> <span class="kw3">action</span><span class="sy0">=</span><span class="st0">&quot;...&quot;</span> <span class="kw3">method</span><span class="sy0">=</span><span class="st0">&quot;post&quot;</span> <span class="kw3">enctype</span><span class="sy0">=</span><span class="st0">&quot;multipart/form-data&quot;</span>&gt;</span>
+  ...
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">form</span>&gt;</span></pre>
+</div>
+
+<h3 id="campos-ocultos">9.2.8 Campos ocultos</h3>
+
+<p>Los campos ocultos se emplean para añadir información oculta en el formulario:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;hidden&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;url_previa&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;/articulo/primero.html&quot;</span> <span class="sy0">/</span>&gt;</span></pre>
+</div>
+
+<p>El valor del atributo <code>type</code> para este control de formulario es <code>hidden</code>. Los campos ocultos no se muestran por pantalla, de forma que el usuario desconoce que el formulario los incluye. Normalmente los campos ocultos se utilizan para incluir información que necesita el servidor pero que no es necesario o no es posible que la establezca el usuario.</p>
+
+<h3 id="boton-de-imagen">9.2.9 Botón de imagen</h3>
+
+<p>El aspecto de los botones de formulario se puede personalizar por completo, ya que incluso es posible utilizar una imagen como botón:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;image&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;enviar&quot;</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;accept.png&quot;</span> <span class="sy0">/</span>&gt;</span></pre>
+</div>
+
+<p>El valor del atributo <code>type</code> para este control de formulario es <code>image</code>. El atributo <code>src</code> indica la URL de la imagen que debe mostrar el navegador en lugar del botón normal.</p>
+
+<p>Su principal ventaja es que permite personalizar por completo la estética de los botones y mostrarlos con un aspecto homogéneo en todos los navegadores. El principal inconveniente es que ralentiza la carga del formulario y que si se quiere modificar su aspecto, es necesario crear una nueva imagen.</p>
+
+<h3 id="boton">9.2.10 Botón</h3>
+
+<p>Algunos formularios complejos necesitan botones más avanzados que los de enviar datos (<code>type="submit"</code>) y resetear el formulario (<code>type="reset"</code>). Por ese motivo, el estándar HTML/XHTML define un botón de tipo genérico:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;button&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;guardar&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;Guardar Cambios&quot;</span> <span class="sy0">/</span>&gt;</span></pre>
+</div>
+
+<p>El valor del atributo <code>type</code> para este control de formulario es <code>button</code>. Si pruebas a pulsar un botón de este tipo, verás que el navegador no hace nada: no envía los datos al servidor y no borra los datos introducidos. Este tipo de botones sólo son útiles si se utilizan junto con el lenguaje de programación JavaScript. Si la página incluye código JavaScript, los botones de este tipo se pueden programar para que realicen cualquier tarea compleja cuando se pulsa sobre ellos.</p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 14</p>
+</div>
+
+<p><a class="internal" href="capitulo-14.html#ej14">Ver enunciado</a></p>
+
+<h2 id="formularios-avanzados">9.3 Formularios avanzados</h2>
+
+<p>Utilizando solamente las etiquetas <code>&lt;form&gt;</code> y <code>&lt;input&gt;</code> es posible diseñar la mayoría de formularios de las aplicaciones web. No obstante, HTML define algunos elementos adicionales para mejorar la estructura de los formularios creados.</p>
+
+<p>La etiqueta <code>&lt;fieldset&gt;</code> agrupa campos del formulario y la etiqueta <code>&lt;legend&gt;</code> asigna un nombre a cada grupo.</p>
+
+<div class="table" id="table-9-3">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;fieldset&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En bloque</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplea para agrupar de forma lógica varios campos de un formulario</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<div class="table" id="table-9-4">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;leyend&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En línea</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplea para definir el título o leyenda de un conjunto de campos de formulario agrupados con la etiqueta fieldset</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Un ejemplo de <strong>código HTML</strong> con las etiquetas <code>&lt;fieldset&gt;</code> y <code>&lt;legend&gt;</code> sería:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">form</span> <span class="kw3">action</span><span class="sy0">=</span><span class="st0">&quot;maneja_formulario.php&quot;</span> <span class="kw3">method</span><span class="sy0">=</span><span class="st0">&quot;post&quot;</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">fieldset</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">legend</span>&gt;</span>Datos personales<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">legend</span>&gt;</span>
+    Nombre <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;nombre&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+    Apellidos <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;apellidos&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+    DNI <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;dni&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="kw3">size</span><span class="sy0">=</span><span class="st0">&quot;10&quot;</span> <span class="kw3">maxlength</span><span class="sy0">=</span><span class="st0">&quot;9&quot;</span> <span class="sy0">/</span>&gt;</span>
+  <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">fieldset</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">fieldset</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">legend</span>&gt;</span>Datos de conexión<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">legend</span>&gt;</span>
+    Nombre de usuario<span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;nombre&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="kw3">maxlength</span><span class="sy0">=</span><span class="st0">&quot;10&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+    Contraseña<span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;password&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;password&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="kw3">maxlength</span><span class="sy0">=</span><span class="st0">&quot;10&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+    Repite la contraseña<span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;password&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;password2&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="kw3">maxlength</span><span class="sy0">=</span><span class="st0">&quot;10&quot;</span> <span class="sy0">/</span>&gt;</span>
+  <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">fieldset</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">form</span>&gt;</span></pre>
+</div>
+
+<p>Y un navegador lo visualizaría de esta manera:</p>
+
+<div class="figure" id="figure-9-9">
+    <img src="images/cap09/formulario_fieldset_legend.png" alt="Ejemplo de uso de las etiquetas fieldset y legend" />
+
+    <p class="caption"><strong>Figura 9.9</strong> Ejemplo de uso de las etiquetas fieldset y legend</p>
+</div>
+
+
+<p>La etiqueta <code>&lt;fieldset&gt;</code> agrupa todos los controles de formulario a los que encierra. El navegador muestra por defecto un borde resaltado para cada agrupación. La etiqueta <code>&lt;legend&gt;</code> se incluye dentro de cada etiqueta <code>&lt;fieldset&gt;</code> y establece el título que muestra el navegador para cada agrupación de elementos.</p>
+
+<p>Por otra parte, todos los controles de formulario salvo los botones presentan una carencia muy importante: no disponen de la opción de establecer el título o texto que se muestra junto al control. En el código HTML del ejemplo anterior, el nombre de cada campo se incluye en forma de texto normal, sin ninguna relación con el campo al que hace referencia.</p>
+
+<p>Afortunadamente, el lenguaje HTML incluye una etiqueta denominada <code>&lt;label&gt;</code> y que se utiliza para establecer el título de cada campo del formulario. Su definición formal es la siguiente:</p>
+
+<div class="table" id="table-9-5">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;label&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left"><code>for="id"</code> Indica el ID del campo del formulario para el que este elemento es su título<br />Otros: <code>accesskey</code>, <code>onfocus</code> y <code>onblur</code></td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En línea</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplea para definir el título o leyenda de un conjunto de campos de formulario agrupados con la etiqueta fieldset</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>El único atributo que suele utilizarse con la etiqueta <code>&lt;label&gt;</code> es <code>for</code>, que indica el identificador (atributo id) del campo de formulario para el que esta etiqueta hace de título.</p>
+
+<p>En el anterior ejemplo, el nombre de los campos de formulario se incluía mediante un texto normal:</p>
+
+<div class="code html">
+<pre class="html5">Nombre <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;nombre&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="sy0">/</span>&gt;</span>
+Apellidos <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;apellidos&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="sy0">/</span>&gt;</span>
+DNI <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;dni&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="kw3">size</span><span class="sy0">=</span><span class="st0">&quot;10&quot;</span> <span class="kw3">maxlength</span><span class="sy0">=</span><span class="st0">&quot;9&quot;</span> <span class="sy0">/</span>&gt;</span></pre>
+</div>
+
+<p>Utilizando la etiqueta <code>&lt;label&gt;</code>, cada campo de formulario puede disponer de su propio título:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">label</span> <span class="kw3">for</span><span class="sy0">=</span><span class="st0">&quot;nombre&quot;</span>&gt;</span>Nombre<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">label</span>&gt;</span> <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;nombre&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;nombre&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">label</span> <span class="kw3">for</span><span class="sy0">=</span><span class="st0">&quot;apellidos&quot;</span>&gt;</span>Apellidos<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">label</span>&gt;</span> <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;apellidos&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;apellidos&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">label</span> <span class="kw3">for</span><span class="sy0">=</span><span class="st0">&quot;dni&quot;</span>&gt;</span>DNI<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">label</span>&gt;</span> <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;dni&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;dni&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="kw3">size</span><span class="sy0">=</span><span class="st0">&quot;10&quot;</span> <span class="kw3">maxlength</span><span class="sy0">=</span><span class="st0">&quot;9&quot;</span> <span class="sy0">/</span>&gt;</span></pre>
+</div>
+
+<p>La principal ventaja de utilizar <code>&lt;label&gt;</code> es que el código HTML está mejor estructurado y se mejora su accesibilidad. Además, al pinchar sobre el texto del <code>&lt;label&gt;</code>, el puntero del ratón se posiciona automáticamente para poder escribir sobre el campo de formulario asociado. Este comportamiento es especialmente útil para los campos de tipo radiobutton y checkbox.</p>
+
+<h2 id="otros-elementos-de-formulario">9.4 Otros elementos de formulario</h2>
+
+<p>La etiqueta <code>&lt;input&gt;</code> permite crear diez tipos diferentes de controles de formulario. Sin embargo, algunas aplicaciones web utilizan otros elementos de formulario que no se pueden crear con <code>&lt;input&gt;</code>. Las listas desplegables y las áreas de texto disponen de sus propias etiquetas (<code>&lt;select&gt;</code> y <code>&lt;textarea&gt;</code> respectivamente).</p>
+
+<p>Las áreas de texto son útiles cuando se debe introducir una gran cantidad de texto, ya que es mucho más cómodo de introducir que en un campo de texto normal:</p>
+
+<div class="figure" id="figure-9-10">
+    <img src="images/cap09/textarea.png" alt="Ejemplo de uso de la etiqueta textarea" />
+
+    <p class="caption"><strong>Figura 9.10</strong> Ejemplo de uso de la etiqueta textarea</p>
+</div>
+
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">form</span> <span class="kw3">action</span><span class="sy0">=</span><span class="st0">&quot;insertar_producto.php&quot;</span> <span class="kw3">method</span><span class="sy0">=</span><span class="st0">&quot;post&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">label</span> <span class="kw3">for</span><span class="sy0">=</span><span class="st0">&quot;nombre&quot;</span>&gt;</span>Nombre del producto<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">label</span>&gt;</span> <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;nombre&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;nombre&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">label</span> <span class="kw3">for</span><span class="sy0">=</span><span class="st0">&quot;descripcion&quot;</span>&gt;</span>Descripción del producto<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">label</span>&gt;</span> <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">textarea</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;descripcion&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;descripcion&quot;</span> <span class="kw3">cols</span><span class="sy0">=</span><span class="st0">&quot;40&quot;</span> <span class="kw3">rows</span><span class="sy0">=</span><span class="st0">&quot;5&quot;</span>&gt;</span>
+        Texto
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">textarea</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">form</span>&gt;</span></pre>
+</div>
+
+<p>La definición formal de la etiqueta <code>&lt;textarea&gt;</code> es:</p>
+
+<div class="table" id="table-9-6">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;textarea&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left"><code>rows="numero"</code> Número de filas de texto que mostrará el textarea<br /><code>cols="numero"</code> Número de caracteres que se muestran en cada fila del textarea<br />Otros: <code>name</code>, <code>disabled</code>, <code>readonly</code>, <code>onselect</code>, <code>onchange</code>, <code>onfocus</code>, <code>onblur</code></td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En línea</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplea para incluir un área de texto en un formulario</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Los atributos más utilizados en las etiquetas <code>&lt;textarea&gt;</code> son los que controlan su anchura y altura. La anchura del área de texto se controla mediante el atributo cols, que indica las columnas o número de caracteres que se podrán escribir como máximo en cada fila. La altura del área de texto se controla mediante rows, que indica directamente las filas de texto que serán visibles.</p>
+
+<p>El principal inconveniente de los elementos <code>&lt;textarea&gt;</code> es que el lenguaje HTML no permite limitar el número máximo de caracteres que se pueden introducir. Mientras los elementos <code>&lt;input type="text"&gt;</code> disponen del atributo maxlength, las áreas de texto no disponen de un atributo equivalente, por lo que sólo es posible limitar el número de caracteres mediante su programación con JavaScript.</p>
+
+<p>Por otra parte, el otro control disponible para los formularios es el de las listas desplegables:</p>
+
+<div class="figure" id="figure-9-11">
+    <img src="images/cap09/select.png" alt="Ejemplo de uso de la etiqueta select" />
+
+    <p class="caption"><strong>Figura 9.11</strong> Ejemplo de uso de la etiqueta select</p>
+</div>
+
+
+<p>La imagen anterior muestra los tres tipos de listas desplegables disponibles. El primero es el de las listas más utilizadas que sólo muestran un valor cada vez y sólo permiten seleccionar un valor. El segundo tipo de lista es el que sólo permite seleccionar un valor pero muestra varios a la vez. Por último, el tercer tipo de lista desplegable es aquella que muestra varios valores y permite realizar selecciones múltiples.</p>
+
+<p>El <strong>código HTML</strong> del ejemplo anterior sería:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">label</span> <span class="kw3">for</span><span class="sy0">=</span><span class="st0">&quot;so&quot;</span>&gt;</span>Sistema operativo<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">label</span>&gt;</span> <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">select</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;so&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;so&quot;</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="kw3">selected</span><span class="sy0">=</span><span class="st0">&quot;selected&quot;</span>&gt;</span>- selecciona -<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;windows&quot;</span>&gt;</span>Windows<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;mac&quot;</span>&gt;</span>Mac<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;linux&quot;</span>&gt;</span>Linux<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;otro&quot;</span>&gt;</span>Otro<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">select</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">label</span> <span class="kw3">for</span><span class="sy0">=</span><span class="st0">&quot;so2&quot;</span>&gt;</span>Sistema operativo<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">label</span>&gt;</span> <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">select</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;so2&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;so2&quot;</span> <span class="kw3">size</span><span class="sy0">=</span><span class="st0">&quot;5&quot;</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;windows&quot;</span> <span class="kw3">selected</span><span class="sy0">=</span><span class="st0">&quot;selected&quot;</span>&gt;</span>Windows<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;mac&quot;</span>&gt;</span>Mac<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;linux&quot;</span>&gt;</span>Linux<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;otro&quot;</span>&gt;</span>Otro<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">select</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">label</span> <span class="kw3">for</span><span class="sy0">=</span><span class="st0">&quot;so3&quot;</span>&gt;</span>Sistema operativo<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">label</span>&gt;</span> <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">select</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;so3&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;so3&quot;</span> <span class="kw3">size</span><span class="sy0">=</span><span class="st0">&quot;5&quot;</span> <span class="kw3">multiple</span><span class="sy0">=</span><span class="st0">&quot;multiple&quot;</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;windows&quot;</span> <span class="kw3">selected</span><span class="sy0">=</span><span class="st0">&quot;selected&quot;</span>&gt;</span>Windows<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;mac&quot;</span>&gt;</span>Mac<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;linux&quot;</span>&gt;</span>Linux<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;otro&quot;</span>&gt;</span>Otro<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">select</span>&gt;</span></pre>
+</div>
+
+<p>Los tres tipos de listas desplegables se definen con la misma etiqueta <code>&lt;select&gt;</code> y cada elemento de la lista se define mediante la etiqueta <code>&lt;option&gt;</code>:</p>
+
+<div class="table" id="table-9-7">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;select&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left"><code>size="numero"</code> Número de filas que se muestran de la lista (por defecto sólo se muestra una)<br /><code>multiple="multiple"</code> Si se incluye, se permite seleccionar más de un elemento<br >Otros: name, disabled, onchange, onfocus, onblur</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En línea</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplea para incluir una lista desplegable en un formulario</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<div class="table" id="table-9-8">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;option&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left"><code>selected="selected"</code> Indica si el elemento aparece seleccionado por defecto al cargarse la página<br /><code>value="texto"</code> El valor que se envía al servidor cuando el usuario elige esa opción<br />Otros: <code>label</code>, <code>disabled</code></td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplea para definir cada elemento de una lista desplegable</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>La inmensa mayoría de listas desplegables que utilizan las aplicaciones web son simples, por lo que el código HTML habitual de las listas desplegables es:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">label</span> <span class="kw3">for</span><span class="sy0">=</span><span class="st0">&quot;so&quot;</span>&gt;</span>Sistema operativo<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">label</span>&gt;</span> <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">select</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;so&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;so&quot;</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="kw3">selected</span><span class="sy0">=</span><span class="st0">&quot;selected&quot;</span>&gt;</span>- selecciona -<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;windows&quot;</span>&gt;</span>Windows<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;mac&quot;</span>&gt;</span>Mac<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;linux&quot;</span>&gt;</span>Linux<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;otro&quot;</span>&gt;</span>Otro<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">select</span>&gt;</span></pre>
+</div>
+
+<p>La etiqueta <code>&lt;select&gt;</code> define la lista y encierra todas las opciones que muestra la lista. Cada una de las opciones de la lista se define mediante una etiqueta <code>&lt;option&gt;</code>. El atributo <code>value</code> de cada opción es obligatorio, ya que es el dato que se envía al servidor cuando el usuario envía el formulario. Para seleccionar por defecto una opción al mostrar la lista, se añade el atributo <code>selected</code> a la opción deseada.</p>
+
+<p>Por otra parte, las listas desplegables permiten agrupar sus opciones de forma que el usuario pueda encontrar fácilmente las opciones cuando la lista es muy larga:</p>
+
+<div class="figure" id="figure-9-12">
+    <img src="images/cap09/optgroup.png" alt="Ejemplo de uso de la etiqueta optgroup" />
+
+    <p class="caption"><strong>Figura 9.12</strong> Ejemplo de uso de la etiqueta optgroup</p>
+</div>
+
+
+<p>El <strong>código HTML</strong> correspondiente a la imagen anterior sería:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">form</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;formulario&quot;</span> <span class="kw3">method</span><span class="sy0">=</span><span class="st0">&quot;post&quot;</span> <span class="kw3">action</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">label</span> <span class="kw3">for</span><span class="sy0">=</span><span class="st0">&quot;programa&quot;</span>&gt;</span>Programa seleccionado<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">label</span>&gt;</span> <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">select</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;programa&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;programa&quot;</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">optgroup</span> <span class="kw3">label</span><span class="sy0">=</span><span class="st0">&quot;Sistemas Operativos&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;Windows&quot;</span> <span class="kw3">selected</span><span class="sy0">=</span><span class="st0">&quot;selected&quot;</span>&gt;</span>Windows<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;Mac&quot;</span>&gt;</span>Mac<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;Linux&quot;</span>&gt;</span>Linux<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;Other&quot;</span>&gt;</span>Otro<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">optgroup</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">optgroup</span> <span class="kw3">label</span><span class="sy0">=</span><span class="st0">&quot;Navegadores&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;Internet Explorer&quot;</span> <span class="kw3">selected</span><span class="sy0">=</span><span class="st0">&quot;selected&quot;</span>&gt;</span>Internet Explorer<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;Firefox&quot;</span>&gt;</span>Firefox<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;Safari&quot;</span>&gt;</span>Safari<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;Opera&quot;</span>&gt;</span>Opera<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;Other&quot;</span>&gt;</span>Otro<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">optgroup</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">select</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">form</span>&gt;</span></pre>
+</div>
+
+<p>La etiqueta <code>&lt;optgroup&gt;</code> permite agrupar opciones relacionadas dentro de una lista desplegable. Su definición formal se muestra a continuación:</p>
+
+<div class="table" id="table-9-9">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;optgroup&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left"><code>label="texto"</code> Texto que se muestra como título de la agrupación de opciones<br />Otros: <code>disabled</code>, <code>selected</code></td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplea para definir una agrupación lógica de opciones de una lista desplegable</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>El único atributo que suele utilizarse con la etiqueta <code>&lt;optgroup&gt;</code> es <code>label</code>, que indica el nombre de cada agrupación. Los navegadores muestran de forma destacada el título de cada agrupación, de forma que el usuario pueda localizar más fácilmente la opción deseada.</p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 15</p>
+</div>
+
+<p><a class="internal" href="capitulo-14.html#ej15">Ver enunciado</a></p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 16</p>
+</div>
+
+<p><a class="internal" href="capitulo-14.html#ej16">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-9.html#formularios">Formularios</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.1</span>
+                        <a class="internal" href="capitulo-9.html#formularios-basicos">Formularios básicos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.2</span>
+                        <a class="internal" href="capitulo-9.html#elementos-de-formulario">Elementos de formulario</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.3</span>
+                        <a class="internal" href="capitulo-9.html#formularios-avanzados">Formularios avanzados</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.4</span>
+                        <a class="internal" href="capitulo-9.html#otros-elementos-de-formulario">Otros elementos de formulario</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

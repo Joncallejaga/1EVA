@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="15/04/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Estructura de un programa | Java</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">Java</a></h1>
+        <p class="span3">
+                        <a href="capitulo-1.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-3.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="estructura-de-un-programa"><span>Capítulo 2</span> Estructura de un programa</h1>
+        <p>Este capítulo tiene como objetivo presentar la estructura de un programa mediante un ejemplo sencillo y mostrar dos elementos típicos del código fuente: los comentarios y los identificadores. La estructura de un programa de Java es similar a la de un programa de C/C++. Por su diseño, permite a los programadores de cualquier otro lenguaje leer código en Java sin mucha dificultad. Java emplea siempre la Programación Orientada a Objetos por lo que todo el código se incluye dentro de las <em>clases</em>. Aunque ya se explicarán detenidamente más adelante, las clases son combinaciones de datos (constantes y variables) y rutinas (métodos).</p>
+
+<h2 id="la-clase-principal-y-el-metodo-main">2.1 La clase principal y el método <code>main</code></h2>
+
+<p>Un programa puede construirse empleando varias <em>clases</em>. En el caso más simple se utilizará una única clase. Esta clase contiene el programa, rutina o método principal: <code>main()</code> y en éste se incluyen las sentencias del programa principal. Estas sentencias se separan entre sí por caracteres de punto y coma.</p>
+
+<p>La estructura de un programa simple en Java es la siguiente:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> ClasePrincipal <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        sentencia_1<span class="sy0">;</span>
+        sentencia_2<span class="sy0">;</span>
+        <span class="co1">// ...</span>
+        sentencia_N<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Como primer ejemplo sencillo de programa escrito en Java se va a utilizar uno que muestra un mensaje por la pantalla del ordenador. Por ejemplo, el programa <code>Hola.java</code>:</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/**
+  * La clase hola construye un programa que
+ * muestra un mensaje en pantalla 
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> Hola <span class="br0">&#123;</span> 
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Hola, &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;me llamo Angel&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Hasta luego&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span> 
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Como se ha indicado anteriormente, en un programa de Java todo se organiza dentro de las <em>clases</em>. En el ejemplo anterior, <code>Hola</code> es el nombre de la clase principal y del archivo que contiene el código fuente. Todos los programas o aplicaciones independientes escritas en Java tienen un método <code>main</code> o principal que, a su vez, contiene un conjunto de sentencias. En Java los conjuntos o bloques de sentencias se indican entre llaves { }. En el caso anterior, el conjunto de sentencias se reduce a tres sentencias, que son llamadas a dos métodos predefinidos en Java (<code>print</code> y <code>println</code>) que permiten visualizar texto por el dispositivo de salida de datos por defecto (la pantalla).</p>
+
+<p>Por el momento y hasta que se explique con detalle el concepto de <em>clase</em>, los ejemplos de programa que se utilizarán constarán de una sóla clase en la que se declara el método <code>main</code>. Este método es el punto de arranque de la ejecución de todo programa en Java.</p>
+
+<h2 id="comentarios">2.2 Comentarios</h2>
+
+<p>Los comentarios se emplean para facilitar la tarea de los programadores humanos ya que no realizan ningún papel activo en la generación del código. Los comentarios que se pueden introducir en el código fuente de un programa de Java son del estilo de C y C++. Así, el compilador ignora todo lo que se incluya entre la secuencia de caracteres // y el final de la línea. Por ejemplo:</p>
+
+<div class="code java">
+<pre class="java"><span class="co1">// Este es un comentario estilo C++, llega al final de la linea</span></pre>
+</div>
+
+<p>La pareja de caracteres / hay que escribirla sin dejar ningún espacio en blanco entre ellos. El segundo tipo de comentario es el que se utiliza también en el lenguaje de programación C: el compilador también ignora todo lo que se incluya entre las secuencias de caracteres /* y */. Por ejemplo:</p>
+
+<div class="code java">
+<pre class="java"><span class="coMULTI">/* En este otro comentario estilo C, el final 
+lo indica la marca */</span></pre>
+</div>
+
+<p>El comentario con // es más fácil de teclear si sólo ocupa una línea, pero si ocupa varias, entonces el más sencillo es el de /* ... */. Los comentarios pueden incluir cualquier carácter válido en Unicode y no pueden anidarse.</p>
+
+<p>Estos dos formatos de comentario se emplean para los denominados <em>comentarios de implementación</em>. Los comentarios de implementación se utilizan en el programa fuente para resaltar código o para aclarar un desarrollo en particular.</p>
+
+<p>Además, en Java existe un tercer tipo de comentario (<em>doc comments</em>) que facilita la generación de documentación en formato HTML al emplear algunas herramientas de documentación (por ejemplo, javadoc incluida en el Kit de Desarrollo de Java). Los comentarios para la documentación se emplean para describir la especificación del código, desde una perspectiva independiente cómo se ha implementado y ser leido por desarrolladores que no tengan necesariamente el código fuente a la vista. Debe evitarse emplear los comentarios para dar panorámicas del código y facilitar información que no facilite la propia lectura del código. Ejemplos de este tipo de comentarios:</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/** Comentario estilo javadoc, se incluye 
+automaticamente en documentacion HTML */</span>
+&nbsp;
+<span class="co3">/**
+ * Muchos programadores 
+ * suelen incluir un asterisco 
+ * al principio de cada linea del 
+ * comentario para facilitar su lectura 
+ */</span></pre>
+</div>
+
+<p>Los comentarios deberían contener sólo información relevante para la lectura y comprensión del programa. Todos los programas deben empezar por un comentario que describa el propósito del programa. La discusión de decisiones de diseño que no sean obvias (triviales) es apropiada, pero debe evitarse la duplicidad de información dada por el propio código. Es muy común que los comentarios redundantes se desactualicen. En general, se debe evitar incluir comentarios que puedan quedarse obsoletos conforme el código se desarrolle. Por ejemplo, dentro de un comentario no debería incluirse información acerca de cómo se ha construido un archivo fuente determinado o en que directorio se haya el código.</p>
+
+<p>A veces la frecuencia de los comentarios refleja una peor calidad de código. Cuando se sienta la necesidad de añadir un comentario, debe considerarse la reescritura del código para hacerlo más claro.</p>
+
+<p><strong>Convención para los comentarios al inicio de los programas</strong></p>
+
+<p>Todos los archivos fuente deberían comenzar con un comentario estilo C que liste el nombre de la clase, información de la versión, fecha y el aviso de <em>copyright</em>:</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/**
+ * Nombre de la clase
+ * Información de la versión
+ * Fecha
+ * Aviso de copyright
+ */</span></pre>
+</div>
+
+<h2 id="javadoc">2.3 Javadoc</h2>
+
+<p>Javadoc es un programa proporcionado en el Kit de Desarrollo de Java que permite generar automáticamente documentación para las clases. El resultado de javadoc es un conjunto de documentos en formato HTML que puede ser visualizados con un navegador. El archivo fuente de java puede añadir comentarios incluidos entre las secuencias de caracteres /** ... */ a la documentación generada con javadoc. Existe también un conjunto de datos específicos que pueden incluirse en los comentarios de tipo javadoc. Por ejemplo: <code>@author, @param, @return y @exception. @author</code> debe preceder al código de la declaración de la clase mientras que <code>@param</code> y <code>@return</code> deben preceder a la declaración del método como muestra el siguiente código:</p>
+
+<div class="code java">
+<pre class="java"><span class="co1">// Ejemplo de declaracion de una clase para documentar con javadoc</span>
+<span class="co3">/**
+ * Clase para trabajar con una variable que almacena un precio
+ * @author Arkaitz Garro
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> Precio2
+<span class="br0">&#123;</span>
+    <span class="co1">// Variable miembro</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> euros<span class="sy0">;</span>
+&nbsp;
+    <span class="co3">/** 
+     * Devuelve el valor almacenado en euros
+     * @return el valor almacenado
+     */</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> da<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> euros<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co3">/** 
+     * Almacena un valor
+     * @param x el valor a almacenar
+     */</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> pone<span class="br0">&#40;</span><span class="kw4">double</span> x<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        euros<span class="sy0">=</span>x<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La salida de javadoc está formada fundamentalmente por los comentarios incluidos en el código fuente. El compilador no comprueba que dichos comentarios estén implementados. En la Figura 9.7 se muestra uno de los documentos HTML generados por javadoc.</p>
+
+<div class="figure" id="figure-2-1">
+    <img src="images/cap02/javadoc.png" alt="Visualización de uno de los documentos generados por Javadoc" />
+
+    <p class="caption"><strong>Figura 2.1</strong> Visualización de uno de los documentos generados por Javadoc</p>
+</div>
+
+
+<h2 id="identificadores">2.4 Identificadores</h2>
+
+<p>Los identificadores son nombres que se les asignan a variables, métodos, clases... en el código fuente de un programa. Los identificadores sólo existen en el código del programa fuente y no en el programa objeto (resultado de la compilación del programa fuente). Todo nuevo identificador que se emplee en un programa Java debe definirse previamente a su utilización. Las normas para la construcción de un identificador empleando el lenguaje de programación Java son las siguientes:</p>
+
+<ul>
+<li>Un identificador comienza por una letra, un carácter de subrayado (<code>_</code>) o un carácter de dólar (<code>$</code>). Aunque no se recomienda emplear el carácter <code>$</code>, ya que el compilador suele utilizarlos de forma interna para crear identificadores propios.</li>
+<li>Los siguientes caracteres pueden ser también dígitos. Pero no pueden emplearse espacios en blanco u otros caracteres como el signo de interrogación (<code>?</code>) o el signo del tanto por ciento (<code>%</code>).</li>
+<li>No hay límite máximo de caracteres.</li>
+<li>En los identificadores del código fuente de un programa en Java se distinguen las mayúsculas de las minúsculas. Por ejemplo, casa, CASA y Casa son tres identificadores diferentes.</li>
+<li>Pueden incluir caracteres Unicode, con lo que se pueden emplear secuencias de escape /uxxxx para representar estos caracteres.</li>
+<li>No puede emplearse el identificador de una variable o cualquier otro elemento del código fuente del programa para otro ya existente en el mismo bloque.</li>
+<li>Existe una serie de palabras reservadas que no pueden emplearse como identificadores por el programador en el código fuente para otros usos. Por ejemplo, la palabra <code>double</code> se utiliza para definir un tipo de dato real y la palabra <code>for</code> se emplea para construir un tipo determinado de bucle. En la siguiente tabla se muestran las palabras reservadas en Java.</li>
+</ul>
+
+<div class="figure" id="figure-2-2">
+    <img src="images/cap02/palabras-reservadas.png" alt="Palabras reservadas en Java" />
+
+    <p class="caption"><strong>Figura 2.2</strong> Palabras reservadas en Java</p>
+</div>
+
+
+<p>Algunos de estos identificadores reservados no tienen todavía uso en la implementación actual del lenguaje Java. En concreto, los identificadores marcados con un asterisco * no se utilizan actualmente. Por otro lado en la siguiente tabla se muestran los nombres de métodos reservados en Java cuyo significado y utilización se explicará más adelante cuando se menciones la clase predefinida <code>Object</code>.</p>
+
+<div class="figure" id="figure-2-3">
+    <img src="images/cap02/identificadores.png" alt="Palabras reservadas en Java" />
+
+    <p class="caption"><strong>Figura 2.3</strong> Palabras reservadas en Java</p>
+</div>
+
+
+<p>Aunque la forma de escribir los identificadores en Java no está <em>normalizada</em>, a continuación se dan algunas recomendaciones para la elección de estos identificadores:</p>
+
+<ul>
+<li>Es conveniente utilizar identificadores <strong>autoexplicativos</strong> para orientar al usuario o a cualquier otra persona que accede al código fuente de un programa sobre lo que representan, sin necesidad de utilizar los comentarios en el propio código fuente. Por ejemplo, para almacenar el valor del radio de una esfera podría declararse una variable con el identificador <code>radio</code>, <code>radioEsfera</code> o <code>radioDeUnaEsfera</code>.</li>
+<li>El signo de subrayado se acepta en cualquier identificador pero por convención sólo se emplea para separar palabras en identificadores en constantes (por convención las constantes se escriben completamente en mayúsculas y esto dificulta la separación de los nombres). Por ejemplo, para un valor constante que almacena un valor numérico que representa el número máximo de alumnos con los que trabaja el programa se podría declarar el identificador de la constante <code>NUMERO_MAXIMO_ALUMNOS</code>.</li>
+</ul>
+
+<p><strong>Convenciones para la legibilidad del programa fuente</strong></p>
+
+<p>Aunque la definición exacta de la indentación (espacios vs tabuladores) no se especifica en el lenguaje Java, se recomienda emplear una secuencia de cuatro espacios como unidad de indentación.</p>
+
+<p>Por otro lado se recomienda evitar las lineas de más de 80 caracteres en el código fuente ya que no se manejan correctamente por muchos terminales y herramientas de edición.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-2.html#estructura-de-un-programa">Estructura de un programa</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.1</span>
+                        <a class="internal" href="capitulo-2.html#la-clase-principal-y-el-metodo-main">La clase principal y el método <code>main</code></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.2</span>
+                        <a class="internal" href="capitulo-2.html#comentarios">Comentarios</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.3</span>
+                        <a class="internal" href="capitulo-2.html#javadoc">Javadoc</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.4</span>
+                        <a class="internal" href="capitulo-2.html#identificadores">Identificadores</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

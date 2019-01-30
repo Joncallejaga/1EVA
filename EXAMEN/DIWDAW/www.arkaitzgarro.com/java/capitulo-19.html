@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="15/04/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title><em>Packages</em> o paquetes | Java</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">Java</a></h1>
+        <p class="span3">
+                        <a href="capitulo-18.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-20.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="packages-o-paquetes"><span>Capítulo 19</span> <em>Packages</em> o paquetes</h1>
+        <p>Aunque la mayoría de los programas que se han realizado hasta ahora han constado de una única clase o de unas pocas almacenadas en uno o pocos archivos, habitualmente una aplicación Java se compone de una colección de clases más o menos numerosa. Cuando los programas son relativamente grandes o se trabaja en equipo, es recomendable dividir el código en varios archivos fuente. Las razones son las siguientes:</p>
+
+<ul>
+<li>el <strong>tiempo</strong> necesario para la compilación de todo el código cada vez que se haga una modificación mínima en una clase: si cada clase se almacena en un archivo fuente sólo será necesario la compilación de aquellos archivos que se vayan modificando y necesiten ser recompilados.</li>
+<li>favorece la <strong>eficiencia</strong> del trabajo en equipo ya que la edición simultánea de un único archivo fuente por varios programadores es complicada: es preferible dividir el código fuente en archivos y que cada programador se responsabilice de uno o varios de ellos.</li>
+<li>incrementa la <strong>facilidad</strong> para localizar y controlar los accesos a las clases e interfaces y evitar conflictos con identificadores.</li>
+</ul>
+
+<h2 id="como-se-organiza-un-conjunto-de-archivos-fuente-de-java">19.1 ¿Cómo se organiza un conjunto de archivos fuente de Java?</h2>
+
+<p>Un paquete o <em>package</em> de Java es un conjunto de clases e interfaces relacionadas entre sí.</p>
+
+<p>Por un lado, las clases e interfaces que forman parte de la plataforma Java se estructuran en varios paquetes organizados por funciones o tareas. Por ejemplo, las clases fundamentales están en <code>java.lang</code>, las clases para operaciones de entrada y salida de datos están en <code>java.io</code>, etcétera.</p>
+
+<p>Aprender a utilizar y familiarizarse con las clases y métodos implementados en estos paquetes representa la mayor parte del aprendizaje del lenguaje de programación Java.</p>
+
+<div class="figure" id="figure-19-1">
+    <img src="http://www.arkaitzgarro.com/java/images/cap19/api.png" alt="Algunos de los paquetes más importantes del API (*Application Programming Interface*) de Java" />
+
+    <p class="caption"><strong>Figura 19.1</strong> Algunos de los paquetes más importantes del API (*Application Programming Interface*) de Java</p>
+</div>
+
+
+<p>Por otro lado, cualquier programador puede introducir sus clases e interfaces en paquetes para facilitar tanto su uso en el desarrollo de un programa como su reutilización en varios de ellos. Para incluir una clase en un paquete debe incluirse la siguiente sentencia al principio del archivo fuente que contiene la clase:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">package</span> <span class="co2">identificadordelPaquete</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Por ejemplo, para incluir la clase <code>Rectangulo</code> dentro del paquete <code>geometria</code>:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">package</span> <span class="co2">geometria</span><span class="sy0">;</span> 
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Rectangulo <span class="kw1">extends</span> FiguraGeometrica <span class="br0">&#123;</span>
+    <span class="co1">// Declaracion de atributos y metodos</span>
+    ...
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>El alcance de la sentencia <em>package</em> es todo el archivo fuente. Si se incluyen varias clases dentro de un único archivo fuente, sólo puede declararse como pública una clase y debe tener el mismo nombre que el archivo fuente. Sólo las componentes públicas de esa clase son accesibles desde fuera del paquete.</p>
+
+<p>Si no se emplea una sentencia <code>package</code>, las clases o interfaces pertenecen al paquete por defecto (sin identificador). Normalmente, este paquete por defecto sólo se emplea en aplicaciones pequeñas o temporales o al inicio de un desarrollo. En cualquier otro caso, las clases e interfaces deben pertenecer a paquetes con un identificador explícito.</p>
+
+<p>Las ventajas de agrupar clases e interfaces en un paquete son las siguientes:</p>
+
+<ul>
+<li>Se puede determinar más fácilmente qué clases e interfaces están relacionadas.</li>
+<li>Se evitan conflictos por el empleo de los mismos identificadores en diferentes clases si éstas están en paquetes distintos.</li>
+<li>Puede configurarse un acceso específico dentro de las clases de un mismo paquete diferente al acceso desde otras clases fuera del paquete.</li>
+</ul>
+
+<h2 id="identificacion-de-un-paquete">19.2 Identificación de un paquete</h2>
+
+<p>Es relativamente fácil que dos programadores de Java escojan el mismo identificador para dos clases diferentes. El compilador permite que haya dos clases con el mismo identificador si pertenecen a paquetes diferentes: el identificador de la clase debe ir precedida del identificador del paquete (a este identificador compuesto se le denomina identificador <em>cualificado</em>). En el ejemplo anterior: <code>geometria.Rectangulo</code>. Eso sí, existe una convención para evitar que dos programadores diferentes empleen el mismo identificador cualificado para sus paquetes:</p>
+
+<p>Convención: las empresas, compañías u organizaciones deben usar el nombre de dominio de Internet inverso para identificar los nombres de los paquetes que han desarrollado. Por ejemplo: <code>com.nombreEmpresa.nombrePaquete</code>.</p>
+
+<h2 id="acceso-a-los-componentes-de-un-paquete">19.3 Acceso a los componentes de un paquete</h2>
+
+<p>Como se ha comentado anteriormente, sólo los componentes públicos de un paquete son accesibles desde fuera del paquete desde el que se han definido. Para emplear un componente público de un paquete debe hacerse una de las siguientes cosas, cada una de las cuales es adecuada a una situación distinta:</p>
+
+<ul>
+<li>Referenciarlo mediante su identificador <strong>cualificado</strong>. Por ejemplo: <code>geometria.Rectangulo r1 = new geometria.Rectangulo();</code></li>
+</ul>
+
+<p>Esta opción puede ser adecuada si el identificador sólo se emplea una o muy pocas veces.</p>
+
+<ul>
+<li>Importar el componente del paquete, incluyendo una sentencia <code>import</code> al principio del archivo fuente, antes de cualquier declaración de clase o interfaz y después de la sentencia <code>package</code>, si existe.</li>
+</ul>
+
+<div class="code java">
+<pre class="java"><span class="kw1">import</span> <span class="co2">geometria.Rectangulo</span><span class="sy0">;</span> 
+...
+ <span class="co1">// Puede hacerse referencia directamente a la clase rectangulo</span>
+Rectangulo r1 <span class="sy0">=</span> <span class="kw1">new</span> Rectangulo<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Esta opción es adecuada si sólo se emplean uno o pocos componentes del paquete <code>geometria</code>.</p>
+
+<ul>
+<li>Importar el paquete completo, empleando la sentencia <code>import</code> con el identificador del paquete seguido de un punto y un asterisco:</li>
+</ul>
+
+<div class="code java">
+<pre class="java"><span class="kw1">import</span> <span class="co2">geometria.*</span><span class="sy0">;</span>
+ ...
+ <span class="co1">// Puede hacerse referencia directamente a cualquier</span>
+<span class="co1">// componente del paquete geometria</span>
+Rectangulo r1 <span class="sy0">=</span> <span class="kw1">new</span> Rectangulo<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Por defecto, la plataforma Java importa automáticamente tres paquetes completos:</p>
+
+<ul>
+<li>El paquete por defecto (sin identificador explícito).</li>
+<li>El paquete <code>java.lang</code> que contienen las clases de Java más corrientes, como <code>Object</code> y  <code>Math</code>.</li>
+<li>El paquete actual de trabajo.</li>
+</ul>
+
+<h2 id="modificadores-de-acceso-a-los-componentes">19.4 Modificadores de acceso a los componentes</h2>
+
+<p>Los programadores incluyen sus clases e interfaces dentro de paquetes por dos razones. La primera es por motivos organizativos y la segunda es por la configuración de acceso a los componentes.</p>
+
+<p>Existen cuatro tipos de modificadores de acceso en Java: <code>public, private, protected y package</code>. Los tres primeros se han de definir explícitamente mediante la palabra reservada en la declaración del atributo o del método correspondiente, mientras que la cuarta es el acceso por defecto si no se indica otro explícitamente.</p>
+
+<div class="figure" id="figure-19-2">
+    <img src="http://www.arkaitzgarro.com/java/images/cap19/modificadores.png" alt="Modificadores de acceso en Java" />
+
+    <p class="caption"><strong>Figura 19.2</strong> Modificadores de acceso en Java</p>
+</div>
+
+
+<h2 id="recomendaciones-para-la-gestion-de-archivos-de-java">19.5 Recomendaciones para la gestión de archivos de Java</h2>
+
+<p>Aunque la especificación del lenguaje Java no obliga a ello, se suele emplear el siguiente procedimiento para construir un sistema jerárquico que facilite la gestión y uso de los archivos fuente y compilados (<em>bytecodes</em>):</p>
+
+<ul>
+<li>Almacenar el código fuente de una clase o interfaz en un archivo de texto con el mismo identificador que la clase o interfaz y extensión <code>.java</code>. Por ejemplo: <code>Rectangulo.java</code>.</li>
+<li>Poner el archivo en un directorio con el mismo nombre que el paquete al que pertenezca la clase o la interfaz. Por ejemplo: <code>geometria/Rectangulo.java</code>. El identificador <em>cualificado</em> del componente del paquete (<code>geometria.Rectangulo</code>) y la vía de acceso al archivo son ahora paralelos o equivalentes.
+<em>Como se ha comentado anteriormente, por convención, una organización emplea su nombre de dominio a la inversa para identificar los *packages</em> que desarrolla. Por ejemplo, la empresa ficticia <em>Novedades García y Arranz</em> con nombre de dominio <code>garciayarranz.com</code> añadiría <code>com.garciayarranz</code> al principio de los identificadores de sus <em>packages</em>. Así, si la empresa García y Arranz tuviera un paquete <code>geometria</code> que contuviera un archivo fuente <code>Rectangulo.java</code>, debería incluirse en una secuencia de directorios de la  siguiente forma:</li>
+</ul>
+
+<div class="code java">
+<pre class="java"><span class="kw1">package</span> <span class="co2">com.arkaitzgarro.geometria</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Rectangulo <span class="br0">&#123;</span>
+    ...
+<span class="br0">&#125;</span></pre>
+</div>
+
+<ul>
+<li>Al compilar un archivo fuente, el compilador genera un archivo de <em>bytecodes</em> distinto para cada clase e interfaz declarada en el archivo fuente. El nombre del archivo es el identificador de la clase o interfaz y la extensión es <code>.class</code>. Los archivos con extensión suelen organizarse en una estructura específica de directorios que refleja el nombre del paquete y diferente de la estructura utilizada para organizar los archivos fuente. Por ejemplo:</li>
+</ul>
+
+<p>Archivo de bytescodes: <code>clases/com/garciayarranz/geometria/Rectangulo.class</code>
+Archivo fuente: <code>fuentes/com/garciayarranz/geometria/Rectangulo.java</code></p>
+
+<ul>
+<li>El directorio raíz de la estructura de directorios debe incluirse la vía del acceso a las clases del ordenador. Esta vía de acceso se define mediante la variable de entorno CLASSPATH. Cuando el compilador o el intérprete Java necesitan localizar una clase en un paquete, buscan en cada uno de los directorios asignados a CLASSPATH para ver si el árbol de directorios que contiene el paquete se encuentra ahí.</li>
+<li>Esta estructura facilita que tanto el compilador como el intérprete de Java busquen y encuentren las clases en el directorio apropiado. Si se desea los archivos pueden encontrarse dentro de archivos comprimidos en formato ZIP.</li>
+</ul>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-19.html#packages-o-paquetes"><em>Packages</em> o paquetes</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>19.1</span>
+                        <a class="internal" href="capitulo-19.html#como-se-organiza-un-conjunto-de-archivos-fuente-de-java">¿Cómo se organiza un conjunto de archivos fuente de Java?</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>19.2</span>
+                        <a class="internal" href="capitulo-19.html#identificacion-de-un-paquete">Identificación de un paquete</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>19.3</span>
+                        <a class="internal" href="capitulo-19.html#acceso-a-los-componentes-de-un-paquete">Acceso a los componentes de un paquete</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>19.4</span>
+                        <a class="internal" href="capitulo-19.html#modificadores-de-acceso-a-los-componentes">Modificadores de acceso a los componentes</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>19.5</span>
+                        <a class="internal" href="capitulo-19.html#recomendaciones-para-la-gestion-de-archivos-de-java">Recomendaciones para la gestión de archivos de Java</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

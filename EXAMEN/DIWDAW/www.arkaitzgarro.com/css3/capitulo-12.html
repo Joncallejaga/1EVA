@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Módulo <em>Animations</em> | CSS 3</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">CSS 3</a></h1>
+        <p class="span3">
+                        <a href="capitulo-11.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-13.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="modulo-animations"><span>Capítulo 12</span> Módulo <em>Animations</em></h1>
+        <p>La especificación oficial y el estado actual de desarrollo del módulo <em>Animations</em> en CSS 3 puede consultarse en <a href="http://www.w3.org/TR/css3-animations/">http://www.w3.org/TR/css3-animations/</a>.</p>
+
+<p>Las <strong>animaciones CSS 3</strong> hacen posible animar transiciones de una configuración de estilo de CSS a otra. Las animaciones constan de dos componentes: un estilo que describe la animación CSS y un conjunto de fotogramas que indican el comienzo y final de la animación, así como los posibles puntos de ruta intermedios durante la animación.</p>
+
+<p>Hay tres <strong>ventajas clave</strong> en las animaciones CSS sobre las técnicas de animación tradicionales ejecutadas a través de <em>scripts</em>:</p>
+
+<ul>
+<li><p>Son fáciles de usar para las animaciones simples; puedes crearlas sin tener la necesidad de conocer el funcionamiento de JavaScript.</p></li>
+<li><p>Las animaciones funcionan bien, incluso bajo carga de sistema medio. Las animaciones simples pueden, a menudo, ejecutarse de manera pobre en JavaScript (a menos que estén bien hechas). El motor de renderizado puede no reproducir ciertos fotogramas y utilizar otras técnicas para mantener el reproducción lo más suave posible.</p></li>
+<li><p>Dejar al navegador controlar la secuencia de animación permite a éste optimizar el rendimiento y la eficiencia a través de, por ejemplo, la reducción de la frecuencia de actualización de las animaciones en ejecución en pestañas que no están visibles en ese momento.</p></li>
+</ul>
+
+<h2 id="configuracion">12.1 Configuración</h2>
+
+<p>Para crear una <strong>secuencia de animación CSS</strong>, se requiere dar estilo al elemento que se quiere animar con la <strong>propiedad de animación</strong> o sus <strong>sub-propiedades</strong>. Esto permite configurar los tiempos y duración de la animación, así como otros detalles de cómo la secuencia de animación debe progresar. Esto, sin embargo, no configura la apariencia real de la animación, que se establece utilizando los <strong><code>keyframes</code></strong> explicados en el apartado siguiente.</p>
+
+<p>Las <strong>sub-propiedades</strong> de la propiedad animación son:</p>
+
+<ul>
+<li><code>animation-delay</code>: configura el retraso entre lo que tarda el elemento en cargarse y el comienzo de la secuencia de animación.</li>
+<li><code>animation-direction</code>: configura si la animación debe alternar dirección en cada reproducción a través de la secuencia o volver al punto de inicio y repetirse.</li>
+<li><code>animation-duration</code>: configura el tiempo que tarda la animación en completar un ciclo.</li>
+<li><code>animation-iteration-count</code>: configura el número de veces que la animación debe repetirse, puede establecerse el valor <code>infinite</code> para repetir la animación de forma indefinida.</li>
+<li><code>animation-name</code>: especifica el nombre de los <code>keyframes</code> que describen los fotogramas de la animación.</li>
+<li><code>animation-play-state</code>: permite pausar y reanudar la secuencia de animación.</li>
+<li><code>animation-timing-function</code>: configura los tiempos de la animación; esto es, cómo la animación transiciona a través de los fotogramas mediante el establecimiento de curvas de aceleración.</li>
+<li><code>animation-fill-mode</code>: configura qué valores son aplicados por la animación antes y después de que ésta es ejecutada.</li>
+</ul>
+
+<h2 id="keyframes">12.2 <em>keyframes</em></h2>
+
+<p>Una vez que se han configurado los tiempos de la animación, es necesario definir la <strong>apariencia</strong> de ésta. Esto se realiza mediante el establecimiento de <strong>dos o más fotogramas</strong>, definidos por los <code>keyframes</code>. Cada fotograma describe cómo el elemento animado debe ejecutarse en un momento dado durante la secuencia de animación.</p>
+
+<p>Dado que los tiempos de la animación son definidos en el estilo CSS que configura la animación, <code>keyframes</code> utiliza un <strong>porcentaje</strong> para indicar el momento de la secuencia de animación en el que tienen lugar. <strong>0%</strong> indica el primer momento de la secuencia de animación, mientras que <strong>100%</strong> indica el estado final de ésta. Debido a que estos dos momentos son tan importantes, tienen dos alias especiales: <code>from</code> y <code>to</code>. Ambos son opcionales. Si <code>from/0%</code> o <code>to/100%</code> no son especificados, el navegador inicia o finaliza la animación utilizando los valores calculados de todos los atributos.</p>
+
+<p>Se pueden incluir opcionalmente <strong>fotogramas adicionales</strong> que describen los pasos intermedios desde el punto de partida hasta el punto final de la animación.</p>
+
+<p>La sintaxis de la regla <code>keyframe</code> es la siguiente:</p>
+
+<div class="code css">
+<pre class="css"><span class="co1">@keyframes &lt;identifier&gt; {</span>
+  <span class="br0">&#91;</span> <span class="br0">&#91;</span> from | to | &lt;percentage<span class="sy0">&gt;</span> <span class="br0">&#93;</span> <span class="br0">&#91;</span><span class="sy0">,</span> from | to | &lt;percentage<span class="sy0">&gt;</span> <span class="br0">&#93;</span><span class="sy0">*</span> <span class="kw2">block</span> <span class="br0">&#93;</span><span class="sy0">*</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="ejemplos-3">12.3 Ejemplos</h2>
+
+<h3 id="creacion-de-textos-en-movimiento">12.3.1 Creación de textos en movimiento</h3>
+
+<p>Este sencillo ejemplo da estilo al elemento <code>&lt;h1&gt;</code> para que el texto se dezlice desde el borde derecho de la ventana del navegador.</p>
+
+<div class="code css">
+<pre class="css">h1 <span class="br0">&#123;</span>
+    animation-duration<span class="sy0">:</span> 3s<span class="sy0">;</span>
+    animation-name<span class="sy0">:</span> slidein<span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="co1">@keyframes slidein {</span>
+    from <span class="br0">&#123;</span>
+        <span class="kw1">margin-left</span><span class="sy0">:</span> <span class="re3">100%</span><span class="sy0">;</span>
+        <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">300%</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    to <span class="br0">&#123;</span>
+        <span class="kw1">margin-left</span><span class="sy0">:</span> <span class="re3">0%</span><span class="sy0">;</span>
+        <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">100%</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>El estilo dado al elemento <code>&lt;h1&gt;</code>, en este caso, especifica que la animación debe esperar 3 segundos para ejecutarse de principio a fin, utilizando la propiedad <code>animation-duration</code>, y que el valor de los <code>keyframes</code> que definen los fotogramas para la secuencia de animación es <code>slidein</code>.</p>
+
+<p>Si quisiésemos dar un estilo personalizado al elemento <code>&lt;h1&gt;</code> para que apareciera en navegadores que no soportan animaciones CSS, deberíamos incluirlo aquí también. Sin embargo, en este caso, no queremos ningún estilo personalizado además del efecto de animación.</p>
+
+<p>Los fotogramas son definidos utilizando los <code>keyframes</code>. En este caso, sólamente tenemos dos fotogramas. El primero se ejecuta en el 0% (utilizando el alias <code>from</code>). Además, aquí configuramos que el margen izquierdo del elemento se ejecute al 100% (esto es, en el extremos derecho del elemento contenedor), y que la anchura del elemento sea 300% (o tres veces la anchura del elemento contenedor). Esto provoca que el primer fotograma de la animación tenga el encabezado fijado en el borde derecho de la ventana del navegador.</p>
+
+<p>El segundo (y final) fotograma se ejecuta al 100% (utilizando el alias <code>to</code>). El margen izquierdo se establece en 0% y el ancho del elemento en 100%. Esto hace que el encabezado finalice su animación a ras del borde izquierdo del área de contenido.</p>
+
+<h4 id="anadir-otro-fotograma">12.3.1.1 Añadir otro fotograma</h4>
+
+<p>Añadamos ahora otro fotograma al ejemplo de animación anterior. Digamos que queremos que la fuente del encabezado aumente a medida que se mueve de derecha a izquierda por un tiempo, y después disminuya de nuevo hasta su tamaño original. Es tan sencillo como añadir este fotograma:</p>
+
+<div class="code css">
+<pre class="css"><span class="re3">75%</span> <span class="br0">&#123;</span>
+    <span class="kw1">font-size</span><span class="sy0">:</span> <span class="re3">300%</span><span class="sy0">;</span>
+    <span class="kw1">margin-left</span><span class="sy0">:</span> <span class="re3">25%</span><span class="sy0">;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">150%</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Esto indica al navegador que al 75% del "camino" de la secuencia de animación, la cabecera debe tener su margen izquierdo al 25% y la anchura al 150%.</p>
+
+<h4 id="hacer-que-se-repita">12.3.1.2 Hacer que se repita</h4>
+
+<p>Para hacer que la animación se repita por sí sola, simplemente hay que utilizar la propiedad <code>animation-iteration-count</code> para indicar cuántas veces tiene ésta que repetirse. En este caso, utilizaremos <code>infinite</code> para que la animación se repita de forma indefinida:</p>
+
+<div class="code css">
+<pre class="css">h1 <span class="br0">&#123;</span>
+    animation-duration<span class="sy0">:</span> 3s<span class="sy0">;</span>
+    animation-name<span class="sy0">:</span> slidein<span class="sy0">;</span>
+    animation-iteration-count<span class="sy0">:</span> infinite<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h4 id="hacer-que-se-mueva-hacia-atras-y-adelante">12.3.1.3 Hacer que se mueva hacia atrás y adelante</h4>
+
+<p>El ejemplo anterior hacía que la animación se repitiera, pero el hecho de que la animación salte de nuevo al comienzo es algo que resulta extraño. Lo que realmente queremos es que se mueve hacia atrás y adelante de la pantalla. Esto se logra fácilmente estableciendo la propiedad <code>animation-direction</code> con el valor <code>alternate</code>:</p>
+
+<div class="code css">
+<pre class="css">h1 <span class="br0">&#123;</span>
+    animation-duration<span class="sy0">:</span> 3s<span class="sy0">;</span>
+    animation-name<span class="sy0">:</span> slidein<span class="sy0">;</span>
+    animation-iteration-count<span class="sy0">:</span> infinite<span class="sy0">;</span>
+    animation-direction<span class="sy0">:</span> alternate<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h4 id="utilizar-eventos-de-animacion">12.3.1.4 Utilizar eventos de animación</h4>
+
+<p>Se puede obtener un control adicional sobre las animaciones - así como información útil sobre éstas -, mediante el uso de eventos de animación. Estos eventos, representados por el objeto <code>AnimationEvent</code>, pueden ser utilizados para detectar cuándo comienzan las animaciones, terminan o inician una nueva iteración. Cada evento incluye el momento en el que se produjo, así como el nombre de la animación que desencadenó el evento.</p>
+
+<p>Nosotros modificaremos el texto desizante del ejemplo anterior para emitir información sobre cada evento de animación cuando se produce y así poder echar un vistazo a cómo funcionan.</p>
+
+<h5 id="anadir-los-detectores-de-eventos-de-animacion">12.3.1.4.1 Añadir los detectores de eventos de animación</h5>
+
+<p>Usaremos código JavaScript para "escuchar" los tres posibles eventos de animación. La función <code>setup()</code> configura los detectores de eventos:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> setup<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> e <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;watchme&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    e.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">&quot;animationstart&quot;</span><span class="sy0">,</span> listener<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    e.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">&quot;animationend&quot;</span><span class="sy0">,</span> listener<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    e.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">&quot;animationiteration&quot;</span><span class="sy0">,</span> listener<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">    var e = document.getElementById(&quot;watchme&quot;);
+    e.className = &quot;slidein&quot;;
+}</pre>
+</div>
+
+<p>Este es un código bastante estándar; se puede obtener más información sobre cómo funciona en la documentación de <code>element.addEventListener()</code>. Lo último que la función <code>setup()</code> realiza aquí es establecer la <code>class</code> sobre el elemento que estamos animando a <code>slidein</code>; hacemos esto para iniciar la animación.</p>
+
+<p>¿Por qué? Porque el evento <code>animationstart</code> se ejecuta en cuanto la animación se inicia, y en nuestro caso, esto sucede antes de ejecutar el código. Así que iniciaremos la animación nosotros mismos.</p>
+
+<h5 id="recepcion-de-los-eventos">12.3.1.4.2 Recepción de los eventos</h5>
+
+<p>Los eventos se "entregan" con la función <code>listener()</code>, que se muestra a continuación:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> listener<span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> l <span class="sy0">=</span> document.<span class="me1">createElement</span><span class="br0">&#40;</span><span class="st0">&quot;li&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">switch</span><span class="br0">&#40;</span>e.<span class="me1">type</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">case</span> <span class="st0">&quot;animationstart&quot;</span><span class="sy0">:</span>
+            l.<span class="me1">innerHTML</span> <span class="sy0">=</span> <span class="st0">&quot;Started: elapsed time is &quot;</span> <span class="sy0">+</span> e.<span class="me1">elapsedTime</span><span class="sy0">;</span>
+            <span class="kw1">break</span><span class="sy0">;</span>
+        <span class="kw1">case</span> <span class="st0">&quot;animationend&quot;</span><span class="sy0">:</span>
+            l.<span class="me1">innerHTML</span> <span class="sy0">=</span> <span class="st0">&quot;Ended: elapsed time is &quot;</span> <span class="sy0">+</span> e.<span class="me1">elapsedTime</span><span class="sy0">;</span>
+            <span class="kw1">break</span><span class="sy0">;</span>
+        <span class="kw1">case</span> <span class="st0">&quot;animationiteration&quot;</span><span class="sy0">:</span>
+            l.<span class="me1">innerHTML</span> <span class="sy0">=</span> <span class="st0">&quot;New loop started at time &quot;</span> <span class="sy0">+</span> e.<span class="me1">elapsedTime</span><span class="sy0">;</span>
+            <span class="kw1">break</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;output&quot;</span><span class="br0">&#41;</span>.<span class="me1">appendChild</span><span class="br0">&#40;</span>l<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Este código también es muy sencillo. Simplemente "mira" al <code>event.type</code> para determinar qué tipo de evento de animación se produce, y a continuación añade una nota apropiada al <code>&lt;ul&gt;</code> (lista no ordenada) que estamos usando para registrar estos eventos.</p>
+
+<p>La salida, cuando todo está dicho y hecho, se vería algo así:</p>
+
+<ul>
+<li>Iniciado: el tiempo transcurrido es 0</li>
+<li>Nuevo ciclo comenzó en el momento 3.01200008392334</li>
+<li>Nuevo ciclo comenzó en el momento 6.00600004196167</li>
+<li>Finalizado: tiempo transcurrido es 9.234000205993652</li>
+</ul>
+
+<p>Hay que tener en cuenta que los tiempos están muy cerca entre sí, y que no se muestran exactamente igual que los establecidos cuando la animación fue configurada. También hay que saber que después de la iteración final de la animación, el evento <code>animationiteration</code> no se envía; en su lugar se envía el evento <code>animationend</code>.</p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 9</p>
+</div>
+
+<p><a class="internal" href="capitulo-13.html#ej09">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-12.html#modulo-animations">Módulo <em>Animations</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>12.1</span>
+                        <a class="internal" href="capitulo-12.html#configuracion">Configuración</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>12.2</span>
+                        <a class="internal" href="capitulo-12.html#keyframes"><em>keyframes</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>12.3</span>
+                        <a class="internal" href="capitulo-12.html#ejemplos-3">Ejemplos</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

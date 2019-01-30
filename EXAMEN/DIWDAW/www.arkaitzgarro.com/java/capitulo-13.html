@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="15/04/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Constructores | Java</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">Java</a></h1>
+        <p class="span3">
+                        <a href="capitulo-12.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-14.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="constructores"><span>Capítulo 13</span> Constructores</h1>
+        <p>Aunque en un principio pueda parecer lo contrario, un <em>constructor</em> <strong>no</strong> es en realidad un método estrictamente hablando. Un constructor es un elemento de una clase cuyo identificador coincide con el de la clase correspondiente y que tiene por objetivo obligar a y controlar cómo se inicializa una instancia de una determinada clase, ya que el lenguaje Java no permite que las variables miembro de una nueva instancia queden sin inicializar. Además, a diferencia de los métodos, los constructores sólo se emplean cuando se quiere crear una nueva instancia.</p>
+
+<h2 id="constructores-2">13.1 Constructores</h2>
+
+<p>Por defecto toda clase tiene un constructor sin parámetros cuyo identificador coincide con el de la clase y que, al ejecutarse, inicializa el valor de cada atributo de la nueva instancia: los atributos de tipo primitivo se inicializan a <code>0</code> o <code>false</code>, mientras que los atributos de tipo <em>objeto</em> (referencia) se inicializan a <code>null</code>.</p>
+
+<p>En el ejemplo de la clase <code>PruebaPrecio</code>, que utiliza una instancia de la clase <code>Precio</code>, la llamada al constructor se produce en la sentencia <code>p = new Precio();</code>. Mientras que la ejecución de <code>new</code> genera una nueva instancia y devuelve su dirección de memoria, la ejecución del constructor <code>Precio()</code> inicializa los valores de los atributos.</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> PruebaPrecio <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span> <span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        Precio p<span class="sy0">;</span>            <span class="co1">// Crea una referencia de la clase Precio </span>
+        p <span class="sy0">=</span> <span class="kw1">new</span> Precio<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// Crea el objeto de la clase Precio y realiza</span>
+                            <span class="co1">// una llamada al metodo constructor</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="figure" id="figure-13-1">
+    <img src="images/cap13/constructor.png" alt="Resultado de la ejecución del constructor: inicialización de los atributos del nuevo objeto" />
+
+    <p class="caption"><strong>Figura 13.1</strong> Resultado de la ejecución del constructor: inicialización de los atributos del nuevo objeto</p>
+</div>
+
+
+<h2 id="declaracion-de-un-constructor">13.2 Declaración de un constructor</h2>
+
+<p>La declaración de un constructor diferente del constructor por defecto, obliga a que se le asigne el mismo identificador que la clase y que no se indique de forma explícita un tipo de valor de retorno. La existencia o no de parámetros es opcional. Por otro lado, la <em>sobrecarga</em> permite que puedan declararse varios constructores (con el mismo identificador que el de la clase), siempre y cuando tengan un tipo y/o número de parámetros distinto. Por ejemplo, para la clase <code>Fecha</code> se declaran dos constructores, el primero sin parámetros (por lo tanto se redefine el constructor por defecto) y el segundo con tres parámetros:</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/** 
+ * Declaracion de la clase Fecha 
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> Fecha <span class="br0">&#123;</span>
+    <span class="co1">// Atributos o variables miembro</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> dia<span class="sy0">;</span>
+     <span class="kw1">private</span> <span class="kw4">int</span> mes<span class="sy0">;</span> 
+    <span class="kw1">private</span> <span class="kw4">int</span> anho<span class="sy0">;</span>
+&nbsp;
+    <span class="co3">/**
+     * Constructor 1 
+     * Asigna los valores 1, 1 y 2000 a los atributos
+     * dia, mes y anho respectivamente 
+     */</span>
+    <span class="kw1">public</span> Fecha<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">dia</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">mes</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">anho</span> <span class="sy0">=</span> <span class="nu0">2000</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co3">/**
+     * Constructor 2 
+     * @param ndia el dia del mes a almacenar
+     * @param nmes el mes del anho a almacenar
+     * @param nanho el anho a almacenar 
+     */</span>
+    <span class="kw1">public</span> Fecha<span class="br0">&#40;</span><span class="kw4">int</span> dia, <span class="kw4">int</span> mes, <span class="kw4">int</span> anho<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">dia</span> <span class="sy0">=</span> dia<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">mes</span> <span class="sy0">=</span> mes<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">anho</span> <span class="sy0">=</span> anho<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">String</span> toString<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> 
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">dia</span> <span class="sy0">+</span> <span class="st0">&quot;/&quot;</span> <span class="sy0">+</span> <span class="kw1">this</span>.<span class="me1">mes</span> <span class="sy0">+</span> <span class="st0">&quot;/&quot;</span> <span class="sy0">+</span> <span class="kw1">this</span>.<span class="me1">anho</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La <em>sobrecarga</em> permite que puedan declararse varios constructores (con el mismo identificador que el de la clase), siempre y cuando tengan un tipo y/o número de parámetros distinto. Para probar el código anterior, se construye el siguiente programa:</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/** 
+ * Ejemplo de uso de la clase Fecha
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> PruebaFecha <span class="br0">&#123;</span> 
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main <span class="br0">&#40;</span><span class="kw3">String</span> <span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        Fecha origen <span class="sy0">=</span> <span class="kw1">new</span> Fecha<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+        Fecha actual <span class="sy0">=</span> <span class="kw1">new</span> Fecha<span class="br0">&#40;</span><span class="nu0">16</span>,<span class="nu0">2</span>,<span class="nu0">2009</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Primera fecha: &quot;</span> <span class="sy0">+</span> origen.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Segunda fecha: &quot;</span> <span class="sy0">+</span> actual.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="figure" id="figure-13-2">
+    <img src="images/cap13/constructores-instancias.png" alt="Resultado de la ejecución de los respectivos constructores para las nuevas instancias referenciadas por <code>origen</code> y <code>actual</code>" />
+
+    <p class="caption"><strong>Figura 13.2</strong> Resultado de la ejecución de los respectivos constructores para las nuevas instancias referenciadas por <code>origen</code> y <code>actual</code></p>
+</div>
+
+
+<p>El código anterior puede compilarse y ejecutarse, mostrando la siguiente salida por pantalla:</p>
+
+<div class="code bash">
+<pre class="bash">$<span class="sy0">&gt;</span>javac PruebaFecha.java
+Primera fecha: <span class="nu0">1</span><span class="sy0">/</span><span class="nu0">1</span><span class="sy0">/</span><span class="nu0">2000</span>
+Segunda fecha: <span class="nu0">16</span><span class="sy0">/</span><span class="nu0">2</span><span class="sy0">/</span><span class="nu0">2009</span></pre>
+</div>
+
+<p><strong>Importante</strong>: una vez construido un constructor ya no se puede emplear el constructor por defecto sin parámetros. Si se desea trabajar con él, es necesario declararlo explícitamente.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-13.html#constructores">Constructores</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>13.1</span>
+                        <a class="internal" href="capitulo-13.html#constructores-2">Constructores</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>13.2</span>
+                        <a class="internal" href="capitulo-13.html#declaracion-de-un-constructor">Declaración de un constructor</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+
+body {
+  padding: 2em; 
+}
+
+.wrapper {
+  display: flex;  
+  flex-flow: row wrap;
+  font-weight: bold;
+  text-align: center;
+}
+
+.wrapper > * {
+  padding: 10px;
+  flex: 1 100%;
+}
+
+.header {
+  background: tomato;
+}
+
+.ul {
+  display: flex;
+  text-align: right;
+  color: transparent;
+  text-align: right;
+  margin-left: 80%;
+  
+}
+
+li{
+  padding-right: 5px;
+  margin
+}
+li > a:link{
+  color: white;
+  text-decoration: none;
+
+
+}
+
+li > a:hover{
+  color: white; 
+  background-color: blue;
+  padding-right: .6em;
+  text-decoration: none;
+
+
+}
+
+.nav {
+  background: turquoise;
+}
+
+.main {
+  text-align: left;
+  background: deepskyblue;
+}
+
+.section {
+  background: gold;
+}
+
+.aside {
+  background: hotpink;
+}
+
+.footer {
+  background: lightgreen;
+}
+
+

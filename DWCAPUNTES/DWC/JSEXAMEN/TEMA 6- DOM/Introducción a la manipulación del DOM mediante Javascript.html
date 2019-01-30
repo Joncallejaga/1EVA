@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)http://www.maestrosdelweb.com/dom/ -->
+<html lang="es" class=" -webkit-"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Introducción a la manipulación del DOM mediante Javascript</title>
+<script type="text/javascript" async="" src="./Introducción a la manipulación del DOM mediante Javascript_files/analytics.js.descarga"></script><script src="./Introducción a la manipulación del DOM mediante Javascript_files/cb=gapi.loaded_1" async=""></script><script src="./Introducción a la manipulación del DOM mediante Javascript_files/cb=gapi(1).loaded_0" async=""></script><script async="" src="./Introducción a la manipulación del DOM mediante Javascript_files/gtm.js.descarga"></script><script id="twitter-wjs" src="./Introducción a la manipulación del DOM mediante Javascript_files/widgets.js.descarga"></script><script id="facebook-jssdk" src="./Introducción a la manipulación del DOM mediante Javascript_files/sdk.js.descarga"></script><script async="" src="./Introducción a la manipulación del DOM mediante Javascript_files/analytics.js.descarga"></script><script async="" src="./Introducción a la manipulación del DOM mediante Javascript_files/analytics.js.descarga"></script><script src="./Introducción a la manipulación del DOM mediante Javascript_files/siSLvjfSw3Nx0AEPDY6O_DoqooQ.js.descarga"></script><style media="" data-href="//fonts.googleapis.com/css?family=Quicksand|Montserrat">/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v12/JTUSjIg1_i6t8kCHKm459WRhyzbi.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v12/JTUSjIg1_i6t8kCHKm459W1hyzbi.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v12/JTUSjIg1_i6t8kCHKm459WZhyzbi.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v12/JTUSjIg1_i6t8kCHKm459Wdhyzbi.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v12/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Quicksand Regular'), local('Quicksand-Regular'), url(https://fonts.gstatic.com/s/quicksand/v8/6xKtdSZaM9iE8KbpRA_hJFQNcOM.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Quicksand Regular'), local('Quicksand-Regular'), url(https://fonts.gstatic.com/s/quicksand/v8/6xKtdSZaM9iE8KbpRA_hJVQNcOM.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Quicksand Regular'), local('Quicksand-Regular'), url(https://fonts.gstatic.com/s/quicksand/v8/6xKtdSZaM9iE8KbpRA_hK1QN.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style media="" data-href="//fonts.googleapis.com/css?family=Crimson+Text:400,700,400italic">/* latin */
+@font-face {
+  font-family: 'Crimson Text';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Crimson Text Italic'), local('CrimsonText-Italic'), url(https://fonts.gstatic.com/s/crimsontext/v8/wlpogwHKFkZgtmSR3NB0oRJfajhRK_Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin */
+@font-face {
+  font-family: 'Crimson Text';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Crimson Text Regular'), local('CrimsonText-Regular'), url(https://fonts.gstatic.com/s/crimsontext/v8/wlp2gwHKFkZgtmSR3NB0oRJfbwhT.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin */
+@font-face {
+  font-family: 'Crimson Text';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Crimson Text Bold'), local('CrimsonText-Bold'), url(https://fonts.gstatic.com/s/crimsontext/v8/wlppgwHKFkZgtmSR3NB0oRJX1C1GDNNQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style media="" data-href="//www.maestrosdelweb.com/wp-content/themes/mdw5/style.css">@import 'styles/normalize.css';@import 'styles/font-awesome.min.css';body.archive .posts-section,body.category .posts-section,body.error404 .posts-section,body.paged .posts-section{padding-top:80px}.aligncenter{display:block;margin:0 auto}.alignleft{float:left;height:auto;margin:0 -75px 1em 0;max-width:450px;position:relative;left:-100px}.alignright{float:right;height:auto;margin:0 0 1em -75px;max-width:450px;position:relative;right:-100px}.btn{background-color:#01b5ff;box-sizing:border-box;display:inline-block;color:#fff;font-size:14px;height:60px;padding:20px 0;position:relative;text-align:center;text-decoration:none;width:260px;word-spacing:3px}.btn:before{font-family:fontawesome!important;font-size:30px;line-height:14px;margin-right:10px;position:relative;top:3px;vertical-align:top}.btn.facebook{background-color:#3b5999}.btn.facebook:before{content:'\f09a'}.btn.google-plus{background-color:#de4b39}.btn.google-plus:before{content:'\f0d5'}.btn.twitter{background-color:#60a9de}.btn.twitter:before{content:'\f099'}a{color:#01b5ff}body{font-family:montserrat,sans-serif}.commentlist{font-family:helvetica neue,Helvetica,Arial,lucida grande,tahoma,verdana,arial,sans-serif;font-size:12px;list-style:none;margin:0;padding:0 0 35px 10px}.commentlist li>img{float:left}.commentlist li blockquote{display:inline;margin:0}.commentlist li cite{color:#3b5998;display:block;font-style:normal;font-weight:700;margin-left:58px}.commentlist li cite:hover{text-decoration:underline}.commentlist li cite a{color:#3b5998;text-decoration:none}.commentlist li p{margin-left:58px}.content{right:0;position:relative}.content .header{right:0}.content .search-section{right:0}.content.left{right:300px!important}.content.left .header{right:300px!important}.content.left .search-section{right:300px!important}.content.left .suscribe{right:300px!important}.header{background-color:#000;color:#fff;height:85px;position:fixed;top:0;width:100%;z-index:1000}.header.scrolled{background-color:rgba(0,0,0,.6)}.header .wrapper{position:relative}.header .wrapper *{display:inline-block}.header .wrapper .logo-container{background-position:0 0;background-size:auto 100%;height:65px;margin:10px 5px;width:260px}.header .wrapper .logo-container a{display:block;height:65px;width:260px;text-indent:-500em}.header .wrapper .menu{margin:0}.header .wrapper .menu ul{margin:0;padding:0}.header .wrapper .menu ul .menu-item{border-bottom:0 solid transparent;box-sizing:border-box;display:inline-block;height:85px;margin-right:25px;text-transform:uppercase;transition:all .2s ease;vertical-align:top}.header .wrapper .menu ul .menu-item.active,.header .wrapper .menu ul .menu-item:hover{border-bottom:10px solid #01b5ff}.header .wrapper .menu ul .menu-item.logo:hover{border-bottom:none}.header .wrapper .menu ul .menu-item.mobile{box-sizing:content-box;cursor:pointer;font-family:fontawesome!important;height:40px;margin:20px 0;padding:3px 5px;width:40px}.header .wrapper .menu ul .menu-item.mobile:before{content:'\f0c9';font-size:2.5em}.header .wrapper .menu ul .menu-item.mobile:hover{border-bottom:none;color:#01b5ff}.header .wrapper .menu ul .menu-item.search{border-left:1px solid #fff;box-sizing:content-box;cursor:pointer;height:40px;margin:20px 0;padding:5px;text-align:center;width:40px}.header .wrapper .menu ul .menu-item.search:before{content:'\f002';font-family:fontawesome!important;font-size:1.5em;line-height:1.6}.header .wrapper .menu ul .menu-item.search:hover{border-bottom:none}.header .wrapper .menu ul .menu-item.search:hover:before{color:#01b5ff}.header .wrapper .menu ul .menu-item a{color:#fff;text-decoration:none;padding:35px 0}.header .wrapper .social{box-sizing:border-box;position:absolute;right:350px;margin:35px 0}.header .wrapper .social .social-btn{max-width:120px;vertical-align:top}.header .wrapper .social .social-btn>*{text-align:center}.home .posts-section,.archive .posts-section{padding:0 0 120px}.post-container .post .post-header .wrapper{position:relative}.post-header .post-image-container img{display:block;height:auto;min-width:100%;max-width:100%}.post-header .post-wrapper{background:rgba(0,0,0,.2);bottom:0;height:100%;max-width:1000px;position:absolute;width:100%}.post-header .post-wrapper h1{max-width:800px;padding:0 2.1em}.posts-section{padding:0 0 80px}.posts-section .post{display:inline-block;margin-right:15px;margin-top:30px;padding:0;vertical-align:top;width:320px}.posts-section .post:nth-child(3n){margin-right:0}.posts-section .post a{color:#515151;text-decoration:none}.posts-section .post .post-date{font-family:quicksand,sans-serif;font-size:.9em;margin:10px 0}.posts-section .post .post-picture-container{height:214px;margin:0;overflow:hidden;text-align:center;width:100%}.posts-section .post .post-picture-container img{height:auto;min-height:100%;min-width:100%;max-width:100%}.posts-section .post .post-picture-container .post-picture{width:100%}.posts-section .post .post-title{border-bottom:1px solid #b7b7b7;color:#515151;font-size:1.4em;font-weight:400;margin:0;padding:10px 0 20px}.promoted-section{background-color:#efefef;margin-top:85px}.promoted-section a{color:#515151;text-decoration:none}.promoted-section .promoted-post{overflow:hidden;position:relative;width:100%}.promoted-section .promoted-post .promoted-data{background-color:rgba(255,255,255,.8);bottom:40px;left:20px;padding:20px 40px 20px 20px;position:absolute;width:480px}.promoted-section .promoted-post .promoted-data .promoted-title{color:#515151;border-bottom:1px solid #b7b7b7;font-size:1.7em;font-weight:400;margin:0;padding-bottom:20px}.promoted-section .promoted-post .promoted-data .author-avatar{background-color:#01b5ff;display:inline-block;border-radius:50%;height:35px;margin:0;overflow:hidden;width:35px}.promoted-section .promoted-post .promoted-data .author-avatar img{height:100%}.promoted-section .promoted-post .promoted-data .post-meta{font-family:quicksand,sans-serif;margin-top:10px}.promoted-section .promoted-post .promoted-data .post-meta *{vertical-align:top}.promoted-section .promoted-post .promoted-data .post-meta .author{display:inline-block;margin-top:10px}.promoted-section .promoted-post .promoted-data .post-meta .date{display:inline-block;float:right;margin-top:10px}.promoted-section .promoted-post .promoted-picture-container{margin:0;max-height:560px;min-height:300px;width:100%}.promoted-section .promoted-post .promoted-picture-container img{height:auto;min-width:100%;max-width:100%}.results-section{margin-top:180px}.results-section .wrapper iframe{width:100%}.search-section{background-color:#fff;box-sizing:border-box;height:0;overflow:hidden;padding:0;position:fixed;right:0;top:85px;transition:all .3s ease-in-out;width:100%;z-index:1000}.search-section.show{height:85px;padding:15px 0}.search-section .search-container{border-bottom:1px solid #b7b7b7;padding-right:100px;position:relative}.search-section .search-container .search-form{width:100%}.search-section .search-container .search-form .search-box{background-color:#fff;border:none;font-size:1.2em;font-weight:700;margin:15px 0;width:100%}.search-section .search-container .search-form .search-box:focus{outline:none}.search-section .search-container .search-form .search-button{background-color:#fff;background-size:100%;border:none;color:#01b5ff;font-size:1.5em;height:30px;margin:15px 0;position:absolute;right:50px;top:-5px;width:30px}.search-section .search-container .search-form .search-close{background:url("http://www.maestrosdelweb.com/wp-content/themes/mdw5/images/search-close.png") top center no-repeat #fff;background-size:100%;cursor:pointer;height:20px;margin:15px 10px;position:absolute;right:0;top:0;width:20px}.search .pagetitle{padding-top:95px}.single .post-container{margin-top:85px}.social-bottom{margin:2.5em 0}.social-bottom>div,.social-bottom>iframe,.social-bottom>span{margin:0 16px 0 0!important;vertical-align:top!important}.social-top{background-color:rgba(238,238,238,.5);float:left;margin-left:-140px;margin-top:36px;padding:15px 5px 0;position:relative;width:100px;text-align:center;z-index:1}.social-top>div,.social-top>iframe,.social-top>span{display:block!important;margin:0 auto 16px!important}.social-top>span{width:82px}.social-top-mobile{display:none;margin-top:1.5em}.social-top-mobile>*{margin:0 16px 0 0;vertical-align:top!important}.social-top-mobile .twitter-share-button{width:100px!important}.suscribe{background-color:#515151;bottom:-80px;box-sizing:border-box;color:#fff;font-size:1.2em;height:80px;padding:20px 10px;position:fixed;right:0;transition:all .5s ease-in-out;width:100%;z-index:2}.suscribe .mc_header_text{display:none}#mc_mv_FNAME{display:none}.mc_header_email{display:none}.suscribe.scrolled{bottom:0}.suscribe.static{position:static}.suscribe .wrapper,.suscribe .post-wrapper{position:relative}.suscribe .wrapper>*,.suscribe .post-wrapper>*{display:inline-block}.suscribe .wrapper .suscribe-form,.suscribe .post-wrapper .suscribe-form{position:absolute;right:0;top:0}.suscribe .wrapper .suscribe-form .email-container,.suscribe .post-wrapper .suscribe-form .email-container,.mc_merge_var{display:inline-block}.suscribe .wrapper .suscribe-form .email-container .email-box,.suscribe .post-wrapper .suscribe-form .email-container .email-box,#mc_mv_EMAIL{border:none;border-bottom:1px solid #fff;background:0 0;margin-right:20px;padding:10px 0;width:100%}.suscribe .wrapper .suscribe-form .submit,.suscribe .post-wrapper .suscribe-form .submit{background-color:#01b5ff;border:none;letter-spacing:4px;padding:10px 20px}.suscribe .wrapper .text,.suscribe .post-wrapper .text{position:relative;margin:10px 0;padding-left:90px}.suscribe .wrapper .text:before,.suscribe .post-wrapper .text:before{background:url("http://www.maestrosdelweb.com/wp-content/themes/mdw5/images/sprite.png") no-repeat;background-position:-350px 0;background-size:auto 100%;content:'';height:61px;left:0;position:absolute;top:-20px!important;width:61px}.suscribe .wrapper .text .highlight,.suscribe .post-wrapper .text .highlight{color:#01b5ff}.wrapper{margin:0 auto;max-width:1000px}.clearfix{zoom:1}.clearfix:after{clear:both;content:"\0020";display:block;height:0;visibility:hidden}.inline-space{font-size:1px;letter-spacing:-1px;word-spacing:-1px}.only-mobile{display:none!important}.only-l-480{display:none}.only-l-640{display:none}.right{position:absolute;right:0;top:0}.sprite{background:url("http://www.maestrosdelweb.com/wp-content/themes/mdw5/images/sprite.png") no-repeat}.twitter-tweet{margin:0 auto!important}.twitter_author_link{text-decoration:none}.twitter_author_link:hover{color:#00a0e2}.navigation{padding:3em 0 .5em}.wp-caption{max-width:100%}#pagination .navigation a,#pagination .navigation span{display:inline-block;margin-bottom:.5em;padding:.5em .7em}@media screen and (max-width:1080px){.social-top{display:none}.social-top-mobile{display:block}}@media screen and (max-width:1024px){.header .wrapper{padding:0 20px}.header .wrapper .social{background-color:rgba(0,0,0,.6);left:0;margin:0;padding:10px 20px;position:absolute;text-align:left;top:85px;width:100%}.post-header .post-wrapper h1{padding:0 1em}.posts-section{text-align:center}.posts-section .post{margin:30px 10px;width:400px}.posts-section .post:nth-child(3n){margin-right:10px}.suscribe .wrapper .text{font-size:1em;margin:0}.suscribe .wrapper .text:before{top:-10px}.suscribe .wrapper .text .highlight{display:block}}@media screen and (max-width:768px){.alignleft,alignright{display:block;float:none;height:auto;margin:0 auto;max-width:100%;position:static;left:0}.header .wrapper{padding:0 20px}.header .wrapper .logo-container{width:65px}.header .wrapper .logo-container a{width:65px}.menu-mobile{background-color:#191919;bottom:0;height:100%;overflow:hidden;position:fixed;right:-300px;top:0;z-index:2000;width:300px}.menu-mobile.show{right:0}.menu-mobile .menu-item{display:block!important;text-align:center;border-bottom:1px solid #515151;margin:0!important}.menu-mobile .menu-item.logo{padding:0 0 5px!important}.menu-mobile .menu-item.logo .logo-container{background-position:-526px 0;background-size:auto 150%;height:80px;width:90px}.only-desktop{display:none!important}.only-mobile{display:inline-block!important}.post-header .post-wrapper{padding:0}.post-header .post-wrapper h1{padding:0 40px}.posts-section .post{margin:20px 10px;width:320px}.suscribe{bottom:-160px;height:120px;text-align:center}.suscribe .wrapper .suscribe-form{float:none;margin:10px 0 0;position:static;width:100%}.suscribe .wrapper .suscribe-form .email-container{width:80%}.suscribe .wrapper .suscribe-form .submit{display:none}.suscribe .wrapper .text{font-size:1em;padding:0;text-align:center}.suscribe .wrapper .text:before{height:40px;width:40px}.suscribe .wrapper .text .highlight{display:inline-block}.wrapper{overflow:hidden}}@media screen and (max-width:640px){.not-l-640{display:none}.only-l-640{display:inline-block!important}.promoted-section .promoted-post .promoted-data{box-sizing:border-box;padding:10px 30px;position:static;width:100%}.posts-section{margin-top:50px}.posts-section .wrapper{padding:0 30px}.posts-section .post{margin:30px 0;width:100%}.posts-section .post .post-date{font-size:1.1em;text-align:left}.posts-section .post .post-title{text-align:left}}@media screen and (max-width:550px){.social-top-mobile{margin-bottom:0!important;text-align:center!important}.social-top-mobile>*{margin:0 20px 16px 0!important}.social-top-mobile .IN-widget{margin-bottom:0!important}.social-bottom{margin-bottom:0!important}.social-bottom>div,.social-bottom>iframe,.social-bottom>span{margin-bottom:20px!important}}@media screen and (max-width:480px){.not-l-480{display:none}.only-l-480{display:inline-block}.suscribe .wrapper .text{font-size:.875em;padding:0;text-align:center}}@media screen and (max-width:320px){.content.left{right:200px!important}.content.left .header{right:200px!important}.content.left .search-section{right:200px!important}.content.left .suscribe{right:200px!important}.header .wrapper{padding:0 10px}.header .wrapper .social{padding:5px 10px;text-align:left}.header .wrapper .social .social-btn{max-width:110px}.menu-mobile{right:-200px;width:200px}.promoted-section .promoted-post .promoted-data{padding:10px}.promoted-section .promoted-post .promoted-data .post-meta{font-size:.9em}.posts-section{margin-top:30px}.posts-section .wrapper{padding:0 10px}.posts-section .wrapper .post{margin:20px 0}.suscribe{bottom:-140px;height:140px}.suscribe .wrapper .text{font-size:1em}}.comments{background-color:#efefef;padding:50px 0}.comments .post-wrapper{max-width:800px}.post-container .post{color:#515151}.post-container .post .author-extend{background:#f2f2f2;overflow:hidden;padding:1.5em}.post-container .post .author-extend>*{display:inline-block;vertical-align:top}.post-container .post .author-extend .author-picture-container{-moz-border-radius:50%;-webkit-border-radius:50%;border-radius:50%;height:100px;float:left;margin:0;overflow:hidden;width:100px}.post-container .post .author-extend .author-picture-container .author-picture{width:100%}.post-container .post .author-extend .author-data{margin-left:40px;margin-top:10px;width:560px}.post-container .post .author-extend .author-data>*{display:block}.post-container .post .author-extend .author-data .author-name{font-size:1.5em;font-weight:400}.post-container .post .author-extend .author-data .author-twitter{color:#b7b7b7;font-size:1.2em}.post-container .post .author-extend .author-data .author-twitter:before{color:#01b5ff;content:'\f099';font-family:fontawesome!important;font-size:1.4em;margin-right:5px;position:relative;vertical-align:top}.post-container .post .author-extend .author-data .author-job{margin-top:20px}.post-container .post .author-extend .author-data>p{line-height:1.25;margin:5px 0}.post-container .post .author-extend .author-data .author-website{margin-top:0}.post-container .post .post-content{font-family:crimson text,serif;font-size:1.4em}.post-container .post .post-content img{max-width:100%;height:auto}.post-container .post .post-content blockquote{display:block;font-family:montserrat,sans-serif;font-size:.9em;font-weight:700;margin:3.5em 1em;position:relative;text-align:center}.post-container .post .post-content blockquote:after{background-color:#01b5ff;bottom:-55px;color:#01b5ff;content:'’’';font-size:4em;line-height:0;left:0;margin:0 auto;position:absolute;text-align:center;width:100%}.post-container .post .post-content blockquote:before{background-color:#01b5ff;color:#01b5ff;content:"‘‘";font-size:4em;line-height:0;left:0;margin:0 auto;position:absolute;top:-10px;text-align:center;width:100%}.post-container .post .post-content blockquote cite{bottom:-100px;font-family:quicksand,sans-serif;font-size:.9em;font-style:normal;left:0;position:absolute;text-align:center;width:100%}.post-container .post .post-content blockquote{line-height:185%}.post-container .post .post-content p{line-height:160%;margin:25px 0}.post-container .post .post-content p.highlight{font-family:montserrat,sans-serif;font-size:.9em;font-weight:700}.post-container .post .post-content .image{margin:0}.post-container .post .post-content .image>*{display:block}.post-container .post .post-content .wp-caption .wp-caption-text{background-color:#fff;color:#01b5ff;font-family:montserrat,sans-serif;font-size:1.1em;font-weight:700;margin:20px 0;text-align:left}.post-container .post .post-content .image figcaption.normal{background-color:#efefef;box-sizing:border-box;font-family:quicksand,sans-serif;font-size:.7em;margin:0;padding:20px 60px;text-align:center;vertical-align:top}.post-container .post .post-content .image img{width:100%}.post-container .post .post-header{background-color:#191919}.post-container .post .post-header .wrapper{position:relative}.post-container .post .post-header .wrapper .post-image-container{margin:0;min-height:250px;max-height:600px;overflow:hidden}.post-container .post .post-header .wrapper .post-image-container .post-image{width:100%}.post-container .post .post-header .wrapper .post-title{bottom:0;color:#fff;font-size:3em;position:absolute;text-shadow:rgba(0,0,0,.8) 0 1px 1px}.post-container .post .post-header .wrapper .post-type{background-color:#01b5ff;box-sizing:border-box;color:#fff;padding:10px;position:absolute;right:-28px;text-transform:uppercase;top:100px;z-index:2}.post-container .post .post-header .wrapper .post-type:after{border-left:15px solid transparent;border-right:15px solid transparent;border-top:14px solid #0ea3cd;bottom:-14px;content:'';height:0;position:absolute;right:6px;transform:skew(-45deg,0deg);-webkit-transform:skew(-45deg,0deg)}.post-container .post .post-header .wrapper .post-type a{color:#fff;text-decoration:none}.post-container .post .post-summary{border-bottom:1px solid #b7b7b7;font-size:20px;font-weight:700;line-height:30px;margin:10px 0;padding-bottom:10px}.post-container .post .post-meta{font-family:quicksand,sans-serif;font-size:20px;padding:10px 0}.post-container .post .post-meta>*{display:inline-block;vertical-align:top}.post-container .post .post-meta .author-picture-container{border-radius:50%;height:40px;margin:0;overflow:hidden;width:40px}.post-container .post .post-meta .author-picture-container .author-picture{height:100%}.post-container .post .post-meta .author-name{font-weight:400;margin:8px 5px}.post-container .post .post-meta .post-date{float:right;margin:8px 10px}.post-container .post .social{margin:5px 0}.post-container .post .social .btn{margin-right:10px}.post-container .post .social .btn:last-child{margin-right:0}.post-wrapper{margin:0 auto;max-width:800px;position:relative}.recomended-posts{color:#515151;font-family:montserrat,sans-serif;margin-bottom:5px}.recomended-posts a{color:#515151}.recomended-posts .post{display:inline-block;margin-right:20px;vertical-align:top;width:185px}.recomended-posts .post:nth-child(5n){margin-right:0}.recomended-posts .post .post-picture-container{height:123px;margin:0;overflow:hidden;width:100%}.recomended-posts .post .post-picture-container img{height:auto;min-height:100%;min-width:100%;max-width:100%}.recomended-posts .post .post-title{font-size:1rem;font-weight:400}.recomended-posts .recomended-title{font-size:1.5rem;font-weight:700;margin:20px 0}.suscribe.static{height:100px}.suscribe.static .post-wrapper .suscribe-form{margin-top:10px}.suscribe.static .post-wrapper .text:before{background-position:-458px 0;height:81px;top:-20px!important;width:81px}.suscribe.static .post-wrapper .text .highlight{display:block}@media screen and (max-width:1024px){.post-container .post .post-header .wrapper .post-type{top:150px;right:0}.post-container .post .post-header .wrapper .post-type:after{display:none}}@media screen and (max-width:768px){.post-container .post .author-extend .author-data{width:60%}.post-container .post .post-content .wp-caption{box-sizing:border-box;display:block;float:none;position:static;width:100%}.post-container .post .post-content .wp-caption>*{display:inline-block;width:49%}.post-container .post .post-content .wp-caption .wp-caption-text{box-sizing:border-box;display:inline-block;margin:0;padding:0 0 0 20px;vertical-align:top;width:49%}.post-container .post .post-content .image figcaption.normal{font-size:.7em;padding:20px}.post-container .post .post-header .wrapper .post-type{display:none}.post-container .post .social{text-align:center}.post-container .post .social .btn{height:auto;margin-right:5px;max-width:200px;padding:10px 0;vertical-align:top}.post-container .post .social .btn:before{font-size:1.5em}.post-container .post .social .btn .btn-text{font-size:.8em}.post-wrapper{padding:0 40px}.recomended-posts{text-align:center}.recomended-posts .recomended-title{text-align:left}.recomended-posts .post{text-align:left;width:215px}.recomended-posts .post:nth-child(4n){display:none}.suscribe.static{height:auto}.suscribe.static .post-wrapper{text-align:center}.suscribe.static .post-wrapper .text:before{top:-20px}.suscribe.static .post-wrapper .text .highlight{display:inline-block}.suscribe.static .post-wrapper .suscribe-form{display:block;position:static;text-align:center}.suscribe.static .post-wrapper .suscribe-form>*{display:block;margin:10px auto;width:60%}}@media screen and (max-width:640px){.alignleft,.alignright{float:none;margin:0}.post-container .post .social{text-align:center}.post-container .post .social .btn{margin:0 10px;text-align:center;width:80px!important}.post-container .post .social .btn span{display:none}.post-container .post .social .btn .btn-text{display:none}.post-container .post .social .mobile-share{color:#b7b7b7;font-size:23px;font-weight:400;line-height:20px;padding:20px 20px 20px 0}.post-container .post .wrapper .author-extend .author-data .author-job{margin-top:10px}.post-container .post .wrapper .post-wrapper>*{padding:0 20px}.post-container .post .wrapper .post-wrapper .post-content{padding:0 10px}.post-container .post .wrapper .post-wrapper .post-content p{padding:0 20px}.post-container .post .wrapper .post-wrapper .post-content .wp-caption{padding:0 30px}.post-container .post .wrapper .post-wrapper .post-content .wp-caption>*{display:block;width:100%}.post-container .post .wrapper .post-wrapper .post-content .wp-caption .wp-caption-text{padding:20px 0;text-align:left}.post-container .post .wrapper .post-wrapper .post-content .image figcaption.normal{font-size:.7em}.post-container .post .wrapper .post-wrapper .post-summary{margin:1em;padding:10px 0}.post-container .post .post-header .wrapper .post-title{font-size:2.5em}.recomended-posts{display:none!important}.suscribe.static{height:auto}.suscribe.static .text:before{background-position:-465px 0!important;top:-30px!important}.suscribe.static .text .highlight{display:inline-block!important}.suscribe.static .suscribe-form{float:none}}@media screen and (max-width:480px){.comments .post-wrapper{padding:0 10px}.post-container .post .post-header .wrapper .post-title{font-size:30px}.post-container .post .wrapper .post-wrapper .post-summary{padding:10px 0}.post-container .post .wrapper .post-wrapper .post-meta .author-picture-container{height:40px;margin:15px 10px;width:40px}.post-container .post .wrapper .post-wrapper .social .mobile-share{display:none}.promoted-section .promoted-post .promoted-picture-container{min-height:150px}}@media screen and (max-width:320px){.post-container .post .post-header .wrapper .post-image-container{height:auto;min-height:150px}.post-container .post .post-header .wrapper .post-image-container .post-image{height:100%;width:auto}.post-container .post .post-header .wrapper .post-title{font-size:1.2em}.post-container .post .wrapper .post-wrapper .author-extend{margin:0 0 1em;padding:1em}.post-container .post .author-extend .author-data{margin-left:0;width:auto}.post-container .post .wrapper .post-wrapper .post-content{font-size:1em}.post-container .post .wrapper .post-wrapper .post-content blockquote{margin:60px 20px 110px;text-align:left}.post-container .post .wrapper .post-wrapper .post-content blockquote:after{bottom:-35px}.post-container .post .wrapper .post-wrapper .post-content blockquote:before{top:-5px}.post-container .post .wrapper .post-wrapper .post-content blockquote cite{bottom:-80px;font-size:1.1em}.post-container .post .wrapper .post-wrapper .post-content blockquote p{font-size:1em;padding:0}.post-container .post .wrapper .post-wrapper .post-content p{margin:1em 0;padding:0 10px}.post-container .post .wrapper .post-wrapper .post-content .wp-caption{padding:0 20px}.post-container .post .wrapper .post-wrapper .post-content .wp-caption .wp-caption-text{font-size:1em;padding:5px 0}.post-container .post .wrapper .post-wrapper .post-content .image figcaption.normal{font-size:.9em;padding:20px}.post-container .post .wrapper .post-wrapper .post-summary{font-size:.875em;line-height:2;padding-top:0}.post-container .post .wrapper .post-wrapper .post-meta .author-picture-container{height:30px;margin:0!important;width:30px}.post-container .post .wrapper .post-wrapper .post-meta .author-name{font-size:.7em;margin:10px 0!important}.post-container .post .wrapper .post-wrapper .post-meta .post-date{font-size:.7em;margin:10px 0}.post-container .post .wrapper .post-wrapper .social{text-align:center}.post-container .post .wrapper .post-wrapper .social.not-320{display:none}.post-container .post .wrapper .post-wrapper .social .btn{margin:0 3px!important}.post-wrapper{padding:0}.promoted-section .promoted-post .promoted-picture-container{min-height:100px}.social-top-mobile>div,.social-top-mobile>iframe,.social-top-mobile>span{display:block!important;text-align:left!important}.suscribe .post-wrapper{padding:0 10px}.suscribe .post-wrapper .text:before{top:-10px!important}.suscribe .post-wrapper .suscribe-form .submit{margin-top:10px}}</style>
+<link rel="apple-touch-icon" href="http://www.maestrosdelweb.com/wp-content/themes/mdw5/images/ipad-icon.png">
+<link rel="icon" type="image/png" href="http://www.maestrosdelweb.com/wp-content/themes/mdw5/images/favicon.png">
+<script data-main="http://www.maestrosdelweb.com/wp-content/themes/mdw5/js/main.js" src="./Introducción a la manipulación del DOM mediante Javascript_files/require.js.descarga" type="text/javascript"></script>
+<meta property="fb:app_id" content="189109253508">
+
+<link rel="canonical" href="http://www.maestrosdelweb.com/dom/">
+<link rel="publisher" href="http://plus.google.com/112142655562359332904">
+<meta property="og:locale" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Introducción a la manipulación del DOM mediante Javascript">
+<meta property="og:description" content="El Modelo de Objetos del Documento (DOM) permite ver el mismo documento de otra manera, describiendo el contenido del documento como un conjunto de objetos que un programa Javascript puede actuar sobre ellos. ¿Qué es el Modelo de Objetos del Documento? Acorde al W3C el Modelo de Objetos del Documento es una interfaz de programación …">
+<meta property="og:url" content="http://www.maestrosdelweb.com/dom/">
+<meta property="og:site_name" content="Maestros del Web">
+<meta property="article:publisher" content="https://www.facebook.com/maestrosdelweb">
+<meta property="article:section" content="Editorial">
+<meta property="article:published_time" content="2007-02-27T00:00:00+00:00">
+<meta property="article:modified_time" content="2007-03-04T12:31:27+00:00">
+<meta property="og:updated_time" content="2007-03-04T12:31:27+00:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="El Modelo de Objetos del Documento (DOM) permite ver el mismo documento de otra manera, describiendo el contenido del documento como un conjunto de objetos que un programa Javascript puede actuar sobre ellos. ¿Qué es el Modelo de Objetos del Documento? Acorde al W3C el Modelo de Objetos del Documento es una interfaz de programación […]">
+<meta name="twitter:title" content="Introducción a la manipulación del DOM mediante Javascript">
+<meta name="twitter:site" content="@maestros">
+<meta name="twitter:domain" content="Maestros del Web">
+<meta name="twitter:creator" content="@maestros">
+
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.maestrosdelweb.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.3.1"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<style media="screen" data-href="//www.maestrosdelweb.com/wp-content/plugins/simple-pagination/css/default.css?ver=2.1.7">div.pagination{padding:3px;margin:3px;text-align:center}div.pagination a,div.pagination span.pages,div.pagination span.dots,div.pagination span.current{-moz-border-radius:3px;-webkit-border-radius:3px;-o-border-radius:3px;-ms-border-radius:3px;-khtml-border-radius:3px;border-radius:3px;-moz-box-shadow:0 0 0 1px rgba(0,0,0,.2);-webkit-box-shadow:0 0 0 1px rgba(0,0,0,.2);-o-box-shadow:0 0 0 1px rgba(0,0,0,.2);box-shadow:0 0 0 1px rgba(0,0,0,.2);margin:1px 2px;padding:5px 10px;display:inline-block;border-top:1px solid #fff;text-decoration:none!important;color:#717171!important;font-size:smaller!important;font-family:helvetica neueu,Helvetica,Arial,sans-serif;text-shadow:#fff 0 1px 0;background-color:#f5f5f5;background-image:-webkit-gradient(linear,left top,left bottom,from(#f9f9f9),to(#eaeaea));background-image:-webkit-linear-gradient(top,#f9f9f9,#eaeaea);background-image:-moz-linear-gradient(top,#f9f9f9,#eaeaea);background-image:-ms-linear-gradient(top,#f9f9f9,#eaeaea);background-image:-o-linear-gradient(top,#f9f9f9,#eaeaea);background-image:linear-gradient(top,#f9f9f9,#eaeaea);filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#f9f9f9',EndColorStr='#eaeaea')}div.pagination a:hover,div.pagination a:focus{border-color:#fff;background-color:#fdfdfd;background-image:-webkit-gradient(linear,left top,left bottom,from(#fefefe),to(#fafafa));background-image:-webkit-linear-gradient(top,#fefefe,#fafafa);background-image:-moz-linear-gradient(top,#fefefe,#fafafa);background-image:-ms-linear-gradient(top,#fefefe,#fafafa);background-image:-o-linear-gradient(top,#fefefe,#fafafa);background-image:linear-gradient(top,#fefefe,#fafafa);filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#fefefe',EndColorStr='#fafafa')}div.pagination span.current{-moz-box-shadow:inset 0 0 0 0 rgba(0,0,0,.75);-webkit-box-shadow:inset 0 0 0 0 rgba(0,0,0,.75);-o-box-shadow:inset 0 0 0 0 rgba(0,0,0,.75);box-shadow:inset 0 0 0 0 rgba(0,0,0,.75);border-color:#505050!important;color:#f2f2f2!important;text-shadow:#000 0 1px 0;background-color:#676767;background-image:-webkit-gradient(linear,left top,left bottom,from(#5f5f5f),to(#5c5c5c));background-image:-webkit-linear-gradient(top,#5f5f5f,#5c5c5c);background-image:-moz-linear-gradient(top,#5f5f5f,#5c5c5c);background-image:-ms-linear-gradient(top,#5f5f5f,#5c5c5c);background-image:-o-linear-gradient(top,#5f5f5f,#5c5c5c);background-image:linear-gradient(top,#5f5f5f,#5c5c5c);filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#5f5f5f',EndColorStr='#5c5c5c')}</style>
+<style media="screen" data-href="//www.maestrosdelweb.com/wp-content/plugins/wp-paginate/wp-paginate.css?ver=1.3.1">.wp-paginate{padding:0;margin:0}.wp-paginate li{display:inline;list-style:none}.wp-paginate a{background:#ddd;border:1px solid #ccc;color:#666;margin-right:4px;padding:4px 8px;text-align:center;text-decoration:none}.wp-paginate a:hover,.wp-paginate a:active{background:#ccc;color:#888}.wp-paginate .title{color:#555;margin-right:4px}.wp-paginate .gap{color:#999;margin-right:4px}.wp-paginate .current{color:#fff;background:#5f87ae;border:1px solid #89adcf;margin-right:4px;padding:4px 8px}.wp-paginate .page{}.wp-paginate .prev,.wp-paginate .next{}.wp-paginate-comments{}.wp-paginate-comments li{}.wp-paginate-comments a{}.wp-paginate-comments a:hover,.wp-paginate-comments a:active{}.wp-paginate-comments .title{}.wp-paginate-comments .gap{}.wp-paginate-comments .current{}.wp-paginate-comments .page{}.wp-paginate-comments .prev,.wp-paginate-comments .next{}</style>
+<script type="text/javascript" src="./Introducción a la manipulación del DOM mediante Javascript_files/jquery.js.descarga"></script>
+<script type="text/javascript" src="./Introducción a la manipulación del DOM mediante Javascript_files/jquery-migrate.min.js.descarga"></script>
+<meta name="generator" content="WordPress 4.3.1">
+<meta name="description" content="Una página web es un documento HTML que es interpretado por los navegadores en forma gráfica, pero también permiten el ...">
+<style type="text/css" id="syntaxhighlighteranchor"></style>
+<script type="text/javascript">
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	  ga('create', 'UA-309831-1', 'auto');
+	  ga('send', 'pageview');
+	</script>
+<script src="./Introducción a la manipulación del DOM mediante Javascript_files/wp-emoji-release.min.js.descarga" type="text/javascript"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="main" src="./Introducción a la manipulación del DOM mediante Javascript_files/main.js.descarga"></script><script src="./Introducción a la manipulación del DOM mediante Javascript_files/secureAnonymousFramework"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="libs/prefixfree" src="./Introducción a la manipulación del DOM mediante Javascript_files/prefixfree.js.descarga"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="libs/hammer" src="./Introducción a la manipulación del DOM mediante Javascript_files/hammer.js.descarga"></script><script async="" src="./Introducción a la manipulación del DOM mediante Javascript_files/hotjar-9361.js.descarga"></script><style type="text/css">* html #li_ui_li_gen_1542467947418_0 a#li_ui_li_gen_1542467947418_0-link{height:1% !important;}#li_ui_li_gen_1542467947418_0{position:relative !important;overflow:visible !important;display:block !important;}#li_ui_li_gen_1542467947418_0 span{-webkit-box-sizing:content-box !important;-moz-box-sizing:content-box !important;box-sizing:content-box !important;}#li_ui_li_gen_1542467947418_0 a#li_ui_li_gen_1542467947418_0-link{border:0 !important;height:20px !important;text-decoration:none !important;padding:0 !important;margin:0 !important;display:inline-block !important;}#li_ui_li_gen_1542467947418_0 a#li_ui_li_gen_1542467947418_0-link:link, #li_ui_li_gen_1542467947418_0 a#li_ui_li_gen_1542467947418_0-link:visited, #li_ui_li_gen_1542467947418_0 a#li_ui_li_gen_1542467947418_0-link:hover, #li_ui_li_gen_1542467947418_0 a#li_ui_li_gen_1542467947418_0-link:active{border:0 !important;text-decoration:none !important;}#li_ui_li_gen_1542467947418_0 a#li_ui_li_gen_1542467947418_0-link:after{content:"." !important;display:block !important;clear:both !important;visibility:hidden !important;line-height:0 !important;height:0 !important;}#li_ui_li_gen_1542467947418_0 #li_ui_li_gen_1542467947418_0-logo{background-image:url(https://static.licdn.com/scds/common/u/images/apps/connect/sprites/sprite_connect_v14.png) !important;background-position:0px -593px !important;background-repeat:no-repeat !important;background-color:#0077b5 !important;background-size:initial !important;cursor:pointer !important;border:0 !important;border-right:1px solid #066094 !important;text-indent:-9999em !important;overflow:hidden !important;padding:0 !important;margin:0 !important;position:absolute !important;left:0px !important;top:0px !important;display:block !important;width:20px !important;height:20px !important;float:right !important;border-radius:2px !important;-webkit-border-radius:2px !important;border-top-right-radius:2px !important;border-bottom-right-radius:2px !important;-webkit-border-top-right-radius:2px !important;-webkit-border-bottom-right-radius:2px !important;}#li_ui_li_gen_1542467947418_0 #li_ui_li_gen_1542467947418_0-title{color:#fff !important;cursor:pointer !important;display:block !important;white-space:nowrap !important;float:left !important;margin-left:1px !important;vertical-align:top !important;overflow:hidden !important;text-align:center !important;height:18px !important;padding:0 4px 0 23px !important;border:1px solid #000 !important;border-top-color:#0077b5 !important;border-right-color:#0077b5 !important;border-bottom-color:#0077b5 !important;border-left-color:#0077b5 !important;text-shadow:0 -1px #005887 !important;line-height:20px !important;border-radius:2px !important;-webkit-border-radius:2px !important;border-top-right-radius:2px !important;border-bottom-right-radius:2px !important;-webkit-border-top-right-radius:2px !important;-webkit-border-bottom-right-radius:2px !important;background-color:#0077b5 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#0077b5), color-stop(100%,#0077b5)) !important; background-image: -webkit-linear-gradient(top, #0077b5 0%, #0077b5 100%) !important;}#li_ui_li_gen_1542467947418_0.hovered #li_ui_li_gen_1542467947418_0-title{border:1px solid #000 !important;border-top-color:#0369a0 !important;border-right-color:#0369a0 !important;border-bottom-color:#0369a0 !important;border-left-color:#0369a0 !important;background-color:#0369a0 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#0369a0), color-stop(100%,#0369a0)) !important; background-image: -webkit-linear-gradient(top, #0369a0 0%, #0369a0 100%) !important;}#li_ui_li_gen_1542467947418_0.clicked #li_ui_li_gen_1542467947418_0-title, #li_ui_li_gen_1542467947418_0.down #li_ui_li_gen_1542467947418_0-title{color:#fff !important;border:1px solid #000 !important;border-top-color:#066094 !important;border-right-color:#066094 !important;border-bottom-color:#066094 !important;border-left-color:#066094 !important;background-color:#066094 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#066094), color-stop(100%,#066094)) !important; background-image: -webkit-linear-gradient(top, #066094 0%, #066094 100%) !important;}.IN-shadowed #li_ui_li_gen_1542467947418_0 #li_ui_li_gen_1542467947418_0-title{}.IN-shadowed #li_ui_li_gen_1542467947418_0.hovered #li_ui_li_gen_1542467947418_0-title{}.IN-shadowed #li_ui_li_gen_1542467947418_0.clicked #li_ui_li_gen_1542467947418_0-title, .IN-shadowed #li_ui_li_gen_1542467947418_0.down #li_ui_li_gen_1542467947418_0-title{}#li_ui_li_gen_1542467947418_0 #li_ui_li_gen_1542467947418_0-title-text, #li_ui_li_gen_1542467947418_0 #li_ui_li_gen_1542467947418_0-title-text *{color:#fff !important;font-size:11px !important;font-family:Arial, sans-serif !important;font-weight:bold !important;font-style:normal !important;-webkit-font-smoothing:antialiased !important;display:inline-block !important;background:transparent none !important;vertical-align:top !important;height:18px !important;line-height:20px !important;float:none !important;}#li_ui_li_gen_1542467947418_0 #li_ui_li_gen_1542467947418_0-title-text strong{font-weight:bold !important;}#li_ui_li_gen_1542467947418_0 #li_ui_li_gen_1542467947418_0-title-text em{font-style:italic !important;}#li_ui_li_gen_1542467947418_0.hovered #li_ui_li_gen_1542467947418_0-title-text, #li_ui_li_gen_1542467947418_0.hovered #li_ui_li_gen_1542467947418_0-title-text *{color:#fff !important;}#li_ui_li_gen_1542467947418_0.clicked #li_ui_li_gen_1542467947418_0-title-text, #li_ui_li_gen_1542467947418_0.down #li_ui_li_gen_1542467947418_0-title-text, #li_ui_li_gen_1542467947418_0.clicked #li_ui_li_gen_1542467947418_0-title-text *, #li_ui_li_gen_1542467947418_0.down #li_ui_li_gen_1542467947418_0-title-text *{color:#fff !important;}#li_ui_li_gen_1542467947418_0 #li_ui_li_gen_1542467947418_0-title #li_ui_li_gen_1542467947418_0-mark{display:inline-block !important;width:0px !important;overflow:hidden !important;}.success #li_ui_li_gen_1542467947418_0 #li_ui_li_gen_1542467947418_0-title{color:#fff !important;border-top-color:#0077b5 !important;border-right-color:#0077b5 !important;border-bottom-color:#0077b5 !important;border-left-color:#0077b5 !important;background-color:#0077b5 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#0077b5), color-stop(100%,#0077b5)) !important; background-image: -webkit-linear-gradient(top, #0077b5 0%, #0077b5 100%) !important;}.success #li_ui_li_gen_1542467947418_0 #li_ui_li_gen_1542467947418_0-title-text, .success #li_ui_li_gen_1542467947418_0 #li_ui_li_gen_1542467947418_0-title-text *{color:#fff !important;}.IN-shadowed .success #li_ui_li_gen_1542467947418_0 #li_ui_li_gen_1542467947418_0-title{}.success #li_ui_li_gen_1542467947418_0.hovered #li_ui_li_gen_1542467947418_0-title{color:#fff !important;border-top-color:#0369a0 !important;border-right-color:#0369a0 !important;border-bottom-color:#0369a0 !important;border-left-color:#0369a0 !important;background-color:#0369a0 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#0369a0), color-stop(100%,#0369a0)) !important; background-image: -webkit-linear-gradient(top, #0369a0 0%, #0369a0 100%) !important;}.success #li_ui_li_gen_1542467947418_0.hovered #li_ui_li_gen_1542467947418_0-title-text, .success #li_ui_li_gen_1542467947418_0.hovered #li_ui_li_gen_1542467947418_0-title-text *{color:#fff !important;}.success #li_ui_li_gen_1542467947418_0.clicked #li_ui_li_gen_1542467947418_0-title, .success #li_ui_li_gen_1542467947418_0.down #li_ui_li_gen_1542467947418_0-title{color:#fff !important;border-top-color:#066094 !important;border-right-color:#066094 !important;border-bottom-color:#066094 !important;border-left-color:#066094 !important;background-color:#066094 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#066094), color-stop(100%,#066094)) !important; background-image: -webkit-linear-gradient(top, #066094 0%, #066094 100%) !important;}.success #li_ui_li_gen_1542467947418_0.clicked #li_ui_li_gen_1542467947418_0-title-text, .success #li_ui_li_gen_1542467947418_0.down #li_ui_li_gen_1542467947418_0-title-text, .success #li_ui_li_gen_1542467947418_0.clicked #li_ui_li_gen_1542467947418_0-title-text *, .success #li_ui_li_gen_1542467947418_0.down #li_ui_li_gen_1542467947418_0-title-text *{color:#fff !important;}.IN-shadowed .success #li_ui_li_gen_1542467947418_0.clicked #li_ui_li_gen_1542467947418_0-title, .IN-shadowed .success #li_ui_li_gen_1542467947418_0.down #li_ui_li_gen_1542467947418_0-title{}* html #li_ui_li_gen_1542467947425_1 a#li_ui_li_gen_1542467947425_1-link{height:1% !important;}#li_ui_li_gen_1542467947425_1{position:relative !important;overflow:visible !important;display:block !important;}#li_ui_li_gen_1542467947425_1 span{-webkit-box-sizing:content-box !important;-moz-box-sizing:content-box !important;box-sizing:content-box !important;}#li_ui_li_gen_1542467947425_1 a#li_ui_li_gen_1542467947425_1-link{border:0 !important;height:20px !important;text-decoration:none !important;padding:0 !important;margin:0 !important;display:inline-block !important;}#li_ui_li_gen_1542467947425_1 a#li_ui_li_gen_1542467947425_1-link:link, #li_ui_li_gen_1542467947425_1 a#li_ui_li_gen_1542467947425_1-link:visited, #li_ui_li_gen_1542467947425_1 a#li_ui_li_gen_1542467947425_1-link:hover, #li_ui_li_gen_1542467947425_1 a#li_ui_li_gen_1542467947425_1-link:active{border:0 !important;text-decoration:none !important;}#li_ui_li_gen_1542467947425_1 a#li_ui_li_gen_1542467947425_1-link:after{content:"." !important;display:block !important;clear:both !important;visibility:hidden !important;line-height:0 !important;height:0 !important;}#li_ui_li_gen_1542467947425_1 #li_ui_li_gen_1542467947425_1-logo{background-image:url(https://static.licdn.com/scds/common/u/images/apps/connect/sprites/sprite_connect_v14.png) !important;background-position:0px -593px !important;background-repeat:no-repeat !important;background-color:#0077b5 !important;background-size:initial !important;cursor:pointer !important;border:0 !important;border-right:1px solid #066094 !important;text-indent:-9999em !important;overflow:hidden !important;padding:0 !important;margin:0 !important;position:absolute !important;left:0px !important;top:0px !important;display:block !important;width:20px !important;height:20px !important;float:right !important;border-radius:2px !important;-webkit-border-radius:2px !important;border-top-right-radius:2px !important;border-bottom-right-radius:2px !important;-webkit-border-top-right-radius:2px !important;-webkit-border-bottom-right-radius:2px !important;}#li_ui_li_gen_1542467947425_1 #li_ui_li_gen_1542467947425_1-title{color:#fff !important;cursor:pointer !important;display:block !important;white-space:nowrap !important;float:left !important;margin-left:1px !important;vertical-align:top !important;overflow:hidden !important;text-align:center !important;height:18px !important;padding:0 4px 0 23px !important;border:1px solid #000 !important;border-top-color:#0077b5 !important;border-right-color:#0077b5 !important;border-bottom-color:#0077b5 !important;border-left-color:#0077b5 !important;text-shadow:0 -1px #005887 !important;line-height:20px !important;border-radius:2px !important;-webkit-border-radius:2px !important;border-top-right-radius:2px !important;border-bottom-right-radius:2px !important;-webkit-border-top-right-radius:2px !important;-webkit-border-bottom-right-radius:2px !important;background-color:#0077b5 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#0077b5), color-stop(100%,#0077b5)) !important; background-image: -webkit-linear-gradient(top, #0077b5 0%, #0077b5 100%) !important;}#li_ui_li_gen_1542467947425_1.hovered #li_ui_li_gen_1542467947425_1-title{border:1px solid #000 !important;border-top-color:#0369a0 !important;border-right-color:#0369a0 !important;border-bottom-color:#0369a0 !important;border-left-color:#0369a0 !important;background-color:#0369a0 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#0369a0), color-stop(100%,#0369a0)) !important; background-image: -webkit-linear-gradient(top, #0369a0 0%, #0369a0 100%) !important;}#li_ui_li_gen_1542467947425_1.clicked #li_ui_li_gen_1542467947425_1-title, #li_ui_li_gen_1542467947425_1.down #li_ui_li_gen_1542467947425_1-title{color:#fff !important;border:1px solid #000 !important;border-top-color:#066094 !important;border-right-color:#066094 !important;border-bottom-color:#066094 !important;border-left-color:#066094 !important;background-color:#066094 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#066094), color-stop(100%,#066094)) !important; background-image: -webkit-linear-gradient(top, #066094 0%, #066094 100%) !important;}.IN-shadowed #li_ui_li_gen_1542467947425_1 #li_ui_li_gen_1542467947425_1-title{}.IN-shadowed #li_ui_li_gen_1542467947425_1.hovered #li_ui_li_gen_1542467947425_1-title{}.IN-shadowed #li_ui_li_gen_1542467947425_1.clicked #li_ui_li_gen_1542467947425_1-title, .IN-shadowed #li_ui_li_gen_1542467947425_1.down #li_ui_li_gen_1542467947425_1-title{}#li_ui_li_gen_1542467947425_1 #li_ui_li_gen_1542467947425_1-title-text, #li_ui_li_gen_1542467947425_1 #li_ui_li_gen_1542467947425_1-title-text *{color:#fff !important;font-size:11px !important;font-family:Arial, sans-serif !important;font-weight:bold !important;font-style:normal !important;-webkit-font-smoothing:antialiased !important;display:inline-block !important;background:transparent none !important;vertical-align:top !important;height:18px !important;line-height:20px !important;float:none !important;}#li_ui_li_gen_1542467947425_1 #li_ui_li_gen_1542467947425_1-title-text strong{font-weight:bold !important;}#li_ui_li_gen_1542467947425_1 #li_ui_li_gen_1542467947425_1-title-text em{font-style:italic !important;}#li_ui_li_gen_1542467947425_1.hovered #li_ui_li_gen_1542467947425_1-title-text, #li_ui_li_gen_1542467947425_1.hovered #li_ui_li_gen_1542467947425_1-title-text *{color:#fff !important;}#li_ui_li_gen_1542467947425_1.clicked #li_ui_li_gen_1542467947425_1-title-text, #li_ui_li_gen_1542467947425_1.down #li_ui_li_gen_1542467947425_1-title-text, #li_ui_li_gen_1542467947425_1.clicked #li_ui_li_gen_1542467947425_1-title-text *, #li_ui_li_gen_1542467947425_1.down #li_ui_li_gen_1542467947425_1-title-text *{color:#fff !important;}#li_ui_li_gen_1542467947425_1 #li_ui_li_gen_1542467947425_1-title #li_ui_li_gen_1542467947425_1-mark{display:inline-block !important;width:0px !important;overflow:hidden !important;}.success #li_ui_li_gen_1542467947425_1 #li_ui_li_gen_1542467947425_1-title{color:#fff !important;border-top-color:#0077b5 !important;border-right-color:#0077b5 !important;border-bottom-color:#0077b5 !important;border-left-color:#0077b5 !important;background-color:#0077b5 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#0077b5), color-stop(100%,#0077b5)) !important; background-image: -webkit-linear-gradient(top, #0077b5 0%, #0077b5 100%) !important;}.success #li_ui_li_gen_1542467947425_1 #li_ui_li_gen_1542467947425_1-title-text, .success #li_ui_li_gen_1542467947425_1 #li_ui_li_gen_1542467947425_1-title-text *{color:#fff !important;}.IN-shadowed .success #li_ui_li_gen_1542467947425_1 #li_ui_li_gen_1542467947425_1-title{}.success #li_ui_li_gen_1542467947425_1.hovered #li_ui_li_gen_1542467947425_1-title{color:#fff !important;border-top-color:#0369a0 !important;border-right-color:#0369a0 !important;border-bottom-color:#0369a0 !important;border-left-color:#0369a0 !important;background-color:#0369a0 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#0369a0), color-stop(100%,#0369a0)) !important; background-image: -webkit-linear-gradient(top, #0369a0 0%, #0369a0 100%) !important;}.success #li_ui_li_gen_1542467947425_1.hovered #li_ui_li_gen_1542467947425_1-title-text, .success #li_ui_li_gen_1542467947425_1.hovered #li_ui_li_gen_1542467947425_1-title-text *{color:#fff !important;}.success #li_ui_li_gen_1542467947425_1.clicked #li_ui_li_gen_1542467947425_1-title, .success #li_ui_li_gen_1542467947425_1.down #li_ui_li_gen_1542467947425_1-title{color:#fff !important;border-top-color:#066094 !important;border-right-color:#066094 !important;border-bottom-color:#066094 !important;border-left-color:#066094 !important;background-color:#066094 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#066094), color-stop(100%,#066094)) !important; background-image: -webkit-linear-gradient(top, #066094 0%, #066094 100%) !important;}.success #li_ui_li_gen_1542467947425_1.clicked #li_ui_li_gen_1542467947425_1-title-text, .success #li_ui_li_gen_1542467947425_1.down #li_ui_li_gen_1542467947425_1-title-text, .success #li_ui_li_gen_1542467947425_1.clicked #li_ui_li_gen_1542467947425_1-title-text *, .success #li_ui_li_gen_1542467947425_1.down #li_ui_li_gen_1542467947425_1-title-text *{color:#fff !important;}.IN-shadowed .success #li_ui_li_gen_1542467947425_1.clicked #li_ui_li_gen_1542467947425_1-title, .IN-shadowed .success #li_ui_li_gen_1542467947425_1.down #li_ui_li_gen_1542467947425_1-title{}* html #li_ui_li_gen_1542467947427_2 a#li_ui_li_gen_1542467947427_2-link{height:1% !important;}#li_ui_li_gen_1542467947427_2{position:relative !important;overflow:visible !important;display:block !important;}#li_ui_li_gen_1542467947427_2 span{-webkit-box-sizing:content-box !important;-moz-box-sizing:content-box !important;box-sizing:content-box !important;}#li_ui_li_gen_1542467947427_2 a#li_ui_li_gen_1542467947427_2-link{border:0 !important;height:20px !important;text-decoration:none !important;padding:0 !important;margin:0 !important;display:inline-block !important;}#li_ui_li_gen_1542467947427_2 a#li_ui_li_gen_1542467947427_2-link:link, #li_ui_li_gen_1542467947427_2 a#li_ui_li_gen_1542467947427_2-link:visited, #li_ui_li_gen_1542467947427_2 a#li_ui_li_gen_1542467947427_2-link:hover, #li_ui_li_gen_1542467947427_2 a#li_ui_li_gen_1542467947427_2-link:active{border:0 !important;text-decoration:none !important;}#li_ui_li_gen_1542467947427_2 a#li_ui_li_gen_1542467947427_2-link:after{content:"." !important;display:block !important;clear:both !important;visibility:hidden !important;line-height:0 !important;height:0 !important;}#li_ui_li_gen_1542467947427_2 #li_ui_li_gen_1542467947427_2-logo{background-image:url(https://static.licdn.com/scds/common/u/images/apps/connect/sprites/sprite_connect_v14.png) !important;background-position:0px -593px !important;background-repeat:no-repeat !important;background-color:#0077b5 !important;background-size:initial !important;cursor:pointer !important;border:0 !important;border-right:1px solid #066094 !important;text-indent:-9999em !important;overflow:hidden !important;padding:0 !important;margin:0 !important;position:absolute !important;left:0px !important;top:0px !important;display:block !important;width:20px !important;height:20px !important;float:right !important;border-radius:2px !important;-webkit-border-radius:2px !important;border-top-right-radius:2px !important;border-bottom-right-radius:2px !important;-webkit-border-top-right-radius:2px !important;-webkit-border-bottom-right-radius:2px !important;}#li_ui_li_gen_1542467947427_2 #li_ui_li_gen_1542467947427_2-title{color:#fff !important;cursor:pointer !important;display:block !important;white-space:nowrap !important;float:left !important;margin-left:1px !important;vertical-align:top !important;overflow:hidden !important;text-align:center !important;height:18px !important;padding:0 4px 0 23px !important;border:1px solid #000 !important;border-top-color:#0077b5 !important;border-right-color:#0077b5 !important;border-bottom-color:#0077b5 !important;border-left-color:#0077b5 !important;text-shadow:0 -1px #005887 !important;line-height:20px !important;border-radius:2px !important;-webkit-border-radius:2px !important;border-top-right-radius:2px !important;border-bottom-right-radius:2px !important;-webkit-border-top-right-radius:2px !important;-webkit-border-bottom-right-radius:2px !important;background-color:#0077b5 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#0077b5), color-stop(100%,#0077b5)) !important; background-image: -webkit-linear-gradient(top, #0077b5 0%, #0077b5 100%) !important;}#li_ui_li_gen_1542467947427_2.hovered #li_ui_li_gen_1542467947427_2-title{border:1px solid #000 !important;border-top-color:#0369a0 !important;border-right-color:#0369a0 !important;border-bottom-color:#0369a0 !important;border-left-color:#0369a0 !important;background-color:#0369a0 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#0369a0), color-stop(100%,#0369a0)) !important; background-image: -webkit-linear-gradient(top, #0369a0 0%, #0369a0 100%) !important;}#li_ui_li_gen_1542467947427_2.clicked #li_ui_li_gen_1542467947427_2-title, #li_ui_li_gen_1542467947427_2.down #li_ui_li_gen_1542467947427_2-title{color:#fff !important;border:1px solid #000 !important;border-top-color:#066094 !important;border-right-color:#066094 !important;border-bottom-color:#066094 !important;border-left-color:#066094 !important;background-color:#066094 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#066094), color-stop(100%,#066094)) !important; background-image: -webkit-linear-gradient(top, #066094 0%, #066094 100%) !important;}.IN-shadowed #li_ui_li_gen_1542467947427_2 #li_ui_li_gen_1542467947427_2-title{}.IN-shadowed #li_ui_li_gen_1542467947427_2.hovered #li_ui_li_gen_1542467947427_2-title{}.IN-shadowed #li_ui_li_gen_1542467947427_2.clicked #li_ui_li_gen_1542467947427_2-title, .IN-shadowed #li_ui_li_gen_1542467947427_2.down #li_ui_li_gen_1542467947427_2-title{}#li_ui_li_gen_1542467947427_2 #li_ui_li_gen_1542467947427_2-title-text, #li_ui_li_gen_1542467947427_2 #li_ui_li_gen_1542467947427_2-title-text *{color:#fff !important;font-size:11px !important;font-family:Arial, sans-serif !important;font-weight:bold !important;font-style:normal !important;-webkit-font-smoothing:antialiased !important;display:inline-block !important;background:transparent none !important;vertical-align:top !important;height:18px !important;line-height:20px !important;float:none !important;}#li_ui_li_gen_1542467947427_2 #li_ui_li_gen_1542467947427_2-title-text strong{font-weight:bold !important;}#li_ui_li_gen_1542467947427_2 #li_ui_li_gen_1542467947427_2-title-text em{font-style:italic !important;}#li_ui_li_gen_1542467947427_2.hovered #li_ui_li_gen_1542467947427_2-title-text, #li_ui_li_gen_1542467947427_2.hovered #li_ui_li_gen_1542467947427_2-title-text *{color:#fff !important;}#li_ui_li_gen_1542467947427_2.clicked #li_ui_li_gen_1542467947427_2-title-text, #li_ui_li_gen_1542467947427_2.down #li_ui_li_gen_1542467947427_2-title-text, #li_ui_li_gen_1542467947427_2.clicked #li_ui_li_gen_1542467947427_2-title-text *, #li_ui_li_gen_1542467947427_2.down #li_ui_li_gen_1542467947427_2-title-text *{color:#fff !important;}#li_ui_li_gen_1542467947427_2 #li_ui_li_gen_1542467947427_2-title #li_ui_li_gen_1542467947427_2-mark{display:inline-block !important;width:0px !important;overflow:hidden !important;}.success #li_ui_li_gen_1542467947427_2 #li_ui_li_gen_1542467947427_2-title{color:#fff !important;border-top-color:#0077b5 !important;border-right-color:#0077b5 !important;border-bottom-color:#0077b5 !important;border-left-color:#0077b5 !important;background-color:#0077b5 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#0077b5), color-stop(100%,#0077b5)) !important; background-image: -webkit-linear-gradient(top, #0077b5 0%, #0077b5 100%) !important;}.success #li_ui_li_gen_1542467947427_2 #li_ui_li_gen_1542467947427_2-title-text, .success #li_ui_li_gen_1542467947427_2 #li_ui_li_gen_1542467947427_2-title-text *{color:#fff !important;}.IN-shadowed .success #li_ui_li_gen_1542467947427_2 #li_ui_li_gen_1542467947427_2-title{}.success #li_ui_li_gen_1542467947427_2.hovered #li_ui_li_gen_1542467947427_2-title{color:#fff !important;border-top-color:#0369a0 !important;border-right-color:#0369a0 !important;border-bottom-color:#0369a0 !important;border-left-color:#0369a0 !important;background-color:#0369a0 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#0369a0), color-stop(100%,#0369a0)) !important; background-image: -webkit-linear-gradient(top, #0369a0 0%, #0369a0 100%) !important;}.success #li_ui_li_gen_1542467947427_2.hovered #li_ui_li_gen_1542467947427_2-title-text, .success #li_ui_li_gen_1542467947427_2.hovered #li_ui_li_gen_1542467947427_2-title-text *{color:#fff !important;}.success #li_ui_li_gen_1542467947427_2.clicked #li_ui_li_gen_1542467947427_2-title, .success #li_ui_li_gen_1542467947427_2.down #li_ui_li_gen_1542467947427_2-title{color:#fff !important;border-top-color:#066094 !important;border-right-color:#066094 !important;border-bottom-color:#066094 !important;border-left-color:#066094 !important;background-color:#066094 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#066094), color-stop(100%,#066094)) !important; background-image: -webkit-linear-gradient(top, #066094 0%, #066094 100%) !important;}.success #li_ui_li_gen_1542467947427_2.clicked #li_ui_li_gen_1542467947427_2-title-text, .success #li_ui_li_gen_1542467947427_2.down #li_ui_li_gen_1542467947427_2-title-text, .success #li_ui_li_gen_1542467947427_2.clicked #li_ui_li_gen_1542467947427_2-title-text *, .success #li_ui_li_gen_1542467947427_2.down #li_ui_li_gen_1542467947427_2-title-text *{color:#fff !important;}.IN-shadowed .success #li_ui_li_gen_1542467947427_2.clicked #li_ui_li_gen_1542467947427_2-title, .IN-shadowed .success #li_ui_li_gen_1542467947427_2.down #li_ui_li_gen_1542467947427_2-title{}</style><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_dialog_advanced{border-radius:8px;padding:10px}.fb_dialog_content{background:#fff;color:#373737}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{left:5px;right:auto;top:5px}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{height:100%;left:0;margin:0;overflow:visible;position:absolute;top:-10000px;transform:none;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{background:none;height:auto;min-height:initial;min-width:initial;width:auto}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{clear:both;color:#fff;display:block;font-size:18px;padding-top:20px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .4);bottom:0;left:0;min-height:100%;position:absolute;right:0;top:0;width:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_mobile .fb_dialog_iframe{position:sticky;top:0}.fb_dialog_content .dialog_header{background:linear-gradient(from(#738aba), to(#2c4987));border-bottom:1px solid;border-color:#1d3c78;box-shadow:white 0 1px 1px -1px inset;color:#fff;font:bold 14px Helvetica, sans-serif;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:linear-gradient(from(#4267B2), to(#2a4887));background-clip:padding-box;border:1px solid #29487d;border-radius:3px;display:inline-block;line-height:18px;margin-top:3px;max-width:85px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{background:none;border:none;color:#fff;font:bold 12px Helvetica, sans-serif;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #4a4a4a;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f5f6f7;border:1px solid #4a4a4a;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-position:50% 50%;background-repeat:no-repeat;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}
+.fb_customer_chat_bounce_in_v2{animation-duration:300ms;animation-name:fb_bounce_in_v2;transition-timing-function:ease-in}.fb_customer_chat_bounce_out_v2{animation-duration:300ms;animation-name:fb_bounce_out_v2;transition-timing-function:ease-in}.fb_customer_chat_bounce_in_v2_mobile_chat_started{animation-duration:300ms;animation-name:fb_bounce_in_v2_mobile_chat_started;transition-timing-function:ease-in}.fb_customer_chat_bounce_out_v2_mobile_chat_started{animation-duration:300ms;animation-name:fb_bounce_out_v2_mobile_chat_started;transition-timing-function:ease-in}.fb_customer_chat_bubble_pop_in{animation-duration:250ms;animation-name:fb_customer_chat_bubble_bounce_in_animation}.fb_customer_chat_bubble_animated_no_badge{box-shadow:0 3px 12px rgba(0, 0, 0, .15);transition:box-shadow 150ms linear}.fb_customer_chat_bubble_animated_no_badge:hover{box-shadow:0 5px 24px rgba(0, 0, 0, .3)}.fb_customer_chat_bubble_animated_with_badge{box-shadow:-5px 4px 14px rgba(0, 0, 0, .15);transition:box-shadow 150ms linear}.fb_customer_chat_bubble_animated_with_badge:hover{box-shadow:-5px 8px 24px rgba(0, 0, 0, .2)}.fb_invisible_flow{display:inherit;height:0;overflow-x:hidden;width:0}.fb_mobile_overlay_active{background-color:#fff;height:100%;overflow:hidden;position:fixed;visibility:hidden;width:100%}@keyframes fb_bounce_in_v2{0%{opacity:0;transform:scale(0, 0);transform-origin:bottom right}50%{transform:scale(1.03, 1.03);transform-origin:bottom right}100%{opacity:1;transform:scale(1, 1);transform-origin:bottom right}}@keyframes fb_bounce_in_v2_mobile_chat_started{0%{opacity:0;top:20px}100%{opacity:1;top:0}}@keyframes fb_bounce_out_v2{0%{opacity:1;transform:scale(1, 1);transform-origin:bottom right}100%{opacity:0;transform:scale(0, 0);transform-origin:bottom right}}@keyframes fb_bounce_out_v2_mobile_chat_started{0%{opacity:1;top:0}100%{opacity:0;top:20px}}@keyframes fb_customer_chat_bubble_bounce_in_animation{0%{bottom:6pt;opacity:0;transform:scale(0, 0);transform-origin:center}70%{bottom:18pt;opacity:1;transform:scale(1.2, 1.2)}100%{transform:scale(1, 1)}}</style><script charset="utf-8" src="./Introducción a la manipulación del DOM mediante Javascript_files/button.e96bb6acc0f8bda511c0c46a84ee18e4.js.descarga"></script><script async="" src="./Introducción a la manipulación del DOM mediante Javascript_files/modules-c5c729f090830a40ca9069d25853d3f7.js.descarga"></script><style type="text/css">iframe#_hjRemoteVarsFrame {display: none !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important;}</style></head>
+<body class="single single-post postid-411 single-format-standard">
+<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./Introducción a la manipulación del DOM mediante Javascript_files/afATJJjxKE6.html" style="border: none;"></iframe></div></div></div>
+<script type="text/javascript">(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.0";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+<div class="content">
+<header class="header scrolled">
+<div class="wrapper clearfix header-wrapper">
+<figure class="logo-container logo sprite">
+<a href="http://www.maestrosdelweb.com/" title="Maestros del Web">Maestros del Web</a>
+</figure>
+<nav class="menu right">
+<ul>
+<div class="menu-mobile">
+<li class="menu-item only-mobile logo">
+<figure class="logo-container sprite">
+</figure>
+</li>
+<li id="menu-item-39614" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-39614"><a href="http://www.maestrosdelweb.com/editorial/">Editoriales</a></li>
+<li id="menu-item-39615" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-39615"><a href="http://www.maestrosdelweb.com/guias/">Guías</a></li>
+<li id="menu-item-39616" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-39616"><a href="https://platzi.com/cursos/">Cursos</a></li>
+</div>
+<li class="menu-item mobile only-mobile"></li>
+<li class="menu-item search search-open"></li>
+</ul>
+</nav>
+</div>
+</header>
+<div class="search-section">
+<div class="wrapper">
+<div class="search-container">
+<form class="search-form" method="get" id="searchform" action="http://www.maestrosdelweb.com/">
+<input type="text" name="s" id="s" class="search-box" placeholder="Buscar">
+<button type="submit" class="search-button"><i class="fa fa-search"></i></button>
+<a class="search-close"></a>
+</form>
+</div>
+</div>
+</div>
+<section class="post-container">
+<article class="post">
+<div class="post-header">
+<div class="wrapper">
+<span class="post-type">
+<a href="http://www.maestrosdelweb.com/editorial/">Editorial</a> </span>
+<figure class="post-image-container">
+</figure>
+<div class="post-wrapper">
+<h1 class="post-title">Introducción a la manipulación del DOM mediante Javascript</h1>
+</div>
+</div>
+</div>
+<div class="wrapper">
+<div class="post-wrapper">
+<p class="post-summary">Una página web es un documento HTML que es interpretado por los navegadores en forma gráfica, pero también permiten el acceso al código.</p>
+<div class="post-meta clearfix">
+<figure class="author-picture-container">
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/172.png" alt="Maikel González Suárez" width="40" height="40"> </figure>
+<strong class="author-name">Maikel González Suárez</strong>
+<span class="post-date">febrero 27 2007</span>
+</div>
+<div class="social-top">
+<div class="fb-share-button fb_iframe_widget" data-href="http://www.maestrosdelweb.com/dom/" data-layout="box_count" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=&amp;container_width=0&amp;href=http%3A%2F%2Fwww.maestrosdelweb.com%2Fdom%2F&amp;layout=box_count&amp;locale=es_ES&amp;sdk=joey"><span style="vertical-align: bottom; width: 81px; height: 40px;"><iframe name="f1d9eeeeb10048" width="1000px" height="1000px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" title="fb:share_button Facebook Social Plugin" src="./Introducción a la manipulación del DOM mediante Javascript_files/share_button.html" style="border: none; visibility: visible; width: 81px; height: 40px;" class=""></iframe></span></div>
+<iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" title="Twitter Tweet Button" src="./Introducción a la manipulación del DOM mediante Javascript_files/tweet_button.31bcb7ae210ce3a448d2ffc6cde7ba34.es.html" style="position: static; visibility: visible; width: 70px; height: 20px;"></iframe>
+<script type="text/javascript">
+	window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
+	</script>
+<script src="./Introducción a la manipulación del DOM mediante Javascript_files/platform.js.descarga" async="" defer="" type="text/javascript" gapi_processed="true">
+		{lang: 'es'}
+	</script>
+<div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 50px; height: 24px;"><iframe ng-non-bindable="" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 50px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 24px;" tabindex="0" vspace="0" width="100%" id="I0_1542467947211" name="I0_1542467947211" src="./Introducción a la manipulación del DOM mediante Javascript_files/fastbutton.html" data-gapiattached="true" title="G+"></iframe></div>
+<script src="./Introducción a la manipulación del DOM mediante Javascript_files/in.js.descarga" type="text/javascript">
+	  lang: es_ES
+	</script>
+<span class="IN-widget" style="line-height: 1; vertical-align: baseline; display: inline-block; text-align: center;"><span style="padding: 0px !important; margin: 0px !important; text-indent: 0px !important; display: inline-block !important; vertical-align: baseline !important; font-size: 1px !important;"><span id="li_ui_li_gen_1542467947418_0"><a id="li_ui_li_gen_1542467947418_0-link" href="javascript:void(0);"><span id="li_ui_li_gen_1542467947418_0-logo">in</span><span id="li_ui_li_gen_1542467947418_0-title"><span id="li_ui_li_gen_1542467947418_0-mark"></span><span id="li_ui_li_gen_1542467947418_0-title-text">Compartir</span></span></a></span></span></span><script type="IN/Share+init" data-counter="top"></script>
+</div>
+<div class="social-top-mobile">
+<div class="fb-share-button fb_iframe_widget" data-href="http://www.maestrosdelweb.com/dom/" data-layout="button_count" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=&amp;container_width=784&amp;href=http%3A%2F%2Fwww.maestrosdelweb.com%2Fdom%2F&amp;layout=button_count&amp;locale=es_ES&amp;sdk=joey"><span style="vertical-align: bottom; width: 97px; height: 20px;"><iframe name="f11420480c5065" width="1000px" height="1000px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" title="fb:share_button Facebook Social Plugin" src="./Introducción a la manipulación del DOM mediante Javascript_files/share_button(1).html" style="border: none; visibility: visible; width: 97px; height: 20px;" class=""></iframe></span></div>
+<iframe id="twitter-widget-1" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" style="position: static; visibility: visible; width: 70px; height: 20px;" title="Twitter Tweet Button" src="./Introducción a la manipulación del DOM mediante Javascript_files/tweet_button.31bcb7ae210ce3a448d2ffc6cde7ba34.es(1).html"></iframe>
+<script type="text/javascript">
+	window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
+	</script>
+<script src="./Introducción a la manipulación del DOM mediante Javascript_files/platform.js.descarga" async="" defer="" type="text/javascript" gapi_processed="true">
+	  {lang: 'es'}
+	</script>
+<div id="___plusone_1" style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 32px; height: 20px;"><iframe ng-non-bindable="" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 32px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I1_1542467947215" name="I1_1542467947215" src="./Introducción a la manipulación del DOM mediante Javascript_files/fastbutton(1).html" data-gapiattached="true" title="G+"></iframe></div>
+<script src="./Introducción a la manipulación del DOM mediante Javascript_files/in.js.descarga" type="text/javascript">
+	  lang: es_ES
+	</script>
+<span class="IN-widget" style="line-height: 1; vertical-align: baseline; display: inline-block; text-align: center;"><span style="padding: 0px !important; margin: 0px !important; text-indent: 0px !important; display: inline-block !important; vertical-align: baseline !important; font-size: 1px !important;"><span id="li_ui_li_gen_1542467947425_1"><a id="li_ui_li_gen_1542467947425_1-link" href="javascript:void(0);"><span id="li_ui_li_gen_1542467947425_1-logo">in</span><span id="li_ui_li_gen_1542467947425_1-title"><span id="li_ui_li_gen_1542467947425_1-mark"></span><span id="li_ui_li_gen_1542467947425_1-title-text">Compartir</span></span></a></span></span></span><script type="IN/Share+init" data-counter="right"></script>
+</div>
+<div class="post-content clearfix">
+<p>El Modelo de Objetos del Documento (DOM) permite ver el mismo documento de otra manera, describiendo el contenido del documento como un conjunto de objetos que un programa Javascript puede actuar sobre ellos. </p>
+<h3>¿Qué es el Modelo de Objetos del Documento? </h3>
+<p>Acorde al <a href="http://www.w3c.es/">W3C</a> el Modelo de Objetos del Documento es una interfaz de programación de aplicaciones (API) para documentos validos <a href="http://www.maestrosdelweb.com/editorial/nivelhtml/">HTML</a> y bien construidos <a href="http://www.maestrosdelweb.com/editorial/xmlintro/">XML</a>. Define la estructura lógica de los documentos y el modo en que se accede y manipula.</p>
+<p>El DOM permite un acceso a la estructura de una página HTML mediante el mapeo de los elementos de esta página en un árbol de nodos. Cada elemento se convierte en un nodo y cada porción de texto en un nodo de texto. Para comprender más fácilmente véase el siguiente ejemplo: </p>
+<div class="codigo">
+<pre>&lt;body&gt;
+&lt;p&gt;Esto es un párrafo que contiene &lt;a href="#"&gt;un enlace&lt;/a&gt; en el medio. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Primer punto en la lista&lt;/li&gt;
+&lt;li&gt;Otro punto en la lista&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;</pre>
+</div>
+<p>Como puede verse un elemento [a] se encuentra localizado dentro de un elemento [p] del HTML, convirtiéndose en un nodo hijo, o simplemente hijo del nodo [p], de manera similar [p] es el nodo padre. Los dos nodos li son hijos del mismo padre, llamándose nodos hermanos o simplemente hermanos.</p>
+<p>Es importante comprender la diferencia entre elementos y nodos de textos. Los elementos comúnmente son asociados a las etiquetas. En HTML todas las etiquetas son elementos, tales como &lt;p&gt;, &lt;img&gt; y &lt;div&gt; por lo que tienen atributos y contienes nodos hijos. Sin embargo, los nodos de textos no poseen atributos e hijos.</p>
+<h3>Siempre use el DOCTYPE correcto </h3>
+<p>El DOCTYPE (abreviado del inglés “document type declaration”, declaración del tipo de documento) informa cual versión de (X)HTML se usará para validar el documento; existen varios tipos a seleccionar. El DOCTYPE, debe aparecer siempre en la parte superior de cada página HTML y siendo un componente clave de las páginas web “obedientes” a los <a href="http://www.maestrosdelweb.com/editorial/estandaresweb/">estándares</a>.</p>
+<p> En caso de usarse un DOCTYPE incompleto, no actualizado o simplemente no usarlo llevará al navegador a entrar en modo raro o extraño, donde el navegador asume que se ha programado fuera de los estándares. </p>
+<p>Todavía todos los <a href="http://www.maestrosdelweb.com/editorial/firefox/">navegadores</a> actuales no son capaces de procesar correctamente todos los tipos de documentos, sin embargo, muchos de ellos funcionan correctamente en los navegadores más utilizados actualmente, tales como:</p>
+<p> HTML 4.01 Strict y Transitional, XHML 1.0 Strict y Transitional los se comportan del modo correcto en <a href="http://www.maestrosdelweb.com/actualidad/3241/">Internet Explorer</a> (versión 6, 7 Beta), <a href="http://www.maestrosdelweb.com/editorial/firefox/">Mozilla </a>y <a href="http://www.maestrosdelweb.com/editorial/opera/">Opera 7</a>. De ahora en adelante se adoptará para cada ejemplo HTML 4.01 Strict :</p>
+<div class="codigo">
+<pre>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt; 
+</pre>
+</div>
+<p>Resultando una única línea de código, o dos líneas con un salto de línea después de EN”. </p>
+<h3>La importancia de validar el HTML </h3>
+<p>Si los elementos son anidados de manera inadecuada pueden generarse problemas, véase la siguiente línea: </p>
+<div class="codigo">
+<pre>&lt;p&gt;Estos elementos han sido &lt;strong&gt;incorrectamente &lt;/p&gt;anidados &lt;/strong&gt;
+</pre>
+</div>
+<p>El árbol que resulta de esto se encuentra incorrectamente anidado del todo, por tanto generará errores inesperados en los navegadores. Manteniendo su HTML válido se pueden evitar tales problemas.</p>
+<h3>Accediendo a los elementos </h3>
+<p>Afortunadamente, Javascript permite acceder a cada uno de los elementos de una página utilizando tan sólo algunos métodos y propiedades. </p>
+<p>Si desea encontrar de manera rápida y fácil un elemento se tiene a la mano el método getElementById. El mismo permite un acceso inmediato a cualquier elemento tan sólo conociendo el valor de su atributo id. Véase el siguiente ejemplo: </p>
+<div class="codigo">
+<pre>&lt;p&gt;
+&lt;a id="contacto" href="contactos.html"&gt;Contáctenos&lt;/a&gt;
+&lt;/p&gt;</pre>
+</div>
+<p>Puede usarse el atributo id del elemento a para acceder al mismo:</p>
+<div class="codigo">
+<pre>var elementoContacto = document.getElementById("contacto");
+</pre>
+</div>
+<p>Ahora el valor de la variable elementoContacto está referida al elemento [a] y cualquier operación sobre la misma afectará el hiperenlace. </p>
+<p>El método getElementById es adecuado para operar sobre un elemento en específico, sin embargo, en ocasiones se necesita trabajar sobre un grupo de elementos por lo que en este caso puede utilizarse el método getElementsByTagName. Este retorna todos los elementos de un mismo tipo. Asumiendo la siguiente lista desordenada: </p>
+<div class="codigo">
+<pre>&lt;ul&gt;
+&lt;li&gt;&lt;a href="editorial.html"&gt;Editorial&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="semblanza.html"&gt;Autores&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="noticias.html"&gt;Noticias&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="contactos.html"&gt;Contátenos&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</pre>
+</div>
+<p>Puede obtenerse todos los hipervínculos de la siguiente manera:</p>
+<div class="codigo">
+<pre>var hipervinculos= document.getElementsByTagName("a"); 
+</pre>
+</div>
+<p>El valor de la variable hipervinculos es una colección de elementos [a]. Las colecciones son arreglos pudiéndose acceder a cada elemento a través de la ya conocida notación con corchetes. </p>
+<p>Los elementos devueltos por getElementsByTagName serán ordenado según el orden que aparezcan en el código fuente. Por tanto para el caso anterior quedaría así:</p>
+<ul>
+<li>hipervinculos[0] el elemento [a] para “Editorial”</li>
+<li>hipervinculos[1] el elemento [a] para “Autores”</li>
+<li>hipervinculos[2] el elemento [a] para “Noticias”</li>
+<li>hipervinculos[3] el elemento [a] para “Contáctenos” </li>
+</ul>
+<p>Otra maneras de acceder a un elemento usando su id es document.all["id"] la cual fue introducida en Internet Explorer 4 y document.layers["id"] introducida por Netscape 5 por que el W3C todavía no había estandarizado la manera de acceder a los elementos mediante su id. Sin embargo, no se recomienda su uso porque al estar fuera de los estándares actuales hay navegadores que no soportan estos métodos.</p>
+<p>Por otro lado existen varios elementos en un documento HTML que pueden ser accedidos de otras maneras. El elemento body de un documento puede accederse a través de la forma document.body, mientras que el conjunto de todos los formularios en un documento puede encontrase en document.forms, así mismo el conjunto de todas las imágenes sería mediante document.images.</p>
+<p>Actualmente la mayoría de los navegadores soportan esto métodos aún así es recomendable el uso del método getElementsByTagName, véase el siguiente ejemplo para acceder al elemento body: </p>
+<div class="codigo">
+<pre>var body = document.getElementsByTagName("body")[0]; 
+</pre>
+</div>
+<h3> Creando elementos y textos </h3>
+<p>La creación de nodos es posible mediante el uso de dos métodos disponibles en el objeto document. Dichos métodos son:</p>
+<ul>
+<li> createElement(Tipo cadena): Crea un nuevo elemento del tipo especificado y devuelve un referencia a dicho elemento.</li>
+<li> createTextNode(Cadena de texto): Crea un nuevo nodo de texto con el contenido especificado en la cadena de texto.</li>
+</ul>
+<p>El siguiente ejemplo muestra cómo se crea un nuevo elemento de párrafo vacío:</p>
+<div class="codigo">
+<pre>var nuevoEnlace = document.createElement("a"); 
+</pre>
+</div>
+<p>La variable nuevoEnlace ahora referencia un nuevo enlace listo para ser insertado en el documento. El texto que va dentro del elemento [a] es un nodo de texto hijo, por lo que debe ser creado por separado.</p>
+<div class="codigo">
+<pre>var nodoTexto = document.createTextNode("Semblanza");
+</pre>
+</div>
+<p>Luego si desea modificar el nodo de texto ya existente, puede utilizarse la propiedad nodeValue, esta permite coger y poner el nodo de texto: </p>
+<div class="codigo">
+<pre>var textoViejo = nodoTexto.nodeValue;
+
+nodoTexto.nodeValue = "Novedades"; 
+</pre>
+</div>
+<p>El valor de la variable textoViejo es ahora "Semblanza" y el nuevo texto "Novedades". Se puede insertar un elemento o texto (nodo) como último hijo de un nodo ya existente usando el método appendChild. Este método coloca el nuevo nodo después de todos los hijos del nodo. </p>
+<div class="codigo">
+<pre>NuevoEnlace.appendChild(nodoTexto); 
+</pre>
+</div>
+<p>Ahora todo lo que se necesita es insertar el enlace en el cuerpo del documento. Para hacer esto, se necesita una referencia al elemento body del documento, teniendo como guía los estándares siguientes: </p>
+<div class="codigo">
+<pre>var cuerpoRef = document.getElementsByTagName("body")[0]; 
+cuerpoRef.appendChild(nuevoEnlace); 
+</pre>
+</div>
+<p>Otra manera sería utilizando el método getElementById. Para ello se asume que la etiqueta &lt;body&gt; tiene asignado un valor para el atributo id. </p>
+<div class="codigo">
+<pre>&lt;body id=”cuerpo”&gt; 
+var cuerpoRef = document.getElementById("cuerpo"); 
+cuerpoRef.appendChild(nuevoEnlace); </pre>
+</div>
+<p>Existen básicamente tres maneras mediante las cuales un nuevo elemento o nodo de texto puede ser insertado en una página Web. Todo ello depende del punto en el cual se desee insertar el nuevo nodo: como último hijo de un elemento, antes de otro nodo o reemplazo para un nodo.</p>
+<p> El caso de apertura de un nuevo hijo ya fue visto en el ejemplo anterior, luego para insertar el nodo antes de otro nodo se realiza utilizando el método insertBefore de su elemento padre, mientras que el reemplazo de nodo se utiliza el método replaceChild de su elemento padre. </p>
+<p>Al usar insertBefore, se necesita tener referencias al nodo que va ser insertado y donde va a ser insertado, considérese el siguiente código HTML:</p>
+<p>
+</p><div class="codigo">
+<pre>&lt;p id="mwEnlaces"&gt;
+&lt;a id="editor" href="editorial.html"&gt;Editorial&lt;/a&gt;
+&lt;/p&gt; 
+</pre>
+</div>
+<p>Luego el nuevo enlace será insertado antes de enlace ya existente llamando el método insertBefore desde el nodo padre (párrafo): </p>
+<div class="codigo">
+<pre>var anclaTexto = document.createTextNode("Actualidad");
+var nuevoAncla = document.createElement("a");
+nuevoAncla.appendChild(anclaTexto);
+var anclaExistente = document.getElementById("editor");
+var padre = anclaExistente.parentNode;
+var nuevoHijo = padre.insertBefore(nuevoAncla, anclaExistente); 
+</pre>
+</div>
+<p>Si se hiciera una traducción del DOM hacia HTML después de esta operación el resultado sería el siguiente: </p>
+<div class="codigo">
+<pre>&lt;p id="mwEnlaces"&gt;
+&lt;a&gt; Actualidad &lt;/a&gt;&lt;a id="editor" href="editorial.html"&gt;Editorial&lt;/a&gt;
+&lt;/p&gt; 
+</pre>
+</div>
+<p>En el caso de reemplazar el enlace usando replaceChild: </p>
+<div class="codigo">
+<pre>var nuevoHijo = padre.replaceChild(nuevoAncla, anclaExistente); 
+</pre>
+</div>
+<p>El DOM lucirá así: </p>
+<div class="codigo">
+<pre>&lt;p id="mwEnlaces"&gt;
+&lt;a&gt; Actualidad &lt;/a&gt;
+&lt;/p&gt;</pre>
+</div>
+<h3>Usando innerHTML</h3>
+<p>En aplicaciones complejas donde es necesario crear varios elementos a la vez, el código JavaScript generado puede ser extenso recurriéndose a la propiedad innerHTML. Dicha propiedad fue introducida por <a href="http://www.maestrosdelweb.com/editorial/microsoft/">Microsoft</a> permitiendo leer y escribir el contenido HTML de un elemento. </p>
+<p>Por ejemplo, puede crearse fácilmente una <a href="http://www.maestrosdelweb.com/editorial/tutsql11/">tabla</a> con múltiples celdas e insertarla luego en la página con innerHTML: </p>
+<div class="codigo">
+<pre>var tabla = '&lt;table border="0"&gt;'; 
+tabla += '&lt;tr&gt;&lt;td&gt;Celda 1&lt;/td&gt;&lt;td&gt;Celda 2&lt;/td&gt;&lt;td&gt; Celda 3&lt;/td&gt;&lt;/tr&gt;'; 
+tabla += '&lt;/table&gt;'; 
+document.getElementById("datos").innerHTML = tabla; 
+</pre>
+</div>
+<h3>Eliminando un elemento o nodo de texto </h3>
+<p>Se pueden eliminar nodos existentes y nuevos. El método removeChild permite eliminar nodos hijos a cualquier nodo con tan sólo pasarle las referencias del nodo hijo [a] eliminar y su correspondiente padre. Para mejor compresión retómese el ejemplo anterior: </p>
+<div class="codigo">
+<pre>&lt;p id="mwEnlaces"&gt;
+&lt;a id="editor" href="editorial.html"&gt;Editorial&lt;/a&gt;
+&lt;/p&gt; 
+</pre>
+</div>
+<p>El método removeChild será usado para eliminar el hipervínculo del elemento padre párrafo:</p>
+<div class="codigo">
+<pre>var ancla = document.getElementById("editor");
+var padre = ancla.parentNode;
+var hijoRemovido = padre.removeChild(ancla);
+</pre>
+</div>
+<p>La variable hijoRemovido todavía hace referencia al elemento, de manera que fue removido pero no destruido, no pudiéndose localizar en ninguna parte del DOM. Este se encuentra disponible en memoria como si fuera creado usando el método createElement. Esto permite posicionarlo en cualquier otra parte de la página.</p>
+<h3>Lectura y escritura de los atributos de un elemento </h3>
+<p>Las partes más frecuentemente usadas de un elemento HTML son sus atributos, tales como: id, class, href., title, <a href="http://www.maestrosdelweb.com/editorial/cssplan/">estilos CSS</a>, entre muchas otras piezas de información que pueden se incluidas en una etiqueta HTML.</p>
+<p>Los atributos de una etiqueta son traducidos por el navegador en propiedades de un objeto. Dos métodos existen para leer y escribir los atributos de un elemento, getAttribute permite leer el valor de un atributo mientras que setAttribute permite su escritura.</p>
+<p>En ocasiones se hace necesario ver las propiedades y métodos de un determinado elemento, esto puede realizarse mediante la siguiente función utilitaria: </p>
+<div class="codigo">
+<pre>function inspector(el) {
+var str =””;
+for (var i in el){
+str+=I + “: ” + el.getAttribute(i) + “\n”; 
+}
+alert(str);
+} 
+</pre>
+</div>
+<p>Para usar la función inspector() tan sólo debe pasarle la referencia al elemento, continuando con el ejemplo anterior resulta: </p>
+<div class="codigo">
+<pre>var ancla = document.getElementById("editor");
+
+inspector(ancla); 
+</pre>
+</div>
+<p>Para modificar el atributo title del hipervínculo, elemento referenciado por la variable ancla, se usará el setAttribute, pasándole el nombre del atributo y el valor: </p>
+<div class="codigo">
+<pre>var ancla = document.getElementById("editor");
+ancla.setAttribute("title", "Artículos de programación");
+var nuevoTitulo = ancla.getAttribute("title"); 
+El valor de la variable nuevoTitulo es ahora “Artículos de programación”.
+</pre>
+</div>
+<h3>Manipulando los estilos de los elementos </h3>
+<p>Como se ha visto, los atributos que le son asignados a las etiquetas HTML están disponibles como propiedades de sus correspondientes nodos en el DOM. Las propiedades de estilo pueden ser aplicadas a través del DOM. </p>
+<p>Cada atributo <a href="http://www.maestrosdelweb.com/editorial/introcss/">CSS</a> posee una propiedad del DOM equivalente, formándose con el mismo nombre del atributo CSS pero sin los guiones y llevando la primera letra de las palabras a mayúsculas. Véase el siguiente ejemplo para mayor entendimiento donde se utiliza un atributo CSS modelo:</p>
+<div class="codigo">
+<pre>algun-atributo-css 
+</pre>
+</div>
+<p>Tendrá como equivalente la siguiente propiedad o método en Javascript: </p>
+<div class="codigo">
+<pre>algunAtributoCss
+</pre>
+</div>
+<p>Por tanto, para cambiar el atributo CSS font-family de un elemento, podría realizarse de lo siguiente:</p>
+<div class="codigo">
+<pre>ancla.style.fontFamily = 'sans-serif'; 
+</pre>
+</div>
+<p>Los valores CSS en Javascript serán en su mayoría del tipo cadena; por ejemplo: font-size, pues posee dimensiones tales como “px”, “%”. Sólo los atributos completamente numéricos, tales como z-index serán del tipo entero. </p>
+<p>En muchos casos es necesario aparecer y desaparecer un determinado elemento, para ellos se utiliza el atributo CSS display, por ejemplo, para desaparecer: </p>
+<div class="codigo">
+<pre>ancla.style.display = 'none'; 
+</pre>
+</div>
+<p>Luego para volverlo a mostrar se le asigna otro valor: </p>
+<div class="codigo">
+<pre>ancla.style.display = 'inline'; 
+</pre>
+</div>
+<h3>Ejemplo: Adjuntar múltiples ficheros a la vez </h3>
+<p>Este es el primer ejemplo completo donde se propone utilizar la manipulación del DOM mediante javascript con el objetivo de adicionar tantos elementos input del tipo file como tantos ficheros se deseen subir al servidor. </p>
+<p>Se muestra una versión simplificada del problema limitada tan sólo al lado del cliente. Para ello es necesario imaginarse un sistema en línea donde se suben ficheros al servidor, ejemplo de ello podría ser una aplicación de <a href="http://www.maestrosdelweb.com/editorial/emailhis/">correo electrónico</a>. </p>
+<div class="codigo">
+<pre>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd"&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Ejemplo para adjuntar múltiples ficheros&lt;/title&gt;
+&lt;script language="javascript" type="text/javascript"&gt;
+function nuevoFichero() {
+var input = document.getElementsByTagName("input")[0];
+var nuevoInput = input.cloneNode(true);
+input.parentNode.appendChild(nuevoInput);
+}
+&lt;/script&gt;
+&lt;/head&gt; 
+&lt;body&gt;
+&lt;form action="upload.php" method="post" enctype="multipart/form-data"&gt;
+&lt;fieldset&gt;&lt;legend&gt;Adjuntar múltiples ficheros&lt;/legend&gt;
+&lt;input name="ficheros[]" type="file" size="60" &gt;
+&lt;/fieldset&gt;
+&lt;a href="javascript: nuevoFichero();"&gt;Adjuntar otro fichero&lt;/a&gt;&nbsp;&nbsp;&nbsp;
+&lt;input name="Subir" type="submit" value="Adjuntar" &gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>El enlace para adjuntar otro fichero hace una llamada a la función nuevoFichero() realizándose las siguientes tareas en la misma: </p>
+<p> Se accede al primer elemento input encontrado en el documento: </p>
+<div class="codigo">
+<pre>var input = document.getElementsByTagName("input")[0]; 
+</pre>
+</div>
+<ul>
+<li> Se crea un nuevo elemento input referenciado por la variable nuevoInput utilizando el método cloneNode resultando un elemento idéntico al primero:</li>
+</ul>
+<div class="codigo">
+<pre>var nuevoInput = input.cloneNode(true); 
+</pre>
+</div>
+<ul>
+<li> Aquí se accede al nodo padre del elemento input mediante el método parentNode y la vez se inserta un nuevo elemento hijo copia del primero por medio del método appendChild:</li>
+</ul>
+<div class="codigo">
+<pre>input.parentNode.appendChild(nuevoInput); 
+</pre>
+</div>
+<p>Es de notar que en este ejemplo podría haberse usado el evento clic para la llamada de la función, si embargo se dejó reservado para cuando el tema de la manipulación de eventos del DOM sea abordado. </p>
+<h3>Ejemplo: Mostrador de diapositivas </h3>
+<p>Este ejemplo contempla un mostrador de diapositivas (en este caso imágenes). Se tienen dos enlaces, uno mostrar la diapositiva siguiente y otro para mostrar la diapositiva anterior. Una posible aplicación práctica podría ser en una galería de fotos. </p>
+<div class="codigo">
+<pre>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+
+"http://www.w3.org/TR/html4/strict.dtd"&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Ejemplo de un mostrador de diapositivas&lt;/title&gt; 
+&lt;script type="text/javascript"&gt;
+var contador = 0;
+var diapositivas = [];
+function inicio() {
+var contenedor = document.getElementById("diapositivas");
+while (contenedor.childNodes.length &gt; 0){
+if (contenedor.getElementsByTagName("img")[0]==contenedor.firstChild){
+diapositivas[diapositivas.length] = contenedor.removeChild(contenedor .firstChild);
+}
+else contenedor.removeChild(contenedor.firstChild);
+}
+}
+function adelante() {
+contador++;
+if (contador &gt;= diapositivas.length) contador = 0;
+ponerImagen()
+}
+function atras() {
+contador--;
+if (contador &lt; 0 ) contador = diapositivas.length - 1;
+ponerImagen();
+} 
+function ponerImagen() {
+var contenedor = document.getElementById("diapositivas");
+if (contenedor.childNodes.length==0)
+contenedor.appendChild(diapositivas[contador]);
+else contenedor.replaceChild(diapositivas[contador], contenedor.childNodes[0]);
+}
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;a href="javascript: atras();"&gt;Atrás&lt;/a&gt;
+&lt;span id="diapositivas"&gt;
+&lt;img src="diapositiva1.jpg" alt="Diapositiva 1" height="100" width="200"&gt;
+&lt;img src="diapositiva2.jpg" alt="Diapositiva 2" height="100" width="200"&gt;
+&lt;img src="diapositiva3.jpg" alt="Diapositiva 3" height="100" width="200"&gt;
+&lt;/span&gt;
+&lt;a href="javascript: adelante();"&gt;Adelante&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+&lt;script type="text/javascript"&gt;
+inicio();
+ponerImagen();
+&lt;/script&gt; 
+</pre>
+</div>
+<p>Este ejemplo se analizará de manera abreviada dejando un análisis detallado por parte del lector. Se tiene dos variables globales, contador y diapositivas, la primera para indicar la diapositiva que se está mostrando actualmente y la última para almacenar en un arreglo el conjunto de diapositivas a mostrar.</p>
+<p>La función inicio() remueve todos elementos img y los almacena. Es de notar que todo nodo hijo del nodo con id diapositivas parásito (ejemplo: salto de línea) es eliminado para evitar un mal funcionamiento posterior. </p>
+<p>Por otro lado la función ponerImagen() se encarga de colocar la imagen apuntada por el contador en el contenedor de diapositivas. Mientras que las funciones atras() y adelante() se encargan de decrementar e incrementar el contador respectivamente. </p>
+<h3>Conclusión </h3>
+<p>El presente material tan sólo ha sido una ligera aproximación a la manipulación del Modelo de Objetos del Documento. Explorando el DOM se puede encontrar, cambiar, adicionar y eliminar elementos de un documento. Es sin duda alguna una poderosa técnica para generar aplicaciones Web dinámicas en el lado del cliente. </p>
+</div>
+<div class="social-bottom">
+<div class="fb-share-button fb_iframe_widget" data-href="http://www.maestrosdelweb.com/dom/" data-layout="box_count" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=&amp;container_width=784&amp;href=http%3A%2F%2Fwww.maestrosdelweb.com%2Fdom%2F&amp;layout=box_count&amp;locale=es_ES&amp;sdk=joey"><span style="vertical-align: bottom; width: 81px; height: 40px;"><iframe name="f3bd107d4f9c2" width="1000px" height="1000px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" title="fb:share_button Facebook Social Plugin" src="./Introducción a la manipulación del DOM mediante Javascript_files/share_button(2).html" style="border: none; visibility: visible; width: 81px; height: 40px;" class=""></iframe></span></div>
+<iframe id="twitter-widget-2" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" style="position: static; visibility: visible; width: 70px; height: 20px;" title="Twitter Tweet Button" src="./Introducción a la manipulación del DOM mediante Javascript_files/tweet_button.31bcb7ae210ce3a448d2ffc6cde7ba34.es(2).html"></iframe>
+<script type="text/javascript">
+	window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
+	</script>
+<script src="./Introducción a la manipulación del DOM mediante Javascript_files/platform.js.descarga" async="" defer="" type="text/javascript" gapi_processed="true">
+		{lang: 'es'}
+	</script>
+<div id="___plusone_2" style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 50px; height: 24px;"><iframe ng-non-bindable="" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 50px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 24px;" tabindex="0" vspace="0" width="100%" id="I2_1542467947218" name="I2_1542467947218" src="./Introducción a la manipulación del DOM mediante Javascript_files/fastbutton(2).html" data-gapiattached="true" title="G+"></iframe></div>
+<script src="./Introducción a la manipulación del DOM mediante Javascript_files/in.js.descarga" type="text/javascript">
+	  lang: es_ES
+	</script>
+<span class="IN-widget" style="line-height: 1; vertical-align: baseline; display: inline-block; text-align: center;"><span style="padding: 0px !important; margin: 0px !important; text-indent: 0px !important; display: inline-block !important; vertical-align: baseline !important; font-size: 1px !important;"><span id="li_ui_li_gen_1542467947427_2"><a id="li_ui_li_gen_1542467947427_2-link" href="javascript:void(0);"><span id="li_ui_li_gen_1542467947427_2-logo">in</span><span id="li_ui_li_gen_1542467947427_2-title"><span id="li_ui_li_gen_1542467947427_2-mark"></span><span id="li_ui_li_gen_1542467947427_2-title-text">Compartir</span></span></a></span></span></span><script type="IN/Share+init" data-counter="top"></script>
+</div>
+<div class="author-extend">
+<figure class="author-picture-container only-l-640">
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/172.png" alt="Maikel González Suárez" width="100" height="100"> </figure>
+<div class="author-data">
+<strong class="author-name">Maikel González Suárez</strong>
+<p class="author-description">Desarrollador Web, residente en La Habana, Cuba.</p><a title="Sitio web de Maikel González Suárez" href="http:" class="author-website">http://</a> </div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<section class="recomended-posts">
+<div class="post-wrapper inline-space">
+<h2 class="recomended-title">Otros artículos que podrían interesarte</h2> <article class="post">
+<figure class="post-picture-container">
+<a href="http://www.maestrosdelweb.com/derechos-digitales/" title="Derechos digitales en América Latina, los gobiernos te están observando (y espiando)"><img width="150" height="150" src="./Introducción a la manipulación del DOM mediante Javascript_files/infografía-150x150.jpg" class="attachment-thumbnail" alt="infografía"></a>
+</figure>
+<h3 class="post-title"><a href="http://www.maestrosdelweb.com/derechos-digitales/" title="Derechos digitales en América Latina, los gobiernos te están observando (y espiando)">Derechos digitales en América Latina, los gobiernos te están observando (y espiando)</a></h3>
+</article>
+<article class="post">
+<figure class="post-picture-container">
+<a href="http://www.maestrosdelweb.com/search-experience-optimization/" title="“Search Experience Optimization” SEO para humanos, no robots"><img width="150" height="150" src="./Introducción a la manipulación del DOM mediante Javascript_files/User-experience-150x150.jpg" class="attachment-thumbnail wp-post-image" alt="Tomada de: https://www.flickr.com/photos/notionscapital/10089497055/"></a>
+</figure>
+<h3 class="post-title"><a href="http://www.maestrosdelweb.com/search-experience-optimization/" title="“Search Experience Optimization” SEO para humanos, no robots">“Search Experience Optimization” SEO para humanos, no robots</a></h3>
+</article>
+<article class="post">
+<figure class="post-picture-container">
+<a href="http://www.maestrosdelweb.com/como-contar-historias-increibles-en-internet/" title="Cómo contar historias increíbles en Internet"><img width="150" height="150" src="./Introducción a la manipulación del DOM mediante Javascript_files/Captura-de-pantalla-2014-11-13-a-las-3.58.43-p.m.-150x150.png" class="attachment-thumbnail wp-post-image" alt="Captura de pantalla 2014-11-13 a las 3.58.43 p.m."></a>
+</figure>
+<h3 class="post-title"><a href="http://www.maestrosdelweb.com/como-contar-historias-increibles-en-internet/" title="Cómo contar historias increíbles en Internet">Cómo contar historias increíbles en Internet</a></h3>
+</article>
+<article class="post">
+<figure class="post-picture-container">
+<a href="http://www.maestrosdelweb.com/long-form-content-que-es/" title="Qué es long-form content y cómo usarlo en estrategias de content marketing"><img width="150" height="150" src="./Introducción a la manipulación del DOM mediante Javascript_files/promedio-palabras-serps-150x150.jpg" class="attachment-thumbnail" alt="Promedio de palabras en los resultados de búsqueda"></a>
+</figure>
+<h3 class="post-title"><a href="http://www.maestrosdelweb.com/long-form-content-que-es/" title="Qué es long-form content y cómo usarlo en estrategias de content marketing">Qué es long-form content y cómo usarlo en estrategias de content marketing</a></h3>
+</article>
+</div>
+</section>
+<section class="comments">
+<div class="post-wrapper">
+<div class="fb-comments fb_iframe_widget fb_iframe_widget_fluid_desktop" data-href="http://www.maestrosdelweb.com/dom/" data-width="100%" data-numposts="5" data-colorscheme="light" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=&amp;color_scheme=light&amp;container_width=800&amp;height=100&amp;href=http%3A%2F%2Fwww.maestrosdelweb.com%2Fdom%2F&amp;locale=es_ES&amp;numposts=5&amp;sdk=joey&amp;version=v2.0" style="width: 100%;"><span style="vertical-align: bottom; width: 100%; height: 836px;"><iframe name="f2967bea54e8064" width="1000px" height="100px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" title="fb:comments Facebook Social Plugin" src="./Introducción a la manipulación del DOM mediante Javascript_files/comments.html" style="border: none; visibility: visible; width: 100%; height: 836px;" class=""></iframe></span></div>
+<ul class="commentlist">
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de EvayJam">
+<cite><a href="http://www.imagoimagen.com/webempresas" rel="external nofollow" class="url">EvayJam</a></cite>
+<p>Muy interesante y didáctico el articulo. He estado probando los ejemplos y he apreciado la diferente manera de enlazar los nodos padres con los hijos y como crearlos a partir de un DOM válido.<br>
+Gracias, siempre se aprende algo.</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Javier Seixas">
+<cite><a href="http://www.javierseixas.com/" rel="external nofollow" class="url">Javier Seixas</a></cite>
+<p>Saludos,</p>
+<p>un artículo muy interesante. Considero la manipulación del DOM muy básica de cara a desarrollar aplicaciones web 2.0. Ya hace algunos meses que me introducí en este mundo del DOM, al principio con JavaScript tecleado directamente, pero poco después descubrí la librería de prototype. Es una librería JavaScript que permite la manipulación del DOM de forma sencilla, y que además funciona en la mayoría de navegadores actuales, por lo que no es necesario teclear diferentes funciones una para cada navegador, ya que prototype lo hace por nosotros.</p>
+<p>Para mí la única pega de esta librería es que es bastante pesada, unos 70kB, pero una vez está en caché creo que la cosa no tiene mayor importancia.</p>
+<p>Si quereis conocer más sobre prototype podeis consultar su página oficial (en inglés) en <a href="http://prototypejs.org/" rel="nofollow">http://prototypejs.org</a></p>
+<p>Espero que el apunte le sirva a algunos. Un cordial saludo!</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Runnerk">
+<cite><a href="http://otwperu.wordpress.com/" rel="external nofollow" class="url">Runnerk</a></cite>
+<p>muy hçbuen el articulo .. lo recomendare..</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de tule">
+<cite><a href="http://www.intelligenia.com/" rel="external nofollow" class="url">tule</a></cite>
+<p>Utilizar el DOM es necesario e imprescindible en aplicaciones WEB 2.0, algunos puristas modifican todo el HTML de una aplicación mediante DOM, creando hijos, nodos, etc. Yo me declino más por el innerHTML, por dos razones, una es que es más facil de usar y la otra es que da más juego para usar cosas como ajaxslt. </p>
+<p>Además de prototype hay muchas otras plataformas que ocupan mucho menos, cada una tiene sus pros y sus contras. Tenemos DOJO, Yahoo UI, MOO, aculo script,…</p>
+<p>Desde mi punto de vista, la más completa es DOJO, pero también la más pesada, os recomiendo que le echeis un ojo a eso y a ajaxslt, la unión de estas dos herramientas es muy potente.</p>
+<p><a href="http://blog.intelligenia.com/search/label/web2.0" rel="nofollow">http://blog.intelligenia.com/search/label/web2.0</a></p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Limpiar valores en un formulario — yukei.net">
+<cite><a href="http://www.yukei.net/2007/03/limpiar-valores-en-un-formulario/" rel="external nofollow" class="url">Limpiar valores en un formulario — yukei.net</a></cite>
+<p>[…] Introducción a la manipulación del DOM mediante Javascript […]</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de RetroFOX">
+<cite><a href="http://blog.cabezaderato.com.ar/" rel="external nofollow" class="url">RetroFOX</a></cite>
+<p>Creo que uno de los mejores framworks es MooTools. Me parece que vale la pena.</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Luis">
+<cite>Luis</cite>
+<p>Muy bueno, te felicito!</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Joel Camarillo">
+<cite>Joel Camarillo</cite>
+<p>Como estas Maikel mira tengo una duda estoy creando una tabla dinamica en php y tiene inputs.La pregunta es como puedo hace para agregarle unos atributos en javascript al momento de crearlo</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Maikel">
+<cite>Maikel</cite>
+<p>Joel Camarillo:<br>
+Como práctica general cuando se genera una página dinámica e incluso estática es aconsejable hacer los cambios sobre el DOM una vez cargada la página. Colocándose las acciones en el evento onLoad del elemento window. Particularmente para tu ejemplo, debes tener una manera de identificar los elementos input para poder recuperarlos ya se por nombre de la etiqueta (si son únicas en la página), id (id1, id2, i…,idn) o mejor aun una clase CSS. Todas estas tareas pueden realizarse de manera muy fácil mediante el framework javascript Prototype <a href="http://www.prototypejs.org/" rel="nofollow">http://www.prototypejs.org</a>.<br>
+( Event.observe, $$)</p>
+<p> Saludos</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de AplicacionesWeb » Archivos del Blog » 10 funciones imprescindibles en Javascript">
+<cite><a href="http://blog.aplicacionesweb.cl/2007/06/25/10-funciones-imprescindibles-en-javascript/" rel="external nofollow" class="url">AplicacionesWeb » Archivos del Blog » 10 funciones imprescindibles en Javascript</a></cite>
+<p>[…] con el lenguaje JavaScript no podremos hacer nada en una página web. También necesitaremos el DOM (Document Object Model). El DOM es una estructura de objetos que representa absolutamente todos los […]</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de johny">
+<cite>johny</cite>
+<p>Mi Amigo, como hago para crear en una pagina la adicion de comentario y que lo muestre como es este.<br>
+gracias.</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Calderón">
+<cite>Calderón</cite>
+<p>Prototype es un proyecto prácticamente abandonado. Pero siempre nos quedará mootools <img draggable="false" class="emoji" alt="😉" src="./Introducción a la manipulación del DOM mediante Javascript_files/1f609.png"></p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Tutoriales DOM en Javascript » Innova Desarrollos informáticos">
+<cite><a href="http://www.balearsinnovacio.com/blog/?p=125" rel="external nofollow" class="url">Tutoriales DOM en Javascript » Innova Desarrollos informáticos</a></cite>
+<p>[…] que pueden ayudar a entender lo fácil que resulta acceder a esta estructura en modo árbol: Introducción a la manipulación del DOM mediante Javascript (vía Maestros del […]</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de colombia">
+<cite><a href="http://www.imaginacolombia.com/" rel="external nofollow" class="url">colombia</a></cite>
+<p>Bueno, aunque anteriormente en algunos proyectos he estado utilizando el prototype dado que hay muchisima documentacion al respecto, algo a tener en cuenta es que Joomla 1.5 tiene por defecto a Mootools como framework de javascript, asi que para los que utilizamos Joomla como plataforma inevitablemente debemos empezar a usar este framework.</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de colombia">
+<cite><a href="http://www.imaginacolombia.com/" rel="external nofollow" class="url">colombia</a></cite>
+<p>Otra cosa, en la comparativa de velocidad que esta rondando por ahi con los frameworks mootools tambien es el mejor asi que otro punto a favor. Recomendado</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Daniel Méndez">
+<cite>Daniel Méndez</cite>
+<p>Muy bien estructurado la teoria con los ejmplos práticos, quisiera saber si tenes un ejemplo de validador de formularios de varias páginas</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Nico">
+<cite>Nico</cite>
+<p>Yo recomiendo JQuery.</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Darwin Murillo">
+<cite><a href="http://hola/" rel="external nofollow" class="url">Darwin Murillo</a></cite>
+<p>Son muy buenas las instrucciones pero necesito saber como validar codigo javascript en el navegador mozilla. por que tengo un sitema con instruciones javascript que el mozilla no las lee.</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Influx Desarrollo Digital » Blog Archive » Jquery">
+<cite><a href="http://www.influxmedia.es/?p=58" rel="external nofollow" class="url">Influx Desarrollo Digital » Blog Archive » Jquery</a></cite>
+<p>[…] cualquier modificación en la página o la selección de cualquier elemento necesita que el árbol DOM de la página se haya construido por completo, y por tanto, que esté disponible el código HTML de […]</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de moises barria">
+<cite>moises barria</cite>
+<p>amigo tengo una pagina que descarga un archivo ftp del servidor mediante un boton ejecutar y otro que lo sube mediante otro boton ejecutar , bueno la cosa es que demora bastante mientras se le de cualquier click a cualquier boton, quisiera que mientras le de click a cualquiera de los 2 botonos aparesca una imagen mientras baja o sube el documento , cuando se termina de bajar o subir desparesca la imagen , en el jsp va controlando con funciones javascriptuna ejecuta del primer boton y otra ejecutar del segundo que lboton, llama a una funciones que viene de la clase java , esa clase manda unos parametros que recoje el jsp uno si se ejecuta correctamente y bueno las cosa es lo de la imagen a ver si me ayudas …………</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de emeldo quiros">
+<cite>emeldo quiros</cite>
+<p>necesito una clase java que instancia unos metodos de escritura</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de yorker">
+<cite>yorker</cite>
+<p>Pienso que esta muy bueno el articulo, explica de manera eficiente como se trabaja con DOM, a mi ahora mismo me sirve para mi proyecto final de programacion web.</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Maikel González">
+<cite><a href="http://www.htmleando.com/" rel="external nofollow" class="url">Maikel González</a></cite>
+<p>Agradezco mucho las notas.<br>
+Hay otro proyecto que está tomando auge es <a href="http://extjs.com/" rel="nofollow">http://extjs.com</a> (Librería Javascript Ext 2.0) siendo compatible en los siguientes navegadores:</p>
+<p> * Internet Explorer 6+<br>
+* FireFox 1.5+ (PC, Mac)<br>
+* Safari 2+<br>
+* Opera 9+ (PC, Mac)</p>
+<p>Donde los elementos son el corazón de Ext, por ejemplo:<br>
+El equivalente a la forma tradicional para acceder a un elemento de la forma:</p>
+<p>var myDiv= document.getElementById(“myDiv”);</p>
+<p>sería:</p>
+<p>var myDiv = Ext.get(‘myDiv’);</p>
+<p>Posee además un poderosa librería para acceder al DOM llamada DomQuery, la misma puede ser usada de manera independiente.<br>
+Al igual que Prototype es poderosa en el manejo de Eventos y Ajax.</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Mudska Studio Blog Lab » CSS 3: más social que nunca">
+<cite><a href="http://www.mudska.com/blab/?p=23" rel="external nofollow" class="url">Mudska Studio Blog Lab » CSS 3: más social que nunca</a></cite>
+<p>[…] cambios sustanciales serían un mejor modelo para trabajar CSS con DOM incluyendo la posibilidad de cambiar valores a las propiedades, uso de NAMESPACES como XML y la […]</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Raul">
+<cite>Raul</cite>
+<p>Hola queria preguntar como puedo acceder al DOM de una url externa (por ejemplo la loteria) para almacenar algun dato tomado de ella en mi base de datos (por ejemplo los numeros que salieron hoy). Gracias <img draggable="false" class="emoji" alt="😀" src="./Introducción a la manipulación del DOM mediante Javascript_files/1f600.png"></p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de matias">
+<cite>matias</cite>
+<p>Sin palabras, SP como decimos en Uruguay, grandiosa obra. Saludos</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de arturo bustamante">
+<cite><a href="http://gestorescontenido.blogspot.com/" rel="external nofollow" class="url">arturo bustamante</a></cite>
+<p>Me gusto la manera en que explicas como manipular dom me agradaron los ejemplos yo apenas me estoy iniciando en esto gracias por el aporte</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de » Manipulación del DOM mediante Javascript">
+<cite><a href="http://www.pcanete.com.ar/manipulacion-del-dom-mediante-javascript/" rel="external nofollow" class="url">» Manipulación del DOM mediante Javascript</a></cite>
+<p>[…] Introducción a la manipulación del DOM mediante Javascript: otro de esos para coleccionar. […]</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Manuel Benítez">
+<cite><a href="http://www.mktgweb.net/" rel="external nofollow" class="url">Manuel Benítez</a></cite>
+<p>Excelente artículo.<br>
+Saludos,<br>
+M. Benítez</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de jose">
+<cite>jose</cite>
+<p>muy bueno!!!!!!!</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de armando">
+<cite><a href="http://ajjjjjjkjkjkjkjkh/" rel="external nofollow" class="url">armando</a></cite>
+<p>Este ejemplo se analizará de manera abreviada dejando un análisis detallado por parte del lector. Se tiene dos variables globales, contador y diapositivas, la primera para indicar la diapositiva que se está mostrando actualmente y la última para almacenar en un arreglo el conjunto de diapositivas a mostrar.</p>
+<p>La función inicio() remueve todos elementos img y los almacena. Es de notar que todo nodo hijo del nodo con id diapositivas parásito (ejemplo: salto de línea) es eliminado para evitar un mal funcionamiento posterior.</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Isabel">
+<cite>Isabel</cite>
+<p>Muy bien explicado el DOM, me ha servido de gran ayuda.</p>
+<p>Solo tengo una pregunta, cuando carga el contenido, lo carga en formato texto plano, pero si he cargado enlaces, como puedo hacer para que estén activos?</p>
+<p>Es decir, en la página me sale como texto plano por ejemplo: <a href="http://www.maestrosdelweb.com/dom/pagina.html" rel="nofollow">texto que enlaza</a></p>
+<p>Gracias de antemano</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Alex">
+<cite>Alex</cite>
+<p>Muy bueno el artículo..</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de VÍCTOR">
+<cite>VÍCTOR</cite>
+<p>Bien hermano, excelente esta explicación del DOM, me sirvió mucho, y es que se me aproxima un examen de esto, y me aclaraste algunas cosas!!!!!!</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Juan">
+<cite>Juan</cite>
+<p>Hola. Muy completo el articulo.<br>
+Pero estoy renegando con una aplicación web en la cual quiero agregarle mediante DOM – JAVASCRIPT el evento onclik a un boton que ya fue AGREGADO en un formulario. Alguien me tira una mano? </p>
+<p>Gracias!!!!</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de invlol">
+<cite>invlol</cite>
+<p>Muy bueno el articulo, la verdad lo explicas detenidamente.</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Nat">
+<cite>Nat</cite>
+<p>Soy una señora que sabe muy poco de computacion, pero necesito habilitar JavaScript para poder ver unos comentarios (eso dice la pagina para ver todos los comentarios) no se como se hace, me podrias ayudar? te lo agradecere!!! Ayuda a una señora con un minimo de conocimiento en esto. Nat</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de AJAX « Sabelita&#39;s Blog">
+<cite><a href="http://sabelita.wordpress.com/2010/08/03/28/" rel="external nofollow" class="url">AJAX « Sabelita's Blog</a></cite>
+<p>[…] Exhibición e interacción dinámicas usando el Document Object Model […]</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de ¿Qué es Javascript? « Ricardo Glazman | Blog tecnológico">
+<cite><a href="http://ricardoglazmanblog.wordpress.com/2010/09/02/%c2%bfque-es-javascript/" rel="external nofollow" class="url">¿Qué es Javascript? « Ricardo Glazman | Blog tecnológico</a></cite>
+<p>[…] de 1997 y luego también por la “Internacional Organization for Standardization” (ISO). El DOM por sus siglas en inglés “Modelo de Objetos del Documento” fue diseñado para evitar […]</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de 10 funciones imprescindibles en Javascript « Diseño web y markting online. Recursos web gratuitos">
+<cite><a href="http://www.siprocor.com/siprocor/blog/javascript/10-funciones-javascript/" rel="external nofollow" class="url">10 funciones imprescindibles en Javascript « Diseño web y markting online. Recursos web gratuitos</a></cite>
+<p>[…] con el lenguaje JavaScript no podremos hacer nada en una página web. También necesitaremos el DOM (Document Object Model). El DOM es una estructura de objetos que representa absolutamente todos los […]</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Jose llucia">
+<cite><a href="http://www.sierracadiz.net/" rel="external nofollow" class="url">Jose llucia</a></cite>
+<p>Buenissimo! … GRACIAS</p>
+</li>
+<li>
+<img src="./Introducción a la manipulación del DOM mediante Javascript_files/avatar-default-48px.png" alt="Avatar de Jose Aguiñaga">
+ <cite>Jose Aguiñaga</cite>
+<p>Muy buena la explicación para un novato apenas en DOM como yo, muchas gracias y felicidades.</p>
+<p>Viendo los comentarios solo me queda adentrarme en esos frameworks que no se nada de ellos, pero por el comentario que vi de Calderon que Prototype “esta practicamente abandonado” creo que seria mejor que le hechara un vistazo a Mootools, no?</p>
+</li>
+</ul>
+</div>
+</section>
+</div> 
+
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P5K95S"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script type="text/javascript">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-P5K95S');</script>
+
+
+
+<iframe name="oauth2relay461370811" id="oauth2relay461370811" src="./Introducción a la manipulación del DOM mediante Javascript_files/postmessageRelay.html" tabindex="-1" aria-hidden="true" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe><script type="text/javascript" id="">(function(b,a,d){function e(){b.hj.documentHtml=a.documentElement.outerHTML;c=a.createElement("script");c.async=1;c.src="//static.hotjar.com/c/hotjar-9361.js?sv\x3d2";a.getElementsByTagName("head")[0].appendChild(c)}var f=d.prototype.open,g=d.prototype.send,c;b.hj=b.hj||function(){(b.hj.q=b.hj.q||[]).push(arguments)};b._hjSettings={hjid:9361,hjsv:2};"interactive"===a.readyState||"complete"===a.readyState||"loaded"===a.readyState?e():a.addEventListener&&a.addEventListener("DOMContentLoaded",e,!1);
+!b._hjPlayback&&a.addEventListener&&(d.prototype.open=function(a,b,h,d,c){this._u=b;f.call(this,a,b,h,d,c)},d.prototype.send=function(a){function d(){4===c.readyState&&b.hj("_xhr",c._u,c.status,c.response)}var c=this;this.addEventListener("readystatechange",d,!1);g.call(this,a)})})(window,document,window.XMLHttpRequest);</script><iframe scrolling="no" frameborder="0" allowtransparency="true" src="./Introducción a la manipulación del DOM mediante Javascript_files/widget_iframe.31bcb7ae210ce3a448d2ffc6cde7ba34.html" title="Twitter settings iframe" style="display: none;"></iframe><iframe name="_hjRemoteVarsFrame" title="_hjRemoteVarsFrame" id="_hjRemoteVarsFrame" style="display: none !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important;" src="./Introducción a la manipulación del DOM mediante Javascript_files/rcj-da10bd4908deb9e19dfde013ec3fe4ff.html"></iframe><div id="ads"></div><iframe id="rufous-sandbox" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;" title="Twitter analytics iframe" src="./Introducción a la manipulación del DOM mediante Javascript_files/saved_resource.html"></iframe></body></html>

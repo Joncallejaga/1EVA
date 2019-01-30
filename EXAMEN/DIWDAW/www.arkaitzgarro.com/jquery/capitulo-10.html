@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="14/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Organización del Código | jQuery</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">jQuery</a></h1>
+        <p class="span3">
+                        <a href="capitulo-9.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-11.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="organizacion-del-codigo"><span>Capítulo 10</span> Organización del Código</h1>
+        <h2 id="introduccion-6">10.1 Introducción</h2>
+
+<p>Cuando se emprende la tarea de realizar aplicaciones complejas del lado del cliente, es necesario considerar la forma en que se organizará el código. Este capitulo está dedicado a analizar algunos patrones de organización de código para utilizar en una aplicación realizada con jQuery. Además se explorará el sistema de gestión de dependencias de RequireJS.</p>
+
+<h3 id="conceptos-clave-2">10.1.1 Conceptos Clave</h3>
+
+<p>Antes de comenzar con los patrones de organización de código, es importante entender algunos conceptos clave.</p>
+
+<ul>
+<li>El código debe estar divido en unidades funcionales — módulos, servicios, etc. Y se debe evitar la tentación de tener todo en un único bloque <code>$(document).ready()</code>. Este concepto se conoce como encapsulación.</li>
+<li>No repetir código. Identificar piezas similares y utilizar técnicas de heredación.</li>
+<li>A pesar de la naturaleza de jQuery, no todas las aplicaciones JavaScript trabajan (o tienen la necesidad de poseer una representación) en el DOM.</li>
+<li>Las unidades de funcionalidad deben tener una articulación flexible (en inglés <a href="http://en.wikipedia.org/wiki/Loose_coupling">loosely coupled</a>) — es decir, una unidad de funcionalidad debe ser capaz de existir por si misma y la comunicación con otras unidades debe ser a través de un sistema de mensajes como los eventos personalizados o pub/sub. Por otro lado, siempre que sea posible, de debe mantener alejada la comunicación directa entre unidades funcionales.</li>
+</ul>
+
+<p>El concepto de articulación flexible puede ser especialmente problemático para desarrolladores que hacen su primera incursión en aplicaciones complejas. Por lo tanto, si usted esta empezando a crear aplicaciones, solamente sea consciente de este concepto.</p>
+
+<h2 id="encapsulacion">10.2 Encapsulación</h2>
+
+<p>El primer paso para la organización del código es separar la aplicación en distintas piezas.</p>
+
+<p>Muchas veces, este esfuerzo suele ser suficiente para mantener al código en orden.</p>
+
+<h3 id="el-objeto-literal">10.2.1 El Objeto Literal</h3>
+
+<p>Un objeto literal es tal vez la manera más simple de encapsular código relacionado. Este no ofrece ninguna privacidad para propiedades o métodos, pero es útil para eliminar funciones anónimas, centralizar opciones de configuración, y facilitar el camino para la reutilización y refactorización.</p>
+
+<p><strong>Un objeto literal</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myFeature <span class="sy0">=</span> <span class="br0">&#123;</span>
+    myProperty <span class="sy0">:</span> <span class="st0">'hello'</span><span class="sy0">,</span>
+&nbsp;
+    myMethod <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        console.<span class="me1">log</span><span class="br0">&#40;</span>myFeature.<span class="me1">myProperty</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    init <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span>settings<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        myFeature.<span class="me1">settings</span> <span class="sy0">=</span> settings<span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    readSettings <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        console.<span class="me1">log</span><span class="br0">&#40;</span>myFeature.<span class="me1">settings</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+myFeature.<span class="me1">myProperty</span><span class="sy0">;</span> <span class="co1">// 'hello'</span>
+myFeature.<span class="me1">myMethod</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// registra 'hello'</span>
+myFeature.<span class="me1">init</span><span class="br0">&#40;</span><span class="br0">&#123;</span> foo <span class="sy0">:</span> <span class="st0">'bar'</span> <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+myFeature.<span class="me1">readSettings</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// registra { foo : 'bar' }</span></pre>
+</div>
+
+<p>El objeto posee una propiedad y varios métodos, los cuales son públicos (es decir, cualquier parte de la aplicación puede verlos).  ¿Cómo se puede aplicar este patrón con jQuery? Por ejemplo, en el siguiente código escrito en el estilo tradicional:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// haciendo click en un item de la lista se carga cierto contenido,</span>
+<span class="co1">// luego utilizando el ID de dicho item se ocultan</span>
+<span class="co1">// los items aledaños</span>
+$<span class="br0">&#40;</span>document<span class="br0">&#41;</span>.<span class="me1">ready</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  $<span class="br0">&#40;</span><span class="st0">'#myFeature li'</span><span class="br0">&#41;</span>
+    .<span class="me1">append</span><span class="br0">&#40;</span><span class="st0">'&lt;div/&gt;'</span><span class="br0">&#41;</span>
+    .<span class="me1">click</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="kw1">var</span> $this <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+      <span class="kw1">var</span> $div <span class="sy0">=</span> $this.<span class="me1">find</span><span class="br0">&#40;</span><span class="st0">'div'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+      $div.<span class="me1">load</span><span class="br0">&#40;</span><span class="st0">'foo.php?item='</span> <span class="sy0">+</span>
+        $this.<span class="me1">attr</span><span class="br0">&#40;</span><span class="st0">'id'</span><span class="br0">&#41;</span><span class="sy0">,</span>
+        <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+          $div.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+          $this.<span class="me1">siblings</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            .<span class="me1">find</span><span class="br0">&#40;</span><span class="st0">'div'</span><span class="br0">&#41;</span>.<span class="me1">hide</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+      <span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Si el ejemplo mostrado representa el 100% de la aplicación, es conveniente dejarlo como esta, ya que no amerita hacer una reestructuración. En cambio, si la pieza es parte de una aplicación más grande, estaría bien separar dicha funcionalidad de otras no relacionadas. Por ejemplo, es conveniente mover la URL a la cual se hace la petición fuera del código y pasarla al área de configuración. También romper la cadena de métodos para hacer luego más fácil la modificación.</p>
+
+<p><strong>Utilizar un objeto literal para una funcionalidad jQuery</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myFeature <span class="sy0">=</span> <span class="br0">&#123;</span>
+    init <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span>settings<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        myFeature.<span class="me1">config</span> <span class="sy0">=</span> <span class="br0">&#123;</span>
+            $items <span class="sy0">:</span> $<span class="br0">&#40;</span><span class="st0">'#myFeature li'</span><span class="br0">&#41;</span><span class="sy0">,</span>
+            $container <span class="sy0">:</span> $<span class="br0">&#40;</span><span class="st0">'&lt;div class=&quot;container&quot;&gt;&lt;/div&gt;'</span><span class="br0">&#41;</span><span class="sy0">,</span>
+            urlBase <span class="sy0">:</span> <span class="st0">'/foo.php?item='</span>
+        <span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="co1">// permite sobreescribir la configuración predeterminada</span>
+        $.<span class="me1">extend</span><span class="br0">&#40;</span>myFeature.<span class="me1">config</span><span class="sy0">,</span> settings<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        myFeature.<span class="me1">setup</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    setup <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        myFeature.<span class="me1">config</span>.$items
+            .<span class="me1">each</span><span class="br0">&#40;</span>myFeature.<span class="me1">createContainer</span><span class="br0">&#41;</span>
+            .<span class="me1">click</span><span class="br0">&#40;</span>myFeature.<span class="me1">showItem</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    createContainer <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">var</span> $i <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">,</span>
+            $c <span class="sy0">=</span> myFeature.<span class="me1">config</span>.$container.<span class="me1">clone</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+                     .<span class="me1">appendTo</span><span class="br0">&#40;</span>$i<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">        $i.data('container', $c);
+    },
+&nbsp;
+    buildUrl : function() {
+        return myFeature.config.urlBase +
+               myFeature.$currentItem.attr('id');
+    },
+&nbsp;
+    showItem : function() {
+        var myFeature.$currentItem = $(this);
+        myFeature.getContent(myFeature.showContent);
+    },
+&nbsp;
+    getContent : function(callback) {
+        var url = myFeature.buildUrl();
+        myFeature.$currentItem
+            .data('container').load(url, callback);
+    },
+&nbsp;
+    showContent : function() {
+        myFeature.$currentItem
+            .data('container').show();
+        myFeature.hideContent();
+    },
+&nbsp;
+    hideContent : function() {
+        myFeature.$currentItem.siblings()
+            .each(function() {
+                $(this).data('container').hide();
+            });
+    }
+};
+&nbsp;
+$(document).ready(myFeature.init);</pre>
+</div>
+
+<p>La primera característica a notar es que el código es más largo que el original — como se dijo anteriormente, si este fuera el alcance de la aplicación, utilizar un objeto literal seria probablemente una exageración.</p>
+
+<p>Con la nueva organización, las ventajas obtenidas son:</p>
+
+<ul>
+<li>Separación de cada funcionalidad en pequeños métodos. En un futuro, si se quiere cambiar la forma en que el contenido se muestra, será claro en donde habrá que hacerlo. En el código original, este paso es mucho más difícil de localizar.</li>
+<li>Se eliminaron los usos de funciones anónimas.</li>
+<li>Las opciones de configuración se movieron a una ubicación central.</li>
+<li>Se eliminaron las limitaciones que poseen las cadenas de métodos, haciendo que el código sea más fácil para refactorizar, mezclar y reorganizar.</li>
+</ul>
+
+<p>Por sus características, la utilización de objetos literales permiten una clara mejora para tramos largos de código insertados en un bloque <code>$(document).ready()</code>. Sin embargo, no son más avanzados que tener varias declaraciones de funciones dentro de un bloque <code>$(document).ready()</code>.</p>
+
+<h3 id="el-patron-modular">10.2.2 El Patrón Modular</h3>
+
+<p>El patrón modular supera algunas limitaciones del objeto literal, ofreciendo privacidad para variables y funciones, exponiendo a su vez (si se lo desea) una API pública.</p>
+
+<p><strong>El patrón modular</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> feature <span class="sy0">=</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+    <span class="co1">// variables y funciones privadas</span>
+    <span class="kw1">var</span> privateThing <span class="sy0">=</span> <span class="st0">'secret'</span><span class="sy0">,</span>
+        publicThing <span class="sy0">=</span> <span class="st0">'not secret'</span><span class="sy0">,</span>
+&nbsp;
+        changePrivateThing <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            privateThing <span class="sy0">=</span> <span class="st0">'super secret'</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+        sayPrivateThing <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            console.<span class="me1">log</span><span class="br0">&#40;</span>privateThing<span class="br0">&#41;</span><span class="sy0">;</span>
+            changePrivateThing<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="co1">// API publica</span>
+    <span class="kw1">return</span> <span class="br0">&#123;</span>
+        publicThing <span class="sy0">:</span> publicThing<span class="sy0">,</span>
+        sayPrivateThing <span class="sy0">:</span> sayPrivateThing
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+feature.<span class="me1">publicThing</span><span class="sy0">;</span> <span class="co1">// registra 'not secret'</span>
+&nbsp;
+feature.<span class="me1">sayPrivateThing</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">// registra 'secret' y cambia el valor</span>
+<span class="co1">// de privateThing</span></pre>
+</div>
+
+<p>En el ejemplo, se autoejecuta una función anónima la cual devuelve un objeto. Dentro de la función, se definen algunas variables. Debido a que ellas son definidas dentro de la función, desde afuera no se tiene acceso a menos que se pongan dentro del objeto que se devuelve. Esto implica que ningún código fuera de la función tiene acceso a la variable <code>privateThing</code> o a la función <code>sayPrivateThing</code>. Sin embargo, <code>sayPrivateThing</code> posee acceso a <code>privateThing</code> y <code>changePrivateThing</code> debido a estar definidos en el mismo alcance.</p>
+
+<p>El patrón es poderoso debido a que permite tener variables y funciones privadas, exponiendo una API limitada consistente en devolver propiedades y métodos de un objeto.</p>
+
+<p>A continuación se muestra una revisión del ejemplo visto anteriormente, con las mismas características, pero exponiendo un único método público del modulo, <code>showItemByIndex()</code>.</p>
+
+<p><strong>Utilizar el patrón modular para una funcionalidad jQuery</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span>document<span class="br0">&#41;</span>.<span class="me1">ready</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> feature <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+        <span class="kw1">var</span> $items <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="st0">'#myFeature li'</span><span class="br0">&#41;</span><span class="sy0">,</span>
+            $container <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="st0">'&lt;div class=&quot;container&quot;&gt;&lt;/div&gt;'</span><span class="br0">&#41;</span><span class="sy0">,</span>
+            $currentItem<span class="sy0">,</span>
+&nbsp;
+            urlBase <span class="sy0">=</span> <span class="st0">'/foo.php?item='</span><span class="sy0">,</span>
+&nbsp;
+            createContainer <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">var</span> $i <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">,</span>
+                    $c <span class="sy0">=</span> $container.<span class="me1">clone</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">appendTo</span><span class="br0">&#40;</span>$i<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+                $i.<span class="me1">data</span><span class="br0">&#40;</span><span class="st0">'container'</span><span class="sy0">,</span> $c<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+            buildUrl <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">return</span> urlBase <span class="sy0">+</span> $currentItem.<span class="me1">attr</span><span class="br0">&#40;</span><span class="st0">'id'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+            showItem <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">var</span> $currentItem <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                getContent<span class="br0">&#40;</span>showContent<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+            showItemByIndex <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>idx<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                $.<span class="me1">proxy</span><span class="br0">&#40;</span>showItem<span class="sy0">,</span> $items.<span class="kw1">get</span><span class="br0">&#40;</span>idx<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+            getContent <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>callback<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                $currentItem.<span class="me1">data</span><span class="br0">&#40;</span><span class="st0">'container'</span><span class="br0">&#41;</span>.<span class="me1">load</span><span class="br0">&#40;</span>buildUrl<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> callback<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+            showContent <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                $currentItem.<span class="me1">data</span><span class="br0">&#40;</span><span class="st0">'container'</span><span class="br0">&#41;</span>.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                hideContent<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+            hideContent <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                $currentItem.<span class="me1">siblings</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+                    .<span class="me1">each</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span>.<span class="me1">data</span><span class="br0">&#40;</span><span class="st0">'container'</span><span class="br0">&#41;</span>.<span class="me1">hide</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+        $items
+            .<span class="me1">each</span><span class="br0">&#40;</span>createContainer<span class="br0">&#41;</span>
+            .<span class="me1">click</span><span class="br0">&#40;</span>showItem<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">return</span> <span class="br0">&#123;</span> showItemByIndex <span class="sy0">:</span> showItemByIndex <span class="br0">&#125;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    feature.<span class="me1">showItemByIndex</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="gestion-de-dependencias">10.3 Gestión de Dependencias</h2>
+
+<blockquote>
+  <p><strong>Nota</strong></p>
+  
+  <p>Esta sección esta basada en la excelente <a href="http://requirejs.org/docs/jquery.html"> documentación de RequireJS</a> y es utilizada con el permiso de James Burke, autor de RequireJS.</p>
+</blockquote>
+
+<p>Cuando un proyecto alcanza cierto tamaño, comienza a ser difícil el manejo de los módulos de una aplicación, ya que es necesario saber ordenarlos de forma correcta, y comenzar a combinarlos en un único archivo para lograr la menor cantidad de peticiones. También es posible que se quiera cargar código "al vuelo" luego de la carga de la página.</p>
+
+<p>RequireJS es una herramienta de gestión de dependencias creada por James Burke, la cual ayuda a manejar los módulos, cargarlos en un orden correcto y combinarlos de forma fácil sin tener que realizar ningún cambio. A su vez, otorga una manera fácil de cargar código una vez cargada la página, permitiendo minimizar el tiempo de descarga.</p>
+
+<p>RequireJS posee un sistema modular, que sin embargo, no es necesario seguirlo para obtener sus beneficios. El formato modular de RequireJS permite la escritura de código encapsulado, incorporación de internacionalización (i18n) a los paquetes (para permitir utilizarlos en diferentes lenguajes) e incluso la utilización de servicios JSONP como dependencias.</p>
+
+<h3 id="obtener-requirejs">10.3.1 Obtener RequireJS</h3>
+
+<p>La manera más fácil de utilizar RequireJS con jQuery es descargando <a href="http://requirejs.org/docs/download.html">el paquete de jQuery con RequireJS</a> ya incorporado en él. Este paquete excluye porciones de código que duplican funciones de jQuery. También es útil descargar <a href="http://requirejs.org/docs/release/0.11.0/jquery-require-sample.zip">un ejemplo de proyecto jQuery que utiliza RequireJS</a>.</p>
+
+<h3 id="utilizar-requirejs-con-jquery">10.3.2 Utilizar RequireJS con jQuery</h3>
+
+<p>Utilizar RequireJS es simple, tan solo es necesario incorporar en la página la versión de jQuery que posee RequireJS incorporado y a continuación solicitar los archivos de la aplicación. El siguiente ejemplo asume que tanto jQuery como los otros archivos están dentro de la carpeta <code>scripts/</code>.</p>
+
+<p><strong>Utilizar RequireJS: Un ejemplo simple</strong></p>
+
+<div class="code html">
+<pre class="html5"><span class="sc0">&lt;!DOCTYPE html&gt;</span>
+<span class="sc2">&lt;<span class="kw2">html</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>jQuery+RequireJS Sample Page<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">script</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;scripts/require-jquery.js&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">script</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">script</span>&gt;</span>require([&quot;app&quot;]);<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">script</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">h1</span>&gt;</span>jQuery+RequireJS Sample Page<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h1</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>La llamada a <code>require(["app"])</code> le dice a RequireJS que cargue el archivo <code>scripts/app.js</code>. RequireJS cargará cualquier dependencia pasada a <code>require()</code> sin la extensión <code>.js</code> desde el mismo directorio que en que se encuentra el archivo <code>require-jquery.js</code>, aunque también es posible especificar la ruta de la siguiente forma:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">script</span>&gt;</span>require([&quot;scripts/app.js&quot;]);<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">script</span>&gt;</span></pre>
+</div>
+
+<p>El archivo <code>app.js</code> es otra llamada a <code>require.js</code> para cargar todos los archivos necesarios para la aplicación. En el siguiente ejemplo, <code>app.js</code> solicita dos extensiones <code>jquery.alpha.js</code> y <code>jquery.beta.js</code> (no son extensiones reales, solo ejemplos). Estas extensiones están en la misma carpeta que <code>require-jquery.js</code>:</p>
+
+<p><strong>Un simple archivo JavaScript con dependencias</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">require<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="st0">&quot;jquery.alpha&quot;</span><span class="sy0">,</span> <span class="st0">&quot;jquery.beta&quot;</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">//las extensiones jquery.alpha.js y jquery.beta.js han sido cargadas.</span>
+    $<span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        $<span class="br0">&#40;</span><span class="st0">'body'</span><span class="br0">&#41;</span>.<span class="me1">alpha</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">beta</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="crear-modulos-reusables-con-requirejs">10.3.3 Crear Módulos Reusables con RequireJS</h3>
+
+<p>RequireJS hace que sea fácil definir módulos reusables a través de <code>require.def()</code>. Un modulo RequireJS puede tener dependencias que pueden ser utilizadas para definir un módulo, además de poder devolver un valor — un objeto, una función, u otra cosa — que puede ser incluso utilizado otros módulos.</p>
+
+<p>Si el módulo no posee ninguna dependencia, tan solo se debe especificar el nombre como primer argumento de <code>require.def()</code>. El segundo argumento es un objeto literal que define las propiedades del módulo. Por ejemplo:</p>
+
+<p><strong>Definición de un módulo RequireJS que no posee dependencias</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">require.<span class="me1">def</span><span class="br0">&#40;</span><span class="st0">&quot;my/simpleshirt&quot;</span><span class="sy0">,</span>
+    <span class="br0">&#123;</span>
+        color<span class="sy0">:</span> <span class="st0">&quot;black&quot;</span><span class="sy0">,</span>
+        size<span class="sy0">:</span> <span class="st0">&quot;unisize&quot;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>El ejemplo debe ser guardado en el archivo <code>my/simpleshirt.js</code>.</p>
+
+<p>Si el modulo posee dependencias, es posible especificarlas en el segundo argumento de <code>require.def()</code> a través de un vector) y luego pasar una función como tercer argumento. Esta función será llamada para definir el módulo una vez cargadas todos las dependencias. Dicha función recibe los valores devueltos por las dependencias como un argumento (en el mismo orden en que son requeridas en el vector) y luego la misma debe devolver un objeto que defina el módulo.</p>
+
+<p><strong>Definición de un módulo RequireJS con dependencias</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">require.<span class="me1">def</span><span class="br0">&#40;</span><span class="st0">&quot;my/shirt&quot;</span><span class="sy0">,</span>
+    <span class="br0">&#91;</span><span class="st0">&quot;my/cart&quot;</span><span class="sy0">,</span> <span class="st0">&quot;my/inventory&quot;</span><span class="br0">&#93;</span><span class="sy0">,</span>
+    <span class="kw1">function</span><span class="br0">&#40;</span>cart<span class="sy0">,</span> inventory<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="co1">//devuelve un objeto que define a &quot;my/shirt&quot;</span>
+        <span class="kw1">return</span> <span class="br0">&#123;</span>
+            color<span class="sy0">:</span> <span class="st0">&quot;blue&quot;</span><span class="sy0">,</span>
+            size<span class="sy0">:</span> <span class="st0">&quot;large&quot;</span>
+            addToCart<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                inventory.<span class="me1">decrement</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                cart.<span class="me1">add</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>En este ejemplo, el modulo <code>my/shirt</code> es creado. Este depende de <code>my/cart</code> y <code>my/inventory</code>. En el disco, los archivos están estructurados de la siguiente forma:</p>
+
+<div class="code javascript">
+<pre class="javascript">my<span class="sy0">/</span>cart.<span class="me1">js</span>
+my<span class="sy0">/</span>inventory.<span class="me1">js</span>
+my<span class="sy0">/</span>shirt.<span class="me1">js</span></pre>
+</div>
+
+<p>La función que define <code>my/shirt</code> no es llamada hasta que <code>my/cart</code> y <code>my/inventory</code> hayan sido cargadas, y dicha función recibe como argumentos a los módulos como <code>cart</code> y <code>inventory</code>. El orden de los argumentos de la función debe coincidir con el orden en que las dependencias se requieren en el vector. El objeto devuelto define el módulo <code>my/shirt</code>. Definiendo los módulos de esta forma, <code>my/shirt</code> no existe como un objeto global, ya que múltiples módulos pueden existir en la página al mismo tiempo.</p>
+
+<p>Los módulos no tienen que devolver un objeto; cualquier tipo de valor es permitido.</p>
+
+<p><strong>Definición de un módulo RequireJS que devuelve una función</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">require.<span class="me1">def</span><span class="br0">&#40;</span><span class="st0">&quot;my/title&quot;</span><span class="sy0">,</span>
+    <span class="br0">&#91;</span><span class="st0">&quot;my/dependency1&quot;</span><span class="sy0">,</span> <span class="st0">&quot;my/dependency2&quot;</span><span class="br0">&#93;</span><span class="sy0">,</span>
+    <span class="kw1">function</span><span class="br0">&#40;</span>dep1<span class="sy0">,</span> dep2<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="co1">// devuelve una función para definir &quot;my/title&quot;.</span>
+        <span class="co1">// Este devuelve o establece</span>
+        <span class="co1">// el titulo de la ventana</span>
+        <span class="kw1">return</span> <span class="kw1">function</span><span class="br0">&#40;</span>title<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">return</span> title <span class="sy0">?</span> <span class="br0">&#40;</span>window.<span class="me1">title</span> <span class="sy0">=</span> title<span class="br0">&#41;</span> <span class="sy0">:</span> window.<span class="me1">title</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Solo un módulo debe ser requerido por archivo JavaScript.</p>
+
+<h3 id="optimizar-el-codigo-con-las-herramientas-de-requirejs">10.3.4 Optimizar el Código con las Herramientas de RequireJS</h3>
+
+<p>Una vez incorporado RequireJS para el manejo de dependencias, la optimización del código es muy fácil. Descargue el paquete de RequireJS y colóquelo en cualquier lugar, preferentemente fuera del área de desarrollo web. Para los propósitos de este ejemplo, el paquete de RequireJS esta ubicado en una carpeta paralela al directorio <code>webapp</code> (la cual contiene la página HTML y todos los archivos JavaScript de la aplicación). La estructura de directorios es:</p>
+
+<div class="code javascript">
+<pre class="javascript">requirejs<span class="sy0">/</span> <span class="br0">&#40;</span>utilizado para ejecutar las herramientas<span class="br0">&#41;</span>
+webapp<span class="sy0">/</span>app.<span class="me1">html</span>
+webapp<span class="sy0">/</span>scripts<span class="sy0">/</span>app.<span class="me1">js</span>
+webapp<span class="sy0">/</span>scripts<span class="sy0">/</span>require<span class="sy0">-</span>jquery.<span class="me1">js</span>
+webapp<span class="sy0">/</span>scripts<span class="sy0">/</span>jquery.<span class="me1">alpha</span>.<span class="me1">js</span>
+webapp<span class="sy0">/</span>scripts<span class="sy0">/</span>jquery.<span class="me1">beta</span>.<span class="me1">js</span></pre>
+</div>
+
+<p>Luego, en la carpeta en donde se encuentran <code>require-jquery.js</code> y <code>app.js</code>, crear un archivo llamado <code>app.build.js</code> con el siguiente contenido:</p>
+
+<p><strong>Archivo de configuración para las herramientas de optimización de RequireJS</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="br0">&#123;</span>
+    appDir<span class="sy0">:</span> <span class="st0">&quot;../&quot;</span><span class="sy0">,</span>
+    baseUrl<span class="sy0">:</span> <span class="st0">&quot;scripts/&quot;</span><span class="sy0">,</span>
+    dir<span class="sy0">:</span> <span class="st0">&quot;../../webapp-build&quot;</span><span class="sy0">,</span>
+    <span class="co1">//Comentar la siguiente línea si se desea</span>
+    <span class="co1">//minificar el código por el compilador</span>
+    <span class="co1">//en su modo &quot;simple&quot;</span>
+    optimize<span class="sy0">:</span> <span class="st0">&quot;none&quot;</span><span class="sy0">,</span>
+&nbsp;
+    modules<span class="sy0">:</span> <span class="br0">&#91;</span>
+        <span class="br0">&#123;</span>
+            name<span class="sy0">:</span> <span class="st0">&quot;app&quot;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#93;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Para utilizar la herramienta, es necesario tener instalado Java 6. <a href="http://code.google.com/closure/compiler/">Closure Compiler</a> es utilizado para la minificación del código (en caso que <code>optimize: "none"</code> esté comentado).</p>
+
+<p>Para comenzar a procesar los archivos, abrir una ventana de comandos, dirigirse al directorio <code>webapp/scripts</code> y ejecutar:</p>
+
+<div class="code javascript">
+<pre class="javascript"># para sistemas que no son windows
+..<span class="sy0">/</span>..<span class="sy0">/</span>requirejs<span class="sy0">/</span>build<span class="sy0">/</span>build.<span class="me1">sh</span> app.<span class="me1">build</span>.<span class="me1">js</span>
+&nbsp;
+# para sistemas windows
+..\..\requirejs\build\build.<span class="me1">bat</span> app.<span class="me1">build</span>.<span class="me1">js</span></pre>
+</div>
+
+<p>Una vez ejecutado, el archivo <code>app.js</code> de la carpeta <code>webapp-build</code> contendrá todo el código de <code>app.js</code> más el de <code>jquery.alpha.js</code> y <code>jquery.beta.js</code>. Si se abre el archivo <code>app.html</code> (también en la carpeta <code>webapp-build</code>) podrá notar que ninguna petición se realiza para cargar <code>jquery.alpha.js</code> y <code>jquery.beta.js</code>.</p>
+
+<h2 id="ejercicios-7">10.4 Ejercicios</h2>
+
+<h3 id="crear-un-modulo-portlet">10.4.1 Crear un Módulo Portlet</h3>
+
+<p>Abra el archivo <code>/ejercicios/portlets.html</code> en el navegador. Realice el ejercicio utilizando el archivo <code>/ejercicios/js/portlets.js</code>. El ejercicio consiste en crear una función creadora de portlet que utilice el patrón modular, de tal manera que el siguiente código funcione:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myPortlet <span class="sy0">=</span> Portlet<span class="br0">&#40;</span><span class="br0">&#123;</span>
+    title <span class="sy0">:</span> <span class="st0">'Curry'</span><span class="sy0">,</span>
+    source <span class="sy0">:</span> <span class="st0">'data/html/curry.html'</span><span class="sy0">,</span>
+    initialState <span class="sy0">:</span> <span class="st0">'open'</span> <span class="co1">// or 'closed'</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+myPortlet.$element.<span class="me1">appendTo</span><span class="br0">&#40;</span><span class="st0">'body'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Cada portlet deberá ser un <code>div</code> con un título, un área de contenido, un botón para abrir/cerrar el portlet, un botón para removerlo y otro para actualizarlo. El portlet devuelto por la función deberá tener la siguiente API pública:</p>
+
+<div class="code javascript">
+<pre class="javascript">myPortlet.<span class="me1">open</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// fuerza a abrir</span>
+myPortlet.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// fuerza a cerrar</span>
+myPortlet.<span class="me1">toggle</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// alterna entre los estados abierto y cerrado</span>
+myPortlet.<span class="me1">refresh</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// actualiza el contenido</span>
+myPortlet.<span class="me1">destroy</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// remueve el portlet de la página</span>
+myPortlet.<span class="me1">setSource</span><span class="br0">&#40;</span><span class="st0">'data/html/onions.html'</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// cambia el código</span></pre>
+</div>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-10.html#organizacion-del-codigo">Organización del Código</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.1</span>
+                        <a class="internal" href="capitulo-10.html#introduccion-6">Introducción</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.2</span>
+                        <a class="internal" href="capitulo-10.html#encapsulacion">Encapsulación</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.3</span>
+                        <a class="internal" href="capitulo-10.html#gestion-de-dependencias">Gestión de Dependencias</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.4</span>
+                        <a class="internal" href="capitulo-10.html#ejercicios-7">Ejercicios</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

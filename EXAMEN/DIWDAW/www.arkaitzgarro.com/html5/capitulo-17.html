@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="28/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>XMLHttpRequest2 | HTML5</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">HTML5</a></h1>
+        <p class="span3">
+                        <a href="capitulo-16.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-18.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="xmlhttprequest2"><span>Capítulo 17</span> XMLHttpRequest2</h1>
+        <p>XMLHttpRequest forma parte de las mejoras incrementales que los creadores de navegadores están implementando a la plataforma base.</p>
+
+<p>XMLHttpRequest de nivel 2 introduce una gran cantidad de nuevas funciones que ponen fin a los problemas de nuestras aplicaciones web, como solicitudes de origen cruzado, eventos de progreso de subidas y compatibilidad con subida/bajada de datos binarios. Esto permite a AJAX trabajar en coordinación con muchas de las API HTML5 más punteras, como API de FileSystem, el API de Web Audio y WebGL.</p>
+
+<h2 id="recuperacion-de-archivos">17.1 Recuperación de archivos</h2>
+
+<p>Recuperar archivos como <code>blob</code> binario era muy complicado con <code>XHR</code>. Técnicamente, no era ni siquiera posible. Un truco que se ha documentado mucho implicaba anular el tipo mime con un conjunto de caracteres definido por el usuario, como se muestra a continuación.</p>
+
+<p>La antigua forma de recuperar una imagen:</p>
+
+<div class="code code">
+<pre class="code">var xhr = new XMLHttpRequest();
+xhr.open('GET', '/path/to/image.png', true);</pre>
+</div>
+
+<div class="code code">
+<pre class="code">// Hack to pass bytes through unprocessed.
+xhr.overrideMimeType('text/plain; charset=x-user-defined');</pre>
+</div>
+
+<div class="code code">
+<pre class="code">xhr.onreadystatechange = function(e) {
+    if (this.readyState == 4 &amp;&amp; this.status == 200) {
+        var binStr = this.responseText;
+            for (var i = 0, len = binStr.length; i &lt; len; ++i) {
+                var c = binStr.charCodeAt(i);
+                //String.fromCharCode(c &amp; 0xff);
+                var byte = c &amp; 0xff;  // byte at offset i
+            }
+        }
+    };</pre>
+</div>
+
+<div class="code code">
+<pre class="code">xhr.send();</pre>
+</div>
+
+<p>Aunque funciona, lo que se obtiene realmente en <code>responseText</code> no es un <code>blob</code> binario, sino una cadena binaria que representa el archivo de imagen. Estamos engañando al servidor para que devuelva los datos sin procesar.</p>
+
+<h2 id="especificacion-de-un-formato-de-respuesta">17.2 Especificación de un formato de respuesta</h2>
+
+<p>En lugar de realizar la acción del ejemplo anterior, vamos a aprovechar las nuevas propiedades de XMLHttpRequest (<code>responseType</code> y <code>response</code>) para indicar al navegador el formato en el que queremos que nos devuelva los datos.</p>
+
+<ul>
+<li><code>xhr.responseType</code>: antes de enviar una solicitud, establece <code>xhr.responseType</code> en <code>text</code>, <code>arraybuffer</code>, <code>blob</code> o <code>document</code>, en función de los datos que necesites. Ten en cuenta que si se establece <code>xhr.responseType = ''</code> (o si se omite), se utilizará la respuesta predeterminada <code>text</code>.</li>
+<li><code>xhr.response</code>: después de una solicitud correcta, la propiedad <code>response</code> de <code>xhr</code> contendrá los datos solicitados como <code>DOMString</code>, <code>ArrayBuffer</code>, <code>Blob</code> o <code>Document</code> (en función del valor establecido para responseType).</li>
+</ul>
+
+<p>Con esto, podemos recuperar la imagen como <code>ArrayBuffer</code> en lugar de como una cadena. Al transferir el búfer al API <code>BlobBuilder</code> se crea un <code>Blob</code>:</p>
+
+<div class="code code">
+<pre class="code">BlobBuilder = window.MozBlobBuilder || window.WebKitBlobBuilder || window.BlobBuilder;</pre>
+</div>
+
+<div class="code code">
+<pre class="code">var xhr = new XMLHttpRequest();
+xhr.open('GET', '/path/to/image.png', true);
+xhr.responseType = 'arraybuffer';</pre>
+</div>
+
+<div class="code code">
+<pre class="code">xhr.onload = function(e) {
+    if (this.status == 200) {
+        var bb = new BlobBuilder();
+        bb.append(this.response); // Note: not xhr.responseText</pre>
+</div>
+
+<div class="code code">
+<pre class="code">        var blob = bb.getBlob('image/png');
+        ...
+    }
+};</pre>
+</div>
+
+<div class="code code">
+<pre class="code">xhr.send();</pre>
+</div>
+
+<p>Si se quiere trabajar directamente con un <code>Blob</code> o no se necesita manipular ni un solo <em>byte</em> del archivo, utilizaremos <code>xhr</code>:</p>
+
+<div class="code code">
+<pre class="code">responseType='blob':
+window.URL = window.URL || window.webkitURL;  // Take care of vendor prefixes.</pre>
+</div>
+
+<div class="code code">
+<pre class="code">var xhr = new XMLHttpRequest();
+xhr.open('GET', '/path/to/image.png', true);
+xhr.responseType = 'blob';</pre>
+</div>
+
+<div class="code code">
+<pre class="code">xhr.onload = function(e) {
+    if (this.status == 200) {
+        var blob = this.response;</pre>
+</div>
+
+<div class="code code">
+<pre class="code">        var img = document.createElement('img');
+        img.onload = function(e) {
+          window.URL.revokeObjectURL(img.src); // Clean up after yourself.
+        };
+        img.src = window.URL.createObjectURL(blob);
+        document.body.appendChild(img);
+        ...
+    }
+};</pre>
+</div>
+
+<div class="code code">
+<pre class="code">xhr.send();</pre>
+</div>
+
+<h2 id="envio-de-datos">17.3 Envío de datos</h2>
+
+<p>Durante algún tiempo, XMLHttpRequest nos ha limitado a enviar datos <code>DOMString</code> o <code>Document</code> (XML). Pero eso se acabó. Se ha anulado un método <code>send()</code> y rediseñado para aceptar todos estos tipos: <code>DOMString, Document, FormData, Blob, File y ArrayBuffer</code>.</p>
+
+<ul>
+<li>Envío de la cadena de datos: <code>xhr.send(domstring)</code></li>
+</ul>
+
+<div class="code code">
+<pre class="code">sendText('test string'); function sendTextNew(txt) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/server', true);
+    xhr.responseType = 'text';
+    xhr.onload = function(e) {
+        if (this.status == 200) {
+            console.log(this.response);
+        }
+    };
+    xhr.send(txt);
+}</pre>
+</div>
+
+<div class="code code">
+<pre class="code">sendText2('test string');</pre>
+</div>
+
+<ul>
+<li>Envío de formularios: <code>xhr.send(formdata)</code></li>
+</ul>
+
+<div class="code code">
+<pre class="code">function sendForm() {
+    var formData = new FormData();
+    formData.append('username', 'johndoe');
+    formData.append('id', 123456);</pre>
+</div>
+
+<div class="code code">
+<pre class="code">    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/server', true);
+    xhr.onload = function(e) { ... };</pre>
+</div>
+
+<div class="code code">
+<pre class="code">    xhr.send(formData);
+}</pre>
+</div>
+
+<p>Por supuesto, no es necesario crear un objeto <code>&lt;form&gt;</code> desde cero. Los objetos <code>FormData</code> se pueden inicializar a partir de un elemento <code>HTMLFormElement</code> de la página. Por ejemplo:</p>
+
+<div class="code code">
+<pre class="code">&lt;form id=&quot;myform&quot; name=&quot;myform&quot; action=&quot;/server&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;username&quot; value=&quot;johndoe&quot;&gt;
+    &lt;input type=&quot;number&quot; name=&quot;id&quot; value=&quot;123456&quot;&gt;
+    &lt;input type=&quot;submit&quot; onclick=&quot;return sendForm(this.form);&quot;&gt;
+&lt;/form&gt;
+function sendForm(form) {
+    var formData = new FormData(form);</pre>
+</div>
+
+<div class="code code">
+<pre class="code">    formData.append('secret_token', '1234567890');</pre>
+</div>
+
+<div class="code code">
+<pre class="code">    var xhr = new XMLHttpRequest();
+    xhr.open('POST', form.action, true);
+    xhr.onload = function(e) { ... };</pre>
+</div>
+
+<div class="code code">
+<pre class="code">    xhr.send(formData);</pre>
+</div>
+
+<div class="code code">
+<pre class="code">    return false; // Prevent page from submitting.
+}</pre>
+</div>
+
+<p>Un formulario HTML puede incluir subidas de archivos (como <code>&lt;input type="file"&gt;</code>) y <code>FormData</code> también. Simplemente se añade el archivo o los archivos y el navegador construirá una solicitud multipart/form-data cuando se ejecute <code>send()</code>:</p>
+
+<div class="code code">
+<pre class="code">function uploadFiles(url, files) {
+    var formData = new FormData();</pre>
+</div>
+
+<div class="code code">
+<pre class="code">    for (var i = 0, file; file = files[i]; ++i) {
+    formData.append(file.name, file);
+    }</pre>
+</div>
+
+<div class="code code">
+<pre class="code">    var xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+    xhr.onload = function(e) { ... };</pre>
+</div>
+
+<div class="code code">
+<pre class="code">    xhr.send(formData);  // multipart/form-data
+}</pre>
+</div>
+
+<div class="code code">
+<pre class="code">document.querySelector('input[type=&quot;file&quot;]').addEventListener('change', function(e) {
+    uploadFiles('/server', this.files);
+}, false);</pre>
+</div>
+
+<h2 id="subida-de-archivos-o-blob">17.4 Subida de archivos o Blob</h2>
+
+<p>También podemos enviar datos de <code>File</code> o <code>Blob</code> con <code>XHR</code>.</p>
+
+<p>En este ejemplo se crea un texto nuevo desde cero con el API <code>lobBuilder y se sube ese</code>Blob` al servidor. El código también configura un controlador para informar al usuario sobre el progreso de la subida:</p>
+
+<div class="code code">
+<pre class="code">&nbsp;
+function upload(blobOrFile) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/server', true);
+    xhr.onload = function(e) { ... };</pre>
+</div>
+
+<div class="code code">
+<pre class="code">    // Listen to the upload progress.
+    var progressBar = document.querySelector('progress');
+    xhr.upload.onprogress = function(e) {
+        if (e.lengthComputable) {
+            progressBar.value = (e.loaded / e.total) * 100;
+            progressBar.textContent = progressBar.value; // Fallback for unsupported browsers.
+        }
+    };</pre>
+</div>
+
+<div class="code code">
+<pre class="code">    xhr.send(blobOrFile);
+}</pre>
+</div>
+
+<p>// Take care of vendor prefixes.
+        BlobBuilder = window.MozBlobBuilder || window.WebKitBlobBuilder || window.BlobBuilder;</p>
+
+<div class="code code">
+<pre class="code">    var bb = new BlobBuilder();
+    bb.append('hello world');</pre>
+</div>
+
+<div class="code code">
+<pre class="code">    upload(bb.getBlob('text/plain'));</pre>
+</div>
+
+<h2 id="subida-de-un-fragmento-de-bytes">17.5 Subida de un fragmento de bytes</h2>
+
+<p>Y por último, podemos enviar <code>ArrayBuffer</code> como la carga de XHR.</p>
+
+<div class="code code">
+<pre class="code">function sendArrayBuffer() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/server', true);
+    xhr.onload = function(e) { ... };</pre>
+</div>
+
+<div class="code code">
+<pre class="code">    var uInt8Array = new Uint8Array([1, 2, 3]);</pre>
+</div>
+
+<div class="code code">
+<pre class="code">    xhr.send(uInt8Array.buffer);
+}</pre>
+</div>
+
+<h2 id="ejemplos-practicos">17.6 Ejemplos prácticos</h2>
+
+<h3 id="como-descargar-y-guardar-archivos-en-el-sistema-de-archivos-html5">17.6.1 Cómo descargar y guardar archivos en el sistema de archivos HTML5</h3>
+
+<p>Supongamos que tienes una galería de imágenes y quieres recuperar un grupo de imágenes para, a continuación, guardarlas localmente con el sistema de archivos HTML5. Una forma de conseguir esto sería solicitar imágenes como <code>ArrayBuffer</code>, crear un <code>Blob</code> a partir de los datos y escribir el blob con <code>FileWriter</code>:</p>
+
+<div class="code code">
+<pre class="code">window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;</pre>
+</div>
+
+<div class="code code">
+<pre class="code">function onError(e) {
+    console.log('Error', e);
+}</pre>
+</div>
+
+<div class="code code">
+<pre class="code">var xhr = new XMLHttpRequest();
+xhr.open('GET', '/path/to/image.png', true);
+xhr.responseType = 'arraybuffer';</pre>
+</div>
+
+<div class="code code">
+<pre class="code">xhr.onload = function(e) {</pre>
+</div>
+
+<div class="code code">
+<pre class="code">    window.requestFileSystem(TEMPORARY, 1024 * 1024, function(fs) {
+        fs.root.getFile('image.png', {create: true}, function(fileEntry) {
+            fileEntry.createWriter(function(writer) {</pre>
+</div>
+
+<div class="code code">
+<pre class="code">            writer.onwrite = function(e) { ... };
+            writer.onerror = function(e) { ... };</pre>
+</div>
+
+<div class="code code">
+<pre class="code">            var bb = new BlobBuilder();
+            bb.append(xhr.response);</pre>
+</div>
+
+<div class="code code">
+<pre class="code">            writer.write(bb.getBlob('image/png'));</pre>
+</div>
+
+<div class="code code">
+<pre class="code">            }, onError);
+        }, onError);
+    }, onError);
+};</pre>
+</div>
+
+<div class="code code">
+<pre class="code">xhr.send();</pre>
+</div>
+
+<h3 id="como-dividir-un-archivo-y-subir-cada-fragmento">17.6.2 Cómo dividir un archivo y subir cada fragmento</h3>
+
+<p>Con las API de archivo, podemos minimizar el trabajo necesario para subir un archivo de gran tamaño. La técnica es dividir el archivo que se va a subir en varios fragmentos, crear un <code>XHR</code> para cada parte y unir los fragmentos en el servidor. Es similar a la forma en que Gmail sube archivos adjuntos tan grandes en tan poco tiempo.</p>
+
+<div class="code code">
+<pre class="code">window.BlobBuilder = window.MozBlobBuilder || window.WebKitBlobBuilder ||
+                    window.BlobBuilder;</pre>
+</div>
+
+<div class="code code">
+<pre class="code">function upload(blobOrFile) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/server', true);
+    xhr.onload = function(e) { ... };
+    xhr.send(blobOrFile);
+}</pre>
+</div>
+
+<div class="code code">
+<pre class="code">document.querySelector('input[type=&quot;file&quot;]').addEventListener('change', function(e) {
+    var blob = this.files[0];</pre>
+</div>
+
+<div class="code code">
+<pre class="code">    const BYTES_PER_CHUNK = 1024 * 1024; // 1MB chunk sizes.
+    const SIZE = blob.size;</pre>
+</div>
+
+<div class="code code">
+<pre class="code">    var start = 0;
+    var end = BYTES_PER_CHUNK;</pre>
+</div>
+
+<div class="code code">
+<pre class="code">    while(start &lt; SIZE) {</pre>
+</div>
+
+<div class="code code">
+<pre class="code">        if ('mozSlice' in blob) {
+            var chunk = blob.mozSlice(start, end);
+        } else {
+            var chunk = blob.webkitSlice(start, end);
+        }</pre>
+</div>
+
+<div class="code code">
+<pre class="code">        upload(chunk);</pre>
+</div>
+
+<div class="code code">
+<pre class="code">        start = end;
+        end = start + BYTES_PER_CHUNK;
+    }
+}, false);</pre>
+</div>
+
+<div class="code code">
+<pre class="code">})();</pre>
+</div>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-17.html#xmlhttprequest2">XMLHttpRequest2</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>17.1</span>
+                        <a class="internal" href="capitulo-17.html#recuperacion-de-archivos">Recuperación de archivos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>17.2</span>
+                        <a class="internal" href="capitulo-17.html#especificacion-de-un-formato-de-respuesta">Especificación de un formato de respuesta</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>17.3</span>
+                        <a class="internal" href="capitulo-17.html#envio-de-datos">Envío de datos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>17.4</span>
+                        <a class="internal" href="capitulo-17.html#subida-de-archivos-o-blob">Subida de archivos o Blob</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>17.5</span>
+                        <a class="internal" href="capitulo-17.html#subida-de-un-fragmento-de-bytes">Subida de un fragmento de bytes</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>17.6</span>
+                        <a class="internal" href="capitulo-17.html#ejemplos-practicos">Ejemplos prácticos</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

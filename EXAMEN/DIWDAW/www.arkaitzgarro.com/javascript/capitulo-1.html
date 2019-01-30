@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="08/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Introducción | JavaScript</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">JavaScript</a></h1>
+        <p class="span3">
+                        <a href="index.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-2.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="introduccion"><span>Capítulo 1</span> Introducción</h1>
+        <h2 id="que-es-javascript">1.1 ¿Qué es JavaScript?</h2>
+
+<p>JavaScript es un lenguaje de programación interpretado, dialecto del estándar ECMAScript. Se define como orientado a objetos, <a href="http://es.wikipedia.org/wiki/Programaci%C3%B3n_basada_en_prototipos">basado en prototipos</a>, <a href="http://es.wikipedia.org/wiki/Programaci%C3%B3n_imperativa">imperativo</a>, débilmente tipado y dinámico.</p>
+
+<p>Se utiliza principalmente en el lado del cliente, implementado como parte de un navegador web permitiendo crear interacción con el usuario y páginas web dinámicas, aunque actualmente es posible ejecutar JavaScript en el propio servidor (<a href="http://nodejs.org/">NodeJS</a>). Su uso en aplicaciones externas a la web, por ejemplo en documentos PDF o aplicaciones de escritorio (mayoritariamente widgets) es también significativo.</p>
+
+<p>JavaScript se diseñó con una sintaxis similar al lenguaje de programación C, aunque adopta nombres y convenciones del lenguaje de programación Java. Sin embargo Java y JavaScript no están relacionados y tienen semánticas y propósitos diferentes.</p>
+
+<h2 id="breve-historia">1.2 Breve historia</h2>
+
+<p>A principios de los años 90, la mayoría de usuarios que se conectaban a Internet lo hacían con módems a una velocidad máxima de 28.8 kbps. En esa época, empezaban a desarrollarse las primeras aplicaciones web y por tanto, las páginas web comenzaban a incluir formularios complejos.</p>
+
+<p>Con unas aplicaciones web cada vez más complejas y una velocidad de navegación tan lenta, surgió la necesidad de un lenguaje de programación que se ejecutara en el navegador del usuario. De esta forma, si el usuario no rellenaba correctamente un formulario, no se le hacía esperar mucho tiempo hasta que el servidor volviera a mostrar el formulario indicando los errores existentes.</p>
+
+<p><strong>Brendan Eich</strong>, un programador que trabajaba en Netscape, pensó que podría solucionar este problema adaptando otras tecnologías existentes (como ScriptEase) al navegador Netscape Navigator 2.0, que iba a lanzarse en 1995. Inicialmente, Eich denominó a su lenguaje LiveScript.</p>
+
+<p>Posteriormente, Netscape firmó una alianza con Sun Microsystems para el desarrollo del nuevo lenguaje de programación. Además, justo antes del lanzamiento Netscape decidió cambiar el nombre por el de JavaScript. La razón del cambio de nombre fue exclusivamente por marketing, ya que Java era la palabra de moda en el mundo informático y de Internet de la época.</p>
+
+<p>La primera versión de JavaScript fue un completo éxito y Netscape Navigator 3.0 ya incorporaba la siguiente versión del lenguaje, la versión 1.1. Al mismo tiempo, Microsoft lanzó JScript con su navegador Internet Explorer 3. JScript era una copia de JavaScript al que le cambiaron el nombre para evitar problemas legales.</p>
+
+<p>Para evitar una guerra de tecnologías, Netscape decidió que lo mejor sería estandarizar el lenguaje JavaScript. De esta forma, en 1997 se envió la especificación JavaScript 1.1 al organismo ECMA European Computer Manufacturers Association).</p>
+
+<p>ECMA creó el comité TC39 con el objetivo de "estandarizar de un lenguaje de script multiplataforma e independiente de cualquier empresa". El primer estándar que creó el comité TC39 se denominó <strong>ECMA-262</strong>, en el que se definió por primera vez el lenguaje ECMAScript.</p>
+
+<p>Por este motivo, algunos programadores prefieren la denominación ECMAScript para referirse al lenguaje JavaScript. De hecho, JavaScript no es más que la implementación que realizó la empresa Netscape del estándar ECMAScript.</p>
+
+<p>La organización internacional para la estandarización (ISO) adoptó el estándar ECMA-262 a través de su comisión IEC, dando lugar al estándar ISO/IEC-16262.</p>
+
+<h2 id="especificaciones-oficiales">1.3 Especificaciones oficiales</h2>
+
+<p>ECMA ha publicado varios estándares relacionados con ECMAScript. En Junio de 1997 se publicó la primera edición del estándar ECMA-262. Un año después, en Junio de 1998 se realizaron pequeñas modificaciones para adaptarlo al estandar ISO/IEC-16262 y se creó la segunda edición.</p>
+
+<p>La quinte edición del estándar ECMA-262 (publicada en junio de 2011) es la versión que utilizan los navegadores actuales y se puede consultar gratuitamente en <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">http://www.ecma-international.org/publications/standards/Ecma-262.htm</a></p>
+
+<h2 id="como-incluir-javascript-en-documentos-xhtml">1.4 Cómo incluir JavaScript en documentos XHTML</h2>
+
+<p>La integración de JavaScript y XHTML es muy flexible, ya que existen al menos tres formas para incluir código JavaScript en las páginas web.</p>
+
+<h3 id="incluir-javascript-en-el-mismo-documento-xhtml">1.4.1 Incluir JavaScript en el mismo documento XHTML</h3>
+
+<p>El código JavaScript se encierra entre etiquetas <code>&lt;script&gt;</code> y se incluye en cualquier parte del documento. Aunque es correcto incluir cualquier bloque de código en cualquier zona de la página, se recomienda definir el código JavaScript dentro de la cabecera del documento (dentro de la etiqueta <code>&lt;head&gt;</code>):</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc0">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span>
+<span class="sc0">    &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</span>
+<span class="sc2">&lt;<span class="kw2">html</span> xmlns<span class="sy0">=</span><span class="st0">&quot;http://www.w3.org/1999/xhtml&quot;</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">meta</span> <span class="kw3">http-equiv</span><span class="sy0">=</span><span class="st0">&quot;Content-Type&quot;</span> <span class="kw3">content</span><span class="sy0">=</span><span class="st0">&quot;text/html; charset=UTF-8&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Ejemplo de código JavaScript en el propio documento<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">script</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text/javascript&quot;</span>&gt;</span>
+      console.log(&quot;Un mensaje de prueba&quot;);
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">script</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Un párrafo de texto.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>Para que la página XHTML resultante sea válida, es necesario añadir el atributo <code>type</code> a la etiqueta <code>&lt;script&gt;</code>. Los valores que se incluyen en el atributo <code>type</code> están estandarizados y para el caso de JavaScript, el valor correcto es <code>text/javascript</code>.</p>
+
+<p>Este método se emplea cuando se define un bloque pequeño de código o cuando se quieren incluir instrucciones específicas en un determinado documento HTML que completen las instrucciones y funciones que se incluyen por defecto en todos los documentos del sitio web.</p>
+
+<p>El principal inconveniente es que si se quiere hacer una modificación en el bloque de código, es necesario modificar todas las páginas que incluyen ese mismo bloque de código JavaScript.</p>
+
+<h3 id="definir-javascript-en-un-archivo-externo">1.4.2 Definir JavaScript en un archivo externo</h3>
+
+<p>Las instrucciones JavaScript se pueden incluir en un archivo externo de tipo JavaScript que los documentos XHTML enlazan mediante la etiqueta <code>&lt;script&gt;</code>. Se pueden crear todos los archivos JavaScript que sean necesarios y cada documento XHTML puede enlazar tantos archivos JavaScript como necesite.</p>
+
+<p>Ejemplo:</p>
+
+<p>Archivo <code>codigo.js</code></p>
+
+<div class="code javascript">
+<pre class="javascript">console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Un mensaje de prueba&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Documento XHTML</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc0">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span>
+<span class="sc0">    &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</span>
+<span class="sc2">&lt;<span class="kw2">html</span> xmlns<span class="sy0">=</span><span class="st0">&quot;http://www.w3.org/1999/xhtml&quot;</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">meta</span> <span class="kw3">http-equiv</span><span class="sy0">=</span><span class="st0">&quot;Content-Type&quot;</span> <span class="kw3">content</span><span class="sy0">=</span><span class="st0">&quot;text/html; charset=UTF-8&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Ejemplo de código JavaScript en el propio documento<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">script</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text/javascript&quot;</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;/js/codigo.js&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">script</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Un párrafo de texto.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>Además del atributo <code>type</code>, este método requiere definir el atributo <code>src</code>, que es el que indica la URL correspondiente al archivo JavaScript que se quiere enlazar. Cada etiqueta <code>&lt;script&gt;</code> solamente puede enlazar un único archivo, pero en una misma página se pueden incluir tantas etiquetas <code>&lt;script&gt;</code> como sean necesarias.</p>
+
+<p>Los archivos de tipo JavaScript son documentos normales de texto con la extensión <code>.js</code>, que se pueden crear con cualquier editor de texto como Notepad, Wordpad, EmEditor, UltraEdit, Vi, etc.</p>
+
+<p>La principal ventaja de enlazar un archivo JavaScript externo es que se simplifica el código XHTML de la página, que se puede reutilizar el mismo código JavaScript en todas las páginas del sitio web y que cualquier modificación realizada en el archivo JavaScript se ve reflejada inmediatamente en todas las páginas XHTML que lo enlazan.</p>
+
+<h3 id="incluir-javascript-en-los-elementos-xhtml">1.4.3 Incluir JavaScript en los elementos XHTML</h3>
+
+<p>Este último método es el menos utilizado, ya que consiste en incluir instrucciones JavaScript dentro del código XHTML de la página:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc0">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span>
+<span class="sc0">    &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</span>
+<span class="sc2">&lt;<span class="kw2">html</span> xmlns<span class="sy0">=</span><span class="st0">&quot;http://www.w3.org/1999/xhtml&quot;</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">meta</span> <span class="kw3">http-equiv</span><span class="sy0">=</span><span class="st0">&quot;Content-Type&quot;</span> <span class="kw3">content</span><span class="sy0">=</span><span class="st0">&quot;text/html; charset=UTF-8&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Ejemplo de código JavaScript en el propio documento<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">onclick</span><span class="sy0">=</span><span class="st0">&quot;console.log('Un mensaje de prueba')&quot;</span>&gt;</span>Un párrafo de texto.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>El mayor inconveniente de este método es que ensucia innecesariamente el código XHTML de la página y complica el mantenimiento del código JavaScript. En general, este método sólo se utiliza para definir algunos eventos y en algunos otros casos especiales, como se verá más adelante.</p>
+
+<h2 id="etiqueta-noscript">1.5 Etiqueta noscript</h2>
+
+<p>Algunos navegadores no disponen de soporte completo de JavaScript, otros navegadores permiten bloquearlo parcialmente e incluso algunos usuarios bloquean completamente el uso de JavaScript porque creen que así navegan de forma más segura.</p>
+
+<p>En estos casos, es habitual que si la página web requiere JavaScript para su correcto funcionamiento, se incluya un mensaje de aviso al usuario indicándole que debería activar JavaScript para disfrutar completamente de la página. El siguiente ejemplo muestra una página web basada en JavaScript cuando se accede con JavaScript activado y cuando se accede con JavaScript completamente desactivado.</p>
+
+<div class="figure" id="figure-1-1">
+    <img src="images/cap01/javascript-activado.png" alt="Imagen de www.netvibes.com con JavaScript activado" />
+
+    <p class="caption"><strong>Figura 1.1</strong> Imagen de www.netvibes.com con JavaScript activado</p>
+</div>
+
+
+<div class="figure" id="figure-1-2">
+    <img src="images/cap01/javascript-desactivado.png" alt="Imagen de www.netvibes.com con JavaScript desactivado" />
+
+    <p class="caption"><strong>Figura 1.2</strong> Imagen de www.netvibes.com con JavaScript desactivado</p>
+</div>
+
+
+<p>El lenguaje HTML define la etiqueta <code>&lt;noscript&gt;</code> para mostrar un mensaje al usuario cuando su navegador no puede ejecutar JavaScript. El siguiente código muestra un ejemplo del uso de la etiqueta <code>&lt;noscript&gt;</code>:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">head</span>&gt;</span> ... <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">noscript</span>&gt;</span>
+      <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Bienvenido a Mi Sitio<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+      <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>La página que estás viendo requiere para su funcionamiento el
+      uso de JavaScript. Si lo has deshabilitado intencionadamente,
+      por favor vuelve a activarlo.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">noscript</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span></pre>
+</div>
+
+<p>La etiqueta <code>&lt;noscript&gt;</code> se debe incluir en el interior de la etiqueta <code>&lt;body&gt;</code> (normalmente se incluye al principio de <code>&lt;body&gt;</code>). El mensaje que muestra <code>&lt;noscript&gt;</code> puede incluir cualquier elemento o etiqueta XHTML.</p>
+
+<h2 id="glosario-basico">1.6 Glosario básico</h2>
+
+<ul>
+<li><strong>Script</strong>: cada uno de los programas, aplicaciones o trozos de código creados con el lenguaje de programación JavaScript. Unas pocas líneas de código forman un script y un archivo de miles de líneas de JavaScript también se considera un script.</li>
+<li><strong>Sentencia</strong>: cada una de las instrucciones que forman un script.</li>
+<li><strong>Palabras reservadas</strong>: son las palabras (en inglés) que se utilizan para construir las sentencias de JavaScript y que por tanto no pueden ser utilizadas libremente. Las palabras actualmente reservadas por JavaScript son: <code>break</code>, <code>case</code>, <code>catch</code>, <code>continue</code>, <code>default</code>, <code>delete</code>, <code>do</code>, <code>else</code>, <code>finally</code>, <code>for</code>, <code>function</code>, <code>if</code>, <code>in</code>, <code>instanceof</code>, <code>new</code>, <code>return</code>, <code>switch</code>, <code>this</code>, <code>throw</code>, <code>try</code>, <code>typeof</code>, <code>var</code>, <code>void</code>, <code>while</code>, <code>with</code>.</li>
+</ul>
+
+<h2 id="sintaxis">1.7 Sintaxis</h2>
+
+<p>La sintaxis de un lenguaje de programación se define como el conjunto de reglas que deben seguirse al escribir el código fuente de los programas para considerarse como correctos para ese lenguaje de programación.</p>
+
+<p>La sintaxis de JavaScript es muy similar a la de otros lenguajes de programación como Java y C. Las normas básicas que definen la sintaxis de JavaScript son las siguientes:</p>
+
+<ul>
+<li><strong>No se tienen en cuenta los espacios en blanco y las nuevas líneas</strong>: como sucede con XHTML, el intérprete de JavaScript ignora cualquier espacio en blanco sobrante, por lo que el código se puede ordenar de forma adecuada para entenderlo mejor (tabulando las líneas, añadiendo espacios, creando nuevas líneas, etc.)</li>
+<li><strong>Se distinguen las mayúsculas y minúsculas</strong>: al igual que sucede con la sintaxis de las etiquetas y elementos XHTML. Sin embargo, si en una página XHTML se utilizan indistintamente mayúsculas y minúsculas, la página se visualiza correctamente, siendo el único problema la no validación de la página. En cambio, si en JavaScript se intercambian mayúsculas y minúsculas el script no funciona.</li>
+<li><strong>No se define el tipo de las variables</strong>: al crear una variable, no es necesario indicar el tipo de dato que almacenará. De esta forma, una misma variable puede almacenar diferentes tipos de datos durante la ejecución del script.</li>
+<li><strong>No es necesario terminar cada sentencia con el carácter de punto y coma (<code>;</code>)</strong>: en la mayoría de lenguajes de programación, es obligatorio terminar cada sentencia con el carácter <code>;</code>. Aunque JavaScript no obliga a hacerlo, es conveniente seguir la tradición de terminar cada sentencia con el carácter del punto y coma (<code>;</code>).</li>
+<li>Se pueden incluir comentarios: los comentarios se utilizan para añadir información en el código fuente del programa. Aunque el contenido de los comentarios no se visualiza por pantalla, si que se envía al navegador del usuario junto con el resto del script, por lo que es necesario extremar las precauciones sobre la información incluida en los comentarios.</li>
+</ul>
+
+<p>JavaScript define dos tipos de comentarios: los de una sola línea y los que ocupan varias líneas.</p>
+
+<p>Ejemplo de comentario de una sola línea:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// a continuación se muestra un mensaje</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;mensaje de prueba&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Los comentarios de una sola línea se definen añadiendo dos barras oblicuas (<code>//</code>) al principio de la línea.</p>
+
+<p>Ejemplo de comentario de varias líneas:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="coMULTI">/* Los comentarios de varias líneas son muy útiles
+cuando se necesita incluir bastante información
+en los comentarios */</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;mensaje de prueba&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Los comentarios multilínea se definen encerrando el texto del comentario entre los símbolos <code>/*</code> y <code>*/</code>.</p>
+
+<h2 id="posibilidades-y-limitaciones">1.8 Posibilidades y limitaciones</h2>
+
+<p>Desde su aparición, JavaScript siempre fue utilizado de forma masiva por la mayoría de sitios de Internet. La aparición de Flash disminuyó su popularidad, ya que Flash permitía realizar algunas acciones imposibles de llevar a cabo mediante JavaScript.</p>
+
+<p>Sin embargo, la aparición de las aplicaciones AJAX programadas con JavaScript le ha devuelto una popularidad sin igual dentro de los lenguajes de programación web.</p>
+
+<p>JavaScript fue diseñado de forma que se ejecutara en un entorno muy limitado que permitiera a los usuarios confiar en la ejecución de los scripts. De esta forma, los scripts de JavaScript no pueden comunicarse con recursos que no pertenezcan al mismo dominio desde el que se descargó el script. Los scripts tampoco pueden cerrar ventanas que no hayan abierto esos mismos scripts. Las ventanas que se crean no pueden ser demasiado pequeñas ni demasiado grandes ni colocarse fuera de la vista del usuario (aunque los detalles concretos dependen de cada navegador).</p>
+
+<p>Además, los scripts no pueden acceder a los archivos del ordenador del usuario (ni en modo lectura ni en modo escritura) y tampoco pueden leer o modificar las preferencias del navegador.</p>
+
+<p>Por último, si la ejecución de un script dura demasiado tiempo (por ejemplo por un error de programación) el navegador informa al usuario de que un script está consumiendo demasiados recursos y le da la posibilidad de detener su ejecución.</p>
+
+<p>A pesar de todo, existen alternativas para poder saltarse algunas de las limitaciones anteriores. La alternativa más utilizada y conocida consiste en firmar digitalmente el script y solicitar al usuario el permiso para realizar esas acciones.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-1.html#introduccion">Introducción</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.1</span>
+                        <a class="internal" href="capitulo-1.html#que-es-javascript">¿Qué es JavaScript?</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.2</span>
+                        <a class="internal" href="capitulo-1.html#breve-historia">Breve historia</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.3</span>
+                        <a class="internal" href="capitulo-1.html#especificaciones-oficiales">Especificaciones oficiales</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.4</span>
+                        <a class="internal" href="capitulo-1.html#como-incluir-javascript-en-documentos-xhtml">Cómo incluir JavaScript en documentos XHTML</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.5</span>
+                        <a class="internal" href="capitulo-1.html#etiqueta-noscript">Etiqueta noscript</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.6</span>
+                        <a class="internal" href="capitulo-1.html#glosario-basico">Glosario básico</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.7</span>
+                        <a class="internal" href="capitulo-1.html#sintaxis">Sintaxis</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.8</span>
+                        <a class="internal" href="capitulo-1.html#posibilidades-y-limitaciones">Posibilidades y limitaciones</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

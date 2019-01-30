@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>objeto select</title>
+	<script language ="javascript">
+	<!-- se oculta la información de los navegadores antiguos
+		var eventos = function (){
+		document.miformulario.addEventListener('submit', informar);
+		};
+		function informar(){
+		    var mensaje="";
+		    mensaje+="Se ha seleccionado un procesador ";
+			var indiceSelec=document.miformulario.procesador.selectedIndex;
+		    mensaje+=document.miformulario.procesador.options[indiceSelec].value;
+		    mensaje+="\n        con sistema operativo ";
+			var indiceSelec=document.miformulario.soperativo.selectedIndex;
+		    mensaje+=document.miformulario.soperativo.options[indiceSelec].value;
+		    alert(mensaje);
+	  	}
+	// final del comentario -->
+		window.addEventListener('load', eventos);
+	</script>
+<style type='text/css'> #turnkey-credit { font-family: Tahoma,Sans,Arial,Helvetica,Verdana,sans-serif; font-size: 11px; text-align: center; } #turnkey-credit a { text-decoration: none; } #turnkey-credit a:hover { text-decoration: underline; } </style></head>
+<body>
+	<center>
+	<h2>manejando los objetos select...</h2>
+	<form name="miformulario" id="idmiformulario">
+		selecciona las opciones deseadas...<br><br>
+		<table border=1 cellpadding=5><tr align=center>
+		<td>procesador</td><td>sistema operativo</td></tr><td>
+		<select name="procesador" size=1>
+		<option value="mac pro">mac pro 2,0 mhz</option> 
+		<option value="intel i3">intel i5 2,2 mhz</option> 
+		<option value="intel i5" selected>intel i7 2,7 mhz</option> 
+		<select>
+		</td><td>
+		<select name="soperativo" >
+		<option value="winxp">windows 7</option> 
+		<option value="win7" selected>windows 10</option> 
+		<option value="winserver">windows server 2008</option> 
+		<select>
+		</td></tr></table><br>
+		<input type=submit name="botonenviar" value="enviar">
+		<input type=reset name="botonlimpiar" value="limpiar">
+	</form>
+	</center>
+<div id='turnkey-credit'> <div> <a href='http://www.turnkeylinux.org/moodle'>Moodle Appliance</a> - Powered by <a href='http://www.turnkeylinux.org'>TurnKey Linux</a> </div> </div></body>
+</html>

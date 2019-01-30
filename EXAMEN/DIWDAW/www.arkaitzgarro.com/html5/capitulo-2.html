@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="28/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Semántica | HTML5</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">HTML5</a></h1>
+        <p class="span3">
+                        <a href="capitulo-1.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-3.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="semantica"><span>Capítulo 2</span> Semántica</h1>
+        <p>Una de las novedades que hemos mencionado anteriormente son las etiquetas que se han introducido en HTML5. Existen más de 30 nuevas etiquetas semánticas que pueden ser utilizadas en nuestras páginas estáticas. Estas nuevas etiquetas se podrían clasificar en dos grupos:</p>
+
+<ul>
+<li>Etiquetas que extienden a las actuales, como <code>&lt;video&gt;</code>, <code>&lt;audio&gt;</code> o <code>&lt;canvas&gt;</code>, y que además añaden nuevas funcionalidades a los documentos HTML, que podemos controlar desde JavaScript y</li>
+<li>etiquetas que componen la web semántica, es decir, que no proponen nuevas funcionalidades pero sirven para estructurar sitios web, y añadir un significado concreto, más allá de las etiquetas generales como <code>&lt;div&gt;</code>.</li>
+</ul>
+
+<p>En este capítulo, veremos como transformar nuestra estructura actual de marcado basada en <code>&lt;div&gt;</code>, a una estructura que utiliza las nuevas etiquetas estructurales como <code>&lt;nav&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;aside&gt;</code>, o <code>&lt;article&gt;</code>.</p>
+
+<h2 id="cabecera-del-documento">2.1 Cabecera del documento</h2>
+
+<p>Además de las nuevas etiquetas introducidas por HTML5 (que veremos más adelante), el nuevo estándar propone pequeñas mejoras que podemos aplicar en la definición de nuestros documentos, en concreto en la cabecera de los mismos.</p>
+
+<h3 id="doctype">2.1.1 DOCTYPE</h3>
+
+<p>El estándar XHTML deriva de XML, por lo que comparte con él muchas de sus normas y sintaxis. Uno de los conceptos fundamentales de XML es la utilización del DTD o Document Type Definition ("Definición del Tipo de Documento"). El estándar XHTML define el DTD que deben seguir las páginas y documentos XHTML. En este documento se definen las etiquetas que se pueden utilizar, los atributos de cada etiqueta y el tipo de valores que puede tener cada atributo.</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc0">&lt;!DOCTYPE html</span>
+<span class="sc0">       PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;</span>
+<span class="sc0">       &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;</span></pre>
+</div>
+
+<p>Ésta es una de las 15 declaraciones posibles declaradas en los estándares HTML4 y XHTML. En HTML5 se reduce la definición del tipo de documento a una única posibilidad, por lo que no tenemos que preocuparnos de elegir el tipo de documento correcto:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc0">&lt;!DOCTYPE html&gt;</span></pre>
+</div>
+
+<h3 id="elemento-raiz-html">2.1.2 Elemento raíz HTML</h3>
+
+<p>En todo documento HTML, su elemento raíz o nodo superior siempre es la etiqueta <code>&lt;html&gt;</code>. Hasta ahora, este elemento raíz se definía de la siguiente manera:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">html</span> xmlns<span class="sy0">=</span>http:<span class="sy0">//</span>www.w3.org<span class="sy0">/</span><span class="nu0">1999</span><span class="sy0">/</span>xhtml</span>
+<span class="sc2">   <span class="kw3">lang</span><span class="sy0">=</span><span class="st0">&quot;en&quot;</span></span>
+<span class="sc2">   xml:<span class="kw3">lang</span><span class="sy0">=</span><span class="st0">&quot;en&quot;</span>&gt;</span></pre>
+</div>
+
+<p>No hay ningún problema en mantener esta sintaxis. Si se desea, se puede conservar, ya que es válido en HTML5. Sin embargo, algunas de sus partes ya no son necesarias, por lo que podemos eliminarlas.</p>
+
+<p>El primer elemento del que podemos prescindir es el atributo <code>xmlns</code>. Se trata de una herencia de XHTML 1.0, que dice que los elementos de esta página están en el espacio de nombres XHTML, <code>http://www.w3.org/1999/xhtml</code>. Sin embargo, los elementos de HTML5 están siempre en este espacio de nombres, por lo que ya no es necesario declararlo explícitamente. Eliminar el atributo <code>xmlns</code> nos deja con este elemento de la siguiente manera:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">html</span> <span class="kw3">lang</span><span class="sy0">=</span><span class="st0">&quot;es&quot;</span> xml:<span class="kw3">lang</span><span class="sy0">=</span><span class="st0">&quot;en&quot;</span>&gt;</span></pre>
+</div>
+
+<p>En este caso ocurre lo mismo con el atributo <code>xml:lang</code>, es una herencia de XHTML que podemos eliminar, quedando finalmente la etiqueta de la siguiente manera:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">html</span> <span class="kw3">lang</span><span class="sy0">=</span><span class="st0">&quot;en&quot;</span>&gt;</span></pre>
+</div>
+
+<h3 id="elemento-head">2.1.3 Elemento HEAD</h3>
+
+<p>El primer hijo del elemento raíz es generalmente el elemento <code>head</code>. El elemento <code>head</code> contiene los metadatos que aportan información extra sobre la página, como su título, descripción, autor, etc. Además, puede incluir referencias externas a contenidos necesarios para que el documento se muestre y comporte de manera correcta (como hojas de estilos o <em>scripts</em>). Este elemento ha sufrido pequeñas variaciones, pero que debemos tener en cuenta:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">meta</span> <span class="kw3">http-equiv</span><span class="sy0">=</span><span class="st0">&quot;Content-Type&quot;</span> <span class="kw3">content</span><span class="sy0">=</span><span class="st0">&quot;text/html; charset=UTF-8&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>My Weblog<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">link</span> <span class="kw3">rel</span><span class="sy0">=</span><span class="st0">&quot;stylesheet&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text/css&quot;</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;style-original.css&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">link</span> <span class="kw3">rel</span><span class="sy0">=</span><span class="st0">&quot;alternate&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;application/atom+xml&quot;</span></span>
+<span class="sc2">                          <span class="kw3">title</span><span class="sy0">=</span><span class="st0">&quot;My Weblog feed&quot;</span></span>
+<span class="sc2">                          <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;/feed/&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">link</span> <span class="kw3">rel</span><span class="sy0">=</span><span class="st0">&quot;search&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;application/opensearchdescription+xml&quot;</span></span>
+<span class="sc2">                          <span class="kw3">title</span><span class="sy0">=</span><span class="st0">&quot;My Weblog search&quot;</span></span>
+<span class="sc2">                          <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;opensearch.xml&quot;</span>  <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">link</span> <span class="kw3">rel</span><span class="sy0">=</span><span class="st0">&quot;shortcut icon&quot;</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;/favicon.ico&quot;</span> <span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span></pre>
+</div>
+
+<h4 id="codificacion-del-contenido">2.1.3.1 Codificación del contenido</h4>
+
+<p>Cuando se piensa en "texto", probablemente nos venga a la cabeza una definición de "caracteres y símbolos que veo en la pantalla de mi ordenador". Pero realmente se tratan de bits y bytes. Cada cadena de caracteres que se muestra en la pantalla, se almacena con una codificación de caracteres en particular. Hay cientos de codificaciones de caracteres diferentes, algunos optimizado para ciertos idiomas como el ruso, el chino o inglés, y otros que se pueden utilizar para múltiples idiomas. En términos generales, la codificación de caracteres proporciona una correspondencia entre lo que se muestra en la pantalla y lo que un equipo realmente almacena en la memoria y en el disco.</p>
+
+<p>Se puede pensar en la codificación de caracteres como una especie de clave de descifrado del texto. Cuando accedemos a una secuencia de bytes, y decidimos que es "texto", lo que necesitamos saber es qué codificación de caracteres se utiliza para que pueda decodificar los bytes en caracteres y mostrarlos (o transformarlos) de manera correcta.</p>
+
+<p>Lo ideal es establecer esta codificación en el servidor, indicando el tipo en las cabeceras de respuesta:</p>
+
+<div class="code code">
+<pre class="code">Content-Type: text/html; charset=&quot;utf-8&quot;</pre>
+</div>
+
+<p>Por desgracia, no siempre podemos tener el control sobre la configuración de un servidor HTTP. Por ejemplo, en la plataforma <em>Blogger</em>, el contenido es proporcionado por personas, pero los servidores son administrados por Google, por lo que estamos supeditados a su configuración. Aún así, HTML 4 proporciona una manera de especificar la codificación de caracteres en el documento HTML:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">meta</span> <span class="kw3">http-equiv</span><span class="sy0">=</span><span class="st0">&quot;Content-Type&quot;</span> <span class="kw3">content</span><span class="sy0">=</span><span class="st0">&quot;text/html; charset=UTF-8&quot;</span>&gt;</span></pre>
+</div>
+
+<p>El encabezado HTTP es el método principal, y anula la etiqueta <code>&lt;meta&gt;</code> si está presente. Pero no todo el mundo puede establecer encabezados HTTP, por lo que la etiqueta <code>&lt;meta&gt;</code> todavía tiene sentido. En el caso de HTML5, es aún más sencillo definir esta etiqueta <em>meta</em>:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">meta</span> <span class="kw3">charset</span><span class="sy0">=</span><span class="st0">&quot;utf-8&quot;</span>&gt;</span></pre>
+</div>
+
+<p>Debemos acostumbrarnos a especificar la codificación de nuestros documentos, aunque no vayamos a utilizar caracteres especiales o nuestro documentos no se presente en otros idiomas. Si no lo hacemos, podemos exponernos a <a href="http://openmya.hacker.jp/hasegawa/security/utf7cs.html">problemas de seguridad</a>.</p>
+
+<h4 id="links">2.1.3.2 Links</h4>
+
+<p>Dentro del elemento <code>head</code>, las etiquetas <code>&lt;link&gt;</code> son una manera de acceder o declarar contenido externo al documento actual, que puede cumplir distintos objetivos:</p>
+
+<ul>
+<li>Es una hoja de estilo contiene las reglas CSS que su navegador debe aplicar al presente documento.</li>
+<li>Es un feed que contiene el mismo contenido que esta página, pero en un formato estándar (RSS).</li>
+<li>Es una traducción de esta página en otro idioma.</li>
+<li>Es el mismo contenido que esta página, pero en formato PDF.</li>
+<li>Es el próximo capítulo de un libro en línea de la cual esta página es también una parte.</li>
+</ul>
+
+<p>En HTML5, se separan estas relaciones de enlace en dos categorías:</p>
+
+<ul>
+<li>Enlaces a recursos externos que se van a utilizar para mejorar el documento actual,</li>
+<li>y enlaces de hipervínculos que son enlaces a otros documentos.</li>
+</ul>
+
+<p>El tipo de relación más utilizado (literalmente) es el siguiente:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">link</span> <span class="kw3">rel</span><span class="sy0">=</span><span class="st0">&quot;stylesheet&quot;</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;style-original.css&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text/css&quot;</span> <span class="sy0">/</span>&gt;</span></pre>
+</div>
+
+<p>Esta relación es utilizada para indicar el archivo donde se almacenan las reglas CSS que se desean aplicar al documento. Una pequeña optimización que se puede hacer en HTML5 es eliminar el atributo <code>type</code>. Sólo hay un lenguaje de estilo para la web, CSS, así que ese es el valor predeterminado para el atributo <code>type</code>:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">link</span> <span class="kw3">rel</span><span class="sy0">=</span><span class="st0">&quot;stylesheet&quot;</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;style-original.css&quot;</span> <span class="sy0">/</span>&gt;</span></pre>
+</div>
+
+<h2 id="nuevas-etiquetas-semanticas">2.2 Nuevas etiquetas semánticas</h2>
+
+<p>En 2004, <a href="http://en.wikipedia.org/wiki/Ian_Hickson">Ian Hickson</a>, el autor de la especificación de HTML5, analizó 1.000.000.000 de páginas web utilizando el motor de Google, intentando identificar la manera en la que la <em>web real</em> estaba construida. Uno de los resultados de este análisis, fue la <a href="http://code.google.com/webstats/2005-12/classes.html">publicación</a> de una lista con los nombres de <em>clases</em> más utilizados. Este estudio revela que los desarrolladores utilizan <em>clases</em> o <em>IDs</em> comunes para estructurar los documentos. Esto llevó a considerar que quizás fuese una buena idea crear etiquetas concretas para reflejar estas estructuras.</p>
+
+<p>Este tipo de etiquetas que componen la web semántica nos sirven para que cualquier mecanismo automático (un navegador, un motor de búsqueda, un lector de <em>feeds</em>...) que lea un sitio web sepa con exactitud qué partes de su contenido corresponden a cada una de las partes típicas de un sitio. Observando esas etiquetas semánticas estructurales, cualquier sistema podrá procesar la página y saber cómo está estructurada. Veamos algunas de estas etiquetas que introduce HTML5 en este sentido.</p>
+
+<ul>
+<li><code>&lt;section&gt;&lt;/section&gt;</code>: se utiliza para representar una sección "general" dentro de un documento o aplicación, como un capítulo de un libro. Puede contener subsecciones y si lo acompañamos de <code>h1-h6</code> podemos estructurar mejor toda la página creando jerarquías del contenido, algo muy favorable para el buen posicionamiento web.</li>
+<li><code>&lt;article&gt;&lt;/article&gt;</code>: representa un componente de una página que consiste en una composición autónoma en un documento, página, aplicación, o sitio web con la intención de que pueda ser reutilizado y repetido. Podría utilizarse en los artículos de los foros, una revista o el artículo de periódico, una entrada de un blog, un comentario escrito por un usuario, un widget interactivo o cualquier otro artículo independiente de contenido. Cuando los elementos de <code>&lt;article&gt;</code> son anidados, los elementos interiores representan los artículos que en principio son relacionados con el contenido del artículo externo. Por ejemplo, un artículo de un blog que permite comentarios de usuario, dichos comentarios se podrían representar con <code>&lt;article&gt;</code>.</li>
+<li><code>&lt;aside&gt;&lt;/aside&gt;</code>: representa una sección de la página que abarca un contenido relacionado con el contenido que lo rodea, por lo que se le puede considerar un contenido independiente. Este elemento puede utilizarse para efectos tipográficos, barras laterales, elementos publicitarios, para grupos de elementos de la navegación, u otro contenido que se considere separado del contenido principal de la página.</li>
+<li><code>&lt;header&gt;&lt;/header&gt;</code>: representa un grupo de artículos introductorios o de navegación. Está destinado a contener por lo general la cabecera de la sección (un elemento <code>h1-h6</code> o un elemento <code>hgroup</code>), pero no es necesario.</li>
+<li><code>&lt;nav&gt;&lt;/nav&gt;</code>: representa una sección de una página que enlaza a otras páginas o a otras partes dentro de la página. No todos los grupos de enlaces en una página necesita estar en un elemento <code>nav</code>, sólo las secciones que constan de bloques de navegación principales son apropiados para el elemento de navegación.</li>
+<li><code>&lt;footer&gt;&lt;/footer&gt;</code>: representa el pie de una sección, con información acerca de la página/sección que poco tiene que ver con el contenido de la página, como el autor, el copyright o el año.</li>
+<li><code>&lt;hgroup&gt;&lt;/hgroup&gt;</code>: representa el encabezado de una sección. El elemento se utiliza para agrupar un conjunto de elementos <code>h1-h6</code> cuando el título tiene varios niveles, tales como subtítulos o títulos alternativos.</li>
+<li><code>&lt;time&gt;</code>: representa o bien una hora (en formato de 24 horas), o una fecha precisa en el calendario gregoriano (en formato <a href="http://es.wikipedia.org/wiki/ISO_8601">ISO</a>), opcionalmente con un tiempo y un desplazamiento de zona horaria.</li>
+</ul>
+
+<h2 id="estructura-de-un-documento-html5">2.3 Estructura de un documento HTML5</h2>
+
+<p>Como hemos visto con las nuevas etiquetas semánticas introducidas en HTML5, éstas aportan un significado concreto al documento que estamos definiendo, y por lo tanto, afectan de manera directa a la forma en la estructuramos el contenido. Vamos a ver como podemos <em>convertir</em> nuestra actual página con las nuevas etiquetas introducidas en HTML5.</p>
+
+<h3 id="estructura-tradicional-de-un-documento-en-html-4">2.3.1 Estructura tradicional de un documento en HTML 4</h3>
+
+<p>El siguiente código muestra una estructura "clásica" de documento HTML, donde los diferentes contenidos de la web se encuentran agrupados por etiquetas <code>&lt;div&gt;</code>. Por sí mismas, estas etiquetas no aportan ningún tipo de significado, y el atributo <code>id</code> tampoco se lo proporciona. Si cambiamos <code>&lt;div id="header"&gt;</code> por <code>&lt;div id="whatever"&gt;</code>, el significado sigue siendo el mismo, <em>ninguno</em>.</p>
+
+<p><img src="images/cap02/html4.png" alt="Estructura tradicional de un documento en HTML4"></p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;DOCTYPE html PUBLIC<span class="st0">&quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span></span>
+<span class="sc2">    <span class="st0">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">html</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;header&quot;</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;/&quot;</span>&gt;&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span>logo.png <span class="kw3">alt</span><span class="sy0">=</span><span class="st0">&quot;home&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">h1</span>&gt;</span>My Weblog<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h1</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;tagline&quot;</span>&gt;</span>
+            A lot of effort went into making this effortless.
+        <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;nav&quot;</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">ul</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">li</span>&gt;&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>home<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">li</span>&gt;&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>blog<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">li</span>&gt;&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>gallery<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">li</span>&gt;&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>about<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+        <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">ul</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;articles&quot;</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;article&quot;</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;post-date&quot;</span>&gt;</span>October 22, 2009<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>
+                <span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span> <span class="kw3">title</span><span class="sy0">=</span><span class="st0">&quot;link to this post&quot;</span>&gt;</span>Travel day<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+            <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;content&quot;</span>&gt;</span>
+                Content goes here...
+            <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;comments&quot;</span>&gt;</span>
+                <span class="sc2">&lt;<span class="kw2">p</span>&gt;&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>3 comments<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+            <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+        <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;aside&quot;</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;related&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;related&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;related&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;footer&quot;</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span><span class="sc1">&amp;#167;</span><span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span><span class="sc1">&amp;#169;</span> 2013<span class="sc1">&amp;#8211;</span>9 <span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Arkaitz Garro<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<h3 id="estructura-tradicional-de-un-documento-en-html5">2.3.2 Estructura tradicional de un documento en HTML5</h3>
+
+<p>Veamos como podemos añadir un significado a este documento, únicamente aplicando las nuevas etiquetas semánticas incluidas en HTML5.</p>
+
+<p><img src="images/cap02/html5.png" alt="Estructura tradicional de un documento en HTML5"></p>
+
+<div class="code html">
+<pre class="html5"><span class="sc0">&lt;!DOCTYPE html&gt;</span>
+<span class="sc2">&lt;<span class="kw2">html</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">header</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;/&quot;</span>&gt;&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span>logo.png <span class="kw3">alt</span><span class="sy0">=</span><span class="st0">&quot;home&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">hgroup</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">h1</span>&gt;</span>Title<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h1</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">h2</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;tagline&quot;</span>&gt;</span>
+                A lot of effort went into making this effortless.
+            <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+        <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">hgroup</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">header</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">nav</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">ul</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">li</span>&gt;&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>home<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">li</span>&gt;&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>blog<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">li</span>&gt;&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>gallery<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">li</span>&gt;&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>about<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+        <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">ul</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">nav</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">section</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;articles&quot;</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">article</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">time</span> <span class="kw3">datetime</span><span class="sy0">=</span><span class="st0">&quot;2009-10-22&quot;</span>&gt;</span>October 22, 2009<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">time</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>
+                <span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span> <span class="kw3">title</span><span class="sy0">=</span><span class="st0">&quot;link to this post&quot;</span>&gt;</span>Travel day<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+            <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;content&quot;</span>&gt;</span>
+                Content goes here...
+            <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">section</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;comments&quot;</span>&gt;</span>
+                <span class="sc2">&lt;<span class="kw2">p</span>&gt;&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>3 comments<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+            <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">section</span>&gt;</span>
+        <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">article</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">section</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">aside</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;related&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;related&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;related&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">aside</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">footer</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span><span class="sc1">&amp;#167;</span><span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span><span class="sc1">&amp;#169;</span> 2013<span class="sc1">&amp;#8211;</span>9 <span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Arkaitz Garro<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span> 
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">footer</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>Partiendo de la anterior estructura, parece evidente las nuevas etiquetas que debemos utilizar. Esto no siempre es así, y cuando estructuramos contenidos de mucho mayor alcance, lo normal es que nos surjan dudas. Un sencillo algoritmo que nos puede ayudar en la correcta selección de etiquetas, es el que proponen en <a href="http://html5doctor.com/element-index/">HTML5 Doctor</a>.</p>
+
+<p><a href="http://html5doctor.com/downloads/h5d-sectioning-flowchart.png"><img src="http://html5doctor.com/downloads/h5d-sectioning-flowchart.png" alt="Algoritmo de selección de etiquetas"></a></p>
+
+<h2 id="uso-de-las-nuevas-etiquetas-semanticas">2.4 Uso de las nuevas etiquetas semánticas</h2>
+
+<h3 id="ltheadergt">2.4.1 <code>&lt;header&gt;</code></h3>
+
+<p>Según la especificación, un elemento <code>&lt;header&gt;</code> representa lo siguiente:</p>
+
+<blockquote>
+  <p>Un grupo de navegación o contenido introductorio. Un elemento header normalmente contiene una sección de encabezado (un elemento h1-h6 o un elemento hgroup), pero puede contener otro tipo de elementos, como una tabla de contenidos, un formulario de búsqueda o cualquier logo importante.</p>
+</blockquote>
+
+<p>En nuestro ejemplo, y en la mayoría de los sitios web, la cabecera contiene los primeros elementos de la página. Tradicionalmente el título de la web, su logo, enlaces para volver al inicio... De la manera más simple, nuestra cabecera quedaría de esta forma:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">header</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;/&quot;</span>&gt;&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span>logo.png <span class="kw3">alt</span><span class="sy0">=</span><span class="st0">&quot;home&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">h1</span>&gt;</span>Title<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h1</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">header</span>&gt;</span></pre>
+</div>
+
+<p>También es muy común que los sitios web muestren un lema o subtítulo bajo el título principal. Para dar mayor importancia a este subtítulo, y relacionarlo de alguna manera con el título principal de la web, es posible agrupar los dos titulares bajo un elemento <code>&lt;hgroup&gt;</code>.</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">header</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;/&quot;</span>&gt;&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span>logo.png <span class="kw3">alt</span><span class="sy0">=</span><span class="st0">&quot;home&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">hgroup</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">h1</span>&gt;</span>Title<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h1</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">h2</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;tagline&quot;</span>&gt;</span>
+            A lot of effort went into making this effortless.
+        <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">hgroup</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">header</span>&gt;</span></pre>
+</div>
+
+<h3 id="ltnavgt">2.4.2 <code>&lt;nav&gt;</code></h3>
+
+<p>Según la especificación, un elemento <code>&lt;nav&gt;</code> representa lo siguiente:</p>
+
+<blockquote>
+  <p>El elemento <code>&lt;nav&gt;</code> representa una sección de una página que enlaza con otras páginas o partes de la misma página: una sección con enlaces de navegación.</p>
+</blockquote>
+
+<p>El elemento <code>&lt;nav&gt;</code> ha sido diseñado para identificar la navegación de un sitio web. La navegación se define como un conjunto de enlaces que hacen referencia a las secciones de una página o un sitio, pero no todos los enlaces son candidatos de pertenecer a un elemento <code>&lt;nav&gt;</code>: una lista de enlaces a patrocinadores o los resultados de una búsqueda, no forman parte de la navegación principal, sino que corresponden con el contenido de la página.</p>
+
+<p>Como ocurre con los elementos <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code> y el resto de nuevas etiquetas, no estamos obligados a utilizar un único elemento <code>&lt;nav&gt;</code> en toda la página. Es posible que tengamos una navegación principal en la cabecera de la página, una tabla de contenidos o enlaces en el pie de la página, que apuntan a contenidos secundarios. Todos ellos son candidatos a pertenecer a un elemento <code>&lt;nav&gt;</code>.</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">nav</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">ul</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">li</span>&gt;&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>home<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">li</span>&gt;&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>blog<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">li</span>&gt;&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>gallery<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">li</span>&gt;&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>about<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">ul</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">nav</span>&gt;</span></pre>
+</div>
+
+<h3 id="ltfootergt">2.4.3 <code>&lt;footer&gt;</code></h3>
+
+<p>Según la especificación, un elemento <code>&lt;footer&gt;</code> representa lo siguiente:</p>
+
+<blockquote>
+  <p>Representa el pie de una sección. Un pie tradicionalmente contiene información acerca de su sección, como quién escribió el contenido, enlaces relacionados, copyright y similares.</p>
+</blockquote>
+
+<p>Al igual que ocurre con el elemento <code>&lt;nav&gt;</code>, podemos tener tantos elementos <code>&lt;footer&gt;</code> como sea necesario. Lo normal es que nuestro sitio web disponga de al menos un pie principal, que contiene los avisos legales (privacidad, condiciones del servicio, copyright...), mapa del sitio web, accesibilidad, contacto y otros muchos enlaces que pueden ir incluidos en un elemento <code>&lt;nav&gt;</code>.</p>
+
+<h3 id="ltarticlegt">2.4.4 <code>&lt;article&gt;</code></h3>
+
+<p>Según la especificación, un elemento <code>&lt;article&gt;</code> representa lo siguiente:</p>
+
+<blockquote>
+  <p>Este elemento representa un contenido completo, auto-contenido en un documento, página, aplicación o sitio web, que es, en principio, independiente de ser distribuido y reutilizado, por ejemplo en un RSS. Puede ser un post de un foro, un artículo de un periódico o revista, una entrada de un blog, un comentario de un usuario, un widget o cualquier otro elemento independiente.</p>
+  
+  <p>Cuando los artículos están anidados, los artículos interiores representan contenido que en principio está relacionado con el artículo que los contiene. Por ejemplo, una entrada de un blog puede aceptar comentarios de usuarios, que están incluidos dentro del contenido principal y relacionados con el mismo.</p>
+</blockquote>
+
+<p>Por lo tanto, la etiqueta <code>&lt;article&gt;</code> se utiliza para encapsular contenido, que tiene significado en sí mismo, y que puede ser distribuido y reutilizado en otros formatos de datos. No nos referimos únicamente a contenidos clásicos de texto, sino que incluso un contenido multimedia con su transcripción, un mapa o email pueden ser totalmente válidos para ser incluidos en una etiqueta <code>&lt;article&gt;</code>.</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">section</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">h1</span>&gt;</span>Comments<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h1</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">article</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;c1&quot;</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">footer</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Posted by: <span class="sc2">&lt;<span class="kw2">span</span>&gt;</span>George Washington<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">span</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">p</span>&gt;&lt;<span class="kw2">time</span> <span class="kw3">datetime</span><span class="sy0">=</span><span class="st0">&quot;2009-10-10&quot;</span>&gt;</span>15 minutes ago<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">time</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+        <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">footer</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Yeah! Especially when talking about your lobbyist friends!<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">article</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">article</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;c2&quot;</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">footer</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Posted by: <span class="sc2">&lt;<span class="kw2">span</span> itemprop<span class="sy0">=</span><span class="st0">&quot;name&quot;</span>&gt;</span>George Hammond<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">span</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">p</span>&gt;&lt;<span class="kw2">time</span> <span class="kw3">datetime</span><span class="sy0">=</span><span class="st0">&quot;2009-10-10&quot;</span>&gt;</span>5 minutes ago<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">time</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+        <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">footer</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Hey, you have the same first name as me.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">article</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">section</span>&gt;</span></pre>
+</div>
+
+<h3 id="ltsectiongt">2.4.5 <code>&lt;section&gt;</code></h3>
+
+<p>A diferencia del elemento <code>&lt;article&gt;</code>, este elemento es utilizado para dividir el documento (o artículos) en diferentes áreas, o como su propio nombre indica, en secciones. Según la especificación, un elemento <code>&lt;section&gt;</code> representa lo siguiente:</p>
+
+<blockquote>
+  <p>Representa una sección genérica de un documento o aplicación. Una sección, en este contexto, es un grupo temático de contenido, que generalmente incluye una cabecera.</p>
+</blockquote>
+
+<p>Consideremos el siguiente marcado válido en HTML 4:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">h1</span>&gt;</span>Rules for Munchkins<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h1</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>Yellow Brick Road<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>It is vital that Dorothy follows it—so no selling
+    bricks as &quot;souvenirs&quot;<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>Fan Club uniforms<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>All Munchkins are obliged to wear their &quot;I’m a friend 
+    of Dorothy!&quot; t-shirt when representing the club<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span>&gt;&lt;<span class="kw2">strong</span>&gt;</span>Vital caveat about the information above: 
+    does not apply on the first Thursday of the month.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">strong</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<p>En este caso, y desde un punto de vista semántico, es complicado deducir si el texto <em>Vital caveat about the information above: does not apply on the first Thursday of the month.</em> pertenece al contenido completo o está relacionado con la <em>sección Fan Club uniforms</em>. Gracias a la etiqueta <code>&lt;section&gt;</code>, es muy sencillo separar e identificar a qué sección pertenece cada contenido:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">article</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">h1</span>&gt;</span>Rules for Munchkins<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h1</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">section</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>Yellow Brick Road<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>It is vital that Dorothy follows it—so no selling
+            bricks as &quot;souvenirs&quot;<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">section</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">section</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>Fan Club uniforms<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>All Munchkins are obliged to wear their &quot;I’m a friend 
+            of Dorothy!&quot; t-shirt when representing the club<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">section</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">p</span>&gt;&lt;<span class="kw2">strong</span>&gt;</span>Vital caveat about the information above: 
+        does not apply on the first Thursday of the month.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">strong</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">article</span>&gt;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">article</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">h1</span>&gt;</span>Rules for Munchkins<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h1</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">section</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>Yellow Brick Road<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>It is vital that Dorothy follows it—so no selling
+            bricks as &quot;souvenirs&quot;<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">section</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">section</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>Fan Club uniforms<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>All Munchkins are obliged to wear their &quot;I’m a friend 
+            of Dorothy!&quot; t-shirt when representing the club<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;&lt;<span class="kw2">strong</span>&gt;</span>Vital caveat about the information above: 
+            does not apply on the first Thursday of the month.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">strong</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">section</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">article</span>&gt;</span></pre>
+</div>
+
+<p>Como podemos observar en los dos ejemplos anteriores, es muy sencillo agrupar contenido que pertenece a una misma sección, permitiendo incluirlo dentro de un contexto semántico.</p>
+
+<p>Otra de las posibilidades que nos ofrece esta etiqueta, es la de dividir nuestro documento en secciones, que incluyen contenido de temáticas diferentes entre sí. Si además queremos separar estos contenidos visualmente en dos columnas, lo lógico sería utilizar las tradicionales etiquetas <code>&lt;div&gt;</code> para agrupar los artículos según su temática, y posteriormente aplicar estilos CSS o JavaScript para presentarlos en forma de <em>pestañas</em>.</p>
+
+<p>En este caso, la etiqueta <code>&lt;div&gt;</code> no nos aporta ningún significado semántico, tan sólo estructural. La etiqueta <code>&lt;section&gt;</code> es la encargada de añadir semántica en estos casos:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">section</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">h1</span>&gt;</span>Articles about llamas<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h1</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">article</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>The daily llama: Buddhism and South American camelids<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>blah blah<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">article</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">article</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>Shh! Do not alarm a llama<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>blah blah<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">article</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">section</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">section</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">h1</span>&gt;</span>Articles about root vegetables<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h1</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">article</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>Carrots: the orange miracle<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>blah blah<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">article</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">article</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>Eat more Swedes (the vegetables, not the people)<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>blah blah<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">article</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">section</span>&gt;</span></pre>
+</div>
+
+<h3 id="ltasidegt">2.4.6 <code>&lt;aside&gt;</code></h3>
+
+<p>Según la especificación, un elemento <code>&lt;aside&gt;</code> representa lo siguiente:</p>
+
+<blockquote>
+  <p>Una sección de una página que consiste en contenido tangencialmente relacionado con el contenido alrededor del elemento, y puede considerarse separado de este contenido. Estas secciones son normalmente representadas como elementos laterales en medios impresos. Este elemento puede utilizarse contener citas, anuncios, grupos de elementos de navegación y cualquier otro contenido separado del contenido principal de la pagina.</p>
+</blockquote>
+
+<p>Dentro de un artículo, por ejemplo, puede ser utilizado para mostrar contenido relacionado como citas u otros artículos relacionados.</p>
+
+<h3 id="ltfiguregt">2.4.7 <code>&lt;figure&gt;</code></h3>
+
+<p>Según la especificación, un elemento <code>&lt;figure&gt;</code> representa lo siguiente:</p>
+
+<blockquote>
+  <p>The figure element represents some flow content, optionally with a caption, that is self-contained and is typically referenced as a single unit from the main flow of the document.</p>
+  
+  <p>The element can be used to annotate illustrations, diagrams, photos, code listings, etc. This includes, but is not restricted to, content referred to from the main part of the document, but that could, without affecting the flow of the document, be moved away from that primary content, e.g. to the side of the page, to dedicated pages, or to an appendix.</p>
+</blockquote>
+
+<p>Hasta ahora, no había una manera correcta de poder añadir un subtítulo o una leyenda a un contenido concreto, como explicar una figura o atribuir una imagen a un fotógrafo. Gracias a la etiqueta <code>&lt;figure&gt;</code> podemos contener una imagen (o un vídeo, ilustración o bloque de código) en un elemento y relacionarlo con un contenido concreto:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">figure</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;welcome.jpg&quot;</span> <span class="kw3">alt</span><span class="sy0">=</span><span class="st0">&quot;Alternative text&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">figcaption</span>&gt;</span>
+        Bruce and Remy welcome questions
+            <span class="sc2">&lt;<span class="kw2">small</span>&gt;</span>Photo <span class="sc1">&amp;copy;</span> Bruce’s mum<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">small</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">figcaption</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">figure</span>&gt;</span></pre>
+</div>
+
+<p>En conveniente recordar que el atributo <code>alt</code> indica el texto a mostrar cuando la imagen no está disponible, y no está pensada para contener una descripción de la imagen, y mucho menos para duplicar lo ya indicado en la etiqueta <code>&lt;figcaption&gt;</code>.</p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 1</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej01">Ver enunciado</a></p>
+
+<h2 id="atributos-globales">2.5 Atributos globales</h2>
+
+<p>HTML5 también incluye nuevos atributos globales que pueden ser asignados a cualquier elemento. Son los siguientes:</p>
+
+<h3 id="accesskey">2.5.1 accesskey</h3>
+
+<p>El atributo <code>accesskey</code> permite a los desarrolladores especificar un atajo de teclado que permite activar un elemento a asignarle el foco. Este atributo ya existía en HTML 4, aunque ha sido utilizado en muy pocas ocasiones. Como HTML5 está pensado para aplicaciones, y algunos usuarios siguen prefiriendo los atajos de teclado, este atributo no ha sido eliminado, y ahora está disponible para cualquier elemento.</p>
+
+<p>Para evitar conflictos con otros atajos de teclado, o con los propios del navegador, ahora esta etiqueta permite asignar alternativas en este atributo. Un ejemplo incluido en la especificación:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;search&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;q&quot;</span> <span class="kw3">accesskey</span><span class="sy0">=</span><span class="st0">&quot;s 0&quot;</span>&gt;</span></pre>
+</div>
+
+<p>Esto quiere decir que este elemento es accesible a través de dos atajos de teclado, a través de la tecla <code>s</code> o a través de la tecla <code>0</code> (en ese orden).</p>
+
+<h3 id="contenteditable">2.5.2 contenteditable</h3>
+
+<p>Inventado por Microsoft, e implementado por el resto de los navegadores, la etiqueta <code>contenteditable</code> es ahora parte de la especificación oficial.</p>
+
+<p>La introducción de esta etiqueta significa principalmente dos cosas:</p>
+
+<ul>
+<li>Primero, los usuarios pueden editar los contenidos de un elemento que incluya esta etiqueta. Este elemento debe ser seleccionable y el navegador debe proporcionar una marca que indique la posición actual del cursor.</li>
+<li>Y segundo, es posible cambiar el formato del texto del contenido, añadiendo negritas, cambiar la fuente, añadir listas, etc.</li>
+</ul>
+
+<p>Este atributo es de tipo <em>booleano</em>, por lo que su valor puede ser <em>true</em> o <em>false</em>. Al acceder desde JavaScript a este atributo, hay que tener en cuenta su notación <em>lowerCamelCase</em>, siendo el nombre de la propiedad del DOM <code>contentEditable</code>. Además, existe otra propiedad llamada <code>isContentEditable</code>, que indica si el elemento es editable o no.</p>
+
+<p>Finalmente, el contenido que ha sido seleccionado por el usuario, puede ser objeto de modificaciones, como hemos comentado antes. A través del comando <code>element.execCommand()</code> es posible indicar el tipo de modificación (poner en negrita, copiar, cambiar la fuente...), siempre que el documento se haya indicado como editable.</p>
+
+<div class="code javascript">
+<pre class="javascript">document.<span class="me1">designMode</span> <span class="sy0">=</span> <span class="st0">'on'</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Si se desea almacenar los cambios realizados en el contenido, es necesario enviarlo al servidor. No existe ningún API o método en JavaScript que nos posibilite esta acción, por lo que debemos utilizar algún tipo de tecnología tipo AJAX.</p>
+
+<h3 id="data-custom-data-attributes">2.5.3 data-* (custom data attributes)</h3>
+
+<p>HTML5 permite crear atributos personalizados para los elementos. Estos atributos son utilizados para pasar información a JavaScript. Como veremos en el capítulo correspondiente, hasta ahora se utilizaba el atributo <em>class</em> para de alguna manera almacenar información asociada con elementos, pero esto cambia radicalmente con estos atributos.</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">ul</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;vegetable-seeds&quot;</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">li</span> data-spacing<span class="sy0">=</span><span class="st0">&quot;10cm&quot;</span> data-sowing-time<span class="sy0">=</span><span class="st0">&quot;March to June&quot;</span>&gt;</span>Carrots<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">li</span> data-spacing<span class="sy0">=</span><span class="st0">&quot;30cm&quot;</span> data-sowing-time<span class="sy0">=</span><span class="st0">&quot;February to March&quot;</span>&gt;</span>Celery<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">li</span> data-spacing<span class="sy0">=</span><span class="st0">&quot;3cm&quot;</span> data-sowing-time<span class="sy0">=</span><span class="st0">&quot;March to September&quot;</span>&gt;</span>Radishes<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">ul</span>&gt;</span></pre>
+</div>
+
+<h3 id="draggable">2.5.4 draggable</h3>
+
+<p>Este atributo indica que el elemento indicado puede ser <em>arrastable</em>. Lo veremos en el capítulo correspondiente.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-2.html#semantica">Semántica</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.1</span>
+                        <a class="internal" href="capitulo-2.html#cabecera-del-documento">Cabecera del documento</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.2</span>
+                        <a class="internal" href="capitulo-2.html#nuevas-etiquetas-semanticas">Nuevas etiquetas semánticas</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.3</span>
+                        <a class="internal" href="capitulo-2.html#estructura-de-un-documento-html5">Estructura de un documento HTML5</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.4</span>
+                        <a class="internal" href="capitulo-2.html#uso-de-las-nuevas-etiquetas-semanticas">Uso de las nuevas etiquetas semánticas</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.5</span>
+                        <a class="internal" href="capitulo-2.html#atributos-globales">Atributos globales</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

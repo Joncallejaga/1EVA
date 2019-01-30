@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="14/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Eventos | jQuery</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">jQuery</a></h1>
+        <p class="span3">
+                        <a href="capitulo-4.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-6.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="eventos"><span>Capítulo 5</span> Eventos</h1>
+        <h2 id="introduccion-3">5.1 Introducción</h2>
+
+<p>jQuery provee métodos para asociar controladores de eventos (en inglés <em>event handlers</em>) a selectores. Cuando un evento ocurre, la función  provista es ejecutada. Dentro de la función, la palabra clave <code>this</code> hace referencia al elemento en que el evento ocurre.</p>
+
+<p>Para más detalles sobre los eventos en jQuery, puede consultar <a href="http://api.jquery.com/category/events/">http://api.jquery.com/category/events/</a>.</p>
+
+<p>La función del controlador de eventos puede recibir un objeto. Este objeto puede ser utilizado para determinar la naturaleza del evento o, por ejemplo, prevenir el comportamiento predeterminado de éste.  Para más detalles sobre el objeto del evento, visite <a href="http://api.jquery.com/category/events/event-object/">http://api.jquery.com/category/events/event-object/</a>.</p>
+
+<h2 id="vincular-eventos-a-elementos">5.2 Vincular Eventos a Elementos</h2>
+
+<p>jQuery ofrece métodos para la mayoría de los eventos — entre ellos <code>$.fn.click</code>, <code>$.fn.focus</code>, <code>$.fn.blur</code>, <code>$.fn.change</code>, etc. Estos últimos son formas reducidas del método <code>$.fn.on</code> de jQuery (<code>$.fn.bind</code> en versiones anteriores a jQuery 1.7). El método <code>$.fn.on</code> es útil para vincular (en inglés <em>binding</em>) la misma función de controlador a múltiples eventos, para cuando se desea proveer información al controlador de evento, cuando se está trabajando con eventos personalizados o cuando se desea pasar un objeto a múltiples eventos y controladores.</p>
+
+<p><strong>Vincular un evento utilizando un método reducido</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'p'</span><span class="br0">&#41;</span>.<span class="me1">click</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'click'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p><strong>Vincular un evento utilizando el método <code>$.fn.on</code></strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'p'</span><span class="br0">&#41;</span>.<span class="me1">on</span><span class="br0">&#40;</span><span class="st0">'click'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'click'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p><strong>Vincular un evento utilizando el método <code>$.fn.on</code> con información asociada</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'input'</span><span class="br0">&#41;</span>.<span class="me1">on</span><span class="br0">&#40;</span>
+    <span class="st0">'click blur'</span><span class="sy0">,</span>  <span class="co1">// es posible vincular múltiples eventos al elemento</span>
+    <span class="br0">&#123;</span> foo <span class="sy0">:</span> <span class="st0">'bar'</span> <span class="br0">&#125;</span><span class="sy0">,</span> <span class="co1">// se debe pasar la información asociada como argumento</span>
+&nbsp;
+    <span class="kw1">function</span><span class="br0">&#40;</span>eventObject<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        console.<span class="me1">log</span><span class="br0">&#40;</span>eventObject.<span class="me1">type</span><span class="sy0">,</span> eventObject.<span class="me1">data</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="co1">// registra el tipo de evento y la información asociada { foo : 'bar' }</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="vincular-eventos-para-ejecutar-una-vez">5.2.1 Vincular Eventos para Ejecutar una vez</h3>
+
+<p>A veces puede necesitar que un controlador particular se ejecute solo una vez — y después de eso, necesite que ninguno más se ejecute, o que se ejecute otro diferente. Para este propósito jQuery provee el método <code>$.fn.one</code>.</p>
+
+<p><strong>Cambiar controladores utilizando el método <code>$.fn.one</code></strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'p'</span><span class="br0">&#41;</span>.<span class="me1">one</span><span class="br0">&#40;</span><span class="st0">'click'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'Se clickeó al elemento por primera vez'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span>.<span class="me1">click</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'Se ha clickeado nuevamente'</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>El método <code>$.fn.one</code> es útil para situaciones en que necesita ejecutar cierto código la primera vez que ocurre un evento en un elemento, pero no en los eventos sucesivos.</p>
+
+<h3 id="desvincular-eventos">5.2.2 Desvincular Eventos</h3>
+
+<p>Para desvincular (en ingles <em>unbind</em>) un controlador de evento, puede utilizar el método <code>$.fn.off</code> pasándole el tipo de evento a desconectar. Si se pasó como adjunto al evento una función nombrada, es posible aislar la desconexión de dicha función pasándola como segundo argumento.</p>
+
+<p><strong>Desvincular todos los controladores del evento click en una selección</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'p'</span><span class="br0">&#41;</span>.<span class="me1">off</span><span class="br0">&#40;</span><span class="st0">'click'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p><strong>Desvincular un controlador particular del evento click</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> foo <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'foo'</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+<span class="kw1">var</span> bar <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'bar'</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+$<span class="br0">&#40;</span><span class="st0">'p'</span><span class="br0">&#41;</span>.<span class="me1">on</span><span class="br0">&#40;</span><span class="st0">'click'</span><span class="sy0">,</span> foo<span class="br0">&#41;</span>.<span class="me1">on</span><span class="br0">&#40;</span><span class="st0">'click'</span><span class="sy0">,</span> bar<span class="br0">&#41;</span><span class="sy0">;</span>
+$<span class="br0">&#40;</span><span class="st0">'p'</span><span class="br0">&#41;</span>.<span class="me1">off</span><span class="br0">&#40;</span><span class="st0">'click'</span><span class="sy0">,</span> bar<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// foo esta atado aún al evento click</span></pre>
+</div>
+
+<h3 id="espacios-de-nombres-para-eventos">5.2.3 Espacios de Nombres para Eventos</h3>
+
+<p>Cuando se esta desarrollando aplicaciones complejas o extensiones de jQuery, puede ser útil utilizar espacios de nombres para los eventos, y de esta forma evitar que se desvinculen eventos cuando no lo desea.</p>
+
+<p><strong>Asignar espacios de nombres a eventos</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'p'</span><span class="br0">&#41;</span>.<span class="me1">on</span><span class="br0">&#40;</span><span class="st0">'click.myNamespace'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="coMULTI">/* ... */</span> <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+$<span class="br0">&#40;</span><span class="st0">'p'</span><span class="br0">&#41;</span>.<span class="me1">off</span><span class="br0">&#40;</span><span class="st0">'click.myNamespace'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+$<span class="br0">&#40;</span><span class="st0">'p'</span><span class="br0">&#41;</span>.<span class="me1">off</span><span class="br0">&#40;</span><span class="st0">'.myNamespace'</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// desvincula todos los eventos con</span>
+                            <span class="co1">// el espacio de nombre 'myNamespace'</span></pre>
+</div>
+
+<h3 id="vinculacion-de-multiples-eventos">5.2.4 Vinculación de Múltiples Eventos</h3>
+
+<p>Muy a menudo, elementos en una aplicación estarán vinculados a múltiples eventos, cada uno con una función diferente. En estos casos, es posible pasar un objeto dentro de <code>$.fn.on</code> con uno o más pares de nombres claves/valores. Cada clave será el nombre del evento mientras que cada valor será la función a ejecutar cuando ocurra el evento.</p>
+
+<p><strong>Vincular múltiples eventos a un elemento</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'p'</span><span class="br0">&#41;</span>.<span class="me1">on</span><span class="br0">&#40;</span><span class="br0">&#123;</span>
+    <span class="st0">'click'</span><span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> 
+        console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'clickeado'</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+    <span class="st0">'mouseover'</span><span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> 
+        console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'sobrepasado'</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="el-objeto-del-evento">5.3 El Objeto del Evento</h2>
+
+<p>Como se menciona en la introducción, la función controladora de eventos recibe un objeto del evento, el cual contiene varios métodos y propiedades. El objeto es comúnmente utilizado para prevenir la acción predeterminada del evento a través del método <em>preventDefault</em>. Sin embargo, también contiene varias propiedades y métodos útiles:</p>
+
+<dl>
+<dt>pageX, pageY</dt>
+<dd>La posición del puntero del ratón en el momento que el evento ocurrió, relativo a las zonas superiores e izquierda de la página.</dd>
+
+<dt>type</dt>
+<dd>El tipo de evento (por ejemplo "click").</dd>
+
+<dt>which</dt>
+<dd>El botón o tecla presionada.</dd>
+
+<dt>data</dt>
+<dd>Alguna información pasada cuando el evento es ejecutado.</dd>
+
+<dt>target</dt>
+<dd>El elemento DOM que inicializó el evento.</dd>
+
+<dt>preventDefault()</dt>
+<dd>Cancela la acción predeterminada del evento (por ejemplo: seguir un enlace).</dd>
+
+<dt>stopPropagation()</dt>
+<dd>Detiene la propagación del evento sobre otros elementos.</dd>
+</dl>
+
+<p>Por otro lado, la función controladora también tiene acceso al elemento DOM que inicializó el evento a través de la palabra clave <code>this</code>. Para convertir a dicho elemento DOM en un objeto jQuery (y poder utilizar los métodos de la biblioteca) es necesario escribir <code>$(this)</code>, como se muestra a continuación:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> $this <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p><strong>Cancelar que al hacer click en un enlace, éste se siga</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'a'</span><span class="br0">&#41;</span>.<span class="me1">click</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> $this <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>$this.<span class="me1">attr</span><span class="br0">&#40;</span><span class="st0">'href'</span><span class="br0">&#41;</span>.<span class="me1">match</span><span class="br0">&#40;</span><span class="st0">'evil'</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        e.<span class="me1">preventDefault</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        $this.<span class="me1">addClass</span><span class="br0">&#40;</span><span class="st0">'evil'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="ejecucion-automatica-de-controladores-de-eventos">5.4 Ejecución automática de Controladores de Eventos</h2>
+
+<p>A través del método <code>$.fn.trigger</code>, jQuery provee una manera de disparar controladores de eventos sobre algún elemento sin requerir la acción del usuario. Si bien este método tiene sus usos, no debería ser utilizado para simplemente llamar a una función que pueda ser ejecutada con un click del usuario. En su lugar, debería guardar la función que se necesita llamar en una variable, y luego pasar el nombre de la variable cuando realiza el vinculo (<em>binding</em>). De esta forma, podrá llamar a la función cuando lo desee en lugar de ejecutar <code>$.fn.trigger</code>.</p>
+
+<p><strong>Disparar un controlador de eventos de la forma correcta</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> foo <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        console.<span class="me1">log</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+        console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'esta ejecucción no provino desde un evento'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+$<span class="br0">&#40;</span><span class="st0">'p'</span><span class="br0">&#41;</span>.<span class="me1">click</span><span class="br0">&#40;</span>foo<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+foo<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// en lugar de realizar $('p').trigger('click')</span></pre>
+</div>
+
+<h2 id="incrementar-el-rendimiento-con-la-delegacion-de-eventos">5.5 Incrementar el Rendimiento con la Delegación de Eventos</h2>
+
+<p>Cuando trabaje con jQuery, frecuentemente añadirá nuevos elementos a la página, y cuando lo haga, necesitará vincular eventos a dichos elementos. En lugar de repetir la tarea cada vez que se añade un elemento, es posible utilizar la delegación de eventos para hacerlo. Con ella, podrá enlazar un evento a un elemento contenedor, y luego, cuando el evento ocurra, podrá ver en que elemento sucede.</p>
+
+<p>La delegación de eventos posee algunos beneficios, incluso si no se tiene pensando añadir más elementos a la página. El tiempo requerido para enlazar controladores de eventos a cientos de elementos no es un trabajo trivial; si posee un gran conjunto de elementos, debería considerar utilizar la delegación de eventos a un elemento contenedor.</p>
+
+<blockquote>
+  <p><strong>Nota</strong></p>
+  
+  <p>A partir de la versión 1.4.2, se introdujo <code>$.fn.delegate</code>, sin embargo a partir de la versión 1.7 es preferible utilizar el evento <code>$.fn.on</code> para la delegación de eventos.</p>
+</blockquote>
+
+<p><strong>Delegar un evento utilizando <code>$.fn.on</code></strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'#myUnorderedList'</span><span class="br0">&#41;</span>.<span class="me1">on</span><span class="br0">&#40;</span><span class="st0">'click'</span><span class="sy0">,</span> <span class="st0">'li'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> $myListItem <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="co1">// ...</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p><strong>Delegar un evento utilizando <code>$.fn.delegate</code></strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'#myUnorderedList'</span><span class="br0">&#41;</span>.<span class="me1">delegate</span><span class="br0">&#40;</span><span class="st0">'li'</span><span class="sy0">,</span> <span class="st0">'click'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> $myListItem <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="co1">// ...</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="desvincular-eventos-delegados">5.5.1 Desvincular Eventos Delegados</h3>
+
+<p>Si necesita remover eventos delegados, no puede hacerlo simplemente desvinculándolos. Para eso, utilice el método <code>$.fn.off</code> para eventos conectados con <code>$.fn.on</code>, y <code>$.fn.undelegate</code> para eventos conectados con <code>$.fn.delegate</code>. Al igual que cuando se realiza un vinculo, opcionalmente, se puede pasar el nombre de una función vinculada.</p>
+
+<p><strong>Desvincular eventos delegados</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'#myUnorderedList'</span><span class="br0">&#41;</span>.<span class="me1">off</span><span class="br0">&#40;</span><span class="st0">'click'</span><span class="sy0">,</span> <span class="st0">'li'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+$<span class="br0">&#40;</span><span class="st0">'#myUnorderedList'</span><span class="br0">&#41;</span>.<span class="me1">undelegate</span><span class="br0">&#40;</span><span class="st0">'li'</span><span class="sy0">,</span> <span class="st0">'click'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="funciones-auxiliares-de-eventos">5.6 Funciones Auxiliares de Eventos</h2>
+
+<p>jQuery ofrece dos funciones auxiliares para el trabajo con eventos:</p>
+
+<h3 id="fnhover">5.6.1 <code>$.fn.hover</code></h3>
+
+<p>El método <code>$.fn.hover</code> permite pasar una o dos funciones que se ejecutarán cuando los eventos <code>mouseenter</code> y <code>mouseleave</code> ocurran en el elemento seleccionado. Si se pasa una sola función, está será ejecutada en ambos eventos; en cambio si se pasan dos, la primera será ejecutada cuando ocurra el evento <code>mouseenter</code>, mientras que la segunda será ejecutada cuando ocurra <code>mouseleave</code>.</p>
+
+<blockquote>
+  <p><strong>Nota</strong></p>
+  
+  <p>A partir de la versión 1.4 de jQuery, el método requiere obligatoriamente dos funciones.</p>
+</blockquote>
+
+<p><strong>La función auxiliar hover</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'#menu li'</span><span class="br0">&#41;</span>.<span class="me1">hover</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span>.<span class="me1">toggleClass</span><span class="br0">&#40;</span><span class="st0">'hover'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="fntoggle">5.6.2 <code>$.fn.toggle</code></h3>
+
+<p>Al igual que el método anterior, <code>$.fn.toggle</code> recibe dos o más funciones; cada vez que un evento ocurre, la función siguiente en la lista se ejecutará. Generalmente, <code>$.fn.toggle</code> es utilizada con solo dos funciones. En caso que utiliza más de dos funciones, tenga cuidado, ya que puede ser dificultar la depuración del código.</p>
+
+<p><strong>La función auxiliar toggle</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'p.expander'</span><span class="br0">&#41;</span>.<span class="me1">toggle</span><span class="br0">&#40;</span>
+    <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span>.<span class="me1">prev</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">addClass</span><span class="br0">&#40;</span><span class="st0">'open'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+    <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span>.<span class="me1">prev</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">removeClass</span><span class="br0">&#40;</span><span class="st0">'open'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="ejercicios-3">5.7 Ejercicios</h2>
+
+<h3 id="crear-una-sugerencia-para-una-caja-de-ingreso-de-texto">5.7.1 Crear una "Sugerencia" para una Caja de Ingreso de Texto</h3>
+
+<p>Abra el archivo <code>/ejercicios/index.html</code> en el navegador. Realice el ejericio utilizando el archivo <code>/ejercicios/js/inputHint.js</code> o trabaje directamente con Firebug. La tarea a realizar es utilizar el texto del elemento label y aplicar una "sugerencia" en la caja de ingreso de texto. Los pasos ha seguir son los siguientes:</p>
+
+<ol>
+<li>Establecer el valor del elemento <em>input</em> igual al valor del elemento <em>label</em>;</li>
+<li>Añadir la clase "hint" al elemento <em>input</em>;</li>
+<li>Remover el elemento <em>label</em>;</li>
+<li>Vincular un evento <em>focus</em> en el <em>input</em> para remover el texto de sugerencia y la clase "hint";</li>
+<li>Vincular un evento <em>blur</em> en el <em>input</em> para restaurar el texto de sugerencia y la clase "hint" en caso que no se haya ingresado algún texto.</li>
+</ol>
+
+<p>¿Qué otras consideraciones debe considerar si se desea aplicar esta funcionalidad a un sitio real?</p>
+
+<h3 id="anadir-una-navegacion-por-pestanas">5.7.2 Añadir una Navegación por Pestañas</h3>
+
+<p>Abra el archivo <code>/ejercicios/index.html</code> en el navegador. Realice el ejericio utilizando el archivo <code>/ejercicios/js/tabs.js</code> o trabaje directamente con Firebug. La tarea a realizar es crear una navegación por pestañas para los dos elementos <em>div.module</em>. Los pasos ha seguir son los siguientes:</p>
+
+<ol>
+<li>Ocultar todos los elementos <em>div.module</em>;</li>
+<li>Crear una lista desordenada antes del primer <em>div.module</em> para utilizar como pestañas;</li>
+<li>Interactuar con cada div utilizando <code>$.fn.each</code>. Por cada uno, utilizar el texto del elemento <em>h2</em> como el texto para el ítem de la lista desordenada;</li>
+<li>Vincular un evento <em>click</em> a cada ítem de la lista de forma que:
+
+<ul>
+<li>Muestre el <em>div</em> correspondiente y oculte el otro;</li>
+<li>Añada la clase "current" al ítem seleccionado;</li>
+<li>Remueva la clase "current" del otro ítem de la lista;</li>
+</ul></li>
+<li>Finalmente, mostrar la primera pestaña.</li>
+</ol>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-5.html#eventos">Eventos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.1</span>
+                        <a class="internal" href="capitulo-5.html#introduccion-3">Introducción</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.2</span>
+                        <a class="internal" href="capitulo-5.html#vincular-eventos-a-elementos">Vincular Eventos a Elementos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.3</span>
+                        <a class="internal" href="capitulo-5.html#el-objeto-del-evento">El Objeto del Evento</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.4</span>
+                        <a class="internal" href="capitulo-5.html#ejecucion-automatica-de-controladores-de-eventos">Ejecución automática de Controladores de Eventos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.5</span>
+                        <a class="internal" href="capitulo-5.html#incrementar-el-rendimiento-con-la-delegacion-de-eventos">Incrementar el Rendimiento con la Delegación de Eventos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.6</span>
+                        <a class="internal" href="capitulo-5.html#funciones-auxiliares-de-eventos">Funciones Auxiliares de Eventos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.7</span>
+                        <a class="internal" href="capitulo-5.html#ejercicios-3">Ejercicios</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

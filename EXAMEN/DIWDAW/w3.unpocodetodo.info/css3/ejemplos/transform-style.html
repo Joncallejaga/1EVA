@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>La propiedad transform-style</title>
+<meta name="description" content="En CSS3 la propiedad transform-style decide si los elementos anidados preservan las transformaciones 3D  o no.  Demo." />
+  <meta name="keywords" content="tutorial, html5, css, css3, transform-style, preserve-3d, flat, demo"/>
+  <meta name="author" content="enxaneta.info" />
+  <meta property="og:title" content="Referencia CSS3" /> 
+  <meta property="og:type" content="website" /> 
+  <meta property="og:image" content="http://w3.unpocodetodo.info/images/w3_og.png" /> 
+  <meta property="og:url" content="http://w3.unpocodetodo.info/css3/ejemplos/transform-style.html" /> 
+  <meta property="og:site_name" content="w3.unpocodetodo.info" /> 
+  <meta property="og:description" content="En CSS3 la propiedad transform-style decide si los elementos anidados preservan las transformaciones 3D  o no.  Demo." />
+  
+  <link rel="icon" type="image/png" href="../../images/w3.png" />
+  <!-- 57x57 older iPhone and Android devices -->
+ <!-- <link rel="apple-touch-icon-precomposed" href="http://w3.unpocodetodo.info/images/apple-touch-icon-precomposed.png">-->
+  <!-- iPad 1 and 2 & iPad mini -->
+  <link rel="apple-touch-icon" sizes="72x72" href="../../images/apple-touch-icon-72x72.png">
+  <!-- iPhone 4, 4S, 5 and iPod Touch -->
+  <link rel="apple-touch-icon" sizes="114x114" href="../../images/apple-touch-icon-114x114.png">
+  <!-- iPad 3rd gen -->
+  <link rel="apple-touch-icon" sizes="144x144" href="../../images/apple-touch-icon-144x144.png"> 
+<style>
+body{ margin:0; padding:0; width:100%;}
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+    box-sizing: border-box; 
+}
+#contenido{ width:790px; margin:50px auto; border:1px solid #d9d9d9; padding:30px;}
+.container{ width:400px; margin:0 auto; height:150px}
+
+
+/******** La propiedad transform-style **********/
+.preserve { 
+	min-width:200px; height:100px; margin:30px 0; float:left;
+	-webkit-perspective:200px;
+    perspective:200px;
+	}
+#preserve1{	
+	-webkit-transform-style: flat;
+	transform-style: flat;
+	-webkit-transform : rotateY(60deg);
+	transform : rotateY(60deg);	
+	}
+#preserve2{
+	-webkit-transform : rotateY(60deg);
+	transform : rotateY(60deg);	
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+.preserve .d{
+	padding: 40px;
+    background-color: gold;
+	-webkit-transform : rotateX(20deg);
+	transform : rotateX(20deg);}';
+	
+</style>
+</head>
+
+<body>
+<div id="contenido">
+
+<div class="container">
+<div class="preserve">
+  <div id="preserve1">
+    <div class="d">&nbsp;&nbsp;flat&nbsp;&nbsp;</div>
+  </div>
+</div>
+<div class="preserve">
+  <div id="preserve2">
+    <div class="d">preserve-3d</div>
+  </div>
+</div>
+</div>
+
+</div>
+</body>
+</html>

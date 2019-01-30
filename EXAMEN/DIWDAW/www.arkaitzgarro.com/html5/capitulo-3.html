@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="28/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Elementos de formulario | HTML5</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">HTML5</a></h1>
+        <p class="span3">
+                        <a href="capitulo-2.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-4.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="elementos-de-formulario"><span>Capítulo 3</span> Elementos de formulario</h1>
+        <p>HTML5 hace que el desarrollo de formularios sea mucho más sencillo. Se han añadido dos nuevos métodos que pueden ser utilizados en la acción del formulario (<code>update</code> y <code>delete</code>), pero lo más interesante son los nuevos tipos de <code>input</code> y elementos de formulario que mejoran la experiencia del usuario y facilitan el desarrollo de los formularios. Estos nuevos elementos añaden en algunos casos, validaciones propias de sus datos, por lo que ya no es necesario JavaScript para realizar este proceso.</p>
+
+<h2 id="nuevos-tipos-de-input">3.1 Nuevos tipos de input</h2>
+
+<p>La especificación de HTML5 define 12 nuevos tipos de <code>input</code> que podemos utilizar en nuestros formularios. Esta especificación no define cómo deben mostrarse los nuevos tipos en los navegadores, ni los campos ni las validaciones. De hecho, y gracias a cómo está especificado HTML, los navegadores que no <em>comprendan</em> los nuevos tipos de entrada, mostrarán un campo de texto tradicional, por lo que la compatibilidad con navegadores antiguos está garantizada.</p>
+
+<h3 id="tipo-email">3.1.1 Tipo <code>email</code></h3>
+
+<p>El nuevo tipo <code>&lt;input type="email"&gt;</code> indica al navegador que no debe permitir que se envíe el formulario si el usuario no ha introducido una dirección de email <em>válida</em>, pero no comprueba si la dirección existe o no, sólo si el formato es válido. Como ocurre con el resto de campos de entrada, puede enviar este campo vacío a menos que se indique que es obligatorio.</p>
+
+<p>El atributo <code>multiple</code> indica que el valor de este campo, puede ser una lista de emails válidos, separados por comas.</p>
+
+<div class="figure" id="figure-3-1">
+    <img src="images/cap03/input_email.png" alt="Campo de tipo <code>email</code> en un dispositivo iOS" />
+
+    <p class="caption"><strong>Figura 3.1</strong> Campo de tipo <code>email</code> en un dispositivo iOS</p>
+</div>
+
+
+<h3 id="tipo-url">3.1.2 Tipo <code>url</code></h3>
+
+<p>El nuevo tipo <code>&lt;input type="url"&gt;</code> indica al navegador que no debe permitir que se envíe el formulario si el usuario no ha introducido una URL correcta. Algunos navegadores ofrecen ayudas al usuario, como Opera que añade el prefijo <code>http://</code> a la URL si el usuario no lo ha introducido. Una URL no tiene que ser necesariamente una dirección web, sino que es posible utilizar cualquier formato de URI válido, como por ejemplo <code>tel:555123456</code>.</p>
+
+<div class="figure" id="figure-3-2">
+    <img src="images/cap03/input_url.png" alt="Campo de tipo <code>url</code> en un dispositivo iOS" />
+
+    <p class="caption"><strong>Figura 3.2</strong> Campo de tipo <code>url</code> en un dispositivo iOS</p>
+</div>
+
+
+<h3 id="tipo-date">3.1.3 Tipo <code>date</code></h3>
+
+<p>El nuevo tipo <code>&lt;input type="date"&gt;</code> es de los más esperados y útiles. En muchos de los sitios web es normal disponer de campos específicos de fecha, donde el usuario debe especificar fechas (para un concierto, vuelo, reserva de hotel, etc). Al existir tantos formatos de fecha diferentes (DD-MM-YYYY o MM-DD-YYYY o YYYY-MM-DD), esto puede suponer un inconveniente para los desarrolladores o los propios usuarios.</p>
+
+<p>Este nuevo tipo de campo resuelve estos problemas, ya que es el navegador el que proporciona la interfaz de usuario para el calendario, e independientemente del formato en el que se muestre, los datos que se envían al servidor cumplen la <a href="http://es.wikipedia.org/wiki/ISO_8601">norma ISO</a> para el formato de fechas.</p>
+
+<div class="figure" id="figure-3-3">
+    <img src="images/cap03/input_date.png" alt="Campo de tipo <code>date</code> en un dispositivo iOS" />
+
+    <p class="caption"><strong>Figura 3.3</strong> Campo de tipo <code>date</code> en un dispositivo iOS</p>
+</div>
+
+
+<h3 id="tipo-time">3.1.4 Tipo <code>time</code></h3>
+
+<p>El nuevo tipo <code>&lt;input type="time"&gt;</code> permite introducir una hora en formato 24h, y validarlo. De nuevo, es el navegador el encargado de mostrar la interfaz de usuario correspondiente: puede ser un simple campo donde es posible introducir la hora y los minutos, o mostrar algo más complejo como un reloj de agujas.</p>
+
+<div class="figure" id="figure-3-4">
+    <img src="images/cap03/input_time.png" alt="Campo de tipo <code>time</code> en un dispositivo iOS" />
+
+    <p class="caption"><strong>Figura 3.4</strong> Campo de tipo <code>time</code> en un dispositivo iOS</p>
+</div>
+
+
+<h3 id="tipo-datetime">3.1.5 Tipo <code>datetime</code></h3>
+
+<p>Este nuevo tipo de campo es la combinación de los tipos <code>date</code> y <code>time</code>, por lo que se valida tanto la fecha como la hora introducida.</p>
+
+<div class="figure" id="figure-3-5">
+    <img src="images/cap03/input_datetime.png" alt="Campo de tipo <code>datetime</code> en un dispositivo iOS" />
+
+    <p class="caption"><strong>Figura 3.5</strong> Campo de tipo <code>datetime</code> en un dispositivo iOS</p>
+</div>
+
+
+<h3 id="tipo-month">3.1.6 Tipo <code>month</code></h3>
+
+<p>El nuevo tipo <code>&lt;input type="month"&gt;</code> permite la selección de un mes en concreto. La representación interna del mes es un valor entre 1 y 12, pero de nuevo queda en manos del navegador la manera de mostrarlo al usuario, utilizando los nombres de los meses por ejemplo.</p>
+
+<div class="figure" id="figure-3-6">
+    <img src="images/cap03/input_month.png" alt="Campo de tipo <code>month</code> en un dispositivo iOS" />
+
+    <p class="caption"><strong>Figura 3.6</strong> Campo de tipo <code>month</code> en un dispositivo iOS</p>
+</div>
+
+
+<h3 id="tipo-week">3.1.7 Tipo <code>week</code></h3>
+
+<p>El nuevo tipo <code>&lt;input type="week"&gt;</code> permite la selección de una semana del año concreta. La representación interna del mes es un valor entre 1 y 53, pero de nuevo queda en manos del navegador la manera de mostrarlo al usuario. La representación interna de la semana 7, por ejemplo, es la siguiente: <code>2013-W07</code>.</p>
+
+<div class="figure" id="figure-3-7">
+    <img src="images/cap03/input_week.png" alt="Campo de tipo <code>week</code> en Google Chrome" />
+
+    <p class="caption"><strong>Figura 3.7</strong> Campo de tipo <code>week</code> en Google Chrome</p>
+</div>
+
+
+<h3 id="tipo-number">3.1.8 Tipo <code>number</code></h3>
+
+<p>Como es de esperar, el nuevo tipo <code>&lt;input type="number"&gt;</code> valida la entrada de un tipo de dato numérico. Este tipo de campo encaja perfectamente con los atributos <code>min</code>, <code>max</code> y <code>step</code>, que veremos más adelante.</p>
+
+<div class="figure" id="figure-3-8">
+    <img src="images/cap03/input_number.png" alt="Campo de tipo <code>number</code> en un dispositivo iOS" />
+
+    <p class="caption"><strong>Figura 3.8</strong> Campo de tipo <code>number</code> en un dispositivo iOS</p>
+</div>
+
+
+<h3 id="tipo-range">3.1.9 Tipo <code>range</code></h3>
+
+<p>El nuevo tipo <code>&lt;input type="range"&gt;</code>, muestra un control deslizante en el navegador. Para conseguir un elemento de este estilo, era necesario un gran esfuerzo para combinar imágenes, funcionalidad y accesibilidad, siendo ahora mucho más sencillo. Este tipo de campo encaja de nuevo perfectamente con los atributos <code>min</code>, <code>max</code> y <code>step</code>, que veremos más adelante.</p>
+
+<div class="figure" id="figure-3-9">
+    <img src="images/cap03/input_range.png" alt="Campo de tipo <code>range</code> en Google Chrome" />
+
+    <p class="caption"><strong>Figura 3.9</strong> Campo de tipo <code>range</code> en Google Chrome</p>
+</div>
+
+
+<h3 id="tipo-tel">3.1.10 Tipo <code>tel</code></h3>
+
+<p>El nuevo tipo <code>&lt;input type="tel"&gt;</code>, espera que se proporcione un número de teléfono. No se realiza ninguna validación, ni se obliga a que únicamente se proporcionen caracteres numéricos, ya que un número de teléfono puede representarse de muchas maneras: <em>+44 (0) 208 123 1234</em>.</p>
+
+<p>La gran ventaja de este campo es que en dispositivos con un teclado virtual, éste se adaptará para mostrar únicamente los caracteres asociados on números de teléfono.</p>
+
+<div class="figure" id="figure-3-10">
+    <img src="images/cap03/input_tel.png" alt="Campo de tipo <code>tel</code> en un dispositivo iOS" />
+
+    <p class="caption"><strong>Figura 3.10</strong> Campo de tipo <code>tel</code> en un dispositivo iOS</p>
+</div>
+
+
+<h3 id="tipo-search">3.1.11 Tipo <code>search</code></h3>
+
+<p>El nuevo tipo <code>&lt;input type="search"&gt;</code>, espera que se proporcione un término de búsqueda. La diferencia con un campo de texto normal, es únicamente estética, aunque puede ofrecer alguna funcionalidad extra como un histórico de últimos términos introducidos o una ayuda para el borrado. Por norma general, toma el aspecto de un campo de búsqueda del navegador o sistema operativo.</p>
+
+<div class="figure" id="figure-3-11">
+    <img src="images/cap03/input_search.png" alt="Campo de tipo <code>search</code> en Google Chrome" />
+
+    <p class="caption"><strong>Figura 3.11</strong> Campo de tipo <code>search</code> en Google Chrome</p>
+</div>
+
+
+<h3 id="tipo-color">3.1.12 Tipo <code>color</code></h3>
+
+<p>El nuevo tipo <code>&lt;input type="color"&gt;</code>, permite seleccionar un color de una paleta de colores mostrada por el navegador. Esta paleta de colores, coincide, por norma general, con la interfaz de selección de colores del sistema operativo.</p>
+
+<div class="figure" id="figure-3-12">
+    <img src="images/cap03/input_color.png" alt="Campo de tipo <code>color</code> en Google Chrome" />
+
+    <p class="caption"><strong>Figura 3.12</strong> Campo de tipo <code>color</code> en Google Chrome</p>
+</div>
+
+
+<h2 id="nuevos-atributos">3.2 Nuevos atributos</h2>
+
+<p>Al igual que los nuevos tipos de campo, el elemento <code>input</code> ha recibido nuevos atributos para definir su comportamiento y restricciones: <code>autocomplete</code>, <code>min</code>, <code>max</code>, <code>multiple</code>, <code>pattern</code>, <code>autofocus</code>, <code>placeholder</code>, <code>required</code> y <code>step</code>. Existe además un nuevo atributo, <code>list</code>, que hace referencia a otro elemento, permitiendo crear un nuevo tipo de entrada de datos.</p>
+
+<h3 id="atributo-list-y-ltdatalistgt">3.2.1 Atributo <code>list</code> y <code>&lt;datalist&gt;</code></h3>
+
+<p>La combinación del atributo <code>list</code> y un elemento de tipo <code>&lt;datalist&gt;</code> da como resultado un campo de texto, donde el usuario puede introducir cualquier contenido, y las opciones definidas en el <code>&lt;datalist&gt;</code> se muestran como una lista desplegable. Hay que tener en cuenta que la lista tiene que estar contenida en un elemento <code>&lt;datalist&gt;</code> cuyo <code>id</code> coincide con el indicado en el atributo <code>list</code>:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;form-person-title&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> list<span class="sy0">=</span><span class="st0">&quot;mylist&quot;</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">datalist</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;mylist&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">label</span><span class="sy0">=</span><span class="st0">&quot;Mr&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;Mr&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">label</span><span class="sy0">=</span><span class="st0">&quot;Ms&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;Ms&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">label</span><span class="sy0">=</span><span class="st0">&quot;Prof&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;Mad Professor&quot;</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">datalist</span>&gt;</span></pre>
+</div>
+
+<p>En este ejemplo se utiliza un campo de tipo <code>text</code>, pero puede ser utilizado igualmente con campos de tipo <code>url</code> y <code>email</code>.</p>
+
+<div class="figure" id="figure-3-13">
+    <img src="images/cap03/datalist.png" alt="Nuevo elemento <code>datalist</code>, asociado a un campo de texto" />
+
+    <p class="caption"><strong>Figura 3.13</strong> Nuevo elemento <code>datalist</code>, asociado a un campo de texto</p>
+</div>
+
+
+<h3 id="atributo-autofocus">3.2.2 Atributo <code>autofocus</code></h3>
+
+<p>El atributo <em>booleano</em> <code>autofocus</code> permite definir que control va a tener el foco cuando la página se haya cargado. Hasta ahora, esto se conseguía a través de JavaScript, utilizando el método <code>.focus()</code> en un elemento concreto, al cargarse el documento. Ahora es el navegador el encargado de esta tarea, y puede comportarse de manera más inteligente, como no cambiando el foco de un elemento si el usuario ya se encuentra escribiendo en otro campo (éste era un problema común con JavaScript).</p>
+
+<p>Únicamente debe existir un elemento con este atributo definido en el documento. Desde el punto de vista de la usabilidad, hay que utilizar este atributo con cuidado. Hay que utilizarlo únicamente cuando el control que recibe el foco es el elemento principal de la página, como en un buscador, por ejemplo.</p>
+
+<h3 id="atributo-placeholder">3.2.3 Atributo <code>placeholder</code></h3>
+
+<p>Una pequeña mejora en la usabilidad de los formularios, suele ser colocar un pequeño texto de ayuda en algunos campos, de manera <em>discreta</em> y que desaparece cuando el usuario introduce algún dato. Como con el resto de elementos, hasta ahora era necesario utilizar JavaScript para realizar esta tarea, pero el atributo <code>placeholder</code> resuelve esta tarea.</p>
+
+<p>Es importante recordar que este atributo no sustituye a la etiqueta <code>&lt;label&gt;</code>.</p>
+
+<div class="figure" id="figure-3-14">
+    <img src="images/cap03/placeholder.png" alt="Atributo <code>placeholder</code> en un campo de búsqueda" />
+
+    <p class="caption"><strong>Figura 3.14</strong> Atributo <code>placeholder</code> en un campo de búsqueda</p>
+</div>
+
+
+<h3 id="atributo-required">3.2.4 Atributo <code>required</code></h3>
+
+<p>Este atributo puede ser utilizado en un <code>&lt;textarea&gt;</code> y en la gran mayoría de los elementos <code>&lt;input&gt;</code> (excepto en los de tipo <code>hidden</code>, <code>image</code> o botones como <code>submit</code>). Cuando este atributo está presente, el navegador no permite el envío del formulario si el campo en concreto está vacío.</p>
+
+<div class="figure" id="figure-3-15">
+    <img src="images/cap03/required.png" alt="Atributo <code>required</code> en un campo de texto" />
+
+    <p class="caption"><strong>Figura 3.15</strong> Atributo <code>required</code> en un campo de texto</p>
+</div>
+
+
+<h3 id="atributo-multiple">3.2.5 Atributo <code>multiple</code></h3>
+
+<p>Este atributo permite definir que un campo puede admitir varios valores, como URLs o emails. Un uso muy interesante de este atributo es utilizarlo en conjunto con el campo <code>&lt;input type="file"&gt;</code>, ya que de esta manera nos permite seleccionar varios ficheros que podemos enviar al servidor al mismo tiempo.</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;file&quot;</span> <span class="kw3">multiple</span><span class="sy0">=</span><span class="st0">&quot;multiple&quot;</span>&gt;</span></pre>
+</div>
+
+<h3 id="atributo-autocomplete">3.2.6 Atributo <code>autocomplete</code></h3>
+
+<p>Algunos navegadores suelen incluir alguna funcionalidad de autocompletado en algunos campos de formulario. A pesar de haber sido introducido recientemente en el estándar de HTML5, es una característica que lleva mucho tiempo siendo utilizada, concretamente desde la versión 5 de Internet Explorer.</p>
+
+<p>Este atributo permite controlar el comportamiento del autocompletado en los campos de texto del formulario (que por defecto está activado).</p>
+
+<h3 id="atributos-min-y-max">3.2.7 Atributos <code>min</code> y <code>max</code></h3>
+
+<p>Como hemos visto en el campo <code>&lt;input type="number"&gt;</code>, estos atributos restringen los valores que pueden ser introducidos; no es posible enviar el formulario con un valor menor que <code>min</code> o un valor mayor que <code>max</code>. También es posible utilizarlo en otro tipo de campos como <code>date</code>, para especificar fechas mínimas o máximas.</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;date&quot;</span> <span class="kw3">min</span><span class="sy0">=</span><span class="st0">&quot;2010-01-01&quot;</span> <span class="kw3">max</span><span class="sy0">=</span><span class="st0">&quot;2010-12-31&quot;</span>&gt;</span></pre>
+</div>
+
+<div class="figure" id="figure-3-16">
+    <img src="images/cap03/min_max.png" alt="Atributos <code>min</code> y <code>max</code> en un campo numérico" />
+
+    <p class="caption"><strong>Figura 3.16</strong> Atributos <code>min</code> y <code>max</code> en un campo numérico</p>
+</div>
+
+
+<h3 id="atributo-step">3.2.8 Atributo <code>step</code></h3>
+
+<p>El atributo <code>step</code> controla los <em>pasos</em> por los que un campo aumenta o disminuye su valor. Si un usuario quiere introducir un porcentaje, pero queremos que sea en múltiplos de 5, lo haríamos de la siguiente manera:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;range&quot;</span> mix<span class="sy0">=</span><span class="st0">&quot;0&quot;</span> <span class="kw3">max</span><span class="sy0">=</span><span class="st0">&quot;100&quot;</span> <span class="kw3">step</span><span class="sy0">=</span><span class="st0">&quot;5&quot;</span>&gt;</span></pre>
+</div>
+
+<h3 id="atributo-pattern">3.2.9 Atributo <code>pattern</code></h3>
+
+<p>Algunos de los tipos de <code>input</code> que hemos visto anteriormente (<code>email</code>, <code>number</code>, <code>url</code>...), son realmente expresiones regulares que el navegador evalúa cuando se introducen datos. El atributo <code>pattern</code> nos permite definir una expresión regular que el valor del campo debe cumplir. Por ejemplo, si el usuario debe introducir un número seguido de tres letras mayúsculas, podríamos definir esta expresión regular:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">pattern</span><span class="sy0">=</span><span class="st0">&quot;[0-9][A-Z]{3}&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;part&quot;</span></span>
+<span class="sc2">    <span class="kw3">title</span><span class="sy0">=</span><span class="st0">&quot;A part number is a digit followed by three uppercase letters.&quot;</span>&gt;</span></pre>
+</div>
+
+<p>La especificación indica que la sintaxis de la expresión regular que utilicemos debe coincidir con la utilizada en JavaScript.</p>
+
+<h3 id="atributo-form">3.2.10 Atributo <code>form</code></h3>
+
+<p>Tradicionalmente, los campos de un formulario van incluidos dentro de la correspondiente etiqueta <code>&lt;form&gt;</code>. Si por la razón que fuese (principalmente diseño) un elemento tuviese que mostrarse apartado del resto de elementos del formulario, se hacía casi necesario incluir toda la página dentro de una etiqueta <code>&lt;form&gt;</code>.</p>
+
+<p>Con HTML5, los elementos que hasta ahora era obligatorio que estuviesen contenidos dentro del elemento <code>&lt;form&gt;</code>, pueden colocarse en cualquier lugar de la página, siempre que los relacionemos con el formulario concreto a través del atributo <code>form</code> y el <code>id</code> de dicho formulario.</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">form</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;foo&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span>&gt;</span>
+    ...
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">form</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">textarea</span> <span class="kw3">form</span><span class="sy0">=</span><span class="st0">&quot;foo&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">textarea</span>&gt;</span></pre>
+</div>
+
+<p>En este caso, el elemento <code>&lt;textarea&gt;</code> se encuentra fuera del formulario, pero realmente pertenece a él ya que hemos definido el atributo <code>form</code> con el identificador del formulario.</p>
+
+<h2 id="nuevos-elementos">3.3 Nuevos elementos</h2>
+
+<p>Además de los nuevos tipos de <code>input</code> incluidos en la especificación, se han añadido nuevos elementos de formulario, entre los que se incluyen los siguientes:</p>
+
+<h3 id="ltprogressgt">3.3.1 <code>&lt;progress&gt;</code></h3>
+
+<p>El elemento <code>&lt;progress&gt;</code> es utilizado para representar un <em>avance</em> o <em>progreso</em> en la ejecución de una tarea, como puede ser la descarga de un fichero o la ejecución de una tarea compleja. Define los siguientes atributos:</p>
+
+<ul>
+<li><code>max</code>: define el trabajo total a realizar por la tarea, la duración de un vídeo... Su valor por defecto es <code>1.0</code>.</li>
+<li><code>value</code>: el valor actual (en coma flotante) o estado del progreso. Su valor debe ser mayor o igual a <code>0.0</code> y menor o igual a <code>1.0</code> o el valor especificado en <code>max</code>.</li>
+<li><code>position</code>: atributo de sólo lectura que representa la posición actual del elemento <code>&lt;progress&gt;</code>. Este valor es igual a <code>value</code>/<code>max</code> y <code>-1</code> si no se puede determinar la posición.</li>
+</ul>
+
+<p>Las unidades son arbitrarias, y no se especifican.</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">progress</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;5&quot;</span> <span class="kw3">max</span><span class="sy0">=</span><span class="st0">&quot;20&quot;</span>&gt;</span>5<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">progress</span>&gt;</span></pre>
+</div>
+
+<div class="figure" id="figure-3-17">
+    <img src="images/cap03/progress.png" alt="Nuevo elemento progress" />
+
+    <p class="caption"><strong>Figura 3.17</strong> Nuevo elemento progress</p>
+</div>
+
+
+<h3 id="ltmetergt">3.3.2 <code>&lt;meter&gt;</code></h3>
+
+<p>El elemento <code>&lt;meter&gt;</code> es muy similar a <code>&lt;progress&gt;</code> (de hecho, se discute la necesidad de disponer de dos elementos tan similares). Esta nueva etiqueta se usa para representar escalas de medidas conocidas, como la longitud, masa, peso, uso de disco, entre otras. Define los siguientes atributos:</p>
+
+<ul>
+<li><code>value</code>: representa el valor actual. Si no se especifica, se toma como valor el primer número que aparece en el contenido del elemento. Su valor por defecto es <code>0</code>.</li>
+<li><code>min</code>: el mínimo valor permitido. El valor por defecto es <code>0</code>.</li>
+<li><code>max</code>: el mayor valor permitido. Si no se especifica, su valor por defecto es <code>1</code>, a menos que el valor mínimo definido sea mayor que <code>1</code>, en cuyo caso el valor de <code>max</code> será igual a <code>min</code>.</li>
+<li><code>low</code>: es considerado el límite inferior del rango de valores.</li>
+<li><code>max</code>: es considerado el límite superior del rango de valores.</li>
+<li><code>optimum</code>: representa el valor óptimo del elemento, y se encuentra entre <code>min</code> y <code>max</code>.</li>
+</ul>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Your score is:
+    <span class="sc2">&lt;<span class="kw2">meter</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;91&quot;</span> <span class="kw3">min</span><span class="sy0">=</span><span class="st0">&quot;0&quot;</span> <span class="kw3">max</span><span class="sy0">=</span><span class="st0">&quot;100&quot;</span></span>
+<span class="sc2">            low<span class="sy0">=</span><span class="st0">&quot;40&quot;</span> high<span class="sy0">=</span><span class="st0">&quot;90&quot;</span> optimum<span class="sy0">=</span><span class="st0">&quot;100&quot;</span>&gt;</span>A+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">meter</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<div class="figure" id="figure-3-18">
+    <img src="images/cap03/meter.png" alt="Nuevo elemento meter" />
+
+    <p class="caption"><strong>Figura 3.18</strong> Nuevo elemento meter</p>
+</div>
+
+
+<div class="exercise">
+  <p class="title">Ejercicio 2</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej02">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-3.html#elementos-de-formulario">Elementos de formulario</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.1</span>
+                        <a class="internal" href="capitulo-3.html#nuevos-tipos-de-input">Nuevos tipos de input</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.2</span>
+                        <a class="internal" href="capitulo-3.html#nuevos-atributos">Nuevos atributos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.3</span>
+                        <a class="internal" href="capitulo-3.html#nuevos-elementos">Nuevos elementos</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

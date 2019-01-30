@@ -1,0 +1,13 @@
+
+<!doctype html>
+<html>
+ <head>
+   <meta charset="UTF-8">
+   <link rel="icon" type="image/png" href ="imagen.php?hex=6ab150">
+   <title>Imagen creada con php</title>
+ </head>
+ <body>
+  <h1>Imagen creada con php</h1>
+  <p>$_GET['hex'] = 6ab150</p>  <p><img src="imagen.php?hex=6ab150" alt="imagen creada con php" /></p>
+ </body>
+</html>

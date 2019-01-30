@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="18/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Validación | XHTML</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">XHTML</a></h1>
+        <p class="span3">
+                        <a href="capitulo-12.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-14.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="validacion"><span>Capítulo 13</span> Validación</h1>
+        <p>La <strong>validación</strong> es el proceso que asegura que un <strong>documento</strong> escrito en un determinado lenguaje (por ejemplo XHTML) <strong>cumple con las normas y restricciones de ese lenguaje</strong>. Las normas y restricciones de los documentos escritos en XML (y en sus lenguajes derivados, como XHTML) se definen en el <strong>DTD</strong> o <em>Document Type Definition</em> ("Definición del Tipo de Documento").</p>
+
+<p>El concepto de validación es objeto de controversia en el ámbito del diseño web. Por una parte, la validación <strong>no es obligatoria</strong> y las páginas web se pueden ver bien sin que sean válidas. Por otra parte, una página válida es <strong>más correcta</strong> que otra página que no lo sea, ya que cumple con las normas y restricciones impuestas por XHTML.</p>
+
+<p>Debido a esto, algunos diseñadores consideran que se da demasiada importancia a la validación de las páginas y a la creación de páginas válidas. El resto de diseñadores argumentan que si la especificación de XHTML impone una serie de normas y restricciones, lo más correcto es que las páginas web las cumplan, aunque no sea obligatorio.</p>
+
+<p>En cualquier caso, el proceso de validación consiste en <strong>probar página a página si su código HTML pasa la prueba de validación</strong>. Los validadores son las herramientas que se utilizan para validar cada página. Algunos editores de páginas web incluyen sus propios validadores y el organismo <strong>W3C</strong> ha creado una herramienta gratuita para la validación de las páginas.</p>
+
+<p>En las próximas secciones de este capítulo se muestran las diferentes herramientas de validación disponibles para validar las páginas web.</p>
+
+<h2 id="validador-del-w3c">13.1 Validador del W3C</h2>
+
+<p>La validación de las páginas web no requiere el uso de editores avanzados como Dreamweaver, ya que el organismo W3C ha creado una herramienta que se puede utilizar gratuitamente a través de Internet: <a href="http://validator.w3.org/">http://validator.w3.org/</a></p>
+
+<div class="figure" id="figure-13-1">
+    <img src="images/cap13/w3c.png" alt="Validador W3C" />
+
+    <p class="caption"><strong>Figura 13.1</strong> Validador W3C</p>
+</div>
+
+
+<p>Aunque la herramienta sólo está disponible en inglés, su uso es muy intuitivo:</p>
+
+<ul>
+<li><code>Validate by URI</code>, permite escribir la URL de la página que se quiere validar. Esta opción es la más sencilla para validar las páginas que ya están publicadas en Internet.</li>
+<li><code>Validate by File Upload</code>, muestra un formulario mediante el que se puede subir el archivo HTML correspondiente a la página que se quiere validar. Esta opción es la mejor para validar las páginas web que has desarrollado y que aún no has publicado en Internet.</li>
+<li><code>Validate by Direct Input</code>, permite validar código HTML de forma directa. Se trata de la opción más rápida para validar trozos o páginas HTML completas. Esta opción es la mejor cuando estás desarrollando las páginas y quieres asegurarte que el código sea válido.</li>
+</ul>
+
+<p>La siguiente imagen muestra el <strong>resultado de la validación</strong> de la página principal de Google realizada mediante la opción Validate by URI:</p>
+
+<div class="figure" id="figure-13-2">
+    <img src="images/cap13/w3c_google.png" alt="Resultado de validar www.google.com" />
+
+    <p class="caption"><strong>Figura 13.2</strong> Resultado de validar www.google.com</p>
+</div>
+
+
+<p>Si la página no pasa correctamente la prueba de validación, se muestra el listado completo de fallos junto con la ayuda necesaria para resolver cada uno de los errores.</p>
+
+<p>Como se observa en la imagen anterior, incluso una página tan sencilla como la portada de Google contiene decenas de errores que impiden considerarla válida. Por lo tanto, la página principal de Google no es una página válida, aunque eso no impide que se vea bien en todos los navegadores y que los usuarios la consideren correcta.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-13.html#validacion">Validación</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>13.1</span>
+                        <a class="internal" href="capitulo-13.html#validador-del-w3c">Validador del W3C</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

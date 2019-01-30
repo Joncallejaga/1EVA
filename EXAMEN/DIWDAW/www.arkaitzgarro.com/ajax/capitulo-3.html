@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="14/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Técnicas básicas con AJAX | AJAX</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">AJAX</a></h1>
+        <p class="span3">
+                        <a href="capitulo-2.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-4.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="tecnicas-basicas-con-ajax"><span>Capítulo 3</span> Técnicas básicas con AJAX</h1>
+        <h2 id="listas-desplegables-encadenadas">3.1 Listas desplegables encadenadas</h2>
+
+<h3 id="contexto">3.1.1 Contexto</h3>
+
+<p>Algunas aplicaciones web disponen de varias listas desplegables encadenadas. En este tipo de listas, cuando se selecciona un elemento de la primera lista desplegable, se cargan en la segunda lista unos valores que dependen del valor seleccionado en la primera lista.</p>
+
+<p>El mayor inconveniente de este tipo de listas se produce cuando existen un gran número de opciones posibles. Si se considera por ejemplo el caso de una tienda, en la primera lista desplegable se pueden mostrar decenas de productos y en la segunda lista se muestran los diferentes modelos de cada producto y sus precios.</p>
+
+<p>Si todos los elementos de las listas desplegables se almacenan mediante arrays de JavaScript en la propia página, los tiempos de carga se pueden disparar y hacerlo completamente inviable.</p>
+
+<p>Por otra parte, se puede optar por recargar completamente la página cada vez que se selecciona un valor diferente en la primera lista desplegable. Sin embargo, recargar la página entera cada vez que se selecciona un valor, aumenta la carga en el servidor y el tiempo de espera del usuario.</p>
+
+<p>Una posible solución intermedia consiste en actualizar las listas desplegables mediante AJAX. Los valores de la primera lista se incluyen en la página web y cuando se selecciona un valor de esta lista, se realiza una consulta al servidor que devuelve los valores que se deben mostrar en la otra lista desplegable.</p>
+
+<h3 id="solucion-propuesta">3.1.2 Solución propuesta</h3>
+
+<p>A continuación se muestra el esquema gráfico del funcionamiento de la solución propuesta:</p>
+
+<div class="figure" id="figure-3-1">
+    <img src="images/cap03/desplegables.png" alt="Solución propuesta para las listas encadenadas con AJAX" />
+
+    <p class="caption"><strong>Figura 3.1</strong> Solución propuesta para las listas encadenadas con AJAX</p>
+</div>
+
+
+<div class="exercise">
+  <p class="title">Ejercicio 6</p>
+</div>
+
+<p><a class="internal" href="capitulo-4.html#ej06">Ver enunciado</a></p>
+
+<h2 id="teclado-virtual">3.2 Teclado virtual</h2>
+
+<h3 id="contexto-2">3.2.1 Contexto</h3>
+
+<p>Algunas aplicaciones web multi-idioma disponen de la posibilidad de introducir información en muchos idiomas diferentes. El principal problema de estas aplicaciones es que el teclado físico que utiliza el usuario no siempre corresponde al idioma en el que se quieren introducir los contenidos.</p>
+
+<p>La solución habitual de este problema consiste en mostrar un teclado virtual en la pantalla que muestre el valor correcto para cada tecla del idioma seleccionado por el usuario.</p>
+
+<h3 id="solucion-propuesta-2">3.2.2 Solución propuesta</h3>
+
+<p>A continuación se muestra el aspecto gráfico del teclado virtual que se va a construir mediante AJAX:</p>
+
+<div class="figure" id="figure-3-2">
+    <img src="images/cap03/teclado-completo.png" alt="Aspecto final del teclado virtual construido con AJAX" />
+
+    <p class="caption"><strong>Figura 3.2</strong> Aspecto final del teclado virtual construido con AJAX</p>
+</div>
+
+
+<div class="exercise">
+  <p class="title">Ejercicio 8</p>
+</div>
+
+<p><a class="internal" href="capitulo-4.html#ej08">Ver enunciado</a></p>
+
+<h2 id="autocompletar">3.3 Autocompletar</h2>
+
+<h3 id="contexto-3">3.3.1 Contexto</h3>
+
+<p>Algunas veces, se presenta al usuario un cuadro de texto en el que tiene que introducir un valor que pertenece a un grupo muy grande de datos. Algunos casos habituales son: una dirección de correo electrónico que pertenezca a la libreta de direcciones del usuario, el nombre válido de un municipio de un país, el nombre de un empleado de una empresa grande, etc.</p>
+
+<p>En la mayoría de casos, utilizar una lista desplegable que muestre todos los valores es completamente inviable, ya que pueden existir miles de posibles valores. Por otra parte, un cuadro de texto simple resulta de poca utilidad para el usuario. La solución consiste en combinar un cuadro de texto y una lista desplegable mediante AJAX.</p>
+
+<p>Al usuario se le presenta un cuadro de texto simple en el que puede introducir la información. A medida que el usuario escribe en el cuadro de texto, la aplicación solicita al servidor aquellos términos que estén relacionados con lo escrito por el usuario. Cuando la aplicación recibe la respuesta del servidor, la muestra al usuario a modo de ayuda para autocompletar la información.</p>
+
+<h3 id="solucion-propuesta-3">3.3.2 Solución propuesta</h3>
+
+<p>A continuación se muestra la interacción del sistema de autocompletado propuesto:</p>
+
+<div class="figure" id="figure-3-3">
+    <img src="images/cap03/autocompletar.png" alt="Interacción completa del usuario con el sistema de autocompletado" />
+
+    <p class="caption"><strong>Figura 3.3</strong> Interacción completa del usuario con el sistema de autocompletado</p>
+</div>
+
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-3.html#tecnicas-basicas-con-ajax">Técnicas básicas con AJAX</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.1</span>
+                        <a class="internal" href="capitulo-3.html#listas-desplegables-encadenadas">Listas desplegables encadenadas</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.2</span>
+                        <a class="internal" href="capitulo-3.html#teclado-virtual">Teclado virtual</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.3</span>
+                        <a class="internal" href="capitulo-3.html#autocompletar">Autocompletar</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

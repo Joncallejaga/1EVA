@@ -1,0 +1,158 @@
+*{
+	margin: 0 auto;
+}
+
+body{
+	background-image:url("../media/img/atzekalde2.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+header{
+	margin-top: 5em;
+	margin-bottom: 1em;
+	background-image: -moz-linear-gradient(to right, transparent 5%, rgb(255,102,0));
+	border-top: solid;
+	border-bottom: solid;
+	border-top-color: red;
+	border-bottom-color: red;
+	text-align: center;
+}
+
+ul{
+	list-style: none;
+	text-align: center;
+	display: inline-block;
+}
+
+li{
+	display: inline-block;
+}
+
+h3{
+	color: green;
+}
+
+hr{
+	color: green;
+}
+
+a{	
+	text-decoration: none;
+	color: white;
+}
+
+#logo img{
+	float: left;
+	width: 5em;
+	height: 5em;
+	border: solid rgb(255,102,0);
+	border-radius: 10em;
+	box-shadow: 5px 8px 12px 1px rgb(255,102,0);
+	margin-left: 12%;
+}
+
+#logo
+{
+	padding-top: 0.5em;
+}
+
+#fija{
+	padding-left: 1em;
+	padding-bottom: 2em;
+}
+
+#animada{
+}
+
+
+#titulo{
+	width: 100%;
+	text-align: center;
+	color: rgb(255,102,0);
+	margin-bottom: 2em;
+}
+
+#cuerpo{
+	width: 80%;
+	margin: auto;
+	text-align: justify;
+	margin-bottom: 3em;
+}
+
+#seccion{
+	float: left;
+	width: 60%;
+	padding-right: 2em;
+}
+
+#lateral{
+}
+
+#pie{
+	clear: both;
+	width: 100%;
+	background-image: -moz-linear-gradient(to right, transparent 5%, rgb(255,102,0));
+	color: green;
+}
+
+#alumno{
+	padding: 2.5em;
+}
+
+footer img{
+	width: 15em;
+	margin-top: 1em;
+	margin-right: 10em;
+	margin-left: 5%;
+	float: left;
+}
+
+#primeraImagen{
+	width: 14em;
+	height: 14em;
+	float: left;
+	margin-right: 1em;	
+}
+
+#criaturas{
+	display: none;
+	position: absolute;
+	border-radius: 1em;
+	margin-top: 1.5em;
+}
+
+#criaturas a{
+	display: block;
+	padding: 1em;
+
+	background-color: rgb(255,102,0);	
+	border: solid red;
+}
+
+#primera{
+	border-top-right-radius: 1em; 
+	border-top-left-radius: 1em; 
+}
+#ultima{
+	border-bottom-right-radius: 1em; 
+	border-bottom-left-radius: 1em; 
+}
+
+#desplegable:hover #criaturas{
+	display: block;
+}
+
+form{
+	display: none;
+	position: absolute;
+	background-color: rgb(255,102,0);	
+	border: solid red;
+}
+
+#logo:hover form{
+	display: block;
+	border-radius: 1em;
+	margin-top: 5.5em;
+	margin-left: 12em;
+}

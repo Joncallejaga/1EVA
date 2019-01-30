@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+<head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  <meta name="viewport" content="width=device-width" />
+  
+  <meta name="description" content="La propiedad animation-timing-function ( función de temporizador de la animación ) especifica la curva de velocidad de la animaci&oacute;n #CSS3." />
+  <meta name="keywords" content="ejemplo, animation-timing-function, linear, ease, ease-in, ease-out, ease-in-out, cubic-bezier(n,n,n,n) CSS3, HTML5, "/>
+  <meta name="author" content="enxaneta.info" />
+  <meta property="og:title" content="Fichas con pesta&ntilde;as (tabs)" /> 
+  <meta property="og:type" content="website" /> 
+  <meta property="og:image" content="http://w3.unpocodetodo.info/images/w3_og.png" />  
+  <meta property="og:url" content="w3.unpocodetodo.info/ejemplos/animation-timing-function.html" /> 
+  <meta property="og:site_name" content="w3.unpocodetodo.info" /> 
+  <meta property="og:description" content="La propiedad animation-timing-function ( función de temporizador de la animación ) especifica la curva de velocidad de la animaci&oacute;n #CSS3." /> 
+  
+  <link rel="icon" type="image/png" href="../../images/w3.png" />
+  <!--<link rel="icon" type="image/png" href="http://w3.unpocodetodo.info/img/favicon.png">-->
+  <!-- 57x57 older iPhone and Android devices -->
+  <!--<link rel="apple-touch-icon-precomposed" href="http://w3.unpocodetodo.infoimages/apple-touch-icon-precomposed.png">-->
+  <!-- iPad 1 and 2 & iPad mini -->
+  <link rel="apple-touch-icon" sizes="72x72" href="../../images/apple-touch-icon-72x72.png">
+  <!-- iPhone 4, 4S, 5 and iPod Touch -->
+  <link rel="apple-touch-icon" sizes="114x114" href="../../images/apple-touch-icon-114x114.png">
+  <!-- iPad 3rd gen -->
+  <link rel="apple-touch-icon" sizes="144x144" href="../../images/apple-touch-icon-144x144.png"> 
+
+<title>animation-timing-function</title>
+<style>
+*{ margin:0; padding:0; box-sizing:border-box;}
+p{ margin-bottom:30px;}
+.wrapper{ width:90%; min-height:500px; margin:0 auto; border:1px solid #d9d9d9; padding:20px;}
+#animEasing div{ width:100px; height:40px; margin-bottom:5px;}
+#animEasing div p{ text-align:center; line-height:40px;}
+#animEasing .translateX{
+	-webkit-transform:translateX(300px);
+	transform:translateX(300px);
+}
+
+
+#animEasing .linear {
+-webkit-animation: timing 1s linear 1 normal forwards;
+animation: timing 1s linear 1 normal forwards;
+}
+
+#animEasing .ease {
+-webkit-animation: timing 1s ease 1 normal forwards;
+animation: timing 1s ease 1 normal forwards;
+}
+
+#animEasing .ease-in {
+-webkit-animation: timing 1s ease-in 1 normal forwards;
+animation: timing 1s ease-in 1 normal forwards;
+}
+
+#animEasing .ease-in {
+-webkit-animation: timing 1s ease-in 1 normal forwards;
+animation: timing 1s ease-in 1 normal forwards;
+}
+
+#animEasing .ease-out {
+-webkit-animation: timing 1s ease-out 1 normal forwards;
+animation: timing 1s ease-out 1 normal forwards;
+}
+
+
+#animEasing .ease-in-out {
+-webkit-animation: timing 1s ease-in-out 1 normal forwards;
+animation: timing 1s ease-in-out 1 normal forwards;
+}
+
+#animEasing .cubic-bezier {
+-webkit-animation: timing 1s cubic-bezier(0.680, 0, 0.265, 1) 1 normal forwards;
+animation: timing 1s cubic-bezier(0.680, 0, 0.265, 1) 1 normal forwards; 	
+}
+
+#animEasing.reverse div {
+-webkit-animation-direction: reverse;
+animation-direction: reverse;
+}
+
+
+@-webkit-keyframes timing {
+  0% {-webkit-transform:translateX(0);}
+  100% {-webkit-transform:translateX(300px);}
+}
+@keyframes timing {
+  0% {transform:translateX(0);}
+  100% {transform:translateX(300px);}
+}
+
+
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+<p>animation-timing-function: linear | ease | ease-in | ease-out | ease-in-out | cubic-bezier(n,n,n,n)</p>
+<p><input type="button" id="boton" value="animar"></p>
+<div id="animEasing">
+<div class="linear" data-color="e77e23"><p>linear</p></div>
+<div class="ease" data-color="2fcc71"><p>ease</p></div>
+<div class="ease-in" data-color="8f44ad"><p>ease-in</p></div>
+<div class="ease-out" data-color="f1c40f"><p>ease-out</p></div>
+<div class="ease-in-out" data-color="f49c14"><p>ease-in-out</p></div>
+<div class="cubic-bezier" data-color="d55401"><p>cubic-bezier</p></div>
+</div>
+
+</div>
+
+
+<script>
+var animEasing = document.querySelector("#animEasing");
+var animEasingDivs = document.querySelectorAll("#animEasing div");
+var boton = document.querySelector("#boton");
+var classArray = Array();
+
+
+for( var i=0; i<animEasingDivs.length; i++){
+	var color = animEasingDivs[i].dataset.color;
+	animEasingDivs[i].style.backgroundColor = "#"+color;
+	animEasingDivs[i].addEventListener("webkitAnimationEnd", easeOnAnimationEnd, false);
+    animEasingDivs[i].addEventListener("animationend", easeOnAnimationEnd, false);
+
+}
+
+boton.addEventListener("click", toggleClassReverse, false);
+function toggleClassReverse(){
+	animEasing.classList.toggle('reverse');
+	for( var j=0; j<animEasingDivs.length; j++){
+		animEasingDivs[j].setAttribute('class', classArray[j]);
+	}
+}
+	
+function easeOnAnimationEnd(e){
+	var thisClass = (e.path[0].className);
+	classArray.push(thisClass);
+	var revers = (animEasing.className == "reverse") ? false : true;
+	
+	if(revers == true){console.log(revers);
+	document.querySelector("."+thisClass).setAttribute('class', 'translateX');
+	}else{
+	document.querySelector("."+thisClass).setAttribute('class', 'translate0');	
+	}
+}
+
+//http://codepen.io/enxaneta/pen/jEpVqr
+
+</script>
+</body>
+</html>

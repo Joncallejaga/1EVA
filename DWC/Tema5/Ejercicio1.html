@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    div {
+  width:9em;
+  height:9em;
+  display: inline-block;
+  position:relative;
+  background:red;
+}</style>
+    <script>
+    
+    var cuadrado1 = document.getElementById('cuadrado1');
+    var cuadrado2 = document.getElementById('cuadrado2');
+    var cuadrado3 = document.getElementById('cuadrado3');
+    var cuadrado4 = document.getElementById('cuadrado4');
+    var cuadrado5 = document.getElementById('cuadrado5');
+
+    function cambiarColor(){
+        document.body.style.backgroundColor = document.getElementById("cuadrado1").style.backgroundColor;
+        document.getElementById("cuadrado1").style.backgroundColor = "black";
+    }
+
+    function devolverColor(){
+
+    }
+    
+    
+    
+
+    </script>
+</head>
+<body>
+<div id="cuadrado1" onmouseover="cambiarColor()" onmouseout="devolverColor()"></div>
+<div id="cuadrado2"></div>
+<div id="cuadrado3"></div>
+<div id="cuadrado4"></div> 
+<div id="cuadrado5"></div>
+    
+</body>
+</html>

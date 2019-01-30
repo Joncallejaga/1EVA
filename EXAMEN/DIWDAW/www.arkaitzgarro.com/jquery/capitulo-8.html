@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="14/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Extensiones | jQuery</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">jQuery</a></h1>
+        <p class="span3">
+                        <a href="capitulo-7.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-9.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="extensiones"><span>Capítulo 8</span> Extensiones</h1>
+        <h2 id="que-es-una-extension">8.1 ¿Qué es una Extensión?</h2>
+
+<p>Una extensión de jQuery es simplemente un nuevo método que se utilizará para extender el prototipo (<em>prototype</em>) del objeto jQuery. Cuando se
+extiende el prototipo, todos los objetos jQuery hereden los métodos añadidos. Por lo tanto, cuando se realiza una llamada <code>jQuery()</code>, es creado un nuevo objeto jQuery con todos los métodos heredados.</p>
+
+<p>El objetivo de una extensión es realizar una acción utilizando una colección de elementos, de la misma forma que lo hacen, por ejemplo, los
+métodos <code>fadeOut</code> o <code>addClass</code> de la biblioteca.</p>
+
+<p>Usted puede realizar sus propias extensiones y utilizarlas de forma privada en su proyecto o también puede publicarlas para que otras personas le saquen provecho.</p>
+
+<h2 id="crear-una-extension-basica">8.2 Crear una Extensión Básica</h2>
+
+<p>El código para realizar una extensión básica es la siguiente:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span>$<span class="br0">&#41;</span><span class="br0">&#123;</span>
+  $.<span class="me1">fn</span>.<span class="me1">myNewPlugin</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">each</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+          <span class="co1">// realizar algo</span>
+      <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="br0">&#40;</span>jQuery<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>La extensión del prototipo del objeto jQuery ocurre en la siguiente línea:</p>
+
+<div class="code javascript">
+<pre class="javascript">$.<span class="me1">fn</span>.<span class="me1">myNewPlugin</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="co1">//...</span></pre>
+</div>
+
+<p>La cual es encerrada en una función autoejecutable:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span>$<span class="br0">&#41;</span><span class="br0">&#123;</span>
+  <span class="co1">//...</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="br0">&#40;</span>jQuery<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Esta posee la ventaja de crear un alcance "privado", permitiendo utilizar el signo dolar sin tener la preocupación de que otra biblioteca también este utilizando dicho signo.</p>
+
+<p>Por ahora, internamente la extensión queda:</p>
+
+<div class="code javascript">
+<pre class="javascript">$.<span class="me1">fn</span>.<span class="me1">myNewPlugin</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">each</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+      <span class="co1">// realizar algo</span>
+  <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Dentro de ella, la palabra clave <code>this</code> hace referencia al objeto jQuery en donde la extensión es llamada.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> somejQueryObject <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="st0">'#something'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+$.<span class="me1">fn</span>.<span class="me1">myNewPlugin</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  alert<span class="br0">&#40;</span><span class="kw1">this</span> <span class="sy0">===</span> somejQueryObject<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+somejQueryObject.<span class="me1">myNewPlugin</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// muestra un alerta con 'true'</span></pre>
+</div>
+
+<p>El objeto jQuery, normalmente, contendrá referencias a varios elementos DOM, es por ello que a menudo se los refiere como una colección.</p>
+
+<p>Para interactuar con la colección de elementos, es necesario realizar un bucle, el cual se logra fácilmente con el método <code>each()</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript">$.<span class="me1">fn</span>.<span class="me1">myNewPlugin</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">each</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+&nbsp;
+  <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Al igual que otros métodos, <code>each()</code> devuelve un objeto jQuery, permitiendo utilizar el encadenado de métodos (<code>$(...).css().attr()...</code>). Para no romper esta convención, la extensión a crear deberá devolver el objeto <code>this</code>, para permitir seguir con el encadenamiento. A continuación se muestra un pequeño ejemplo:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span>$<span class="br0">&#41;</span><span class="br0">&#123;</span>
+  $.<span class="me1">fn</span>.<span class="me1">showLinkLocation</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">filter</span><span class="br0">&#40;</span><span class="st0">'a'</span><span class="br0">&#41;</span>.<span class="me1">each</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+          $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span>.<span class="me1">append</span><span class="br0">&#40;</span>
+              <span class="st0">' ('</span> <span class="sy0">+</span> $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span>.<span class="me1">attr</span><span class="br0">&#40;</span><span class="st0">'href'</span><span class="br0">&#41;</span> <span class="sy0">+</span> <span class="st0">')'</span>
+          <span class="br0">&#41;</span><span class="sy0">;</span>
+      <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="br0">&#40;</span>jQuery<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Ejemplo de utilización:</span>
+$<span class="br0">&#40;</span><span class="st0">'a'</span><span class="br0">&#41;</span>.<span class="me1">showLinkLocation</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>La extensión modificará todos los enlaces dentro de la colección de elementos y les añadirá el valor de su atributo <code>href</code> entre paréntesis.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="sy0">&lt;!--</span> Antes que la extensión sea llamada<span class="sy0">:</span> <span class="sy0">--&gt;</span>
+<span class="sy0">&lt;</span>a href<span class="sy0">=</span><span class="st0">&quot;page.html&quot;</span><span class="sy0">&gt;</span>Foo<span class="sy0">&lt;/</span>a<span class="sy0">&gt;</span>
+&nbsp;
+<span class="sy0">&lt;!--</span> Después que la extensión es llamada<span class="sy0">:</span> <span class="sy0">--&gt;</span>
+<span class="sy0">&lt;</span>a href<span class="sy0">=</span><span class="st0">&quot;page.html&quot;</span><span class="sy0">&gt;</span>Foo <span class="br0">&#40;</span>page.<span class="me1">html</span><span class="br0">&#41;</span><span class="sy0">&lt;/</span>a<span class="sy0">&gt;</span></pre>
+</div>
+
+<p>También es posible optimizar la extensión:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span>$<span class="br0">&#41;</span><span class="br0">&#123;</span>
+  $.<span class="me1">fn</span>.<span class="me1">showLinkLocation</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">filter</span><span class="br0">&#40;</span><span class="st0">'a'</span><span class="br0">&#41;</span>.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">return</span> <span class="st0">' ('</span> <span class="sy0">+</span> <span class="kw1">this</span>.<span class="me1">href</span> <span class="sy0">+</span> <span class="st0">')'</span><span class="sy0">;</span>
+      <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="br0">&#40;</span>jQuery<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>El método <code>append</code> permite especificar una función de devolución de llamada, y el valor devuelto determinará que es lo que se añadirá a cada elemento. Note también que no se utiliza el método <code>attr</code>, debido a que la API nativa del DOM permite un fácil acceso a la propiedad <code>href</code>.</p>
+
+<p>A continuación se muestra otro ejemplo de extensión. En este caso, no se requiere realizar un bucle en cada elemento ya que se delega la funcionalidad directamente en otro método jQuery:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span>$<span class="br0">&#41;</span><span class="br0">&#123;</span>
+  $.<span class="me1">fn</span>.<span class="me1">fadeInAndAddClass</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>duration<span class="sy0">,</span> className<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">fadeIn</span><span class="br0">&#40;</span>duration<span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+          $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span>.<span class="me1">addClass</span><span class="br0">&#40;</span>className<span class="br0">&#41;</span><span class="sy0">;</span>
+      <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="br0">&#40;</span>jQuery<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Ejemplo de utilización:</span>
+$<span class="br0">&#40;</span><span class="st0">'a'</span><span class="br0">&#41;</span>.<span class="me1">fadeInAndAddClass</span><span class="br0">&#40;</span><span class="nu0">400</span><span class="sy0">,</span> <span class="st0">'finishedFading'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="encontrar-y-evaluar-extensiones">8.3 Encontrar y Evaluar Extensiones</h2>
+
+<p>Uno de los aspectos más populares de jQuery es la diversidad de extensiones que existen.</p>
+
+<p>Sin embargo, la calidad entre extensiones puede variar enormemente. Muchas son intensivamente probadas y bien mantenidas, pero otras son creadas de forma apresurada y luego ignoradas, sin seguir buenas prácticas.</p>
+
+<p>Google es la mejor herramienta para encontrar extensiones (aunque el equipo de jQuery este trabajando para mejorar su repositorio de extensiones). Una vez encontrada la extensión, posiblemente quiera consultar la lista de correos de jQuery o el canal IRC #jquery para obtener la opinión de otras personas sobre dicha extensión.</p>
+
+<p>Asegúrese que la extensión este bien documentada, y que se ofrecen ejemplos de su utilización. También tenga cuidado con las extensiones que realizan más de lo que necesita, estas pueden llegar a sobrecargar su página. Para más consejos sobre como detectar una extensión mediocre, puede leer el artículo (en inglés) <a href="http://remysharp.com/2010/06/03/signs-of-a-poorly-written-jquery-plugin/">Signs of a poorly written jQuery plugin</a> por Remy Sharp.</p>
+
+<p>Una vez seleccionada la extensión, necesitará añadirla a su página. Primero, descargue la extensión, descomprimala (si es necesario) y muévala a la carpeta de su aplicación. Finalmente insertela utilizando el elemento script (luego de la inclusión de jQuery).</p>
+
+<h2 id="escribir-extensiones">8.4 Escribir Extensiones</h2>
+
+<p>A veces, desee realizar una funcionalidad disponible en todo el código, por ejemplo, un método que pueda ser llamado desde una selección el cual realice una serie de operaciones.</p>
+
+<p>La mayoría de las extensiones son métodos creados dentro del espacio de nombres <code>$.fn</code>. jQuery garantiza que un método llamado sobre el objeto jQuery sea capaz de acceder a dicho objeto a través de <code>this</code>. En contrapartida, la extensión debe garantizar de devolver el mismo objeto recibido (a menos que se explicite lo contrario).</p>
+
+<p>A continuación se muestra un ejemplo:</p>
+
+<p><strong>Crear una extensión para añadir y remover una clase en un elemento al suceder el evento hover</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// definición de la extensión</span>
+<span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span>$<span class="br0">&#41;</span><span class="br0">&#123;</span>
+    $.<span class="me1">fn</span>.<span class="me1">hoverClass</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>c<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">hover</span><span class="br0">&#40;</span>
+            <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span>.<span class="me1">toggleClass</span><span class="br0">&#40;</span>c<span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+        <span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="br0">&#40;</span>jQuery<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// utilizar la extensión</span>
+$<span class="br0">&#40;</span><span class="st0">'li'</span><span class="br0">&#41;</span>.<span class="me1">hoverClass</span><span class="br0">&#40;</span><span class="st0">'hover'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Para más información sobre el desarrollo de extensiones, puede consultar el artículo (en inglés) <a href="http://www.learningjquery.com/2007/10/a-plugin-development-pattern">A Plugin Development Pattern</a> de Mike Alsup. En dicho artículo, se desarrolla una extensión llamada <code>$.fn.hilight</code>, la cual provee soporte para la extensión <a href="http://plugins.jquery.com/project/metadata">metadata</a> (en caso de estar presente) y provee un método descentralizado para establecer opciones globales o de instancias de la extensión.</p>
+
+<p><strong>El patrón de desarrollo de extensiones para jQuery explicado por Mike Alsup</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">//</span>
+<span class="co1">// crear una clausura</span>
+<span class="co1">//</span>
+<span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span>$<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="co1">//</span>
+  <span class="co1">// definición de la extensión</span>
+  <span class="co1">//</span>
+  $.<span class="me1">fn</span>.<span class="me1">hilight</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>options<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    debug<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="co1">// generación de las opciones principales antes de interactuar</span>
+    <span class="kw1">var</span> opts <span class="sy0">=</span> $.<span class="me1">extend</span><span class="br0">&#40;</span><span class="br0">&#123;</span><span class="br0">&#125;</span><span class="sy0">,</span> $.<span class="me1">fn</span>.<span class="me1">hilight</span>.<span class="me1">defaults</span><span class="sy0">,</span> options<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="co1">// se iteractua y formatea cada elemento</span>
+    <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">each</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      $this <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+      <span class="co1">// generación de las opciones especificas de cada elemento</span>
+      <span class="kw1">var</span> o <span class="sy0">=</span> $.<span class="me1">meta</span> <span class="sy0">?</span> $.<span class="me1">extend</span><span class="br0">&#40;</span><span class="br0">&#123;</span><span class="br0">&#125;</span><span class="sy0">,</span> opts<span class="sy0">,</span> $this.<span class="me1">data</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">:</span> opts<span class="sy0">;</span>
+      <span class="co1">// actualización de los estilos de cada elemento</span>
+      $this.<span class="me1">css</span><span class="br0">&#40;</span><span class="br0">&#123;</span>
+        backgroundColor<span class="sy0">:</span> o.<span class="me1">background</span><span class="sy0">,</span>
+        color<span class="sy0">:</span> o.<span class="me1">foreground</span>
+      <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+      <span class="kw1">var</span> markup <span class="sy0">=</span> $this.<span class="me1">html</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+      <span class="co1">// se llama a la función de formateo</span>
+      markup <span class="sy0">=</span> $.<span class="me1">fn</span>.<span class="me1">hilight</span>.<span class="me1">format</span><span class="br0">&#40;</span>markup<span class="br0">&#41;</span><span class="sy0">;</span>
+      $this.<span class="me1">html</span><span class="br0">&#40;</span>markup<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span><span class="sy0">;</span>
+  <span class="co1">//</span>
+  <span class="co1">// función privada para realizar depuración</span>
+  <span class="co1">//</span>
+  <span class="kw1">function</span> debug<span class="br0">&#40;</span>$obj<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>window.<span class="me1">console</span> <span class="sy0">&amp;&amp;</span> window.<span class="me1">console</span>.<span class="me1">log</span><span class="br0">&#41;</span>
+      window.<span class="me1">console</span>.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'hilight selection count: '</span> <span class="sy0">+</span> $obj.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span><span class="sy0">;</span>
+  <span class="co1">//</span>
+  <span class="co1">// definir y exponer la función de formateo</span>
+  <span class="co1">//</span>
+  $.<span class="me1">fn</span>.<span class="me1">hilight</span>.<span class="me1">format</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>txt<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="st0">'&lt;strong&gt;'</span> <span class="sy0">+</span> txt <span class="sy0">+</span> <span class="st0">'&lt;/strong&gt;'</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span><span class="sy0">;</span>
+  <span class="co1">//</span>
+  <span class="co1">// opciones predeterminadas</span>
+  <span class="co1">//</span>
+  $.<span class="me1">fn</span>.<span class="me1">hilight</span>.<span class="me1">defaults</span> <span class="sy0">=</span> <span class="br0">&#123;</span>
+    foreground<span class="sy0">:</span> <span class="st0">'red'</span><span class="sy0">,</span>
+    background<span class="sy0">:</span> <span class="st0">'yellow'</span>
+  <span class="br0">&#125;</span><span class="sy0">;</span>
+<span class="co1">//</span>
+<span class="co1">// fin de la clausura</span>
+<span class="co1">//</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="br0">&#40;</span>jQuery<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="escribir-extensiones-con-mantenimiento-de-estado-utilizando-widget-factory-de-jquery-ui">8.5 Escribir Extensiones con Mantenimiento de Estado Utilizando Widget Factory de jQuery UI</h2>
+
+<blockquote>
+  <p><strong>Nota</strong></p>
+  
+  <p>Esta sección esta basada, con permiso del autor, en el artículo <a href="http://blog.nemikor.com/2010/05/15/building-stateful-jquery-plugins/">Building Stateful jQuery Plugins</a> de Scott Gonzalez.</p>
+</blockquote>
+
+<p>Mientras que la mayoría de las extensiones para jQuery son sin mantenimiento de estado (en inglés <em>stateless</em>) — es decir, extensiones que se ejecutan solamente sobre un elemento, siendo esa su única interacción — existe un gran conjunto de funcionalidades que no se aprovechan en el patrón básico con que se desarrollan las extensiones.</p>
+
+<p>Con el fin de llenar ese vacío, jQuery UI (<a href="http://jqueryui.com/">jQuery User Interface</a>) ha implementado un sistema más avanzado de extensiones. Este sistema permite manejar estados y admite múltiples funciones para ser expuestas en una única extensión. Dicho sistema es llamado <em>widget factory</em> y forma parte de la versión 1.8 de jQuery UI a través de <code>jQuery.widget</code>, aunque también puede ser utilizado sin depender de jQuery UI.</p>
+
+<p>Para demostrar las capacidades de <em>widget factory</em>, se creará una extensión que tendrá como funcionalidad ser una barra de progreso.</p>
+
+<p>Por ahora, la extensión solo permitirá establecer el valor de la barra de progreso una sola vez. Esto se realizará llamando a <code>jQuery.widget</code> con dos parámetros: el nombre de la extensión a crear y un objeto literal que contendrá las funciones soportadas por la extensión. Cuando la extensión es llamada, una instancia de ella es creada y todas las funciones se ejecutaran en el contexto de esa instancia.</p>
+
+<p>Existen dos importantes diferencias en comparación con una extensión estándar de jQuery: En primer lugar, el contexto es un objeto, no un elemento DOM. En segundo lugar, el contexto siempre es un único objeto, nunca una colección.</p>
+
+<p><strong>Una simple extensión con mantenimiento de estado utilizando widget factory de jQuery UI</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$.<span class="me1">widget</span><span class="br0">&#40;</span><span class="st0">&quot;nmk.progressbar&quot;</span><span class="sy0">,</span> <span class="br0">&#123;</span>
+    _create<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">var</span> progress <span class="sy0">=</span> <span class="kw1">this</span>.<span class="me1">options</span>.<span class="me1">value</span> <span class="sy0">+</span> <span class="st0">&quot;%&quot;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">element</span>
+            .<span class="me1">addClass</span><span class="br0">&#40;</span><span class="st0">&quot;progressbar&quot;</span><span class="br0">&#41;</span>
+            .<span class="me1">text</span><span class="br0">&#40;</span>progress<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>El nombre de la extensión debe contener un espacio de nombres, en este caso se utiliza <code>nmk</code>. Los espacios de nombres tienen una limitación de un solo nivel de profundidad — es decir que por ejemplo, no es posible utilizar <code>nmk.foo</code>. Como se puede ver en el ejemplo, <em>widget factory</em> provee dos propiedades para ser utilizadas. La primera, <code>this.element</code> es un objeto jQuery que contiene exactamente un elemento. En caso que la extensión sea ejecutada en más de un elemento, una instancia separada de la extensión será creada por cada elemento y cada una tendrá su propio <code>this.element</code>. La segunda propiedad, <code>this.options</code>, es un conjunto de pares clave/valor con todas las opciones de la extensión. Estas opciones pueden pasarse a la extensión como se muestra a continuación:</p>
+
+<blockquote>
+  <p><strong>Nota</strong></p>
+  
+  <p>Cuando esté realizando sus propias extensiones es recomendable utilizar su propio espacio de nombres, ya que deja en claro de donde proviene la extensión y si es parte de una colección mayor. Por otro lado, el espacio de nombres <code>ui</code> está reservado para las extensiones oficiales de jQuery UI.</p>
+</blockquote>
+
+<p><strong>Pasar opciones al widget</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">&quot;&lt;div&gt;&lt;/div&gt;&quot;</span><span class="br0">&#41;</span>
+    .<span class="me1">appendTo</span><span class="br0">&#40;</span> <span class="st0">&quot;body&quot;</span> <span class="br0">&#41;</span>
+    .<span class="me1">progressbar</span><span class="br0">&#40;</span><span class="br0">&#123;</span> value<span class="sy0">:</span> <span class="nu0">20</span> <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Cuando se llama a <code>jQuery.widget</code> se extiende a jQuery añadiendo el método a <code>jQuery.fn</code> (de la misma forma que cuando se crea una extensión estándar). El nombre de la función que se añade esta basado en el nombre que se pasa a <code>jQuery.widget</code>, sin el espacio de nombres (en este caso el nombre será <code>jQuery.fn.progressbar</code>).</p>
+
+<p>Como se muestra a continuación, es posible especificar valores predeterminados para cualquier opción. Estos valores deberían basarse en la utilización más común de la extensión.</p>
+
+<p><strong>Establecer opciones predeterminadas para un widget</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$.<span class="me1">widget</span><span class="br0">&#40;</span><span class="st0">&quot;nmk.progressbar&quot;</span><span class="sy0">,</span> <span class="br0">&#123;</span>
+    <span class="co1">// opciones predeterminadas</span>
+    options<span class="sy0">:</span> <span class="br0">&#123;</span>
+        value<span class="sy0">:</span> <span class="nu0">0</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    _create<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">var</span> progress <span class="sy0">=</span> <span class="kw1">this</span>.<span class="me1">options</span>.<span class="me1">value</span> <span class="sy0">+</span> <span class="st0">&quot;%&quot;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">element</span>
+            .<span class="me1">addClass</span><span class="br0">&#40;</span> <span class="st0">&quot;progressbar&quot;</span> <span class="br0">&#41;</span>
+            .<span class="me1">text</span><span class="br0">&#40;</span> progress <span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="anadir-metodos-a-un-widget">8.5.1 Añadir Métodos a un Widget</h3>
+
+<p>Ahora que es posible inicializar la extensión, es necesario añadir la habilidad de realizar acciones a través de métodos definidos en la extensión. Para definir un método en la extensión es necesario incluir la función en el objeto literal que se pasa a <code>jQuery.widget</code>. También es posible definir métodos "privados" anteponiendo un guión bajo al nombre de la función.</p>
+
+<p><strong>Crear métodos en el Widget</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$.<span class="me1">widget</span><span class="br0">&#40;</span><span class="st0">&quot;nmk.progressbar&quot;</span><span class="sy0">,</span> <span class="br0">&#123;</span>
+    options<span class="sy0">:</span> <span class="br0">&#123;</span>
+        value<span class="sy0">:</span> <span class="nu0">0</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    _create<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">var</span> progress <span class="sy0">=</span> <span class="kw1">this</span>.<span class="me1">options</span>.<span class="me1">value</span> <span class="sy0">+</span> <span class="st0">&quot;%&quot;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">element</span>
+            .<span class="me1">addClass</span><span class="br0">&#40;</span><span class="st0">&quot;progressbar&quot;</span><span class="br0">&#41;</span>
+            .<span class="me1">text</span><span class="br0">&#40;</span>progress<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    <span class="co1">// crear un método público</span>
+    value<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span>value<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="co1">// no se pasa ningún valor, entonces actúa como método obtenedor</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>value <span class="sy0">===</span> <span class="kw2">undefined</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">options</span>.<span class="me1">value</span><span class="sy0">;</span>
+        <span class="co1">// se pasa un valor, entonces actúa como método establecedor</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+            <span class="kw1">this</span>.<span class="me1">options</span>.<span class="me1">value</span> <span class="sy0">=</span> <span class="kw1">this</span>._constrain<span class="br0">&#40;</span>value<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">var</span> progress <span class="sy0">=</span> <span class="kw1">this</span>.<span class="me1">options</span>.<span class="me1">value</span> <span class="sy0">+</span> <span class="st0">&quot;%&quot;</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">element</span>.<span class="me1">text</span><span class="br0">&#40;</span>progress<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    <span class="co1">// crear un método privado</span>
+    _constrain<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span>value<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>value <span class="sy0">&gt;</span> <span class="nu0">100</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            value <span class="sy0">=</span> <span class="nu0">100</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>value <span class="sy0">&lt;</span> <span class="nu0">0</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            value <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> value<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Para llamar a un método en una instancia de la extensión, se debe pasar  el nombre de dicho método a la extensión. En caso que se llame a un método que acepta parámetros, estos se deben pasar a continuación del nombre del método.</p>
+
+<p><strong>Llamar a métodos en una instancia de extensión</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> bar <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="st0">&quot;&lt;div&gt;&lt;/div&gt;&quot;</span><span class="br0">&#41;</span>
+    .<span class="me1">appendTo</span><span class="br0">&#40;</span><span class="st0">&quot;body&quot;</span><span class="br0">&#41;</span>
+    .<span class="me1">progressbar</span><span class="br0">&#40;</span><span class="br0">&#123;</span> value<span class="sy0">:</span> <span class="nu0">20</span> <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// obtiene el valor actual</span>
+alert<span class="br0">&#40;</span>bar.<span class="me1">progressbar</span><span class="br0">&#40;</span><span class="st0">&quot;value&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// actualiza el valor</span>
+bar.<span class="me1">progressbar</span><span class="br0">&#40;</span><span class="st0">&quot;value&quot;</span><span class="sy0">,</span> <span class="nu0">50</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// obtiene el valor nuevamente</span>
+alert<span class="br0">&#40;</span>bar.<span class="me1">progressbar</span><span class="br0">&#40;</span><span class="st0">&quot;value&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<blockquote>
+  <p><strong>Nota</strong></p>
+  
+  <p>Ejecutar métodos pasando el nombre del método a la misma función jQuery que se utiliza para inicializar la extensión puede parecer extraño, sin embargo es realizado así para prevenir la "contaminación" del espacio de nombres de jQuery manteniendo al mismo tiempo la capacidad de llamar a métodos en cadena.</p>
+</blockquote>
+
+<h3 id="trabajar-con-las-opciones-del-widget">8.5.2 Trabajar con las Opciones del Widget</h3>
+
+<p>Uno de los métodos disponibles automáticamente para la extensión es <code>option</code>. Este método permite obtener y establecer opciones después de la inicialización y funciona exactamente igual que los métodos <em>attr</em> y <em>css</em> de jQuery: pasando únicamente un nombre como argumento el método funciona como obtenedor, mientras que pasando uno o más conjuntos de nombres y valores el método funciona como establecedor. Cuando es utilizado como método obtenedor, la extensión devolverá el valor actual de la opción correspondiente al nombre pasado como argumento. Por otro lado, cuando es utilizado como un método establecedor, el método <code>_setOption</code> de la extensión será llamado por cada opción que se desea establecer.</p>
+
+<p><strong>Responder cuando una opción es establecida</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$.<span class="me1">widget</span><span class="br0">&#40;</span><span class="st0">&quot;nmk.progressbar&quot;</span><span class="sy0">,</span> <span class="br0">&#123;</span>
+    options<span class="sy0">:</span> <span class="br0">&#123;</span>
+        value<span class="sy0">:</span> <span class="nu0">0</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    _create<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">element</span>.<span class="me1">addClass</span><span class="br0">&#40;</span><span class="st0">&quot;progressbar&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>._update<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    _setOption<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span>key<span class="sy0">,</span> value<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">options</span><span class="br0">&#91;</span>key<span class="br0">&#93;</span> <span class="sy0">=</span> value<span class="sy0">;</span>
+        <span class="kw1">this</span>._update<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    _update<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">var</span> progress <span class="sy0">=</span> <span class="kw1">this</span>.<span class="me1">options</span>.<span class="me1">value</span> <span class="sy0">+</span> <span class="st0">&quot;%&quot;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">element</span>.<span class="me1">text</span><span class="br0">&#40;</span>progress<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="anadir-funciones-de-devolucion-de-llamada">8.5.3 Añadir Funciones de Devolución de Llamada</h3>
+
+<p>Uno de las maneras más fáciles de extender una extensión es añadir funciones de devolución de llamada, para que de esta forma el usuario puede reaccionar cuando el estado de la extensión cambie. A continuación se mostrará como añadir una función de devolución de llamada a la extensión creada para indicar cuando la barra de progreso haya alcanzado el 100%. El método <code>_trigger</code> obtiene tres parámetros: el nombre de la función de devolución, el objeto de evento nativo que inicializa la función de devolución y un conjunto de información relevante al evento. El nombre de la función de devolución es el único parámetro obligatorio, pero los otros pueden ser muy útiles si el usuario desea implementar funcionalidades personalizadas.</p>
+
+<p><strong>Proveer funciones de devolución de llamada</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$.<span class="me1">widget</span><span class="br0">&#40;</span><span class="st0">&quot;nmk.progressbar&quot;</span><span class="sy0">,</span> <span class="br0">&#123;</span>
+    options<span class="sy0">:</span> <span class="br0">&#123;</span>
+        value<span class="sy0">:</span> <span class="nu0">0</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    _create<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">element</span>.<span class="me1">addClass</span><span class="br0">&#40;</span><span class="st0">&quot;progressbar&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>._update<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    _setOption<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span>key<span class="sy0">,</span> value<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">options</span><span class="br0">&#91;</span>key<span class="br0">&#93;</span> <span class="sy0">=</span> value<span class="sy0">;</span>
+        <span class="kw1">this</span>._update<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    _update<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">var</span> progress <span class="sy0">=</span> <span class="kw1">this</span>.<span class="me1">options</span>.<span class="me1">value</span> <span class="sy0">+</span> <span class="st0">&quot;%&quot;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">element</span>.<span class="me1">text</span><span class="br0">&#40;</span>progress<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="kw1">this</span>.<span class="me1">options</span>.<span class="me1">value</span> <span class="sy0">==</span> <span class="nu0">100</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">this</span>._trigger<span class="br0">&#40;</span><span class="st0">&quot;complete&quot;</span><span class="sy0">,</span> <span class="kw2">null</span><span class="sy0">,</span> <span class="br0">&#123;</span> value<span class="sy0">:</span> <span class="nu0">100</span> <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Las funciones de devolución son esencialmente sólo opciones adicionales, por lo cual, pueden ser establecidas como cualquier otra opción. Cada vez que una función de devolución es ejecutada, un evento correspondiente se activa también. El tipo de evento se determina mediante la concatenación del nombre de la extensión y el nombre de la función de devolución. Dicha función y evento reciben dos mismos parámetros: un objeto de evento y un conjunto de información relevante al evento.</p>
+
+<p>Si la extensión tendrá alguna funcionalidad que podrá ser cancelada por el usuario, la mejor manera de hacerlo es creando funciones de devolución cancelables. El usuario podrá cancelar una función de devolución o su evento asociado de la misma manera que se cancela cualquier evento nativo: llamando a <code>event.preventDefault()</code> o utilizando <code>return false</code>.</p>
+
+<p><strong>Vincular a eventos del widget</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> bar <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="st0">&quot;&lt;div&gt;&lt;/div&gt;&quot;</span><span class="br0">&#41;</span>
+    .<span class="me1">appendTo</span><span class="br0">&#40;</span><span class="st0">&quot;body&quot;</span><span class="br0">&#41;</span>
+    .<span class="me1">progressbar</span><span class="br0">&#40;</span><span class="br0">&#123;</span>
+        complete<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span>event<span class="sy0">,</span> data<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            alert<span class="br0">&#40;</span> <span class="st0">&quot;Función de devolución&quot;</span> <span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span>
+    .<span class="me1">on</span><span class="br0">&#40;</span><span class="st0">&quot;progressbarcomplete&quot;</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>event<span class="sy0">,</span> data<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        alert<span class="br0">&#40;</span><span class="st0">&quot;El valor de la barra de progreso es &quot;</span> <span class="sy0">+</span> data.<span class="me1">value</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+bar.<span class="me1">progressbar</span><span class="br0">&#40;</span><span class="st0">&quot;option&quot;</span><span class="sy0">,</span> <span class="st0">&quot;value&quot;</span><span class="sy0">,</span> <span class="nu0">100</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p><strong>En profundidad: Widget Factory</strong></p>
+
+<p>Cuando se llama a <code>jQuery.widget</code>, ésta crea una función constructora para la extensión y establece el objeto literal que se pasa como el prototipo para todas las instancias de la extensión. Todas las funcionalidades que automáticamente se añaden a la extensión provienen del prototipo base del widget, el cual es definido como <code>jQuery.Widget.prototype</code>. Cuando una instancia de la extensión es creada, es guardada en el elemento DOM original utilizando <code>jQuery.data</code>, con el nombre de la extensión como palabra clave.</p>
+
+<p>Debido a que la instancia de la extensión esta directamente vinculada al elemento DOM, es posible acceder a la instancia de la extensión de forma directa. Esto permite llamar a métodos directamente en la instancia de la extensión en lugar de pasar el nombre del método como una cadena de caracteres, dando la posibilidad de acceder a las propiedades de la extensión.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> bar <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="st0">&quot;&lt;div&gt;&lt;/div&gt;&quot;</span><span class="br0">&#41;</span>
+    .<span class="me1">appendTo</span><span class="br0">&#40;</span><span class="st0">&quot;body&quot;</span><span class="br0">&#41;</span>
+    .<span class="me1">progressbar</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    .<span class="me1">data</span><span class="br0">&#40;</span><span class="st0">&quot;progressbar&quot;</span> <span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// llamar a un método directamente en la instancia de la extensión</span>
+bar.<span class="me1">option</span><span class="br0">&#40;</span><span class="st0">&quot;value&quot;</span><span class="sy0">,</span> <span class="nu0">50</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// acceder a propiedades en la instancia de la extensión</span>
+alert<span class="br0">&#40;</span>bar.<span class="me1">options</span>.<span class="me1">value</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Uno de los mayores beneficios de tener un constructor y un prototipo para una extensión es la facilidad de extender la extensión. El hecho de añadir o cambiar métodos en el prototipo de la extensión, permite también modificarlos en todas las instancias de la extensión. Por ejemplo, si deseamos añadir un método a la extensión de barra de progreso para permitir restablecer el progreso a 0%, es posible hacerlo añadiendo este método al prototipo y automáticamente estará disponible para ser llamada desde cualquier instancia de la extensión.</p>
+
+<div class="code javascript">
+<pre class="javascript">$.<span class="me1">nmk</span>.<span class="me1">progressbar</span>.<span class="kw1">prototype</span>.<span class="me1">reset</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">this</span>._setOption<span class="br0">&#40;</span><span class="st0">&quot;value&quot;</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="limpieza">8.5.4 Limpieza</h3>
+
+<p>En algunos casos, tendrá sentido permitir a los usuarios aplicar y desaplicar la extensión. Esto es posible hacerlo a través del método <code>destroy</code>. Con dicho método, es posible deshacer todo lo realizado con la extensión. También éste es llamado automáticamente si el elemento vinculado a la extensión es eliminado del DOM (por lo cual también es posible utilizarlo para la "recolección de basura"). El método <code>destroy</code> predeterminado remueve el vínculo entre el elemento DOM y la instancia de la extensión</p>
+
+<p><strong>Añadir un método destroy al widget</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$.<span class="me1">widget</span><span class="br0">&#40;</span> <span class="st0">&quot;nmk.progressbar&quot;</span><span class="sy0">,</span> <span class="br0">&#123;</span>
+    options<span class="sy0">:</span> <span class="br0">&#123;</span>
+        value<span class="sy0">:</span> <span class="nu0">0</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    _create<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">element</span>.<span class="me1">addClass</span><span class="br0">&#40;</span><span class="st0">&quot;progressbar&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>._update<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    _setOption<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span>key<span class="sy0">,</span> value<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">options</span><span class="br0">&#91;</span>key<span class="br0">&#93;</span> <span class="sy0">=</span> value<span class="sy0">;</span>
+        <span class="kw1">this</span>._update<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    _update<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">var</span> progress <span class="sy0">=</span> <span class="kw1">this</span>.<span class="me1">options</span>.<span class="me1">value</span> <span class="sy0">+</span> <span class="st0">&quot;%&quot;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">element</span>.<span class="me1">text</span><span class="br0">&#40;</span>progress<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="kw1">this</span>.<span class="me1">options</span>.<span class="me1">value</span> <span class="sy0">==</span> <span class="nu0">100</span> <span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">this</span>._trigger<span class="br0">&#40;</span><span class="st0">&quot;complete&quot;</span><span class="sy0">,</span> <span class="kw2">null</span><span class="sy0">,</span> <span class="br0">&#123;</span> value<span class="sy0">:</span> <span class="nu0">100</span> <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    destroy<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">element</span>
+            .<span class="me1">removeClass</span><span class="br0">&#40;</span><span class="st0">&quot;progressbar&quot;</span><span class="br0">&#41;</span>
+            .<span class="me1">text</span><span class="br0">&#40;</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="co1">// llama a la función base destroy</span>
+        $.<span class="me1">Widget</span>.<span class="kw1">prototype</span>.<span class="me1">destroy</span>.<span class="me1">call</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="conclusion">8.5.5 Conclusión</h3>
+
+<p>La utilización de <em>Widget factory</em> es solo una manera de crear extensiones con mantenimiento de estado. Existen algunos modelos diferentes que pueden ser utilizados y cada uno posee sus ventajas y desventajas. <em>Widget factory</em> resuelve muchos problemas comunes, mejora significativamente la productividad y la reutilización de código.</p>
+
+<h2 id="ejercicios-6">8.6 Ejercicios</h2>
+
+<h3 id="realizar-una-tabla-ordenable">8.6.1 Realizar una Tabla Ordenable</h3>
+
+<p>Para este ejercicio, la tarea es identificar, descargar e implementar una extensión que permita ordenar la tabla existente en la página index.html. Cuando esté listo, todas las columnas de la tabla deben poder ser ordenables.</p>
+
+<h3 id="escribir-una-extension-para-cambiar-el-color-de-fondo-en-tablas">8.6.2 Escribir una Extensión Para Cambiar el Color de Fondo en Tablas</h3>
+
+<p>Abra el archivo <code>/ejercicios/index.html</code> en el navegador. Realice el ejercicio utilizando el archivo <code>/ejercicios/js/stripe.js</code>. La tarea es escribir una extensión llamada "stripe" la cual podrá ser llamada desde cualquier elemento table y deberá cambiar el color de fondo de las filas impares en el cuerpo de la tabla. El color podrá ser especificado como parámetro de la extensión.</p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'#myTable'</span><span class="br0">&#41;</span>.<span class="me1">stripe</span><span class="br0">&#40;</span><span class="st0">'#cccccc'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>No olvide de devolver la tabla para que otros métodos puedan ser encadenados luego de la llamada a la extensión.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-8.html#extensiones">Extensiones</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.1</span>
+                        <a class="internal" href="capitulo-8.html#que-es-una-extension">¿Qué es una Extensión?</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.2</span>
+                        <a class="internal" href="capitulo-8.html#crear-una-extension-basica">Crear una Extensión Básica</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.3</span>
+                        <a class="internal" href="capitulo-8.html#encontrar-y-evaluar-extensiones">Encontrar y Evaluar Extensiones</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.4</span>
+                        <a class="internal" href="capitulo-8.html#escribir-extensiones">Escribir Extensiones</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.5</span>
+                        <a class="internal" href="capitulo-8.html#escribir-extensiones-con-mantenimiento-de-estado-utilizando-widget-factory-de-jquery-ui">Escribir Extensiones con Mantenimiento de Estado Utilizando Widget Factory de jQuery UI</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.6</span>
+                        <a class="internal" href="capitulo-8.html#ejercicios-6">Ejercicios</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://lenguajecss.com/p/css/animaciones/animaciones -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Animaciones CSS | CSS en español</title>
+	<link rel="shortcut icon" href="https://lenguajecss.com/favicon.ico">
+  <meta name="description" content="Con CSS podemos realizar animaciones de forma muy sencilla, ofreciéndonos grandes posibilidades y la flexibilidad de utilizar propiedades para cambiar su comportamiento.">
+  <link rel="stylesheet" href="./Animaciones CSS _ CSS en español_files/css">
+  <link rel="stylesheet" href="./Animaciones CSS _ CSS en español_files/font-awesome.min.css">
+  <link rel="stylesheet" href="./Animaciones CSS _ CSS en español_files/index.min.css">
+  <meta name="viewport" content="initial-scale=1, width=device-width, user-scalable=no">
+    <meta name="theme-color" content="#1e7bbf">
+  <link rel="canonical" href="https://lenguajecss.com/p/css/animaciones/animaciones">
+  <meta property="og:title" content="Animaciones CSS | CSS en español">
+  <meta property="og:image" content="https://lenguajecss.com/img/large-summary.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:description" content="Con CSS podemos realizar animaciones de forma muy sencilla, ofreciéndonos grandes posibilidades y la flexibilidad de utilizar propiedades para cambiar su comportamiento.">
+  <meta property="og:url" content="https://lenguajecss.com/p/css/animaciones/animaciones">
+  <meta property="twitter:url" content="https://lenguajecss.com/p/css/animaciones/animaciones">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:creator" content="@Manz">
+  <meta property="twitter:title" content="Animaciones CSS | CSS en español">
+  <meta property="twitter:description" content="Con CSS podemos realizar animaciones de forma muy sencilla, ofreciéndonos grandes posibilidades y la flexibilidad de utilizar propiedades para cambiar su comportamiento.">
+  <meta property="twitter:image:src" content="https://lenguajecss.com/img/large-summary.jpg">
+  <link rel="stylesheet" href="./Animaciones CSS _ CSS en español_files/prism.min.css">
+  <script async="" src="./Animaciones CSS _ CSS en español_files/analytics.js.descarga"></script><script async="" src="./Animaciones CSS _ CSS en español_files/f.txt"></script>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-0412426997270095",
+            enable_page_level_ads: true
+       });
+  </script>
+<script src="./Animaciones CSS _ CSS en español_files/count-data.js.descarga"></script></head>
+<body class="contentdesign css">
+    <div id="top" class="menutop visible"><ul id="mainbar">
+  <li><a href="https://lenguajecss.com/"><i class="fa fa-home"></i> <span>LenguajeCSS</span></a>
+    <ul>
+      <li><a href="https://lenguajehtml.com/" title="Lenguaje HTML5"><i class="fa fa-html5"></i> <span>HTML5</span></a></li>
+      <li><a href="https://lenguajecss.com/" title="Lenguaje CSS3"><i class="fa fa-css3"></i> <span>CSS3</span></a></li>
+      <li><a href="https://lenguajejs.com/" title="Lenguaje JavaScript"><i class="fa fa-code"></i><span> JavaScript</span></a></li>
+    </ul>
+  </li>
+  <li><a href="https://lenguajecss.com/p/css/indice"><i class="fa fa-file-text-o"></i> <span>Documentación</span></a>
+    <ul>
+      <li><a href="https://lenguajecss.com/referencia/" title="Referencia CSS"><i class="fa fa-list-alt"></i> <span>Referencia</span></a></li>
+      <li><a href="https://lenguajecss.com/enlaces/" title="Documentación y recursos CSS"><i class="fa fa-bookmark"></i> <span>Enlaces</span></a></li>
+    </ul>
+  </li>
+  <li><a href="http://www.emezeta.com/cursos/diseno-web-css3/?utm_source=emezeta&amp;utm_medium=lenguajecss" title="Cursos de CSS3"><i class="fa fa-css3"></i> <span>¡Aprende CSS3!</span></a></li>
+  <li><a href="http://www.emezeta.com/" title="Más sobre el autor"><i class="fa fa-user"></i> <span>Acerca de...</span></a></li>
+</ul>
+</div>    <div id="header"><h1>Animaciones CSS</h1></div>
+    <div id="page">
+      <div class="ab adtop"><script async="" src="./Animaciones CSS _ CSS en español_files/f.txt"></script>
+<!-- 2016_LENGUAJE_TOP -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0412426997270095" data-ad-slot="2122368534" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>            <div id="content">
+        <nav class="navpage"><a class="bt-nav bt-prev" href="https://lenguajecss.com/p/css/animaciones/transiciones">Transiciones CSS «</a>  <a class="bt-nav bt-next" href="https://lenguajecss.com/p/css/animaciones/transformaciones"> » Transformaciones CSS</a></nav>
+        <div class="descr">Con CSS podemos realizar animaciones de forma muy sencilla, ofreciéndonos grandes posibilidades y la flexibilidad de utilizar propiedades para cambiar su comportamiento.</div>
+<div class="gad"></div>
+<p>Una vez conocemos las transiciones CSS3, es muy fácil adaptarnos al concepto de animaciones CSS3, el cual amplia el concepto de transiciones convirtiéndolo en algo mucho más flexible y potente.</p>
+<p>Como habíamos mencionado, las transiciones son la manera de suavizar un cambio de un estado inicial a un estado final. La idea de las animaciones CSS es permitir la adición de más estados, pudiendo realizar cambios desde un estado inicial, a un estado posterior, y luego a otro estado posterior, y así sucesivamente.</p>
+<p>Para crear animaciones debemos tener dos cosas claras. Por un lado, la regla <code>@keyframes</code>, que incluye los fotogramas de la animación, mientras que por otro lado tenemos las propiedades CSS de las <strong>animaciones</strong>, que definen el comportamiento de la misma.</p>
+<p>Para definir dicho comportamiento necesitamos conocer las siguientes propiedades, que son una ampliación de las transiciones CSS:</p>
+<table>
+<thead>
+<tr>
+<th>Propiedades</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>animation-name</td>
+<td><strong>none</strong> | <em>nombre</em></td>
+</tr>
+<tr>
+<td>animation-duration</td>
+<td><strong>0</strong> | <em>tiempo</em></td>
+</tr>
+<tr>
+<td>animation-timing-function</td>
+<td><strong>ease</strong> | linear | ease-in | ease-out | ease-in-out | cubic-bezier(<em>A</em>, <em>B</em>, <em>C</em>, <em>D</em>)</td>
+</tr>
+<tr>
+<td>animation-delay</td>
+<td><strong>0</strong> | <em>tiempo</em></td>
+</tr>
+<tr>
+<td>animation-iteration-count</td>
+<td><strong>1</strong> | infinite | <em>número</em></td>
+</tr>
+<tr>
+<td>animation-direction</td>
+<td><strong>normal</strong> | reverse | alternate | alternate-reverse</td>
+</tr>
+<tr>
+<td>animation-fill-mode</td>
+<td><strong>none</strong> | forwards | backwards | both</td>
+</tr>
+<tr>
+<td>animation-play-state</td>
+<td><strong>running</strong> | paused</td>
+</tr>
+</tbody>
+</table>
+<p>La propiedad <code>animation-name</code> permite especificar el nombre del fotograma a utilizar, mientras que las propiedades <code>animation-duration</code>, <code>animation-timing-function</code> y <code>animation-delay</code> funcionan exactamente igual que en el tema anterior de <strong>transiciones</strong>.</p>
+<p>La propiedad <code>animation-iteration-count</code> permite indicar el número de veces que se repite la animación, pudiendo establecer un número concreto de repeticiones o indicando <code>infinite</code> para que se repita continuamente. Por otra parte, especificando un valor en <code>animation-direction</code> conseguiremos indicar el orden en el que se reproducirán los fotogramas, pudiendo escoger un valor de los siguientes:</p>
+<table>
+<thead>
+<tr>
+<th>Valor</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>normal</td>
+<td>Los fotogramas se reproducen desde el principio al final.</td>
+</tr>
+<tr>
+<td>reverse</td>
+<td>Los fotogramas se reproducen desde el final al principio.</td>
+</tr>
+<tr>
+<td>alternate</td>
+<td>En iteraciones par, de forma normal. Impares, a la inversa.</td>
+</tr>
+<tr>
+<td>alternate-reverse</td>
+<td>En iteraciones impares, de forma normal. Pares, normal.</td>
+</tr>
+</tbody>
+</table>
+<p>Por defecto, cuando se termina una animación que se ha indicado que se reproduzca sólo una vez, la animación vuelve a su estado inicial (<em>primer fotograma</em>). Mediante la propiedad <code>animation-fill-mode</code> podemos indicar que debe mostrar la animación cuando ha finalizado y ya no se está reproduciendo; si mostrar el estado inicial (<em>backwards</em>), el estado final (<em>forwards</em>) o una combinación de ambas (<em>both</em>).</p>
+<p>Por último, la propiedad <code>animation-play-state</code> nos permite establecer la animación a estado de reproducción (<em>running</em>) o pausarla (<em>paused</em>).</p>
+<h3 id="atajo-animaciones">Atajo: Animaciones<a class="perm" href="https://lenguajecss.com/p/css/animaciones/animaciones#atajo-animaciones"><i class="fa fa-link"></i><i class="fa fa-chain-broken"></i></a></h3>
+<p>Nuevamente, CSS ofrece la posibilidad de resumir todas estas propiedades en una sola, para hacer nuestras hojas de estilos más específicas. El orden de la propiedad de atajo sería el siguiente:</p>
+<pre class=" language-css"><code class=" language-css"><span class="token selector">div </span><span class="token punctuation">{</span>
+    <span class="token property">animation</span><span class="token punctuation">:</span> &lt;name&gt; &lt;duration&gt; &lt;timing-function&gt; &lt;delay&gt; &lt;iteration-count&gt; &lt;direction&gt; &lt;fill-mode&gt; &lt;play-state&gt;
+<span class="token punctuation">}</span></code></pre>
+<blockquote>
+<p><strong>Consejo</strong>: Mucho cuidado al indicar los segundos en las propiedades de duración. Al ser una unidad diferente a las que solemos manejar (<em>px, em, etc...</em>) hay que especificar <strong>siempre</strong> la <code>s</code>, aunque sea un valor igual a <code>0</code>.</p>
+</blockquote>
+<h3 id="fotogramas-keyframes">Fotogramas (keyframes)<a class="perm" href="https://lenguajecss.com/p/css/animaciones/animaciones#fotogramas-keyframes"><i class="fa fa-link"></i><i class="fa fa-chain-broken"></i></a></h3>
+<p>Ya sabemos como indicar a ciertas etiquetas HTML que reproduzcan una animación, con ciertas propiedades. Sin embargo, nos falta la parte más importante: definir los fotogramas de dicha animación. Para ello utilizaremos la regla <code>@keyframes</code>, la cuál es muy sencilla de utilizar y se basa en el siguiente esquema:</p>
+<p><img src="./Animaciones CSS _ CSS en español_files/keyframes-syntax.png" alt="Sintaxis del esquema de los keyframes"></p>
+<p>En primer lugar elegiremos un <strong>nombre</strong> para la animación (<em>el cuál utilizamos en el apartado anterior, para hacer referencia a la animación, ya que podemos tener varias en una misma página</em>), mientras que podremos utilizar varios selectores para definir el transcurso de los fotogramas en la animación.</p>
+<p>Veamos algunos ejemplos:</p>
+<pre class=" language-css"><code class=" language-css"><span class="token atrule"><span class="token rule">@keyframes</span> animacion1</span> <span class="token punctuation">{</span>
+    <span class="token selector">from </span><span class="token punctuation">{</span> <span class="token property">left</span><span class="token punctuation">:</span><span class="token number">0</span>px <span class="token punctuation">}</span>   <span class="token comment" spellcheck="true">/* Primer fotograma */</span>
+    <span class="token selector">to </span><span class="token punctuation">{</span> <span class="token property">left</span><span class="token punctuation">:</span><span class="token number">500</span>px <span class="token punctuation">}</span>   <span class="token comment" spellcheck="true">/* Último fotograma */</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector"><span class="token class">.anim</span> </span><span class="token punctuation">{</span>
+    <span class="token property">position</span><span class="token punctuation">:</span> relative<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token color">#000</span><span class="token punctuation">;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> <span class="token color">#FFF</span><span class="token punctuation">;</span>
+    <span class="token property">animation</span><span class="token punctuation">:</span> animacion<span class="token number">1</span> <span class="token time">2s</span> <span class="token easing">ease</span> <span class="token number">0</span> infinite<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">/* Relaciona con @keyframes */</span>
+<span class="token punctuation">}</span></code></pre>
+<blockquote>
+<blockquote>
+<p><strong>Nota</strong>: No olvides añadir el prefijo <code>-webkit</code> (<em>utilizar las reglas <code>@-webkit-keyframes</code> y la propiedad <code>-webkit-animation</code></em>) si utilizas un navegador que aún no soporta animaciones por completo. Como siempre, recomiendo utilizar <strong>autoprefixer</strong> para estas tareas.</p>
+</blockquote>
+</blockquote>
+<p>En este ejemplo nombrado <code>animacion1</code>, partimos de un primer fotograma en el que el elemento en cuestión está posicionado en el píxel 0 (<em>empezando desde la izquierda</em>). Si observamos el último fotograma, le ordenamos que finalice en el píxel 500 (<em>empezando desde la izquierda</em>). Así pues, la regla <code>@keyframes</code> se inventará la animación intermedia para conseguir que el elemento se mueva desde el píxel 0 hasta el píxel 500.</p>
+<p>Los selectores <code>from</code> y <code>to</code> son realmente sinónimos de <code>0%</code> y <code>100%</code>, ya que se pueden definir más selectores, como veremos a continuación en el siguiente ejemplo:</p>
+<pre class=" language-css"><code class=" language-css"><span class="token atrule"><span class="token rule">@keyframes</span> animacion2</span> <span class="token punctuation">{</span>
+    <span class="token selector">0% </span><span class="token punctuation">{</span> <span class="token property">left</span><span class="token punctuation">:</span><span class="token number">0</span> <span class="token punctuation">}</span>                           <span class="token comment" spellcheck="true">/* Primer fotograma */</span>
+    <span class="token selector">50% </span><span class="token punctuation">{</span> <span class="token property">left</span><span class="token punctuation">:</span><span class="token number">500</span>px<span class="token punctuation">;</span> <span class="token property">background</span><span class="token punctuation">:</span><span class="token color">#FF0000</span> <span class="token punctuation">}</span>  <span class="token comment" spellcheck="true">/* Segundo fotograma */</span>
+    <span class="token selector">100% </span><span class="token punctuation">{</span> <span class="token property">left</span><span class="token punctuation">:</span><span class="token number">0</span> <span class="token punctuation">}</span>                         <span class="token comment" spellcheck="true">/* Último fotograma */</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector"><span class="token class">.anim</span> </span><span class="token punctuation">{</span>
+    <span class="token property">position</span><span class="token punctuation">:</span> relative<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token color">#000</span><span class="token punctuation">;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> <span class="token color">#FFF</span><span class="token punctuation">;</span>
+    <span class="token property">animation</span><span class="token punctuation">:</span> animacion<span class="token number">2</span> <span class="token time">2s</span> <span class="token easing">ease</span> <span class="token number">0</span> infinite<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">/* Relaciona con @keyframes */</span>
+<span class="token punctuation">}</span></code></pre>
+<blockquote>
+<p><strong>Truco</strong>: Si tienes fotogramas que van a utilizar los mismos estilos que uno anterior, siempre puedes separarlos con comas, por ejemplo: <code>0%, 75% { /* Estilos CSS */ }</code>, que utilizarían dichos estilos al inicio de la animación y al 75% de la misma.</p>
+</blockquote>
+        <div class="ab adbottom"><script async="" src="./Animaciones CSS _ CSS en español_files/f.txt"></script>
+<!-- 2016_LENGUAJE_TOP -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0412426997270095" data-ad-slot="3660343733" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>        <div class="author">
+          <img class="pic" src="./Animaciones CSS _ CSS en español_files/manz.jpg" alt="Manz">
+          <div class="desc">
+            <h5>Publicado por Manz</h5>
+            <p>Docente, divulgador informático y freelance. Trabaja como autónomo, escribe en <a href="http://www.emezeta.com/">Emezeta.com</a> (<em>sitio web de tecnología con +10.000 visitas diarias</em>) y es profesor en la <a href="https://osl.ull.es/">Oficina de Software Libre de la Universidad de La Laguna</a>, en Tenerife (Islas Canarias).</p>
+            <div class="social-links">
+              <a class="twitter" href="http://twitter.com/manz"><i class="fa fa-twitter"></i></a>
+              <a class="linkedin" href="https://es.linkedin.com/in/joseromanhdez"><i class="fa fa-linkedin"></i></a>
+              <a class="github" href="https://github.com/ManzDev/"><i class="fa fa-github"></i></a>
+              <a class="codepen" href="http://codepen.io/manz/"><i class="fa fa-codepen"></i></a>
+              <a class="url" href="http://www.emezeta.com/"><i class="fa fa-globe"></i></a>
+            </div>
+          </div>
+        </div>
+        <div id="comentarios">
+          <a id="disqus_button" href="https://lenguajecss.com/p/css/animaciones/animaciones#disqus_thread" data-disqus-identifier="/p/css/animaciones/animaciones">¿Quieres compartir tu opinión?</a>
+        </div>
+        <nav class="navpage"><a class="bt-nav bt-prev" href="https://lenguajecss.com/p/css/animaciones/transiciones">Transiciones CSS «</a><a class="bt-nav bt-home" href="https://lenguajecss.com/p/css/indice"><i class="fa fa-home"></i> Indice</a>  <a class="bt-nav bt-next" href="https://lenguajecss.com/p/css/animaciones/transformaciones"> » Transformaciones CSS</a></nav>
+        <div id="up" class="fa fa-arrow-up" onclick="smoothScroll(0)"></div>
+      </div>
+          </div>
+<div id="foot">
+  <div class="square">
+    <h2>Lenguaje CSS</h2>
+    <p>Sitio web de documentación, información, docencia y herramientas acerca de diseño web y front-end (HTML5 / CSS3 / Javascript).</p>
+    <p id="footer">Creado y mantenido por <a href="http://twitter.com/Manz">@Manz</a> con <span><i class="fa fa-heart" title="&lt;3"></i></span></p>
+    <!-- 0.46MB · 0.01s -->
+    <div class="icons">
+      <a href="http://twitter.com/Manz"><i class="fa fa-2x fa-twitter"></i></a>
+      <a href="https://plus.google.com/+JoseRomanHernandezMartin"><i class="fa fa-2x fa-google-plus"></i></a>
+      <a href="http://es.linkedin.com/in/joseromanhdez/"><i class="fa fa-2x fa-linkedin"></i></a>
+      <a href="http://www.emezeta.com/"><i class="fa fa-2x fa-globe"></i></a>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-136544-3', 'auto');
+  ga('send', 'pageview');
+</script>
+<script src="./Animaciones CSS _ CSS en español_files/prism.min.js.descarga"></script>
+<script src="./Animaciones CSS _ CSS en español_files/caniuse-embed.min.js.descarga"></script>
+<script src="./Animaciones CSS _ CSS en español_files/count.js.descarga" id="dsq-count-scr" async=""></script><script>
+var disqus_config = function () {
+  this.page.url = location.href;
+  this.page.identifier = location.pathname;
+};
+window.addEventListener('DOMContentLoaded', function() {
+  coms = document.querySelector('#comentarios');
+  a = coms.querySelector('#disqus_button');
+  a.dataset.disqusIdentifier = location.pathname;
+  a.addEventListener('click', function() {
+    var div = document.createElement('div');
+    div.id = 'disqus_thread';
+    coms.appendChild(div);
+    var d = document, s = d.createElement('script');
+    s.src = '//lenguajecss.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    this.remove();
+  });
+});
+</script>
+<script src="./Animaciones CSS _ CSS en español_files/base.min.js.descarga"></script>
+
+
+</body></html>

@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="15/04/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Tipos de atributos | Java</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">Java</a></h1>
+        <p class="span3">
+                        <a href="capitulo-11.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-13.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="tipos-de-atributos"><span>Capítulo 12</span> Tipos de atributos</h1>
+        <p>Los atributos, también llamados datos o variables miembro son porciones de información que un objeto posee o conoce de sí mismo. Una clase puede tener cualquier número de atributos o no tener ninguno. Se declaran con un identificador y el tipo de dato correspondiente. Además los atributos y tienen asociado un modificador que define su visibilidad según se muestra en la siguiente tabla.</p>
+
+<div class="figure" id="figure-12-1">
+    <img src="images/cap12/modificadores.png" alt="Modificadores y visibilidad correspondiente" />
+
+    <p class="caption"><strong>Figura 12.1</strong> Modificadores y visibilidad correspondiente</p>
+</div>
+
+
+<p>En este capítulo se presentan tres tipos de atributos: las variables de <em>instancia</em>, las variables <em>de clase</em> y las variables <em>finales</em> o constantes.</p>
+
+<h2 id="variables-de-instancia">12.1 Variables de instancia</h2>
+
+<p>Cuando se declara el atributo o variable miembro <code>euros</code> en la clase <code>Precio</code> de la siguiente forma:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> Precio <span class="br0">&#123;</span> 
+    <span class="co1">// Declaracion de atributos o variables miembro</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> euros<span class="sy0">;</span> 
+&nbsp;
+    <span class="co1">// Declaracion de metodos . . .</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>se está declarando el atributo <code>euros</code> como una <em>variable de instancia</em>. En consecuencia, cada vez que se crea una instancia de la clase <code>Precio</code>, se reserva espacio en memoria para una variable de instancia <code>euros</code>. Por ejemplo, el código:</p>
+
+<div class="code java">
+<pre class="java"><span class="co1">// Creacion de dos instancias de la clase precio</span>
+Precio p <span class="sy0">=</span> <span class="kw1">new</span> Precio<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+p.<span class="me1">pone</span><span class="br0">&#40;</span><span class="nu0">56.8</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+Precio q <span class="sy0">=</span> <span class="kw1">new</span> Precio<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+q.<span class="me1">pone</span><span class="br0">&#40;</span><span class="nu0">75.6</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>genera dos instancias de la clase <code>Precio</code> como muestra la Figura 9.2. En este caso, cada una de las dos instancias, <code>p</code> y <code>q</code>, de la clase <code>Precio</code> tiene una variable de instancia euros propia. Las respectivas llamadas al método <code>pone</code> para cada instancia (<code>p.pone(56.8)</code> y <code>q.pone(75.6)</code>), permiten asignar un valor a las variables de instancia correspondientes.</p>
+
+<div class="figure" id="figure-12-2">
+    <img src="images/cap12/precio.png" alt="Representación gráfica del espacio de la memoria utilizado por cada instancia de la clase <code>Precio</code> " />
+
+    <p class="caption"><strong>Figura 12.2</strong> Representación gráfica del espacio de la memoria utilizado por cada instancia de la clase <code>Precio</code> </p>
+</div>
+
+
+<p>Otro ejemplo. En la declaración de la clase <code>Fecha</code> se incluyen tres atributos (<code>dia</code>, <code>mes</code> y <code>anho</code>) que son variables de instancia:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> Fecha <span class="br0">&#123;</span> 
+    <span class="co1">// Declaracion de atributos o variables miembro</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> dia<span class="sy0">;</span> 
+    <span class="kw1">private</span> <span class="kw4">int</span> mes<span class="sy0">;</span> 
+    <span class="kw1">private</span> <span class="kw4">int</span> anho<span class="sy0">;</span> 
+&nbsp;
+    <span class="co1">// Declaracion de metodos . . .</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Con el siguiente código se crean dos instancias de la clase <code>Fecha</code>:</p>
+
+<div class="code java">
+<pre class="java"><span class="co1">// Creacion de dos instancias de la clase Fecha</span>
+Fecha a <span class="sy0">=</span> <span class="kw1">new</span> Fecha<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+Fecha b <span class="sy0">=</span> <span class="kw1">new</span> Fecha<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Cada una de las instancias de la clase <code>Fecha</code> reserva espacio en memoria para cada una de las variables de instancia como muestra la siguiente figura.</p>
+
+<div class="figure" id="figure-12-3">
+    <img src="images/cap12/fecha.png" alt="Representación gráfica del espacio de la memoria utilizado por cada instancia de la clase <code>Fecha</code>" />
+
+    <p class="caption"><strong>Figura 12.3</strong> Representación gráfica del espacio de la memoria utilizado por cada instancia de la clase <code>Fecha</code></p>
+</div>
+
+
+<p>Las variables de instancia pueden declararse como <code>public</code> o como <code>private</code> y pueden pertenecer a cualquiera de los tipos de datos primitivos de Java o bien, a otra clase existente en Java o declarada por el usuario. En principio, la única limitación para el número de variables de instancia que puede declarar una clase es el espacio libre disponible en la memoria del sistema que ejecute el programa.</p>
+
+<h2 id="variables-de-clase-static">12.2 Variables de clase (<code>static</code>)</h2>
+
+<p>Las <em>variables de clase</em> son atributos diferentes de las <em>variables de instancia</em>. Las variables de clase implican una sola zona de memoria reservada para todas las instancias de la clase, y no una copia por objeto, como sucede con las variables de instancia. Para diferenciarlas de éstas en el código fuente de Java, las variables de clase se distinguen con el modificador <code>static</code> en la declaración del atributo correspondiente. Por defecto (si no se indica la palabra <code>static</code>), el atributo declarado se considera variable de instancia.</p>
+
+<p>Durante la ejecución del programa, el sistema reserva un único espacio en memoria para cada variable <em>estáticas</em> o de clase independientemente del número de instancias creadas de una clase. Esta reserva se produce la primera vez que encuentra dicha clase en el código, de forma que todas las instancias pertenecientes a una clase comparten la misma variable de clase. A diferencias de las variables globales fuera de la POO, las variables de clase garantizan la encapsulación.</p>
+
+<p>Las variables de clase sirven para almacenar características comunes (constantes) a todos los objetos (número de ruedas de una bicicleta) o para almacenar características que dependen de todos los objetos (número total de billetes de lotería). Por ejemplo, la clase <code>CuentaBancaria</code> tiene una variable de instancia, <code>saldo</code>, y una variable de clase, <code>totalCuentas</code>.</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> CuentaBancaria <span class="br0">&#123;</span> 
+    <span class="co1">// Atributos o variables miembro</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> saldo<span class="sy0">;</span>                 <span class="co1">// Variable de instancia</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">int</span> totalCuentas<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>   <span class="co1">// Variable de clase</span>
+&nbsp;
+    <span class="co1">// Declaraciones de metodos ... </span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La creación de varias instancias de la clase <code>CuentaBancaria</code> no conlleva la existencia de varias variables <code>totalCuentas</code>. Durante la ejecución de un programa que utilice la clase <code>CuentaBancaria</code> sólo existirá una variable de clase <code>totalCuentas</code>, independientemente del número de instancias de la clase <code>CuentaBancaria</code> que se generen. Es más, no es necesario siquiera que exista una instancia de la clase, para que lo haga la variable de clase. De hecho, se inicializan a <code>false</code>, cero o <code>null</code> (dependiendo de su tipo) antes de que se genere una instancia de la clase.</p>
+
+<div class="code java">
+<pre class="java"><span class="co1">// Creacion de dos instancias de la clase CuentaBancaria</span>
+CuentaBancaria c1 <span class="sy0">=</span> <span class="kw1">new</span> CuentaBancaria<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+CuentaBancaria c2 <span class="sy0">=</span> <span class="kw1">new</span> CuentaBancaria<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="figure" id="figure-12-4">
+    <img src="images/cap12/totalcuentas.png" alt="Representación gráfica del espacio de la memoria utilizado por la variable de clase <code>totalCuentas</code> y por cada instancia de la clase <code>CuentaBancaria</code>" />
+
+    <p class="caption"><strong>Figura 12.4</strong> Representación gráfica del espacio de la memoria utilizado por la variable de clase <code>totalCuentas</code> y por cada instancia de la clase <code>CuentaBancaria</code></p>
+</div>
+
+
+<p>Las variables de clase se emplean cuando sólo es necesaria <strong>una copia</strong> por clase que, además, esté accesible por todas las instancias de la clase a la que pertenece. En este caso, al ser un atributo <code>public</code> y <code>static</code>, puede accederse directamente a la variable de clase (<code>totalCuentas</code>) a través de una instancia (<code>c1</code> o <code>c2</code>) o de la clase en sí (<code>CuentaBancaria</code>). Un atributo estático puede ser accedido desde cualquier instancia de la clase, ya que es miembro de la propia clase.</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> PruebaCuentaBancaria <span class="br0">&#123;</span> 
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main <span class="br0">&#40;</span><span class="kw3">String</span> <span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        CuentaBancaria c1 <span class="sy0">=</span> <span class="kw1">new</span> CuentaBancaria<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        c1.<span class="me1">totalCuentas</span><span class="sy0">++;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Total cuentas: &quot;</span> <span class="sy0">+</span> c1.<span class="me1">totalCuentas</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        CuentaBancaria c2 <span class="sy0">=</span> <span class="kw1">new</span> CuentaBancaria<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        c2.<span class="me1">totalCuentas</span><span class="sy0">++;</span> 
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Total cuentas: &quot;</span> <span class="sy0">+</span> c2.<span class="me1">totalCuentas</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="co1">// Acceso a traves de la clase:</span>
+        CuentaBancaria.<span class="me1">totalCuentas</span><span class="sy0">++;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Total cuentas: &quot;</span> <span class="sy0">+</span> CuentaBancaria.<span class="me1">totalCuentas</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La ejecución del código anterior origina la siguiente salida por pantalla:</p>
+
+<div class="code bash">
+<pre class="bash">$<span class="sy0">&gt;</span>java PruebaCuentaBancaria
+Total cuentas: <span class="nu0">1</span>
+Total cuentas: <span class="nu0">2</span>
+Total cuentas: <span class="nu0">3</span></pre>
+</div>
+
+<p>Para operar con variables de clase también podemos implementar métodos en la clase. Por ejemplo el siguiente método <code>incTotalCuentas</code> incrementa en una unidad el valor de la variable de clase <code>totalCuentas</code>.</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> incTotalCuentas<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    totalCuentas<span class="sy0">++;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Al ser declarado el método <code>incTotalCuentas</code> como un método <code>public</code> y <code>static</code>, puede llamarse mediante cualquiera de las instancias (<code>c1</code> o <code>c2</code>) o de la clase en sí (<code>CuentaBancaria</code>).</p>
+
+<p>Las variables de clase pueden declararse como <code>public</code> o como <code>private</code> y pueden pertenecer a cualquiera de los tipos de datos primitivos de Java o bien, a otra clase existente en Java o declarada por el usuario. En principio, la única limitación para el número de variables de clase que puede declarar una clase es el espacio libre disponible por el sistema que ejecute el programa.</p>
+
+<h2 id="constantes-o-variables-finales-final">12.3 Constantes o variables finales (<code>final</code>)</h2>
+
+<p>Una clase puede contener atributos de valor constante o <em>variables finales</em>. Este tipo de atributo se indica con la palabra reservada <code>final</code>. Las variables finales se suelen declarar además como variables de clase (<code>static final</code>) por razones de ahorro de memoria ya que, al no modificar su valor sólo suele ser necesaria una copia en memoria por clase (y no una por instancia). Por ejemplo, en la clase <code>Circulo</code>:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> Circulo <span class="br0">&#123;</span> 
+    <span class="co1">// Atributos o variables miembro</span>
+     <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw4">double</span> PI <span class="sy0">=</span> <span class="nu0">3.141592</span><span class="sy0">;</span>     <span class="co1">// Constante de clase</span>
+    <span class="kw1">private</span> <span class="kw4">double</span> radio<span class="sy0">;</span> 
+&nbsp;
+    <span class="co1">// Declaracion de metodos ... </span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La palabra reservada <code>final</code> indica que el atributo debe comportarse como una constante, es decir, no puede ser modificada una vez declarada e inicializada. Por otro lado, se puede separar la declaración de la inicialización de la variable final, realizándose ésta más tarde. En este caso, el valor asignado a la variable final puede hacerse en función de otros datos o de llamadas a métodos, con lo que el valor de la <em>constante</em> no tiene porqué ser el mismo para diferentes ejecuciones del programa.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-12.html#tipos-de-atributos">Tipos de atributos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>12.1</span>
+                        <a class="internal" href="capitulo-12.html#variables-de-instancia">Variables de instancia</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>12.2</span>
+                        <a class="internal" href="capitulo-12.html#variables-de-clase-static">Variables de clase (<code>static</code>)</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>12.3</span>
+                        <a class="internal" href="capitulo-12.html#constantes-o-variables-finales-final">Constantes o variables finales (<code>final</code>)</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="title" content="Ultimatix">
+	<meta name="description" content="Grupo 1 de DAW 2.">
+	<link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
+    <title>Ultimatix</title>
+    <link rel="stylesheet" href="fonts/styles.css">
+	<script>
+        <!--
+        function getStylesheet() {
+            var currentTime = new Date().getHours();
+            if (0 <= currentTime&&currentTime < 5) {
+                document.write("<link rel='stylesheet' href='css/night.css' type='text/css'>");
+            }
+            if (5 <= currentTime&&currentTime < 11) {
+                document.write("<link rel='stylesheet' href='css/main.css' type='text/css'>");
+            }
+            if (11 <= currentTime&&currentTime < 16) {
+                document.write("<link rel='stylesheet' href='css/main.css' type='text/css'>");
+            }
+            if (16 <= currentTime&&currentTime < 22) {
+                document.write("<link rel='stylesheet' href='css/main.css' type='text/css'>");
+            }
+            if (22 <= currentTime&&currentTime <= 24) {
+                document.write("<link rel='stylesheet' href='css/night.css' type='text/css'>");
+            }
+        }
+
+        getStylesheet();
+        -->
+	</script>
+
+	<noscript><link rel="stylesheet" href="css/main.css"></noscript>
+</head>
+<body>
+	<div id="loader">
+		<div class="loader_circle loader_animation"></div>
+	</div>
+	<section id="menu">
+		<ul>
+			<li><a href="index.html">Introducción</a></li>
+			<li><a href="wordpress.html">Wordpress</a></li>
+			<li><a href="prestashop.html">Prestashop</a></li>
+			<li><a href="lamp.html">LAMP</a></li>
+			<li><a href="owncloud.html">Owncloud</a></li>
+		</ul>
+	</section>
+	<div id="intro">
+		<img src="img/ultimatix-logo.png" class="logo">
+	</div>
+	<a href="#menu" class="up-button"><img src="img/menu-button.png"></a>
+	<section>
+		<h1>Owncloud</h1>
+		<h2>¿Qué es OwnCloud?</h2>
+		<p>ownCloud es una de software libre de alojamiento de archivos en línea. Este puede ser instalado en un servidor que disponga de PHP y que tenga soporte para base de datos(MySQL).</p>
+		<h2>Como instalar</h2>
+		<p>Para instalar OwnCloud (Server) seguiremos los siguientes pasos.</p>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/1.png">
+			</div>
+			<div class="column">
+				<p>Lo primero que tenemos que hacer es ir a la sección Download de la página de Owncloud.</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/2.png">
+			</div>
+			<div class="column">
+				<p>Allí seleccionaremos el formato en el que deseamos descargarlo.</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/3.png">
+			</div>
+			<div class="column">
+				<p>Después extraemos de la siguiente manera.</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/4.png">
+			</div>
+			<div class="column">
+				<p>La ruta de extracción será la de nuestro servidor apache /var/www/”tu ruta de owncloud”</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/5.png">
+			</div>
+			<div class="column">
+				<p>Una vez hayamos extraído accederemos desde nuestra ip de grupo. Desde allí accederemos a Owncloud.</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/6.png">
+			</div>
+			<div class="column">
+				<p>Una vez dentro rellenamos esta primera parte del formulario con la cuenta que vamos a querer usar en Owncloud y la ruta del Directorio.</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<p>Aqui rellenamos el formulario relacionado con la base datos , pero antes , debemos crearla de la siguiente manera:</p>
+			</div>
+			<div class="column">
+				<img src="img/owncloud/7.png">
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/8.png">
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/9.png">
+			</div>
+			<div class="column">
+				<p>NOTA: Durante la configuración en este formulario puede aparecer el siguiente error</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/10.png">
+			</div>
+			<div class="column">
+				<p>Para arreglarlo debemos dar permisos a la carpeta con el siguiente comando: chown -R www-data /Proyecto Proxmox/Proyecto Proxmox 1_2/Owncloud/owncloud</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/11.png">
+			</div>
+			<div class="column">
+				<p>Tras eso tardara unos segundos en completar la instalacion y despues nos llevará a la pantalla del login que vemos ahora donde iniciaremos con nuestras credenciales.</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/12.png">
+			</div>
+			<div class="column">
+				<p>Tras iniciar sesión accederemos a la Interfaz gráfica donde podemos subir y bajar nuestros archivos.</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/13.png">
+			</div>
+			<div class="column">
+				<p>También podemos administrar nuevos usuarios desde la pestaña de usuarios a la que accedemos clickando en la flechita al lado de tu nombre (parte superior derecha) y accediendo a la sección “usuarios”.</p>
+			</div>
+		</div>
+		<h2>Instalación CLIENTE</h2>
+		<p>Para instalar OwnCloud (Cliente) seguiremos los siguientes pasos.</p>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/14.png">
+			</div>
+			<div class="column">
+				<p>Lo primero que tenemos que hacer es ir a la sección de Download de Owncloud <a href="https://owncloud.org/download/">https://owncloud.org/download/</a> Allí descargamos lo siguiente</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/15.png">
+			</div>
+			<div class="column">
+				<p>Tras descargar ejecutamos el instalador. Al ejecutarlo se nos mostrará la siguiente pantalla en la que debemos introducir nuestra dirección de servidor.</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/16.png">
+			</div>
+			<div class="column">
+				<p>Tras esto, debemos iniciar con las mismas credenciales que en la parte de servidor.</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/17.png">
+			</div>
+			<div class="column">
+				<p>Tras introducir las credenciales nos puede salir un error, en el cual se nos indica que nos faltan deiferentes modulos.</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/18.png">
+			</div>
+			<div class="column">
+				<p>Para arreglar este problema, vamos a instalar cada uno de ellos desde nuestra consola.</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/19.png">
+			</div>
+			<div class="column">
+				<p>Tras esto, al loguearnos satisfactoriamente , nos preguntara como y en que carpeta deseamos sincronizar.</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/20.png">
+			</div>
+			<div class="column">
+				<p>Una vez dentro se nos mostrarán distintas pestañas. En la primera podemos administrar tanto la sincronización , como nuestras carpetas asi como una pestañita de “cuenta” donde podremos añadir usuarios.</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/21.png">
+			</div>
+			<div class="column">
+				<p>La pestaña “Actividad” donde podemos comprobar cuales son los ultimos archivos sincronizados y cuales están sin sincronizar.</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/22.png">
+			</div>
+			<div class="column">
+				<p>La pestaña “General” donde podemos cambiar distintos parámetros de configuración.</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/owncloud/23.png">
+			</div>
+			<div class="column">
+				<p>Y por último la pestaña red donde podemos cambiar parámetros relacionados con el proxy  o con la velocidad de transferencia de datos.</p>
+			</div>
+		</div>
+	</section>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

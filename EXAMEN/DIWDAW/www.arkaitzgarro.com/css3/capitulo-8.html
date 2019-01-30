@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Módulo <em>Multi-column Layout</em> | CSS 3</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">CSS 3</a></h1>
+        <p class="span3">
+                        <a href="capitulo-7.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-9.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="modulo-multi-column-layout"><span>Capítulo 8</span> Módulo <em>Multi-column Layout</em></h1>
+        <p>La especificación oficial y el estado actual de desarrollo del módulo <em>Multi-column Layout</em> en CSS 3 puede consultarse en <a href="http://www.w3.org/TR/css3-multicol/">http://www.w3.org/TR/css3-multicol/</a>.</p>
+
+<p>La propiedad <code>multi-column</code> permite crear estructuras multicolumna con nuestros textos de dos maneras diferentes: definiendo el número de columnas (con la propiedad <code>column-count</code>), o definiendo un ancho para dichas columnas (con la propiedad <code>column-width</code>). Es posible especificar el espacio entre columnas con la propiedad <code>column-gap</code>.</p>
+
+<p>Un ejemplo de estructura multicolumna utilizando la propiedad <code>column-count</code>:</p>
+
+<div class="code css">
+<pre class="css">div <span class="br0">&#123;</span> column-count<span class="sy0">:</span><span class="nu0">2</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<div style="-webkit-column-count:2;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
+nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa 
+qui officia deserunt mollit anim id est laborum</div>
+
+<p>Un ejemplo de estructura multicolumna utilizando la propiedad <code>column-width</code>:</p>
+
+<div class="code css">
+<pre class="css">div <span class="br0">&#123;</span> column-width<span class="sy0">:</span><span class="re3">10em</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<div style="-webkit-column-width:10em;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
+nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa 
+qui officia deserunt mollit anim id est laborum</div>
+
+<h2 id="propiedad-shorthand-2">8.1 Propiedad <em>shorthand</em></h2>
+
+<p>Como los valores de las propiedades anteriores no se superponen, a menudo es conveniente utilizar la propiedad <em>shorthand</em> <code>columns</code>.</p>
+
+<div class="table" id="table-8-1">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>columns</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">&lt;column-width&gt; || &lt;column-count&gt;</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos de bloque (excepto tablas), celdas de tabla y elementos inline-block.</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">none</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Especifica el número de columnas y/o ancho de las mismas.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<h2 id="equilibro-de-altura">8.2 Equilibro de altura</h2>
+
+<p>La especificación de CSS3 requiere que la <strong>alturas de las columnas</strong> sea equilibrada. Esto es, el navegador automáticamente establece el máximo de altura de la columna de manera que las alturas de los contenidos de las columnas sean aproximadamente iguales.</p>
+
+<p>Sin embargo, en algunas situaciones, es util establecer explícitamente el máximo de altura. Si la altura está limmitada mediante las propiedades CSS <code>height</code> o <code>max-height</code> en un bloque multi-columna, cada columna puede "crecer" hasta la máxima altura y no más allá antes de añadir una nueva columna.</p>
+
+<h2 id="espacios-entre-columnas">8.3 Espacios entre columnas</h2>
+
+<p>Siempre existe un espacio entre columnas. El espacio recomendado es <code>1em</code>. Este tamaño puede ser cambiado aplicando la propiedad <code>column-gap</code>.</p>
+
+<div class="table" id="table-8-2">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>column-gap</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">&lt;length&gt; &#124; normal</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Elementos multi-columna</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">normal</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Especifica el espacio entre columnas</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<h2 id="trazos-entre-columnas">8.4 Trazos entre columnas</h2>
+
+<p>En el espacio que existe entre las columnas, es posible dibujar un trazo, como si de un borde se tratara.</p>
+
+<div class="table" id="table-8-3">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>column-rule</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">&lt;column-rule-width&gt; || &lt;column-rule-style&gt; || [ &lt;column-rule-color&gt; | transparent ]</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Elementos multi-columna</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">transparent</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Especifica el trazo a dibujar en el espacio entre columnas.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<div style="-webkit-column-count:3; -webkit-column-rule: 1px dotted black;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
+nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa 
+qui officia deserunt mollit anim id est laborum</div>
+
+<h2 id="texto-sobre-columnas">8.5 Texto sobre columnas</h2>
+
+<p>Es posible mostrar un elemento, inicialmente incluido en el texto formateado en columnas, para que ocupe el ancho completo de las columnas, utilizando la propiedad <code>column-span</code>.</p>
+
+<div class="table" id="table-8-4">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>column-span</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">none &#124; all ]</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Elementos de bloque, excepto los flotantes y los definidos con posición absoluta.</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">none</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Especifica cuantas columnas ocupa el elemento.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<div style="-webkit-column-count:3; -webkit-column-rule: 1px dotted black;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+<h2 style="-webkit-column-span: all;">Loren ipsum</h2>quis nostrud exercitation ullamco laboris nisi ut aliquip
+ex ea commodo consequat. 
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
+nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa 
+qui officia deserunt mollit anim id est laborum</div>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-8.html#modulo-multi-column-layout">Módulo <em>Multi-column Layout</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.1</span>
+                        <a class="internal" href="capitulo-8.html#propiedad-shorthand-2">Propiedad <em>shorthand</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.2</span>
+                        <a class="internal" href="capitulo-8.html#equilibro-de-altura">Equilibro de altura</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.3</span>
+                        <a class="internal" href="capitulo-8.html#espacios-entre-columnas">Espacios entre columnas</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.4</span>
+                        <a class="internal" href="capitulo-8.html#trazos-entre-columnas">Trazos entre columnas</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.5</span>
+                        <a class="internal" href="capitulo-8.html#texto-sobre-columnas">Texto sobre columnas</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

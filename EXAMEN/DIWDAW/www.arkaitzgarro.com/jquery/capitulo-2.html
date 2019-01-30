@@ -1,0 +1,1066 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="14/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Conceptos Básicos de JavaScript | jQuery</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">jQuery</a></h1>
+        <p class="span3">
+                        <a href="capitulo-1.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-3.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="conceptos-basicos-de-javascript"><span>Capítulo 2</span> Conceptos Básicos de JavaScript</h1>
+        <h2 id="introduccion-2">2.1 Introducción</h2>
+
+<p>jQuery se encuentra escrito en JavaScript, un lenguaje de programación muy rico y expresivo.</p>
+
+<p>El capítulo está orientado a personas sin experiencia en el lenguaje, abarcando conceptos básicos y problemas frecuentes que pueden presentarse al trabajar con el mismo. Por otro lado, la sección puede ser beneficiosa para quienes utilicen otros lenguajes de programación para entender las peculiaridades de JavaScript.</p>
+
+<p>Si usted esta interesado en aprender el lenguaje más en profundidad, puede leer el libro <em>JavaScript: The Good Parts</em> escrito por Douglas Crockford.</p>
+
+<h2 id="sintaxis-basica">2.2 Sintaxis Básica</h2>
+
+<p>Comprensión de declaraciones, nombres de variables, espacios en blanco, y otras sintaxis básicas de JavaScript.</p>
+
+<p><strong>Declaración simple de variable</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> foo <span class="sy0">=</span> <span class="st0">'hola mundo'</span><span class="sy0">;</span></pre>
+</div>
+
+<p><strong>Los espacios en blanco no tienen valor fuera de las comillas</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> foo <span class="sy0">=</span>         <span class="st0">'hola mundo'</span><span class="sy0">;</span></pre>
+</div>
+
+<p><strong>Los paréntesis indican prioridad</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="nu0">2</span> <span class="sy0">*</span> <span class="nu0">3</span> <span class="sy0">+</span> <span class="nu0">5</span><span class="sy0">;</span>    <span class="co1">// es igual a 11; la multiplicación ocurre primero</span>
+<span class="nu0">2</span> <span class="sy0">*</span> <span class="br0">&#40;</span><span class="nu0">3</span> <span class="sy0">+</span> <span class="nu0">5</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// es igual a 16; por lo paréntesis, la suma ocurre primero</span></pre>
+</div>
+
+<p><strong>La tabulación mejora la lectura del código, pero no posee ningún significado especial</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> foo <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'hola'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="operadores">2.3 Operadores</h2>
+
+<h3 id="operadores-basicos">2.3.1 Operadores Básicos</h3>
+
+<p>Los operadores básicos permiten manipular valores.</p>
+
+<p><strong>Concatenación</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> foo <span class="sy0">=</span> <span class="st0">'hola'</span><span class="sy0">;</span>
+<span class="kw1">var</span> bar <span class="sy0">=</span> <span class="st0">'mundo'</span><span class="sy0">;</span>
+&nbsp;
+console.<span class="me1">log</span><span class="br0">&#40;</span>foo <span class="sy0">+</span> <span class="st0">' '</span> <span class="sy0">+</span> bar<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// la consola de depuración muestra 'hola mundo'</span></pre>
+</div>
+
+<p><strong>Multiplicación y división</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="nu0">2</span> <span class="sy0">*</span> <span class="nu0">3</span><span class="sy0">;</span>
+<span class="nu0">2</span> <span class="sy0">/</span> <span class="nu0">3</span><span class="sy0">;</span></pre>
+</div>
+
+<p><strong>Incrementación y decrementación</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> i <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">var j = ++i;  // incrementación previa:  j es igual a 2; i es igual a 2
+var k = i++;  // incrementación posterior: k es igual a 2; i es igual a 3</pre>
+</div>
+
+<h3 id="operaciones-con-numeros-y-cadenas-de-caracteres">2.3.2 Operaciones con Números y Cadenas de Caracteres</h3>
+
+<p>En JavaScript, las operaciones con números y cadenas de caracteres (en inglés <em>strings</em>) pueden ocasionar resultados no esperados.</p>
+
+<p><strong>Suma vs. concatenación</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> foo <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+<span class="kw1">var</span> bar <span class="sy0">=</span> <span class="st0">'2'</span><span class="sy0">;</span>
+&nbsp;
+console.<span class="me1">log</span><span class="br0">&#40;</span>foo <span class="sy0">+</span> bar<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// error: La consola de depuración muestra 12</span></pre>
+</div>
+
+<p><strong>Forzar a una cadena de caracteres actuar como un número</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> foo <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+<span class="kw1">var</span> bar <span class="sy0">=</span> <span class="st0">'2'</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// el constructor 'Number' obliga a la cadena comportarse como un número</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>foo <span class="sy0">+</span> <span class="kw4">Number</span><span class="br0">&#40;</span>bar<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// la consola de depuración muestra 3</span></pre>
+</div>
+
+<p>El constructor <em>Number</em>, cuando es llamado como una función (como se muestra en el ejemplo) obliga a su argumento a comportarse como un número. También es posible utilizar el operador de <em>suma unaria</em>, entregando el mismo resultado:</p>
+
+<p><strong>Forzar a una cadena de caracteres actuar como un número (utilizando el operador de suma unaria)</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">console.<span class="me1">log</span><span class="br0">&#40;</span>foo <span class="sy0">+</span> <span class="sy0">+</span>bar<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="operadores-logicos">2.3.3 Operadores Lógicos</h3>
+
+<p>Los operadores lógicos permiten evaluar una serie de operandos utilizando operaciones AND y OR.</p>
+
+<p><strong>Operadores lógicos AND y OR</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> foo <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+<span class="kw1">var</span> bar <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="kw1">var</span> baz <span class="sy0">=</span> <span class="nu0">2</span><span class="sy0">;</span>
+&nbsp;
+foo <span class="sy0">||</span> bar<span class="sy0">;</span>   <span class="co1">// devuelve 1, el cual es verdadero (true)</span>
+bar <span class="sy0">||</span> foo<span class="sy0">;</span>   <span class="co1">// devuelve 1, el cual es verdadero (true)</span>
+&nbsp;
+foo <span class="sy0">&amp;&amp;</span> bar<span class="sy0">;</span>   <span class="co1">// devuelve 0, el cual es falso (false)</span>
+foo <span class="sy0">&amp;&amp;</span> baz<span class="sy0">;</span>   <span class="co1">// devuelve 2, el cual es verdadero (true)</span>
+baz <span class="sy0">&amp;&amp;</span> foo<span class="sy0">;</span>   <span class="co1">// devuelve 1, el cual es verdadero (true)</span></pre>
+</div>
+
+<p>El operador <code>||</code> (OR lógico) devuelve el valor del primer operando, si éste es verdadero; caso contrario devuelve el segundo operando. Si ambos operandos son falsos devuelve falso (<em>false</em>). El operador <code>&amp;&amp;</code> (AND lógico) devuelve el valor del primer operando si éste es falso; caso contrario devuelve el segundo operando. Cuando ambos valores son verdaderos devuelve verdadero (<em>true</em>), sino devuelve falso.</p>
+
+<p>Puede consultar la sección <code>Elementos Verdaderos y Falsos</code> para más detalles sobre que valores se evalúan como <code>true</code> y cuales se evalúan como <code>false</code>.</p>
+
+<blockquote>
+  <p><strong>Nota</strong></p>
+  
+  <p>Puede que a veces note que algunos desarrolladores utilizan esta lógica en flujos de control en lugar de utilizar la declaración <code>if</code>. Por ejemplo:</p>
+</blockquote>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// realizar algo con foo si foo es verdadero</span>
+foo <span class="sy0">&amp;&amp;</span> doSomething<span class="br0">&#40;</span>foo<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// establecer bar igual a baz si baz es verdadero;</span>
+<span class="co1">// caso contrario, establecer a bar igual al</span>
+<span class="co1">// valor de createBar()</span>
+<span class="kw1">var</span> bar <span class="sy0">=</span> baz <span class="sy0">||</span> createBar<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Este estilo de declaración es muy elegante y conciso; pero puede ser difícil para leer (sobretodo para principiantes). Por eso se explícita, para reconocerlo cuando este leyendo código. Sin embargo su utilización no es recomendable a menos que esté cómodo con el concepto y su comportamiento.</p>
+
+<h3 id="operadores-de-comparacion">2.3.4 Operadores de Comparación</h3>
+
+<p>Los operadores de comparación permiten comprobar si determinados valores son equivalentes o idénticos.</p>
+
+<p><strong>Operadores de Comparación</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> foo <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+<span class="kw1">var</span> bar <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="kw1">var</span> baz <span class="sy0">=</span> <span class="st0">'1'</span><span class="sy0">;</span>
+<span class="kw1">var</span> bim <span class="sy0">=</span> <span class="nu0">2</span><span class="sy0">;</span>
+&nbsp;
+foo <span class="sy0">==</span> bar<span class="sy0">;</span>   <span class="co1">// devuelve falso (false)</span>
+foo <span class="sy0">!=</span> bar<span class="sy0">;</span>   <span class="co1">// devuelve verdadero (true)</span>
+foo <span class="sy0">==</span> baz<span class="sy0">;</span>   <span class="co1">// devuelve verdadero (true); tenga cuidado</span>
+&nbsp;
+foo <span class="sy0">===</span> baz<span class="sy0">;</span>             <span class="co1">// devuelve falso (false)</span>
+foo <span class="sy0">!==</span> baz<span class="sy0">;</span>             <span class="co1">// devuelve verdadero (true)</span>
+foo <span class="sy0">===</span> parseInt<span class="br0">&#40;</span>baz<span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// devuelve verdadero (true)</span>
+&nbsp;
+foo <span class="sy0">&gt;</span> bim<span class="sy0">;</span>    <span class="co1">// devuelve falso (false)</span>
+bim <span class="sy0">&gt;</span> baz<span class="sy0">;</span>    <span class="co1">// devuelve verdadero (true)</span>
+foo <span class="sy0">&lt;=</span> baz<span class="sy0">;</span>   <span class="co1">// devuelve verdadero (true)</span></pre>
+</div>
+
+<h2 id="codigo-condicional">2.4 Código Condicional</h2>
+
+<p>A veces se desea ejecutar un bloque de código bajo ciertas condiciones. Las estructuras de control de flujo — a través de la utilización de las declaraciones <code>if</code> y <code>else</code> permiten hacerlo.</p>
+
+<p><strong>Control del flujo</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> foo <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+<span class="kw1">var</span> bar <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#40;</span>bar<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="co1">// este código nunca se ejecutará</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'hola!'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#40;</span>bar<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// este código no se ejecutará</span>
+<span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+  <span class="kw1">if</span> <span class="br0">&#40;</span>foo<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="co1">// este código se ejecutará</span>
+  <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+      <span class="co1">// este código se ejecutará si foo y bar son falsos (false)</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<blockquote>
+  <p><strong>Nota</strong></p>
+  
+  <p>En una línea singular, cuando se escribe una declaración <code>if</code>, las llaves no son estrictamente necesarias; sin embargo es recomendable su utilización, ya que hace que el código sea mucho más legible.</p>
+</blockquote>
+
+<p>Debe tener en cuenta de no definir funciones con el mismo nombre múltiples veces dentro de declaraciones <code>if</code>/<code>else</code>, ya que puede obtener resultados no esperados.</p>
+
+<h3 id="elementos-verdaderos-y-falsos">2.4.1 Elementos Verdaderos y Falsos</h3>
+
+<p>Para controlar el flujo adecuadamente, es importante entender qué tipos de valores son "verdaderos" y cuales "falsos". A veces, algunos valores pueden parecer una cosa pero al final terminan siendo otra.</p>
+
+<p><strong>Valores que devuelven <code>verdadero (true)</code></strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="st0">'0'</span><span class="sy0">;</span>
+<span class="st0">'any string'</span><span class="sy0">;</span> <span class="co1">// cualquier cadena</span>
+<span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">;</span>  <span class="co1">// un vector vacío</span>
+<span class="br0">&#123;</span><span class="br0">&#125;</span><span class="sy0">;</span>  <span class="co1">// un objeto vacío</span>
+<span class="nu0">1</span><span class="sy0">;</span>   <span class="co1">// cualquier número distinto a cero</span></pre>
+</div>
+
+<p><strong>Valores que devuelven <code>falso (false)</code></strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="nu0">0</span><span class="sy0">;</span>
+<span class="st0">''</span><span class="sy0">;</span>  <span class="co1">// una cadena vacía</span>
+<span class="kw2">NaN</span><span class="sy0">;</span> <span class="co1">// la variable JavaScript &quot;not-a-number&quot; (No es un número)</span>
+<span class="kw2">null</span><span class="sy0">;</span> <span class="co1">// un valor nulo</span>
+<span class="kw2">undefined</span><span class="sy0">;</span>  <span class="co1">// tenga cuidado -- indefinido (undefined) puede ser redefinido</span></pre>
+</div>
+
+<h3 id="variables-condicionales-utilizando-el-operador-ternario">2.4.2 Variables Condicionales Utilizando el Operador Ternario</h3>
+
+<p>A veces se desea establecer el valor de una variable dependiendo de cierta condición. Para hacerlo se puede utilizar una declaración <code>if</code>/<code>else</code>, sin embargo en muchos casos es más conveniente utilizar el operador ternario. [Definición: El <em>operador ternario</em> evalúa una condición; si la condición es verdadera, devuelve cierto valor, caso contrario devuelve un valor diferente.]</p>
+
+<p><strong>El operador ternario</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// establecer a foo igual a 1 si bar es verdadero;</span>
+<span class="co1">// caso contrario, establecer a foo igual a 0</span>
+<span class="kw1">var</span> foo <span class="sy0">=</span> bar <span class="sy0">?</span> <span class="nu0">1</span> <span class="sy0">:</span> <span class="nu0">0</span><span class="sy0">;</span></pre>
+</div>
+
+<p>El operador ternario puede ser utilizado sin devolver un valor a la variable, sin embargo este uso generalmente es desaprobado.</p>
+
+<h3 id="declaracion-switch">2.4.3 Declaración Switch</h3>
+
+<p>En lugar de utilizar una serie de declaraciones if/else/else if/else, a veces puede ser útil la utilización de la declaración <code>switch</code>. [Definición: La declaración <code>Switch</code> evalúa el valor de una variable o expresión, y ejecuta diferentes bloques de código dependiendo de ese valor.]</p>
+
+<p><strong>Una declaración Switch</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">switch</span> <span class="br0">&#40;</span>foo<span class="br0">&#41;</span> <span class="br0">&#123;</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">  case 'bar':
+      alert('el valor es bar');
+  break;</pre>
+</div>
+
+<div class="code code">
+<pre class="code">  case 'baz':
+      alert('el valor es baz');
+  break;</pre>
+</div>
+
+<div class="code code">
+<pre class="code">  default:
+      alert('de forma predeterminada se ejecutará este código');
+  break;</pre>
+</div>
+
+<div class="code code">
+<pre class="code">}</pre>
+</div>
+
+<p>Las declaraciones <code>switch</code> son poco utilizadas en JavaScript, debido a que el mismo comportamiento es posible obtenerlo creando un objeto, el cual posee más potencial ya que es posible reutilizarlo, usarlo para realizar pruebas, etc. Por ejemplo:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> stuffToDo <span class="sy0">=</span> <span class="br0">&#123;</span>
+  <span class="st0">'bar'</span> <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      alert<span class="br0">&#40;</span><span class="st0">'el valor es bar'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span><span class="sy0">,</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">  'baz' : function() {
+      alert('el valor es baz');
+  },</pre>
+</div>
+
+<div class="code code">
+<pre class="code">  'default' : function() {
+      alert('de forma predeterminada se ejecutará este código');
+  }
+};
+&nbsp;
+if (stuffToDo[foo]) {
+  stuffToDo[foo]();
+} else {
+  stuffToDo['default']();
+}</pre>
+</div>
+
+<p>Más adelante se abarcará el concepto de objetos.</p>
+
+<h2 id="bucles">2.5 Bucles</h2>
+
+<p>Los bucles (en inglés <em>loops</em>) permiten ejecutar un bloque de código un determinado número de veces.</p>
+
+<p><strong>Bucles</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// muestra en la consola 'intento 0', 'intento 1', ..., 'intento 4'</span>
+<span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw1">var</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;</span><span class="nu0">5</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'intento '</span> <span class="sy0">+</span> i<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p><em>Note que en el ejemplo se utiliza la palabra var antes de la variable <code>i</code>{.varname}, esto hace que dicha variable quede dentro del "alcance" (en inglés *scope</em>) del bucle. Más adelante en este capítulo se examinará en profundidad el concepto de alcance.*</p>
+
+<h3 id="bucles-utilizando-for">2.5.1 Bucles Utilizando For</h3>
+
+<p>Un bucle utilizando <code>for</code> se compone de cuatro estados y posee la siguiente estructura:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">for</span> <span class="br0">&#40;</span><span class="br0">&#91;</span>expresiónInicial<span class="br0">&#93;</span><span class="sy0">;</span> <span class="br0">&#91;</span>condición<span class="br0">&#93;</span><span class="sy0">;</span> <span class="br0">&#91;</span>incrementoDeLaExpresión<span class="br0">&#93;</span><span class="br0">&#41;</span>
+ <span class="br0">&#91;</span>cuerpo<span class="br0">&#93;</span></pre>
+</div>
+
+<p>El estado <em>expresiónInicial</em> es ejecutado una sola vez, antes que el bucle comience. éste otorga la oportunidad de preparar o declarar variables.</p>
+
+<p>El estado <em>condición</em> es ejecutado antes de cada repetición, y retorna un valor que decide si el bucle debe continuar ejecutándose o no. Si el estado condicional evalúa un valor falso el bucle se detiene.</p>
+
+<p>El estado <em>incrementoDeLaExpresión</em> es ejecutado al final de cada repetición y otorga la oportunidad de cambiar el estado de importantes variables. Por lo general, este estado implica la incrementación o decrementación de un contador.</p>
+
+<p>El <em>cuerpo</em> es el código a ejecutar en cada repetición del bucle.</p>
+
+<p><strong>Un típico bucle utilizando <code>for</code></strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw1">var</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">,</span> limit <span class="sy0">=</span> <span class="nu0">100</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> limit<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="co1">// Este bloque de código será ejecutado 100 veces</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'Actualmente en '</span> <span class="sy0">+</span> i<span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="co1">// Nota: el último registro que se mostrará</span>
+  <span class="co1">// en la consola será &quot;Actualmente en 99&quot;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h3 id="bucles-utilizando-while">2.5.2 Bucles Utilizando While</h3>
+
+<p>Un bucle utilizando <code>while</code> es similar a una declaración condicional <code>if</code>, excepto que el cuerpo va a continuar ejecutándose hasta que la condición a evaluar sea falsa.</p>
+
+<div class="code javascript">
+<pre class="javascript">while <span class="br0">&#40;</span><span class="br0">&#91;</span>condición<span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="br0">&#91;</span>cuerpo<span class="br0">&#93;</span></pre>
+</div>
+
+<p><strong>Un típico bucle utilizando <code>while</code></strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+while <span class="br0">&#40;</span>i <span class="sy0">&lt;</span> <span class="nu0">100</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="co1">// Este bloque de código se ejecutará 100 veces</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'Actualmente en '</span> <span class="sy0">+</span> i<span class="br0">&#41;</span><span class="sy0">;</span>
+  i<span class="sy0">++;</span> <span class="co1">// incrementa la variable i</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Puede notar que en el ejemplo se incrementa el contador dentro del cuerpo del bucle, pero también es posible combinar la condición y la incrementación, como se muestra a continuación:</p>
+
+<p><strong>Bucle utilizando <code>while</code> con la combinación de la condición y la incrementación</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> i <span class="sy0">=</span> <span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+while <span class="br0">&#40;</span><span class="sy0">++</span>i <span class="sy0">&lt;</span> <span class="nu0">100</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="co1">// Este bloque de código se ejecutará 100 veces</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'Actualmente en '</span> <span class="sy0">+</span> i<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Se comienza en <code>-1</code> y luego se utiliza la incrementación previa (<code>++i</code>).</p>
+
+<h3 id="bucles-utilizando-do-while">2.5.3 Bucles Utilizando Do-while</h3>
+
+<p>Este bucle es exactamente igual que el bucle utilizando <code>while</code> excepto que el cuerpo es ejecutado al menos una vez antes que la condición sea evaluada.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">do</span> <span class="br0">&#91;</span>cuerpo<span class="br0">&#93;</span> while <span class="br0">&#40;</span><span class="br0">&#91;</span>condición<span class="br0">&#93;</span><span class="br0">&#41;</span></pre>
+</div>
+
+<p><strong>Un bucle utilizando <code>do-while</code></strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">do</span> <span class="br0">&#123;</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">  // Incluso cuando la condición sea falsa
+  // el cuerpo del bucle se ejecutará al menos una vez.</pre>
+</div>
+
+<div class="code code">
+<pre class="code">  alert('Hola');</pre>
+</div>
+
+<div class="code code">
+<pre class="code">} while (false);</pre>
+</div>
+
+<p>Este tipo de bucles son bastantes atípicos ya que en pocas ocasiones se necesita un bucle que se ejecute al menos una vez. De cualquier forma debe estar al tanto de ellos.</p>
+
+<h3 id="break-y-continue">2.5.4 Break y Continue</h3>
+
+<p>Usualmente, el fin de la ejecución de un bucle resultará cuando la condición no siga evaluando un valor verdadero, sin embargo también es posible parar un bucle utilizando la declaración <code>break</code> dentro del cuerpo.</p>
+
+<p><strong>Detener un bucle con break</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw1">var</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> <span class="nu0">10</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">if</span> <span class="br0">&#40;</span>something<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="kw1">break</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>También puede suceder que quiera continuar con el bucle sin tener que ejecutar más sentencias del cuerpo del mismo bucle. Esto puede realizarse utilizando la declaración <code>continue</code>.</p>
+
+<p><strong>Saltar a la siguiente iteración de un bucle</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw1">var</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> <span class="nu0">10</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">  if (something) {
+      continue;
+  }</pre>
+</div>
+
+<div class="code code">
+<pre class="code">  // La siguiente declaración será ejecutada
+  // si la condición 'something' no se cumple
+  console.log('Hola');</pre>
+</div>
+
+<div class="code code">
+<pre class="code">}</pre>
+</div>
+
+<h2 id="palabras-reservadas">2.6 Palabras Reservadas</h2>
+
+<p>JavaScript posee un número de "palabras reservadas", o palabras que son especiales dentro del mismo lenguaje. Debe utilizar estas palabras cuando las necesite para su uso específico.</p>
+
+<p><code>abstract</code>, <code>boolean</code>, <code>break</code>, <code>byte</code>, <code>case</code>, <code>catch</code>, <code>char</code>, <code>class</code>, <code>const</code>, <code>continue</code>, <code>debugger</code>, <code>default</code>, <code>delete</code>, <code>do</code>, <code>double</code>, <code>else</code>, <code>enum</code>, <code>export</code>, <code>extends</code>, <code>final</code>, <code>finally</code>, <code>float</code>, <code>for</code>, <code>function</code>, <code>goto</code>, <code>if</code>, <code>implements</code>, <code>import</code>, <code>in</code>, <code>instanceof</code>, <code>int</code>, <code>interface</code>, <code>long</code>, <code>native</code>, <code>new</code>, <code>package</code>, <code>private</code>, <code>protected</code>, <code>public</code>, <code>return</code>, <code>short</code>, <code>static</code>, <code>super</code>, <code>switch</code>, <code>synchronized</code>, <code>this</code>, <code>throw</code>, <code>throws</code>, <code>transient</code>, <code>try</code>, <code>typeof</code>, <code>var</code>, <code>void</code>, <code>volatile</code>, <code>while</code>, <code>with</code></p>
+
+<h2 id="vectores">2.7 Vectores</h2>
+
+<p>Los vectores (en español también llamados <em>matrices</em> o <em>arreglos</em> y en inglés <em>arrays</em>) son listas de valores con índice-cero (en inglés <em>zero-index</em>), es decir, que el primer elemento del vector está en el índice 0. Éstos son una forma práctica de almacenar un conjunto de datos relacionados (como cadenas de caracteres), aunque en realidad, un vector puede incluir múltiples tipos de datos, incluso otros vectores.</p>
+
+<p><strong>Un vector simple</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myArray <span class="sy0">=</span> <span class="br0">&#91;</span> <span class="st0">'hola'</span><span class="sy0">,</span> <span class="st0">'mundo'</span> <span class="br0">&#93;</span><span class="sy0">;</span></pre>
+</div>
+
+<p><strong>Acceder a los ítems del vector a través de su índice</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myArray <span class="sy0">=</span> <span class="br0">&#91;</span> <span class="st0">'hola'</span><span class="sy0">,</span> <span class="st0">'mundo'</span><span class="sy0">,</span> <span class="st0">'foo'</span><span class="sy0">,</span> <span class="st0">'bar'</span> <span class="br0">&#93;</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>myArray<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// muestra en la consola 'bar'</span></pre>
+</div>
+
+<p><strong>Obtener la cantidad de ítems del vector</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myArray <span class="sy0">=</span> <span class="br0">&#91;</span> <span class="st0">'hola'</span><span class="sy0">,</span> <span class="st0">'mundo'</span> <span class="br0">&#93;</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>myArray.<span class="me1">length</span><span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// muestra en la consola 2</span></pre>
+</div>
+
+<p><strong>Cambiar el valor de un ítem de un vector</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myArray <span class="sy0">=</span> <span class="br0">&#91;</span> <span class="st0">'hola'</span><span class="sy0">,</span> <span class="st0">'mundo'</span> <span class="br0">&#93;</span><span class="sy0">;</span>
+myArray<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="st0">'changed'</span><span class="sy0">;</span></pre>
+</div>
+
+<p><em>Como se muestra en el ejemplo "Cambiar el valor de un ítem de un vector" es posible cambiar el valor de un ítem de un vector, sin embargo, por lo general, no es aconsejable.</em></p>
+
+<p><strong>Añadir elementos a un vector</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myArray <span class="sy0">=</span> <span class="br0">&#91;</span> <span class="st0">'hola'</span><span class="sy0">,</span> <span class="st0">'mundo'</span> <span class="br0">&#93;</span><span class="sy0">;</span>
+myArray.<span class="me1">push</span><span class="br0">&#40;</span><span class="st0">'new'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p><strong>Trabajar con vectores</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myArray <span class="sy0">=</span> <span class="br0">&#91;</span> <span class="st0">'h'</span><span class="sy0">,</span> <span class="st0">'o'</span><span class="sy0">,</span> <span class="st0">'l'</span><span class="sy0">,</span> <span class="st0">'a'</span> <span class="br0">&#93;</span><span class="sy0">;</span>
+<span class="kw1">var</span> myString <span class="sy0">=</span> myArray.<span class="me1">join</span><span class="br0">&#40;</span><span class="st0">''</span><span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// 'hola'</span>
+<span class="kw1">var</span> mySplit <span class="sy0">=</span> myString.<span class="me1">split</span><span class="br0">&#40;</span><span class="st0">''</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// [ 'h', 'o', 'l', 'a' ]</span></pre>
+</div>
+
+<h2 id="objetos">2.8 Objetos</h2>
+
+<p>Los objetos son elementos que pueden contener cero o más conjuntos de pares de nombres claves y valores asociados a dicho objeto. Los nombres claves pueden ser cualquier palabra o número válido. El valor puede ser cualquier tipo de valor: un número, una cadena, un vector, una función, incluso otro objeto.</p>
+
+<p>[Definición: Cuando uno de los valores de un objeto es una función, ésta es nombrada como un <em>método</em> del objeto.] De lo contrario, se los llama <em>propiedades</em>.</p>
+
+<p>Curiosamente, en JavaScript, casi todo es un objeto — vectores, funciones, números, incluso cadenas — y todos poseen propiedades y métodos.</p>
+
+<p><strong>Creación de un "objeto literal"</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myObject <span class="sy0">=</span> <span class="br0">&#123;</span>
+  sayHello<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'hola'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+  myName<span class="sy0">:</span> <span class="st0">'Rebecca'</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+myObject.<span class="me1">sayHello</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// se llama al método sayHello,</span>
+                       <span class="co1">// el cual muestra en la consola 'hola'</span>
+&nbsp;
+console.<span class="me1">log</span><span class="br0">&#40;</span>myObject.<span class="me1">myName</span><span class="br0">&#41;</span><span class="sy0">;</span>    <span class="co1">// se llama a la propiedad myName,</span>
+                                 <span class="co1">// la cual muestra en la consola 'Rebecca'</span></pre>
+</div>
+
+<blockquote>
+  <p><strong>Nota</strong></p>
+  
+  <p>Notar que cuando se crean objetos literales, el nombre de la propiedad puede ser cualquier identificador JavaScript, una cadena de caracteres (encerrada entre comillas) o un número:</p>
+</blockquote>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myObject <span class="sy0">=</span> <span class="br0">&#123;</span>
+    validIdentifier<span class="sy0">:</span> <span class="nu0">123</span><span class="sy0">,</span>
+    <span class="st0">'some string'</span><span class="sy0">:</span> <span class="nu0">456</span><span class="sy0">,</span>
+    <span class="nu0">99999</span><span class="sy0">:</span> <span class="nu0">789</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Los objetos literales pueden ser muy útiles para la organización del código, para más información puede leer el artículo (en inglés) <a href="http://blog.rebeccamurphey.com/2009/10/15/using-objects-to-organize-your-code/">Using Objects to Organize Your Code</a> por Rebecca Murphey.</p>
+
+<h2 id="funciones">2.9 Funciones</h2>
+
+<p>Las funciones contienen bloques de código que se ejecutaran repetidamente. A las mismas se le pueden pasar argumentos, y opcionalmente la función puede devolver un valor.</p>
+
+<p>Las funciones pueden ser creadas de varias formas:</p>
+
+<p><strong>Declaración de una función</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> foo<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="coMULTI">/* hacer algo */</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p><strong>Declaración de una función nombrada</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> foo <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="coMULTI">/* hacer algo */</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p><em>Es preferible el método de función nombrada debido a algunas</em> <em><a href="http://yura.thinkweb2.com/named-function-expressions/">profundas razones técnicas</a>. Igualmente, es probable encontrar a los dos métodos cuando se revise código JavaScript.</em></p>
+
+<h3 id="utilizacion-de-funciones">2.9.1 Utilización de Funciones</h3>
+
+<p><strong>Una función simple</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> greet <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>person<span class="sy0">,</span> greeting<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">var</span> text <span class="sy0">=</span> greeting <span class="sy0">+</span> <span class="st0">', '</span> <span class="sy0">+</span> person<span class="sy0">;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span>text<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+greet<span class="br0">&#40;</span><span class="st0">'Rebecca'</span><span class="sy0">,</span> <span class="st0">'Hola'</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// muestra en la consola 'Hola, Rebecca'</span></pre>
+</div>
+
+<p><strong>Una función que devuelve un valor</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> greet <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>person<span class="sy0">,</span> greeting<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">var</span> text <span class="sy0">=</span> greeting <span class="sy0">+</span> <span class="st0">', '</span> <span class="sy0">+</span> person<span class="sy0">;</span>
+  <span class="kw1">return</span> text<span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+console.<span class="me1">log</span><span class="br0">&#40;</span>greet<span class="br0">&#40;</span><span class="st0">'Rebecca'</span><span class="sy0">,</span><span class="st0">'Hola'</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// la función devuelve 'Hola, Rebecca',</span>
+                                        <span class="co1">// la cual se muestra en la consola</span></pre>
+</div>
+
+<p><strong>Una función que devuelve otra función</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> greet <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>person<span class="sy0">,</span> greeting<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">var</span> text <span class="sy0">=</span> greeting <span class="sy0">+</span> <span class="st0">', '</span> <span class="sy0">+</span> person<span class="sy0">;</span>
+  <span class="kw1">return</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> console.<span class="me1">log</span><span class="br0">&#40;</span>text<span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> greeting <span class="sy0">=</span> greet<span class="br0">&#40;</span><span class="st0">'Rebecca'</span><span class="sy0">,</span> <span class="st0">'Hola'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+greeting<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// se muestra en la consola 'Hola, Rebecca'</span></pre>
+</div>
+
+<h3 id="funciones-anonimas-autoejecutables">2.9.2 Funciones Anónimas Autoejecutables</h3>
+
+<p>Un patrón común en JavaScript son las funciones anónimas autoejecutables. Este patrón consiste en crear una expresión de función e inmediatamente ejecutarla. El mismo es muy útil para casos en que no se desea intervenir espacios de nombres globales, debido a que ninguna variable declarada dentro de la función es visible desde afuera.</p>
+
+<p><strong>Función anónima autoejecutable</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+  <span class="kw1">var</span> foo <span class="sy0">=</span> <span class="st0">'Hola mundo'</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+console.<span class="me1">log</span><span class="br0">&#40;</span>foo<span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// indefinido (undefined)</span></pre>
+</div>
+
+<h3 id="funciones-como-argumentos">2.9.3 Funciones como Argumentos</h3>
+
+<p>En JavaScript, las funciones son "ciudadanos de primera clase" — pueden ser asignadas a variables o pasadas a otras funciones como argumentos. En jQuery, pasar funciones como argumentos es una práctica muy común.</p>
+
+<p><strong>Pasar una función anónima como un argumento</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myFn <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>fn<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">var</span> result <span class="sy0">=</span> fn<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span>result<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+myFn<span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="kw1">return</span> <span class="st0">'hola mundo'</span><span class="sy0">;</span> <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// muestra en la consola 'hola mundo'</span></pre>
+</div>
+
+<p><strong>Pasar una función nombrada como un argumento</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myFn <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>fn<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">var</span> result <span class="sy0">=</span> fn<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span>result<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> myOtherFn <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="st0">'hola mundo'</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+myFn<span class="br0">&#40;</span>myOtherFn<span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// muestra en la consola 'hola mundo'</span></pre>
+</div>
+
+<h2 id="determinacion-del-tipo-de-variable">2.10 Determinación del Tipo de Variable</h2>
+
+<p>JavaScript ofrece una manera de poder comprobar el "tipo" (en inglés <em>type</em>) de una variable. Sin embargo, el resultado puede ser confuso — por ejemplo, el tipo de un vector es "object".</p>
+
+<p>Por eso, es una práctica común utilizar el operador <code>typeof</code> cuando se trata de determinar el tipo de un valor específico.</p>
+
+<p><strong>Determinar el tipo en diferentes variables</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myFunction <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'hola'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> myObject <span class="sy0">=</span> <span class="br0">&#123;</span>
+    foo <span class="sy0">:</span> <span class="st0">'bar'</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> myArray <span class="sy0">=</span> <span class="br0">&#91;</span> <span class="st0">'a'</span><span class="sy0">,</span> <span class="st0">'b'</span><span class="sy0">,</span> <span class="st0">'c'</span> <span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> myString <span class="sy0">=</span> <span class="st0">'hola'</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> myNumber <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">typeof</span> myFunction<span class="sy0">;</span>   <span class="co1">// devuelve 'function'</span>
+<span class="kw1">typeof</span> myObject<span class="sy0">;</span>     <span class="co1">// devuelve 'object'</span>
+<span class="kw1">typeof</span> myArray<span class="sy0">;</span>      <span class="co1">// devuelve 'object' -- tenga cuidado</span>
+<span class="kw1">typeof</span> myString<span class="sy0">;</span>     <span class="co1">// devuelve 'string'</span>
+<span class="kw1">typeof</span> myNumber<span class="sy0">;</span>     <span class="co1">// devuelve 'number'</span>
+&nbsp;
+<span class="kw1">typeof</span> <span class="kw2">null</span><span class="sy0">;</span>         <span class="co1">// devuelve 'object' -- tenga cuidado</span>
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#40;</span>myArray.<span class="me1">push</span> <span class="sy0">&amp;&amp;</span> myArray.<span class="me1">slice</span> <span class="sy0">&amp;&amp;</span> myArray.<span class="me1">join</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// probablemente sea un vector</span>
+    <span class="co1">// (este estilo es llamado, en inglés, &quot;duck typing&quot;)</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#40;</span><span class="kw4">Object</span>.<span class="kw1">prototype</span>.<span class="me1">toString</span>.<span class="me1">call</span><span class="br0">&#40;</span>myArray<span class="br0">&#41;</span> <span class="sy0">===</span> <span class="st0">'[object Array]'</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// definitivamente es un vector;</span>
+    <span class="co1">// esta es considerada la forma más robusta</span>
+    <span class="co1">// de determinar si un valor es un vector.</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>jQuery ofrece métodos para ayudar a determinar el tipo de un determinado valor. Estos métodos serán vistos más adelante.</p>
+
+<h2 id="la-palabra-clave-this">2.11 La palabra clave <code>this</code></h2>
+
+<p>En JavaScript, así como en la mayoría de los lenguajes de programación orientados a objetos, <code>this</code> es una palabra clave especial que hace referencia al objeto en donde el método está siendo invocado. El valor de <code>this</code> es determinado utilizando una serie de simples pasos:</p>
+
+<ol>
+<li>Si la función es invocada utilizando <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/call">Function.call</a> o <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/apply">Function.apply</a>, <code>this</code> tendrá el valor del primer argumento pasado al método. Si el argumento es nulo (<em>null</em>) o indefinido (<em>undefined</em>), <code>this</code> hará     referencia el objeto global (el objeto <code>window</code>);</li>
+<li>Si la función a invocar es creada utilizando <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/bind">Function.bind</a>, <code>this</code> será el primer argumento que es pasado a la función en el momento en que se la crea;</li>
+<li>Si la función es invocada como un método de un objeto, <code>this</code> referenciará a dicho objeto;</li>
+<li>De lo contrario, si la función es invocada como una función independiente, no unida a algún objeto, <code>this</code> referenciará al objeto global.</li>
+</ol>
+
+<p><strong>Una función invocada utilizando Function.call</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myObject <span class="sy0">=</span> <span class="br0">&#123;</span>
+  sayHello <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'Hola, mi nombre es '</span> <span class="sy0">+</span> <span class="kw1">this</span>.<span class="me1">myName</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+  myName <span class="sy0">:</span> <span class="st0">'Rebecca'</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> secondObject <span class="sy0">=</span> <span class="br0">&#123;</span>
+  myName <span class="sy0">:</span> <span class="st0">'Colin'</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+myObject.<span class="me1">sayHello</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>                  <span class="co1">// registra 'Hola, mi nombre es Rebecca'</span>
+myObject.<span class="me1">sayHello</span>.<span class="me1">call</span><span class="br0">&#40;</span>secondObject<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// registra 'Hola, mi nombre es Colin'</span></pre>
+</div>
+
+<p><strong>Una función creada utilizando Function.bind</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myName <span class="sy0">=</span> <span class="st0">'el objeto global'</span><span class="sy0">,</span>
+&nbsp;
+  sayHello <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'Hola, mi nombre es '</span> <span class="sy0">+</span> <span class="kw1">this</span>.<span class="me1">myName</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+  myObject <span class="sy0">=</span> <span class="br0">&#123;</span>
+      myName <span class="sy0">:</span> <span class="st0">'Rebecca'</span>
+  <span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> myObjectHello <span class="sy0">=</span> sayHello.<span class="me1">bind</span><span class="br0">&#40;</span>myObject<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+sayHello<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>       <span class="co1">// registra 'Hola, mi nombre es el objeto global'</span>
+myObjectHello<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// registra 'Hola, mi nombre es Rebecca'</span></pre>
+</div>
+
+<p><strong>Una función vinculada a un objeto</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myName <span class="sy0">=</span> <span class="st0">'el objeto global'</span><span class="sy0">,</span>
+&nbsp;
+  sayHello <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'Hola, mi nombre es '</span> <span class="sy0">+</span> <span class="kw1">this</span>.<span class="me1">myName</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+  myObject <span class="sy0">=</span> <span class="br0">&#123;</span>
+      myName <span class="sy0">:</span> <span class="st0">'Rebecca'</span>
+  <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+  secondObject <span class="sy0">=</span> <span class="br0">&#123;</span>
+      myName <span class="sy0">:</span> <span class="st0">'Colin'</span>
+  <span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+myObject.<span class="me1">sayHello</span> <span class="sy0">=</span> sayHello<span class="sy0">;</span>
+secondObject.<span class="me1">sayHello</span> <span class="sy0">=</span> sayHello<span class="sy0">;</span>
+&nbsp;
+sayHello<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>               <span class="co1">// registra 'Hola, mi nombre es el objeto global'</span>
+myObject.<span class="me1">sayHello</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>      <span class="co1">// registra 'Hola, mi nombre es Rebecca'</span>
+secondObject.<span class="me1">sayHello</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// registra 'Hola, mi nombre es Colin'</span></pre>
+</div>
+
+<blockquote>
+  <p><strong>Nota</strong></p>
+  
+  <p>En algunas oportunidades, cuando se invoca una función que se encuentra dentro de un espacio de nombres (en inglés <em>namespace</em>) amplio, puede ser una tentación guardar la referencia a la función actual en una variable más corta y accesible. Sin embargo, es importante no realizarlo en instancias de métodos, ya que puede llevar a la ejecución de código incorrecto. Por ejemplo:</p>
+</blockquote>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myNamespace <span class="sy0">=</span> <span class="br0">&#123;</span>
+  myObject<span class="sy0">:</span> <span class="br0">&#123;</span>
+    sayHello<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'Hola, mi nombre es '</span> <span class="sy0">+</span> <span class="kw1">this</span>.<span class="me1">myName</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    myName<span class="sy0">:</span> <span class="st0">'Rebecca'</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> hello <span class="sy0">=</span> myNamespace.<span class="me1">myObject</span>.<span class="me1">sayHello</span><span class="sy0">;</span>
+&nbsp;
+hello<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// registra 'Hola, mi nombre es undefined'</span></pre>
+</div>
+
+<p>Para que no ocurran estos errores, es necesario hacer referencia al objeto en donde el método es invocado:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myNamespace <span class="sy0">=</span> <span class="br0">&#123;</span>
+  myObject <span class="sy0">:</span> <span class="br0">&#123;</span>
+    sayHello <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'Hola, mi nombre es '</span> <span class="sy0">+</span> <span class="kw1">this</span>.<span class="me1">myName</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    myName <span class="sy0">:</span> <span class="st0">'Rebecca'</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> obj <span class="sy0">=</span> myNamespace.<span class="me1">myObject</span><span class="sy0">;</span>
+&nbsp;
+obj.<span class="me1">sayHello</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// registra 'Hola, mi nombre es Rebecca'</span></pre>
+</div>
+
+<h2 id="alcance">2.12 Alcance</h2>
+
+<p>El "alcance" (en inglés <em>scope</em>) se refiere a las variables que están disponibles en un bloque de código en un tiempo determinado. La falta de comprensión de este concepto puede llevar a una frustrante experiencia de depuración.</p>
+
+<p>Cuando una variable es declarada dentro de una función utilizando la palabra clave <code>var</code>, ésta únicamente esta disponible para el código dentro de la función — todo el código fuera de dicha función no puede acceder a la variable. Por otro lado, las funciones definidas <em>dentro</em> de la función <em>podrán</em> acceder a la variable declarada.</p>
+
+<p>Las variables que son declaradas dentro de la función sin la palabra clave <code>var</code> no quedan dentro del ámbito de la misma función — JavaScript buscará el lugar en donde la variable fue previamente declarada, y en caso de no haber sido declarada, es definida dentro del alcance global, lo cual puede ocasionar consecuencias inesperadas;</p>
+
+<p><strong>Funciones tienen acceso a variables definidas dentro del mismo alcance</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> foo <span class="sy0">=</span> <span class="st0">'hola'</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> sayHello <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span>foo<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+sayHello<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>         <span class="co1">// muestra en la consola 'hola'</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>foo<span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// también muestra en la consola 'hola'</span></pre>
+</div>
+
+<p><strong>El código de afuera no tiene acceso a la variable definida dentro de la función</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> sayHello <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">var</span> foo <span class="sy0">=</span> <span class="st0">'hola'</span><span class="sy0">;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span>foo<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+sayHello<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>         <span class="co1">// muestra en la consola 'hola'</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>foo<span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// no muestra nada en la consola</span></pre>
+</div>
+
+<p><strong>Variables con nombres iguales pero valores diferentes pueden existir en diferentes alcances</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> foo <span class="sy0">=</span> <span class="st0">'mundo'</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> sayHello <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">var</span> foo <span class="sy0">=</span> <span class="st0">'hola'</span><span class="sy0">;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span>foo<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+sayHello<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>         <span class="co1">// muestra en la consola 'hola'</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>foo<span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// muestra en la consola 'mundo'</span></pre>
+</div>
+
+<p><strong>Las funciones pueden "ver" los cambios en las variables antes de que la función sea definida</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myFunction <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">var</span> foo <span class="sy0">=</span> <span class="st0">'hola'</span><span class="sy0">;</span>
+&nbsp;
+  <span class="kw1">var</span> myFn <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      console.<span class="me1">log</span><span class="br0">&#40;</span>foo<span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+  foo <span class="sy0">=</span> <span class="st0">'mundo'</span><span class="sy0">;</span>
+&nbsp;
+  <span class="kw1">return</span> myFn<span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> f <span class="sy0">=</span> myFunction<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+f<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// registra 'mundo' -- error</span></pre>
+</div>
+
+<p><strong>Alcance</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// una función anónima autoejecutable</span>
+<span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">var</span> baz <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+  <span class="kw1">var</span> bim <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> alert<span class="br0">&#40;</span>baz<span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+  bar <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> alert<span class="br0">&#40;</span>baz<span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+console.<span class="me1">log</span><span class="br0">&#40;</span>baz<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// La consola no muestra nada, ya que baz</span>
+                   <span class="co1">// esta definida dentro del alcance de la función anónima</span>
+&nbsp;
+bar<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// bar esta definido fuera de la función anónima</span>
+        <span class="co1">// ya que fue declarada sin la palabra clave var; además,</span>
+        <span class="co1">// como fue definida dentro del mismo alcance que baz,</span>
+        <span class="co1">// se puede consultar el valor de baz a pesar que</span>
+        <span class="co1">// ésta este definida dentro del alcance de la función anónima</span>
+&nbsp;
+bim<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// bim no esta definida para ser accesible fuera de la función anónima,</span>
+        <span class="co1">// por lo cual se mostrará un error</span></pre>
+</div>
+
+<h2 id="clausuras">2.13 Clausuras</h2>
+
+<p>Las clausuras (en inglés <em>closures</em>) son una extensión del concepto de alcance (<em>scope</em>) — funciones que tienen acceso a las variables que están disponibles dentro del ámbito en donde se creó la función. Si este concepto es confuso, no debe preocuparse: se entiende mejor a través de ejemplos.</p>
+
+<p>En el ejemplo 2.47 se muestra la forma en que funciones tienen acceso para cambiar el valor de las variables. El mismo comportamiento sucede en funciones creadas dentro de bucles — la función "observa" el cambio en la variable, incluso después de que la función sea definida, resultando que en todos los clicks aparezca una ventana de alerta mostrando el valor 5.</p>
+
+<p><strong>¿Cómo establecer el valor de <code>i</code>?</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="coMULTI">/* esto no se comporta como se desea; */</span>
+<span class="coMULTI">/* cada click mostrará una ventana de alerta con el valor 5 */</span>
+<span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw1">var</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;</span><span class="nu0">5</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  $<span class="br0">&#40;</span><span class="st0">'&lt;p&gt;hacer click&lt;/p&gt;'</span><span class="br0">&#41;</span>.<span class="me1">appendTo</span><span class="br0">&#40;</span><span class="st0">'body'</span><span class="br0">&#41;</span>.<span class="me1">click</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      alert<span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p><strong>Establecer el valor de <code>i</code> utilizando una clausura</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="coMULTI">/* solución: “clausurar” el valor de i dentro de createFunction */</span>
+<span class="kw1">var</span> createFunction <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">return</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    alert<span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw1">var</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> <span class="nu0">5</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  $<span class="br0">&#40;</span><span class="st0">'&lt;p&gt;hacer click&lt;/p&gt;'</span><span class="br0">&#41;</span>.<span class="me1">appendTo</span><span class="br0">&#40;</span><span class="st0">'body'</span><span class="br0">&#41;</span>.<span class="me1">click</span><span class="br0">&#40;</span>createFunction<span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Las clausuras también pueden ser utilizadas para resolver problemas con la palabra clave <code>this</code>, la cual es única en cada alcance.</p>
+
+<p><strong>Utilizar una clausura para acceder simultáneamente a instancias de objetos internos y externos.</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> outerObj <span class="sy0">=</span> <span class="br0">&#123;</span>
+  myName<span class="sy0">:</span> <span class="st0">'externo'</span><span class="sy0">,</span>
+  outerFunction<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+    <span class="co1">// provee una referencia al mismo objeto outerObj</span>
+    <span class="co1">// para utilizar dentro de innerFunction</span>
+    <span class="kw1">var</span> self <span class="sy0">=</span> <span class="kw1">this</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">var</span> innerObj <span class="sy0">=</span> <span class="br0">&#123;</span>
+      myName<span class="sy0">:</span> <span class="st0">'interno'</span><span class="sy0">,</span>
+      innerFunction<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        console.<span class="me1">log</span><span class="br0">&#40;</span>self.<span class="me1">myName</span><span class="sy0">,</span> <span class="kw1">this</span>.<span class="me1">myName</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// registra 'externo interno'</span>
+      <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+    innerObj.<span class="me1">innerFunction</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    console.<span class="me1">log</span><span class="br0">&#40;</span><span class="kw1">this</span>.<span class="me1">myName</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// registra 'externo'</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+outerObj.<span class="me1">outerFunction</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Este mecanismo puede ser útil cuando trabaje con funciones de devolución de llamadas (en inglés <em>callbacks</em>). Sin embargo, en estos casos, es preferible que utilice <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/bind">Function.bind</a> ya que evitará cualquier sobrecarga asociada con el alcance (<em>scope</em>).</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-2.html#conceptos-basicos-de-javascript">Conceptos Básicos de JavaScript</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.1</span>
+                        <a class="internal" href="capitulo-2.html#introduccion-2">Introducción</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.2</span>
+                        <a class="internal" href="capitulo-2.html#sintaxis-basica">Sintaxis Básica</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.3</span>
+                        <a class="internal" href="capitulo-2.html#operadores">Operadores</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.4</span>
+                        <a class="internal" href="capitulo-2.html#codigo-condicional">Código Condicional</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.5</span>
+                        <a class="internal" href="capitulo-2.html#bucles">Bucles</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.6</span>
+                        <a class="internal" href="capitulo-2.html#palabras-reservadas">Palabras Reservadas</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.7</span>
+                        <a class="internal" href="capitulo-2.html#vectores">Vectores</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.8</span>
+                        <a class="internal" href="capitulo-2.html#objetos">Objetos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.9</span>
+                        <a class="internal" href="capitulo-2.html#funciones">Funciones</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.10</span>
+                        <a class="internal" href="capitulo-2.html#determinacion-del-tipo-de-variable">Determinación del Tipo de Variable</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.11</span>
+                        <a class="internal" href="capitulo-2.html#la-palabra-clave-this">La palabra clave <code>this</code></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.12</span>
+                        <a class="internal" href="capitulo-2.html#alcance">Alcance</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.13</span>
+                        <a class="internal" href="capitulo-2.html#clausuras">Clausuras</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

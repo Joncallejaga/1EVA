@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="14/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>El núcleo de jQuery | jQuery</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">jQuery</a></h1>
+        <p class="span3">
+                        <a href="capitulo-3.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-5.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="el-nucleo-de-jquery"><span>Capítulo 4</span> El núcleo de jQuery</h1>
+        <h2 id="-vs-">4.1 <code>$</code> vs <code>$()</code></h2>
+
+<p>Hasta ahora, se ha tratado completamente con métodos que se llaman desde el objeto jQuery. Por ejemplo:</p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'h1'</span><span class="br0">&#41;</span>.<span class="me1">remove</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Dichos métodos son parte del espacio de nombres (en inglés <em>namespace</em>) <code>$.fn</code>, o del prototipo (en inglés <em>prototype</em>) de jQuery, y son considerados como métodos del objeto jQuery.</p>
+
+<p>Sin embargo, existen métodos que son parte del espacio de nombres de $ y se consideran como métodos del núcleo de jQuery.</p>
+
+<p>Estas distinciones pueden ser bastantes confusas para usuarios nuevos. Para evitar la confusión, debe recordar estos dos puntos:</p>
+
+<ul>
+<li>Los métodos utilizados en selecciones se encuentran dentro del espacio de nombres <code>$.fn</code>, y automáticamente reciben y devuelven una selección en sí.</li>
+<li>Métodos en el espacio de nombres <code>$</code> son generalmente métodos para diferentes utilidades, no trabajan con selecciones, no se les pasa ningún argumento y el valor que devuelven puede variar.</li>
+</ul>
+
+<p>Existen algunos casos en donde métodos del objeto y del núcleo poseen los mismos nombres, como sucede con <code>$.each</code> y <code>$.fn.each</code>. En estos casos, debe ser cuidadoso de leer bien la documentación para saber que objeto utilizar correctamente.</p>
+
+<h2 id="metodos-utilitarios">4.2 Métodos Utilitarios</h2>
+
+<p>jQuery ofrece varios métodos utilitarios dentro del espacio de nombres <code>$</code>. Estos métodos son de gran ayuda para llevar a cabo tareas rutinarias de programación. A continuación se muestran algunos ejemplos, para una completa documentación sobre ellos, visite <a href="http://api.jquery.com/category/utilities/">http://api.jquery.com/category/utilities/</a>.</p>
+
+<dl>
+<dt>$.trim</dt>
+<dd>Remueve los espacios en blanco del principio y final.</dd>
+</dl>
+
+<div class="code javascript">
+<pre class="javascript">$.<span class="me1">trim</span><span class="br0">&#40;</span><span class="st0">'    varios espacios en blanco   '</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">// devuelve 'varios espacios en blanco'</span></pre>
+</div>
+
+<dl>
+<dt>$.each</dt>
+<dd>Interactúa en vectores y objetos.</dd>
+</dl>
+
+<div class="code javascript">
+<pre class="javascript">$.<span class="me1">each</span><span class="br0">&#40;</span><span class="br0">&#91;</span> <span class="st0">'foo'</span><span class="sy0">,</span> <span class="st0">'bar'</span><span class="sy0">,</span> <span class="st0">'baz'</span> <span class="br0">&#93;</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>idx<span class="sy0">,</span> val<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'elemento '</span> <span class="sy0">+</span> idx <span class="sy0">+</span> <span class="st0">'es '</span> <span class="sy0">+</span> val<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+$.<span class="me1">each</span><span class="br0">&#40;</span><span class="br0">&#123;</span> foo <span class="sy0">:</span> <span class="st0">'bar'</span><span class="sy0">,</span> baz <span class="sy0">:</span> <span class="st0">'bim'</span> <span class="br0">&#125;</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>k<span class="sy0">,</span> v<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    console.<span class="me1">log</span><span class="br0">&#40;</span>k <span class="sy0">+</span> <span class="st0">' : '</span> <span class="sy0">+</span> v<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<blockquote>
+  <p><strong>Nota</strong></p>
+  
+  <p>Como se dijo antes, existe un método llamado <code>$.fn.each</code>, el cual interactúa en una selección de elementos.</p>
+</blockquote>
+
+<dl>
+<dt>$.inArray</dt>
+<dd>Devuelve el índice de un valor en un vector, o -1 si el valor no se encuentra en el vector.</dd>
+</dl>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myArray <span class="sy0">=</span> <span class="br0">&#91;</span> <span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">2</span><span class="sy0">,</span> <span class="nu0">3</span><span class="sy0">,</span> <span class="nu0">5</span> <span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#40;</span>$.<span class="me1">inArray</span><span class="br0">&#40;</span><span class="nu0">4</span><span class="sy0">,</span> myArray<span class="br0">&#41;</span> <span class="sy0">!==</span> <span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'valor encontrado'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<dl>
+<dt>$.extend</dt>
+<dd>Cambia la propiedades del primer objeto utilizando las propiedades de los subsecuentes objetos.</dd>
+</dl>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> firstObject <span class="sy0">=</span> <span class="br0">&#123;</span> foo <span class="sy0">:</span> <span class="st0">'bar'</span><span class="sy0">,</span> a <span class="sy0">:</span> <span class="st0">'b'</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+<span class="kw1">var</span> secondObject <span class="sy0">=</span> <span class="br0">&#123;</span> foo <span class="sy0">:</span> <span class="st0">'baz'</span> <span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">var newObject = $.extend(firstObject, secondObject);
+console.log(firstObject.foo); // 'baz'
+console.log(newObject.foo);   // 'baz'</pre>
+</div>
+
+<p>Si no se desea cambiar las propiedades de ninguno de los objetos que se utilizan en <code>$.extend</code>, se debe incluir un objeto vacío como primer argumento.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> firstObject <span class="sy0">=</span> <span class="br0">&#123;</span> foo <span class="sy0">:</span> <span class="st0">'bar'</span><span class="sy0">,</span> a <span class="sy0">:</span> <span class="st0">'b'</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+<span class="kw1">var</span> secondObject <span class="sy0">=</span> <span class="br0">&#123;</span> foo <span class="sy0">:</span> <span class="st0">'baz'</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> newObject <span class="sy0">=</span> $.<span class="me1">extend</span><span class="br0">&#40;</span><span class="br0">&#123;</span><span class="br0">&#125;</span><span class="sy0">,</span> firstObject<span class="sy0">,</span> secondObject<span class="br0">&#41;</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>firstObject.<span class="me1">foo</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// 'bar'</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>newObject.<span class="me1">foo</span><span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// 'baz'</span></pre>
+</div>
+
+<dl>
+<dt>$.proxy</dt>
+<dd>Devuelve una función que siempre se ejecutará en el alcance (<em>scope</em>) provisto — en otras palabras, establece el significado de <em>this</em> (incluido dentro de la función) como el segundo argumento.</dd>
+</dl>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myFunction <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> console.<span class="me1">log</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+<span class="kw1">var</span> myObject <span class="sy0">=</span> <span class="br0">&#123;</span> foo <span class="sy0">:</span> <span class="st0">'bar'</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+myFunction<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// devuelve el objeto window</span>
+&nbsp;
+<span class="kw1">var</span> myProxyFunction <span class="sy0">=</span> $.<span class="me1">proxy</span><span class="br0">&#40;</span>myFunction<span class="sy0">,</span> myObject<span class="br0">&#41;</span><span class="sy0">;</span>
+myProxyFunction<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// devuelve el objeto myObject</span></pre>
+</div>
+
+<p>Si se posee un objeto con métodos, es posible pasar dicho objeto y el nombre de un método para devolver una función que siempre se ejecuta en el alcance de dicho objeto.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myObject <span class="sy0">=</span> <span class="br0">&#123;</span>
+    myFn <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        console.<span class="me1">log</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+$<span class="br0">&#40;</span><span class="st0">'#foo'</span><span class="br0">&#41;</span>.<span class="me1">click</span><span class="br0">&#40;</span>myObject.<span class="me1">myFn</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// registra el elemento DOM #foo</span>
+$<span class="br0">&#40;</span><span class="st0">'#foo'</span><span class="br0">&#41;</span>.<span class="me1">click</span><span class="br0">&#40;</span>$.<span class="me1">proxy</span><span class="br0">&#40;</span>myObject<span class="sy0">,</span> <span class="st0">'myFn'</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// registra myObject</span></pre>
+</div>
+
+<h2 id="comprobacion-de-tipos">4.3 Comprobación de Tipos</h2>
+
+<p>Como se mencionó en el capítulo "Conceptos Básicos de JavaScript", jQuery ofrece varios métodos útiles para determinar el tipo de un valor específico.</p>
+
+<p><strong>Comprobar el tipo de un determinado valor</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myValue <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">2</span><span class="sy0">,</span> <span class="nu0">3</span><span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Utilizar el operador typeof de JavaScript para comprobar tipos primitivos</span>
+<span class="kw1">typeof</span> myValue <span class="sy0">==</span> <span class="st0">'string'</span><span class="sy0">;</span> <span class="co1">// falso (false)</span>
+<span class="kw1">typeof</span> myValue <span class="sy0">==</span> <span class="st0">'number'</span><span class="sy0">;</span> <span class="co1">// falso (false)</span>
+<span class="kw1">typeof</span> myValue <span class="sy0">==</span> <span class="st0">'undefined'</span><span class="sy0">;</span> <span class="co1">// falso (false)</span>
+<span class="kw1">typeof</span> myValue <span class="sy0">==</span> <span class="st0">'boolean'</span><span class="sy0">;</span> <span class="co1">// falso (false)</span>
+&nbsp;
+<span class="co1">// Utilizar el operador de igualdad estricta para comprobar valores nulos (null)</span>
+myValue <span class="sy0">===</span> <span class="kw2">null</span><span class="sy0">;</span> <span class="co1">// falso (false)</span>
+&nbsp;
+<span class="co1">// Utilizar los métodos jQuery para comprobar tipos no primitivos</span>
+jQuery.<span class="me1">isFunction</span><span class="br0">&#40;</span>myValue<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// falso (false)</span>
+jQuery.<span class="me1">isPlainObject</span><span class="br0">&#40;</span>myValue<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// falso (false)</span>
+jQuery.<span class="me1">isArray</span><span class="br0">&#40;</span>myValue<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// verdadero (true)</span>
+jQuery.<span class="me1">isNumeric</span><span class="br0">&#40;</span><span class="nu0">16</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// verdadero (true). No disponible en versiones inferiores a jQuery 1.7</span></pre>
+</div>
+
+<h2 id="el-metodo-data">4.4 El Método Data</h2>
+
+<p>A menudo encontrará que existe información acerca de un elemento que necesita guardar. En JavaScript es posible hacerlo añadiendo propiedades al DOM del elemento, pero esta práctica conlleva enfrentarse a pérdidas de memoria (en inglés <em>memory leaks</em>) en algunos navegadores. jQuery ofrece una manera sencilla para poder guardar información relacionada a un elemento, y la misma biblioteca se ocupa de manejar los problemas que pueden surgir por falta de memoria.</p>
+
+<p><strong>Guardar y recuperar información relacionada a un elemento</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'#myDiv'</span><span class="br0">&#41;</span>.<span class="me1">data</span><span class="br0">&#40;</span><span class="st0">'keyName'</span><span class="sy0">,</span> <span class="br0">&#123;</span> foo <span class="sy0">:</span> <span class="st0">'bar'</span> <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+$<span class="br0">&#40;</span><span class="st0">'#myDiv'</span><span class="br0">&#41;</span>.<span class="me1">data</span><span class="br0">&#40;</span><span class="st0">'keyName'</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// { foo : 'bar' }</span></pre>
+</div>
+
+<p>A través del método <code>$.fn.data</code> es posible guardar cualquier tipo de información sobre un elemento. Es difícil exagerar la importancia de este concepto cuando se está desarrollando una aplicación compleja.</p>
+
+<p>Por ejemplo, si desea establecer una relación entre el ítem de una lista y el div que hay dentro de este ítem, es posible hacerlo cada vez que se interactúa con el ítem, pero una mejor solución es hacerlo una sola vez, guardando un puntero al div utilizando el método <code>$.fn.data</code>:</p>
+
+<p><strong>Establecer una relación entre elementos utilizando el método <code>$.fn.data</code></strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'#myList li'</span><span class="br0">&#41;</span>.<span class="me1">each</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> $li <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">,</span> $div <span class="sy0">=</span> $li.<span class="me1">find</span><span class="br0">&#40;</span><span class="st0">'div.content'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    $li.<span class="me1">data</span><span class="br0">&#40;</span><span class="st0">'contentDiv'</span><span class="sy0">,</span> $div<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// luego, no se debe volver a buscar al div;</span>
+<span class="co1">// es posible leerlo desde la información asociada al item de la lista</span>
+<span class="kw1">var</span> $firstLi <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="st0">'#myList li:first'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+$firstLi.<span class="me1">data</span><span class="br0">&#40;</span><span class="st0">'contentDiv'</span><span class="br0">&#41;</span>.<span class="me1">html</span><span class="br0">&#40;</span><span class="st0">'nuevo contenido'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Además es posible pasarle al método un objeto conteniendo uno o más pares de conjuntos palabra clave-valor.</p>
+
+<p>A partir de la versión 1.5 de la biblioteca, jQuery permite utilizar al método <code>$.fn.data</code> para obtener la información asociada a un elemento que posea el atributo HTML5 <code>data-*</code>:</p>
+
+<p><strong>Elementos con el atributo <code>data-*</code></strong></p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">'foo'</span> data-foo<span class="sy0">=</span><span class="st0">'baz'</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">'#'</span>&gt;</span>Foo<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">'foobar'</span> data-foo-bar<span class="sy0">=</span><span class="st0">'fol'</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">'#'</span>&gt;</span>Foo Bar<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span></pre>
+</div>
+
+<p><strong>Obtener los valores asociados a los atributos <code>data-*</code> con <code>$.fn.data</code></strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// obtiene el valor del atributo data-foo</span>
+<span class="co1">// utilizando el método $.fn.data</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>$<span class="br0">&#40;</span><span class="st0">'#foo'</span><span class="br0">&#41;</span>.<span class="me1">data</span><span class="br0">&#40;</span><span class="st0">'foo'</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// registra 'baz'</span>
+&nbsp;
+<span class="co1">// obtiene el valor del segundo elemento</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>$<span class="br0">&#40;</span><span class="st0">'#foobar'</span><span class="br0">&#41;</span>.<span class="me1">data</span><span class="br0">&#40;</span><span class="st0">'fooBar'</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// registra 'fol'</span></pre>
+</div>
+
+<blockquote>
+  <p><strong>Nota</strong></p>
+  
+  <p>A partir de la versión 1.6 de la biblioteca, para obtener el valor del atributo <code>data-foo-bar</code> del segundo elemento, el argumento en <code>$.fn.data</code> se debe pasar en estilo <em>CamelCase</em>.</p>
+  
+  <p><strong>Nota</strong></p>
+  
+  <p>Para más información sobre el atributo HTML5 <code>data-*</code> visite <a href="http://www.w3.org/TR/html5/global-attributes.html#embedding-custom-non-visible-data-with-the-data-attributes">http://www.w3.org/TR/html5/global-attributes.html#embedding-custom-non-visible-data-with-the-data-attributes</a>.</p>
+</blockquote>
+
+<h2 id="deteccion-de-navegadores-y-caracteristicas">4.5 Detección de Navegadores y Características</h2>
+
+<p>Más allá que jQuery elimine la mayoría de las peculiaridades de JavaScript entre cada navegador, existen ocasiones en que se necesita ejecutar código en un navegador específico.</p>
+
+<p>Para este tipo de situaciones, jQuery ofrece el objeto <code>$.support</code> y <code>$.browser</code> (este último en desuso). Una completa documentación sobre estos objetos puede encontrarla en <a href="http://api.jquery.com/jQuery.support/">http://api.jquery.com/jQuery.support/</a> y <a href="http://api.jquery.com/jQuery.browser/">http://api.jquery.com/jQuery.browser/</a></p>
+
+<p>El objetivo de <code>$.support</code> es determinar qué características soporta el navegador web.</p>
+
+<p>El objeto <code>$.browser</code> permite detectar el tipo de navegador y su versión. Dicho objeto está en desuso (aunque en el corto plazo no está planificada su eliminación del núcleo de la biblioteca) y se recomienda utilizar al objeto <code>$.support</code> para estos propósitos.</p>
+
+<h2 id="evitar-conflictos-con-otras-bibliotecas-javascript">4.6 Evitar Conflictos con Otras Bibliotecas JavaScript</h2>
+
+<p>Si esta utilizando jQuery en conjunto con otras bibliotecas JavaScript, las cuales también utilizan la variable <code>$</code>, pueden llegar a ocurrir una serie de errores. Para poder solucionarlos, es necesario poner a jQuery en su modo "no-conflicto". Esto se debe realizar inmediatamente después que jQuery se cargue en la página y antes del código que se va a ejecutar.</p>
+
+<p>Cuando se pone a jQuery en modo "no-conflicto", la biblioteca ofrece la opción de asignar un nombre para reemplazar a la variable <code>$</code>.</p>
+
+<p><strong>Poner a jQuery en modo no-conflicto</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="sy0">&lt;</span>script src<span class="sy0">=</span><span class="st0">&quot;prototype.js&quot;</span><span class="sy0">&gt;&lt;/</span>script<span class="sy0">&gt;</span>             <span class="co1">// la biblioteca prototype</span>
+                                                 <span class="co1">// también utiliza $</span>
+<span class="sy0">&lt;</span>script src<span class="sy0">=</span><span class="st0">&quot;jquery.js&quot;</span><span class="sy0">&gt;&lt;/</span>script<span class="sy0">&gt;</span>                <span class="co1">// se carga jquery</span>
+                                                 <span class="co1">// en la página</span>
+<span class="sy0">&lt;</span>script<span class="sy0">&gt;</span><span class="kw1">var</span> $j <span class="sy0">=</span> jQuery.<span class="me1">noConflict</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;&lt;/</span>script<span class="sy0">&gt;</span>   <span class="co1">// se inicializa</span>
+                                                 <span class="co1">// el modo &quot;no-conflicto&quot;</span></pre>
+</div>
+
+<p>También es posible seguir utilizando <code>$</code> conteniendo el código en una función anónima autoejecutable. Éste es un patrón estándar para la creación de extensiones para la biblioteca, ya que <code>$</code> queda encerrada dentro del alcance de la misma función anónima.</p>
+
+<p><strong>Utilizar $ dentro de una función anónima autoejecutable</strong></p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">script</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;prototype.js&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">script</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">script</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;jquery.js&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">script</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">script</span>&gt;</span>
+jQuery.noConflict();
+&nbsp;
+(function($) {
+   // el código va aquí, pudiendo utilizar $
+})(jQuery);
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">script</span>&gt;</span></pre>
+</div>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-4.html#el-nucleo-de-jquery">El núcleo de jQuery</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.1</span>
+                        <a class="internal" href="capitulo-4.html#-vs-"><code>$</code> vs <code>$()</code></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.2</span>
+                        <a class="internal" href="capitulo-4.html#metodos-utilitarios">Métodos Utilitarios</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.3</span>
+                        <a class="internal" href="capitulo-4.html#comprobacion-de-tipos">Comprobación de Tipos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.4</span>
+                        <a class="internal" href="capitulo-4.html#el-metodo-data">El Método Data</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.5</span>
+                        <a class="internal" href="capitulo-4.html#deteccion-de-navegadores-y-caracteristicas">Detección de Navegadores y Características</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.6</span>
+                        <a class="internal" href="capitulo-4.html#evitar-conflictos-con-otras-bibliotecas-javascript">Evitar Conflictos con Otras Bibliotecas JavaScript</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

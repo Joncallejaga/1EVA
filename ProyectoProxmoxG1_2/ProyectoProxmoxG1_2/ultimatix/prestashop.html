@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="title" content="Ultimatix">
+	<meta name="description" content="Grupo 1 de DAW 2.">
+	<link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
+    <title>Ultimatix</title>
+    <link rel="stylesheet" href="fonts/styles.css">
+    <script>
+        <!--
+        function getStylesheet() {
+            var currentTime = new Date().getHours();
+            if (0 <= currentTime&&currentTime < 5) {
+                document.write("<link rel='stylesheet' href='css/night.css' type='text/css'>");
+            }
+            if (5 <= currentTime&&currentTime < 11) {
+                document.write("<link rel='stylesheet' href='css/main.css' type='text/css'>");
+            }
+            if (11 <= currentTime&&currentTime < 16) {
+                document.write("<link rel='stylesheet' href='css/main.css' type='text/css'>");
+            }
+            if (16 <= currentTime&&currentTime < 22) {
+                document.write("<link rel='stylesheet' href='css/main.css' type='text/css'>");
+            }
+            if (22 <= currentTime&&currentTime <= 24) {
+                document.write("<link rel='stylesheet' href='css/night.css' type='text/css'>");
+            }
+        }
+
+        getStylesheet();
+        -->
+    </script>
+
+    <noscript><link rel="stylesheet" href="css/main.css"></noscript>
+</head>
+<body>
+    <div id="loader">
+	    <div class="loader_circle loader_animation"></div>
+    </div>
+	<section id="menu">
+		<ul>
+			<li><a href="index.html">Introducción</a></li>
+			<li><a href="wordpress.html">Wordpress</a></li>
+			<li><a href="prestashop.html">Prestashop</a></li>
+			<li><a href="lamp.html">LAMP</a></li>
+			<li><a href="owncloud.html">Owncloud</a></li>
+		</ul>
+	</section>
+	<div id="intro">
+		<img src="img/ultimatix-logo.png" class="logo">
+	</div>
+	<a href="#menu" class="up-button"><img src="img/menu-button.png"></a>
+	<section>
+		<h1>PrestaShop</h1>
+		<div class="column-wrapper">
+			<div class="column">
+				<p>PrestaShop es un Sistema Gestor de Contenido (CMS) libre y de código abierto,<br/> orientado a la 	creación de tiendas en linea de comercio electrónico.<br/>
+
+					Permite la gestión completa de nuestra propia tienda Online:<br/>
+				    - Creación y gestión de productos.<br/>
+				    - Gestión de pedidos.<br/>
+				    - Gestión de clientes.<br/>
+				    - Conexión con ERP (Sistemas de planificación de recursos empresariales)
+				</p>
+			</div>
+		</div>
+		<h2>Instalacion</h2>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/Prestashop/prestashop1.png" class="bounceIn">
+			</div>
+			<div class="column">
+				<p>Entrando en la pagina oficial de PrestaShop podremos bajarnos gratuitamente el programa de instalación.</p>
+			</div>
+		</div>
+		<h2>Presparando el Servidor</h2>
+		<div class="column-wrapper">
+			<div class="column">
+				<p>En el servidor se puede bajar el archivo de instalación de PrestaShop mediante terminal utilizando el siguiente comando:<br/>
+					<b>sudo curl -O https://download.prestashop.com/download/releases/prestashop_1.7.2.1.zip</b><br/>
+
+					<!--En nuestro caso, al hacer uso de un repositorio en Git-Hub para nuestro proyecto, hemos subido el archivo de instalación en él para posteriormente volcar toda la información en el servidor.-->
+
+					El siguiente paso es descomprimir el archivo principal:<br/>
+					<b>unzip prestashop_1.7.2.1.zip</b><br/>
+
+					Creamos un enlace de la carpeta en el servidor apache:<br/>
+					<b>ln -s ProyectoProxmoxProyectoProxmoxG1_2/Prestashop/ /var/www/html/</b><br/>
+
+					Tendremos que dar entonces permisos a la carpeta para que el proceso de instalación funcione correctamente:<br/>
+					<b>chown -hR www-data ProyectoProxmoxProyectoProxmoxG1_2/PrestaShop/</b></p>
+			</div>
+			<div class="column">
+				<img src="img/Prestashop/prestashop2.png" class="bounceIn">
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/Prestashop/prestashop3.png" class="bounceIn">
+			</div>
+			<div class="column">
+				<p>Antes de empezar con la instalación prepararemos la base de datos que necesitaremos para completar el proceso:<br/>
+					<b>CREATE DATABASE Prestashop;</b></p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<p>Creamos un usuario y le damos privilegios sobre la base de datos que usaremos:<br/>
+					<b>CREATE USER ‘Prestashop’@’localhost’ IDENTIFIED BY ‘*********’;</b></p>
+			</div>
+			<div class="column">
+				<img src="img/Prestashop/prestashop4.png" class="bounceIn">
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/Prestashop/prestashop5.png" class="bounceIn">
+			</div>
+			<div class="column">
+				<p>Entramos en la dirección IP del servidor para poder acceder al proceso de instalación:<br/>
+					<b>10.9.52.104/</b></p>
+			</div>
+		</div>
+		<h2>Configuracion desde el Cliente Web</h2>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<p>Seguimos los pasos en las diferentes pantallas rellenando los campos que nos soliciten:</p>
+			</div>
+			<div class="column">
+				<img src="img/Prestashop/prestashop6.png" class="bounceIn">
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/Prestashop/prestashop7.png" class="bounceIn">
+			</div>
+			<div class="column">
+				<p>En el tercer paso surgió el siguiente fallo:</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<p>Lo solucionamos activando el modulo solicitado con el siguiente comando y reiniciando Apache:<br/>
+					<b>a2enmod rewrite</b><br/>
+					<b>systemctl restart apache2</b></p>
+			</div>
+			<div class="column">
+				<img src="img/Prestashop/prestashop8.png" class="bounceIn">
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/Prestashop/prestashop9.png" class="bounceIn">
+			</div>
+			<div class="column">
+				<p>Tras ello, pudimos reanudar las instalacion.</p>
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<p>Tras rellenar todos los formularios, el instalador continuará con la configuración:</p>
+			</div>
+			<div class="column">
+				<img src="img/Prestashop/prestashop10.png" class="bounceIn">
+			</div>
+		</div>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/Prestashop/prestashop11.png" class="bounceIn">
+			</div>
+			<div class="column">
+				<p>Si la instalacion ha finalizado correctamente, se mostrara la siguiente ventana.</p>
+			</div>
+		</div>
+		<h2>Interfaz de Configuración (Back Office):</h2>
+		<div class="column-wrapper">
+			<div class="column">
+				<img src="img/Prestashop/prestashop12.png" class="bounceIn">
+			</div>
+			<div class="column">
+				<p>Tras la instalación se podra acceder a la página de administracion de PrestaShop ingresando en la siguiente direccion:<br/>
+					<b>10.9.52.104/Prestashop/admin402rswtkf</b></p>
+				<p>La primera vez que ingresemos, nos pedira que borresmos el archivo de instalacion de la carpeta donde hayamos instalado PrestaShop.</p>
+			</div>
+		</div>
+		<h2>Interfaz de Usuario (Front Office):</h2>
+		<div class="column-wrapper">
+			<div class="column">
+				<p>Para acceder a la interfaz de usuario, la que vera todo el que visite la pagina, bastara con poner la ruta a la carpeta donde se encuentra instalado PrestaShop:<br/>
+					<b>http://10.9.52.104/Prestashop/index.php</b>
+				</p>
+			</div>
+			<div class="column">
+				<img src="img/Prestashop/prestashop13.png" class="bounceIn">
+			</div>
+		</div>
+		<h2>Soporte de PrestaShop:</h2>
+		<div class="column-wrapper">
+			<div class="column">
+				<p>Foro para la resolución de duda entre usuarios de la herramienta:<br/>
+					<b>https://www.prestashop.com/forums/</b><br/>
+					Planes de Soporte Técnico:<br/>
+					<b>https://www.prestashop.com/es/soporte</b><br/>
+					Herramienta de migracion de-commerce:<br/>
+					<b>https://www.prestashop.com/es/cambiar-a-prestashop</b><br/>
+					Pagina para la migración:<br/>
+					<b>https://www.shopping-cart-migration.com/migracion-hacia-prestashop</b><br/>
+					Calculadora de coste de la migración:<br/>
+					<b>https://www.shopping-cart-migration.com/migration-pricing</b></p>
+			</div>
+		</div>
+	</section>
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>

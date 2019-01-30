@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="28/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Web workers | HTML5</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">HTML5</a></h1>
+        <p class="span3">
+                        <a href="capitulo-11.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-13.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="web-workers"><span>Capítulo 12</span> Web workers</h1>
+        <p>Los navegadores ejecutan las aplicaciones en un único <em>thread</em>, lo que significa que si JavaScript está ejecutando una tarea muy complicada, que se traduce en tiempo de procesado, el rendimiento del navegador se ve afectado. Los <em>Web workers</em> se introdujeron con la idea de simplificar la ejecución de <em>threads</em> en el navegador. Un <em>worker</em> permite crear un entorno en el que un bloque de código JavaScript puede ejecutarse de manera paralela sin afectar al <em>thread</em> principal del navegador. Los <em>Web workers</em> utilizan un protocolo de paso de mensajes similar a los utilizados en programación paralela.</p>
+
+<p>Estos <em>Web workers</em> se ejecutan en un subproceso aislado. Como resultado, es necesario que el código que ejecutan se encuentre en un archivo independiente. Sin embargo, antes de hacer esto, lo primero que se tiene que hacer es crear un nuevo objeto <em>Worker</em> en la página principal:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> worker <span class="sy0">=</span> <span class="kw1">new</span> Worker<span class="br0">&#40;</span><span class="st0">'task.js'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Si el archivo especificado existe, el navegador generará un nuevo subproceso de <em>Worker</em> que descargará el archivo JavaScript de forma asíncrona. El <em>Worker</em> no comenzará a ejecutarse hasta que el archivo se haya descargado completamente. Si la ruta al nuevo <em>Worker</em> devuelve un <code>error 404</code>, el <em>Worker</em> fallará automáticamente.</p>
+
+<p>Antes de comenzar a utilizar los <em>Worker</em>, es necesario conocer el protocolo de paso de mensajes, que también es utilizado en otras APIs como <em>WebSocket</em> y <em>Server-Sent Event</em>.</p>
+
+<h2 id="transferencia-de-mensajes">12.1 Transferencia de mensajes</h2>
+
+<p>El API de transferencia de mensajes es una manera muy simple de enviar cadenas de caracteres entre un origen (o un dominio) a un destino. Por ejemplo podemos utilizarlo para enviar información a una ventana abierta como <em>popup</em>, o a un <em>iframe</em> dentro de la página, aún cuando tiene como origen otro dominio.</p>
+
+<p>La comunicación entre un <em>Worker</em> y su página principal se realiza mediante un modelo de evento y el método <code>postMessage()</code>. En función del navegador o de la versión, <code>postMessage()</code> puede aceptar una cadena o un objeto <code>JSON</code> como argumento único. Las últimas versiones de los navegadores modernos son compatibles con la transferencia de objetos <code>JSON</code>. De todas maneras, siempre podemos utilizar los métodos <code>JSON.stringify</code> y <code>JSON.parse</code> para la transferencia de objetos entre el <em>thread</em> principal y los <em>Worker</em>.</p>
+
+<p>A continuación, se muestra un ejemplo sobre cómo utilizar una cadena para transferir "Hello World" a un <em>Worker</em> en <code>doWork.js</code>. El <em>Worker</em> simplemente devuelve el mensaje que se le transfiere.</p>
+
+<p>Secuencia de comandos principal:</p>
+
+<div class="code javascript">
+<pre class="javascript">worker.<span class="me1">postMessage</span><span class="br0">&#40;</span><span class="st0">'Hello World'</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Send data to our worker.</span></pre>
+</div>
+
+<p><code>doWork.js</code> (el Worker):</p>
+
+<div class="code javascript">
+<pre class="javascript">self.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'message'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    self.<span class="me1">postMessage</span><span class="br0">&#40;</span>e.<span class="me1">data</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Cuando se ejecuta <code>postMessage()</code> desde la página principal, el <em>Worker</em> es capaz de obtener este mensaje escuchando al evento <code>message</code>. Se puede acceder a los datos del mensaje (en este caso "Hello World") a través de la propiedad <code>data</code> del evento. Aunque este ejemplo concreto no es demasiado complejo, demuestra que <code>postMessage()</code> también sirve para transferir datos de vuelta al <em>thread</em> principal, una vez que los datos de origen se hayan procesado correctamente.</p>
+
+<p>Los mensajes que se transfieren entre el origen y los <em>Worker</em> se copian, no se pasan por referencia. Por ejemplo, en el siguiente ejemplo, a la propiedad <code>msg</code> del mensaje <code>JSON</code> se accede en las dos ubicaciones. Parece que el objeto se transfiere directamente al <em>Worker</em> aunque se esté ejecutando en un espacio específico e independiente. En realidad, lo que ocurre es que el objeto se serializa al transferirlo al <em>Worker</em> y, posteriormente, se anula la serialización en la otra fase del proceso. El origen y el <em>Worker</em> no comparten la misma instancia, por lo que el resultado final es la creación de un duplicado en cada transferencia. La mayoría de los navegadores implementan esta función mediante la codificación/descodificación <code>JSON</code> automática del valor en la otra fase del proceso, cuando el paso de objetos está soportado.</p>
+
+<p>En el siguiente ejemplo, que es más complejo, se transfieren mensajes utilizando objetos JavaScript.</p>
+
+<p>Secuencia de comandos principal:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">button</span> <span class="kw3">onclick</span><span class="sy0">=</span><span class="st0">&quot;sayHI()&quot;</span>&gt;</span>Say HI<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">button</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">button</span> <span class="kw3">onclick</span><span class="sy0">=</span><span class="st0">&quot;unknownCmd()&quot;</span>&gt;</span>Send unknown command<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">button</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">button</span> <span class="kw3">onclick</span><span class="sy0">=</span><span class="st0">&quot;stop()&quot;</span>&gt;</span>Stop worker<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">button</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">output</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;result&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">output</span>&gt;</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">&lt;script&gt;</pre>
+</div>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> sayHI<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    worker.<span class="me1">postMessage</span><span class="br0">&#40;</span><span class="br0">&#123;</span><span class="st0">'cmd'</span><span class="sy0">:</span> <span class="st0">'start'</span><span class="sy0">,</span> <span class="st0">'msg'</span><span class="sy0">:</span> <span class="st0">'Hi'</span><span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">function stop() {
+    worker.postMessage({'cmd': 'stop', 'msg': 'Bye'});
+}</pre>
+</div>
+
+<div class="code code">
+<pre class="code">function unknownCmd() {
+    worker.postMessage({'cmd': 'foobard', 'msg': '???'});
+}</pre>
+</div>
+
+<div class="code code">
+<pre class="code">var worker = new Worker('doWork.js');</pre>
+</div>
+
+<div class="code code">
+<pre class="code">worker.addEventListener('message', function(e) {
+    document.getElementById('result').textContent = e.data;
+}, false);</pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">script</span>&gt;</span></pre>
+</div>
+
+<p>doWork.js:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">this</span>.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'message'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> data <span class="sy0">=</span> e.<span class="me1">data</span><span class="sy0">;</span>
+    <span class="kw1">switch</span> <span class="br0">&#40;</span>data.<span class="me1">cmd</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">case</span> <span class="st0">'start'</span><span class="sy0">:</span>
+            <span class="kw1">this</span>.<span class="me1">postMessage</span><span class="br0">&#40;</span><span class="st0">'WORKER STARTED: '</span><span class="sy0">+</span>data.<span class="me1">msg</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">break</span><span class="sy0">;</span>
+        <span class="kw1">case</span> <span class="st0">'stop'</span><span class="sy0">:</span>
+            <span class="kw1">this</span>.<span class="me1">postMessage</span><span class="br0">&#40;</span><span class="st0">'WORKER STOPPED: '</span><span class="sy0">+</span>data.<span class="me1">msg</span><span class="sy0">+</span><span class="st0">'. (buttons will no longer work)'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Terminates the worker.</span>
+            <span class="kw1">break</span><span class="sy0">;</span>
+        <span class="kw1">default</span><span class="sy0">:</span>
+            <span class="kw1">this</span>.<span class="me1">postMessage</span><span class="br0">&#40;</span><span class="st0">'Unknown command: '</span><span class="sy0">+</span>data.<span class="me1">msg</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="utilizacion-de-web-workers">12.2 Utilización de Web Workers</h2>
+
+<p>Un <em>Worker</em> es una manera ejecutar código JavaScript de manera paralela al proceso principal, sin interferir con el navegador. El navegador sigue siendo responsable de solicitar y analizar ficheros, renderizar la vista, ejecutar JavaScript y cualquier otro proceso que consuma tiempo de procesado y que haga que el resto de tareas tengan que esperar. Y es aquí donde los <em>Web workers</em> toman importancia.</p>
+
+<p>Al igual que con el resto de funcionalidades de HTML5, debemos comprobar su disponibilidad en el navegador en el que ejecutamos la aplicación:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">if</span><span class="br0">&#40;</span>Modernizr.<span class="me1">webworkers</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> 
+    alert<span class="br0">&#40;</span><span class="st0">'El explorador soporta Web workers'</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+<span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span> 
+    alert<span class="br0">&#40;</span><span class="st0">'El explorador NO soporta Web workers'</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Crear nuevo <em>Worker</em> es muy sencillo. Tan sólo tenemos que crear una nueva instancia del objeto <code>Worker</code>, indicando como parámetro del constructor el fichero JavaScript que contiene el código que debe ejecutar el <em>Worker</em>.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> worker <span class="sy0">=</span> <span class="kw1">new</span> Worker<span class="br0">&#40;</span><span class="st0">'my_worker.js'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>De esta manera tenemos disponible y listo para utilizar un nuevo <em>Worker</em>. En este momento, podríamos pensar que podemos llamar a métodos o utilizar objetos definidos dentro del nuevo <em>Worker</em>, pero no nada más lejos de la realidad. La única manera de comunicarnos con el nuevo <em>Worker</em> es a través del paso de mensajes, como hemos visto anteriormente.</p>
+
+<div class="code javascript">
+<pre class="javascript">worker.<span class="me1">postMessage</span><span class="br0">&#40;</span><span class="st0">'Hello World'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Éste método únicamente acepta un parámetro, la cadena de texto a enviar al <em>Worker</em>. Por otra parte, la manera de recibir mensajes originados en el <em>Worker</em> es definiendo un escuchador para el evento <code>message</code>. Los datos incluidos por el <em>Worker</em> se encuentran disponibles en la propiedad <code>data</code> del evento.</p>
+
+<div class="code javascript">
+<pre class="javascript">worker.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'message'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    alert<span class="br0">&#40;</span>e.<span class="me1">data</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="dentro-de-un-worker">12.2.1 Dentro de un <em>Worker</em></h3>
+
+<p>Evidentemente, dentro de un <em>Worker</em> necesitamos comunicarnos con el <em>thread</em> principal, tanto para recibir los datos de los mensajes como para nuevos datos de vuelta. Para ello, añadimos un escuchador para el evento <code>message</code>, y enviamos los datos de vuelta utilizando el mismo método <code>postMessage</code>.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">this</span>.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'message'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    postMessage<span class="br0">&#40;</span><span class="st0">&quot;I'm done!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Es conveniente saber, que a diferencia de la ejecución un <em>script</em> en el documento principal, la visibilidad de un <em>Worker</em> es mucho más reducida. En concreto, la palabra reservada <code>this</code> no hace referencia al objeto <code>window</code>, sino al <em>Worker</em> en sí mismo. Debido al comportamiento de ejecución en paralelo de los <em>Web workers</em>, éstos solo pueden acceder al siguiente conjunto de funciones de JavaScript (según la especificación):</p>
+
+<ul>
+<li>Enviar datos con <code>postMessage</code> y aceptar mensajes entrantes a través del evento <code>onmessage</code>.</li>
+<li><code>close</code>, para terminar con el <em>Worker</em> actual.</li>
+<li>Realizar peticiones Ajax.</li>
+<li>Utilizar las funciones de tiempo <code>setTimeout()/clearTimeout()</code> y <code>setInterval()/clearInterval()</code>.</li>
+<li>Las siguientes funciones de JavaScript: <code>eval</code>, <code>isNaN</code>, <code>escape</code>, etc.</li>
+<li><code>WebSockets</code>.</li>
+<li><code>EventSource</code>.</li>
+<li>Bases de datos <code>Web SQL</code>, <code>IndexedDB</code>.</li>
+<li><code>Web Workers</code>.</li>
+</ul>
+
+<p>En cambio, los <em>Workers</em> <strong>NO</strong> pueden acceder a las siguientes funciones:</p>
+
+<ul>
+<li><code>DOM</code> (no es seguro para el subproceso).</li>
+<li>Objeto <code>window</code>.</li>
+<li>Objeto <code>document</code>.</li>
+<li>Objeto <code>parent</code>.</li>
+</ul>
+
+<h2 id="subworkers">12.3 Subworkers</h2>
+
+<p>Los <em>Workers</em> tienen la capacidad de generar <em>Workers</em> secundarios. Esto significa, que podemos dividir la tarea principal en subtareas, y crear nuevos <em>Workers</em> dentro del <em>Worker</em> principal. Sin embargo, a la hora de utilizar los <em>Subworkers</em>, y antes de poder devolver el resultado final al hilo principal, es necesario asegurarse que todos los procesos han terminado.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> pendingWorkers <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">,</span> results <span class="sy0">=</span> <span class="br0">&#123;</span><span class="br0">&#125;</span><span class="sy0">,;</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">onmessage = function (event) {
+    var data = JSON.parse(event.data), worker = null;
+    pendingWorkers = data.length;</pre>
+</div>
+
+<div class="code code">
+<pre class="code">    for (var i = 0; i &lt; data.length; i++) {
+        worker = new Worker('subworker.js');
+        worker.postMessage(JSON.stringify(data[i]));
+        worker.onmessage = storeResult;
+    }
+}</pre>
+</div>
+
+<div class="code code">
+<pre class="code">function storeResult(event) {
+    var result = JSON.parse(event.data);</pre>
+</div>
+
+<div class="code code">
+<pre class="code">    pendingWorkers--;
+    if (pendingWorkers &lt;= 0) {
+        postMessage(JSON.stringify(results));
+    }
+}</pre>
+</div>
+
+<h2 id="gestionar-errores">12.4 Gestionar errores</h2>
+
+<p>Si se produce un error mientras se ejecuta un Worker, se activa un evento <code>error</code>. La interfaz incluye tres propiedades útiles para descubrir la causa del error: <code>filename</code> (el nombre de la secuencia de comandos del Worker que causó el error), <code>lineno</code> (el número de línea donde se produjo el error) y <code>message</code> (una descripción significativa del error).</p>
+
+<p>Ejemplo: <code>workerWithError.js</code> intenta ejecutar <code>1/x</code>, donde el valor de <code>x</code> no se ha definido:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">output</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;error&quot;</span> <span class="kw3">style</span><span class="sy0">=</span><span class="st0">&quot;color: red;&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">output</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">output</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;result&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">output</span>&gt;</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">&lt;script&gt;</pre>
+</div>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> onError<span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">'error'</span><span class="br0">&#41;</span>.<span class="me1">textContent</span> <span class="sy0">=</span> <span class="br0">&#91;</span>
+        <span class="st0">'ERROR: Line '</span><span class="sy0">,</span> e.<span class="me1">lineno</span><span class="sy0">,</span> <span class="st0">' in '</span><span class="sy0">,</span> e.<span class="me1">filename</span><span class="sy0">,</span> <span class="st0">': '</span><span class="sy0">,</span> e.<span class="me1">message</span><span class="br0">&#93;</span>.<span class="me1">join</span><span class="br0">&#40;</span><span class="st0">''</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">function onMsg(e) {
+    document.getElementById('result').textContent = e.data;
+}</pre>
+</div>
+
+<div class="code code">
+<pre class="code">var worker = new Worker('workerWithError.js');
+worker.addEventListener('message', onMsg, false);
+worker.addEventListener('error', onError, false);
+worker.postMessage(); // Start worker without a message.</pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">script</span>&gt;</span></pre>
+</div>
+
+<p>workerWithError.js:</p>
+
+<div class="code javascript">
+<pre class="javascript">self.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'message'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    postMessage<span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">/</span>x<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Intentional error.</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="seguridad">12.5 Seguridad</h2>
+
+<p>Debido a las restricciones de seguridad de Google Chrome (otros navegadores no aplican esta restricción), los Workers no se ejecutarán de forma local (por ejemplo, desde <code>file://</code>) en las últimas versiones del navegador. En su lugar, fallan de forma automática. Para ejecutar tu aplicación desde el esquema <code>file://</code>, ejecuta Chrome con el conjunto de marcadores <code>--allow-file-access-from-files</code>.</p>
+
+<p>Las secuencias de comandos del Worker deben ser archivos externos con el mismo esquema que su página de llamada. Por ello, no se puede cargar una secuencia de comandos desde una URL <code>data:</code> o una URL <code>javascript:</code>. Asimismo, una página <code>https:</code> no puede iniciar secuencias de comandos de Worker que comiencen con una URL <code>http:</code>.</p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 14</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej14">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-12.html#web-workers">Web workers</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>12.1</span>
+                        <a class="internal" href="capitulo-12.html#transferencia-de-mensajes">Transferencia de mensajes</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>12.2</span>
+                        <a class="internal" href="capitulo-12.html#utilizacion-de-web-workers">Utilización de Web Workers</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>12.3</span>
+                        <a class="internal" href="capitulo-12.html#subworkers">Subworkers</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>12.4</span>
+                        <a class="internal" href="capitulo-12.html#gestionar-errores">Gestionar errores</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>12.5</span>
+                        <a class="internal" href="capitulo-12.html#seguridad">Seguridad</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

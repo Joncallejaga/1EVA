@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="14/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Introducción | jQuery</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">jQuery</a></h1>
+        <p class="span3">
+                        <a href="index.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-2.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="introduccion"><span>Capítulo 1</span> Introducción</h1>
+        <p>jQuery se está convirtiendo rápidamente en una herramienta que todo desarrollador de interfaces web debería de conocer. El propósito de este libro es proveer un resumen de la biblioteca, de tal forma que para cuando lo haya terminado de leer, será capaz de realizar tareas básicas utilizando jQuery y tendrá una sólida base para continuar el aprendizaje.</p>
+
+<h2 id="software">1.1 Software</h2>
+
+<p>Para trabajar con los contenidos del libro, necesitará las siguientes herramientas:</p>
+
+<ul>
+<li><a href="http://www.arkaitzgarro.com/jquery/www.google.com/chrome?hl=es">Navegador web Chrome</a></li>
+<li>Un editor de texto plano (como <a href="http://notepad-plus-plus.org/download/v5.9.8.html">Notepad++</a>/<a href="http://www.sublimetext.com/2">Sublime Text 2</a>, <a href="http://www.icewalkers.com/Linux/Software/56260/gEdit.html">gedit</a>/<a href="http://linux.softpedia.com/get/Text-Editing-Processing/Others/Kate-2317.shtml">Kate</a> o <a href="http://textmate.en.softonic.com/mac">TextMate</a>)</li>
+<li>Para las secciones dedicadas a Ajax: Un servidor local (como <a href="http://www.wampserver.com/en/download.php">WAMP</a> o <a href="http://www.mamp.info/en/index.html">MAMP</a>) o un cliente FTP/SSH (como <a href="http://filezilla-project.org/">FileZilla</a>) para acceder a un servidor remoto.</li>
+</ul>
+
+<h2 id="anadir-javascript-a-una-pagina">1.2 Añadir JavaScript a una Página</h2>
+
+<p>Existen dos formas de insertar código JavaScript dentro de una página: escribiendo código en la misma (en ingles inline) o a través de un archivo externo utilizando la etiqueta script. El orden en el cual se incluye el código es importante: un código que depende de otro debe ser incluido después del que referencia (Ejemplo: Si la función B depende de A, el orden debe ser A,B y no B,A).</p>
+
+<p>Para mejorar el rendimiento de la página, el código JavaScript debe ser incluido al final del HTML. Además, cuando se trabaja en un ambiente de producción con múltiples archivos JavaScript, éstos deben ser combinados en un solo archivo.</p>
+
+<p><strong>Ejemplo de código JavaScript en línea</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="sy0">&lt;</span>script<span class="sy0">&gt;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'hello'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="sy0">&lt;/</span>script<span class="sy0">&gt;</span></pre>
+</div>
+
+<p><strong>Ejemplo de inclusión de un archivo externo JavaScript</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="sy0">&lt;</span>script src<span class="sy0">=</span><span class="st0">'/js/jquery.js'</span><span class="sy0">&gt;&lt;/</span>script<span class="sy0">&gt;</span></pre>
+</div>
+
+<h2 id="depuracion-del-codigo-javascript">1.3 Depuración del Código JavaScript</h2>
+
+<p>La utilización de una herramienta de depuración es esencial para trabajar con JavaScript. Firefox provee un depurador a través de la extensión Firebug; mientras que <a href="http://www.apple.com/es/safari/download/">Safari</a> y <a href="http://www.google.es/chrome/">Chrome</a> ya traen uno integrado.</p>
+
+<p>Cada depurador ofrece:</p>
+
+<ul>
+<li>Un editor multi-linea para experimentar con JavaScript;</li>
+<li>Un inspector para revisar el código generado en la página;</li>
+<li>Un visualizador de red o recursos, para examinar las peticiones que se realizan.</li>
+</ul>
+
+<p>Cuando usted este escribiendo código JavaScript, podrá utilizar alguno de los siguientes métodos para enviar mensajes a la consola del depurador:</p>
+
+<ul>
+<li><code>console.log()</code> para enviar y registrar mensajes generales;</li>
+<li><code>console.dir()</code> para registrar un objeto y visualizar sus propiedades;</li>
+<li><code>console.warn()</code> para registrar mensajes de alerta;</li>
+<li><code>console.error()</code> para registrar mensajes de error;</li>
+</ul>
+
+<p>Existen otros métodos para utilizar desde la consola, pero estos pueden variar según el navegador. La consola además provee la posibilidad de establecer puntos de interrupción y observar expresiones en el código con el fin de facilitar su depuración.</p>
+
+<h2 id="ejercicios">1.4 Ejercicios</h2>
+
+<p>La mayoría de los capítulos concluyen con uno o más ejercicios. En algunos, podrá trabajar directamente con Firebug o la consola de Safari y Chrome; en otros deberá escribir código JavaScript luego de incluir la biblioteca jQuery en el documento.</p>
+
+<p>Aún así, para completar ciertos ejercicios, necesitará consultar la documentación oficial de jQuery. Aprender a encontrar respuestas, es una parte importante del proceso de aprendizaje.</p>
+
+<p>Estas son algunas sugerencias para hacer frente a los problemas:</p>
+
+<ul>
+<li>En primer lugar, asegúrese de entender bien el problema que está tratando de resolver.</li>
+<li>Luego, averigüe a qué elementos tendrá que acceder con el fin de resolver el problema, y determine cómo accederlos. Puede utilizar Firebug para verificar que esta obteniendo el resultado esperado.</li>
+<li>Finalmente, averigüe qué necesita hacer con esos elementos para resolver el problema. Puede ser útil, antes de comenzar, escribir comentarios explicando lo que va a realizar.</li>
+</ul>
+
+<p>No tenga miedo de cometer errores. Tampoco trate en el primer intento escribir de forma perfecta su código. Cometer errores y experimentar con soluciones es parte del proceso de aprendizaje y le ayudará a que sea un mejor desarrollador.</p>
+
+<p>Puede descargar el código fuente utilizado en los ejercicios <a href="snippets/Ejercicios.zip">aquí</a>.</p>
+
+<h2 id="convenciones-utilizadas-en-el-libro">1.5 Convenciones Utilizadas en el Libro</h2>
+
+<p>Existen una serie de convenciones utilizadas en el libro:</p>
+
+<p>Los métodos que pueden ser llamados desde el objeto jQuery, serán referenciados como <code>$.fn.nombreDelMetodo</code>. Los métodos que existen en el espacio de nombres (en inglés <em>namespace</em>) de jQuery pero que no pueden ser llamados desde el objeto jQuery serán referenciados como <code>$.nombreDelMetodo</code>. Si esto no significa mucho para usted, no se preocupe — será más claro a medida que vaya progresando en el libro.</p>
+
+<p><strong>Ejemplo de un código</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// el código de ejemplo aparecerá de esta forma</span></pre>
+</div>
+
+<p><em>Las anotaciones aparecerán de esta forma.</em></p>
+
+<blockquote>
+  <p><strong>Nota</strong></p>
+  
+  <p>Las notas sobre algún tema aparecerán de esta forma.</p>
+</blockquote>
+
+<h2 id="material-de-referencia">1.6 Material de Referencia</h2>
+
+<p>Existe una gran cantidad de artículos que se ocupan de algún aspecto de jQuery. Algunos son excelentes pero otros, francamente, son erróneos. Cuando lea un artículo sobre jQuery, este seguro que se está abarcando la misma versión de la biblioteca que está utilizando, y resístase a la tentación de copiar y pegar el código — tómese un tiempo para poder entenderlo.</p>
+
+<p>A continuación se listan una serie de excelentes recursos para utilizar durante el aprendizaje. El más importante de todos es el código fuente de jQuery, el cual contiene (en su formato sin comprimir) una completa documentación a través de comentarios. La biblioteca no es una caja negra — el entendimiento de ella irá incrementándose exponencialmente si la revisa de vez en cuando — y es muy recomendable que la guarde en los favoritos de su navegador para tenerla como guía de referencia.</p>
+
+<ul>
+<li><a href="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js">El código fuente de jQuery</a></li>
+<li><a href="http://api.jquery.com">Documentación de jQuery</a></li>
+<li><a href="http://forum.jquery.com/">Foro de jQuery</a></li>
+<li><a href="http://delicious.com/rdmey/jquery-class">Favoritos en Delicious</a></li>
+<li><a href="http://docs.jquery.com/Discussion#Chat_.2F_IRC_Channel">Canal IRC #jquery en Freenode</a></li>
+</ul>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-1.html#introduccion">Introducción</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.1</span>
+                        <a class="internal" href="capitulo-1.html#software">Software</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.2</span>
+                        <a class="internal" href="capitulo-1.html#anadir-javascript-a-una-pagina">Añadir JavaScript a una Página</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.3</span>
+                        <a class="internal" href="capitulo-1.html#depuracion-del-codigo-javascript">Depuración del Código JavaScript</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.4</span>
+                        <a class="internal" href="capitulo-1.html#ejercicios">Ejercicios</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.5</span>
+                        <a class="internal" href="capitulo-1.html#convenciones-utilizadas-en-el-libro">Convenciones Utilizadas en el Libro</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.6</span>
+                        <a class="internal" href="capitulo-1.html#material-de-referencia">Material de Referencia</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

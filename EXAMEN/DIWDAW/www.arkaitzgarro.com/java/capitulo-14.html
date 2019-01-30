@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="15/04/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Tipos de métodos | Java</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">Java</a></h1>
+        <p class="span3">
+                        <a href="capitulo-13.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-15.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="tipos-de-metodos"><span>Capítulo 14</span> Tipos de métodos</h1>
+        <p>Un método es una abstracción de una operación que puede hacer o realizarse con un objeto. Una clase puede declarar cualquier número de métodos que lleven a cabo operaciones de lo más variado con los objetos. En esta sección los métodos se clasifican en dos grupos: los métodos <em>de instancia</em> y los métodos <em>de clase</em>.</p>
+
+<h2 id="metodos-de-instancia">14.1 Métodos de instancia</h2>
+
+<p>Las clases pueden incluir en su declaración muchos métodos o no declarar ninguno. Los métodos pueden clasificarse en métodos <em>de instancia</em> y métodos <em>de clase</em>.</p>
+
+<p>Los <em>métodos de instancia</em> operan sobre las variables de instancia de los objetos pero también tienen acceso a las variables de clase. La sintaxis de llamada a un método de instancia es:</p>
+
+<div class="code java">
+<pre class="java"><span class="co1">// Llamada tipica a un metodo de instancia</span>
+idReferencia.<span class="me1">idMetodo</span><span class="br0">&#40;</span>parametros<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Todas las instancias de una clase comparten la misma implementación para un método de instancia. La instancia que hace la llamada al método es siempre un parámetro o argumento implícito. Dentro de un método de instancia, el identificador de una variable de instancia hace referencia al atributo de la instancia concreta que hace la llamada al método (suponiendo que el identificador del atributo no ha sido <em>ocultado</em> por el de un parámetro).</p>
+
+<p>En el ejemplo anterior en la declaración de la clase <code>CuentaBancaria</code>, los métodos <code>saldo</code> y <code>transferencia</code> son métodos de instancia.</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">public</span> <span class="kw4">double</span> saldo<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">saldo</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> 
+&nbsp;
+<span class="kw1">public</span> <span class="kw4">void</span> transferencia<span class="br0">&#40;</span> CuentaBancaria origen <span class="br0">&#41;</span> <span class="br0">&#123;</span>
+   <span class="kw1">this</span>.<span class="me1">saldo</span> <span class="sy0">+=</span> origen.<span class="me1">saldo</span><span class="sy0">;</span>
+   origen.<span class="me1">saldo</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Ejemplos de llamada a estos métodos dentro de <code>PruebaCuentaBancaria</code>:</p>
+
+<div class="code java">
+<pre class="java">CuentaBancaria c1 <span class="sy0">=</span> <span class="kw1">new</span> CuentaBancaria<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+CuentaBancaria c2 <span class="sy0">=</span> <span class="kw1">new</span> CuentaBancaria<span class="br0">&#40;</span><span class="nu0">20.0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+c1.<span class="me1">transferencia</span><span class="br0">&#40;</span>c2<span class="br0">&#41;</span><span class="sy0">;</span> 
+<span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Cuenta con: &quot;</span> <span class="sy0">+</span> c1.<span class="me1">saldo</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">+</span> <span class="st0">&quot; euros&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="metodos-de-clase">14.2 Métodos de clase</h2>
+
+<p>En principio, los <em>métodos de clase</em> no operan sobre las variables de instancia de los objetos. Los <em>métodos de clase</em> pueden trabajar con las <strong>variables de clase</strong> pero no pueden acceder a las variables de instancia declaradas dentro de la clase, a no ser que se crea una nueva instancia y se acceda a las variables de instancia a través del nuevo objeto. Los métodos de clase también pueden ser llamados precediendolos con el identificador de la clase, sin necesidad de utilizar el de una instancia.</p>
+
+<div class="code java">
+<pre class="java">IdClase.<span class="me1">idMetodo</span><span class="br0">&#40;</span>parametros<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Llamada tipica a un metodo de clase</span></pre>
+</div>
+
+<p>La palabra <code>static</code> determina la declaración de un método de clase. Por defecto, si no se indica la palabra <code>static</code>, el método declarado se considera un método de instancia.</p>
+
+<p>En el ejemplo anterior en la declaración de la clase <code>CuentaBancaria</code>, el método <code>incCuentas</code> es un método de clase.</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> incCuentas <span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    totalCuentas<span class="sy0">++;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Un ejemplo de llamada a este método dentro de <code>PruebaCuentaBancaria</code> sería:</p>
+
+<div class="code java">
+<pre class="java">CuentaBancaria.<span class="me1">incCuentas</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Las diferencias entre los métodos de instancia y los de clase se resumen aquí:</p>
+
+<div class="figure" id="figure-14-1">
+    <img src="images/cap14/instancia-clase.png" alt="Diferencias entre los métodos de instancia y los métodos de clase" />
+
+    <p class="caption"><strong>Figura 14.1</strong> Diferencias entre los métodos de instancia y los métodos de clase</p>
+</div>
+
+
+<p>Los métodos de clase o <em>estáticos</em> se pueden considerar equivalentes a las rutinas (globales) de otros lenguajes de programación como Pascal o C. Como ejemplos típicos de métodos estáticos pueden indicarse los métodos de Java correspondientes a las funciones matemáticas <code>sin, cos, exp, pow</code>... de la clase <code>java.lang.Math</code>. Las llamadas a estos métodos se realizan anteponiendo el identificador de la clase <code>Math</code> al identificador del método: <code>Math.sin(angulo)</code>...</p>
+
+<div class="figure" id="figure-14-2">
+    <img src="images/cap14/math.png" alt="Métodos estáticos de la clase <code>Math</code>" />
+
+    <p class="caption"><strong>Figura 14.2</strong> Métodos estáticos de la clase <code>Math</code></p>
+</div>
+
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-14.html#tipos-de-metodos">Tipos de métodos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>14.1</span>
+                        <a class="internal" href="capitulo-14.html#metodos-de-instancia">Métodos de instancia</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>14.2</span>
+                        <a class="internal" href="capitulo-14.html#metodos-de-clase">Métodos de clase</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

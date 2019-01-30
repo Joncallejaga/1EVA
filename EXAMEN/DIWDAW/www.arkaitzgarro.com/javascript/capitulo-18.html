@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="08/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Ejercicios | JavaScript</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">JavaScript</a></h1>
+        <p class="span3">
+                        <a href="capitulo-17.html"><span>&larr;</span> Anterior</a>
+            
+                        <a class="disabled" href="capitulo-18.html#">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="ejercicios"><span>Capítulo 18</span> Ejercicios</h1>
+        <h2 id="ej01">18.1 Ejercicio 1</h2>
+
+<p>Modificar el siguiente script para que:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc0">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</span>
+<span class="sc2">&lt;<span class="kw2">html</span> xmlns<span class="sy0">=</span><span class="st0">&quot;http://www.w3.org/1999/xhtml&quot;</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">meta</span> <span class="kw3">http-equiv</span><span class="sy0">=</span><span class="st0">&quot;Content-Type&quot;</span> <span class="kw3">content</span><span class="sy0">=</span><span class="st0">&quot;text/html; charset=iso-8859-1&quot;</span> <span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>El primer script<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+&nbsp;
+<span class="sc2">&lt;<span class="kw2">script</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text/javascript&quot;</span>&gt;</span>
+  console.log(&quot;Hola Mundo!&quot;);
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">script</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+&nbsp;
+<span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Esta página contiene el primer script<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<ol>
+<li>Todo el código JavaScript se encuentre en un archivo externo llamado <code>codigo.js</code> y el script siga funcionando de la misma manera.</li>
+<li>Después del primer mensaje, se debe mostrar otro mensaje que diga "Soy el primer script"</li>
+<li>Añadir algunos comentarios que expliquen el funcionamiento del código</li>
+<li>Añadir en la página XHTML un mensaje de aviso para los navegadores que no tengan activado el soporte de JavaScript</li>
+</ol>
+
+<h2 id="ej02">18.2 Ejercicio 2</h2>
+
+<p>Modificar el script del ejercicio anterior para que:</p>
+
+<ol>
+<li>El mensaje que se muestra al usuario se almacene en una variable llamada mensaje y el funcionamiento del script sea el mismo.</li>
+<li>El mensaje mostrado sea el de la siguiente imagen:</li>
+</ol>
+
+<div class="figure" id="figure-18-1">
+    <img src="images/cap18/ej02.png" alt="Nuevo mensaje que debe mostrar el script" />
+
+    <p class="caption"><strong>Figura 18.1</strong> Nuevo mensaje que debe mostrar el script</p>
+</div>
+
+
+<h2 id="ej03">18.3 Ejercicio 3</h2>
+
+<p>Crear un array llamado meses y que almacene el nombre de los doce meses del año. Mostrar por pantalla los doce nombres utilizando la función <code>console.log()</code>.</p>
+
+<h2 id="ej04">18.4 Ejercicio 4</h2>
+
+<p>A partir del siguiente array que se proporciona: <code>var valores = [true, 5, false, "hola", "adios", 2];</code></p>
+
+<ol>
+<li>Determinar cual de los dos elementos de texto es mayor</li>
+<li>Utilizando exclusivamente los dos valores booleanos del array, determinar los operadores necesarios para obtener un resultado true y otro resultado false</li>
+<li>Determinar el resultado de las cinco operaciones matemáticas realizadas con los dos elementos numéricos</li>
+</ol>
+
+<h2 id="ej05">18.5 Ejercicio 5</h2>
+
+<p>Completar las condiciones de los if del siguiente script para que los mensajes se muestren siempre de forma correcta:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> numero1 <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+<span class="kw1">var</span> numero2 <span class="sy0">=</span> <span class="nu0">8</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">if</span><span class="br0">&#40;</span>...<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;numero1 no es mayor que numero2&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="kw1">if</span><span class="br0">&#40;</span>...<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;numero2 es positivo&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="kw1">if</span><span class="br0">&#40;</span>...<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;numero1 es negativo o distinto de cero&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="kw1">if</span><span class="br0">&#40;</span>...<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Incrementar en 1 unidad el valor de numero1 no lo hace mayor o igual que numero2&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="ej06">18.6 Ejercicio 6</h2>
+
+<p>El cálculo de la letra del Documento Nacional de Identidad (DNI) es un proceso matemático sencillo que se basa en obtener el resto de la división entera del número de DNI y el número 23. A partir del resto de la división, se obtiene la letra seleccionándola dentro de un array de letras.</p>
+
+<p>El array de letras es:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> letras <span class="sy0">=</span> <span class="br0">&#91;</span><span class="st0">'T'</span><span class="sy0">,</span> <span class="st0">'R'</span><span class="sy0">,</span> <span class="st0">'W'</span><span class="sy0">,</span> <span class="st0">'A'</span><span class="sy0">,</span> <span class="st0">'G'</span><span class="sy0">,</span> <span class="st0">'M'</span><span class="sy0">,</span> <span class="st0">'Y'</span><span class="sy0">,</span> <span class="st0">'F'</span><span class="sy0">,</span> <span class="st0">'P'</span><span class="sy0">,</span> <span class="st0">'D'</span><span class="sy0">,</span> <span class="st0">'X'</span><span class="sy0">,</span> <span class="st0">'B'</span><span class="sy0">,</span> <span class="st0">'N'</span><span class="sy0">,</span> <span class="st0">'J'</span><span class="sy0">,</span> <span class="st0">'Z'</span><span class="sy0">,</span> <span class="st0">'S'</span><span class="sy0">,</span> <span class="st0">'Q'</span><span class="sy0">,</span> <span class="st0">'V'</span><span class="sy0">,</span> <span class="st0">'H'</span><span class="sy0">,</span> <span class="st0">'L'</span><span class="sy0">,</span> <span class="st0">'C'</span><span class="sy0">,</span> <span class="st0">'K'</span><span class="sy0">,</span> <span class="st0">'E'</span><span class="sy0">,</span> <span class="st0">'T'</span><span class="br0">&#93;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Por tanto si el resto de la división es <code>0</code>, la letra del DNI es la <code>T</code> y si el resto es <code>3</code> la letra es la <code>A</code>. Con estos datos, elaborar un pequeño script que:</p>
+
+<ol>
+<li>Almacene en una variable el número de DNI indicado por el usuario y en otra variable la letra del DNI que se ha indicado.</li>
+<li>En primer lugar (y en una sola instrucción) se debe comprobar si el número es menor que <code>0</code> o mayor que <code>99999999</code>. Si ese es el caso, se muestra un mensaje al usuario indicando que el número proporcionado no es válido y el programa no muestra más mensajes.</li>
+<li>Si el número es válido, se calcula la letra que le corresponde según el método explicado anteriormente.</li>
+<li>Una vez calculada la letra, se debe comparar con la letra indicada por el usuario. Si no coinciden, se muestra un mensaje al usuario diciéndole que la letra que ha indicado no es correcta. En otro caso, se muestra un mensaje indicando que el número y la letra de DNI son correctos.</li>
+</ol>
+
+<h2 id="ej07">18.7 Ejercicio 7</h2>
+
+<p>El factorial de un número entero n es una operación matemática que consiste en multiplicar todos los factores <code>n x (n-1) x (n-2) x ... x 1</code>. Así, el factorial de <code>5</code> (escrito como <code>5!</code>) es igual a: <code>5! = 5 x 4 x 3 x 2 x 1 = 120</code></p>
+
+<p>Utilizando la estructura <code>for</code>, crear un script que calcule el factorial de un número entero.</p>
+
+<h2 id="ej08">18.8 Ejercicio 8</h2>
+
+<p>Escribir el código de una función a la que se pasa como parámetro un número entero y devuelve como resultado una cadena de texto que indica si el número es par o impar. Mostrar por pantalla el resultado devuelto por la función.</p>
+
+<h2 id="ej09">18.9 Ejercicio 9</h2>
+
+<p>Definir una función que muestre información sobre una cadena de texto que se le pasa como argumento. A partir de la cadena que se le pasa, la función determina si esa cadena está formada sólo por mayúsculas, sólo por minúsculas o por una mezcla de ambas.</p>
+
+<h2 id="ej10">18.10 Ejercicio 10</h2>
+
+<p>Definir una función que determine si la cadena de texto que se le pasa como parámetro es un palíndromo, es decir, si se lee de la misma forma desde la izquierda y desde la derecha. Ejemplo de palíndromo complejo: "La ruta nos aporto otro paso natural".</p>
+
+<h2 id="ej11">18.11 Ejercicio 11</h2>
+
+<p>Definir la siguiente jerarquía de objetos, haciendo uso de los prototipos de JavaScript:</p>
+
+<ul>
+<li>Objeto <code>Persona</code> con las propiedades <code>nombre</code>, <code>edad</code> y género, y el método <code>obtDetalles()</code>, que muestra por pantalla las propiedades de la persona.</li>
+<li>Objeto <code>Estudiante</code>, que hereda de <code>Persona</code>, e incluye las propiedades <code>curso</code> y <code>grupo</code> y el método <code>registrar()</code>.</li>
+<li>Objeto <code>Profesor</code>, que hereda de <code>Persona</code>, e incluye las propiedades <code>asignatura</code> y <code>nivel</code> y el método <code>asignar()</code>.</li>
+</ul>
+
+<p>Crear los objetos y casos de prueba necesarios para comprobar el correcto funcionamiento de la jerarquía.</p>
+
+<h2 id="ej12">18.12 Ejercicio 12</h2>
+
+<p>Escribir un script que simule el lanzamiento de dos dados. Hacer uso de la función <code>Math.random</code> para obtener números aleatorios entre 1 y 6 para cada uno de los lanzamientos de los dados. Sumar el resultado de lanzar dos dados y anotar en un array el número de apariciones de dicha suma, repitiendo 36.000 veces esta operación.</p>
+
+<h2 id="ej13">18.13 Ejercicio 13</h2>
+
+<p>Crear las expresiones regulares necesarias para resolver los siguientes puntos:</p>
+
+<ul>
+<li>Crear una expresión regular valide una fecha en formato "XX/XX/XXXX", donde "X" es un dígito. Probarlo con la expresión: "Nací el 05/04/1982 en Donostia.".</li>
+<li>Crear una expresión regular que valide una dirección de email. Para simplificar, los valores antes de la @ pueden contener cualquier carácter alfanumérico, y los caracteres <code>.</code> y <code>-</code>, mientras que los valores tra la @ pueden contener caracteres alfanuméricos, y el tipo de dominio puede tener una longitud de 2 o 3 caracteres.</li>
+<li>Dada la siguiente función que de reemplazo de caracteres, reescribirla utilizando expresiones regulares.</li>
+</ul>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> escapeHTML<span class="br0">&#40;</span>text<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> replacements <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#91;</span><span class="st0">&quot;&amp;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;amp;&quot;</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="st0">&quot;<span class="es0">\&quot;</span>&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;quot;&quot;</span><span class="br0">&#93;</span><span class="sy0">,</span>
+                        <span class="br0">&#91;</span><span class="st0">&quot;&lt;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;lt;&quot;</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="st0">&quot;&gt;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;gt;&quot;</span><span class="br0">&#93;</span><span class="br0">&#93;</span><span class="sy0">;</span>
+    forEach<span class="br0">&#40;</span>replacements<span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>replace<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        text <span class="sy0">=</span> text.<span class="me1">replace</span><span class="br0">&#40;</span>replace<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">,</span> replace<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">return</span> text<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<ul>
+<li>Dados un nombre y un apellido, crear la expresión regulatr necesaria para mostrarlos en orden inverso y separados por una coma. Por ejemplo, la cadena "John Smith", convertirla en "Smith, John".</li>
+<li>Crear una expresión regular que elimine las etiquetas potencialmente peligrosas (<code>&lt;script&gt;...&lt;/script&gt;</code>) y todo su contenido de una cadena HTML.</li>
+</ul>
+
+<h2 id="ej14">18.14 Ejercicio 14</h2>
+
+<p>A partir de la página web proporcionada y utilizando las funciones DOM, mostrar por pantalla la siguiente información:</p>
+
+<ol>
+<li>Número de enlaces de la página</li>
+<li>Dirección a la que enlaza el penúltimo enlace</li>
+<li>Numero de enlaces que enlazan a http://prueba</li>
+<li>Número de enlaces del tercer párrafo</li>
+</ol>
+
+<p><a href="snippets/cap18/ej14.html">Descargar página HTML</a></p>
+
+<h2 id="ej15">18.15 Ejercicio 15</h2>
+
+<p>Completar el código JavaScript proporcionado para que cuando se pulse sobre el enlace se muestre completo el contenido de texto. Además, el enlace debe dejar de mostrarse después de pulsarlo por primera vez. La acción de pulsar sobre un enlace forma parte de los "Eventos" de JavaScript que se ven en el siguiente capítulo. En este ejercicio, sólo se debe saber que al pinchar sobre el enlace, se ejecuta la función llamada muestra().</p>
+
+<p><a href="snippets/cap18/ej15.html">Descargar página HTML</a></p>
+
+<h2 id="ej16">18.16 Ejercicio 16</h2>
+
+<p>Completar el código JavaScript proporcionado para que se añadan nuevos elementos a la lista cada vez que se pulsa sobre el botón. Utilizar las funciones DOM para crear nuevos nodos y añadirlos a la lista existente. Al igual que sucede en el ejercicio anterior, la acción de pinchar sobre un botón forma parte de los "Eventos" de JavaScript que se ven en el siguiente capítulo. En este ejercicio, sólo se debe saber que al pinchar sobre el botón, se ejecuta la función llamada anade().</p>
+
+<p><a href="snippets/cap18/ej16.html">Descargar página HTML</a></p>
+
+<h2 id="ej17">18.17 Ejercicio 17</h2>
+
+<p>A partir de la página web proporcionada, completar el código JavaScript para que:</p>
+
+<ol>
+<li>Cuando se pinche sobre el primer enlace, se oculte su sección relacionada</li>
+<li>Cuando se vuelva a pinchar sobre el mismo enlace, se muestre otra vez esa sección de contenidos</li>
+<li>Completar el resto de enlaces de la página para que su comportamiento sea idéntico al del primer enlace</li>
+<li>Cuando una sección se oculte, debe cambiar el mensaje del enlace asociado</li>
+</ol>
+
+<p><a href="snippets/cap18/ej17.html">Descargar página HTML</a></p>
+
+<h2 id="ej18">18.18 Ejercicio 18</h2>
+
+<p>Completar el código JavaScript proporcionado para que:</p>
+
+<ul>
+<li>Al mover el ratón en cualquier punto de la ventana del navegador, se muestre la posición del puntero respecto del navegador y respecto de la página:</li>
+</ul>
+
+<p><img src="images/cap18/ej1601.png"></p>
+
+<p>Para mostrar los mensajes, utilizar la función <code>muestraInformacion()</code> deduciendo su funcionamiento a partir de su código fuente.</p>
+
+<ul>
+<li>Al pulsar cualquier tecla, el mensaje mostrado debe cambiar para indicar el nuevo evento y su información asociada:</li>
+</ul>
+
+<p><img src="images/cap18/ej1602.png"></p>
+
+<ul>
+<li>Añadir la siguiente característica al script: cuando se pulsa un botón del ratón, el color de fondo del cuadro de mensaje debe ser amarillo (<code>#FFFFCC</code>) y cuando se pulsa una tecla, el color de fondo debe ser azul (<code>#CCE6FF</code>). Al volver a mover el ratón, el color de fondo vuelve a ser blanco.</li>
+</ul>
+
+<p><img src="images/cap18/ej1603.png"></p>
+
+<p><a href="snippets/cap18/ej18.html">Descargar página HTML</a></p>
+
+<h2 id="ej19">18.19 Ejercicio 19</h2>
+
+<p>Crear un script que informe al usuario en que zona de la pantalla ha pulsado el ratón. Las zonas definidas son las siguientes: izquierda arriba, izquierda abajo, derecha arriba y derecha abajo. Para determinar el tamaño de la ventana del navegador, utilizar la función <code>tamanoVentanaNavegador()</code> proporcionada.</p>
+
+<p><a href="snippets/cap18/ej19.html">Descargar página HTML</a></p>
+
+<h2 id="ej20">18.20 Ejercicio 20</h2>
+
+<p>Mejorar el ejemplo anterior indicando en todo momento al usuario el número de caracteres que aún puede escribir. Además, se debe permitir pulsar las teclas Backspace, Supr. y las flechas horizontales cuando se haya llegado al máximo número de caracteres.</p>
+
+<h2 id="ej21">18.21 Ejercicio 21</h2>
+
+<p>Construir un validador para un formulario de registro que, dado el HTML que se proporciona, valide cada uno de los campos cuando el usuario ha terminado de introducir datos en cada uno de ellos, es decir, al perder el foco. Si el campo no cumple las restricciones, se mostrará una alerta al usuario, pero se le permitirá seguir introduciendo datos en el resto de campos.</p>
+
+<p>En el momento en el que el usuario envíe el formulario (evento <code>submit</code>), se validarán todos los campos y el formulario no se enviará si alguno de los campos no es válido. Las restricciones a cumplir son las siguientes:</p>
+
+<ul>
+<li>El nombre, email y comentarios son campos obligatorios.</li>
+<li>El campo email debe ser una dirección de email válida.</li>
+<li>El texto introducido en el campo de comentarios no debe exceder los 50 caracteres.</li>
+<li>El password debe tener una longitud mínima de 6 caracteres, y contener al menos una letra minúscula, una letra mayúscula y un dígito.</li>
+</ul>
+
+<p><a href="snippets/cap18/ej21.html">Descargar página HTML</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-18.html#ejercicios">Ejercicios</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.1</span>
+                        <a class="internal" href="capitulo-18.html#ej01">Ejercicio 1</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.2</span>
+                        <a class="internal" href="capitulo-18.html#ej02">Ejercicio 2</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.3</span>
+                        <a class="internal" href="capitulo-18.html#ej03">Ejercicio 3</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.4</span>
+                        <a class="internal" href="capitulo-18.html#ej04">Ejercicio 4</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.5</span>
+                        <a class="internal" href="capitulo-18.html#ej05">Ejercicio 5</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.6</span>
+                        <a class="internal" href="capitulo-18.html#ej06">Ejercicio 6</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.7</span>
+                        <a class="internal" href="capitulo-18.html#ej07">Ejercicio 7</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.8</span>
+                        <a class="internal" href="capitulo-18.html#ej08">Ejercicio 8</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.9</span>
+                        <a class="internal" href="capitulo-18.html#ej09">Ejercicio 9</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.10</span>
+                        <a class="internal" href="capitulo-18.html#ej10">Ejercicio 10</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.11</span>
+                        <a class="internal" href="capitulo-18.html#ej11">Ejercicio 11</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.12</span>
+                        <a class="internal" href="capitulo-18.html#ej12">Ejercicio 12</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.13</span>
+                        <a class="internal" href="capitulo-18.html#ej13">Ejercicio 13</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.14</span>
+                        <a class="internal" href="capitulo-18.html#ej14">Ejercicio 14</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.15</span>
+                        <a class="internal" href="capitulo-18.html#ej15">Ejercicio 15</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.16</span>
+                        <a class="internal" href="capitulo-18.html#ej16">Ejercicio 16</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.17</span>
+                        <a class="internal" href="capitulo-18.html#ej17">Ejercicio 17</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.18</span>
+                        <a class="internal" href="capitulo-18.html#ej18">Ejercicio 18</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.19</span>
+                        <a class="internal" href="capitulo-18.html#ej19">Ejercicio 19</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.20</span>
+                        <a class="internal" href="capitulo-18.html#ej20">Ejercicio 20</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.21</span>
+                        <a class="internal" href="capitulo-18.html#ej21">Ejercicio 21</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Selectores | CSS 2.1</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">CSS 2.1</a></h1>
+        <p class="span3">
+                        <a href="capitulo-1.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-3.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="selectores"><span>Capítulo 2</span> Selectores</h1>
+        <p>Para crear diseños web profesionales, es imprescindible conocer y dominar los selectores de CSS. Como se vio en el capítulo anterior, una regla de CSS está formada por una parte llamada "selector" y otra parte llamada "declaración".</p>
+
+<p>La declaración indica "<em>qué hay que hacer</em>" y el selector indica "<em>a quién hay que aplicarlo</em>". Por lo tanto, los selectores son imprescindibles para aplicar de forma correcta los estilos CSS en una página.</p>
+
+<p>A un mismo elemento HTML se le pueden aplicar varias reglas CSS y cada regla CSS puede aplicarse a un número ilimitado de elementos. En otras palabras, una misma regla puede aplicarse sobre varios selectores y un mismo selector se puede utilizar en varias reglas.</p>
+
+<p>El estándar de CSS 2.1 incluye una docena de tipos diferentes de selectores, que permiten seleccionar de forma muy precisa elementos individuales o conjuntos de elementos dentro de una página web.</p>
+
+<p>No obstante, la mayoría de páginas de los sitios web se pueden diseñar utilizando solamente los cinco selectores básicos.</p>
+
+<h2 id="selectores-basicos">2.1 Selectores básicos</h2>
+
+<h3 id="selector-universal">2.1.1 Selector universal</h3>
+
+<p>Se utiliza para seleccionar todos los elementos de la página. El siguiente ejemplo elimina el margen y el relleno de todos los elementos HTML (por ahora no es importante fijarse en la parte de la declaración de la regla CSS):</p>
+
+<div class="code css">
+<pre class="css"><span class="sy0">*</span> <span class="br0">&#123;</span>
+  <span class="kw1">margin</span><span class="sy0">:</span> <span class="nu0">0</span><span class="sy0">;</span>
+  <span class="kw1">padding</span><span class="sy0">:</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>El selector universal se indica mediante un asterisco (<code>*</code>). A pesar de su sencillez, no se utiliza habitualmente, ya que es difícil que un mismo estilo se pueda aplicar a todos los elementos de una página.</p>
+
+<p>No obstante, sí que se suele combinar con otros selectores y además, forma parte de algunos hacks muy utilizados, como se verá más adelante.</p>
+
+<h3 id="selector-de-tipo-o-etiqueta">2.1.2 Selector de tipo o etiqueta</h3>
+
+<p>Selecciona todos los elementos de la página cuya etiqueta HTML coincide con el valor del selector. El siguiente ejemplo selecciona todos los párrafos de la página:</p>
+
+<div class="code css">
+<pre class="css">p <span class="br0">&#123;</span>
+  ...
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Para utilizar este selector, solamente es necesario indicar el nombre de una etiqueta HTML (sin los caracteres <code>&lt;</code> y <code>&gt;</code>) correspondiente a los elementos que se quieren seleccionar.</p>
+
+<p>El siguiente ejemplo aplica diferentes estilos a los titulares y a los párrafos de una página HTML:</p>
+
+<div class="code css">
+<pre class="css">h1 <span class="br0">&#123;</span>
+  <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+h2 <span class="br0">&#123;</span>
+  <span class="kw1">color</span><span class="sy0">:</span> <span class="kw1">blue</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+p <span class="br0">&#123;</span>
+  <span class="kw1">color</span><span class="sy0">:</span> <span class="kw1">black</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Si se quiere aplicar los mismos estilos a dos etiquetas diferentes, se pueden encadenar los selectores. En el siguiente ejemplo, los títulos de sección <code>h1</code>, <code>h2</code> y <code>h3</code> comparten los mismos estilos:</p>
+
+<div class="code css">
+<pre class="css">h1 <span class="br0">&#123;</span>
+  <span class="kw1">color</span><span class="sy0">:</span> <span class="re0">#8A8E27</span><span class="sy0">;</span>
+  <span class="kw1">font-weight</span><span class="sy0">:</span> <span class="kw2">normal</span><span class="sy0">;</span>
+  <span class="kw1">font-family</span><span class="sy0">:</span> Arial<span class="sy0">,</span> Helvetica<span class="sy0">,</span> <span class="kw2">sans-serif</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+h2 <span class="br0">&#123;</span>
+  <span class="kw1">color</span><span class="sy0">:</span> <span class="re0">#8A8E27</span><span class="sy0">;</span>
+  <span class="kw1">font-weight</span><span class="sy0">:</span> <span class="kw2">normal</span><span class="sy0">;</span>
+  <span class="kw1">font-family</span><span class="sy0">:</span> Arial<span class="sy0">,</span> Helvetica<span class="sy0">,</span> <span class="kw2">sans-serif</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+h3 <span class="br0">&#123;</span>
+  <span class="kw1">color</span><span class="sy0">:</span> <span class="re0">#8A8E27</span><span class="sy0">;</span>
+  <span class="kw1">font-weight</span><span class="sy0">:</span> <span class="kw2">normal</span><span class="sy0">;</span>
+  <span class="kw1">font-family</span><span class="sy0">:</span> Arial<span class="sy0">,</span> Helvetica<span class="sy0">,</span> <span class="kw2">sans-serif</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>En este caso, CSS permite agrupar todas las reglas individuales en una sola regla con un selector múltiple. Para ello, se incluyen todos los selectores separados por una coma (<code>,</code>) y el resultado es que la siguiente regla CSS es equivalente a las tres reglas anteriores:</p>
+
+<div class="code css">
+<pre class="css">h1<span class="sy0">,</span> h2<span class="sy0">,</span> h3 <span class="br0">&#123;</span>
+  <span class="kw1">color</span><span class="sy0">:</span> <span class="re0">#8A8E27</span><span class="sy0">;</span>
+  <span class="kw1">font-weight</span><span class="sy0">:</span> <span class="kw2">normal</span><span class="sy0">;</span>
+  <span class="kw1">font-family</span><span class="sy0">:</span> Arial<span class="sy0">,</span> Helvetica<span class="sy0">,</span> <span class="kw2">sans-serif</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>En las hojas de estilo complejas, es habitual agrupar las propiedades comunes de varios elementos en una única regla CSS y posteriormente definir las propiedades específicas de esos mismos elementos. El siguiente ejemplo establece en primer lugar las propiedades comunes de los títulos de sección (color y tipo de letra) y a continuación, establece el tamaño de letra de cada uno de ellos:</p>
+
+<div class="code css">
+<pre class="css">h1<span class="sy0">,</span> h2<span class="sy0">,</span> h3 <span class="br0">&#123;</span>
+  <span class="kw1">color</span><span class="sy0">:</span> <span class="re0">#8A8E27</span><span class="sy0">;</span>
+  <span class="kw1">font-weight</span><span class="sy0">:</span> <span class="kw2">normal</span><span class="sy0">;</span>
+  <span class="kw1">font-family</span><span class="sy0">:</span> Arial<span class="sy0">,</span> Helvetica<span class="sy0">,</span> <span class="kw2">sans-serif</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+h1 <span class="br0">&#123;</span> <span class="kw1">font-size</span><span class="sy0">:</span> <span class="re3">2em</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+h2 <span class="br0">&#123;</span> <span class="kw1">font-size</span><span class="sy0">:</span> <span class="re3">1.5em</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+h3 <span class="br0">&#123;</span> <span class="kw1">font-size</span><span class="sy0">:</span> <span class="re3">1.2em</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<h3 id="selector-descendente">2.1.3 Selector descendente</h3>
+
+<p>Selecciona los elementos que se encuentran dentro de otros elementos. Un elemento es descendiente de otro cuando se encuentra entre las etiquetas de apertura y de cierre del otro elemento.</p>
+
+<p>El selector del siguiente ejemplo selecciona todos los elementos <code>&lt;span&gt;</code> de la página que se encuentren dentro de un elemento <code>&lt;p&gt;</code>:</p>
+
+<div class="code css">
+<pre class="css">p span <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Si el código HTML de la página es el siguiente:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>
+  ...
+  <span class="sc2">&lt;<span class="kw2">span</span>&gt;</span>texto1<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">span</span>&gt;</span>
+  ...
+  <span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span>&gt;</span>...<span class="sc2">&lt;<span class="kw2">span</span>&gt;</span>texto2<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">span</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+  ...
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<p>El selector <code>p span</code> selecciona tanto <code>texto1</code> como <code>texto2</code>. El motivo es que en el selector descendente, un elemento no tiene que ser descendiente directo del otro. La única condición es que un elemento debe estar dentro de otro elemento, sin importar el nivel de profundidad en el que se encuentre.</p>
+
+<p>Al resto de elementos <code>&lt;span&gt;</code> de la página que no están dentro de un elemento <code>&lt;p&gt;</code>, no se les aplica la regla CSS anterior.</p>
+
+<p>Los selectores descendentes permiten aumentar la precisión del selector de tipo o etiqueta. Así, utilizando el selector descendente es posible aplicar diferentes estilos a los elementos del mismo tipo. El siguiente ejemplo amplía el anterior y muestra de color azul todo el texto de los <code>&lt;span&gt;</code> contenidos dentro de un <code>&lt;h1&gt;</code>:</p>
+
+<div class="code css">
+<pre class="css">p span  <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span>  <span class="br0">&#125;</span>
+h1 span <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw1">blue</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Con las reglas CSS anteriores:</p>
+
+<ul>
+<li>Los elementos <code>&lt;span&gt;</code> que se encuentran dentro de un elemento <code>&lt;p&gt;</code> se muestran de color rojo.</li>
+<li>Los elementos <code>&lt;span&gt;</code> que se encuentran dentro de un elemento <code>&lt;h1&gt;</code> se muestran de color azul.</li>
+<li>El resto de elementos <span> de la página, se muestran con el color por defecto aplicado por el navegador.</li>
+</ul>
+
+<p>La sintaxis formal del selector descendente se muestra a continuación:</p>
+
+<div class="code code">
+<pre class="code">selector1 selector2 selector3 ... selectorN</pre>
+</div>
+
+<p>Los selectores descendentes siempre están formados por dos o más selectores separados entre sí por espacios en blanco. El último selector indica el elemento sobre el que se aplican los estilos y todos los selectores anteriores indican el lugar en el que se debe encontrar ese elemento.</p>
+
+<p>En el siguiente ejemplo, el selector descendente se compone de cuatro selectores:</p>
+
+<div class="code css">
+<pre class="css">p a span em <span class="br0">&#123;</span> <span class="kw1">text-decoration</span><span class="sy0">:</span> <span class="kw2">underline</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Los estilos de la regla anterior se aplican a los elementos de tipo <code>&lt;em&gt;</code> que se encuentren dentro de elementos de tipo <code>&lt;span&gt;</code>, que a su vez se encuentren dentro de elementos de tipo <code>&lt;a&gt;</code> que se encuentren dentro de elementos de tipo <code>&lt;p&gt;</code>.</p>
+
+<p>No debe confundirse el selector descendente con la combinación de selectores:</p>
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* El estilo se aplica a todos los elementos &quot;p&quot;, &quot;a&quot;, &quot;span&quot; y &quot;em&quot; */</span>
+p<span class="sy0">,</span> a<span class="sy0">,</span> span<span class="sy0">,</span> em <span class="br0">&#123;</span> <span class="kw1">text-decoration</span><span class="sy0">:</span> <span class="kw2">underline</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* El estilo se aplica solo a los elementos &quot;em&quot; que se
+   encuentran dentro de &quot;p a span&quot; */</span>
+p a span em <span class="br0">&#123;</span> <span class="kw1">text-decoration</span><span class="sy0">:</span> <span class="kw2">underline</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Se puede restringir el alcance del selector descendente combinándolo con el selector universal. El siguiente ejemplo, muestra los dos enlaces de color rojo:</p>
+
+<div class="code css">
+<pre class="css">p a <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">p</span>&gt;&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enlace<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span>&gt;&lt;<span class="kw2">span</span>&gt;&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enlace<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">span</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<p>Sin embargo, en el siguiente ejemplo solamente el segundo enlace se muestra de color rojo:</p>
+
+<div class="code css">
+<pre class="css">p <span class="sy0">*</span> a <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">p</span>&gt;&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enlace<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span>&gt;&lt;<span class="kw2">span</span>&gt;&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enlace<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">span</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<p>La razón es que el selector <code>p * a</code> se interpreta como <em>todos los elementos de tipo <code>&lt;a&gt;</code> que se encuentren dentro de cualquier elemento que, a su vez, se encuentre dentro de un elemento de tipo <code>&lt;p&gt;</code></em>. Como el primer elemento <code>&lt;a&gt;</code> se encuentra directamente bajo un elemento <code>&lt;p&gt;</code>, no se cumple la condición del selector <code>p * a</code>.</p>
+
+<h3 id="selector-de-clase">2.1.4 Selector de clase</h3>
+
+<p>Si se considera el siguiente código HTML de ejemplo:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Lorem ipsum dolor sit amet...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Nunc sed lacus et est adipiscing accumsan...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Class aptent taciti sociosqu ad litora...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span></pre>
+</div>
+
+<p>¿Cómo se pueden aplicar estilos CSS sólo al primer párrafo? El selector universal (<code>*</code>) no se puede utilizar porque selecciona todos los elementos de la página. El selector de tipo o etiqueta (<code>p</code>) tampoco se puede utilizar porque seleccionaría todos los párrafos. Por último, el selector descendente (<code>body p</code>) tampoco se puede utilizar porque todos los párrafos se encuentran en el mismo sitio.</p>
+
+<p>Una de las soluciones más sencillas para aplicar estilos a un solo elemento de la página consiste en utilizar el atributo <code>class</code> de HTML sobre ese elemento para indicar directamente la regla CSS que se le debe aplicar:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;destacado&quot;</span>&gt;</span>Lorem ipsum dolor sit amet...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Nunc sed lacus et est adipiscing accumsan...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Class aptent taciti sociosqu ad litora...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span></pre>
+</div>
+
+<p>A continuación, se crea en el archivo CSS una nueva regla llamada <code>destacado</code> con todos los estilos que se van a aplicar al elemento. Para que el navegador no confunda este selector con los otros tipos de selectores, se prefija el valor del atributo <code>class</code> con un punto (<code>.</code>) tal y como muestra el siguiente ejemplo:</p>
+
+<div class="code css">
+<pre class="css"><span class="re1">.destacado</span> <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>El selector <code>.destacado</code> se interpreta como "<em>cualquier elemento de la página cuyo atributo class sea igual a destacado</em>", por lo que solamente el primer párrafo cumple esa condición.</p>
+
+<p>Este tipo de selectores se llaman selectores de clase y son los más utilizados junto con los selectores de ID que se verán a continuación. La principal característica de este selector es que en una misma página HTML varios elementos diferentes pueden utilizar el mismo valor en el atributo <code>class</code>:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;destacado&quot;</span>&gt;</span>Lorem ipsum dolor sit amet...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Nunc sed lacus et <span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;destacado&quot;</span>&gt;</span>est adipiscing<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span> accumsan...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Class aptent taciti <span class="sc2">&lt;<span class="kw2">em</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;destacado&quot;</span>&gt;</span>sociosqu ad<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">em</span>&gt;</span> litora...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span></pre>
+</div>
+
+<p>Los selectores de clase son imprescindibles para diseñar páginas web complejas, ya que permiten disponer de una precisión total al seleccionar los elementos. Además, estos selectores permiten reutilizar los mismos estilos para varios elementos diferentes.</p>
+
+<p>A continuación se muestra otro ejemplo de selectores de clase:</p>
+
+<div class="code css">
+<pre class="css"><span class="re1">.aviso</span> <span class="br0">&#123;</span>
+  <span class="kw1">padding</span><span class="sy0">:</span> <span class="re3">0.5em</span><span class="sy0">;</span>
+  <span class="kw1">border</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="kw2">solid</span> <span class="re0">#98be10</span><span class="sy0">;</span>
+  <span class="kw1">background</span><span class="sy0">:</span> <span class="re0">#f6feda</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re1">.error</span> <span class="br0">&#123;</span>
+  <span class="kw1">color</span><span class="sy0">:</span> <span class="re0">#930</span><span class="sy0">;</span>
+  <span class="kw1">font-weight</span><span class="sy0">:</span> <span class="kw2">bold</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">span</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;error&quot;</span>&gt;</span>...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">span</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;aviso&quot;</span>&gt;</span>...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre>
+</div>
+
+<p>El elemento <code>&lt;span&gt;</code> tiene un atributo <code>class="error"</code>, por lo que se le aplican las reglas CSS indicadas por el selector <code>.error</code>. Por su parte, el elemento <code>&lt;div&gt;</code> tiene un atributo <code>class="aviso"</code>, por lo que su estilo es el que definen las reglas CSS del selector <code>.aviso</code>.</p>
+
+<p>En ocasiones, es necesario restringir el alcance del selector de clase. Si se considera de nuevo el ejemplo anterior:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;destacado&quot;</span>&gt;</span>Lorem ipsum dolor sit amet...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Nunc sed lacus et <span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;destacado&quot;</span>&gt;</span>est adipiscing<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span> accumsan...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Class aptent taciti <span class="sc2">&lt;<span class="kw2">em</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;destacado&quot;</span>&gt;</span>sociosqu ad<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">em</span>&gt;</span> litora...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span></pre>
+</div>
+
+<p>¿Cómo es posible aplicar estilos solamente al párrafo cuyo atributo <code>class</code> sea igual a <code>destacado</code>? Combinando el selector de tipo y el selector de clase, se obtiene un selector mucho más específico:</p>
+
+<div class="code css">
+<pre class="css">p<span class="re1">.destacado</span> <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>El selector <code>p.destacado</code> se interpreta como "<em>aquellos elementos de tipo <code>&lt;p&gt;</code> que dispongan de un atributo <code>class</code> con valor <code>destacado</code></em>". De la misma forma, el selector <code>a.destacado</code> solamente selecciona los enlaces cuyo atributo <code>class</code> sea igual a <code>destacado</code>.</p>
+
+<p>De lo anterior se deduce que el atributo <code>.destacado</code> es equivalente a <code>*.destacado</code>, por lo que todos los diseñadores obvian el símbolo <code>*</code> al escribir un selector de clase normal.</p>
+
+<p>No debe confundirse el selector de clase con los selectores anteriores:</p>
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* Todos los elementos de tipo &quot;p&quot; con atributo class=&quot;aviso&quot; */</span>
+p<span class="re1">.aviso</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Todos los elementos con atributo class=&quot;aviso&quot; que estén dentro
+   de cualquier elemento de tipo &quot;p&quot; */</span>
+p <span class="re1">.aviso</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Todos los elementos &quot;p&quot; de la página y todos los elementos con
+   atributo class=&quot;aviso&quot; de la página */</span>
+p<span class="sy0">,</span> <span class="re1">.aviso</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Por último, es posible aplicar los estilos de varias clases CSS sobre un mismo elemento. La sintaxis es similar, pero los diferentes valores del atributo class se separan con espacios en blanco. En el siguiente ejemplo:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;especial destacado error&quot;</span>&gt;</span>Párrafo de texto...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<p>Al párrafo anterior se le aplican los estilos definidos en las reglas <code>.especial</code>, <code>.destacado</code> y <code>.error</code>, por lo que en el siguiente ejemplo, el texto del párrafo se vería de color rojo, en negrita y con un tamaño de letra de <code>15 píxel</code>:</p>
+
+<div class="code css">
+<pre class="css"><span class="re1">.error</span> <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+<span class="re1">.destacado</span> <span class="br0">&#123;</span> <span class="kw1">font-size</span><span class="sy0">:</span> <span class="re3">15px</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+<span class="re1">.especial</span>  <span class="br0">&#123;</span> <span class="kw1">font-weight</span><span class="sy0">:</span> <span class="kw2">bold</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;especial destacado error&quot;</span>&gt;</span>Párrafo de texto...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<p>Si un elemento dispone de un atributo class con más de un valor, es posible utilizar un selector más avanzado:</p>
+
+<div class="code css">
+<pre class="css"><span class="re1">.error</span> <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+<span class="re1">.error</span><span class="re1">.destacado</span> <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw1">blue</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+<span class="re1">.destacado</span> <span class="br0">&#123;</span> <span class="kw1">font-size</span><span class="sy0">:</span> <span class="re3">15px</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+<span class="re1">.especial</span>  <span class="br0">&#123;</span> <span class="kw1">font-weight</span><span class="sy0">:</span> <span class="kw2">bold</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;especial destacado error&quot;</span>&gt;</span>Párrafo de texto...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<p>En el ejemplo anterior, el color de la letra del texto es azul y no rojo. El motivo es que se ha utilizado un selector de clase múltiple <code>.error.destacado</code>, que se interpreta como "<em>aquellos elementos de la página que dispongan de un atributo class con al menos los valores <code>error</code> y <code>destacado</code></em>".</p>
+
+<h3 id="selectores-de-id">2.1.5 Selectores de ID</h3>
+
+<p>En ocasiones, es necesario aplicar estilos CSS a un único elemento de la página. Aunque puede utilizarse un selector de clase para aplicar estilos a un único elemento, existe otro selector más eficiente en este caso.</p>
+
+<p>El selector de ID permite seleccionar un elemento de la página a través del valor de su atributo id. Este tipo de selectores sólo seleccionan un elemento de la página porque el valor del atributo id no se puede repetir en dos elementos diferentes de una misma página.</p>
+
+<p>La sintaxis de los selectores de ID es muy parecida a la de los selectores de clase, salvo que se utiliza el símbolo de la almohadilla (<code>#</code>) en vez del punto (<code>.</code>) como prefijo del nombre de la regla CSS:</p>
+
+<div class="code css">
+<pre class="css"><span class="re0">#destacado</span> <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Primer párrafo<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;destacado&quot;</span>&gt;</span>Segundo párrafo<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Tercer párrafo<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<p>En el ejemplo anterior, el selector <code>#destacado</code> solamente selecciona el segundo párrafo (cuyo atributo id es igual a destacado).</p>
+
+<p>La principal diferencia entre este tipo de selector y el selector de clase tiene que ver con HTML y no con CSS. Como se sabe, en una misma página, el valor del atributo id debe ser único, de forma que dos elementos diferentes no pueden tener el mismo valor de id. Sin embargo, el atributo class no es obligatorio que sea único, de forma que muchos elementos HTML diferentes pueden compartir el mismo valor para su atributo class.</p>
+
+<p>De esta forma, la recomendación general es la de utilizar el selector de ID cuando se quiere aplicar un estilo a un solo elemento específico de la página y utilizar el selector de clase cuando se quiere aplicar un estilo a varios elementos diferentes de la página HTML.</p>
+
+<p>Al igual que los selectores de clase, en este caso también se puede restringir el alcance del selector mediante la combinación con otros selectores. El siguiente ejemplo aplica la regla CSS solamente al elemento de tipo <code>&lt;p&gt;</code> que tenga un atributo id igual al indicado:</p>
+
+<div class="code css">
+<pre class="css">p<span class="re0">#aviso</span> <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw1">blue</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>A primera vista, restringir el alcance de un selector de ID puede parecer absurdo. En realidad, un selector de tipo <code>p#aviso</code> sólo tiene sentido cuando el archivo CSS se aplica sobre muchas páginas HTML diferentes.</p>
+
+<p>En este caso, algunas páginas pueden disponer de elementos con un atributo id igual a aviso y que no sean párrafos, por lo que la regla anterior no se aplica sobre esos elementos.</p>
+
+<p>No debe confundirse el selector de ID con los selectores anteriores:</p>
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* Todos los elementos de tipo &quot;p&quot; con atributo id=&quot;aviso&quot; */</span>
+p<span class="re0">#aviso</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Todos los elementos con atributo id=&quot;aviso&quot; que estén dentro
+    de cualquier elemento de tipo &quot;p&quot; */</span>
+p <span class="re0">#aviso</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Todos los elementos &quot;p&quot; de la página y todos los elementos con
+    atributo id=&quot;aviso&quot; de la página */</span>
+p<span class="sy0">,</span> <span class="re0">#aviso</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span></pre>
+</div>
+
+<h3 id="combinacion-de-selectores-basicos">2.1.6 Combinación de selectores básicos</h3>
+
+<p>CSS permite la combinación de uno o más tipos de selectores para restringir el alcance de las reglas CSS. A continuación se muestran algunos ejemplos habituales de combinación de selectores.</p>
+
+<div class="code css">
+<pre class="css"><span class="re1">.aviso</span> <span class="re1">.especial</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span></pre>
+</div>
+
+<p>El anterior selector solamente selecciona aquellos elementos con un <code>class="especial"</code> que se encuentren dentro de cualquier elemento con un <code>class="aviso"</code>.</p>
+
+<p>Si se modifica el anterior selector:</p>
+
+<div class="code css">
+<pre class="css">div<span class="re1">.aviso</span> span<span class="re1">.especial</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Ahora, el selector solamente selecciona aquellos elementos de tipo <code>&lt;span&gt;</code> con un atributo <code>class="especial"</code> que estén dentro de cualquier elemento de tipo <code>&lt;div&gt;</code> que tenga un atributo <code>class="aviso"</code>.</p>
+
+<p>La combinación de selectores puede llegar a ser todo lo compleja que sea necesario:</p>
+
+<div class="code css">
+<pre class="css">ul<span class="re0">#menuPrincipal</span> li<span class="re1">.destacado</span> a<span class="re0">#inicio</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span></pre>
+</div>
+
+<p>El anterior selector hace referencia al enlace con un atributo id igual a inicio que se encuentra dentro de un elemento de tipo <code>&lt;li&gt;</code> con un atributo class igual a destacado, que forma parte de una lista <code>&lt;ul&gt;</code> con un atributo id igual a <code>menuPrincipal</code>.</p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 1</p>
+</div>
+
+<p><a class="internal" href="capitulo-14.html#ej01">Ver enunciado</a></p>
+
+<h2 id="selectores-avanzados">2.2 Selectores avanzados</h2>
+
+<p>Utilizando solamente los selectores básicos de la sección anterior, es posible diseñar prácticamente cualquier página web. No obstante, CSS define otros selectores más avanzados que permiten simplificar las hojas de estilos.</p>
+
+<p>Desafortunadamente, el navegador Internet Explorer 6 y sus versiones anteriores no soportaban este tipo de selectores avanzados, por lo que su uso no era común hasta hace poco tiempo. Si quieres consultar el soporte de los selectores en los distintos navegadores, puedes utilizar las siguientes referencias:</p>
+
+<ul>
+<li><a href="http://dev.l-c-n.com/CSS3-selectors/browser-support.php">Lista completa de los selectores que soporta cada versión de cada navegador</a></li>
+<li><a href="http://www.css3.info/selectors-test/">Test online en el que puedes comprobar los selectores que soporta el navegador con el que realizas el test</a></li>
+</ul>
+
+<h3 id="selector-de-hijos">2.2.1 Selector de hijos</h3>
+
+<p>Se trata de un selector similar al selector descendente, pero muy diferente en su funcionamiento. Se utiliza para seleccionar un elemento que es hijo directo de otro elemento y se indica mediante el "signo de mayor que" (<code>&gt;</code>):</p>
+
+<div class="code css">
+<pre class="css">p <span class="sy0">&gt;</span> span <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw1">blue</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">p</span>&gt;&lt;<span class="kw2">span</span>&gt;</span>Texto1<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">span</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span>&gt;&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;&lt;<span class="kw2">span</span>&gt;</span>Texto2<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">span</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<p>En el ejemplo anterior, el selector p > span se interpreta como "<em>cualquier elemento <code>&lt;span&gt;</code> que sea hijo directo de un elemento <code>&lt;p&gt;</code></em>", por lo que el primer elemento <code>&lt;span&gt;</code> cumple la condición del selector. Sin embargo, el segundo elemento <code>&lt;span&gt;</code> no la cumple porque es descendiente pero no es hijo directo de un elemento <code>&lt;p&gt;</code>.</p>
+
+<p>El siguiente ejemplo muestra las diferencias entre el selector descendente y el selector de hijos:</p>
+
+<div class="code css">
+<pre class="css">p a <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+p <span class="sy0">&gt;</span> a <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">p</span>&gt;&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enlace1<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span>&gt;&lt;<span class="kw2">span</span>&gt;&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enlace2<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">span</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<p>El primer selector es de tipo descendente y por tanto se aplica a todos los elementos <code>&lt;a&gt;</code> que se encuentran dentro de elementos <code>&lt;p&gt;</code>. En este caso, los estilos de este selector se aplican a los dos enlaces.</p>
+
+<p>Por otra parte, el selector de hijos obliga a que el elemento <code>&lt;a&gt;</code> sea hijo directo de un elemento <code>&lt;p&gt;</code>. Por lo tanto, los estilos del selector <code>p &gt; a</code> no se aplican al segundo enlace del ejemplo anterior.</p>
+
+<h3 id="selector-adyacente">2.2.2 Selector adyacente</h3>
+
+<p>El selector adyacente se emplea para seleccionar elementos que en el código HTML de la página se encuentran justo a continuación de otros elementos. Su sintaxis emplea el signo <code>+</code> para separar los dos elementos:</p>
+
+<div class="code css">
+<pre class="css">elemento1 <span class="sy0">+</span> elemento2 <span class="br0">&#123;</span> ... <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Si se considera el siguiente código HTML:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">h1</span>&gt;</span>Titulo1<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h1</span>&gt;</span>
+&nbsp;
+  <span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>Subtítulo<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+  ...
+&nbsp;
+  <span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>Otro subtítulo<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+  ...
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span></pre>
+</div>
+
+<p>La página anterior dispone de dos elementos <code>&lt;h2&gt;</code>, pero sólo uno de ellos se encuentra inmediatamente después del elemento <code>&lt;h1&gt;</code>. Si se quiere aplicar diferentes colores en función de esta circunstancia, el selector adyacente es el más adecuado:</p>
+
+<div class="code css">
+<pre class="css">h2 <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">green</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+h1 <span class="sy0">+</span> h2 <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Las reglas CSS anteriores hacen que todos los <code>&lt;h2&gt;</code> de la página se vean de color verde, salvo aquellos <code>&lt;h2&gt;</code> que se encuentran inmediatamente después de cualquier elemento <code>&lt;h1&gt;</code> y que se muestran de color rojo.</p>
+
+<p>Técnicamente, los elementos que forman el selector adyacente deben cumplir las dos siguientes condiciones:</p>
+
+<ul>
+<li><code>elemento1</code> y <code>elemento2</code> deben ser <em>elementos hermanos</em>, por lo que su elemento padre debe ser el mismo.</li>
+<li><code>elemento2</code> debe aparecer inmediatamente después de <code>elemento1</code> en el código HTML de la página.</li>
+</ul>
+
+<p>El siguiente ejemplo es muy útil para los textos que se muestran como libros:</p>
+
+<div class="code css">
+<pre class="css">p <span class="sy0">+</span> p <span class="br0">&#123;</span> <span class="kw1">text-indent</span><span class="sy0">:</span> <span class="re3">1.5em</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>En muchos libros, suele ser habitual que la primera línea de todos los párrafos esté indentada, salvo la primera línea del primer párrafo. Con el selector <code>p + p</code>, se seleccionan todos los párrafos de la página que estén precedidos por otro párrafo, por lo que no se aplica al primer párrafo de la página.</p>
+
+<h3 id="selector-de-atributos">2.2.3 Selector de atributos</h3>
+
+<p>El último tipo de selectores avanzados lo forman los selectores de atributos, que permiten seleccionar elementos HTML en función de sus atributos y/o valores de esos atributos.</p>
+
+<p>Los cuatro tipos de selectores de atributos son:</p>
+
+<ul>
+<li><code>[nombre_atributo]</code>, selecciona los elementos que tienen establecido el atributo llamado <code>nombre_atributo</code>, independientemente de su valor.</li>
+<li><code>[nombre_atributo=valor]</code>, selecciona los elementos que tienen establecido un atributo llamado <code>nombre_atributo</code> con un valor igual a <code>valor</code>.</li>
+<li><code>[nombre_atributo~=valor]</code>, selecciona los elementos que tienen establecido un atributo llamado <code>nombre_atributo</code> y al menos uno de los valores del atributo es <code>valor</code>.</li>
+<li><code>[nombre_atributo|=valor]</code>, selecciona los elementos que tienen establecido un atributo llamado <code>nombre_atributo</code> y cuyo valor es una serie de palabras separadas con guiones, pero que comienza con valor. Este tipo de selector sólo es útil para los atributos de tipo <code>lang</code> que indican el idioma del contenido del elemento.</li>
+</ul>
+
+<p>A continuación se muestran algunos ejemplos de estos tipos de selectores:</p>
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* Se muestran de color azul todos los enlaces que tengan 
+   un atributo &quot;class&quot;, independientemente de su valor */</span>
+a<span class="br0">&#91;</span>class<span class="br0">&#93;</span> <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw1">blue</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Se muestran de color azul todos los enlaces que tengan 
+   un atributo &quot;class&quot; con el valor &quot;externo&quot; */</span>
+a<span class="br0">&#91;</span>class<span class="sy0">=</span><span class="st0">&quot;externo&quot;</span><span class="br0">&#93;</span> <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw1">blue</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Se muestran de color azul todos los enlaces que apunten 
+   al sitio &quot;http://www.ejemplo.com&quot; */</span>
+a<span class="br0">&#91;</span>href<span class="sy0">=</span><span class="st0">&quot;http://www.ejemplo.com&quot;</span><span class="br0">&#93;</span> <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw1">blue</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Se muestran de color azul todos los enlaces que tengan 
+   un atributo &quot;class&quot; en el que al menos uno de sus valores
+   sea &quot;externo&quot; */</span>
+a<span class="br0">&#91;</span>class~<span class="sy0">=</span><span class="st0">&quot;externo&quot;</span><span class="br0">&#93;</span> <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw1">blue</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Selecciona todos los elementos de la página cuyo atributo
+   &quot;lang&quot; sea igual a &quot;en&quot;, es decir, todos los elementos en inglés */</span>
+<span class="sy0">*</span><span class="br0">&#91;</span>lang<span class="sy0">=</span>en<span class="br0">&#93;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Selecciona todos los elementos de la página cuyo atributo
+   &quot;lang&quot; empiece por &quot;es&quot;, es decir, &quot;es&quot;, &quot;es-ES&quot;, &quot;es-AR&quot;, etc. */</span>
+<span class="sy0">*</span><span class="br0">&#91;</span>lang|<span class="sy0">=</span><span class="st0">&quot;es&quot;</span><span class="br0">&#93;</span> <span class="br0">&#123;</span> <span class="kw1">color</span> <span class="sy0">:</span> <span class="kw2">red</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="agrupacion-de-reglas">2.3 Agrupación de reglas</h2>
+
+<p>Cuando se crean archivos CSS complejos con decenas o cientos de reglas, es habitual que los estilos que se aplican a un mismo selector se definan en diferentes reglas:</p>
+
+<div class="code css">
+<pre class="css">h1 <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+...
+h1 <span class="br0">&#123;</span> <span class="kw1">font-size</span><span class="sy0">:</span> <span class="re3">2em</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+...
+h1 <span class="br0">&#123;</span> <span class="kw1">font-family</span><span class="sy0">:</span> Verdana<span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Las tres reglas anteriores establecen el valor de tres propiedades diferentes de los elementos <code>&lt;h1&gt;</code>. Antes de que el navegador muestre la página, procesa todas las reglas CSS de la página para tener en cuenta todos los estilos definidos para cada elemento.</p>
+
+<p>Cuando el selector de dos o más reglas CSS es idéntico, se pueden agrupar las declaraciones de las reglas para hacer las hojas de estilos más eficientes:</p>
+
+<div class="code css">
+<pre class="css">h1 <span class="br0">&#123;</span>
+  <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span>
+  <span class="kw1">font-size</span><span class="sy0">:</span> <span class="re3">2em</span><span class="sy0">;</span>
+  <span class="kw1">font-family</span><span class="sy0">:</span> Verdana<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>El ejemplo anterior tiene el mismo efecto que las tres reglas anteriores, pero es más eficiente y es más fácil de modificar y mantener por parte de los diseñadores. Como CSS ignora los espacios en blanco y las nuevas líneas, también se pueden agrupar las reglas de la siguiente forma:</p>
+
+<div class="code css">
+<pre class="css">h1 <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span> <span class="kw1">font-size</span><span class="sy0">:</span> <span class="re3">2em</span><span class="sy0">;</span> <span class="kw1">font-family</span><span class="sy0">:</span> Verdana<span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Si se quiere reducir al máximo el tamaño del archivo CSS para mejorar ligeramente el tiempo de carga de la página web, también es posible indicar la regla anterior de la siguiente forma:</p>
+
+<div class="code css">
+<pre class="css">h1 <span class="br0">&#123;</span><span class="kw1">color</span><span class="sy0">:</span><span class="kw2">red</span><span class="sy0">;</span><span class="kw1">font-size</span><span class="sy0">:</span><span class="re3">2em</span><span class="sy0">;</span><span class="kw1">font-family</span><span class="sy0">:</span>Verdana<span class="sy0">;</span><span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="herencia">2.4 Herencia</h2>
+
+<p>Una de las características principales de CSS es la herencia de los estilos definidos para los elementos. Cuando se establece el valor de una propiedad CSS en un elemento, sus elementos descendientes heredan de forma automática el valor de esa propiedad. Si se considera el siguiente ejemplo:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc0">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span>
+<span class="sc0">  &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</span>
+<span class="sc2">&lt;<span class="kw2">html</span> xmlns<span class="sy0">=</span><span class="st0">&quot;http://www.w3.org/1999/xhtml&quot;</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">meta</span> <span class="kw3">http-equiv</span><span class="sy0">=</span><span class="st0">&quot;Content-Type&quot;</span> <span class="kw3">content</span><span class="sy0">=</span><span class="st0">&quot;text/html; charset=UTF-8&quot;</span> <span class="sy0">/</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Ejemplo de herencia de estilos<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">style</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text/css&quot;</span>&gt;</span>
+    body { color: blue; }
+  <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">style</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+&nbsp;
+<span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">h1</span>&gt;</span>Titular de la página<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h1</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Un párrafo de texto no muy largo.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>En el ejemplo anterior, el selector body solamente establece el color de la letra para el elemento <code>&lt;body&gt;</code>. No obstante, la propiedad color es una de las que se heredan de forma automática, por lo que todos los elementos descendientes de <code>&lt;body&gt;</code> muestran ese mismo color de letra. Por tanto, establecer el color de la letra en el elemento <code>&lt;body&gt;</code> de la página implica cambiar el color de letra de todos los elementos de la página.</p>
+
+<p>Aunque la herencia de estilos se aplica automáticamente, se puede anular su efecto estableciendo de forma explícita otro valor para la propiedad que se hereda, como se muestra en el siguiente ejemplo:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc0">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span>
+<span class="sc0">  &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</span>
+<span class="sc2">&lt;<span class="kw2">html</span> xmlns<span class="sy0">=</span><span class="st0">&quot;http://www.w3.org/1999/xhtml&quot;</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">meta</span> <span class="kw3">http-equiv</span><span class="sy0">=</span><span class="st0">&quot;Content-Type&quot;</span> <span class="kw3">content</span><span class="sy0">=</span><span class="st0">&quot;text/html; charset=UTF-8&quot;</span> <span class="sy0">/</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Ejemplo de herencia de estilos<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">style</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text/css&quot;</span>&gt;</span>
+    body { font-family: Arial; color: black; }
+    h1 { font-family: Verdana; }
+    p { color: red; }
+  <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">style</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+&nbsp;
+<span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">h1</span>&gt;</span>Titular de la página<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h1</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Un párrafo de texto no muy largo.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>En el ejemplo anterior, se establece en primer lugar el color y tipo de letra del elemento <code>&lt;body&gt;</code>, por lo que todos los elementos de la página se mostrarían con ese mismo color y tipo de letra. No obstante, las otras reglas CSS modifican alguno de los estilos heredados.</p>
+
+<p>De esta forma, los elementos <code>&lt;h1&gt;</code> de la página se muestran con el tipo de letra Verdana establecido por el selector h1 y se muestran de color negro que es el valor heredado del elemento <code>&lt;body&gt;</code>. Igualmente, los elementos <code>&lt;p&gt;</code> de la página se muestran del color rojo establecido por el selector p y con un tipo de letra Arial heredado del elemento <code>&lt;body&gt;</code>.</p>
+
+<p>La mayoría de propiedades CSS aplican la herencia de estilos de forma automática. Además, para aquellas propiedades que no se heredan automáticamente, CSS incluye un mecanismo para forzar a que se hereden sus valores, tal y como se verá más adelante.</p>
+
+<p>Por último, aunque la herencia automática de estilos puede parecer complicada, simplifica en gran medida la creación de hojas de estilos complejas. Como se ha visto en los ejemplos anteriores, si se quiere establecer por ejemplo la tipografía base de la página, simplemente se debe establecer en el elemento <code>&lt;body&gt;</code> de la página y el resto de elementos la heredarán de forma automática.</p>
+
+<h2 id="colisiones-de-estilos">2.5 Colisiones de estilos</h2>
+
+<p>En las hojas de estilos complejas, es habitual que varias reglas CSS se apliquen a un mismo elemento HTML. El problema de estas reglas múltiples es que se pueden dar colisiones como la del siguiente ejemplo:</p>
+
+<div class="code css">
+<pre class="css">p <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+p <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw1">blue</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+&nbsp;
+&lt;p<span class="sy0">&gt;</span>...&lt;/p<span class="sy0">&gt;</span></pre>
+</div>
+
+<p>¿De qué color se muestra el párrafo anterior? CSS tiene un mecanismo de resolución de colisiones muy complejo y que tiene en cuenta el tipo de hoja de estilo que se trate (de navegador, de usuario o de diseñador), la importancia de cada regla y lo específico que sea el selector.</p>
+
+<p>El método seguido por CSS para resolver las colisiones de estilos se muestra a continuación:</p>
+
+<ul>
+<li>Determinar todas las declaraciones que se aplican al elemento para el medio CSS seleccionado.</li>
+<li>Ordenar las declaraciones según su origen (CSS de navegador, de usuario o de diseñador) y su prioridad (palabra clave <code>!important</code>).</li>
+<li>Ordenar las declaraciones según lo específico que sea el selector. Cuanto más genérico es un selector, menos importancia tienen sus declaraciones.</li>
+<li>Si después de aplicar las normas anteriores existen dos o más reglas con la misma prioridad, se aplica la que se indicó en último lugar.</li>
+</ul>
+
+<p>Hasta que no se expliquen más adelante los conceptos de tipo de hoja de estilo y la prioridad, el mecanismo simplificado que se puede aplicar es el siguiente:</p>
+
+<ul>
+<li>Cuanto más específico sea un selector, más importancia tiene su regla asociada.</li>
+<li>A igual <em>especificidad</em>, se considera la última regla indicada.</li>
+</ul>
+
+<p>Como en el ejemplo anterior los dos selectores son idénticos, las dos reglas tienen la misma prioridad y prevalece la que se indicó en último lugar, por lo que el párrafo se muestra de color azul.</p>
+
+<p>En el siguiente ejemplo, la regla CSS que prevalece se decide por lo específico que es cada selector:</p>
+
+<div class="code css">
+<pre class="css">p <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+p<span class="re0">#especial</span> <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">green</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+<span class="sy0">*</span> <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw1">blue</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+&nbsp;
+&lt;p id<span class="sy0">=</span><span class="st0">&quot;especial&quot;</span><span class="sy0">&gt;</span>...&lt;/p<span class="sy0">&gt;</span></pre>
+</div>
+
+<p>Al elemento <code>&lt;p&gt;</code> se le aplican las tres declaraciones. Como su origen y su importancia es la misma, decide la especificidad del selector. El selector <code>*</code> es el menos específico, ya que se refiere a "<em>todos los elementos de la página</em>". El selector <code>p</code> es poco específico porque se refiere a "<em>todos los párrafos de la página</em>". Por último, el selector <code>p#especial</code> sólo hace referencia a "<em>el párrafo de la página cuyo atributo <code>id</code> sea igual a especial</em>". Como el selector <code>p#especial</code> es el más específico, su declaración es la que se tiene en cuenta y por tanto el párrafo se muestra de color verde.</p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 2</p>
+</div>
+
+<p><a class="internal" href="capitulo-14.html#ej02">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-2.html#selectores">Selectores</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.1</span>
+                        <a class="internal" href="capitulo-2.html#selectores-basicos">Selectores básicos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.2</span>
+                        <a class="internal" href="capitulo-2.html#selectores-avanzados">Selectores avanzados</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.3</span>
+                        <a class="internal" href="capitulo-2.html#agrupacion-de-reglas">Agrupación de reglas</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.4</span>
+                        <a class="internal" href="capitulo-2.html#herencia">Herencia</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.5</span>
+                        <a class="internal" href="capitulo-2.html#colisiones-de-estilos">Colisiones de estilos</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="28/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Geolocalización | HTML5</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">HTML5</a></h1>
+        <p class="span3">
+                        <a href="capitulo-10.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-12.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="geolocalizacion"><span>Capítulo 11</span> Geolocalización</h1>
+        <p>El uso del API de geolocalización es extremadamente sencillo. Soportado por todos los navegadores modernos, nos permite conocer la posición del usuario con mayor o menor precisión, según el método de localización utilizado. En la actualidad, disponemos de tres <em>tecnologías</em> para geolocalizar un usuario:</p>
+
+<ul>
+<li>Vía IP: todo dispositivo que se encuentra conectado a la red, tiene asignada una dirección IP (<em>Internet Protocol</em>) pública que actúa, de forma muy simplificada, como un código postal. Evidentemente, esta no es la mejor manera de localización, pero sí nos da una ligera idea de dónde se encuentra.</li>
+<li>Redes GSM: cualquier dispositivo que se conecte a una red telefonía, es capaz de obtener una posición aproximada basándose en una triangulación con las antenas de telefonía. Es un método sensiblemente más preciso que mediante la dirección IP, pero mucho menos que mediante GPS.</li>
+<li>GPS: <em>Global Positioning System</em> o Sistema de Posicionamiento Global. Es el método más preciso, pudiendo concretar la posición del usuario con un margen de error de escasos metros.</li>
+</ul>
+
+<p>El primer paso es comprobar es la disponibilidad del API de geolocalización de HTML 5 en el explorador del usuario:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">if</span><span class="br0">&#40;</span>Modernizr.<span class="me1">geolocation</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> 
+    alert<span class="br0">&#40;</span><span class="st0">'El explorador soporta geolocalización'</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+<span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span> 
+    alert<span class="br0">&#40;</span><span class="st0">'El explorador NO soporta geolocalización'</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>El API ofrece los siguientes métodos para geolocalizar la posición del usuario:</p>
+
+<ul>
+<li><code>getCurrentPosition</code>: obtiene la posición actual del usuario, utilizando la mejor tecnología posible.</li>
+<li><code>watchPosition</code>: consulta cada cierto tiempo la posición del usuario, ejecutando la función de <em>callback</em> indicada únicamente si la posición ha cambiado desde la última consulta.</li>
+</ul>
+
+<p>Ambos métodos se ejecutan de manera asíncrona para obtener la posición del usuario. Si es la primera vez que se solicita la localización al navegador, éste mostrará un mensaje pidiendo permiso al usuario para compartir su localización. Si el usuario no da su permiso, el API llama a la función de error que hayamos definido. La especificación dice:</p>
+
+<blockquote>
+  <p>"El navegador no debe enviar información sobre la localización a sitios sin el permiso explícito del usuario."</p>
+</blockquote>
+
+<p>Así pues, queda en manos de los navegadores informar al usuario que estamos intentando acceder a su posición actual. La forma de realizarlo depende del navegador. Por norma general, los navegadores de escritorio muestran un aviso no bloqueante, lo que permite seguir utilizando y ejecutando la aplicación.</p>
+
+<div class="figure" id="figure-11-1">
+    <img src="images/cap12/permiso.png" alt="Petición para compartir localización en Chrome" />
+
+    <p class="caption"><strong>Figura 11.1</strong> Petición para compartir localización en Chrome</p>
+</div>
+
+
+<p>En cambio, en navegadores de dispositivos móviles, como Safari y Chrome, se muestra una ventana modal que bloquea la ejecución del código hasta que el usuario acepte o deniegue la solicitud de geolocalización.</p>
+
+<div class="figure" id="figure-11-2">
+    <img src="images/cap12/permiso_mobile.png" alt="Petición para compartir localización en Safari Mobile y Chrome Mobile" />
+
+    <p class="caption"><strong>Figura 11.2</strong> Petición para compartir localización en Safari Mobile y Chrome Mobile</p>
+</div>
+
+
+<h2 id="metodos-del-api">11.1 Métodos del API</h2>
+
+<p>El API de geolocalización del objeto <code>navigator</code> contiene tres métodos:</p>
+
+<ul>
+<li><code>getCurrentPosition</code></li>
+<li><code>watchPosition</code></li>
+<li><code>clearWatch</code></li>
+</ul>
+
+<p>Los métodos <code>watchPosition</code> y <code>clearWatch</code> están emparejados, de la misma manera que lo están <code>setInterval</code> y <code>clearTimeout</code>. <code>watchPosition</code> devuelve un identificador único, que permite cancelar posteriormente las consultas de posición pasando es identificador como parámetro a <code>clearWatch</code>.</p>
+
+<p>Tanto <code>getCurrentPosition</code> como <code>watchPosition</code>, son métodos muy parecidos, y toman los mismos parámetros: una función de éxito, una función de error y opciones de geolocalización. Un simple ejemplo de uso del API geolocalización es el siguiente:</p>
+
+<div class="code javascript">
+<pre class="javascript">navigator.<span class="me1">geolocation</span>.<span class="me1">getCurrentPosition</span><span class="br0">&#40;</span><span class="kw1">function</span> <span class="br0">&#40;</span>position<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    alert<span class="br0">&#40;</span><span class="st0">'We found you!'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="co1">// now do something with the position data</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="funcion-de-exito">11.1.1 Función de éxito</h3>
+
+<p>Si el usuario permite que el navegador comparta la localización, y no se produce ningún otro error, se llama a la función de éxito, que es el primer argumento de las funciones de <code>getCurrentPosition</code> y <code>watchPosition</code>. Ésta función recibe como parámetro un objeto <code>position</code> que contiene dos propiedades: un objeto <code>coords</code> (contiene las coordenadas) una marca de tiempo <code>timestamp</code>. El objeto de coordenadas es el que nos interesa, ya que es el que contiene la información sobre la geolocalización. Sus propiedades son las siguientes:</p>
+
+<ul>
+<li><code>readonly attribute double latitude</code></li>
+<li><code>readonly attribute double longitude</code></li>
+<li><code>readonly attribute double accuracy</code></li>
+</ul>
+
+<p>La propiedad <code>accuracy</code> contiene la precisión de las coordenadas en metros. Podemos utilizarlo para mostrar un radio de precisión de la posición en nuestro mapa.</p>
+
+<p>Aunque es complicado de confirmar, es posible que esta información de geolocalización provenga de servicios propios de los fabricantes. Por ejemplo, Google
+dispone de una gran base de datos, que combinado con la información de la petición (como el hardware, la dirección IP, etc.) puede dar una localización. Esta información simplemente representa la posición del usuario, y no contiene nada más que nos pueda indicar la velocidad o dirección del usuario.</p>
+
+<p>Utilizando la información de posición, es muy sencillo mostrar la posición del usuario en un mapa:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">if</span> <span class="br0">&#40;</span>navigator.<span class="me1">geolocation</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    navigator.<span class="me1">geolocation</span>.<span class="me1">getCurrentPosition</span><span class="br0">&#40;</span><span class="kw1">function</span> <span class="br0">&#40;</span>position<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">var</span> coords <span class="sy0">=</span> position.<span class="me1">coords</span><span class="sy0">;</span>
+        showMap<span class="br0">&#40;</span>coords.<span class="me1">latitude</span><span class="sy0">,</span> coords.<span class="me1">longitude</span><span class="sy0">,</span> coords.<span class="me1">accuracy</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Existe otro tipo de datos dentro del objeto <code>coords</code>, para dispositivos que dispongan de GPS, aunque la gran mayoría de navegadores establecerán estas propiedades como <code>null</code>.</p>
+
+<ul>
+<li><code>readonly attribute double altitude</code></li>
+<li><code>readonly attribute double altitudeAccuracy</code></li>
+<li><code>readonly attribute double heading</code></li>
+<li><code>readonly attribute double speed</code></li>
+</ul>
+
+<h3 id="obteniendo-datos-extra">11.1.2 Obteniendo datos extra</h3>
+
+<p>Actualmente, muchos de los dispositivos integran un GPS. Dependiendo del navegador o del sistema operativo, la información provista con la geolocalización puede incluir mucha más información que simplemente las coordenadas de la posición, como la velocidad y la altitud.</p>
+
+<p>En la mayoría de los casos, hay que especificar al API que utilice una mayor precisión para activar el GPS. Como siempre, hay que tener cuidado al utilizar el GPS, ya que consume muchísima batería y hay que utilizar esta tecnología únicamente si es estrictamente necesario.</p>
+
+<p>Para calcular la velocidad, el dispositivo necesita conocer la diferencia media entre las últimas localizaciones. Por esta razón, es necesario utilizar el método <code>watchPosition</code> y calcular la velocidad de la siguiente manera:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> speedEl <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span>‘speed’<span class="br0">&#41;</span><span class="sy0">;</span>
+navigator.<span class="me1">geolocation</span>.<span class="me1">watchPosition</span><span class="br0">&#40;</span><span class="kw1">function</span> <span class="br0">&#40;</span>geodata<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> speed <span class="sy0">=</span> geodata.<span class="me1">coords</span>.<span class="me1">speed</span><span class="sy0">;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>speed <span class="sy0">===</span> <span class="kw2">null</span> <span class="sy0">||</span> speed <span class="sy0">===</span> <span class="nu0">0</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        speedEl.<span class="me1">innerHTML</span> <span class="sy0">=</span> <span class="st0">&quot;You're standing still!&quot;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+        <span class="co1">// speed is in metres per second</span>
+        speedEl.<span class="me1">innerHTML</span> <span class="sy0">=</span> speed <span class="sy0">+</span> “Mps”<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="sy0">,</span> <span class="kw1">function</span> <span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    speedEl.<span class="me1">innerHTML</span> <span class="sy0">=</span> <span class="st0">&quot;Unable to determine speed :-(&quot;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">,</span>
+<span class="br0">&#123;</span> enableHighAccuracy<span class="sy0">:</span> <span class="kw2">true</span> <span class="br0">&#125;</span>
+<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="funcion-de-error">11.1.3 Función de error</h3>
+
+<p>El segundo parámetro para los métodos <code>getCurrentPosition</code> y <code>watchPosition</code> es la función de error. Esta función es importante si queremos proveer de un segundo método alternativo para introducir la localización, por ejemplo de manera manual, o queremos informar al usuario del error. Esta función se ejecuta cuando el usuario deniega la petición de localización, o cuando estamos consultando la posición pero el dispositivo pierde la recepción de la localización. La función de error recibe un único argumento con dos propiedades:</p>
+
+<ul>
+<li><code>readonly attribute unsigned short code</code></li>
+<li><code>readonly attribute DOMString message</code></li>
+</ul>
+
+<p>El código de error puede contener los siguientes valores:</p>
+
+<ul>
+<li><code>PERMISSION_DENIED (valor = 1)</code></li>
+<li><code>POSITION_UNAVAILABLE (valor = 2)</code></li>
+<li><code>TIMEOUT (valor = 3)</code></li>
+</ul>
+
+<h3 id="configurar-la-geolocalizacion">11.1.4 Configurar la geolocalización</h3>
+
+<p>Finalmente, el tercer argumento para los métodos <code>getCurrentPosition</code> y <code>watchPosition</code> contiene las opciones de geolocalización. Todas estas configuraciones son opcionales, puede que no se tengan en cuenta por los navegadores.</p>
+
+<ul>
+<li><code>enableHighAccuracy</code>: booleano, por defecto <code>false</code></li>
+<li><code>timeout</code>: en milisegundos, por defecto infinito</li>
+<li><code>maximumAge</code>: en milisegundos, por defecto 0</li>
+</ul>
+
+<p>Por ejemplo, para solicitar una alta precisión, un <code>timeout</code> de dos segundos y no cachear las peticiones, llamamos al método <code>getCurrentPosition</code> con las siguientes opciones:</p>
+
+<div class="code javascript">
+<pre class="javascript">navigator.<span class="me1">geolocation</span>.<span class="me1">getCurrentPosition</span><span class="br0">&#40;</span>success<span class="sy0">,</span> error<span class="sy0">,</span> <span class="br0">&#123;</span>
+    enableHighAccuracy<span class="sy0">:</span> <span class="kw2">true</span>
+    timeout<span class="sy0">:</span> <span class="nu0">2000</span>
+    maximumAge<span class="sy0">:</span> <span class="nu0">0</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 13</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej13">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-11.html#geolocalizacion">Geolocalización</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>11.1</span>
+                        <a class="internal" href="capitulo-11.html#metodos-del-api">Métodos del API</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

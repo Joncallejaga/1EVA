@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="18/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Introducción | XHTML</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">XHTML</a></h1>
+        <p class="span3">
+                        <a href="capitulo-1.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-3.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="introduccion"><span>Capítulo 2</span> Introducción</h1>
+        <h2 id="que-es-html">2.1 ¿Qué es HTML?</h2>
+
+<p><strong>HTML</strong> <em>(HyperText Markup Language)</em> es un lenguaje de marcas usado, de manera predominante, para la elaboración de páginas web. El lenguaje <strong>HTML</strong> es utilizado en forma de texto para describir y crear la estructura de estas páginas, tanto por programas, que traducen un diseño de página en código HTML, como por parte de las personas de manera directa.</p>
+
+<p>Este lenguaje es un estándar reconocido mundialmente y cuyas normas vienen dadas por el <em>World Wide Web Consortium</em> o <a href="http://www.w3.org/"><strong>W3C</strong></a> - consorcio internacional que produce recomendaciones para la <em>World Wide Web</em> -, lo que hace que una misma página HTML sea visualizada de forma <em>similar</em> en diferentes navegadores y sistemas operativos.</p>
+
+<h3 id="especificacion-oficial">2.1.1 Especificación oficial</h3>
+
+<p>Este organismo <strong>W3C</strong> elabora las normas a seguir para la creación de las páginas HTML o XHTML. Sin embargo, no es necesario conocer todas estas especificaciones, escritas en un lenguaje bastante formal, para diseñar páginas con este lenguaje.  Las normas oficiales están escritas en inglés y se pueden consultar de forma gratuita en las siguientes direcciones:</p>
+
+<ul>
+<li><a href="http://www.w3.org/TR/html401/">Especificación oficial de HTML 4.01</a></li>
+<li><a href="http://www.w3.org/TR/xhtml1/">Especificación oficial de XHTML 1.0</a></li>
+</ul>
+
+<p>El estándar XHTML 1.0 incluye el 95% del estándar HTML 4.01, ya que sólo añade pequeñas mejoras y modificaciones menores. Este sería un sencillo gráfico del esquema de relación y evolución de los lenguajes <strong>HTML</strong> y <strong>XHTML</strong> <em>(eXtensible HyperText Markup Language)</em> - que es básicamente HTML expresado como <strong>XML</strong> válido, una versión más estricta a nivel técnico - :</p>
+
+<div class="figure" id="figure-2-1">
+    <img src="images/cap02/xhtml.png" alt="Esquema de la evolución de HTML y XHTML" />
+
+    <p class="caption"><strong>Figura 2.1</strong> Esquema de la evolución de HTML y XHTML</p>
+</div>
+
+
+<h3 id="html-css-y-javascript">2.1.2 HTML, CSS y Javascript</h3>
+
+<p>Originalmente, las páginas HTML sólo incluian información sobre sus contenidos de texto e imágenes. Con el desarrollo del <strong>estándar HTML</strong>, las páginas empezaron a incluir también información sobre el aspecto de sus contenidos.</p>
+
+<p>La posterior aparición de tecnologías como <strong>JavaScript</strong> provocó que las páginas HTML también incluyeran el código de las aplicaciones (llamadas <em>scripts</em>) que se utilizan para crear páginas web dinámicas.</p>
+
+<p>Una página web está compuesta, como vemos en este gráfico, por <strong>contenidos, presentación e interacción</strong>. Esto es, está subdividida de manera que, en vez de incluir en una misma página todo, se utilizan mecanismos para separar dichos contenidos: como son <strong>CSS</strong> y <strong>JavaScript</strong>.</p>
+
+<div class="figure" id="figure-2-2">
+    <img src="images/cap02/contenidos.png" alt="Separación de contenidos" />
+
+    <p class="caption"><strong>Figura 2.2</strong> Separación de contenidos</p>
+</div>
+
+
+<h2 id="estructura-y-primer-documento">2.2 Estructura y primer documento</h2>
+
+<h3 id="como-se-construye-y-que-contiene">2.2.1 Cómo se construye y qué contiene</h3>
+
+<p>Este lenguaje de marcado se construye en forma de <strong>etiquetas</strong> o <em>tags</em> rodeadas por corchetes angulares (como <code>&lt;html&gt;</code>) dentro del contenido de la página web.
+Muchas de las etiquetas vienen 'en pareja', como pueden ser <code>&lt;h1&gt;</code> y<code>&lt;/h1&gt;</code>, siendo la primera la etiqueta o <strong><em>tag</em> inicial o de apertura</strong> y la segunda <strong>de cierre</strong>; pero también existen algunos <em>tags</em> conocidos como elementos vacíos, por ejemplo <code>&lt;img&gt;</code>.</p>
+
+<p><strong>HTML</strong> puede incluir o incrustar <em>scripts</em> escritos en lenguajes como <strong>JavaScript</strong> que afectan al comportamiento de las páginas en HTML y crean webs dinámicas, y puede también describir en cierta manera la apariencia de un documento, aunque para dar estilo a las páginas web escritas con este lenguaje, lo más habitual es la utilización de las <strong>hojas de estilo en cascada</strong>, <em>Cascading Style Sheets</em>, o su nombre más común, <strong>CSS</strong>.</p>
+
+<h3 id="esquema-de-paginas-html">2.2.2 Esquema de páginas HTML</h3>
+
+<p>Las páginas HTML se dividen en:</p>
+
+<ul>
+<li><strong>cabecera</strong> o <em>head</em>: incluye información sobre dicha página (título, idioma, hojas de estilos) - todo lo que el usuario no ve, a excepción del título.</li>
+<li><strong>cuerpo</strong> o <em>body</em>: incluye todos sus contenidos (párrafos de texto, imágenes) - todo lo que ve el usuario.</li>
+</ul>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">html</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+       <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Documento HTML<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+       <span class="sc2">&lt;<span class="kw2">p</span>&gt;&lt;<span class="kw2">b</span>&gt;</span>HTML<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">b</span>&gt;</span> (HyperText Markup Language) es un lenguaje
+        de marcas usado, de manera predominante, para la elaboración
+        de páginas web.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>Si guardásemos este código HTML con un editor de texto sin formato y la extensión <strong>.html</strong>, y lo abriésemos con cualquier navegador, esto sería lo que veríamos:</p>
+
+<div class="figure" id="figure-2-3">
+    <img src="images/cap02/html_intro_example.png" alt="Aspecto que muestra el primer documento HTML en cualquier navegador" />
+
+    <p class="caption"><strong>Figura 2.3</strong> Aspecto que muestra el primer documento HTML en cualquier navegador</p>
+</div>
+
+
+<p>En este ejemplo anterior, hemos utilizado los <em>tags</em> <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code> y <code>&lt;body&gt;</code>, las tres etiquetas principales de un documento HTML:</p>
+
+<ul>
+<li><p><code>&lt;html&gt;</code>: es el primer y último <em>tag</em> (<code>&lt;/html&gt;</code>) de un documento HTML, lo que significa que ninguna etiqueta o contenido debe colocarse antes o después de éstas (a excepción del <em>doctype</em>).</p></li>
+<li><p><code>&lt;head&gt;</code>: delimita la parte de la cabecera del documento y contiene información sobre éste que no se muestran al usuario (a excepción del <em>tag</em> <code>&lt;title&gt;</code> que muestra el título de la página en la parte superior izquierda de la ventana del navegador).</p></li>
+<li><p><code>&lt;body&gt;</code>: delimita el cuerpo del documento HTML y encierra todos sus contenidos visibles.</p></li>
+</ul>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-2.html#introduccion">Introducción</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.1</span>
+                        <a class="internal" href="capitulo-2.html#que-es-html">¿Qué es HTML?</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.2</span>
+                        <a class="internal" href="capitulo-2.html#estructura-y-primer-documento">Estructura y primer documento</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

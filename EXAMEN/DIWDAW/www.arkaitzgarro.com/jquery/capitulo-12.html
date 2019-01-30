@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="14/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Funciones y ejecuciones diferidas a través del objeto <code>$.Deferred</code> | jQuery</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">jQuery</a></h1>
+        <p class="span3">
+                        <a href="capitulo-11.html"><span>&larr;</span> Anterior</a>
+            
+                        <a class="disabled" href="capitulo-12.html#">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="funciones-y-ejecuciones-diferidas-a-traves-del-objeto-deferred"><span>Capítulo 12</span> Funciones y ejecuciones diferidas a través del objeto <code>$.Deferred</code></h1>
+        <h2 id="introduccion-7">12.1 Introducción</h2>
+
+<p>A partir de la versión 1.5 de jQuery, la biblioteca introdujo una nueva utilidad: El objeto diferido <code>$.Deferred</code> (en inglés <em>Deferred Object</em>). Este objeto introduce nuevas formas para la invocación y ejecución de las funciones de devolución (<em>callbacks</em>), permitiendo crear aplicaciones más robustas y flexibles. Para más detalles sobre <code>$.Deferred</code>, puede consultar <a href="http://api.jquery.com/category/deferred-object/">http://api.jquery.com/category/deferred-object/</a>.</p>
+
+<h2 id="el-objeto-diferido-y-ajax">12.2 El objeto diferido y Ajax</h2>
+
+<p>El caso más común en donde se puede apreciar la utilidad del objeto diferido es en el manejo de las funciones de devolución en peticiones Ajax.</p>
+
+<p>Según se pudo apreciar en el capítulo dedicado, una manera de invocar una petición Ajax es:</p>
+
+<p><strong>Manera tradicional de utilizar el método <code>$.ajax</code></strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$.<span class="me1">ajax</span><span class="br0">&#40;</span><span class="br0">&#123;</span>
+ <span class="co1">// la URL para la petición</span>
+ url <span class="sy0">:</span> <span class="st0">'post.php'</span><span class="sy0">,</span>
+&nbsp;
+ <span class="co1">// funciónes de devolución a ejecutar</span>
+ <span class="co1">// en caso que la petición haya sido</span>
+ <span class="co1">// satisfactoria, con error y/o completada</span>
+ success <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span>data<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+     alert<span class="br0">&#40;</span><span class="st0">'Petición realizada satisfactoriamente'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ <span class="br0">&#125;</span><span class="sy0">,</span>
+ error <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span>jqXHR<span class="sy0">,</span> status<span class="sy0">,</span> error<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+     alert<span class="br0">&#40;</span><span class="st0">'Disculpe, existió un problema'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ <span class="br0">&#125;</span><span class="sy0">,</span>
+ complete <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span>jqXHR<span class="sy0">,</span> status<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+     alert<span class="br0">&#40;</span><span class="st0">'Petición realizada'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Como se puede observar, las funciones de devolución son configuradas dentro del mismo objeto <code>$.ajax</code>. Esta manera es incomoda y poco flexible ya que <strong>no permite desacoplar las funciones de devolución de la misma petición Ajax</strong>. Y en grandes aplicaciones esto puede llegar a ser un problema.</p>
+
+<p>El objeto diferido nos permite reescribir el código anterior de la siguiente manera:</p>
+
+<p><strong>El objeto diferido en una petición Ajax</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// dentro de una variable se define </span>
+<span class="co1">// la configuración de la petición ajax</span>
+<span class="kw1">var</span> ajax <span class="sy0">=</span> $.<span class="me1">ajax</span><span class="br0">&#40;</span><span class="br0">&#123;</span>
+  url <span class="sy0">:</span> <span class="st0">'post.php'</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// a través del método done() ejecutamos</span>
+<span class="co1">// la función de devolución satisfactoria (sucess)</span>
+ajax.<span class="me1">done</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    alert<span class="br0">&#40;</span><span class="st0">'Petición realizada satisfactoriamente'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// a través del método fail() ejecutamos</span>
+<span class="co1">// la función de devolución de error (error)</span>
+ajax.<span class="me1">fail</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    alert<span class="br0">&#40;</span><span class="st0">'Disculpe, existió un problema'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// a través del método always() ejecutamos</span>
+<span class="co1">// la función de devolución de petición completada (complete)</span>
+ajax.<span class="me1">always</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    alert<span class="br0">&#40;</span><span class="st0">'Petición realizada'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>A través de los métodos <code>deferred.done</code>, <code>deferred.fail</code> y <code>deferred.always</code> es posible desacoplar las funciones de devolución de la misma petición Ajax, permitiendo un manejo más comodo de las mismas.</p>
+
+<p><em>Notar que en en ningún momento se llama al objeto diferido <code>$.Deferred</code>. Esto es porque jQuery ya lo incorpora implicitamente dentro del manejo del objeto <code>$.ajax</code>. Más adelante se explicará como utilizar al objeto <code>$.Deferred</code> de manera explícita.</em></p>
+
+<p>De la misma forma es posible crear colas de funciones de devolución o atarlas a diferentes lógicas/acciones:</p>
+
+<p><strong>Colas de funciones de devolución en una petición Ajax</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// definición de la petición Ajax</span>
+<span class="kw1">var</span> ajax <span class="sy0">=</span> $.<span class="me1">ajax</span><span class="br0">&#40;</span><span class="br0">&#123;</span>
+  url <span class="sy0">:</span> <span class="st0">'post.php'</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// primera función de devolución a ejecutar</span>
+ajax.<span class="me1">done</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    alert<span class="br0">&#40;</span><span class="st0">'Primera función de devolución en caso satisfactorio'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// segunda función de devolución a ejecutar </span>
+<span class="co1">// inmediatamente después de la primera</span>
+ajax.<span class="me1">done</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    alert<span class="br0">&#40;</span><span class="st0">'Segunda función de devolución en caso satisfactorio'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// si el usuario hace click en #element se</span>
+<span class="co1">// agrega una tercera función de devolución</span>
+$<span class="br0">&#40;</span><span class="st0">'#element'</span><span class="br0">&#41;</span>.<span class="me1">click</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+&nbsp;
+    ajax.<span class="me1">done</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        alert<span class="br0">&#40;</span><span class="st0">'Tercera función de devolución si el usuario hace click'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// en caso que exista un error se define otra</span>
+<span class="co1">// función de devolución</span>
+ajax.<span class="me1">fail</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    alert<span class="br0">&#40;</span><span class="st0">'Disculpe, existió un problema'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Al ejecutarse la petición Ajax, y en caso de que ésta haya sido satisfactoria, se ejecutan dos funciones de devolución, una detrás de la otra. Sin embargo si el usuario hace click en <code>#element</code> se agrega una tercera función de devolución, la cual también se ejecuta inmediatamente, sin volver a realizar la petición Ajax. Esto es porque el objeto diferido (que se encuentra implicitamente en la variable <code>ajax</code>) ya tiene información asociada sobre que la petición Ajax se realizó correctamente.</p>
+
+<h3 id="deferredthen">12.2.1 <code>deferred.then</code></h3>
+
+<p>Otra manera de utilizar los métodos <code>deferred.done</code> y <code>deferred.fail</code> es a través de <code>deferred.then</code>, el cual permite definir en un mismo bloque de código las funciones de devolución a suceder en los casos satisfactorios y erroneos.</p>
+
+<p><strong>Utilización del método <code>deferred.then</code></strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// definición de la petición Ajax</span>
+<span class="kw1">var</span> ajax <span class="sy0">=</span> $.<span class="me1">ajax</span><span class="br0">&#40;</span><span class="br0">&#123;</span>
+  url <span class="sy0">:</span> <span class="st0">'post.php'</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// el método espera dos funciones de devolución</span>
+ajax.<span class="me1">then</span><span class="br0">&#40;</span>
+&nbsp;
+    <span class="co1">// la primera es la función de devolución satisfactoria</span>
+     <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span> 
+         alert<span class="br0">&#40;</span><span class="st0">'Petición realizada satisfactoriamente'</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+     <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+     <span class="co1">// la segunda es la función de devolución erronea</span>
+     <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span> 
+         alert<span class="br0">&#40;</span><span class="st0">'Disculpe, existió un problema'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+     <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="creacion-de-objetos-diferidos-con-deferred">12.3 Creación de objetos diferidos con <code>$.Deferred</code></h2>
+
+<p>Así como es posible desacoplar las funciones de devolución en una petición Ajax, también es posible realizarlo en otras funciones utilizando de manera explícita el objeto <code>$.Deferred</code>.</p>
+
+<p>Por ejemplo, una función que verifica si un número es par, de la manera tradicional puede escribirse de la siguiente manera:</p>
+
+<p><strong>Función sin utilizar el objeto <code>$.Deferred</code></strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// función que calcula si un número entero es par o impar</span>
+<span class="kw1">var</span> isEven <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>number<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">if</span> <span class="br0">&#40;</span>number<span class="sy0">%</span>2 <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw2">true</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="co1">// si es par registra un mensaje,</span>
+<span class="co1">// en caso contrario registra otro</span>
+<span class="kw1">if</span> <span class="br0">&#40;</span>isEven<span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'Es par'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+    console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'Es impar'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Utilizando el objeto <code>$.Deferred</code>, el mismo ejemplo puede reescribirse de la siguiente forma:</p>
+
+<p><strong>Función utilizando el objeto <code>$.Deferred</code></strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// función que calcula si un número entero es par o impar</span>
+<span class="kw1">var</span> isEven <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>number<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+    <span class="co1">// guarda en una variable al objeto $.Deferred()</span>
+    <span class="kw1">var</span> dfd <span class="sy0">=</span> $.<span class="me1">Deferred</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="co1">// si es par, resuelve al objeto utilizando deferred.resolve,</span>
+    <span class="co1">// caso contrario, lo rechaza utilizando deferred.reject</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>number<span class="sy0">%</span>2 <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        dfd.<span class="me1">resolve</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+        dfd.<span class="me1">reject</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co1">// devuelve al objeto diferido con su estado definido</span>
+    <span class="kw1">return</span> dfd.<span class="me1">promise</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="co1">// con deferred.then se manejan las funciones de devolución</span>
+<span class="co1">// en los casos que el numero sea par o impar</span>
+isEven<span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span>.<span class="me1">then</span><span class="br0">&#40;</span>
+&nbsp;
+    <span class="co1">// la primera es la función de devolución satisfactoria</span>
+       <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span> 
+           console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'Es par'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+       <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+       <span class="co1">// la segunda es la función de devolución erronea</span>
+       <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span> 
+           console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'Es impar'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+       <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Los métodos <code>deferred.resolve</code> y <code>deferred.reject</code> permiten <strong>definir el estado interno</strong> del objeto <code>$.Deferred()</code>. Esta definición <strong>es permanente, es decir, no es posible modificarla después</strong> y es lo que permite manejar el comportamiento y ejecución de las funciones de devolución posteriores para cada uno de los casos.</p>
+
+<p>Notar que la función <code>isEven</code> devuelve el método <code>deferred.promise</code>. El mismo es una versión del objeto diferido, pero que sólo permite leer su estado o añadir nuevas funciones de devolución.</p>
+
+<blockquote>
+  <p><strong>Nota</strong></p>
+  
+  <p>En los ejemplos que utilizaban Ajax mostrados anteriormente, los métodos <code>deferred.resolve</code> y <code>deferred.reject</code> son llamados de manera interna por jQuery dentro de la configuración <code>sucess</code> y <code>error</code> de la petición. Por eso mismos se decía que el objeto diferido estaba incorporado implicitamente dentro del objeto <code>$.ajax</code>.</p>
+</blockquote>
+
+<p>Los métodos <code>deferred.resolve</code> y <code>deferred.reject</code> además permiten devolver valores para ser utilizados por las funciones de devolución.</p>
+
+<p><strong>Función con <code>deferred.resolve</code> y <code>deferred.reject</code> devolviendo valores reutilizables</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// función que calcula si un numero entero es par o impar</span>
+<span class="kw1">var</span> isEven <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>number<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">var</span> dfd <span class="sy0">=</span> $.<span class="me1">Deferred</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="co1">// resuelve o rechaza al objeto utilizando</span>
+    <span class="co1">// y devuelve un texto con el resultado</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>number<span class="sy0">%</span>2 <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        dfd.<span class="me1">resolve</span><span class="br0">&#40;</span><span class="st0">'El número '</span> <span class="sy0">+</span> number <span class="sy0">+</span> <span class="st0">' es par'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+        dfd.<span class="me1">reject</span><span class="br0">&#40;</span><span class="st0">'El número '</span> <span class="sy0">+</span> number <span class="sy0">+</span> <span class="st0">' es impar'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co1">// devuelve al objeto diferido con su estado definido</span>
+    <span class="kw1">return</span> dfd.<span class="me1">promise</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;
+isEven<span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span>.<span class="me1">then</span><span class="br0">&#40;</span>
+&nbsp;
+       <span class="kw1">function</span><span class="br0">&#40;</span>result<span class="br0">&#41;</span><span class="br0">&#123;</span> 
+           console.<span class="me1">log</span><span class="br0">&#40;</span>result<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Registra 'El número 2 es par'</span>
+       <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+       <span class="kw1">function</span><span class="br0">&#40;</span>result<span class="br0">&#41;</span><span class="br0">&#123;</span> 
+           console.<span class="me1">log</span><span class="br0">&#40;</span>result<span class="br0">&#41;</span><span class="sy0">;</span>
+       <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<blockquote>
+  <p><strong>Nota</strong></p>
+  
+  <p>Es posible determinar el estado de un objeto diferido a través del método <code>deferred.state</code>. El mismo devuelve un string con alguno de estos tres valores: <code>pending</code>, <code>resolved</code> o <code>rejected</code>. Para más detalles sobre <code>deferred.state</code>, puede consultar <a href="http://api.jquery.com/deferred.state/">http://api.jquery.com/deferred.state/</a>.</p>
+</blockquote>
+
+<h3 id="deferredpipe">12.3.1 <code>deferred.pipe</code></h3>
+
+<p>Existen casos en que se necesita modificar el estado de un objeto diferido o filtrar la información que viene asociada. Para estos casos existe <code>deferred.pipe</code>. Su funcionamiento es similar a <code>deferred.then</code>, con la diferencia que <code>deferred.pipe</code> devuelve un nuevo objeto diferido modificado a través de una función interna.</p>
+
+<p><strong>Función filtrando valores utilizando <code>deferred.pipe</code></strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// función que calcula si un número entero es par o impar</span>
+<span class="kw1">var</span> isEven <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>number<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">var</span> dfd <span class="sy0">=</span> $.<span class="me1">Deferred</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">if</span> <span class="br0">&#40;</span>number<span class="sy0">%</span>2 <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        dfd.<span class="me1">resolve</span><span class="br0">&#40;</span>number<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+        dfd.<span class="me1">reject</span><span class="br0">&#40;</span>number<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">return</span> dfd.<span class="me1">promise</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="co1">// vector con una serie de números pares e impares</span>
+<span class="kw1">var</span> numbers <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">2</span><span class="sy0">,</span> <span class="nu0">9</span><span class="sy0">,</span> <span class="nu0">10</span><span class="sy0">,</span> <span class="nu0">5</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> <span class="nu0">12</span><span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// a través de deferred.pipe se pregunta si número se encuentra</span>
+<span class="co1">// dentro del vector numbers</span>
+isEven<span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span>.<span class="me1">pipe</span><span class="br0">&#40;</span>
+&nbsp;
+    <span class="kw1">function</span><span class="br0">&#40;</span>number<span class="br0">&#41;</span><span class="br0">&#123;</span>
+&nbsp;
+        <span class="co1">// crea un nuevo objeto diferido</span>
+        <span class="kw1">var</span> dfd <span class="sy0">=</span> $.<span class="me1">Deferred</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">if</span><span class="br0">&#40;</span>$.<span class="me1">inArray</span><span class="br0">&#40;</span>number<span class="sy0">,</span> numbers<span class="br0">&#41;</span> <span class="sy0">!==</span> <span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span> 
+            dfd.<span class="me1">resolve</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+            dfd.<span class="me1">reject</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        <span class="co1">// devuelve un nuevo objeto diferido</span>
+        <span class="kw1">return</span> dfd.<span class="me1">promise</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#41;</span>.<span class="me1">then</span><span class="br0">&#40;</span>
+&nbsp;
+    <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="co1">// al estar dentro del vector numbers y ser par,</span>
+        <span class="co1">// se registra este mensaje</span>
+        console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'El número es par y se encuentra dentro de numbers'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'El número es impar o no se encuentra dentro de numbers'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Para más detalles sobre <code>deferred.pipe</code>, puede consultar <a href="http://api.jquery.com/deferred.pipe/">http://api.jquery.com/deferred.pipe/</a>.</p>
+
+<h3 id="when">12.3.2 <code>$.when</code></h3>
+
+<p>El método <code>$.when</code> permite ejecutar funciones de devolución, cuando uno o más objetos diferidos posean algun estado definido.</p>
+
+<p>Un caso común de utilización de <code>$.when</code> es cuando se quiere verificar que dos peticiones Ajax separadas se han realizado.</p>
+
+<p><strong>Utilización de <code>$.when</code></strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// primera petición ajax</span>
+<span class="kw1">var</span> comments <span class="sy0">=</span> $.<span class="me1">ajax</span><span class="br0">&#40;</span><span class="br0">&#123;</span>
+    url <span class="sy0">:</span> <span class="st0">'/echo/json/'</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// segunda petición ajax</span>
+<span class="kw1">var</span> validation <span class="sy0">=</span> $.<span class="me1">ajax</span><span class="br0">&#40;</span><span class="br0">&#123;</span>
+    url <span class="sy0">:</span> <span class="st0">'/echo/json/'</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// cuando las dos peticiones sean realizadas</span>
+<span class="co1">// ejecuta alguna función de devolución definida</span>
+<span class="co1">// dentro de deferred.then</span>
+$.<span class="me1">when</span><span class="br0">&#40;</span>comments<span class="sy0">,</span> validation<span class="br0">&#41;</span>.<span class="me1">then</span><span class="br0">&#40;</span>
+    <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        alert<span class="br0">&#40;</span><span class="st0">'Peticiones realizadas'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+    <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        alert<span class="br0">&#40;</span><span class="st0">'Disculpe, existió un problema'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Para más detalles sobre <code>$.when</code>, puede consultar <a href="http://api.jquery.com/jQuery.when/">http://api.jquery.com/jQuery.when/</a>.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-12.html#funciones-y-ejecuciones-diferidas-a-traves-del-objeto-deferred">Funciones y ejecuciones diferidas a través del objeto <code>$.Deferred</code></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>12.1</span>
+                        <a class="internal" href="capitulo-12.html#introduccion-7">Introducción</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>12.2</span>
+                        <a class="internal" href="capitulo-12.html#el-objeto-diferido-y-ajax">El objeto diferido y Ajax</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>12.3</span>
+                        <a class="internal" href="capitulo-12.html#creacion-de-objetos-diferidos-con-deferred">Creación de objetos diferidos con <code>$.Deferred</code></a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

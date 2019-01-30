@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  <meta name="viewport" content="width=device-width" />
+  
+  <meta name="description" content="Ejemplo de texto tridimensional utilizando la propiedad text-shadow de CSS3 ( varias sombras )." />
+  <meta name="keywords" content="ejemplo, texto 3D, texto tridimensional, text-shadow, sombras m&uacute;ltiples, CSS3, HTML5, "/>
+  <meta name="author" content="enxaneta.info" />
+  <meta property="og:title" content="Ejemplo de texto tridimensional en CSS3" /> 
+  <meta property="og:type" content="website" /> 
+  <meta property="og:image" content="http://w3.unpocodetodo.info/images/w3_og.png" />  
+  <meta property="og:url" content="w3.unpocodetodo.info/ejemplos/texto3d.html" /> 
+  <meta property="og:site_name" content="w3.unpocodetodo.info" /> 
+  <meta property="og:description" content="Ejemplo de texto tridimensional utilizando la propiedad text-shadow de CSS3 ( varias sombras )." /> 
+  
+  <link rel="icon" type="image/png" href="http://w3.unpocodetodo.info/gabi_canvas/images/w3.png" />
+  <!--<link rel="icon" type="image/png" href="/img/favicon.png">-->
+  <!-- 57x57 older iPhone and Android devices -->
+  <!--<link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon-precomposed.png">-->
+  <!-- iPad 1 and 2 & iPad mini -->
+  <link rel="apple-touch-icon" sizes="72x72" href="../../images/apple-touch-icon-72x72.png">
+  <!-- iPhone 4, 4S, 5 and iPod Touch -->
+  <link rel="apple-touch-icon" sizes="114x114" href="../../images/apple-touch-icon-114x114.png">
+  <!-- iPad 3rd gen -->
+  <link rel="apple-touch-icon" sizes="144x144" href="../../images/apple-touch-icon-144x144.png"> 
+  
+<title>Ejemplo de texto tridimensional en CSS3</title>
+
+
+<style type="text/css">
+
+	body {
+		background-color:rgb(250,220,220);
+		/*-webkit-perspective: 400px;*/ /* Chrome, Safari, Opera  */
+        /*perspective: 400px;*/
+	}
+
+	
+	h1 {display:block; width:700px; margin:100px auto;
+		font-family:Georgia, "Times New Roman", Times, serif;
+		font-size:120px;
+		text-align:center;
+    	text-shadow:
+				 /*relieve*/	 
+		         0 1px 0 rgb(200,200,200),
+                 0 2px 0 rgb(190,190,190),
+                 0 3px 0 rgb(180,180,180),
+                 0 4px 0 rgb(175,175,175),
+                 0 5px 0 rgb(180,180,180),
+                 0 6px 0 rgb(190,190,190),
+				 /*sombra*/
+                 5px 7px  5px  rgba(0, 0, 0, .40),
+                 5px 12px 10px rgba(0, 0, 0, .30), 
+                 5px 17px 20px rgba(0, 0, 0, .20),
+                 5px 22px 30px rgba(0, 0, 0, .10);
+				 
+    	color: white;
+		/*-webkit-transform: rotateY(20deg) rotateX(30deg);*/
+	}
+	
+</style>
+
+</head>
+
+<body>
+        <h1>Texto 3D<br>con css3</h1>
+</body>
+</html>

@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="08/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Sintaxis básica | JavaScript</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">JavaScript</a></h1>
+        <p class="span3">
+                        <a href="capitulo-2.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-4.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="sintaxis-basica"><span>Capítulo 3</span> Sintaxis básica</h1>
+        <p>Antes de comenzar a desarrollar programas y utilidades con JavaScript, es necesario conocer los elementos básicos con los que se construyen las aplicaciones. Este capítulo explica en detalle y comenzando desde cero los conocimientos básicos necesarios para poder comprender la sintaxis básica de Javascript. En el próximo capítulo veremos aspectos más avanzados como objetos, herencia, arrays o expresiones regulares.</p>
+
+<h2 id="espacios-en-blanco">3.1 Espacios en blanco</h2>
+
+<p>No se tienen en cuenta los espacios en blanco y las nuevas líneas: como sucede con XHTML, el intérprete de JavaScript ignora cualquier espacio en blanco sobrante, por lo que el código se puede ordenar de forma adecuada para entenderlo mejor (tabulando las líneas, añadiendo espacios, creando nuevas líneas, etc.) Sin embargo, en ocasiones estos espacios en blanco son totalmente necesarios, por ejemplo, para reparar nombres de variables o palabras reservadas. Por ejemplo:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> that <span class="sy0">=</span> <span class="kw1">this</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Aquí el espacio en blanco entre <code>var</code> y <code>that</code> no puede ser eliminado, pero el resto sí.</p>
+
+<p><img src="images/diagrams/whitespace.png" alt="Utilización de los espacios en blanco"></p>
+
+<h2 id="comentarios">3.2 Comentarios</h2>
+
+<p>JavaScript ofrece dos tipos de comentarios, de bloque gracias a los caracteres <code>/* */</code> y de línea comenzando con <code>//</code>. El formato <code>/* */</code>de comentarios puede causar problemas en ciertas condiciones, como en las expresiones regulares, por lo que hay que tener cuidado al utilizarlo. Por ejemplo:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="coMULTI">/*
+    var rm_a = /a*/</span>.<span class="me1">match</span><span class="br0">&#40;</span>s<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="sy0">*/</span></pre>
+</div>
+
+<p>provoca un error de sintaxis. Por lo tanto, suele ser recomendable utilizar únicamente los comentarios de línea, para evitar este tipo de problemas.</p>
+
+<h2 id="variables">3.3 Variables</h2>
+
+<p>Las variables en JavaScript se crean mediante la palabra reservada <code>var</code>. De esta forma, podemos declarar variables de la siguiente manera:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> numero_1 <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span>
+<span class="kw1">var</span> numero_2 <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+<span class="kw1">var</span> resultado <span class="sy0">=</span> numero_1 <span class="sy0">+</span> numero_2<span class="sy0">;</span></pre>
+</div>
+
+<p>La palabra reservada <code>var</code> solamente se debe indicar al declarar por primera vez la variable. Cuando se utilizan las variables en el resto de instrucciones del script, solamente es necesario indicar su nombre. En otras palabras, en el ejemplo anterior sería un error indicar lo siguiente:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> numero_1 <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span>
+<span class="kw1">var</span> numero_2 <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+<span class="kw1">var</span> resultado <span class="sy0">=</span> <span class="kw1">var</span> numero_1 <span class="sy0">+</span> <span class="kw1">var</span> numero_2<span class="sy0">;</span></pre>
+</div>
+
+<p>En JavaScript no es obligatorio inicializar las variables, ya que se pueden declarar por una parte y asignarles un valor posteriormente. Por tanto, el ejemplo anterior se puede rehacer de la siguiente manera:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> numero_1<span class="sy0">;</span>
+<span class="kw1">var</span> numero_2<span class="sy0">;</span>
+&nbsp;
+numero_1 <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span>
+numero_2 <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> resultado <span class="sy0">=</span> numero_1 <span class="sy0">+</span> numero_2<span class="sy0">;</span></pre>
+</div>
+
+<p>Una de las características más sorprendentes de JavaSript para los programadores habituados a otros lenguajes de programación es que tampoco es necesario declarar las variables. En otras palabras, se pueden utilizar variables que no se han definido anteriormente mediante la palabra reservada <code>var</code>. El ejemplo anterior también es correcto en JavaScript de la siguiente forma:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> numero_1 <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span>
+<span class="kw1">var</span> numero_2 <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+resultado <span class="sy0">=</span> numero_1 <span class="sy0">+</span> numero_2<span class="sy0">;</span></pre>
+</div>
+
+<p>La variable <code>resultado</code> no está declarada, por lo que JavaScript crea una variable global (más adelante se verán las diferencias entre variables locales y globales) y le asigna el valor correspondiente. De la misma forma, también sería correcto el siguiente código:</p>
+
+<div class="code javascript">
+<pre class="javascript">numero_1 <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span>
+numero_2 <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+resultado <span class="sy0">=</span> numero_1 <span class="sy0">+</span> numero_2<span class="sy0">;</span></pre>
+</div>
+
+<p>En cualquier caso, se recomienda declarar todas las variables que se vayan a utilizar.</p>
+
+<p><img src="images/diagrams/var-statements.png" alt="Diagrama de declaración de variables"></p>
+
+<h3 id="nombres-de-variables">3.3.1 Nombres de variables</h3>
+
+<p>El nombre de una variable también se conoce como <strong>identificador</strong> y debe cumplir las siguientes normas:</p>
+
+<ul>
+<li>Sólo puede estar formado por letras, números y los símbolos <code>$</code> (dólar) y <code>_</code> (guión bajo).</li>
+<li>El primer carácter no puede ser un número.</li>
+</ul>
+
+<p>Por tanto, las siguientes variables tienen nombres correctos:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> $numero1<span class="sy0">;</span>
+<span class="kw1">var</span> _$letra<span class="sy0">;</span>
+<span class="kw1">var</span> $$$otroNumero<span class="sy0">;</span>
+<span class="kw1">var</span> $_a__$4<span class="sy0">;</span></pre>
+</div>
+
+<p>Sin embargo, las siguientes variables tienen identificadores incorrectos:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> 1numero<span class="sy0">;</span>       <span class="co1">// Empieza por un número</span>
+<span class="kw1">var</span> numero<span class="sy0">;</span><span class="nu0">1</span>_123<span class="sy0">;</span>  <span class="co1">// Contiene un carácter &quot;;&quot;</span></pre>
+</div>
+
+<p><img src="images/diagrams/name.png" alt="Diagrama de sintaxis de nombres"></p>
+
+<p>A continuación se indica el listado de palabras reservadas en JavaScript, y que no podremos utilizar para nombrar nuestras variables, parámetros, funciones, operadores o etiquetas:</p>
+
+<ul>
+<li><code>abstract</code></li>
+<li><code>boolean break byte</code></li>
+<li><code>case catch char class const continue</code></li>
+<li><code>debugger default delete do double</code></li>
+<li><code>else enum export extends</code></li>
+<li><code>false final finally float for function</code></li>
+<li><code>goto</code></li>
+<li><code>if implements import in instanceof int interface</code></li>
+<li><code>long</code></li>
+<li><code>native new null</code></li>
+<li><code>package private protected public</code></li>
+<li><code>return</code></li>
+<li><code>short static super switch synchronized</code></li>
+<li><code>this throw throws transient true try typeof</code></li>
+<li><code>var volatile void</code></li>
+<li><code>while with</code></li>
+</ul>
+
+<h3 id="tipos-de-variables">3.3.2 Tipos de variables</h3>
+
+<p>JavaScript divide los distintos tipos de variables en dos grupos: tipos primitivos y tipos de referencia o clases.</p>
+
+<h4 id="tipos-primitivos">3.3.2.1 Tipos primitivos</h4>
+
+<p>JavaScript define cinco tipos primitivos: <code>undefined</code>, <code>null</code>, <code>boolean</code>, <code>number</code> y <code>string</code>. Además de estos tipos, JavaScript define el operador <code>typeof</code> para averiguar el tipo de una variable.</p>
+
+<h5 id="variables-de-tipo-undefined">3.3.2.1.1 Variables de tipo undefined</h5>
+
+<p>El tipo <code>undefined</code> corresponde a las variables que han sido definidas y todavía no se les ha asignado un valor:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> variable1<span class="sy0">;</span>
+<span class="kw1">typeof</span> variable1<span class="sy0">;</span>  <span class="co1">// devuelve &quot;undefined&quot;</span></pre>
+</div>
+
+<h5 id="variables-de-tipo-null">3.3.2.1.2 Variables de tipo null</h5>
+
+<p>Se trata de un tipo similar a <code>undefined</code>, y de hecho en JavaScript se consideran iguales (<code>undefined == null</code>). El tipo <code>null</code> se suele utilizar para representar objetos que en ese momento no existen.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> nombreUsuario <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span></pre>
+</div>
+
+<h5 id="variables-de-tipo-boolean">3.3.2.1.3 Variables de tipo boolean</h5>
+
+<p>Se trata de una variable que sólo puede almacenar uno de los dos valores especiales definidos y que representan el valor <em>"verdadero"</em> y el valor <em>"falso"</em>.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> variable1 <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+<span class="kw1">var</span> variable2 <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Los valores <code>true</code> y <code>false</code> son valores especiales, de forma que no son palabras ni números ni ningún otro tipo de valor. Este tipo de variables son esenciales para crear cualquier aplicación, tal y como se verá más adelante.</p>
+
+<p>Cuando es necesario convertir una variable numérica a una variable de tipo <code>boolean</code>, JavaScript aplica la siguiente conversión: el número <code>0</code> se convierte en <code>false</code> y cualquier otro número distinto de <code>0</code> se convierte en <code>true</code>.</p>
+
+<p>Por este motivo, en ocasiones se asocia el número <code>0</code> con el valor <code>false</code> y el número <code>1</code> con el valor <code>true</code>. Sin embargo, es necesario insistir en que <code>true</code> y <code>false</code> son valores especiales que no se corresponden ni con números ni con ningún otro tipo de dato.</p>
+
+<h4 id="conversion-entre-tipos-de-variables">3.3.2.2 Conversión entre tipos de variables</h4>
+
+<p>JavaScript es un lenguaje de programación <em>"no tipado"</em>, lo que significa que una misma variable puede guardar diferentes tipos de datos a lo largo de la ejecución de la aplicación. De esta forma, una variable se podría inicializar con un valor numérico, después podría almacenar una cadena de texto y podría acabar la ejecución del programa en forma de variable booleana.</p>
+
+<p>No obstante, en ocasiones es necesario que una variable almacene un dato de un determinado tipo. Para asegurar que así sea, se puede convertir una variable de un tipo a otro, lo que se denomina <em>typecasting</em>:</p>
+
+<p>Así, JavaScript incluye un método llamado <code>toString()</code> que permite convertir variables de cualquier tipo a variables de cadena de texto, tal y como se muestra en el siguiente ejemplo:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> variable1 <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+variable1.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// devuelve &quot;true&quot; como cadena de texto</span>
+<span class="kw1">var</span> variable2 <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+variable2.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// devuelve &quot;5&quot; como cadena de texto</span></pre>
+</div>
+
+<p>JavaScript también incluye métodos para convertir los valores de las variables en valores numéricos. Los métodos definidos son <code>parseInt()</code> y <code>parseFloat()</code>, que convierten la variable que se le indica en un número entero o un número decimal respectivamente.</p>
+
+<p>La conversión numérica de una cadena se realiza carácter a carácter empezando por el de la primera posición. Si ese carácter no es un número, la función devuelve el valor NaN. Si el primer carácter es un número, se continúa con los siguientes caracteres mientras estos sean números.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> variable1 <span class="sy0">=</span> <span class="st0">&quot;hola&quot;</span><span class="sy0">;</span>
+parseInt<span class="br0">&#40;</span>variable1<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// devuelve NaN</span>
+<span class="kw1">var</span> variable2 <span class="sy0">=</span> <span class="st0">&quot;34&quot;</span><span class="sy0">;</span>
+parseInt<span class="br0">&#40;</span>variable2<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// devuelve 34</span>
+<span class="kw1">var</span> variable3 <span class="sy0">=</span> <span class="st0">&quot;34hola23&quot;</span><span class="sy0">;</span>
+parseInt<span class="br0">&#40;</span>variable3<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// devuelve 34</span>
+<span class="kw1">var</span> variable4 <span class="sy0">=</span> <span class="st0">&quot;34.23&quot;</span><span class="sy0">;</span>
+parseInt<span class="br0">&#40;</span>variable4<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// devuelve 34</span></pre>
+</div>
+
+<p>En el caso de <code>parseFloat()</code>, el comportamiento es el mismo salvo que también se considera válido el carácter . que indica la parte decimal del número:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> variable1 <span class="sy0">=</span> <span class="st0">&quot;hola&quot;</span><span class="sy0">;</span>
+parseFloat<span class="br0">&#40;</span>variable1<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// devuelve NaN</span>
+<span class="kw1">var</span> variable2 <span class="sy0">=</span> <span class="st0">&quot;34&quot;</span><span class="sy0">;</span>
+parseFloat<span class="br0">&#40;</span>variable2<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// devuelve 34.0</span>
+<span class="kw1">var</span> variable3 <span class="sy0">=</span> <span class="st0">&quot;34hola23&quot;</span><span class="sy0">;</span>
+parseFloat<span class="br0">&#40;</span>variable3<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// devuelve 34.0</span>
+<span class="kw1">var</span> variable4 <span class="sy0">=</span> <span class="st0">&quot;34.23&quot;</span><span class="sy0">;</span>
+parseFloat<span class="br0">&#40;</span>variable4<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// devuelve 34.23</span></pre>
+</div>
+
+<h4 id="tipos-de-referencia">3.3.2.3 Tipos de referencia</h4>
+
+<p>Aunque JavaScript no define el concepto de clase, los tipos de referencia se asemejan a las clases de otros lenguajes de programación. Los objetos en JavaScript se crean mediante la palabra reservada <code>new</code> y el nombre de la clase que se va a instanciar. De esta forma, para crear un objeto de tipo <code>String</code> se indica lo siguiente (los paréntesis solamente son obligatorios cuando se utilizan argumentos, aunque se recomienda incluirlos incluso cuando no se utilicen):</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> variable1 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">String</span><span class="br0">&#40;</span><span class="st0">&quot;hola mundo&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>JavaScript define una clase para cada uno de los tipos de datos primitivos. De esta forma, existen objetos de tipo <code>Boolean</code> para las variables booleanas, <code>Number</code> para las variables numéricas y <code>String</code> para las variables de cadenas de texto. Las clases <code>Boolean</code>, <code>Number</code> y <code>String</code> almacenan los mismos valores de los tipos de datos primitivos y añaden propiedades y métodos para manipular sus valores.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> longitud <span class="sy0">=</span> <span class="st0">&quot;hola mundo&quot;</span>.<span class="me1">length</span><span class="sy0">;</span></pre>
+</div>
+
+<p>La propiedad <code>length</code> sólo está disponible en la clase <code>String</code>, por lo que en principio no debería poder utilizarse en un dato primitivo de tipo cadena de texto. Sin embargo, JavaScript convierte el tipo de dato primitivo al tipo de referencia <code>String</code>, obtiene el valor de la propiedad <code>length</code> y devuelve el resultado. Este proceso se realiza de forma automática y transparente para el programador.</p>
+
+<p>En realidad, con una variable de tipo <code>String</code> no se pueden hacer muchas más cosas que con su correspondiente tipo de dato primitivo. Por este motivo, no existen muchas diferencias prácticas entre utilizar el tipo de referencia o el tipo primitivo, salvo en el caso del resultado del operador <code>typeof</code> y en el caso de la función <code>eval()</code>, como se verá más adelante.</p>
+
+<p>La principal diferencia entre los tipos de datos es que los datos primitivos se manipulan por valor y los tipos de referencia se manipulan, como su propio nombre indica, por referencia. Los conceptos <em>"por valor"</em> y <em>"por referencia"</em> son iguales que en el resto de lenguajes de programación, aunque existen diferencias importantes (no existe por ejemplo el concepto de puntero).</p>
+
+<p>Cuando un dato se manipula por valor, lo único que importa es el valor en sí. Cuando se asigna una variable por valor a otra variable, se copia directamente el valor de la primera variable en la segunda. Cualquier modificación que se realice en la segunda variable es independiente de la primera variable.</p>
+
+<p>De la misma forma, cuando se pasa una variable por valor a una función (como se explicará más adelante) sólo se pasa una copia del valor. Así, cualquier modificación que realice la función sobre el valor pasado no se refleja en el valor de la variable original.</p>
+
+<p>En el siguiente ejemplo, una variable se asigna por valor a otra variable:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> variable1 <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span>
+<span class="kw1">var</span> variable2 <span class="sy0">=</span> variable1<span class="sy0">;</span>
+&nbsp;
+variable2 <span class="sy0">=</span> variable2 <span class="sy0">+</span> <span class="nu0">5</span><span class="sy0">;</span>
+<span class="co1">// Ahora variable2 = 8 y variable1 sigue valiendo 3</span></pre>
+</div>
+
+<p>La <code>variable1</code> se asigna por valor en la <code>variable1</code>. Aunque las dos variables almacenan en ese momento el mismo valor, son independientes y cualquier cambio en una de ellas no afecta a la otra. El motivo es que los tipos de datos primitivos siempre se asignan (y se pasan) por valor.</p>
+
+<p>Sin embargo, en el siguiente ejemplo, se utilizan tipos de datos de referencia:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// variable1 = 25 diciembre de 2009</span>
+<span class="kw1">var</span> variable1 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">Date</span><span class="br0">&#40;</span><span class="nu0">2009</span><span class="sy0">,</span> <span class="nu0">11</span><span class="sy0">,</span> <span class="nu0">25</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">// variable2 = 25 diciembre de 2009</span>
+<span class="kw1">var</span> variable2 <span class="sy0">=</span> variable1<span class="sy0">;</span>
+&nbsp;
+<span class="co1">// variable2 = 31 diciembre de 2010</span>
+variable2.<span class="me1">setFullYear</span><span class="br0">&#40;</span><span class="nu0">2010</span><span class="sy0">,</span> <span class="nu0">11</span><span class="sy0">,</span> <span class="nu0">31</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">// Ahora variable1 también es 31 diciembre de 2010</span></pre>
+</div>
+
+<p>En el ejemplo anterior, se utiliza un tipo de dato de referencia que se verá más adelante, que se llama <code>Date</code> y que se utiliza para manejar fechas. Se crea una variable llamada <code>variable1</code> y se inicializa la fecha a 25 de diciembre de 2009. Al constructor del objeto <code>Date</code> se le pasa el año, el número del mes (siendo <code>0</code> = enero, <code>1</code> = febrero, ..., <code>11</code> = diciembre) y el día (al contrario que el mes, los días no empiezan en <code>0</code> sino en <code>1</code>). A continuación, se asigna el valor de la <code>variable1</code> a otra variable llamada <code>variable2</code>.</p>
+
+<p>Como <code>Date</code> es un tipo de referencia, la asignación se realiza por referencia. Por lo tanto, las dos variables quedan "unidas" y hacen referencia al mismo objeto, al mismo dato de tipo <code>Date</code>. De esta forma, si se modifica el valor de <code>variable2</code> (y se cambia su fecha a 31 de diciembre de 2010) el valor de <code>variable1</code> se verá automáticamente modificado.</p>
+
+<h2 id="numeros">3.4 Números</h2>
+
+<p>En JavaScript únicamente existe un tipo de número. Internamente, es representado como un dato de <code>64 bits</code> en coma flotante, al igual el tipo de dato <code>double</code> en Java. A diferencia de otros lenguajes de programación, no existe una diferencia entre un número entero y otro decimal, por lo que <code>1</code> y <code>1.0</code>son el mismo valor. Esto es significativo ya que evitamos los problemas desbordamiento en tipos de dato <em>pequeños</em>, al no existir la necesidad de conocer el tipo de dato.</p>
+
+<p><img src="images/diagrams/number-literal.png" alt="Diagrama de definición de números"></p>
+
+<h3 id="tipos-de-numeros">3.4.1 Tipos de números</h3>
+
+<p>Si el número es entero, se indica su valor directamente.</p>
+
+<p><img src="images/diagrams/integer.png" alt="Diagrama de definición de un número entero"></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> variable1 <span class="sy0">=</span> <span class="nu0">10</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Si el número es decimal, se debe utilizar el punto (.) para separar la parte entera de la decimal.</p>
+
+<p><img src="images/diagrams/fraction.png" alt="Diagrama de definición de un número decimal"></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> variable2 <span class="sy0">=</span> <span class="nu0">3.14159265</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Además del sistema numérico decimal, también se pueden indicar valores en el sistema octal (si se incluye un cero delante del número) y en sistema hexadecimal (si se incluye un cero y una x delante del número).</p>
+
+<p><img src="images/diagrams/exponent.png" alt="Diagrama de definición de un número exponencial"></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> variable1 <span class="sy0">=</span> <span class="nu0">10</span><span class="sy0">;</span>
+<span class="kw1">var</span> variable_octal <span class="sy0">=</span> 034<span class="sy0">;</span>
+<span class="kw1">var</span> variable_hexadecimal <span class="sy0">=</span> 0xA3<span class="sy0">;</span></pre>
+</div>
+
+<p>JavaScript define tres valores especiales muy útiles cuando se trabaja con números. En primer lugar se definen los valores <code>Infinity</code> y <code>–Infinity</code> para representar números demasiado grandes (positivos y negativos) y con los que JavaScript no puede trabajar.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> variable1 <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">,</span> variable2 <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>variable1<span class="sy0">/</span>variable2<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// muestra &quot;Infinity&quot;</span></pre>
+</div>
+
+<p>El otro valor especial definido por JavaScript es <code>NaN</code>, que es el acrónimo de <em>"Not a Number"</em>. De esta forma, si se realizan operaciones matemáticas con variables no numéricas, el resultado será de tipo <code>NaN</code>.</p>
+
+<p>Para manejar los valores <code>NaN</code>, se utiliza la función relacionada <code>isNaN()</code>, que devuelve <code>true</code> si el parámetro que se le pasa no es un número:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> variable1 <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span>
+<span class="kw1">var</span> variable2 <span class="sy0">=</span> <span class="st0">&quot;hola&quot;</span><span class="sy0">;</span>
+isNaN<span class="br0">&#40;</span>variable1<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// false</span>
+isNaN<span class="br0">&#40;</span>variable2<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// true</span>
+isNaN<span class="br0">&#40;</span>variable1 <span class="sy0">+</span> variable2<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// true</span></pre>
+</div>
+
+<p>Por último, JavaScript define algunas constantes matemáticas que representan valores numéricos significativos:</p>
+
+<div class="table" id="table-3-1">
+
+    <table>
+<thead>
+<tr>
+  <th>Constante</th>
+  <th align="center">Valor</th>
+  <th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>Math.E</code></td>
+  <td align="center"><code>2.718281828459045</code></td>
+  <td>Constante de Euler, base de los logaritmos naturales y también llamado <em>número e</em></td>
+</tr>
+<tr>
+  <td><code>Math.LN2</code></td>
+  <td align="center"><code>0.6931471805599453</code></td>
+  <td>Logaritmo natural de <code>2</code></td>
+</tr>
+<tr>
+  <td><code>Math.LN10</code></td>
+  <td align="center"><code>2.302585092994046</code></td>
+  <td>Logaritmo natural de <code>10</code></td>
+</tr>
+<tr>
+  <td><code>Math.LOG2E</code></td>
+  <td align="center"><code>1.4426950408889634</code></td>
+  <td>Logaritmo en base <code>2</code> de <code>Math.E</code></td>
+</tr>
+<tr>
+  <td><code>Math.LOG10E</code></td>
+  <td align="center"><code>0.4342944819032518</code></td>
+  <td>Logaritmo en base <code>10</code> de <code>Math.E</code></td>
+</tr>
+<tr>
+  <td><code>Math.PI</code></td>
+  <td align="center"><code>3.141592653589793</code></td>
+  <td>Pi, relación entre el radio de una circunferencia y su diámetro</td>
+</tr>
+<tr>
+  <td><code>Math.SQRT1_2</code></td>
+  <td align="center"><code>0.7071067811865476</code></td>
+  <td>Raíz cuadrada de <code>1/2</code></td>
+</tr>
+<tr>
+  <td><code>Math.SQRT2</code></td>
+  <td align="center"><code>1.4142135623730951</code></td>
+  <td>Raíz cuadrada de <code>2</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>De esta forma, para calcular el área de un círculo de radio r, se debe utilizar la constante que representa al número Pi:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> area <span class="sy0">=</span> <span class="kw4">Math</span>.<span class="me1">PI</span> <span class="sy0">*</span> r <span class="sy0">*</span> r<span class="sy0">;</span></pre>
+</div>
+
+<h2 id="cadenas-de-texto">3.5 Cadenas de texto</h2>
+
+<p>Las variables de tipo cadena de texto permiten almacenar cuaquier sucesión de caracteres, por lo que se utilizan ampliamente en la mayoría de aplicaciones JavaScript. Cada carácter de la cadena se encuentra en una posición a la que se puede acceder individualmente, siendo el primer carácter el de la posición <code>0</code>.</p>
+
+<p><img src="images/diagrams/string-literal.png" alt="Diagrama de definición de una cadena de texto"></p>
+
+<p>El valor de las cadenas de texto se indica encerrado entre comillas simples o dobles:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> variable1 <span class="sy0">=</span> <span class="st0">&quot;hola&quot;</span><span class="sy0">;</span>
+<span class="kw1">var</span> variable2 <span class="sy0">=</span> <span class="st0">'mundo'</span><span class="sy0">;</span>
+<span class="kw1">var</span> variable3 <span class="sy0">=</span> <span class="st0">&quot;hola mundo, esta es una frase más larga&quot;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Las cadenas de texto pueden almacenar cualquier carácter, aunque algunos no se pueden incluir directamente en la declaración de la variable. Si por ejemplo se incluye un <code>ENTER</code> para mostrar el resto de caracteres en la línea siguiente, se produce un error en la aplicación:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> variable <span class="sy0">=</span> <span class="st0">&quot;hola mundo, esta es
+                                     una frase más larga&quot;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>La variable anterior no está correctamente definida y se producirá un error en la aplicación. Por tanto, resulta evidente que algunos caracteres <em>especiales</em> no se pueden incluir directamente. De la misma forma, como las comillas (doble y simple) se utilizan para encerrar los contenidos, también se pueden producir errores:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> variable1 <span class="sy0">=</span> <span class="st0">&quot;hola 'mundo'&quot;</span><span class="sy0">;</span>
+<span class="kw1">var</span> variable2 <span class="sy0">=</span> <span class="st0">'hola &quot;mundo&quot;'</span><span class="sy0">;</span>
+<span class="kw1">var</span> variable3 <span class="sy0">=</span> <span class="st0">&quot;hola 'mundo', esta es una &quot;</span>frase<span class="st0">&quot; más larga&quot;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Si el contenido de texto tiene en su interior alguna comilla simple, se encierran los contenidos con comillas dobles (como en el caso de la <code>variable1</code> anterior). Si el contenido de texto tiene en su interior alguna comilla doble, se encierran sus contenidos con comillas simples (como en el caso de la <code>variable2</code> anterior). Sin embargo, en el caso de la <code>variable3</code> su contenido tiene tanto comillas simples como comillas dobles, por lo que su declaración provocará un error.</p>
+
+<p>Para resolver estos problemas, JavaScript define un mecanismo para incluir de forma sencilla caracteres especiales (<code>ENTER</code>, <code>Tabulador</code>) y problemáticos (comillas). Esta estrategia se denomina "mecanismo de escape", ya que se sustituyen los caracteres problemáticos por otros caracteres seguros que siempre empiezan con la barra <code>\</code>:</p>
+
+<div class="table" id="table-3-2">
+
+    <table>
+<thead>
+<tr>
+  <th>Si se quiere incluir...</th>
+  <th>Se debe sustituir por...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Una nueva línea</td>
+  <td><code>\n</code></td>
+</tr>
+<tr>
+  <td>Un tabulador</td>
+  <td><code>\t</code></td>
+</tr>
+<tr>
+  <td>Una comilla simple</td>
+  <td><code>\'</code></td>
+</tr>
+<tr>
+  <td>Una comilla doble</td>
+  <td><code>\"</code></td>
+</tr>
+<tr>
+  <td>Una barra inclinada</td>
+  <td><code>\\</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p><img src="images/diagrams/escaped-character.png" alt="Diagrama de definición de mecanismos de escape"></p>
+
+<p>Utilizando el mecanismo de escape, se pueden corregir los ejemplos anteriores:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> variable <span class="sy0">=</span> <span class="st0">&quot;hola mundo, esta es <span class="es0">\n</span> una frase más larga&quot;</span><span class="sy0">;</span>
+<span class="kw1">var</span> variable3 <span class="sy0">=</span> <span class="st0">&quot;hola 'mundo', esta es una <span class="es0">\&quot;</span>frase<span class="es0">\&quot;</span> más larga&quot;</span><span class="sy0">;</span></pre>
+</div>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-3.html#sintaxis-basica">Sintaxis básica</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.1</span>
+                        <a class="internal" href="capitulo-3.html#espacios-en-blanco">Espacios en blanco</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.2</span>
+                        <a class="internal" href="capitulo-3.html#comentarios">Comentarios</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.3</span>
+                        <a class="internal" href="capitulo-3.html#variables">Variables</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.4</span>
+                        <a class="internal" href="capitulo-3.html#numeros">Números</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.5</span>
+                        <a class="internal" href="capitulo-3.html#cadenas-de-texto">Cadenas de texto</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

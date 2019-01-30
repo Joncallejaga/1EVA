@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script>
+ var nombres = new Array();
+    for (var i=0; i<4; i++){
+       
+        nombres[i] = prompt("Introduce palabras para el array");
+    }
+    
+    imprimirArray(nombres);
+
+
+    PrimeraPalabra(nombres);
+
+
+    function imprimirArray(nombres) {
+            document.writeln("<br>");
+            for (var i = 0; i < nombres.length; i++) {
+                document.writeln(nombres[i])
+            }
+
+        }
+
+  
+
+    function PrimeraPalabra(nombres){
+       
+        var primera = nombres.toString();
+        primera.split(" ");
+        // La idea es ahora cojer el primer elemento del array pero no recuerdo el metodo y no me da tiempo a buscarlo en los apuntes
+        console.log(primera[]);
+    }
+
+    function UltimaPalabra(){
+ 
+        var primera = nombres.toString();
+        primera.split(" ");
+         // La idea es ahora cojer el ultimo elemento del array pero no recuerdo el metodo y no me da tiempo a buscarlo en los apuntes
+        
+        console.log(primera[0]);
+    }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

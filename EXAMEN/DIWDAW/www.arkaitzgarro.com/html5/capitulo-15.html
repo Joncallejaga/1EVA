@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="28/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>File | HTML5</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">HTML5</a></h1>
+        <p class="span3">
+                        <a href="capitulo-14.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-16.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="file"><span>Capítulo 15</span> File</h1>
+        <p>HTML5 ofrece una forma estándar de interactuar con archivos locales a través de la especificación del API de archivos. El API de archivos se puede utilizar, por ejemplo, para crear una vista previa en miniatura de imágenes mientras se envían al servidor o para permitir que una aplicación guarde una referencia de un archivo mientras el usuario se encuentra sin conexión. También se podría utilizar para verificar si el tipo MIME de un archivo seleccionado por el usuario coincide con los formatos de archivo permitidos o para restringir el tamaño de un fichero, antes de enviarlo al servidor.</p>
+
+<p>A continuación se indican las <em>interfaces</em> que ofrece la especificación para acceder a archivos desde un sistema de archivos local:</p>
+
+<ul>
+<li><code>File</code>: representa un archivo local y proporciona información únicamente de lectura (el nombre, el tamaño del archivo, el tipo MIME y una referencia al manejador del archivo).</li>
+<li><code>FileList</code>: representa un conjunto de objetos <code>File</code> (tanto para un conjunto de ficheros seleccionados a través de <code>&lt;input type="file" multiple&gt;</code> como para un conjunto de ficheros arrastrados desde el sistema de ficheros al navegador).</li>
+<li><code>Blob</code>: permite fragmentar un archivo en intervalos de <em>bytes</em>.</li>
+</ul>
+
+<p>Cuando se utiliza junto con las estructuras de datos anteriores, el API de <code>FileReader</code> se puede utilizar para leer un archivo de forma asíncrona mediante el control de eventos de JavaScript. Por lo tanto, se puede controlar el progreso de una lectura, detectar si se han producido errores y determinar si ha finalizado una carga de un fichero. El modelo de evento de <code>FileReader</code> guarda muchas semejanzas con el API de <code>XMLHttpRequest</code>.</p>
+
+<h2 id="deteccion-de-la-funcionalidad-2">15.1 Detección de la funcionalidad</h2>
+
+<p>En primer lugar, se debe comprobar que el navegador sea totalmente compatible con el API de archivos. Si la aplicación solo va a utilizar algunas funcionalidades del API, se debe modificar este fragmento de código para adaptarlo a nuestras necesidades:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// Check for the various File API support.</span>
+<span class="kw1">if</span> <span class="br0">&#40;</span>window.<span class="me1">File</span> <span class="sy0">&amp;&amp;</span> window.<span class="me1">FileReader</span> <span class="sy0">&amp;&amp;</span> window.<span class="me1">FileList</span> <span class="sy0">&amp;&amp;</span> window.<span class="me1">Blob</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// Great success! All the File APIs are supported.</span>
+<span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+    alert<span class="br0">&#40;</span><span class="st0">'The File APIs are not fully supported in this browser.'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="acceso-a-traves-del-formulario">15.2 Acceso a través del formulario</h2>
+
+<p>La forma más sencilla de cargar un archivo es utilizar un elemento <code>&lt;input type="file"&gt;</code> estándar de formulario. JavaScript devuelve la lista de objetos <code>File</code> seleccionados como un objeto <code>FileList</code>.</p>
+
+<p>A continuación, se muestra un ejemplo en el que se utiliza el atributo <code>multiple</code> para permitir la selección simultánea de varios archivos:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;file&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;files&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;files[]&quot;</span> <span class="kw3">multiple</span> <span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">output</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;list&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">output</span>&gt;</span></pre>
+</div>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> handleFileSelect<span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> files <span class="sy0">=</span> e.<span class="me1">target</span>.<span class="me1">files</span><span class="sy0">;</span> <span class="co1">// FileList object</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">    // files is a FileList of File objects. List some properties.
+    var output = [];
+    for (var i = 0, f; f = files[i]; i++) {
+        output.push('&lt;li&gt;&lt;strong&gt;', escape(f.name), '&lt;/strong&gt; (', f.type || 'n/a', ') - ',
+                    f.size, ' bytes, last modified: ',
+                    f.lastModifiedDate.toLocaleDateString(), '&lt;/li&gt;');
+    }
+    list.innerHTML = '&lt;ul&gt;' + output.join('') + '&lt;/ul&gt;';
+}
+&nbsp;
+files.addEventListener('change', handleFileSelect, false);</pre>
+</div>
+
+<h2 id="como-leer-archivos">15.3 Cómo leer archivos</h2>
+
+<p>Después de obtener una referencia de <code>File</code>, podemos crear una instancia de un objeto <code>FileReader</code> para leer su contenido y almacenarlo en memoria. Cuando finaliza la carga, se lanza el evento <code>onload</code> y se puede utilizar su atributo <code>result</code> para acceder a los datos del archivo.</p>
+
+<p>A continuación se indican las cuatro opciones de lectura asíncrona de archivo que incluye <code>FileReader</code>:</p>
+
+<ul>
+<li><code>FileReader.readAsBinaryString(Blob|File)</code>: la propiedad <code>result</code> contendrá los datos del archivo/objeto <code>BLOB</code> en forma de cadena binaria. Cada <em>byte</em> se representa con un número entero comprendido entre <code>0</code> y <code>255</code>, ambos incluidos.</li>
+<li><code>FileReader.readAsText(Blob|File, opt_encoding)</code>: la propiedad <code>result</code> contendrá los datos del archivo/objeto <code>BLOB</code> en forma de cadena de texto. De forma predeterminada, la cadena se decodifica con el formato <code>UTF-8</code>. Podemos especificar un parámetro de codificación opcional para especificar un formato diferente.</li>
+<li><code>FileReader.readAsDataURL(Blob|File)</code>: la propiedad <code>result</code> contendrá los datos del archivo/objeto <code>BLOB</code> codificados como una URL de datos.</li>
+<li><code>FileReader.readAsArrayBuffer(Blob|File)</code>: la propiedad <code>result</code> contendrá los datos del archivo/objeto <code>BLOB</code> como un objeto <code>ArrayBuffer</code>.</li>
+</ul>
+
+<p>Una vez que se ha activado uno de estos métodos de lectura en el objeto <code>FileReader</code>, se pueden escuchar los eventos <code>onloadstart</code>, <code>onprogress</code>, <code>onload</code>, <code>onabort</code>, <code>onerror</code> y <code>onloadend</code> para realizar un seguimiento de su progreso de lectura. En el ejemplo que se muestra a continuación, obtenemos las imágenes de los elementos seleccionados por el usuario, leemos su contenido con <code>reader.readAsDataURL()</code> mostramos una miniatura de la imagen:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;file&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;files&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;files[]&quot;</span> <span class="kw3">multiple</span> <span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">output</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;list&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">output</span>&gt;</span></pre>
+</div>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> handleFileSelect<span class="br0">&#40;</span>evt<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> files <span class="sy0">=</span> evt.<span class="me1">target</span>.<span class="me1">files</span><span class="sy0">;</span> <span class="co1">// FileList object</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">    // Loop through the FileList and render image files as thumbnails.
+    for (var i = 0, f; f = files[i]; i++) {
+&nbsp;
+        // Only process image files.
+        if (!f.type.match('image.*')) {
+            continue;
+        }
+&nbsp;
+        var reader = new FileReader();
+        // Closure to capture the file information.
+        reader.onload = (function(theFile) {
+            return function(e) {
+                // Render thumbnail.
+                var span = document.createElement('span');
+                span.innerHTML = ['&lt;img class=&quot;thumb&quot; src=&quot;', e.target.result,
+                                  '&quot; title=&quot;', escape(theFile.name), '&quot;/&gt;'].join('');
+                list.insertBefore(span, null);
+            };
+        })(f);
+&nbsp;
+        // Read in the image file as a data URL.
+        reader.readAsDataURL(f);
+    }
+}
+&nbsp;
+files.addEventListener('change', handleFileSelect, false);</pre>
+</div>
+
+<h2 id="fragmentacion-de-archivos">15.4 Fragmentación de archivos</h2>
+
+<p>En algunos casos, leer el archivo completo en memoria no es la mejor opción. Supongamos, por ejemplo, que se quiere crear una herramienta de subida de archivos de forma asíncrona. Para acelerar la subida, se podría leer y enviar el archivo en diferentes fragmentos de <em>bytes</em>. El servidor se encargaría de reconstruir el contenido del archivo en el orden correcto.</p>
+
+<p>Afortunadamente, la interfaz <code>File</code> nos proporciona un método de fragmentación de ficheros. El método utiliza un <em>byte</em> de inicio como primer argumento, un <em>byte</em> de finalización como segundo argumento. El siguiente ejemplo muestra cómo leer un fichero por partes:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> files <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">'files'</span><span class="br0">&#41;</span>.<span class="me1">files</span><span class="sy0">;</span>
+<span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span>files.<span class="me1">length</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  alert<span class="br0">&#40;</span><span class="st0">'Please select a file!'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">return</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">var</span> file  <span class="sy0">=</span> files<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">;</span>
+<span class="kw1">var</span> start <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="kw1">var</span> stop  <span class="sy0">=</span> file.<span class="me1">size</span> <span class="sy0">-</span> <span class="nu0">1</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> reader <span class="sy0">=</span> <span class="kw1">new</span> FileReader<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+reader.<span class="me1">onloadend</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">if</span> <span class="br0">&#40;</span>e.<span class="me1">target</span>.<span class="me1">readyState</span> <span class="sy0">==</span> FileReader.<span class="me1">DONE</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="co1">// DONE == 2</span>
+    document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">'byte_content'</span><span class="br0">&#41;</span>.<span class="me1">textContent</span> <span class="sy0">=</span> e.<span class="me1">target</span>.<span class="me1">result</span><span class="sy0">;</span>
+    document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">'byte_range'</span><span class="br0">&#41;</span>.<span class="me1">textContent</span> <span class="sy0">=</span> 
+        <span class="br0">&#91;</span><span class="st0">'Read bytes: '</span><span class="sy0">,</span> start <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">,</span> <span class="st0">' - '</span><span class="sy0">,</span> stop <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">,</span>
+         <span class="st0">' of '</span><span class="sy0">,</span> file.<span class="me1">size</span><span class="sy0">,</span> <span class="st0">' byte file'</span><span class="br0">&#93;</span>.<span class="me1">join</span><span class="br0">&#40;</span><span class="st0">''</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#40;</span>file.<span class="me1">webkitSlice</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">var</span> blob <span class="sy0">=</span> file.<span class="me1">webkitSlice</span><span class="br0">&#40;</span>start<span class="sy0">,</span> stop <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>file.<span class="me1">mozSlice</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">var</span> blob <span class="sy0">=</span> file.<span class="me1">mozSlice</span><span class="br0">&#40;</span>start<span class="sy0">,</span> stop <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+reader.<span class="me1">readAsBinaryString</span><span class="br0">&#40;</span>blob<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-15.html#file">File</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>15.1</span>
+                        <a class="internal" href="capitulo-15.html#deteccion-de-la-funcionalidad-2">Detección de la funcionalidad</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>15.2</span>
+                        <a class="internal" href="capitulo-15.html#acceso-a-traves-del-formulario">Acceso a través del formulario</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>15.3</span>
+                        <a class="internal" href="capitulo-15.html#como-leer-archivos">Cómo leer archivos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>15.4</span>
+                        <a class="internal" href="capitulo-15.html#fragmentacion-de-archivos">Fragmentación de archivos</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

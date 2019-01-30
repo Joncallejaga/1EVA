@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="08/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Objetos | JavaScript</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">JavaScript</a></h1>
+        <p class="span3">
+                        <a href="capitulo-7.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-9.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="objetos"><span>Capítulo 8</span> Objetos</h1>
+        <p>Los tipos primitivos en JavaScript son <code>undefined</code>, <code>null</code>, <code>boolean</code>, <code>number</code> y <code>string</code>. Aunque pueda resultar extraño, el resto de elementos en JavaScript son objetos, tanto las funciones, arrays, expresiones regulares como los propios objetos. Un objeto en JavaScript es un contenedor de propiedades, donde una propiedad tiene un nombre y un valor. El nombre de una propiedad puede ser una cadena de caracteres, incluso una vacía. El valor de la propiedad puede ser cualquier valor que podamos utilizar en JavaScript, excepto <code>undefined</code>.</p>
+
+<p>En JavaScript, los objetos son básicamente <a href="http://en.wikipedia.org/wiki/Hash_table">tablas hash</a>, esto es, un grupo de propiedades y funciones que pueden ser accedidos a través de una clave. Tanto las propiedades como los métodos (que no son más que propiedades cuyo valor es una función) pueden ser creados dinámicamente en tiempo de ejecución.</p>
+
+<h2 id="representacion-de-objetos">8.1 Representación de objetos</h2>
+
+<p><img src="images/diagrams/object-literal.png" alt="Diagrama de representación de objetos"></p>
+
+<p>La manera más simple de construir un objeto en JavaScript, es declarar una nueva variable de tipo <em>Object</em> y asignarle las propiedades o métodos que el objeto necesite:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> obj <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">Object</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+obj.<span class="me1">foo</span> <span class="sy0">=</span> <span class="st0">&quot;bar&quot;</span><span class="sy0">;</span>
+obj.<span class="me1">hello</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Hello world!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Existe una manera más rápida (en términos de caracteres), de crear un objeto utilizando la denominada notación literal. Esta representación consiste en asignar a una variable una pareja de llaves (<code>{</code> <code>}</code>) para crear un objeto vacío, y asignar las propiedades y métodos de la misma manera que en el ejemplo anterior:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> obj   <span class="sy0">=</span> <span class="br0">&#123;</span><span class="br0">&#125;</span><span class="sy0">;</span>
+obj.<span class="me1">foo</span>   <span class="sy0">=</span> <span class="st0">&quot;bar&quot;</span><span class="sy0">;</span>
+obj.<span class="me1">hello</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Hello world!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">var</span> obj <span class="sy0">=</span> <span class="br0">&#123;</span>
+    <span class="st0">&quot;foo&quot;</span>   <span class="sy0">:</span> <span class="st0">&quot;bar&quot;</span><span class="sy0">,</span>
+    <span class="st0">&quot;hello&quot;</span> <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Hello world!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Como hemos dicho, el nombre de una propiedad puede ser un <code>string</code>, incluso uno vacío. Las <em>comillas dobles</em> alrededor del nombre de la propiedad son opcionales, si el nombre es un nombre legal de JavaScript, y no es una palabra reservada. Así, las <em>comillas dobles</em> son necesarias para un nombre de propiedad como "first-name", pero no son necesarias para first_name. Los valores de las propiedades pueden ser cualquier expresión, incluso la definición de otro objeto:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> flight <span class="sy0">=</span> <span class="br0">&#123;</span>
+    airline<span class="sy0">:</span> <span class="st0">&quot;Oceanic&quot;</span><span class="sy0">,</span>
+    number<span class="sy0">:</span> <span class="nu0">815</span><span class="sy0">,</span>
+    departure<span class="sy0">:</span> <span class="br0">&#123;</span>
+        IATA<span class="sy0">:</span> <span class="st0">&quot;SYD&quot;</span><span class="sy0">,</span>
+        time<span class="sy0">:</span> <span class="st0">&quot;2004-09-22 14:55&quot;</span><span class="sy0">,</span>
+        city<span class="sy0">:</span> <span class="st0">&quot;Sydney&quot;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+    arrival<span class="sy0">:</span> <span class="br0">&#123;</span>
+        IATA<span class="sy0">:</span> <span class="st0">&quot;LAX&quot;</span><span class="sy0">,</span>
+        time<span class="sy0">:</span> <span class="st0">&quot;2004-09-23 10:42&quot;</span><span class="sy0">,</span>
+        city<span class="sy0">:</span> <span class="st0">&quot;Los Angeles&quot;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>En JavaScript, los objetos son dinámicos, esto quiere decir que sus propiedades no tienen por qué ser definidas en el momento en el que creamos el objeto. Podemos añadir nuevas propiedades al objeto en tiempo de ejecución, tan solo indicando el nombre la propiedad y asignándole un valor o función.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> cat <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">Object</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+cat.<span class="me1">name</span> <span class="sy0">=</span> <span class="st0">&quot;Rufus&quot;</span><span class="sy0">;</span>
+cat.<span class="me1">species</span> <span class="sy0">=</span> <span class="st0">&quot;cat&quot;</span><span class="sy0">;</span>
+cat.<span class="me1">hello</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;miaow&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Como podemos observar en la propiedad <em>hello</em>, su valor no es un tipo primitivo sino una función. Esto es posible porque en JavaScript las funciones son un tipo especial de objetos, que podemos tratar de la misma manera que un <em>string</em> o un número. Las propiedades que tienen como valor una función, son tratadas como métodos del objeto.</p>
+
+<p>En estos casos, no suele ser necesario definir la función anteriormente, pudiendo utilizar una función anónima para declarar el método.</p>
+
+<h3 id="notacion-literal">8.1.1 Notación literal</h3>
+
+<p>Crear objetos utilizando una notación literal es muy útil en situaciones en las que queremos pasar una serie de datos relacionados a una función o configurar una librería externa.</p>
+
+<p>Imaginemos una situación en la que utilizamos una librería que nos permite crear una galería de imágenes. Una posible solución sería definir un método para cada una de las propiedades de la galería, de manera que pudiésemos llamar a cada uno de esos métodos con el valor correspondiente. Esto supondría tener dos métodos por cada propiedad (<em>getter</em> y <em>setter</em>), así como una llamada para cada propiedad que deseemos configurar. Utilizando una notación literal de objetos, podemos ahorrarnos todo este código y configurar la librería utilizando un único objeto:</p>
+
+<div class="code javascript">
+<pre class="javascript">domElement.<span class="me1">fancybox</span><span class="br0">&#40;</span><span class="br0">&#123;</span>
+    maxWidth    <span class="sy0">:</span> <span class="nu0">800</span><span class="sy0">,</span>
+    maxHeight   <span class="sy0">:</span> <span class="nu0">600</span><span class="sy0">,</span>
+    fitToView   <span class="sy0">:</span> <span class="kw2">false</span><span class="sy0">,</span>
+    width       <span class="sy0">:</span> <span class="st0">'70%'</span><span class="sy0">,</span>
+    height      <span class="sy0">:</span> <span class="st0">'70%'</span><span class="sy0">,</span>
+    autoSize    <span class="sy0">:</span> <span class="kw2">false</span><span class="sy0">,</span>
+    closeClick  <span class="sy0">:</span> <span class="kw2">false</span><span class="sy0">,</span>
+    openEffect  <span class="sy0">:</span> <span class="st0">'none'</span><span class="sy0">,</span>
+    closeEffect <span class="sy0">:</span> <span class="st0">'none'</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Otra de las ventajas que nos ofrece esta notación literal, es poder crear librerías de utilidades, de la misma manera que podríamos crear una clase abstracta con métodos estáticos en otros lenguajes de programación con Java o C#.</p>
+
+<p>Aquí un ejemplo de cómo podríamos crear una librería de utilidades para arrays:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> ArrayUtil <span class="sy0">=</span> <span class="br0">&#123;</span>
+    contains <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span>array<span class="sy0">,</span> element<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw1">var</span> x<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> x<span class="sy0">&lt;</span>array .<span class="me1">length</span><span class="sy0">;</span> x<span class="sy0">++</span><span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>array<span class="br0">&#91;</span>x<span class="br0">&#93;</span> <span class="sy0">===</span> element<span class="br0">&#41;</span>
+               <span class="kw1">return</span> <span class="kw2">true</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+    exclude <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span>list<span class="sy0">,</span> items<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        ...
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+    makeList <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span>list<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        ...
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">var</span> list <span class="sy0">=</span> <span class="br0">&#91;</span><span class="st0">&quot;A&quot;</span><span class="sy0">,</span> <span class="st0">&quot;B&quot;</span><span class="sy0">,</span> <span class="st0">&quot;C&quot;</span><span class="br0">&#93;</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;¿Contiene A? &quot;</span> <span class="sy0">+</span> ArrayUtil.<span class="me1">contains</span><span class="br0">&#40;</span>list<span class="sy0">,</span> <span class="st0">&quot;A&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="acceso">8.2 Acceso</h2>
+
+<p>Es posible acceder a los valores de un objeto indicando el nombre de la propiedad dentro de unos corchetes (<code>[</code> <code>]</code>), como si accediésemos a un elemento de un <em>array</em>. Si el nombre de la propiedad es un nombre legal de JavaScript, y no es una palabra reservada, se puede utilizar la notación <code>.</code>. Es preferible utilizar la notación <code>.</code>, ya que es más corta y comúnmente utilizada como acceso a métodos y propiedades en lenguajes orientados a objetos:</p>
+
+<div class="code javascript">
+<pre class="javascript">flight<span class="br0">&#91;</span><span class="st0">&quot;airline&quot;</span><span class="br0">&#93;</span>       <span class="co1">// &quot;Oceanic&quot;</span>
+flight.<span class="me1">departure</span>.<span class="me1">IATA</span>   <span class="co1">// &quot;SYD&quot;</span></pre>
+</div>
+
+<p>En algunas ocasiones, puede resultar interesante utilizar la notación corchetes (<code>[</code> <code>]</code>) para acceder a los elementos, ya que las claves son almacenadas como <em>strings</em>. Esto nos permite construir cadenas de caracteres en tiempo de ejecución, para acceder a las propiedades de los objetos. Por ejemplo, podemos crear un bucle para iterar sobre las propiedades de un objeto:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">for</span><span class="br0">&#40;</span><span class="kw1">var</span> property <span class="kw1">in</span> cat<span class="br0">&#41;</span>
+    console.<span class="me1">log</span><span class="br0">&#40;</span>cat<span class="br0">&#91;</span>property<span class="br0">&#93;</span>.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> myObject <span class="sy0">=</span> <span class="br0">&#123;</span>
+    property1<span class="sy0">:</span> <span class="st0">&quot;chocolate&quot;</span><span class="sy0">,</span>
+    property2<span class="sy0">:</span> <span class="st0">&quot;cake&quot;</span><span class="sy0">,</span>
+    property3<span class="sy0">:</span> <span class="st0">&quot;brownies&quot;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">for</span><span class="br0">&#40;</span><span class="kw1">var</span> x<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span> x<span class="sy0">&lt;</span><span class="nu0">4</span><span class="sy0">;</span> x<span class="sy0">++</span><span class="br0">&#41;</span>
+    console.<span class="me1">log</span><span class="br0">&#40;</span>myObject<span class="br0">&#91;</span><span class="st0">&quot;property&quot;</span> <span class="sy0">+</span> x<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>El valor <code>undefined</code> es devuelto si se intenta acceder a una propiedad que no existe:</p>
+
+<div class="code javascript">
+<pre class="javascript">stooge<span class="br0">&#91;</span><span class="st0">&quot;middle-name&quot;</span><span class="br0">&#93;</span>   <span class="co1">// undefined</span>
+flight.<span class="me1">status</span>           <span class="co1">// undefined</span>
+stooge<span class="br0">&#91;</span><span class="st0">&quot;FIRST-NAME&quot;</span><span class="br0">&#93;</span>    <span class="co1">// undefined</span></pre>
+</div>
+
+<p>El operador <code>||</code> puede ser utilizado para obtener valores por defecto:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> middle <span class="sy0">=</span> stooge<span class="br0">&#91;</span><span class="st0">&quot;middle-name&quot;</span><span class="br0">&#93;</span> <span class="sy0">||</span> <span class="st0">&quot;(none)&quot;</span><span class="sy0">;</span>
+<span class="kw1">var</span> status <span class="sy0">=</span> flight.<span class="me1">status</span> <span class="sy0">||</span> <span class="st0">&quot;unknown&quot;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Intentar acceder a los valores de una propiedad no definida, lanzará una excepción de tipo <code>TypeError</code>. Esto puede evitarse utilizando el operador <code>&amp;&amp;</code>, para asegurarnos que el valor existe y es accesible:</p>
+
+<div class="code javascript">
+<pre class="javascript">flight.<span class="me1">equipment</span>       <span class="co1">// undefined</span>
+flight.<span class="me1">equipment</span>.<span class="me1">model</span> <span class="co1">// TypeError: Cannot read property 'model' of undefined</span>
+flight.<span class="me1">equipment</span> <span class="sy0">&amp;&amp;</span> flight.<span class="me1">equipment</span>.<span class="me1">model</span>  <span class="co1">// undefined</span></pre>
+</div>
+
+<h2 id="modificacion">8.3 Modificación</h2>
+
+<p>El valor de una objeto puede actualizarse a través de una asignación. Si el nombre de la propiedad existe en el objeto, su valor es reemplazado:</p>
+
+<div class="code javascript">
+<pre class="javascript">stooge<span class="br0">&#91;</span><span class="st0">'first-name'</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="st0">'Arkaitz'</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Si la propiedad no existe en el objeto, esta nueva propiedad es añadida al objeto:</p>
+
+<div class="code javascript">
+<pre class="javascript">stooge<span class="br0">&#91;</span><span class="st0">'middle-name'</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="st0">'Lester'</span><span class="sy0">;</span>
+stooge.<span class="me1">nickname</span> <span class="sy0">=</span> <span class="st0">'Curly'</span><span class="sy0">;</span>
+flight.<span class="me1">equipment</span> <span class="sy0">=</span> <span class="br0">&#123;</span> model<span class="sy0">:</span> <span class="st0">'Boeing 777'</span> <span class="br0">&#125;</span>
+flight.<span class="me1">status</span> <span class="sy0">=</span> <span class="st0">'overdue'</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="borrado">8.4 Borrado</h2>
+
+<p>El operado <code>delete</code> puede ser utilizado para eliminar la propiedad de un objeto. Este operador eliminará la propiedad de un objeto, si la tuviera, pero no afectará al resto de propiedades de los prototipos.</p>
+
+<div class="code javascript">
+<pre class="javascript">another_stooge.<span class="me1">nickname</span> <span class="co1">// 'Moe'</span>
+&nbsp;
+<span class="co1">// Remove nickname from another_stooge, revealing</span>
+<span class="co1">// the nickname of the prototype.</span>
+<span class="kw1">delete</span> another_stooge.<span class="me1">nickname</span><span class="sy0">;</span>
+&nbsp;
+another_stooge.<span class="me1">nickname</span> <span class="co1">// 'Curly'</span></pre>
+</div>
+
+<h2 id="paso-por-referencia">8.5 Paso por referencia</h2>
+
+<p>Los objetos siempre son accedidos como referencias, nunca se copia su valor cuando los asignamos a otros objetos, o los pasamos como parámetros en funciones:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> x <span class="sy0">=</span> stooge<span class="sy0">;</span>
+x.<span class="me1">nickname</span> <span class="sy0">=</span> <span class="st0">'Curly'</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// nick contiene 'Curly' porque x y stooge</span>
+<span class="co1">// referencian al mismo objeto</span>
+<span class="kw1">var</span> nick <span class="sy0">=</span> stooge.<span class="me1">nickname</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// a, b, y c hacen referencia a</span>
+<span class="co1">// diferentes objetos vacíos</span>
+<span class="kw1">var</span> a <span class="sy0">=</span> <span class="br0">&#123;</span><span class="br0">&#125;</span><span class="sy0">,</span> b <span class="sy0">=</span> <span class="br0">&#123;</span><span class="br0">&#125;</span><span class="sy0">,</span> c <span class="sy0">=</span> <span class="br0">&#123;</span><span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// a, b, y c hacen referencia al</span>
+<span class="co1">// mismo objeto vacío</span>
+a <span class="sy0">=</span> b <span class="sy0">=</span> c <span class="sy0">=</span> <span class="br0">&#123;</span><span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> obj <span class="br0">&#123;</span> value <span class="sy0">=</span> <span class="nu0">5</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>obj.<span class="me1">value</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// o.value = 5</span>
+&nbsp;
+<span class="kw1">function</span> change<span class="br0">&#40;</span>obj<span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+    obj.<span class="me1">value</span> <span class="sy0">=</span> <span class="nu0">6</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+change<span class="br0">&#40;</span>obj<span class="br0">&#41;</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>obj.<span class="me1">value</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// o.value = 6</span></pre>
+</div>
+
+<h2 id="enumeracion">8.6 Enumeración</h2>
+
+<p>La sentencia <code>for...in</code> puede iterar sobre todos los nombres de propiedades de un objeto. Esta iteración incluirá todas las propiedades, funciones y propiedades definidas en los prototipos, en las que no podemos estar interesados. La mejor manera de filtrar estas propiedades es a través de la función <code>hasOwnProperty</code> y el operador <code>typeof</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> name<span class="sy0">;</span>
+<span class="kw1">for</span> <span class="br0">&#40;</span>name <span class="kw1">in</span> another_stooge<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span><span class="kw1">typeof</span> another_stooge<span class="br0">&#91;</span>name<span class="br0">&#93;</span> <span class="sy0">!==</span> <span class="st0">'function'</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        document.<span class="me1">writeln</span><span class="br0">&#40;</span>name <span class="sy0">+</span> <span class="st0">': '</span> <span class="sy0">+</span> another_stooge<span class="br0">&#91;</span>name<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>No hay ningún tipo de garantía en el orden en el que se van a mostrar las propiedades, por lo que si esto es importante, tendremos que controlarlo de alguna manera. Para ello, la mejor manera es olvidarnos de la sentencia <code>for...in</code> y acceder directamente a las propiedades concretas, en el orden que definamos:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> i<span class="sy0">;</span>
+<span class="kw1">var</span> properties <span class="sy0">=</span> <span class="br0">&#91;</span>
+    <span class="st0">'first-name'</span><span class="sy0">,</span>
+    <span class="st0">'middle-name'</span><span class="sy0">,</span>
+    <span class="st0">'last-name'</span><span class="sy0">,</span>
+    <span class="st0">'profession'</span>
+<span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">for</span> <span class="br0">&#40;</span>i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> properties.<span class="me1">length</span><span class="sy0">;</span> i <span class="sy0">+=</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    document.<span class="me1">writeln</span><span class="br0">&#40;</span>properties<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">+</span> <span class="st0">': '</span> <span class="sy0">+</span>
+        another_stooge<span class="br0">&#91;</span>properties<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="objetos-globales">8.7 Objetos globales</h2>
+
+<p>JavaScript permite crear variables globales de una manera muy sencilla, Desafortunadamente, las variables globales perjudican directamente la calidad de los programas, por lo que deben ser evitadas. Una manera de minimizar la utilización de variables globales, es crear una única variable global para toda la aplicación, que incluya el resto de variables:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> MYAPP <span class="sy0">=</span> <span class="br0">&#123;</span><span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>En este momento, esta variable se convierte en la contenedora de todas las variables de la aplicación:</p>
+
+<div class="code javascript">
+<pre class="javascript">MYAPP.<span class="me1">stooge</span> <span class="sy0">=</span> <span class="br0">&#123;</span>
+    <span class="st0">&quot;first-name&quot;</span><span class="sy0">:</span> <span class="st0">&quot;Joe&quot;</span><span class="sy0">,</span>
+    <span class="st0">&quot;last-name&quot;</span><span class="sy0">:</span> <span class="st0">&quot;Howard&quot;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+MYAPP.<span class="me1">flight</span> <span class="sy0">=</span> <span class="br0">&#123;</span>
+    airline<span class="sy0">:</span> <span class="st0">&quot;Oceanic&quot;</span><span class="sy0">,</span>
+    number<span class="sy0">:</span> <span class="nu0">815</span><span class="sy0">,</span>
+    departure<span class="sy0">:</span> <span class="br0">&#123;</span>
+        IATA<span class="sy0">:</span> <span class="st0">&quot;SYD&quot;</span><span class="sy0">,</span>
+        time<span class="sy0">:</span> <span class="st0">&quot;2004-09-22 14:55&quot;</span><span class="sy0">,</span>
+        city<span class="sy0">:</span> <span class="st0">&quot;Sydney&quot;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+    arrival<span class="sy0">:</span> <span class="br0">&#123;</span>
+        IATA<span class="sy0">:</span> <span class="st0">&quot;LAX&quot;</span><span class="sy0">,</span>
+        time<span class="sy0">:</span> <span class="st0">&quot;2004-09-23 10:42&quot;</span><span class="sy0">,</span>
+        city<span class="sy0">:</span> <span class="st0">&quot;Los Angeles&quot;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Reduciendo el número de variables globales a uno, se reduce de manera significativa la posibilidad de colisiones con otras aplicaciones, widgtes o librerías. Además, la aplicación puede leerse y entenderse de manera más sencilla.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-8.html#objetos">Objetos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.1</span>
+                        <a class="internal" href="capitulo-8.html#representacion-de-objetos">Representación de objetos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.2</span>
+                        <a class="internal" href="capitulo-8.html#acceso">Acceso</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.3</span>
+                        <a class="internal" href="capitulo-8.html#modificacion">Modificación</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.4</span>
+                        <a class="internal" href="capitulo-8.html#borrado">Borrado</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.5</span>
+                        <a class="internal" href="capitulo-8.html#paso-por-referencia">Paso por referencia</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.6</span>
+                        <a class="internal" href="capitulo-8.html#enumeracion">Enumeración</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.7</span>
+                        <a class="internal" href="capitulo-8.html#objetos-globales">Objetos globales</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

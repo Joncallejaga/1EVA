@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang=”es”>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+	<script type="text/javascript">
+
+		var numeroGanador = Math.floor((Math.random() *10) +1);
+		
+
+		for (var intentos = 4;intentos>=0;intentos--){
+			var numeroIntroducido = prompt("Introduce un numero", '');
+			if(numeroIntroducido == numeroGanador){
+				alert("Has acertado");
+				intentos = 0;
+			}else {
+				alert("Has fallado , quedan " + intentos+ " intentos");
+				
+				
+			}
+
+		}
+		alert("El numero era el "+ numeroGanador);
+	</script>
+</head>
+
+<body>
+</body>
+</html>

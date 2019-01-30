@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="15/04/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Ejercicios | Java</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">Java</a></h1>
+        <p class="span3">
+                        <a href="capitulo-19.html"><span>&larr;</span> Anterior</a>
+            
+                        <a class="disabled" href="capitulo-20.html#">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="ejercicios"><span>Capítulo 20</span> Ejercicios</h1>
+        <h2 id="capitulo-4-variables-y-operadores">20.1 Capítulo 4 Variables y operadores</h2>
+
+<h3 id="ej01">20.1.1 Ejercicio 1</h3>
+
+<p>Crear dos variables de cualquiera de los tipos básicos, dar un valor a la primera y a continuación asigne la segunda a la primera. Imprimir por pantalla las dos variables. Cambiar el valor de la segunda variable y volver a imprimir las variables por pantalla. ¿Qué es lo que ocurre?</p>
+
+<h3 id="ej02">20.1.2 Ejercicio 2</h3>
+
+<p>A partir de una variable num1 con valor inicial 12 y una variable num2 con valor inicial 4, crear nuevas variables que almacenen el resultado de realizar la suma, resta, multiplicación, división y resto de num1 y num2. Mostrar el valor de las nuevas variables por pantalla.</p>
+
+<h3 id="ej03">20.1.3 Ejercicio 3</h3>
+
+<p>Construir un programa que, dado el radio de una esfera, calcule y devuelva por pantalla el valor de la superficie y el volumen de la esfera correspondiente. Para obtener el valor de PI, utilizar la variable estática <code>Math.PI</code>.</p>
+
+<p>Volumen esfera = (4/3)<em>PI</em>R3</p>
+
+<p>Superficie esfera = 4<em>PI</em>R2</p>
+
+<h3 id="ej04">20.1.4 Ejercicio 4</h3>
+
+<p>Construir un programa que dado el peso (en kilogramos) y la altura de una persona (en metros) calcule y muestre por pantalla su Indice de Masa Corporal (IMS) o índice de Quetelet. Este índice pretende determinar el intervalo de peso más saludable que puede tener una persona. El valor de este índice se calcula mediante la siguiente expresión:</p>
+
+<p><code>IMS = peso/altura2 </code></p>
+
+<p>Se suele establecer un intervalo de 18 a 25 como saludable en personas adultas. Para la realización de ejercicios, en los que el usuario deba introducir datos por teclado, es posible utilizar las siguientes instrucciones para leer los datos por teclado:</p>
+
+<div class="code java">
+<pre class="java">Scanner entrada <span class="sy0">=</span> <span class="kw1">new</span> Scanner<span class="br0">&#40;</span><span class="kw3">System</span>.<span class="me1">in</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw4">int</span> num <span class="sy0">=</span> entrada.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="capitulo-5-sentencias-condicionales">20.2 Capítulo 5 Sentencias condicionales</h2>
+
+<h3 id="ej05">20.2.1 Ejercicio 5</h3>
+
+<p>Definir dos variables num1 y num2 e implementar un programa que asigne un valor a cada una, y obtenga el mayor de los dos, mostrando el resultado por pantalla.</p>
+
+<h3 id="ej06">20.2.2 Ejercicio 6</h3>
+
+<p>Construir un programa que calcule el índice de masa corporal de una persona (IMC = peso [kg] / altura2[m]) e indique el estado en el que se encuentra esa persona en función del valor de IMC:</p>
+
+<div class="table" id="table-20-1">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Valor de IMC</th>
+  <th align="left">Diagnóstico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right">&lt; 16</td>
+  <td align="left">Criterio de ingreso en hospital</td>
+</tr>
+<tr>
+  <td align="right">de 16 a 17</td>
+  <td align="left">Infrapeso</td>
+</tr>
+<tr>
+  <td align="right">de 17 a 18</td>
+  <td align="left">Bajo peso</td>
+</tr>
+<tr>
+  <td align="right">de 18 a 25</td>
+  <td align="left">Peso normal (saludable)</td>
+</tr>
+<tr>
+  <td align="right">de 25 a 30</td>
+  <td align="left">Sobrepeso</td>
+</tr>
+<tr>
+  <td align="right">de 30 a 35</td>
+  <td align="left">Sobrepeso crónico</td>
+</tr>
+<tr>
+  <td align="right">de 35 a 40</td>
+  <td align="left">Obesidad premórbida</td>
+</tr>
+<tr>
+  <td align="right">> 40</td>
+  <td align="left">Obesidad mórbida</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Nota 1: se recomienda el empleo de sentencias <code>if–else</code> anidadas.</p>
+
+<p>Nota 2: Los operando (peso y altura) deben ser introducidos por teclado por el usuario.</p>
+
+<h3 id="ej07">20.2.3 Ejercicio 7</h3>
+
+<p>Construir un programa que simule el funcionamiento de una calculadora que puede realizar las cuatro operaciones aritméticas básicas (suma, resta, producto y división) con valores numéricos enteros. El usuario debe especificar la operación con el primer carácter del primer parámetro de la línea de comandos: S o s para la suma, R o r para la resta, P, p, M o m para el producto y D o d para la división. Los valores de los operandos se deben indicar en el segundo y tercer parámetros.</p>
+
+<h2 id="capitulo-6-bucles">20.3 Capítulo 6 Bucles</h2>
+
+<h3 id="ej08">20.3.1 Ejercicio 8</h3>
+
+<p>Construir un programa que visualice por pantalla todos los caracteres correspondientes a letras minúsculas.</p>
+
+<h3 id="ej09">20.3.2 Ejercicio 9</h3>
+
+<p>Construir un programa que calcule el factorial de un valor numérico introducido como parámetro o argumento en la línea de comandos.</p>
+
+<h3 id="ej10">20.3.3 Ejercicio 10</h3>
+
+<p>Construir un programa en el que, utilizando un bucle <code>for</code>, se escriba por pantalla una tabla de conversión de grados Fahrenheit a Celsius, para los valores de 0 hasta 300 grados, en intervalos de 20. La regla de conversión es la siguiente:</p>
+
+<p><code>ªC = (5/9)(ºF - 32)</code></p>
+
+<h3 id="ej11">20.3.4 Ejercicio 11</h3>
+
+<p>Definir un array bidimensional para representar una agenda semanal, donde se contemplen los 7 días de la semana y las 24 horas de cada día. Utilizar bucles for anidados para inicializar la agenda a: "No tengo planes.". Añadir "planes" a la agenda y mostrar el resultado por pantalla.</p>
+
+<h3 id="ej12">20.3.5 Ejercicio 12</h3>
+
+<p>Implementar un programa en el que, utilizando un bucle <code>while</code>, se escriban por pantalla los 51 primeros números de la sucesión de Fibonacci, definida por recurrencia como sigue:</p>
+
+<div class="code java">
+<pre class="java">f0 <span class="sy0">=</span> <span class="nu0">0</span>
+f1 <span class="sy0">=</span> <span class="nu0">1</span>
+fn<span class="sy0">+</span><span class="nu0">2</span> <span class="sy0">=</span> fn<span class="sy0">+</span><span class="nu0">1</span> <span class="sy0">+</span> fn</pre>
+</div>
+
+<h3 id="ej13">20.3.6 Ejercicio 13</h3>
+
+<p>Construir un programa en el que se pida al usuario dos números enteros positivos, n y m, y usando un bucle <code>for</code>, escriba el valor de n elevado a m.</p>
+
+<h3 id="ej14">20.3.7 Ejercicio 14</h3>
+
+<p>Construir un programa en el que se pida al usuario un número entero positivo n (validar que lo sea), y usando un bucle <code>while</code>, escriba por pantalla el valor del factorial de n.</p>
+
+<h3 id="ej15">20.3.8 Ejercicio 15</h3>
+
+<p>Construir un programa que simule el juego de la adivinanza de un número. El ordenador debe generar un número aleatorio entre 1 y 100 y el usuario tiene cinco oportunidades para acertarlo. Después de cada intento el programa debe indicarle al usuario si el número introducido por él es mayor, menor o igual al número a adivinar, y el número de intentos restantes.</p>
+
+<p>Nota: para generar el valor aleatorio puede emplearse la sentencia:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw4">int</span> x  <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="nu0">100</span><span class="sy0">*</span><span class="kw3">Math</span>.<span class="me1">random</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="capitulo-7-arrays">20.4 Capítulo 7 Arrays</h2>
+
+<h3 id="ej16">20.4.1 Ejercicio 16</h3>
+
+<p>Construir un programa que pida al usuario una serie de números enteros, los almacene en un array, y obtenga el máximo y el mínimo de los valores almacenados.</p>
+
+<h3 id="ej17">20.4.2 Ejercicio 17</h3>
+
+<p>Construir un programa que pida al usuario una serie de números enteros, los almacene en un array, e indique en pantalla si dicho array es capicúa, es decir, si la secuencia de sus elementos es igual vista de delante hacia atrás y de detrás hacia delante.</p>
+
+<h3 id="ej18">20.4.3 Ejercicio 18</h3>
+
+<p>Construir un programa que pida al usuario dos vectores de números enteros v1 y v2, y que construya un nuevo vector del resultado de "concatenar" los vectores v1 y v2. Es decir, colocar los elementos de v2 a continuación de los de v1 y, finalmente, mostrar el resultado de la concatenación por pantalla.</p>
+
+<h3 id="ej19">20.4.4 Ejercicio 19</h3>
+
+<p>Construir un programa que pida al usuario dos vectores de números enteros v1 y v2, y que construya un nuevo vector v que almacene la suma de ambos vectores. El nuevo vector se ha de ajustar al vector más largo proporcionado por el usuario. Finalmente, mostrar el resultado por pantalla.</p>
+
+<p>Por ejemplo, la suma de los vectores [1, 2, 3] y [1, 2, 3, 4, 5] es [2, 4, 6, 4, 5]</p>
+
+<h2 id="capitulo-8-funciones">20.5 Capítulo 8 Funciones</h2>
+
+<h3 id="ej20">20.5.1 Ejercicio 20</h3>
+
+<p>Crear una función que tome dos parámetros numéricos y calcule el máximo de los dos números. Crear una nueva función con el mismo nombre, que tome tres parámetros, y calcule el máximo de los tres números. Esta segunda función debe hacer uso de la primera.</p>
+
+<h3 id="ej21">20.5.2 Ejercicio 21</h3>
+
+<p>Crear una función que tome como parámetro un número e indique si es primo o no.</p>
+
+<h3 id="ej22">20.5.3 Ejercicio 22</h3>
+
+<p>Crear una función que tome como parámetro un número y devuelve un array con el número de divisores primos que tiene. Recomendación: crear una nueva función o utilizar la anterior que indique si un número es primo o no.</p>
+
+<h3 id="ej23">20.5.4 Ejercicio 23</h3>
+
+<p>Crear una función que convierte de grados Fahrenheit a Celsius.</p>
+
+<p><code>ºC = (5/9)(ºF - 32)</code></p>
+
+<h2 id="capitulo-11-clases-estandar">20.6 Capítulo 11 Clases estándar</h2>
+
+<h3 id="ej24">20.6.1 Ejercicio 24</h3>
+
+<p>Verificar si una cadena de texto almacenada en una variable nif, es un NIF correcto o no. Si lo es, se mostrará por consola su parte numérica; si no lo es se mostrará el mensaje "NIF no valido". Se tendrá en cuenta lo siguiente:</p>
+
+<ul>
+<li>Suponer que los NIFs tienen 8 dígitos y, a continuación, una letra (no importa que sea mayúscula o minúscula).</li>
+</ul>
+
+<p>Recomendaciones:</p>
+
+<ul>
+<li>Usar el método length() de java.lang.String para conocer el número de caracteres de una cadena de texto.</li>
+<li>Usar el método estático isLetter(char c) de java.lang.Character para comprobar que un carácter es una letra.</li>
+<li>Usar el método estático isDigit(char c) de java.lang.Character para comprobar que un carácter es un dígito.</li>
+<li>Usar el método substring(int inicio, int fin) de java.lang.String para obtener la parte numérica del NIF.</li>
+</ul>
+
+<h2 id="capitulo-15-poo">20.7 Capítulo 15 POO</h2>
+
+<h3 id="ej25">20.7.1 Ejercicio 25</h3>
+
+<p>Construir una clase <code>Complejo</code> con dos atributos:</p>
+
+<ul>
+<li><code>pReal</code>: parte real de tipo double</li>
+<li><code>pImag</code>: parte imaginaria también de tipo double</li>
+</ul>
+
+<p>y tres métodos:</p>
+
+<ul>
+<li><code>void asignar(double x, double y)</code></li>
+<li><code>void sumar(Complejo b)</code></li>
+<li><code>void imprimir</code></li>
+</ul>
+
+<p>y construir una clase <code>PruebaComplejo</code> que contenga un método principal que trabaje con instancias de la clase <code>Complejo</code>.</p>
+
+<h3 id="ej26">20.7.2 Ejercicio 26</h3>
+
+<p>Construir una clase <code>Racional</code> que permita representar y manipular números racionales. Un número racional permite representar la relación a/b entre dos números enteros siendo a el numerador y b el denominador (distinto de cero). Se deben implementar los siguientes métodos para la clase <code>Racional</code>:</p>
+
+<ul>
+<li><code>void asignaNumerador(int x)</code></li>
+<li><code>void asignaDenominador(int y)</code></li>
+<li><code>void imprimir()</code></li>
+<li><code>String toString()</code></li>
+<li><code>Racional suma(Racional b)</code></li>
+<li><code>Racional resta(Racional b)</code></li>
+<li><code>Racional producto(Racional b)</code></li>
+<li><code>Racional division(Racional b)</code></li>
+<li><code>boolean esIgual(Racional b)</code></li>
+</ul>
+
+<h3 id="ej27">20.7.3 Ejercicio 27</h3>
+
+<p>Implementar una clase <code>Punto</code> cuyos datos miembros sean las coordenadas de un punto del plano. Estos datos han de ser privados. Para esta clase se piden los siguientes métodos y constructores:</p>
+
+<ul>
+<li>El constructor <code>Punto()</code> recibe como argumento dos números reales, <code>a</code> y <code>b</code>, y construye un nuevo punto de la clase <code>Punto</code> cuyas coordenadas son <code>a</code> y <code>b</code>.</li>
+<li>Los métodos de acceso <code>getX()</code> y <code>getY()</code>, sin argumentos, que devuelven las coordenadas de un objeto <code>Punto</code>.</li>
+<li>Los métodos modificadores <code>setX()</code> y <code>setY()</code>, que reciben un argumento y modifican el valor de la correspondiente coordenada de un objeto <code>Punto</code>.</li>
+<li>El método <code>igual()</code>, que comprueba si un objeto de la clase <code>Punto</code> es igual a otro dado que se pasa como argumento.</li>
+<li>El método <code>distancia()</code>, sin argumentos, que calcula la distancia de un objeto de la clase <code>Punto</code> al origen de coordenadas.</li>
+<li>El método <code>distancia()</code>, que calcula la distancia de un objeto de la clase <code>Punto</code> a otro que se proporciona como argumento.</li>
+</ul>
+
+<h3 id="ej28">20.7.4 Ejercicio 28</h3>
+
+<p>Implementar una clase <code>Cuenta</code> que represente una cuenta bancaria y permita realizar operaciones como ingresar y retirar dinero, así como realizar una transferencia de una cuenta a otra. Se pide:</p>
+
+<ul>
+<li>Definir los atributos y métodos necesarios para realizar las operaciones.</li>
+<li>Implementar los métodos. Los métodos deben actualizar el estado de los atributos y mostrar un mensaje indicando que la operación se ha realizado de manera correcta.</li>
+<li>Crear un programa en Java que cree un par de objetos de tipo Cuenta y realice operaciones con ellos.</li>
+</ul>
+
+<h2 id="capitulo-16-herencia">20.8 Capítulo 16 Herencia</h2>
+
+<h3 id="ej29">20.8.1 Ejercicio 29</h3>
+
+<p>En una tienda se venden 2 tipos de ordenadores: portátiles y de sobremesa. Ambos tipos de ordenadores se caracterizan por su código y por su precio. Además, cada uno tiene un eslogan que es: "Ideal para sus viajes" en el caso de los portátiles y "Es el que más pesa, pero el que menos cuesta" para el caso de los ordenadores de sobremesa. Además, los ordenadores portátiles tienen un atributo peso, y los de sobremesa la descripción del tipo de torre. Se pide:</p>
+
+<ul>
+<li>Definir e implementar los atributos y métodos de cada una de las clases, así como la relación entre ellos.</li>
+<li>Crear un programa en Java que cree un par de objetos de tipo <code>Ordenador</code> y <code>Portatil</code> y realice operaciones con ellos.</li>
+</ul>
+
+<h3 id="ej30">20.8.2 Ejercicio 30</h3>
+
+<p>Desarrollar una clase <code>Empresa</code> cuyos datos miembro sean un nombre, un tamaño y un array de empleados (la clase <code>Empleado</code> se pide en el siguiente ejercicio). El tamaño de la empresa es inmutable. Para esta clase se piden los siguientes constructores y métodos:</p>
+
+<ul>
+<li>El constructor <code>Empresa()</code> que recibe como argumentos una cadena de texto nombre y un valor entero tamaño, y construye un nuevo objeto de la clase <code>Empresa</code>. El tamaño del array de empleados viene dado por el valor de la variable tamaño.</li>
+<li>Los métodos de acceso <code>getNombre()</code> y <code>getTamaño()</code>, devuelven respectivamente el nombre y el tamaño de la empresa.</li>
+<li>El método de acceso <code>getEmpleado()</code>, que recibe como argumento un número entero menor que el tamaño de la empresa, y devuelve el correspondiente campo del array de empleados.</li>
+<li>El método <code>despideEmpleado()</code>, que recibe como argumento un número entero menor que el tamaño de la empresa, y asigna null al correspondiente campo del array de empleados.</li>
+</ul>
+
+<h3 id="ej31">20.8.3 Ejercicio 31</h3>
+
+<p>Desarrollar una clase <code>Empleado</code> cuyos datos miembro sean una empresa, un nombre, un sueldo y un número de empleado. Estos datos han de ser protegidos (protected). Además, el número de empleado y la empresa son inmutables. Para esta clase se piden los siguientes constructores y métodos:</p>
+
+<ul>
+<li>El constructor <code>Empleado()</code> que recibe como argumentos una referencia a un objeto <code>Empresa</code>, una cadena de texto nombre y un valor entero sueldo. El número de empleado se crea de manera única por cada empleado de la empresa, utilizando para ello una variable contador perteneciente a la clase <code>Empresa</code>.</li>
+<li>El constructor protegido <code>Empleado()</code>, que recibe como argumentos una referencia a un objeto <code>Empresa</code>, una cadena de texto nombre, un valor entero sueldo y un número de empleado.</li>
+<li>Los métodos de acceso <code>getNombre()</code>, <code>getSueldo()</code> y <code>getNumEmpleado()</code>.</li>
+<li>Los métodos modificadores <code>setNombre()</code> y <code>setSueldo()</code>.</li>
+<li>El método de impresión por pantalla <code>toString()</code>, que devuelva una cadena con el número, nombre y sueldo del empleado.</li>
+<li>El método aumentar sueldo, que recibe como argumento un número entero N y modifica el sueldo aumentándolo un N%. Éste método no puede ser modificado por clases derivadas.</li>
+<li>El método <code>despedir()</code>, que elimina el empleado actual de la empresa donde trabaja.</li>
+</ul>
+
+<h3 id="ej32">20.8.4 Ejercicio 32</h3>
+
+<p>Añadir a la clase <code>Empresa</code> el método <code>nuevoEmpleado()</code>, que recibe como argumentos una cadena de texto nombre y un valor entero sueldo. Éste método, crea un nuevo empleado asociado a la empresa. Utilizamos el número de empleado como índice del array de empleados de la empresa.</p>
+
+<h3 id="ej33">20.8.5 Ejercicio 33</h3>
+
+<p>Desarrollar una clase <code>Ejecutivo</code> derivada de la clase <code>Empleado</code>, con un atributo adicional llamado presupuesto. Para esta clase se piden los siguientes constructores y métodos.</p>
+
+<ul>
+<li>El constructor <code>Ejecutivo()</code> que recibe como argumentos una referencia a un objeto <code>Empresa</code>, una cadena de texto nombre y un valor entero sueldo.</li>
+<li>El constructor <code>Ejecutivo()</code> que recibe como argumentos una referencia a un objeto <code>Empresa</code>, una cadena de texto nombre, un valor entero sueldo y un número de empleado.</li>
+<li>El método de acceso <code>getPresupuesto()</code>, que devuelve el valor del campo presupuesto.</li>
+<li>El método modificador <code>asignaPresupuesto()</code>, que recibe como argumento un valor entero y modifica el valor del atributo presupuesto.</li>
+<li>Redefinir el método <code>toString()</code> para que indique que el empleado es un ejecutivo.</li>
+<li>Añadir a la clase <code>Empleado</code> un método <code>ascender()</code>, que crea un nuevo objeto <code>Ejecutivo</code> con los datos del objeto <code>Empleado</code> actual, y cambia la referencia en el array de personal de la empresa a la que pertenece dicho objeto.</li>
+</ul>
+
+<h3 id="ej34">20.8.6 Ejercicio 34</h3>
+
+<p>Desarrollar una clase <code>Producto</code> cuyos datos miembro sean una cadena de texto identificación y un valor real precioBase. Ambos datos de tipo protegido. Para esta clase se piden los siguientes constructores y métodos:</p>
+
+<ul>
+<li>El constructor <code>Producto()</code> recibe como parámetros una cadena de texto de identificación y un valor real precioBase.</li>
+<li>Los métodos de acceso <code>getIdentificacion()</code> y <code>getPrecioBase()</code> y los métodos modificadores <code>setIdentificacion()</code> y <code>setPrecioBase()</code>.</li>
+<li>El método <code>toString()</code>, que dado un producto con identificación "RJ45" y precio base 10,50 devuelva la cadena: "RJ45 (10,45)"</li>
+</ul>
+
+<h3 id="ej35">20.8.7 Ejercicio 35</h3>
+
+<p>Desarrollar una clase <code>ProductoInventariado</code> derivada de la clase <code>Producto</code> anterior, con dos campos enteros adicionales cantidad y beneficio. Ambos atributos de tipo protegido. Para esta clase se piden los siguientes constructores y métodos:</p>
+
+<ul>
+<li>El constructor <code>ProductoInventariado()</code> recibe como argumentos una cadena de texto de identificación y un valor real precioBase y dos enteros cantidad y beneficio, y construye un nuevo objeto utilizando el constructor de la clase base.</li>
+<li>Los métodos de acceso <code>getCantidad()</code> y <code>getBeneficio()</code> y los métodos modificadores <code>setCantidad()</code> y <code>setBeneficio()</code>.</li>
+<li>El método <code>precioFinal()</code>, que devuelve el precio final de un producto determinado, calculado a partir del precio base y aplicándole el beneficio.</li>
+<li>El método <code>toString()</code>, que dado un producto inventariado con identificación "RJ45", cuyo precio base es 10,50 , su cantidad es 10 y su beneficio 13, devuelva la cadena: 10 RJ45 (10,45)(+13%)</li>
+</ul>
+
+<h3 id="ej36">20.8.8 Ejercicio 36</h3>
+
+<p>Desarrollar una clase <code>Tienda</code> cuyos datos miembro son una cadena de texto nombre, un valor entero inmutable maxProducto que indica el número máximo de productos distintos que puede tener la tienda, un array que contiene un inventario de objetos de tipo <code>ProductoInventariado</code>, un valor entero ultimaEntrada que indica la primera posición libre del array y un valor real caja que almacena el dinero del que dispone la tienda.</p>
+
+<p>Para esta clase se piden los siguientes constructores y métodos:</p>
+
+<ul>
+<li>El constructor <code>Tienda()</code>, que recibe como argumentos una cadena de texto nombre, un valor entero maxProducto y un valor real caja.</li>
+<li>El método <code>buscaProducto()</code>, que recibe como argumento una cadena de texto id, y devuelve el índice del array inventario en el que se encuentra un producto cuyo identificador coincide con id, si es que existe, o el valor de ultimaEntrada en caso contrario.</li>
+<li>El método <code>añadirProducto()</code>, que recibe como argumento un identificador de producto id, un precio base p, una cantidad c y un beneficio b y lo añade al inventario. Si el producto ya estaba en el inventario, entonces sólo hay que modificar los datos relativos al precio base, cantidad y beneficio. * * Si el producto no está en el inventario entonces hay que añadirlo. En cualquier caso, solo se podrá añadir un producto si el coste total (cantidad x precio base) es menor o igual que el dinero disponible en la tienda, el cual ha de ser disminuido de manera adecuada. Si en el inventario no hay sitio para el producto, o no hay dinero suficiente para adquirirlo, se muestra un mensaje informativo.</li>
+<li>El método <code>venderProducto()</code>, que recibe como parámetro un identificador id y una cantidad c, y si el producto existe en el inventario con una cantidad mayor o igual que c, entonces disminuye en c unidades la cantidad del producto y modifica adecuadamente la caja. Si la tienda se queda sin unidades del producto id, entonces hay que modificar adecuadamente el array inventario y el valor de ultimaEntrada para evitar huecos vacíos.</li>
+</ul>
+
+<h2 id="capitulo-18-interfaces">20.9 Capítulo 18 Interfaces</h2>
+
+<h3 id="ej37">20.9.1 Ejercicio 37</h3>
+
+<p>Desarrollar una interfaz <code>Vehiculo</code> que declare los métodos <code>factura()</code>, <code>hayPlaza()</code>, <code>aparca()</code> y <code>setTiempo()</code>, tales que:</p>
+
+<ul>
+<li><code>factura()</code> proporciona el importe a pagar por estacionar un Vehiculo durante un tiempo determinado en el parking.</li>
+<li><code>hayPlaza()</code> recibe como argumento una referencia a un objeto Parking y determina si hay sitio en dicho parking para estacionar un Vehiculo.</li>
+<li><code>aparca()</code> recibe como argumento una referencia a un objeto Parking y estaciona un Vehiculo en dicho parking.</li>
+<li><code>setTiempo()</code> recibe como argumento un entero y establece ese entero como tiempo de estancia del Vehiculo en el Parking.</li>
+</ul>
+
+<h3 id="ej38">20.9.2 Ejercicio 38</h3>
+
+<p>Desarrollar una clase <code>VehiculoCliente</code> implementando la interfaz <code>Vehiculo</code>, cuyos datos miembro son una cadena de texto matricula y un valor entero tiempo. La cadena de texto matricula no puede ser modificada. El valor entero tiempo almacena el número de minutos que el vehículo está en el parking.
+Para esta clase se piden los siguientes constructores y métodos:</p>
+
+<ul>
+<li>El constructor <code>VehiculoCliente</code>, que recibe como argumento un identificador de vehículo. El valor inicial de tiempo es 0.</li>
+<li>El método <code>setTiempo()</code>, que modifica el campo de tiempo.</li>
+<li>El método <code>factura()</code>, que determina lo que tiene que pagar un objeto del tipo <code>VehiculoCliente</code> por su estancia en el parking. El coste de la estancia es de 25€ el día completo y 1,2€ la hora.</li>
+<li>El método <code>hayPlaza()</code>, que recibe como argumento una referencia a un objeto <code>Parking</code> y determina si hay una plaza en dicho parking para estacionar un objeto de tipo VehiculoCliente.</li>
+<li>El método <code>aparca()</code>, que recibe como argumento una referencia a un objeto <code>Parking</code> y estaciona un <code>VehiculoCliente</code> en dicho parking.</li>
+</ul>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-20.html#ejercicios">Ejercicios</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>20.1</span>
+                        <a class="internal" href="capitulo-20.html#capitulo-4-variables-y-operadores">Capítulo 4 Variables y operadores</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>20.2</span>
+                        <a class="internal" href="capitulo-20.html#capitulo-5-sentencias-condicionales">Capítulo 5 Sentencias condicionales</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>20.3</span>
+                        <a class="internal" href="capitulo-20.html#capitulo-6-bucles">Capítulo 6 Bucles</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>20.4</span>
+                        <a class="internal" href="capitulo-20.html#capitulo-7-arrays">Capítulo 7 Arrays</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>20.5</span>
+                        <a class="internal" href="capitulo-20.html#capitulo-8-funciones">Capítulo 8 Funciones</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>20.6</span>
+                        <a class="internal" href="capitulo-20.html#capitulo-11-clases-estandar">Capítulo 11 Clases estándar</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>20.7</span>
+                        <a class="internal" href="capitulo-20.html#capitulo-15-poo">Capítulo 15 POO</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>20.8</span>
+                        <a class="internal" href="capitulo-20.html#capitulo-16-herencia">Capítulo 16 Herencia</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>20.9</span>
+                        <a class="internal" href="capitulo-20.html#capitulo-18-interfaces">Capítulo 18 Interfaces</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

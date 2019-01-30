@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Introducción | CSS 3</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">CSS 3</a></h1>
+        <p class="span3">
+                        <a href="index.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-2.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="introduccion"><span>Capítulo 1</span> Introducción</h1>
+        <p>Con la introducción de CSS 3, nunca ha sido tan fácil crear aplicaciones y sitios tan atractivos y completos en HTML. Hay una gran cantidad de extensiones y tecnologías nuevas para CSS 3, entre las que se incluyen las transformaciones en 2D, las transiciones, las transformaciones en 3D y las fuentes web.</p>
+
+<p>El objetivo inicial de CSS, separar el contenido de la forma, se cumplió ya con las primeras especificaciones del lenguaje. Sin embargo, el objetivo de ofrecer un control total a los diseñadores sobre los elementos de la página ha sido más difícil de cubrir. Las especificaciones anteriores del lenguaje tenían muchas utilidades para aplicar estilos a los sitios web, pero los desarrolladores aun continúan usando trucos diversos para conseguir efectos tan comunes o tan deseados como los bordes redondeados o el sombreado de elementos en la página.</p>
+
+<p>CSS 2 ya ofrece un control suficiente para el diseño de los sitios web, pero CSS 3 todavía avanza un poco más en la dirección, de aportar más control sobre los elementos de la página. Así pues, la novedad más importante que aporta CSS 3, de cara a los diseñadores y desarrolladores, consiste en la incorporación de nuevos mecanismos para mantener un mayor control sobre el estilo con el que se muestran los elementos de las páginas, sin tener que recurrir a trucos o hacks, que a menudo complicaban el código, tanto HTML como CSS.</p>
+
+<h2 id="especificacion-oficial">1.1 Especificación oficial</h2>
+
+<p>A diferencia de CSS 2, que fue una gran especificación que definía varias funcionalidades, CSS 3 está dividida en varios documentos separados, llamados "módulos". Cada módulo añade nuevas funcionalidades a las definidas en CSS 2, de manera que se preservan las anteriores para mantener la compatibilidad.</p>
+
+<p>Debido a la modularización del CSS 3, diferentes módulos pueden encontrarse en diferentes estados de su desarrollo, existiendo actualmente alrededor de cincuenta módulos publicados. El estado actual del desarrollo de CSS 3 puede ser consultado en <a href="http://www.w3.org/Style/CSS/current-work">http://www.w3.org/Style/CSS/current-work</a>.</p>
+
+<p>Mientras CSS 3 se convierte en un estandar, los distintos navegadores pueden incluir o no las mejoras propuestas, o incluso añadir las suyas propias. La web <a href="http://caniuse.com/">Can I use...</a> incluye un listado completo de funcionalidades soportadas por los ditintos navegadores.</p>
+
+<h2 id="nuevas-funcionalidades">1.2 Nuevas funcionalidades</h2>
+
+<p>Estas son algunas de las nuevas funcionalidades añadidas en CSS 3:</p>
+
+<ul>
+<li><p><strong>Módulo <em>Selectors Level 3</em></strong></p>
+
+<ul>
+<li>Nuevos selectores por atributos</li>
+<li>Nuevas pseudo-clases</li>
+<li>Nuevo selector adyacente</li>
+</ul></li>
+<li><p><strong>Módulo <em>Basic User Interface</em></strong></p>
+
+<ul>
+<li>Propiedad box-sizing</li>
+<li>Propiedades nav-top, nav-right, nav-bottom, nav-left</li>
+<li>Propiedades overflow-x, overflow-y</li>
+</ul></li>
+<li><p><strong>Módulo <em>Color</em></strong></p>
+
+<ul>
+<li>Colores HSL</li>
+<li>Colores HSLA</li>
+<li>Colores RGBA</li>
+<li>Opacidad</li>
+</ul></li>
+<li><p><strong>Módulo <em>Media Queries</em></strong></p></li>
+<li><p><strong>Módulo <em>Backgrounds and Borders</em></strong></p>
+
+<ul>
+<li>Propiedad background-origin</li>
+<li>Propiedad background-clip</li>
+<li>Propiedad background-size</li>
+<li>Propiedad background</li>
+<li>Propiedad border-color</li>
+<li>Propiedad border-image</li>
+<li>Propiedad border-radius</li>
+<li>Propiedad box-shadow</li>
+</ul></li>
+<li><p><strong>Módulo <em>Image Values and Replaced Content</em></strong></p>
+
+<ul>
+<li>Degradados lineales</li>
+<li>Degradados radiales</li>
+<li>Degradados lineales de repetición</li>
+<li>Degradados radiales de repetición</li>
+</ul></li>
+<li><p><strong>Módulo <em>Multi-column Layout</em></strong></p></li>
+<li><p><strong>Módulo <em>Animations</em></strong></p></li>
+<li><p><strong>Módulo <em>Transforms</em></strong></p></li>
+<li><p><strong>Módulo <em>Transitions</em></strong></p></li>
+<li><p><strong>Módulo <em>Fonts Level 3</em></strong></p></li>
+<li><p><strong>Módulo <em>Text Level 3</em></strong></p>
+
+<ul>
+<li>Propiedad text-shadow</li>
+<li>Propiedad text-overflow</li>
+<li>Propiedad word-wrap</li>
+</ul></li>
+</ul>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-1.html#introduccion">Introducción</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.1</span>
+                        <a class="internal" href="capitulo-1.html#especificacion-oficial">Especificación oficial</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.2</span>
+                        <a class="internal" href="capitulo-1.html#nuevas-funcionalidades">Nuevas funcionalidades</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

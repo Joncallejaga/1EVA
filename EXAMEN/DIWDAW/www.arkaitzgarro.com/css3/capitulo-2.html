@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Módulo <em>Selectors</em> | CSS 3</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">CSS 3</a></h1>
+        <p class="span3">
+                        <a href="capitulo-1.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-3.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="modulo-selectors"><span>Capítulo 2</span> Módulo <em>Selectors</em></h1>
+        <p>La versión actual de CSS 3 incluye todos los selectores de CSS 2.1 y añade otras decenas de selectores, pseudo-clases y pseudo-elementos. La lista provisional de novedades y su explicación detallada se puede encontrar en el <a href="http://www.w3.org/TR/css3-selectors/">módulo de selectores de CSS 3</a>.</p>
+
+<p>En primer lugar, CSS 3 añade tres nuevos selectores de atributos:</p>
+
+<ul>
+<li><code>elemento[atributo^="valor"]</code>, selecciona todos los elementos que disponen de ese atributo y cuyo valor comienza exactamente por la cadena de texto indicada.</li>
+<li><code>elemento[atributo$="valor"]</code>, selecciona todos los elementos que disponen de ese atributo y cuyo valor termina exactamente por la cadena de texto indicada.</li>
+<li><code>elemento[atributo*="valor"]</code>, selecciona todos los elementos que disponen de ese atributo y cuyo valor contiene la cadena de texto indicada.</li>
+</ul>
+
+<p>De esta forma, se pueden crear reglas CSS tan avazadas como las siguientes:</p>
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* Selecciona todos los enlaces que apuntan a una dirección de correo
+    electrónico */</span>
+a<span class="br0">&#91;</span>href<span class="sy0">^=</span><span class="st0">&quot;mailto:&quot;</span><span class="br0">&#93;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Selecciona todos los enlaces que apuntan a una página HTML */</span>
+a<span class="br0">&#91;</span>href$<span class="sy0">=</span><span class="st0">&quot;.html&quot;</span><span class="br0">&#93;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Selecciona todos los títulos h1 cuyo atributo title contenga la palabra
+    &quot;capítulo&quot; */</span>
+h1<span class="br0">&#91;</span>title<span class="sy0">*=</span><span class="st0">&quot;capítulo&quot;</span><span class="br0">&#93;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Otro de los nuevos selectores de CSS 3 es el "<em>selector general de elementos hermanos</em>", que generaliza el selector adyacente de CSS 2.1. Su sintaxis es <code>elemento1 ~ elemento2</code> y selecciona el <code>elemento2</code> que es hermano de <code>elemento1</code> y se encuentra detrás en el código HTML. En el selector adyacente la condición adicional era que los dos elementos debían estar uno detrás de otro en el código HTML, mientras que ahora la única condición es que uno esté detrás de otro.</p>
+
+<p>Si se considera el siguiente ejemplo:</p>
+
+<div class="code css">
+<pre class="css">h1 <span class="sy0">+</span> h2 <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>  <span class="coMULTI">/* selector adyacente */</span>
+h1 ~ h2 <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>  <span class="coMULTI">/* selector general de hermanos */</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">h1</span>&gt;</span>...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h1</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">div</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span></pre>
+</div>
+
+<p>El primer selector (<code>h1 + h2</code>) sólo selecciona el primer elemento <code>&lt;h2&gt;</code> de la página, ya que es el único que cumple que es hermano de <code>&lt;h1&gt;</code> y se encuentra justo detrás en el código HTML. Por su parte, el segundo selector (<code>h1 ~ h2</code>) selecciona todos los elementos <code>&lt;h2&gt;</code> de la página salvo el segundo. Aunque el segundo <code>&lt;h2&gt;</code> se encuentra detrás de <code>&lt;h1&gt;</code> en el código HTML, no son elementos hermanos porque no tienen el mismo elemento padre.</p>
+
+<p>Los pseudo-elementos de CSS 2.1 se mantienen en CSS 3, pero cambia su sintaxis y ahora se utilizan :: en vez de : delante del nombre de cada pseudo-elemento:</p>
+
+<ul>
+<li><code>::first-line</code>, selecciona la primera línea del texto de un elemento.</li>
+<li><code>::first-letter</code>, selecciona la primera letra del texto de un elemento.</li>
+<li><code>::before</code>, selecciona la parte anterior al contenido de un elemento para insertar nuevo contenido generado.</li>
+<li><code>::after</code>, selecciona la parte posterior al contenido de un elemento para insertar nuevo contenido generado.</li>
+</ul>
+
+<p>CSS 3 añade además un nuevo pseudo-elemento:</p>
+
+<ul>
+<li><code>::selection</code>, selecciona el texto que ha seleccionado un usuario con su ratón o teclado.</li>
+</ul>
+
+<p>Las mayores novedades de CSS 3 se producen en las pseudo-clases, ya que se añaden 12 nuevas, entre las cuales se encuentran:</p>
+
+<ul>
+<li><code>elemento:nth-child(numero)</code>, selecciona el elemento indicado pero con la condición de que sea el hijo enésimo de su padre. Este selector es útil para seleccionar el segundo párrafo de un elemento, el quinto elemento de una lista, etc.</li>
+<li><code>elemento:nth-last-child(numero)</code>, idéntico al anterior pero el número indicado se empieza a contar desde el último hijo.</li>
+<li><code>elemento:empty</code>, selecciona el elemento indicado pero con la condición de que no tenga ningún hijo. La condición implica que tampoco puede tener ningún contenido de texto.</li>
+<li><code>elemento:first-child</code> y <code>elemento:last-child</code>, seleccionan los elementos indicados pero con la condición de que sean respectivamente los primeros o últimos hijos de su elemento padre.</li>
+<li><code>elemento:nth-of-type(numero)</code>, selecciona el elemento indicado pero con la condición de que sea el enésimo elemento hermano de ese tipo.</li>
+<li><code>elemento:nth-last-of-type(numero)</code>, idéntico al anterior pero el número indicado se empieza a contar desde el último hijo.</li>
+</ul>
+
+<p>Algunas pseudo-clases como :nth-child(numero) permiten el uso de expresiones complejas para realizar selecciones avanzadas:</p>
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* selecciona todos los elementos impares de una lista */</span>
+li<span class="re2">:nth-</span>child<span class="br0">&#40;</span>2n<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+<span class="coMULTI">/* selecciona todos los elementos pares de una lista */</span>
+li<span class="re2">:nth-</span>child<span class="br0">&#40;</span>2n<span class="br0">&#41;</span>   <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Las siguientes reglas alternan cuatro estilos diferentes para los
+    párrafos */</span>
+p<span class="re2">:nth-</span>child<span class="br0">&#40;</span>4n<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+p<span class="re2">:nth-</span>child<span class="br0">&#40;</span>4n<span class="sy0">+</span><span class="nu0">2</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+p<span class="re2">:nth-</span>child<span class="br0">&#40;</span>4n<span class="sy0">+</span><span class="nu0">3</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+p<span class="re2">:nth-</span>child<span class="br0">&#40;</span>4n<span class="sy0">+</span><span class="nu0">4</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Empleando la pseudo-clase <code>:nth-of-type(numero)</code> se pueden crear reglas CSS que alternen la posición de las imágenes en función de la posición de la imagen anterior:</p>
+
+<div class="code css">
+<pre class="css">img<span class="re2">:nth-of-</span>type<span class="br0">&#40;</span>2n<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="kw1">float</span><span class="sy0">:</span> <span class="kw1">right</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+img<span class="re2">:nth-of-</span>type<span class="br0">&#40;</span>2n<span class="br0">&#41;</span>   <span class="br0">&#123;</span> <span class="kw1">float</span><span class="sy0">:</span> <span class="kw1">left</span><span class="sy0">;</span>  <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Otro de los nuevos selectores que incluirá CSS 3 es <code>:not()</code>, que se puede utilizar para seleccionar todos los elementos que no cumplen con la condición de un selector:</p>
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* selecciona todos los elementos de la página que no sean párrafos */</span>
+<span class="sy0">:</span>not<span class="br0">&#40;</span>p<span class="br0">&#41;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+<span class="coMULTI">/* selecciona cualquier elemento cuyo atributo id no sea &quot;especial&quot; */</span>
+<span class="sy0">:</span>not<span class="br0">&#40;</span><span class="re0">#especial</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Aunque todavía faltan muchos años hasta que la versión CSS 3 sustituya a la actual versión CSS 2.1, la mayoría de los navegadores incluyen soporte para varios o casi todos los selectores de CSS 3.</p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 1</p>
+</div>
+
+<p><a class="internal" href="capitulo-13.html#ej01">Ver enunciado</a></p>
+
+<h2 id="prefijos-especificos-de-navegadores">2.1 Prefijos específicos de navegadores</h2>
+
+<p>Los prefijos específicos de navegador son una manera que tienen los distintos navegadores de añadir o probar nuevas funcionalidades de CSS. Son utilizados para añadir funcionalidades específicas que no forman parte de la especificación oficial o para añadir futuras funcionalidades que no han sido implemetadas del todo. Su formato es el siguiente:</p>
+
+<div class="code css">
+<pre class="css">selector <span class="br0">&#123;</span>
+    -prefix-property<span class="sy0">:</span> value<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Los prefijos para los distintos navegadores son los siguientes:</p>
+
+<ul>
+<li><code>-webkit-</code>: Android, Chrome, iOS, Safari</li>
+<li><code>-moz-</code>: Firefox</li>
+<li><code>-ms-</code>: Internet Explorer</li>
+<li><code>-o-</code>: Opera</li>
+</ul>
+
+<p>Por ejemplo, para añadir una transición CSS 3 a un elemento, debemos utilizar la propiedad <code>transition</code> con los siguientes prefijos:</p>
+
+<div class="code css">
+<pre class="css">-webkit-transition<span class="sy0">:</span> all 4s ease<span class="sy0">;</span>
+-moz-transition<span class="sy0">:</span> all 4s ease<span class="sy0">;</span>
+-ms-transition<span class="sy0">:</span> all 4s ease<span class="sy0">;</span>
+-o-transition<span class="sy0">:</span> all 4s ease<span class="sy0">;</span>
+transition<span class="sy0">:</span> all 4s ease<span class="sy0">;</span></pre>
+</div>
+
+<p>Estos prefijos pretenden ser temporales hasta que el navegador implemente completamente la funcionalidad o forme parte del estándar oficialmente. Los navegadores que utilicen prefijos para ciertas propiedades, las tendrán en cuenta e ignorarán el resto, y los que no hagan uso de ellas tendrán en cuenta la última regla indicada.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-2.html#modulo-selectors">Módulo <em>Selectors</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.1</span>
+                        <a class="internal" href="capitulo-2.html#prefijos-especificos-de-navegadores">Prefijos específicos de navegadores</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Módulo <em>Media Queries</em> | CSS 3</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">CSS 3</a></h1>
+        <p class="span3">
+                        <a href="capitulo-8.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-10.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="modulo-media-queries"><span>Capítulo 9</span> Módulo <em>Media Queries</em></h1>
+        <p>La especificación oficial y el estado actual de desarrollo del módulo <em>Media Queries</em> en CSS 3 puede consultarse en <a href="http://www.w3.org/TR/css3-mediaqueries/">http://www.w3.org/TR/css3-mediaqueries/</a>.</p>
+
+<p>Un <strong><em>Media Query</em></strong> consiste en realizar una consulta sobre un tipo de medio y al menos una expresión que limita el alcance de las hojas de estilo en función a características del dispositivo, como pueden ser el ancho, alto o color. Añadidos a CSS 3, los <em>Media Queries</em> permiten que la presentación del contenido se adapte a un rango específico de dispositivos sin tener que cambiar el contenido en sí.</p>
+
+<h2 id="sintaxis">9.1 Sintaxis</h2>
+
+<p>Los <em>Media Queries</em> pueden contener una o más expresiones, expresadas como funciones multimedia, que devuelven <em>true</em> o <em>false</em>. El resultado del <em>query</em> o consulta devuelve <em>true</em> si el <em>media type</em> especificado en el <em>Media Query</em> coincide con el tipo de dispositivo en que el documento está siendo mostrado y todas las expresiones en el <em>Media Query</em> devuelven <em>true</em>.</p>
+
+<p>Cuando un <em>Media Query</em> devuelve <em>true</em>, la correspondiente hoja de estilo es aplicada, siguiendo las reglas habituales de CSS. Las hojas de estilo con <em>Media Queries</em> adjuntos a los <em>tags</em> <code>&lt;link&gt;</code> se descargan siempre, incluso si sus <em>Media Queries</em> resultan <em>false</em> (sin embargo, en este caso, no se aplicarán).</p>
+
+<h2 id="operadores-logicos-o-logical-operators">9.2 Operadores lógicos o <em>logical operators</em></h2>
+
+<p>Se pueden crear <em>Media Queries</em> complejos utilizando operadores lógicos, incluyendo <code>not</code>, <code>and</code> y <code>only</code>. El operador <code>and</code> es usado para combinar múltiples características en un sólo <em>Media Query</em>, requiriendo que cada función devuelva <em>true</em> para que el <em>Query</em> también lo sea. El operador <code>not</code> se utiliza para negar un <em>Media Query</em> completo y el operador <code>only</code> se usa para aplicar un estilo sólo si el <em>Query</em> completo es correcto.</p>
+
+<p>Además, se pueden combinar múltiples <em>Media Queries</em> separados por comas en una lista; si alguno de los <em>Queries</em> devuelve <em>true, toda la consulta devolverá *true</em>. Esto es equivalente a un operador <code>or</code>.</p>
+
+<h3 id="and">9.2.1 and</h3>
+
+<p>El keyword <code>and</code> se usa para combinar múltiples características, así como combinar éstos con tipos de medios. Un <em>Media Query</em> básico sería:</p>
+
+<div class="code css">
+<pre class="css"><span class="co1">@media (min-width: 700px) { ... }</span></pre>
+</div>
+
+<p>Sin embargo, si quisiéramos que esto sólo se aplicara si la pantalla está en modo apaisado, se usaría el operador <code>and</code>:</p>
+
+<div class="code css">
+<pre class="css"><span class="co1">@media (min-width: 700px) and (orientation: landscape) { ... }</span></pre>
+</div>
+
+<p>Si además, sólo quisiéramos que esto se aplicara si el dispositivo fuera un <em>media type TV</em>:</p>
+
+<div class="code css">
+<pre class="css"><span class="co1">@media tv and (min-width: 700px) and (orientation: landscape) { ... }</span></pre>
+</div>
+
+<h3 id="comma-separated-lists">9.2.2 comma-separated lists</h3>
+
+<p>Cuando se utilizan las listas separadas por comas en los <em>Media Queries</em>, si algunas de las <em>Media Queries</em> devuelven <em>true</em>, los estilos se aplican al documento. Cada <em>Media Query</em> separado por comas en la lista se trata como un <em>Query</em> individual, y cualquier operador aplicado a un <em>Media Query</em> no afecta a los demás. Esto significa que los <em>Media Queries</em> separados por comas puede dirigirse a diferentes <em>media features, types</em> o <em>states</em>.</p>
+
+<p>Por ejemplo, si quisiéramos aplicar un conjunto de estilos si el dispositivo de visualización tiene un mínimo de 700px o está en modo apaisado:</p>
+
+<div class="code css">
+<pre class="css"><span class="co1">@media (min-width: 700px), handheld and (orientation: landscape) { ... }</span></pre>
+</div>
+
+<h3 id="not">9.2.3 not</h3>
+
+<p>La <em>keyword</em> <code>not</code> se aplica al <em>Media Query</em> en su totalidad y devuelve <em>true</em> si el <em>Media Query</em> devuelve <em>false</em> (como <code>monochrome</code> en una pantalla a color). Este <em>keyword</em> no se puede utilizar para negar una característica en concreto, sino la consulta completa. Por ejemplo:</p>
+
+<div class="code css">
+<pre class="css"><span class="co1">@media not all and (monochrome) { ... }</span></pre>
+</div>
+
+<p>Esto significa que el <em>Query</em> es evaluado de esta manera:</p>
+
+<div class="code css">
+<pre class="css"><span class="co1">@media not (all and (monochrome)) { ... }</span></pre>
+</div>
+
+<p>en vez de así:</p>
+
+<div class="code css">
+<pre class="css"><span class="co1">@media (not all) and (monochrome) { ... }</span></pre>
+</div>
+
+<p>Por ejemplo, este otro <em>Media Query</em>:</p>
+
+<div class="code css">
+<pre class="css"><span class="co1">@media not screen and (color), print and (color)</span></pre>
+</div>
+
+<p>Se evalúa así:</p>
+
+<div class="code css">
+<pre class="css"><span class="co1">@media (not (screen and (color))), print and (color)</span></pre>
+</div>
+
+<h3 id="only">9.2.4 only</h3>
+
+<p>El <em>keyword</em> <code>only</code> previene a los navegadores que no soportan <em>Media Queries</em>:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">link</span> <span class="kw3">rel</span><span class="sy0">=</span><span class="st0">&quot;stylesheet&quot;</span> <span class="kw3">media</span><span class="sy0">=</span><span class="st0">&quot;only screen and (color)&quot;</span></span>
+<span class="sc2">    <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;example.css&quot;</span> <span class="sy0">/</span>&gt;</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 6</p>
+</div>
+
+<p><a class="internal" href="capitulo-13.html#ej06">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-9.html#modulo-media-queries">Módulo <em>Media Queries</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.1</span>
+                        <a class="internal" href="capitulo-9.html#sintaxis">Sintaxis</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.2</span>
+                        <a class="internal" href="capitulo-9.html#operadores-logicos-o-logical-operators">Operadores lógicos o <em>logical operators</em></a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

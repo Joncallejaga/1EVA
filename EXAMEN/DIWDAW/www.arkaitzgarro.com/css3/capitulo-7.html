@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Módulo <em>Text</em> | CSS 3</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">CSS 3</a></h1>
+        <p class="span3">
+                        <a href="capitulo-6.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-8.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="modulo-text"><span>Capítulo 7</span> Módulo <em>Text</em></h1>
+        <p>La especificación oficial y el estado actual de desarrollo del módulo <em>Text</em> en CSS 3 puede consultarse en <a href="http://www.w3.org/TR/css3-text/">http://www.w3.org/TR/css3-text/</a>.</p>
+
+<p>CSS 3 ha añadido nuevas funcionalidades relacionadas con el texto, realizando un importante avance en este sentido y facilitando la creación de efecto de texto, sin necesidad de recurrir a complejas soluciones.</p>
+
+<h2 id="sombra-en-textos">7.1 Sombra en textos</h2>
+
+<p>Finalmente se ha añadido la posibilidad de crear sombras en los textos del documentos, eliminando la necesidad de crear estos textos en una herramienta externa (como Photoshop o Gimp), he incluyendolos posteriormente como una imagen en el documento, lo que perjudicaba directamente el contenido.</p>
+
+<div class="table" id="table-7-1">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>text-shadow</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">none | [ &lt;length&gt;{2,3} &amp;&amp; &lt;color&gt;? ]#</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos.</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">none</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Especifica una sombra para el texto.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Esta propiedad acepta una lista de valores separados por comas que serán aplicados al texto. Las diferentes sombras son aplicadas de arriba hacia debajo, es decir, la primera sombra de la lista está sobre las demás.</p>
+
+<p>Los valores de la sombra son interpretados de la siguiente manera:</p>
+
+<ul>
+<li>El primer valor indica la separación horizontal de la sombra. Un valor positivo desplaza la sombra hacia la derecha de la caja, mientras que un valor negativo la desplazará hacia la izquierda.</li>
+<li>El segundo valor indica la separación vertical de la sombra. Un valor positivo desplaza la sombra debajo de la caja, mientras que un valor negativo la desplazará hacia arriba.</li>
+<li>El tercer valor es la difusión de la sombra. Si el valor es <code>0</code> (no se aceptan valores negativos) la sombra será muy nítida. Para valores mayores que <code>0</code>, la sombra se va difuminando.</li>
+</ul>
+
+<p>Algunos ejemplos:</p>
+
+<div class="example">
+<div class="example4">
+<h3 class="example4a">Ejemplo de texto sin sombra</h3>
+<h3 class="example4b">Ejemplo de texto con sombra</h3>
+</div>
+</div>
+
+<div class="code css">
+<pre class="css">h3 <span class="br0">&#123;</span><span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">white</span><span class="sy0">;</span> <span class="kw1">text-shadow</span><span class="sy0">:</span> <span class="re3">0.1em</span> <span class="re3">0.1em</span> <span class="re3">0.2em</span> <span class="kw1">black</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<div class="example">
+<div class="example5">
+<h3 class="example5">I wish wish wish…</h3>
+</div>
+</div>
+
+<div class="code css">
+<pre class="css">h3 <span class="br0">&#123;</span><span class="kw1">text-shadow</span><span class="sy0">:</span> <span class="re3">0.2em</span> <span class="re3">0.5em</span> <span class="re3">0.1em</span> <span class="re0">#600</span><span class="sy0">,</span>
+                <span class="re3">-0.3em</span> <span class="re3">0.1em</span> <span class="re3">0.1em</span> <span class="re0">#060</span><span class="sy0">,</span>
+                 <span class="re3">0.4em</span> <span class="re3">-0.3em</span> <span class="re3">0.1em</span> <span class="re0">#006</span><span class="br0">&#125;</span></pre>
+</div>
+
+<div class="example">
+<div class="example6">
+<h3 class="example6a">I, Augustus (you know who)</h3>
+
+<h3 class="example6b">That's extra, of course</h3>
+</div>
+</div>
+
+<div class="code css">
+<pre class="css">h3 <span class="br0">&#123;</span><span class="kw1">text-shadow</span><span class="sy0">:</span> <span class="re3">-1px</span> <span class="re3">-1px</span> <span class="kw2">white</span><span class="sy0">,</span> <span class="re3">1px</span> <span class="re3">1px</span> <span class="re0">#333</span><span class="br0">&#125;</span>
+h3 <span class="br0">&#123;</span><span class="kw1">text-shadow</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="re3">1px</span> <span class="kw2">white</span><span class="sy0">,</span> <span class="re3">-1px</span> <span class="re3">-1px</span> <span class="re0">#444</span><span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="fuentes-web">7.2 Fuentes web</h2>
+
+<p>Hasta la introducción de esta nueva característica en CSS 3, a la hora de escoger una fuente para ser utilizada en un documento HTML, nos encontrábamos con la limitación de que el usuario tuviera ese tipo de letra instalada en su ordenador, porque de no ser así, los textos se mostrarían con otras tipografías, distintas a las que habíamos elegido (las definidas como <code>fallback</code> o la fuente por defecto del navegador). Es por ello que el abanico de fuentes que podíamos utilizar, estaba  reducido a las típicas Arial, Verdana, Times New Roman o Sans.</p>
+
+<p>La regla <code>@font-face</code> permite enlazar fuentes en línea que van a ser utilizadas en páginas web. La descripción de la fuente, define la localización física de la fuente (local o externa), así como las características de dicha fuente. Es posible declarar tantas reglas <code>@font-face</code> como fuentes sean necesarias utilizar.</p>
+
+<p>Su sintaxis es la siguiente:</p>
+
+<div class="code css">
+<pre class="css"><span class="co1">@font-face {</span>
+  <span class="br0">&#91;</span><span class="kw1">font-family</span><span class="sy0">:</span> &lt;family-name<span class="sy0">&gt;;</span><span class="br0">&#93;</span>?
+  <span class="br0">&#91;</span>src<span class="sy0">:</span> <span class="br0">&#91;</span> &lt;uri<span class="sy0">&gt;</span> <span class="br0">&#91;</span>format<span class="br0">&#40;</span>&lt;string<span class="sy0">&gt;</span>#<span class="br0">&#41;</span><span class="br0">&#93;</span>? | &lt;font-face-name<span class="sy0">&gt;</span> <span class="br0">&#93;</span>#<span class="sy0">;</span><span class="br0">&#93;</span>?
+  <span class="br0">&#91;</span>unicode-range<span class="sy0">:</span> &lt;urange<span class="sy0">&gt;</span>#<span class="sy0">;</span><span class="br0">&#93;</span>?
+  <span class="br0">&#91;</span><span class="kw1">font-variant</span><span class="sy0">:</span> &lt;font-variant<span class="sy0">&gt;;</span><span class="br0">&#93;</span>?
+  <span class="br0">&#91;</span>font-feature-settings<span class="sy0">:</span> <span class="kw2">normal</span>|&lt;feature-tag-value<span class="sy0">&gt;</span>#<span class="sy0">;</span><span class="br0">&#93;</span>?
+  <span class="br0">&#91;</span><span class="kw1">font-stretch</span><span class="sy0">:</span> &lt;font-stretch<span class="sy0">&gt;;</span><span class="br0">&#93;</span>?
+  <span class="br0">&#91;</span><span class="kw1">font-weight</span><span class="sy0">:</span> &lt;weight<span class="sy0">&gt;</span><span class="br0">&#93;</span><span class="sy0">;</span>
+  <span class="br0">&#91;</span><span class="kw1">font-style</span><span class="sy0">:</span> &lt;style<span class="sy0">&gt;</span><span class="br0">&#93;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Donde:</p>
+
+<ul>
+<li><code>&lt;family-name&gt;</code>: especifica el nombre de la fuente que se utilizará.</li>
+<li><code>&lt;uri&gt;</code>: URL para de la ubicación remota de la fuente, o nombre de la fuente en el ordenador del autor ("FontName")</li>
+<li><code>&lt;font-variant&gt;</code>: variante de una fuente anterior.</li>
+<li><code>&lt;font-stretch&gt;</code>: especifica la anchura de la fuente.</li>
+<li><code>&lt;weight&gt;</code>: especifica el peso de la fuente (<code>light</code>, <code>normal</code>, <code>bold</code> ...)</li>
+<li><code>&lt;style&gt;</code>: especifica el estilo de la fuente (<code>normal</code>, <code>italic</code> o <code>oblique</code>)</li>
+</ul>
+
+<p>Un ejemplo sencillo:</p>
+
+<div id="preview-font_face">
+<p>Los usuarios que accedan con un navegador que cumpla con el estándar, verán este texto con la fuente Delicious, <em>y esta parte con Delicious Bold</em>.</p>
+</div>
+
+<p>Dependiendo del tipo de navegador con el que se acceda a nuestra web, éste acepta un tipo concreto de fuente. Los tipos existentes son los siquientes:</p>
+
+<div class="table" id="table-7-2">
+
+    <table>
+<thead>
+<tr>
+  <th>String</th>
+  <th>Formato de fuente</th>
+  <th>Extensión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>"woff"</strong></td>
+  <td><a href="http://www.w3.org/TR/WOFF/">WOFF (Web Open Font Format)</a></td>
+  <td>.woff</td>
+</tr>
+<tr>
+  <td><strong>"truetype"</strong></td>
+  <td><a href="http://www.microsoft.com/typography/otspec/default.htm">TrueType</a></td>
+  <td>.ttf</td>
+</tr>
+<tr>
+  <td><strong>"opentype"</strong></td>
+  <td><a href="http://www.microsoft.com/typography/otspec/default.htm">OpenType</a></td>
+  <td>.ttf, .otf</td>
+</tr>
+<tr>
+  <td><strong>"embedded-opentype"</strong></td>
+  <td><a href="http://www.w3.org/Submission/2008/SUBM-EOT-20080305/">Embedded OpenType</a></td>
+  <td>.eot</td>
+</tr>
+<tr>
+  <td><strong>"svg"</strong></td>
+  <td><a href="http://www.w3.org/TR/SVG/fonts.html">SVG Font</a></td>
+  <td>.svg</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Un ejemplo de utilización de varios orígenes de fuentes es el siguiente:</p>
+
+<div class="code css">
+<pre class="css"><span class="co1">@font-face {</span>
+    <span class="kw1">font-family</span><span class="sy0">:</span> <span class="st0">'ITCAvantGardeStd-Bk'</span><span class="sy0">;</span>
+    src<span class="sy0">:</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="st0">'fonts/ITCAvantGardeStd-Bold.eot'</span><span class="br0">&#41;</span> format<span class="br0">&#40;</span><span class="st0">'eot'</span><span class="br0">&#41;</span><span class="sy0">,</span>
+         <span class="kw2">url</span><span class="br0">&#40;</span><span class="st0">'fonts/ITCAvantGardeStd-Bold.woff'</span><span class="br0">&#41;</span> format<span class="br0">&#40;</span><span class="st0">'woff'</span><span class="br0">&#41;</span><span class="sy0">,</span>
+         <span class="kw2">url</span><span class="br0">&#40;</span><span class="st0">'fonts/ITCAvantGardeStd-Bold.ttf'</span><span class="br0">&#41;</span> format<span class="br0">&#40;</span><span class="st0">'truetype'</span><span class="br0">&#41;</span><span class="sy0">,</span>
+         <span class="kw2">url</span><span class="br0">&#40;</span><span class="st0">'fonts/ITCAvantGardeStd-Bold.svg'</span><span class="br0">&#41;</span> format<span class="br0">&#40;</span><span class="st0">'svg'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">font-weight</span><span class="sy0">:</span> <span class="kw2">bold</span><span class="sy0">;</span>
+    <span class="kw1">font-style</span><span class="sy0">:</span> <span class="kw2">normal</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 5</p>
+</div>
+
+<p><a class="internal" href="capitulo-13.html#ej05">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-7.html#modulo-text">Módulo <em>Text</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.1</span>
+                        <a class="internal" href="capitulo-7.html#sombra-en-textos">Sombra en textos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.2</span>
+                        <a class="internal" href="capitulo-7.html#fuentes-web">Fuentes web</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

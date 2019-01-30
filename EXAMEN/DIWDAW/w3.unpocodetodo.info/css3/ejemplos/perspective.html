@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>La propiedad perspective</title>
+<meta name="description" content="En CSS3 la propiedad perspective determina la distancia entre el observador virtual, y el objeto. Demo." />
+  <meta name="keywords" content="tutorial, html5, css, css3, perspectiva, perspective, demo"/>
+  <meta name="author" content="enxaneta.info" />
+  <meta property="og:title" content="Referencia CSS3" /> 
+  <meta property="og:type" content="website" /> 
+  <meta property="og:image" content="http://w3.unpocodetodo.info/images/w3_og.png" /> 
+  <meta property="og:url" content="http://w3.unpocodetodo.info/css3/ejemplos/perspective.html" /> 
+  <meta property="og:site_name" content="w3.unpocodetodo.info" /> 
+  <meta property="og:description" content="En CSS3 la propiedad perspective determina la distancia entre el observador virtual, y el objeto. Demo." />
+  
+  <link rel="icon" type="image/png" href="../../images/w3.png" />
+  <!-- 57x57 older iPhone and Android devices -->
+ <!-- <link rel="apple-touch-icon-precomposed" href="http://w3.unpocodetodo.info/images/apple-touch-icon-precomposed.png">-->
+  <!-- iPad 1 and 2 & iPad mini -->
+  <link rel="apple-touch-icon" sizes="72x72" href="../../images/apple-touch-icon-72x72.png">
+  <!-- iPhone 4, 4S, 5 and iPod Touch -->
+  <link rel="apple-touch-icon" sizes="114x114" href="../../images/apple-touch-icon-114x114.png">
+  <!-- iPad 3rd gen -->
+  <link rel="apple-touch-icon" sizes="144x144" href="../../images/apple-touch-icon-144x144.png"> 
+<style>
+body{ margin:0; padding:0; width:100%;}
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+    box-sizing: border-box; 
+}
+#contenido{ width:790px; margin:50px auto; border:1px solid #d9d9d9; padding:30px;}
+.div {
+    padding: 40px;
+    background-color: gold;
+	text-align:center;
+    float:left;
+	-webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+#perspective{padding:40px 0 150px 20px; min-width:780px;}
+.scroll{overflow:scroll;}
+#div7{
+	-webkit-transform : perspective(100px) rotateY(60deg);
+	transform : perspective(100px) rotateY(60deg);}
+#div8{
+	-webkit-transform : perspective(200px) rotateY(60deg);
+	transform : perspective(200px) rotateY(60deg);}
+#div9{
+	-webkit-transform : perspective(300px) rotateY(60deg);
+	transform : perspective(300px) rotateY(60deg);}
+#div10{
+	-webkit-transform : perspective(400px) rotateY(60deg);
+	transform : perspective(400px) rotateY(60deg);}
+#div11{
+	-webkit-transform : perspective(500px) rotateY(60deg);
+	transform : perspective(500px) rotateY(60deg);}
+#div12{
+	-webkit-transform : perspective(600px) rotateY(60deg);
+	transform : perspective(600px) rotateY(60deg);}'
+
+</style>
+</head>
+
+<body>
+<div id="contenido">
+
+<div id="perspective">
+ <div class="div" id="div7">100px</div>
+ <div class="div" id="div8">200px</div>
+ <div class="div" id="div9">300px</div>
+ <div class="div" id="div10">400px</div>
+ <div class="div" id="div11">500px</div>
+ <div class="div" id="div12">600px</div>
+</div>
+
+</div>
+</body>
+</html>

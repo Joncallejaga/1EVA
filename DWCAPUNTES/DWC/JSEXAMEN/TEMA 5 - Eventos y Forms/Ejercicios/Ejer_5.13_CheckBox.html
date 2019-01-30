@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>objeto checkbox</title>
+	<script language ="javascript">
+	var eventos = function (){
+		document.miformulario.addEventListener('submit', informar);
+	}	  
+
+	  function informar(){
+
+	     var mensaje="";
+	     
+	     mensaje+="se han seleccionado las opciones: \n\n";
+	     
+	     for(i=0; i<miformulario.elements.length; i++){  
+	        if (miformulario.elements[i].checked){
+	          mensaje+="\t * " + miformulario.elements[i].value + "\n";
+	        }
+	     }
+		 /*if (miformulario.checkbox1.checked) {mensaje+="\t * " + miformulario.checkbox1.value + "\n";}
+		 if (miformulario.checkbox2.checked) {mensaje+="\t * " + miformulario.checkbox2.value + "\n";}
+		 if (miformulario.checkbox3.checked) {mensaje+="\t * " + miformulario.checkbox3.value + "\n";}
+		 if (miformulario.checkbox4.checked) {mensaje+="\t * " + miformulario.checkbox4.value + "\n";}*/
+	     alert(mensaje); 
+	  }
+	  window.addEventListener('load', eventos);
+	</script>
+<style type='text/css'> #turnkey-credit { font-family: Tahoma,Sans,Arial,Helvetica,Verdana,sans-serif; font-size: 11px; text-align: center; } #turnkey-credit a { text-decoration: none; } #turnkey-credit a:hover { text-decoration: underline; } </style></head>
+<body>
+	<center>
+	<form name="miformulario"  id="idmiformulario" >
+		selecciona las opciones deseadas...<br><br>
+		<input type=checkbox name="checkbox1" id="idcheckbox1" value="uno" checked>opción 1<br> 
+		<input type=checkbox name="checkbox2" id="idcheckbox2" value="dos">opción 2<br> 
+		<input type=checkbox name="checkbox3" id="idcheckbox3" value="tres">opción 3<br> 
+		<input type=checkbox name="checkbox4" id="idcheckbox4" value="cuatro">opción 4<br><br> 
+		<input type=submit name="botonenviar" value="enviar">
+		<input type=reset name="botonlimpiar" value="limpiar">
+	</form>
+	</center>
+<div id='turnkey-credit'> <div> <a href='http://www.turnkeylinux.org/moodle'>Moodle Appliance</a> - Powered by <a href='http://www.turnkeylinux.org'>TurnKey Linux</a> </div> </div></body>
+</html>

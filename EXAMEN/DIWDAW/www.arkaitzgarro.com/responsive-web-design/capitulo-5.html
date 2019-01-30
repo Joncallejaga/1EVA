@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Desarrollo adaptativo | Responsive Web Design</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">Responsive Web Design</a></h1>
+        <p class="span3">
+                        <a href="capitulo-4.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-6.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="desarrollo-adaptativo"><span>Capítulo 5</span> Desarrollo adaptativo</h1>
+        <p>Hasta ahora, hemos definido todas las herramientas necesarias para crear estructuras adaptativas: diseños basados en rejillas flexibles, estrategias para incorporar elementos multimedia y la potencia de los <em>Media Query</em> para adaptar el contenido a nuestras necesidades. Vemos como incorporar estas técnicas a la hora de desarrollar un sitio web adaptativo.</p>
+
+<h2 id="la-importancia-del-contexto">5.1 La importancia del contexto</h2>
+
+<p>Un diseño adaptativo, implementado de una manera correcta, puede dar a los usuarios de la web, un alto nivel de continuidad entre los diferentes <em>contextos</em>. Esto es así, porque de la manera más simple, un diseño adaptativo es capaz de mostrar un documento HTML correctamente en una infinidad de dispositivos, gracias a una estructura flexible y los <em>Media Query</em> que aseguran un diseño portable y accesible en la manera de lo posible.</p>
+
+<p>De alguna manera, es posible identificar el <em>contexto</em> en el que se visita una web, a partir del dispositivo utilizado. De este contexto, podemos definir un tipo de usuario y sus objetivos. En otras palabras, un usuario móvil quiere un acceso rápido a la información y realizar diferentes tareas a las que realizaría sentado en su sofá con su portátil. En este caso, el tiempo y el ancho de banda están en extremos totalmente opuestos.</p>
+
+<p>Por otra parte, si las prioridades y los objetivos del usuario varían según el <em>contexto</em>, entonces puede que disponer de un único documento HTML pueda suponer un problema, dependiendo de la manera en la que se encuentre estructurada la información.</p>
+
+<p>De todas formas, es complicado suponer el <em>contexto</em> del usuario únicamente por el tipo de dispositivo, ya que efectivamente, es solamente eso: <strong>una suposición</strong>. ¿Cómo diferenciar, si mi navegación <em>móvil</em> se realiza desde la entrada del metro o desde el sofá de mi casa? ¿Es posible por tanto suponer un <em>contexto</em>?</p>
+
+<p>Por lo tanto, no podemos inferir el <em>contexto</em> del usuario en base a su dispositivo. Así mismo, las palabras <em>mobile</em> o <em>desktop</em> no definen el comportamiento en la que los usuarios acceden a la web: un portátil puede ser un dispositivo móvil (por ejemplo en un tren), al igual que un <em>smartphone</em> o <em>tablet</em> puede estar fijo en un lugar. El desarrollo adaptativo no pretende ser un reemplazo de los actuales sitios móviles, sino que forma parte de una estrategia de desarrollo, donde se pretende evaluar si efectivamente es necesario separar totalmente la experiencia móvil o tiene más sentido mostrar la información de una manera adaptativa.</p>
+
+<div class="figure" id="figure-5-1">
+    <img src="images/cap04/newyorktimes_browser.png" alt="¿Es posible realizar una versión adaptativa del New York Times?" />
+
+    <p class="caption"><strong>Figura 5.1</strong> ¿Es posible realizar una versión adaptativa del New York Times?</p>
+</div>
+
+
+<h2 id="hacia-un-flujo-de-trabajo-adaptativo">5.2 Hacia un flujo de trabajo adaptativo</h2>
+
+<p>Una de las primeras preguntas (si no lo primer) que debemos hacernos, a la hora de plantearnos un diseño adaptativo es la siguiente: <strong>¿En qué medida este contenido o funcionalidad beneficia o aporta valor a nuestros usuarios?</strong> De hecho, esto es algo que deberíamos preguntar <strong>siempre</strong> para cualquier tipo de proyecto, sea web o no.</p>
+
+<p>Si partimos de un planteamiento <em>mobile first</em>, hay que asegurarse que la información que mostramos, y las funcionalidades que implementamos sean importantes para el usuario, ya que no hay espacio suficiente para todo. Hay que darse cuenta de lo que realmente importa. Diseñar partiendo de este paradigma, nos obliga a concentrarnos en lo realmente importante.</p>
+
+<blockquote>
+  <p>If you design mobile first, you create agreement on what matters most. You can then apply the same rationale to the desktop/laptop version of the web site. We agreed that this was the most important set of features and content for our customers and business; why should that change with more screen space? <cite>Luke Wroblewski</cite></p>
+</blockquote>
+
+<p>En otras palabras, diseñar desde un inicio pensando en dispositivos móviles puede enriquecer la experiencia de los usuarios, proporcionando un elemento que normalmente se pasa por alto: enfocarnos en lo realmente importante. Esto no quiere decir que los diseños sean simples, faltos de contenidos o funcionalidades, sino que debemos concentrarnos en lo realmente importante.</p>
+
+<h2 id="puntos-de-ruptura">5.3 Puntos de ruptura</h2>
+
+<p>El siguiente paso es identificar el número de diseños diferentes que vamos crear, para acomodarnos a los distintos tamaños de dispositivos. La siguiente tabla muestra los anchos más comunes a la hora de identificar los puntos de ruptura:</p>
+
+<div class="table" id="table-5-1">
+
+    <table>
+<thead>
+<tr>
+  <th>Punto&nbsp;de&nbsp;ruptura</th>
+  <th>Dispositivo objetivo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>320 pixels</code></td>
+  <td>Para dispositivos pequeños como teléfonos, en disposición vertical</td>
+</tr>
+<tr>
+  <td><code>480 pixels</code></td>
+  <td>Para dispositivos pequeños como teléfonos, en disposición horizontal</td>
+</tr>
+<tr>
+  <td><code>600 pixels</code></td>
+  <td>Para tabletas de menor tamaño, como Amazon Kindle (<code>600×800</code>), en disposición vertical</td>
+</tr>
+<tr>
+  <td><code>768 pixels</code></td>
+  <td>Para tabletas de unas 10", como el iPad (<code>768x1024</code>), en disposición vertical</td>
+</tr>
+<tr>
+  <td><code>1024 pixels</code></td>
+  <td>Para tabletas de unas 10", como el iPad (<code>768x1024</code>), y pequeños portátiles o <em>netbooks</em>, en disposición horizontal</td>
+</tr>
+<tr>
+  <td><code>1200 pixels</code></td>
+  <td>Para pantallas panorámicas, en portátiles o dispositivos de escritorio</td>
+</tr>
+<tr>
+  <td><code>1600 pixels</code></td>
+  <td>Para pantallas panorámicas, en portátiles o dispositivos de escritorio</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<h2 id="desarrollo-iterativo">5.4 Desarrollo iterativo</h2>
+
+<p>De manera tradicional, el desarrollo web (y en general, el desarrollo de software) ha seguido las siguientes fases para la construcción de un sitio web:</p>
+
+<ul>
+<li>Una fase de planteamiento inicial, donde se capturan los requisitos que debe cumplir la solución final, se plantea la estructura de contenidos y se realizan <em>mocksups</em> que serán la base del diseño.</li>
+<li>En la fase de diseño, los <em>mockups</em> se convierten en pantallas utilizando una herramienta del tipo <em>Photoshop</em> o <em>Fireworks</em>. Estas pantallas deben ser aprobadas por el cliente antes de seguir adelante.</li>
+<li>Finalmente, una vez que lo diseños se encuentran aprobados, pasan al equipos de desarrollo para crear las páginas estáticas en HTML.</li>
+</ul>
+
+<p>En un desarrollo adaptativo, este proceso puede resultar muy pesado y costoso. Cuando diseñamos una página, lo ideal sería diseñar también el aspecto de esta página en los distintos dispositivos, lo que supondría realizar tantos diseños como puntos de ruptura existan. Si tenemos que repetir este proceso con quince o cincuenta páginas, simplemente deja de ser viable.</p>
+
+<p>En este punto, una posible mejora puede ser combinar el equipo de diseño y el de desarrollo, para que, partiendo de un diseño fijo y único, discutir de manera conjunta cómo el diseño se va a acomodar a las distintas resoluciones, y las implicaciones que puede tener a la hora de implementarlo. De esta manera, rápidamente surgen preguntas del tipo: ¿Cómo va a funcionar esta galería de imágenes en un dispositivo táctil? ¿De qué manera se va a mostrar este elemento emergente? ¿Qué pasa si no disponemos de JavaScript en el dispositivo?</p>
+
+<p>De esta manera podemos comenzar a construir prototipos con un diseño flexible, escalable en los distintos dispositivos, de una manera muy ágil, implicando a ambos equipos.</p>
+
+<h2 id="desarrollo-adaptativo-de-manera-responsable">5.5 Desarrollo adaptativo, de manera responsable</h2>
+
+<p>Durante el ciclo de diseño/desarrollo, las páginas son constantemente refinadas mientras las construimos, con el objetivo de hacerlas totalmente adaptativas. Hemos convertido una página estática, diseñada para mostrarse de la misma manera en todos los dispositivos, en un diseño fluido al que hemos aplicado <em>Media Queries</em> para mostrarse correctamente en los diferentes dispositivos. En este último caso, tenemos la posibilidad de incluir en nuestra página un <em>polyfill</em> para hacer funcionar correctamente esto <em>Media Query</em> en navegadores que no lo soportan, como Internet Explorer 7 u 8: <a href="https://github.com/scottjehl/Respond">respond.js</a></p>
+
+<p>¿Qué ocurre si el navegador no soporta <code>@media</code> y no tiene activado JavaScript? Pues que simplemente se mostrará la página con su diseño original, a tamaño completo.</p>
+
+<p>Otro problema añadido, al aplicar un diseño adaptativo, es el que se muestra a continuación:</p>
+
+<div class="code css">
+<pre class="css"><span class="re1">.blog</span> <span class="br0">&#123;</span>
+    <span class="kw1">background</span><span class="sy0">:</span> <span class="re0">#F8F5F2</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="st0">&quot;img/blog-bg.png&quot;</span><span class="br0">&#41;</span> <span class="kw2">repeat-y</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="co1">@media screen and (max-width: 768px) {</span>
+    <span class="re1">.blog</span> <span class="br0">&#123;</span>
+        <span class="kw1">background</span><span class="sy0">:</span> <span class="re0">#F8F5F2</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="st0">&quot;img/noise.gif&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>En este caso, primero aplicamos una imagen de fondo <code>blog-bg.png</code> al elemento <code>.blog</code>. Después, para dispositivos con una pantalla más pequeña, reemplazamos esa imagen por una simple imagen GIF. El problema, es que en este tipo de dispositivos se descargan ambas imágenes, afectando directamente a la cantidad de información descargada a través de la red.</p>
+
+<h3 id="estrategia-mobile-first">5.5.1 Estrategia "Mobile First"</h3>
+
+<p>Hablando en términos generales, el diseño adaptativo hace referencia a comenzar con una <em>resolución de referencia</em>, y utilizar los <em>Media Query</em> para adaptar el diseño a otros contextos. Una estrategia más responsable para diseños adaptativos es pensar primero en dispositivos móviles, en lugar de un contexto de escritorio. Esto es, comenzamos definiendo una estructura para dispositivos más pequeños, y posteriormente utilizamos los <em>Media Query</em> para escalar el diseño a mayores resoluciones.</p>
+
+<p>Un ejemplo de esta estrategia, es la web de <a href="http://ethanmarcotte.com/">Ethan Marcotte</a>. Por defecto, el contenido es mostrado de una manera lineal, pensado especialmente para dispositivos móviles.</p>
+
+<div class="figure" id="figure-5-2">
+    <img src="images/cap05/ethan_01.png" alt="Aspecto de la web de Ethan Marcotte en dispositivos móviles" />
+
+    <p class="caption"><strong>Figura 5.2</strong> Aspecto de la web de Ethan Marcotte en dispositivos móviles</p>
+</div>
+
+
+<p>A medida que el espacio disponible aumenta, se muestra el diseño completo. La estructura se vuelve más compleja, con <em>assets</em> más pesados.</p>
+
+<div class="figure" id="figure-5-3">
+    <img src="images/cap05/ethan_02.png" alt="Aspecto completo de la web de Ethan Marcotte" />
+
+    <p class="caption"><strong>Figura 5.3</strong> Aspecto completo de la web de Ethan Marcotte</p>
+</div>
+
+
+<p>A pesar de esta estrategia, el diseño sigue siendo totalmente adaptativo, y utiliza las técnicas que hemos visto en anteriores capítulos: la estructura está basada en una rejilla flexible y las imágenes se muestran correctamente en cualquier resolución. Per ha diferencia de la estrategia tradicional, se utiliza la propiedad <code>min-width</code> para escalar y diseñar la web. La estructura básica de la hoja de estilos es la siguiente:</p>
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* Default, linear layout */</span>
+<span class="re1">.page</span> <span class="br0">&#123;</span>
+    <span class="kw1">margin</span><span class="sy0">:</span> <span class="nu0">0</span> <span class="kw2">auto</span><span class="sy0">;</span>
+    <span class="kw1">max-width</span><span class="sy0">:</span> <span class="re3">700px</span><span class="sy0">;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">93%</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Small screen! */</span>
+<span class="co1">@media screen and (min-width: 600px) { ... }</span>
+&nbsp;
+<span class="coMULTI">/* &quot;Desktop&quot; */</span>
+<span class="co1">@media screen and (min-width: 860px) { ... }</span>
+&nbsp;
+<span class="coMULTI">/* IT'S OVER 9000 */</span>
+<span class="co1">@media screen and (min-width: 1200px) { ... }</span></pre>
+</div>
+
+<h3 id="cargar-el-contenido-de-manera-perezosa-pero-inteligente">5.5.2 Cargar el contenido de manera perezosa (pero inteligente)</h3>
+
+<p>Pongamos como ejemplo que tenemos una galería de imágenes en nuestra web, que funciona como un carrusel utilizando JQuery. En este caso, si el navegador no dispone de Javascript, tendremos una lista de imáges, una sobre otra. Si alguien visita la web con JavaScript desactivado, la experiencia será bastante negativa.</p>
+
+<p>La solución a este problema es cargar únicamente el contenido extra de la página a través de JavaScript. Para ello, la primera tarea a realizar es eliminar todas las imágenes excepto la primera de ellas, que es la que siempre se mostrará:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;slides&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;figure&quot;</span>&gt;</span>
+      <span class="sc2">&lt;<span class="kw2">b</span>&gt;&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;img/slide-robot.jpg&quot;</span> <span class="kw3">alt</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="sy0">/</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">b</span>&gt;</span>
+      <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;figcaption&quot;</span>&gt;</span>...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span><span class="sc-1">&lt;!-- /end .figure --&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span><span class="sc-1">&lt;!-- /end .slides --&gt;</span></pre>
+</div>
+
+<p>El siguiente paso es crear una nueva página HTML que contenga las imágenes restantes:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;figure&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">b</span>&gt;&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;img/slide-tin.jpg&quot;</span> <span class="kw3">alt</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="sy0">/</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">b</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;figcaption&quot;</span>&gt;</span>...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span><span class="sc-1">&lt;!-- /end .figure --&gt;</span>
+<span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;figure&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">b</span>&gt;&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;img/slide-statue.jpg&quot;</span> <span class="kw3">alt</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="sy0">/</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">b</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;figcaption&quot;</span>&gt;</span>...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+    ...
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span><span class="sc-1">&lt;!-- /end .figure --&gt;</span></pre>
+</div>
+
+<p>Éste no es un documento HTML válido, ni pretende serlo, ya que vamos a cargarlo a través de JavaScript para insertarlo en nuestra página actual.</p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span>document<span class="br0">&#41;</span>.<span class="me1">ready</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  $.<span class="kw1">get</span><span class="br0">&#40;</span><span class="st0">&quot;slides.html&quot;</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>data<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> sNav <span class="sy0">=</span> <span class="br0">&#91;</span>
+      <span class="st0">'&lt;ul class=&quot;slide-nav&quot;&gt;'</span><span class="sy0">,</span>
+      <span class="st0">'&lt;li&gt;&lt;a class=&quot;prev&quot; href= »
+        &quot;#welcome-slides&quot;&gt;Previous&lt;/a&gt;&lt;/li&gt;'</span><span class="sy0">,</span>
+      <span class="st0">'&lt;li&gt;&lt;a class=&quot;next&quot; href=&quot;#welcome-slides&quot;&gt; »
+        Next&lt;/a&gt;&lt;/li&gt;'</span><span class="sy0">,</span>
+      <span class="st0">'&lt;/ul&gt;'</span>
+<span class="br0">&#93;</span>.<span class="me1">join</span><span class="br0">&#40;</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    $<span class="br0">&#40;</span><span class="st0">&quot;.welcome .slides&quot;</span><span class="br0">&#41;</span>
+      .<span class="me1">append</span><span class="br0">&#40;</span>data<span class="br0">&#41;</span>
+      .<span class="me1">wrapInner</span><span class="br0">&#40;</span><span class="st0">'&lt;div class=&quot;slidewrap&quot;&gt; »
+        &lt;div id=&quot;welcome-slides&quot; class=&quot;slider&quot;&gt; »
+        &lt;/div&gt;&lt;/div&gt;'</span><span class="br0">&#41;</span>
+      .<span class="me1">find</span><span class="br0">&#40;</span><span class="st0">&quot;.slidewrap&quot;</span><span class="br0">&#41;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Y esto es todo. Si el navegador soporta JavaScript, se cargarán el resto de las imágenes, y se creará el carrusel. En caso de no disponer de JavaScript, simplemente se mostrará la imagen principal.</p>
+
+<h3 id="otras-posibles-mejoras">5.5.3 Otras posibles mejoras</h3>
+
+<p>Es posible restringir, desde JavaScript, las funcionalidades del documento en función del contexto, haciendo el <code>script</code> dependiente de la resolución.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">if</span> <span class="br0">&#40;</span>screen.<span class="me1">width</span> <span class="sy0">&gt;</span> <span class="nu0">480</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    $<span class="br0">&#40;</span>document<span class="br0">&#41;</span>.<span class="me1">ready</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Estra instrución en JavaScript equivale a un <em>media query</em> <code>min-width: 480px</code>: si el ancho de la pantalla es menor a <code>480px</code>, el <code>script</code> no se ejecutará.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-5.html#desarrollo-adaptativo">Desarrollo adaptativo</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.1</span>
+                        <a class="internal" href="capitulo-5.html#la-importancia-del-contexto">La importancia del contexto</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.2</span>
+                        <a class="internal" href="capitulo-5.html#hacia-un-flujo-de-trabajo-adaptativo">Hacia un flujo de trabajo adaptativo</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.3</span>
+                        <a class="internal" href="capitulo-5.html#puntos-de-ruptura">Puntos de ruptura</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.4</span>
+                        <a class="internal" href="capitulo-5.html#desarrollo-iterativo">Desarrollo iterativo</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.5</span>
+                        <a class="internal" href="capitulo-5.html#desarrollo-adaptativo-de-manera-responsable">Desarrollo adaptativo, de manera responsable</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

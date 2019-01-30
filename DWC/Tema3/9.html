@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang=”es”>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+		<script type="text/javascript" >
+
+		var opcion = prompt("Que deseas hacer? \n 1. Redondeo a su inmediato superior de un número \n" + 
+			" 2. Redondeo a su inmediato inferior de un número \n"+  
+			" 3. Redondeo al número más cercano \n" +
+			" 4. Cálculo del número máximo entre dos dados \n" +
+			" 5. Cálculo del número mínimo entre dos dados \n" +
+			" 6. Cálculo de un número elevado a otro \n" +
+			" 7. Cálculo de la raiz cuadrada de un número");
+
+		switch (parseInt(opcion)) {
+			case 1:
+				var num = prompt("Introduzca el numero");
+				document.write(Math.ceil(num));
+				break;
+			case 2:
+				var num = prompt("Introduzca el numero");
+				document.write(Math.floor(num));
+				break;
+			case 3:
+				var num = prompt("Introduzca el numero");
+				document.write(Math.round(num));
+				break;
+			case 4:
+				var num1 = Math.floor((Math.random() * 6)+ 1);
+				document.writeln(num1);
+				var num2 = Math.floor((Math.random() * 6)+ 1);
+				document.writeln(num2);
+
+				document.writeln(Math.max(num1 , num2));
+
+				break;
+			case 5:
+			var num1 = Math.floor((Math.random() * 6)+ 1);
+				document.writeln(num1);
+				var num2 = Math.floor((Math.random() * 6)+ 1);
+				document.writeln(num2);
+
+				document.writeln(Math.min(num1 , num2));
+
+
+				break;
+			case 6:
+				var num = prompt("Introduzca el numero 1");
+				var num2 = prompt("Introduzca el numero 2");
+				document.write(Math.pow(num , num2));
+				break;
+			case 7:
+				var num = prompt("Introduzca el numero");
+				document.write(Math.sqrt(num));
+				break;
+			
+			default:
+				alert("No has introducido ningun numero");
+				break;
+		}
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html> 

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script>
+    
+    var nombres=[];
+    var edades=[];
+    for (var i=1;i<=6;i++){
+        nombres[i] = prompt("Introduce nombre numero : "+i); 
+        edades[i] = prompt("Introduce la edad del sujeto : "+i);               
+        
+    }
+
+    imprimir();
+    mediaEdades();
+    
+
+    function imprimir(){
+        for (var i=1;i<=6;i++){
+            document.write("Nombre : "+nombres[i]+" cuya edad es : "+edades[i]);
+        }
+    }
+
+    function mediaEdades(){
+        var sumaEdades = 0;
+          for (var i=1;i<=6;i++){ 
+
+        sumaEdades += parseInt(edades[i]);
+          }
+
+        var media = sumaEdades/(edades.length-1);
+
+        document.write("La media es "+media);
+          
+    }
+    
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

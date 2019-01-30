@@ -1,0 +1,7 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+www.w3schools.com	TRUE	/	FALSE	1999999999	ASPSESSIONIDSSSRDCAR	IJHGAHFDOBONAKOFFECAPOPF
+.google.com	TRUE	/	FALSE	1999999999	NID	146=1_7tGIvTdGOq5xZiEnpeq_EIWv_fwI5t13pFCbSaEzoaLkwX2U0zczIwA8sxF1dUstuPzdRv00_5nqFl50h8ABhSvSr9Xjas-nEG0Ums-iB1h2DTm1evyA-IvMFUfONooEiJK2TARKIcikJLeaOH9oN7WlzEPsn_K9s8s7TO9yI
+.cnn.com	TRUE	/	FALSE	1999999999	countryCode	ES
+.cnn.com	TRUE	/	FALSE	1999999999	geoData	derio|BI|48160|ES|EU
+

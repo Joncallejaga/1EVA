@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var meses=["enero", "feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+    var d = new Date();
+    var n = d.getDate();
+    var m = d.getMonth()+1;
+    var a = d.getFullYear();
+    var h = d.getHours();
+    var mi= d.getMinutes();
+
+    document.write("Hoy es dia "+n+" de "+meses[m-1]+" de "+a+"  en estos momentos son las "+h+":"+mi);
+    
+    
+    </script>
+</body>
+</html>

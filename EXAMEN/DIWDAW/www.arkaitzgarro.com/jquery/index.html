@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="14/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>  jQuery</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="index">
+<div class="container">
+<div class="item cover">
+    <h1>jQuery</h1>
+    <h2>Arkaitz Garro</h2>
+</div>
+
+<div class="item toc">
+    <ul class="unstyled">
+            <li class="chapter level-1">
+            <span>Capítulo 1</span>
+            <a href="capitulo-1.html">Introducción</a>
+        </li>
+            <li class=" level-2">
+            <span>1.1</span>
+            <a href="capitulo-1.html#software">Software</a>
+        </li>
+            <li class=" level-2">
+            <span>1.2</span>
+            <a href="capitulo-1.html#anadir-javascript-a-una-pagina">Añadir JavaScript a una Página</a>
+        </li>
+            <li class=" level-2">
+            <span>1.3</span>
+            <a href="capitulo-1.html#depuracion-del-codigo-javascript">Depuración del Código JavaScript</a>
+        </li>
+            <li class=" level-2">
+            <span>1.4</span>
+            <a href="capitulo-1.html#ejercicios">Ejercicios</a>
+        </li>
+            <li class=" level-2">
+            <span>1.5</span>
+            <a href="capitulo-1.html#convenciones-utilizadas-en-el-libro">Convenciones Utilizadas en el Libro</a>
+        </li>
+            <li class=" level-2">
+            <span>1.6</span>
+            <a href="capitulo-1.html#material-de-referencia">Material de Referencia</a>
+        </li>
+            <li class="chapter level-1">
+            <span>Capítulo 2</span>
+            <a href="capitulo-2.html">Conceptos Básicos de JavaScript</a>
+        </li>
+            <li class=" level-2">
+            <span>2.1</span>
+            <a href="capitulo-2.html#introduccion-2">Introducción</a>
+        </li>
+            <li class=" level-2">
+            <span>2.2</span>
+            <a href="capitulo-2.html#sintaxis-basica">Sintaxis Básica</a>
+        </li>
+            <li class=" level-2">
+            <span>2.3</span>
+            <a href="capitulo-2.html#operadores">Operadores</a>
+        </li>
+            <li class=" level-2">
+            <span>2.4</span>
+            <a href="capitulo-2.html#codigo-condicional">Código Condicional</a>
+        </li>
+            <li class=" level-2">
+            <span>2.5</span>
+            <a href="capitulo-2.html#bucles">Bucles</a>
+        </li>
+            <li class=" level-2">
+            <span>2.6</span>
+            <a href="capitulo-2.html#palabras-reservadas">Palabras Reservadas</a>
+        </li>
+            <li class=" level-2">
+            <span>2.7</span>
+            <a href="capitulo-2.html#vectores">Vectores</a>
+        </li>
+            <li class=" level-2">
+            <span>2.8</span>
+            <a href="capitulo-2.html#objetos">Objetos</a>
+        </li>
+            <li class=" level-2">
+            <span>2.9</span>
+            <a href="capitulo-2.html#funciones">Funciones</a>
+        </li>
+            <li class=" level-2">
+            <span>2.10</span>
+            <a href="capitulo-2.html#determinacion-del-tipo-de-variable">Determinación del Tipo de Variable</a>
+        </li>
+            <li class=" level-2">
+            <span>2.11</span>
+            <a href="capitulo-2.html#la-palabra-clave-this">La palabra clave <code>this</code></a>
+        </li>
+            <li class=" level-2">
+            <span>2.12</span>
+            <a href="capitulo-2.html#alcance">Alcance</a>
+        </li>
+            <li class=" level-2">
+            <span>2.13</span>
+            <a href="capitulo-2.html#clausuras">Clausuras</a>
+        </li>
+            <li class="chapter level-1">
+            <span>Capítulo 3</span>
+            <a href="capitulo-3.html">Conceptos Básicos de jQuery</a>
+        </li>
+            <li class=" level-2">
+            <span>3.1</span>
+            <a href="capitulo-3.html#documentready">$(document).ready()</a>
+        </li>
+            <li class=" level-2">
+            <span>3.2</span>
+            <a href="capitulo-3.html#seleccion-de-elementos">Selección de Elementos</a>
+        </li>
+            <li class=" level-2">
+            <span>3.3</span>
+            <a href="capitulo-3.html#trabajar-con-selecciones">Trabajar con Selecciones</a>
+        </li>
+            <li class=" level-2">
+            <span>3.4</span>
+            <a href="capitulo-3.html#css-estilos-amp-dimensiones">CSS, Estilos, &amp; Dimensiones</a>
+        </li>
+            <li class=" level-2">
+            <span>3.5</span>
+            <a href="capitulo-3.html#atributos">Atributos</a>
+        </li>
+            <li class=" level-2">
+            <span>3.6</span>
+            <a href="capitulo-3.html#recorrer-el-dom">Recorrer el DOM</a>
+        </li>
+            <li class=" level-2">
+            <span>3.7</span>
+            <a href="capitulo-3.html#manipulacion-de-elementos">Manipulación de Elementos</a>
+        </li>
+            <li class=" level-2">
+            <span>3.8</span>
+            <a href="capitulo-3.html#ejercicios-2">Ejercicios</a>
+        </li>
+            <li class="chapter level-1">
+            <span>Capítulo 4</span>
+            <a href="capitulo-4.html">El núcleo de jQuery</a>
+        </li>
+            <li class=" level-2">
+            <span>4.1</span>
+            <a href="capitulo-4.html#-vs-"><code>$</code> vs <code>$()</code></a>
+        </li>
+            <li class=" level-2">
+            <span>4.2</span>
+            <a href="capitulo-4.html#metodos-utilitarios">Métodos Utilitarios</a>
+        </li>
+            <li class=" level-2">
+            <span>4.3</span>
+            <a href="capitulo-4.html#comprobacion-de-tipos">Comprobación de Tipos</a>
+        </li>
+            <li class=" level-2">
+            <span>4.4</span>
+            <a href="capitulo-4.html#el-metodo-data">El Método Data</a>
+        </li>
+            <li class=" level-2">
+            <span>4.5</span>
+            <a href="capitulo-4.html#deteccion-de-navegadores-y-caracteristicas">Detección de Navegadores y Características</a>
+        </li>
+            <li class=" level-2">
+            <span>4.6</span>
+            <a href="capitulo-4.html#evitar-conflictos-con-otras-bibliotecas-javascript">Evitar Conflictos con Otras Bibliotecas JavaScript</a>
+        </li>
+            <li class="chapter level-1">
+            <span>Capítulo 5</span>
+            <a href="capitulo-5.html">Eventos</a>
+        </li>
+            <li class=" level-2">
+            <span>5.1</span>
+            <a href="capitulo-5.html#introduccion-3">Introducción</a>
+        </li>
+            <li class=" level-2">
+            <span>5.2</span>
+            <a href="capitulo-5.html#vincular-eventos-a-elementos">Vincular Eventos a Elementos</a>
+        </li>
+            <li class=" level-2">
+            <span>5.3</span>
+            <a href="capitulo-5.html#el-objeto-del-evento">El Objeto del Evento</a>
+        </li>
+            <li class=" level-2">
+            <span>5.4</span>
+            <a href="capitulo-5.html#ejecucion-automatica-de-controladores-de-eventos">Ejecución automática de Controladores de Eventos</a>
+        </li>
+            <li class=" level-2">
+            <span>5.5</span>
+            <a href="capitulo-5.html#incrementar-el-rendimiento-con-la-delegacion-de-eventos">Incrementar el Rendimiento con la Delegación de Eventos</a>
+        </li>
+            <li class=" level-2">
+            <span>5.6</span>
+            <a href="capitulo-5.html#funciones-auxiliares-de-eventos">Funciones Auxiliares de Eventos</a>
+        </li>
+            <li class=" level-2">
+            <span>5.7</span>
+            <a href="capitulo-5.html#ejercicios-3">Ejercicios</a>
+        </li>
+            <li class="chapter level-1">
+            <span>Capítulo 6</span>
+            <a href="capitulo-6.html">Efectos</a>
+        </li>
+            <li class=" level-2">
+            <span>6.1</span>
+            <a href="capitulo-6.html#introduccion-4">Introducción</a>
+        </li>
+            <li class=" level-2">
+            <span>6.2</span>
+            <a href="capitulo-6.html#efectos-incorporados-en-la-biblioteca">Efectos Incorporados en la Biblioteca</a>
+        </li>
+            <li class=" level-2">
+            <span>6.3</span>
+            <a href="capitulo-6.html#efectos-personalizados-con-fnanimate">Efectos Personalizados con <code>$.fn.animate</code></a>
+        </li>
+            <li class=" level-2">
+            <span>6.4</span>
+            <a href="capitulo-6.html#control-de-los-efectos">Control de los Efectos</a>
+        </li>
+            <li class=" level-2">
+            <span>6.5</span>
+            <a href="capitulo-6.html#ejercicios-4">Ejercicios</a>
+        </li>
+            <li class="chapter level-1">
+            <span>Capítulo 7</span>
+            <a href="capitulo-7.html">Ajax</a>
+        </li>
+            <li class=" level-2">
+            <span>7.1</span>
+            <a href="capitulo-7.html#introduccion-5">Introducción</a>
+        </li>
+            <li class=" level-2">
+            <span>7.2</span>
+            <a href="capitulo-7.html#conceptos-clave">Conceptos Clave</a>
+        </li>
+            <li class=" level-2">
+            <span>7.3</span>
+            <a href="capitulo-7.html#metodos-ajax-de-jquery">Métodos Ajax de jQuery</a>
+        </li>
+            <li class=" level-2">
+            <span>7.4</span>
+            <a href="capitulo-7.html#ajax-y-formularios">Ajax y Formularios</a>
+        </li>
+            <li class=" level-2">
+            <span>7.5</span>
+            <a href="capitulo-7.html#trabajar-con-jsonp">Trabajar con JSONP</a>
+        </li>
+            <li class=" level-2">
+            <span>7.6</span>
+            <a href="capitulo-7.html#eventos-ajax">Eventos Ajax</a>
+        </li>
+            <li class=" level-2">
+            <span>7.7</span>
+            <a href="capitulo-7.html#ejercicios-5">Ejercicios</a>
+        </li>
+            <li class="chapter level-1">
+            <span>Capítulo 8</span>
+            <a href="capitulo-8.html">Extensiones</a>
+        </li>
+            <li class=" level-2">
+            <span>8.1</span>
+            <a href="capitulo-8.html#que-es-una-extension">¿Qué es una Extensión?</a>
+        </li>
+            <li class=" level-2">
+            <span>8.2</span>
+            <a href="capitulo-8.html#crear-una-extension-basica">Crear una Extensión Básica</a>
+        </li>
+            <li class=" level-2">
+            <span>8.3</span>
+            <a href="capitulo-8.html#encontrar-y-evaluar-extensiones">Encontrar y Evaluar Extensiones</a>
+        </li>
+            <li class=" level-2">
+            <span>8.4</span>
+            <a href="capitulo-8.html#escribir-extensiones">Escribir Extensiones</a>
+        </li>
+            <li class=" level-2">
+            <span>8.5</span>
+            <a href="capitulo-8.html#escribir-extensiones-con-mantenimiento-de-estado-utilizando-widget-factory-de-jquery-ui">Escribir Extensiones con Mantenimiento de Estado Utilizando Widget Factory de jQuery UI</a>
+        </li>
+            <li class=" level-2">
+            <span>8.6</span>
+            <a href="capitulo-8.html#ejercicios-6">Ejercicios</a>
+        </li>
+            <li class="chapter level-1">
+            <span>Capítulo 9</span>
+            <a href="capitulo-9.html">Mejores Prácticas para Aumentar el Rendimiento</a>
+        </li>
+            <li class=" level-2">
+            <span>9.1</span>
+            <a href="capitulo-9.html#guardar-la-longitud-en-bucles">Guardar la Longitud en Bucles</a>
+        </li>
+            <li class=" level-2">
+            <span>9.2</span>
+            <a href="capitulo-9.html#anadir-nuevo-contenido-por-fuera-de-un-bucle">Añadir Nuevo Contenido por Fuera de un Bucle</a>
+        </li>
+            <li class=" level-2">
+            <span>9.3</span>
+            <a href="capitulo-9.html#no-repetirse">No Repetirse</a>
+        </li>
+            <li class=" level-2">
+            <span>9.4</span>
+            <a href="capitulo-9.html#cuidado-con-las-funciones-anonimas">Cuidado con las Funciones Anónimas</a>
+        </li>
+            <li class=" level-2">
+            <span>9.5</span>
+            <a href="capitulo-9.html#optimizacion-de-selectores">Optimización de Selectores</a>
+        </li>
+            <li class=" level-2">
+            <span>9.6</span>
+            <a href="capitulo-9.html#utilizar-la-delegacion-de-eventos">Utilizar la Delegación de Eventos</a>
+        </li>
+            <li class=" level-2">
+            <span>9.7</span>
+            <a href="capitulo-9.html#separar-elementos-para-trabajar-con-ellos">Separar Elementos para Trabajar con Ellos</a>
+        </li>
+            <li class=" level-2">
+            <span>9.8</span>
+            <a href="capitulo-9.html#utilizar-estilos-en-cascada-para-cambios-de-css-en-varios-elementos">Utilizar Estilos en Cascada para Cambios de CSS en Varios Elementos</a>
+        </li>
+            <li class=" level-2">
+            <span>9.9</span>
+            <a href="capitulo-9.html#utilizar-data-en-lugar-de-fndata">Utilizar <code>$.data</code> en Lugar de <code>$.fn.data</code></a>
+        </li>
+            <li class=" level-2">
+            <span>9.10</span>
+            <a href="capitulo-9.html#no-actuar-en-elementos-no-existentes">No Actuar en Elementos no Existentes</a>
+        </li>
+            <li class=" level-2">
+            <span>9.11</span>
+            <a href="capitulo-9.html#definicion-de-variables">Definición de Variables</a>
+        </li>
+            <li class=" level-2">
+            <span>9.12</span>
+            <a href="capitulo-9.html#condicionales">Condicionales</a>
+        </li>
+            <li class=" level-2">
+            <span>9.13</span>
+            <a href="capitulo-9.html#no-tratar-a-jquery-como-si-fuera-una-caja-negra">No Tratar a jQuery como si fuera una Caja Negra</a>
+        </li>
+            <li class="chapter level-1">
+            <span>Capítulo 10</span>
+            <a href="capitulo-10.html">Organización del Código</a>
+        </li>
+            <li class=" level-2">
+            <span>10.1</span>
+            <a href="capitulo-10.html#introduccion-6">Introducción</a>
+        </li>
+            <li class=" level-2">
+            <span>10.2</span>
+            <a href="capitulo-10.html#encapsulacion">Encapsulación</a>
+        </li>
+            <li class=" level-2">
+            <span>10.3</span>
+            <a href="capitulo-10.html#gestion-de-dependencias">Gestión de Dependencias</a>
+        </li>
+            <li class=" level-2">
+            <span>10.4</span>
+            <a href="capitulo-10.html#ejercicios-7">Ejercicios</a>
+        </li>
+            <li class="chapter level-1">
+            <span>Capítulo 11</span>
+            <a href="capitulo-11.html">Eventos Personalizados</a>
+        </li>
+            <li class=" level-2">
+            <span>11.1</span>
+            <a href="capitulo-11.html#introduccion-a-los-eventos-personalizados">Introducción a los Eventos Personalizados</a>
+        </li>
+            <li class="chapter level-1">
+            <span>Capítulo 12</span>
+            <a href="capitulo-12.html">Funciones y ejecuciones diferidas a través del objeto <code>$.Deferred</code></a>
+        </li>
+            <li class=" level-2">
+            <span>12.1</span>
+            <a href="capitulo-12.html#introduccion-7">Introducción</a>
+        </li>
+            <li class=" level-2">
+            <span>12.2</span>
+            <a href="capitulo-12.html#el-objeto-diferido-y-ajax">El objeto diferido y Ajax</a>
+        </li>
+            <li class=" level-2">
+            <span>12.3</span>
+            <a href="capitulo-12.html#creacion-de-objetos-diferidos-con-deferred">Creación de objetos diferidos con <code>$.Deferred</code></a>
+        </li>
+        </ul>
+</div>
+
+<div class="item edition">
+    <h1>Sobre esta edición</h1>
+    <p><strong>jQuery</strong></p>
+
+<p><strong>Publication date</strong>: 14/01/2014</p>
+
+<p>This book was published with <em>easybook v5.0-DEV</em>,
+a free and open-source book publishing application developed by <a href="http://javiereguiluz.com">Javier Eguiluz</a>
+using several <a href="http://components.symfony.com">Symfony components</a>.</p>
+
+</div>
+
+<div class="item license">
+    <h1>Licencia</h1>
+    <p>Esta obra se publica bajo la licencia <em>Creative Commons Attribution-Share Alike 3.0 United States</em>, cuyos detalles puedes consultar en <a href="http://creativecommons.org/licenses/by-sa/3.0/us/">http://creativecommons.org/licenses/by-sa/3.0/us/</a>.</p>
+
+<p>Puedes copiar, distribuir y comunicar públicamente la obra, incluso transformándola, siempre que cumplas todas las condiciones siguientes:</p>
+
+<ul>
+<li><p>Reconocimiento: debes reconocer siempre la autoría de la obra original, indicando tanto el nombre del autor (Arkaitz Garro) como el nombre del sitio donde se publicó originalmente <a href="http://www.arkaitzgarro.com/jquery/www.arkaitzgarro.com">www.arkaitzgarro.com</a>. Este reconocimiento no debe hacerse de una manera que sugiera que el autor o el sitio apoyan el uso que haces de su obra.</p></li>
+<li><p>Compartir igual: si alteras o transformas esta obra o si realizas una obra derivada, debes compartir tu trabajo obligatoriamente bajo esta misma licencia.</p></li>
+</ul>
+
+</div>
+</div>
+</body>
+</html>

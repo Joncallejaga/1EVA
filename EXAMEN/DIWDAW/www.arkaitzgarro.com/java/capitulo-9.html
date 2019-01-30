@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="15/04/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Objetos y clases | Java</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">Java</a></h1>
+        <p class="span3">
+                        <a href="capitulo-8.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-10.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="objetos-y-clases"><span>Capítulo 9</span> Objetos y clases</h1>
+        <p>Aunque parezca una obviedad, la base de la Programación Orientada a Objetos es el <em>objeto</em>. En la vida real todos los <em>objetos</em> tienen una serie de características y un comportamiento. Por ejemplo, una puerta tiene color, forma, dimensiones, material... (goza de una serie de características) y puede abrirse, cerrarse... (posee un comportamiento). En Programación Orientada a Objetos, un objeto es una combinación de unos datos específicos y de las rutinas que pueden operar con esos datos. De forma que los dos tipos de componentes de un objeto son:</p>
+
+<ul>
+<li>Campos o <em>atributos</em>: componentes de un objeto que almacenan datos. También se les denomina variables miembro. Estos datos pueden ser de tipo primitivo (<code>boolean, int, double, char...</code>) o, a su vez, de otro tipo de objeto (lo que se denomina <em>agregación o composición</em> de objetos). La idea es que un atributo representa una propiedad determinada de un objeto.</li>
+<li>Rutinas o <em>métodos</em>: es una componente de un objeto que lleva a cabo una determinada acción o tarea con los atributos. En principio, todas las variables y rutinas de un programa de Java deben pertenecer a una clase. De hecho, en Java no hay noción de programa principal y los subrutinas no existen como unidades modulares independientes, sino que forman siempre parte de alguna clase.</li>
+</ul>
+
+<h2 id="clases">9.1 Clases</h2>
+
+<p>Una <em>clase</em> representa al conjunto de objetos que comparten una estructura y un comportamiento comunes. Una clase es una combinación específica de atributos y métodos y puede considerarse un tipo de dato de cualquier tipo <strong>no</strong> primitivo. Así, una clase es una especie de <em>plantilla o prototipo</em> de objetos: define los atributos que componen ese tipo de objetos y los métodos que pueden emplearse para trabajar con esos objetos. Aunque, por otro lado, una clase también puede estar compuesta por métodos estáticos que no necesitan de objetos (como las clases construidas en los capítulos anteriores que contienen un método estático <code>main</code>). La declaración de una clase sigue la siguiente sintaxis:</p>
+
+<div class="code java">
+<pre class="java"><span class="br0">&#91;</span>modificadores<span class="br0">&#93;</span> <span class="kw1">class</span> IdentificadorClase <span class="br0">&#123;</span>
+    <span class="co1">// Declaraciones de atributos y metodos</span>
+    ...
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Convención de los programadores en Java: los identificadores de las clases deberían ser simples, descriptivos y sustantivos y, en el caso de nombres compuestos, con la primera letra de cada uno en mayúsculas. Es conveniente utilizar las palabras completas y evitar los acrónimos, a menos que la abreviatura sea mucho más utilizada que la forma no abreviada como en URL o HTML.</p>
+
+<h2 id="instancias">9.2 Instancias</h2>
+
+<p>Una instancia es un elemento tangible (ocupa memoria durante la ejecución del programa) generado a partir de una definición de clase. Todos los objetos empleados en un programa han de pertenecer a una clase determinada.</p>
+
+<p>Aunque el término a veces se emplea de una forma imprecisa, un objeto es una <em>instancia</em> de una clase predefinida en Java o declarada por el usuario y <em>referenciada</em> por una variable que almacena su dirección de memoria. Cuando se dice que Java <em>no tiene punteros</em> simplemente se indica que Java no tiene punteros que el programador pueda <em>ver</em>, ya que todas las referencias a objeto son de hecho punteros en la representación interna.</p>
+
+<p>En general, el <em>acceso</em> a los atributos se realiza a través del operador punto, que separa al identificador de la referencia del identificador del atributo (<code>idReferencia.idAtributo</code>). Las llamadas a los métodos para realizar las distintas acciones se llevan a cabo separando los identificadores de la referencia y del método correspondiente con el operador punto (<code>idReferencia.idMetodo(parametros)</code>).</p>
+
+<p><strong>Ejemplo sencillo de clase y de instancia</strong></p>
+
+<p>El siguiente código muestra la declaración de la clase <code>Precio</code>. La clase <code>Precio</code> consta de un único atributo (<code>euro</code>) y dos métodos: uno que asigna un valor al atributo (<code>pone</code>) sin devolver ningún valor y otro que devuelve el valor del atributo (<code>da</code>).</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/**
+ *  Ejemplo de declaracion de la clase Precio
+ *  double da() --&gt; devuelve el valor almacenado en euros
+ *  void pone( double x ) --&gt; almacena valor en euros
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> Precio <span class="br0">&#123;</span> 
+    <span class="co1">// Atributo o variable miembro </span>
+    <span class="kw1">public</span> <span class="kw4">double</span> euros<span class="sy0">;</span> 
+&nbsp;
+    <span class="co1">// Metodos </span>
+    <span class="kw1">public</span> <span class="kw4">double</span> da<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">euros</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> pone<span class="br0">&#40;</span><span class="kw4">double</span> x<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">euros</span> <span class="sy0">=</span> x<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Gráficamente, una clase puede representarse como un rectángulo.</p>
+
+<div class="figure" id="figure-9-1">
+    <img src="images/cap09/precio.png" alt="Representación gráfica de la clase <code>Precio</code>" />
+
+    <p class="caption"><strong>Figura 9.1</strong> Representación gráfica de la clase <code>Precio</code></p>
+</div>
+
+
+<p>El anterior código puede compilarse:</p>
+
+<div class="code bash">
+<pre class="bash"><span class="co4">$</span><span class="sy0">&gt;</span>javac Precio.java</pre>
+</div>
+
+<p>generando el archivo de <em>bytecodes</em> <code>Precio.class</code>. Este archivo no es directamente ejecutable por el intérprete, ya que el código fuente no incluye ningún método principal (<code>main</code>). Para poder probar el código anterior, puede construirse otro archivo con el código fuente que se muestra a continuación:</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/** 
+ * Ejemplo de uso de la clase Precio
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> PruebaPrecio <span class="br0">&#123;</span> 
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main <span class="br0">&#40;</span><span class="kw3">String</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>args <span class="br0">&#41;</span> <span class="br0">&#123;</span> 
+        Precio p<span class="sy0">;</span>           <span class="co1">// Crea una referencia de la clase Precio</span>
+        p <span class="sy0">=</span> <span class="kw1">new</span> Precio<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// Crea el objeto de la clase Precio</span>
+        p.<span class="me1">pone</span><span class="br0">&#40;</span><span class="nu0">56.8</span><span class="br0">&#41;</span><span class="sy0">;</span>       <span class="co1">// Llamada al metodo pone </span>
+                            <span class="co1">// que asigna 56.8 al atributo euros</span>
+        <span class="co1">// Llamada al metodo da que devuelve el valor de euros</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Valor = &quot;</span> <span class="sy0">+</span> p.<span class="me1">da</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Precio q <span class="sy0">=</span> <span class="kw1">new</span> Precio<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// Crea una referencia y el objeto</span>
+        q.<span class="me1">euros</span><span class="sy0">=</span><span class="nu0">75.6</span><span class="sy0">;</span>             <span class="co1">// Asigna 75.6 al atributo euros</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Valor = &quot;</span> <span class="sy0">+</span> q.<span class="me1">euros</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+</div>
+
+<div class="figure" id="figure-9-2">
+    <img src="images/cap09/espacio-memoria.png" alt="Representación gráfica del espacio de la memoria utilizado por las referencias e instancias de la clase <code>Precio</code> durante la ejecución del método <code>main</code> de la clase <code>PruebaPrecio</code>" />
+
+    <p class="caption"><strong>Figura 9.2</strong> Representación gráfica del espacio de la memoria utilizado por las referencias e instancias de la clase <code>Precio</code> durante la ejecución del método <code>main</code> de la clase <code>PruebaPrecio</code></p>
+</div>
+
+
+<p><strong>Explicación del ejemplo anterior</strong></p>
+
+<p>Para poder trabajar con objetos se tendrá que seguir un proceso de dos pasos. Lo primero que debe hacer el programa es crear una referencia o puntero de la clase <code>Precio</code> con el identificador <code>p</code>. De forma similar a cómo se declara una variable de un tipo primitivo, la declaración del identificador de la referencia se realiza con la sintaxis:</p>
+
+<div class="code java">
+<pre class="java">identificadorClase identificadorReferencia<span class="sy0">;</span>
+<span class="co1">// En el ejemplo anterior: Precio p;</span></pre>
+</div>
+
+<div class="figure" id="figure-9-3">
+    <img src="images/cap09/p.png" alt="Creación de la referencia <code>p</code>" />
+
+    <p class="caption"><strong>Figura 9.3</strong> Creación de la referencia <code>p</code></p>
+</div>
+
+
+<p>La referencia o puntero, <code>p</code>, tiene como misión almacenar la dirección de memoria de (<em>apuntar a</em>) los componentes de la instancia que todavía no ha sido creada ni referenciada. En este momento se dice que la referencia <code>p</code>, recien creada, almacena una dirección de memoria <em>nula</em> (que no corresponde a objeto alguno) o <code>null</code>. El segundo paso del proceso para trabajar con objetos lleva a la creación de una nueva instancia referenciada por <code>p</code>, que se realiza con la sentencia:</p>
+
+<div class="figure" id="figure-9-4">
+    <img src="images/cap09/p2.png" alt="Creación de la nueva instancia de la clase <code>Precio</code> referenciado por <code>p</code>" />
+
+    <p class="caption"><strong>Figura 9.4</strong> Creación de la nueva instancia de la clase <code>Precio</code> referenciado por <code>p</code></p>
+</div>
+
+
+<p>A esta operación se le denomina también <strong>instanciación</strong>. Aunque las dos operaciones anteriores (creación de la referencia y creación de la instancia referenciada) pueden realizarse conjuntamente en la misma línea de código:</p>
+
+<div class="code java">
+<pre class="java">identificadorClase identificadorReferencia <span class="sy0">=</span> <span class="kw1">new</span> identificadorClase<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">// En el codigo del ejemplo anterior: Precio q = new Precio();</span></pre>
+</div>
+
+<div class="figure" id="figure-9-5">
+    <img src="images/cap09/p3.png" alt="Creación de la referencia <code>q</code> y de la nueva instancia de la clase <code>Precio</code> referenciado por <code>q</code>" />
+
+    <p class="caption"><strong>Figura 9.5</strong> Creación de la referencia <code>q</code> y de la nueva instancia de la clase <code>Precio</code> referenciado por <code>q</code></p>
+</div>
+
+
+<p>El resultado de la ejecución del código anterior son dos nuevas instancias de la clase <code>Precio</code> referenciados respectivamente por <code>p</code> y <code>q</code>. El atributo euros de cada una de las nuevas instancias de la clase <code>Precio</code> es accesible a través del identificador de la referencia y del operador punto (<code>p.euros</code> y <code>q.euros</code>). Los métodos <code>da</code> y <code>pone</code> pertenecientes a la clase <code>Precio</code> son accesibles a través del identificador de la referencia y del operador punto (<code>p.da()</code> y <code>p.pone(56.8)</code> y <code>q.da()</code> y <code>q.pone(75.6)</code>, respectivamente). En el caso de los métodos, la instancia mediante la cual se realiza la llamada correspondiente actúa como un parámetro o argumento implícito del método.</p>
+
+<p>Si se asigna una referencia a otra mediante una sentencia de asignación, no se copian los valores de los atributos, sino que se tiene como resultado una única instancia apuntada por dos referencias distintas. Por ejemplo:</p>
+
+<div class="code java">
+<pre class="java">q <span class="sy0">=</span> p<span class="sy0">;</span> <span class="co1">// Ahora p y q referencian al mismo objeto</span></pre>
+</div>
+
+<div class="figure" id="figure-9-6">
+    <img src="images/cap09/p4.png" alt="Resultado de la asignación de valores entre referencias" />
+
+    <p class="caption"><strong>Figura 9.6</strong> Resultado de la asignación de valores entre referencias</p>
+</div>
+
+
+<p>En este caso ¿qué ocurre con la instancia referenciada previamente por <code>q</code>? Dicha instancia se queda sin referencia (inaccesible). Esto puede ser un problema en algunos lenguajes de programación, como es el caso de Pascal o de C, que utilizan variables <em>dinámicas</em> y que necesitan liberar explícitamente el espacio en memoria reservado para las variables que van a dejar de ser referenciadas. La gestión <em>dinámica</em> de la memoria suele ser una tarea engorrosa para el programador y muy dada a la proliferación de errores de ejecución. Para evitar tales inconvenientes, Java permite crear tantas instancias como se desee (con la única limitación de la memoria que sea capaz de gestionar el sistema), sin que el programador tenga que preocuparse de destruirlas o liberarlas cuando ya no se necesiten. El entorno de ejecución de Java elimina automáticamente las instancias cuando detecta que no se van a usar más (cuando dejan de estar referenciadas). A este proceso se le denomina recogida o recolección de basura (<em>garbage collection</em>).</p>
+
+<h2 id="modificadores-de-visibilidad">9.3 Modificadores de visibilidad</h2>
+
+<p>El modificador <code>public</code> indica que la componente del método es accesible fuera del código de la clase a la que pertenece la componente a través del operador punto. El modificador <code>private</code> indica que la componente solamente es accesible a través de los métodos de la propia clase. El modificador protected se verá posteriormente. En el siguiente código se declara el atributo <code>euros</code> con el modificador <code>private</code>.</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/**
+ * Ejemplo de declaracion de la clase PrecioPrivado
+ * double da()              --&gt; devuelve el valor almacenado en euros
+ * void pone( double x )    --&gt; almacena valor en euros
+ * euros                    --&gt; Atributo de acceso privado
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> PrecioPrivado <span class="br0">&#123;</span> 
+    <span class="co1">// Atributo o variable miembro  private double euros; </span>
+    <span class="kw1">private</span> <span class="kw4">double</span> euros<span class="sy0">;</span>
+&nbsp;
+    <span class="co1">// Metodos publicos</span>
+     <span class="kw1">public</span> <span class="kw4">double</span> da<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">euros</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> pone<span class="br0">&#40;</span><span class="kw4">double</span> x<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">euros</span> <span class="sy0">=</span> x<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Si se construye otro código que intente utilizar directamente el atributo <code>euros</code>:</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/**
+ * Ejemplo de uso de la clase PrecioPrivado
+ * double da()              --&gt; devuelve el valor almacenado en euros
+ * void pone( double x )    --&gt; almacena valor en euros
+ * euros                    --&gt; Atributo de acceso privado
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> PruebaPrecioPrivado <span class="br0">&#123;</span> 
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main <span class="br0">&#40;</span><span class="kw3">String</span> <span class="br0">&#91;</span><span class="br0">&#93;</span> args <span class="br0">&#41;</span> <span class="br0">&#123;</span> 
+        PrecioPrivado p <span class="sy0">=</span> <span class="kw1">new</span> PrecioPrivado<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>    <span class="co1">// Crea instancia</span>
+        p.<span class="me1">pone</span><span class="br0">&#40;</span><span class="nu0">56.8</span><span class="br0">&#41;</span><span class="sy0">;</span>                              <span class="co1">// Asigna 56.8 a euros</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Valor = &quot;</span> <span class="sy0">+</span> p.<span class="me1">da</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="co1">// Asigna 75.6 a euros - ERROR</span>
+        p.<span class="me1">euros</span><span class="sy0">=</span><span class="nu0">75.6</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Valor = &quot;</span> <span class="sy0">+</span> p.<span class="me1">euros</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Tambien ERROR</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>se producirá un error de compilación:</p>
+
+<div class="code bash">
+<pre class="bash">$<span class="sy0">&gt;</span>javac PruebaPrecioPrivado.java
+pruebaPrecioPrivado.java:<span class="nu0">15</span>: euros has private access <span class="kw1">in</span> precioPrivado
+    p.euros=<span class="nu0">75.6</span>;
+     ^
+ pruebaPrecioPrivado.java:<span class="nu0">16</span>: euros has private access <span class="kw1">in</span> precioPrivado
+    System.out.println<span class="br0">&#40;</span><span class="st0">&quot;Valor = &quot;</span> + p.euros<span class="br0">&#41;</span>;
+                                     ^</pre>
+</div>
+
+<p>ya que el atributo <code>euros</code> sólo es accesible a través de los métodos de la clase <code>da</code> y <code>pone</code>.</p>
+
+<p>La utilización del modificador <code>private</code> sirve para implementar una de las características de la programación orientada a objetos: el ocultamiento de la información o <strong>encapsulación</strong>. Estrictamente hablando, la declaración como público de un atributo de una clase no respeta este principio de ocultación de información. Declarándolos como privados, no se tiene acceso directo a los atributos del objeto fuera del código de la clase correspondiente y sólo puede accederse a ellos de forma indirecta a través de los métodos proporcionados por la propia clase. Una de las ventajas prácticas de obligar al empleo de un método para modificar el valor de un atributo es asegurar la consistencia de la operación. Por ejemplo, un método que asigne valor al atributo <code>euros</code> de un objeto de la clase <code>Precio</code> puede garantizar que no se le asignará un valor negativo.</p>
+
+<h2 id="clases-anidadas-e-internas">9.4 Clases anidadas e internas</h2>
+
+<p>Una clase B se puede definir como miembro de otra clase A. La estructura sintáctica es la siguiente:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">class</span> ClaseA <span class="br0">&#123;</span>
+    ...
+    <span class="kw1">class</span> ClaseB <span class="br0">&#123;</span>
+        ...
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Se dice que <code>ClaseB</code> es una clase anidada en la <code>ClaseA</code>. La clase anidada sólo puede emplearse dentro de la clase <em>contenedora</em>. Este tipo de clases sólo se construyen cuando la clase anidada sólo se emplea o tiene sentido dentro de la clase contenedora. La clase anidada puede declararse como <code>static</code>. En este caso la clase anidada se denomina clase <em>anidada estática</em>. En caso contrario se denomina clase <em>interna</em>.</p>
+
+<h2 id="el-operador-instanceof">9.5 El operador instanceof</h2>
+
+<p>El operador <code>instanceof</code> devuelve verdadero o falso si un objeto pertenece o no a una clase determinada. Sintaxis:</p>
+
+<div class="code java">
+<pre class="java">identificadorInstancia <span class="kw1">instanceof</span> identificadorClase</pre>
+</div>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-9.html#objetos-y-clases">Objetos y clases</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.1</span>
+                        <a class="internal" href="capitulo-9.html#clases">Clases</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.2</span>
+                        <a class="internal" href="capitulo-9.html#instancias">Instancias</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.3</span>
+                        <a class="internal" href="capitulo-9.html#modificadores-de-visibilidad">Modificadores de visibilidad</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.4</span>
+                        <a class="internal" href="capitulo-9.html#clases-anidadas-e-internas">Clases anidadas e internas</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.5</span>
+                        <a class="internal" href="capitulo-9.html#el-operador-instanceof">El operador instanceof</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

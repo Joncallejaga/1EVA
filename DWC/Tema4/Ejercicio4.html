@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script>
+    
+    
+    function producto(codigo, nombre, precio){
+        var productoAlimenticio = new Object();
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.imprimir = function(){
+            document.write(this.codigo +", "+this.nombre+", "+this.precio+"<br>");
+        }
+    }
+
+    var chocolate = new producto(61, "chocolate", 1);
+    var lejia = new producto(62, "lejia", 0.50);
+    var lentejas = new producto(63, "lentejas", 0.99);
+
+    var compra = [chocolate, lejia, lentejas];
+
+    for (i=0;i<=2;i++){
+        (compra[i].imprimir());
+    }
+
+   
+    
+    
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

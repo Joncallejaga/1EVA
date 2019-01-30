@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="08/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Expresiones regulares | JavaScript</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">JavaScript</a></h1>
+        <p class="span3">
+                        <a href="capitulo-10.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-12.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="expresiones-regulares"><span>Capítulo 11</span> Expresiones regulares</h1>
+        <p>Las expresiones, son un lenguaje utilizado para describir patrones en cadenas de caracteres. Forman un pequeño y separado lenguaje, que está incluido en JavaScript (y en la gran mayoría de lenguajes de programación). No es un lenguaje fácil de leer, pero es una herramienta muy poderosa que simplifica mucho tareas de procesado de cadenas de caracteres.</p>
+
+<p>Las expresiones regulares son utilizadas para buscar, reemplazar y extraer información de las cadenas de caracteres. Al igual que la gran mayoría de elementos en JavaScript, las expresiones regulares también son objetos. Los métodos que funcionan con expresiones regulares en JavaScript son las siguientes: <code>regexp.exec</code>, <code>regexp.test</code>, <code>string.match</code>, <code>string.replace</code>, <code>string.search</code>, y <code>string.split</code>. Las expresiones regulares tienen un rendimiento sensiblemente superior a las operaciones equivalentes sobre <em>strings</em>.</p>
+
+<h2 id="primera-expresion-regular">11.1 Primera expresión regular</h2>
+
+<p>Al igual que las cadenas de caracteres se escriben entre comillas dobles (<code>"</code>), los patrones de expresiones regulares se escriben entre barras (<code>/</code>).</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> slash <span class="sy0">=</span> <span class="co2">/\//</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;AC/DC&quot;</span>.<span class="me1">search</span><span class="br0">&#40;</span>slash<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Este método de búsqueda se asemeja a <code>indexOf</code>, pero utiliza una expresión regular para la búsqueda en lugar de un <em>string</em>. Los patrones especificados por expresiones regulares, pueden hacer cosas que las cadenas de caracteres no pueden hacer, como que alguno de sus elementos coincida con más de un carácter.</p>
+
+<p>Un ejemplo complejo de expresión regular puede ser el siguiente, un patrón para analizar URLs:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> parse_url <span class="sy0">=</span> <span class="co2">/^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> url <span class="sy0">=</span> <span class="st0">&quot;http://www.ora.com:80/goodparts?q#fragment&quot;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Utilicemos el método <code>exec</code>, que procesa la cadena de caracteres en función del patrón proporcionado, devolviendo un <em>array</em> que contiene las partes extraidas:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> result <span class="sy0">=</span> parse_url.<span class="me1">exec</span><span class="br0">&#40;</span>url<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> names <span class="sy0">=</span> <span class="br0">&#91;</span><span class="st0">'url'</span><span class="sy0">,</span> <span class="st0">'scheme'</span><span class="sy0">,</span> <span class="st0">'slash'</span><span class="sy0">,</span> <span class="st0">'host'</span><span class="sy0">,</span> <span class="st0">'port'</span><span class="sy0">,</span>
+     <span class="st0">'path'</span><span class="sy0">,</span> <span class="st0">'query'</span><span class="sy0">,</span> <span class="st0">'hash'</span><span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> i<span class="sy0">;</span>
+<span class="kw1">for</span> <span class="br0">&#40;</span>i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> names.<span class="me1">length</span><span class="sy0">;</span> i <span class="sy0">+=</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    document.<span class="me1">writeln</span><span class="br0">&#40;</span>names<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">+</span> <span class="st0">':<span class="es0">\n</span>'</span><span class="sy0">,</span> result<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Donde el resultado es el siguiente:</p>
+
+<div class="code javascript">
+<pre class="javascript">url<span class="sy0">:</span>    http<span class="sy0">:</span><span class="co1">//www.ora.com:80/goodparts?q#fragment</span>
+scheme<span class="sy0">:</span> http
+slash<span class="sy0">:</span>  <span class="co1">//</span>
+host<span class="sy0">:</span>   www.<span class="me1">ora</span>.<span class="me1">com</span>
+port<span class="sy0">:</span>   <span class="nu0">80</span>
+path<span class="sy0">:</span>   goodparts
+query<span class="sy0">:</span>  q
+hash<span class="sy0">:</span>   fragment</pre>
+</div>
+
+<h2 id="contruccion">11.2 Contrucción</h2>
+
+<p>La principal manera de construir expresiones regulares, es utilizando los literales, de la siguiente manera:</p>
+
+<div class="figure" id="figure-11-1">
+    <img src="images/diagrams/regexp-literal.png" alt="Construcción de una expresión literal" />
+
+    <p class="caption"><strong>Figura 11.1</strong> Construcción de una expresión literal</p>
+</div>
+
+
+<p>Podemos indicar tres parámetros al final de la expresión regular, que modifican ligeramente su comportamiento.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> my_regexp <span class="sy0">=</span> <span class="co2">/\s*/g</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Su significado es el siguiente:</p>
+
+<div class="table" id="table-11-1">
+
+    <table>
+<thead>
+<tr>
+  <th>Parámetro</th>
+  <th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>g</code></td>
+  <td>Global (hace coincidir el patrón todas las veces posibles, aunque puede variar según el método).</td>
+</tr>
+<tr>
+  <td><code>i</code></td>
+  <td>Insensitive (ignora las mayúsculas y minúsculas).</td>
+</tr>
+<tr>
+  <td><code>m</code></td>
+  <td>Multiline (los caracteres <code>^</code> y <code>$</code> pueden coincidir con caracteres multilínea).</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<h2 id="elementos">11.3 Elementos</h2>
+
+<h3 id="el-punto-">11.3.1 El punto "."</h3>
+
+<p>El punto se interpreta como <em>cualquier carácter</em>, es decir, busca cualquier carácter sin incluir los saltos de línea.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> point <span class="sy0">=</span> <span class="co2">/g.ant/</span><span class="sy0">;</span>
+<span class="kw1">var</span> story <span class="sy0">=</span> <span class="st0">&quot;We noticed the *gi<span class="es0">\n</span>ant sloth*, hanging from a giant branch.&quot;</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>story.<span class="me1">search</span><span class="br0">&#40;</span>point<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>     <span class="co1">// 17</span></pre>
+</div>
+
+<h3 id="la-barra-invertida-o-contrabarra-">11.3.2 La barra invertida o contrabarra "\"</h3>
+
+<p>Se utiliza para "marcar" el siguiente carácter de la expresión de búsqueda, de forma que este adquiera un significado especial o deje de tenerlo. Es decir, la barra invertida no se utiliza nunca por sí sola, sino en combinación con otros caracteres. Al utilizarlo por ejemplo en combinación con el punto "&#46;" este deja de tener su significado normal y se comporta como un carácter literal.</p>
+
+<p>De la misma forma, cuando se coloca la barra invertida seguida de cualquiera de los caracteres especiales listados a continuación, estos dejan de tener su significado especial y se convierten en caracteres de búsqueda literal.</p>
+
+<ul>
+<li><code>\t</code>: representa un tabulador.</li>
+<li><code>\r</code>: representa el "retorno de carro".</li>
+<li><code>\n</code>: representa la "nueva línea".</li>
+<li><code>\e</code>: representa la tecla "Esc" o "Escape".</li>
+<li><code>\f</code>: se utiliza para representar caracteres ASCII o ANSI si se conoce su código. Por ejemplo el símbolo &copy; es representado mediante "\fA9".</li>
+<li><code>\x</code>: se utiliza para representar caracteres Unicode si se conoce su código. Por ejemplo, "\u02" representa el símbolo de centavos.</li>
+<li><code>\u</code>: se utiliza para representar caracteres Unicode si se conoce su código. Por ejemplo, "\u00A2" representa el símbolo de centavos.</li>
+<li><code>\d</code>: representa un dígito del 0 al 9.</li>
+<li><code>\w</code>: representa cualquier carácter alfanumérico (incluidos los guiones bajos <code>_</code>).</li>
+<li><code>\s</code>: representa un espacio en blanco (espacios en blanco, tabuladores y nuevas líneas).</li>
+<li><code>\b</code>: marca el inicio y el final de una palabra.</li>
+</ul>
+
+<p>Para los caracteres <code>d</code>, <code>w</code> y <code>s</code>, se puede utlizar su variante en mayúsculas para indicar justamente su significado opuesto.</p>
+
+<ul>
+<li><code>\D</code>: representa cualquier carácter que no sea un dígito del 0 al 9.</li>
+<li><code>\W</code>: representa cualquier carácter no alfanumérico.</li>
+<li><code>\S</code>: representa cualquier carácter que no sea un espacio en blanco.</li>
+</ul>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> digitSurroundedBySpace <span class="sy0">=</span> <span class="co2">/\s\d\s/</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;1a 2 3d&quot;</span>.<span class="me1">search</span><span class="br0">&#40;</span>digitSurroundedBySpace<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>    <span class="co1">// 2</span></pre>
+</div>
+
+<div class="figure" id="figure-11-2">
+    <img src="images/diagrams/regexp-class-escape.png" alt="Caracteres de escape" />
+
+    <p class="caption"><strong>Figura 11.2</strong> Caracteres de escape</p>
+</div>
+
+
+<h3 id="los-corchetes-">11.3.3 Los corchetes "[ ]"</h3>
+
+<p>La función de los corchetes es representar "clases de caracteres", es decir, agrupar caracteres en grupos o clases. Dentro de los corchetes es posible utilizar el guion "-" para especificar rangos de caracteres. Hay que tener en cuenta que dentro de los corchetes, los metacaracteres (<code>$</code>, <code>*</code>, <code>+</code>, <code>?</code>) pierden su significado y se convierten en literales cuando se encuentran dentro de estos corchetes.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> asteriskOrBrace <span class="sy0">=</span> <span class="co2">/[{*]/</span><span class="sy0">;</span>
+<span class="kw1">var</span> story <span class="sy0">=</span> <span class="st0">&quot;We noticed the *giant sloth*, hanging from a giant branch.&quot;</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>story.<span class="me1">search</span><span class="br0">&#40;</span>asteriskOrBrace<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>       <span class="co1">// 15</span></pre>
+</div>
+
+<p>Cuando al inicio de este grupo de caracteres se encuentra el carácter <code>^</code>, permite encontrar cualquier carácter que NO se encuentre dentro del grupo indicado.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> notABC <span class="sy0">=</span> <span class="co2">/[^ABC]/</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;ABCBACCBBADABC&quot;</span>.<span class="me1">search</span><span class="br0">&#40;</span>notABC<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>     <span class="co1">// 10</span></pre>
+</div>
+
+<div class="figure" id="figure-11-3">
+    <img src="images/diagrams/regexp-class.png" alt="Caracteres de clase" />
+
+    <p class="caption"><strong>Figura 11.3</strong> Caracteres de clase</p>
+</div>
+
+
+<h3 id="la-barra-">11.3.4 La barra "|"</h3>
+
+<p>Sirve para indicar una de varias opciones.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> cardinalPoints <span class="sy0">=</span> <span class="co2">/north|south|east|west/i</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>cardinalPoints.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;At north&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>                 <span class="co1">// true</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>cardinalPoints.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;I'm from Southampton&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>     <span class="co1">// true</span></pre>
+</div>
+
+<div class="figure" id="figure-11-4">
+    <img src="images/diagrams/regexp-choice.png" alt="Carácter para indicar posibles opciones" />
+
+    <p class="caption"><strong>Figura 11.4</strong> Carácter para indicar posibles opciones</p>
+</div>
+
+
+<h3 id="el-signo-de-dolar-">11.3.5 El signo de dólar "$"</h3>
+
+<p>Representa el final de la cadena de caracteres o el final de la línea, si se utiliza el modo multi-línea. No representa un carácter en especial sino una posición. Si se utiliza la expresión regular "&#46;$", el motor encontrará todos los lugares donde un punto finalice la línea, lo que es útil para avanzar entre párrafos.</p>
+
+<div class="code javascript">
+<pre class="javascript">console.<span class="me1">log</span><span class="br0">&#40;</span><span class="co2">/a+/</span>.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;blah&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>        <span class="co1">// true</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span><span class="co2">/a+$/</span>.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;blah&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>       <span class="co1">// false</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span><span class="co2">/a+$/</span>.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;blahaa&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>     <span class="co1">// true</span></pre>
+</div>
+
+<h3 id="el-acento-circunflejo-">11.3.6 El acento circunflejo "^"</h3>
+
+<p>Éste carácter tiene una doble funcionalidad, en función de si utiliza individualmente y si se utiliza en conjunto con otros caracteres especiales. Su funcionalidad como carácter individual: el carácter <code>^</code> representa el inicio de la cadena (de la misma forma que el signo de dólar <code>$</code> representa el final de la cadena).</p>
+
+<div class="code javascript">
+<pre class="javascript">console.<span class="me1">log</span><span class="br0">&#40;</span><span class="co2">/a+/</span>.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;blah&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>        <span class="co1">// true</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span><span class="co2">/^a+/</span>.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;blah&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>       <span class="co1">// false</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span><span class="co2">/^a+/</span>.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;aaaablah&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>     <span class="co1">// true</span></pre>
+</div>
+
+<p>Cuando se utiliza en conjunto con los corchetes, permite encontrar cualquier carácter que NO se encuentre dentro del grupo indicado.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> notABC <span class="sy0">=</span> <span class="co2">/[^ABC]/</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;ABCBACCBBADABC&quot;</span>.<span class="me1">search</span><span class="br0">&#40;</span>notABC<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>     <span class="co1">// 10</span></pre>
+</div>
+
+<p>La utilización en conjunto de los caracteres especiales <code>^</code> y <code>$</code> permite realizar validaciones de forma sencilla. Por ejemplo <code>^\d$</code> permite asegurar que la cadena a verificar representa un único dígito, mientras que <code>^\d\d/\d\d/\d\d\d\d$</code> permite validar una fecha en formato corto.</p>
+
+<h3 id="los-parentesis-">11.3.7 Los paréntesis "()"</h3>
+
+<p>De forma similar que los corchetes, los paréntesis sirven para agrupar caracteres, sin embargo existen varias diferencias fundamentales entre los grupos establecidos por medio de corchetes y los grupos establecidos por paréntesis:</p>
+
+<ul>
+<li>Los caracteres especiales conservan su significado dentro de los paréntesis.</li>
+<li>Los grupos establecidos con paréntesis establecen una "etiqueta" o "punto de referencia" para el motor de búsqueda, que puede ser utilizada posteriormente.</li>
+<li>Utilizados en conjunto con la barra <code>|</code> permiten hacer búsquedas opcionales.</li>
+<li>Utilizados en conjunto con otros caracteres especiales que se detallan posteriormente, ofrece funcionalidad adicional.</li>
+</ul>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> holyCow <span class="sy0">=</span> <span class="co2">/(sacred|holy) (cow|bovine|bull|taurus)/i</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>holyCow.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;Sacred bovine!&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>      <span class="co1">// true</span></pre>
+</div>
+
+<div class="figure" id="figure-11-5">
+    <img src="images/diagrams/regexp-group.png" alt="Grupos de caracteres" />
+
+    <p class="caption"><strong>Figura 11.5</strong> Grupos de caracteres</p>
+</div>
+
+
+<h3 id="el-signo-de-interrogacion-">11.3.8 El signo de interrogación "?"</h3>
+
+<p>El signo de interrogación especifica que una parte de la búsqueda es opcional. En conjunto con los paréntesis, permite especificar que un conjunto mayor de caracteres es opcional</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> nov <span class="sy0">=</span> <span class="co2">/Nov(\.|iembre|ember)?/</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>nov.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;Nov&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>             <span class="co1">// true</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>nov.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;Nov.&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>            <span class="co1">// true</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>nov.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;Noviembre&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>       <span class="co1">// true</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>nov.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;November&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>        <span class="co1">// true</span></pre>
+</div>
+
+<p>Como hemos indicado antes, los paréntesis pueden ser utilizados como puntos de referencia dentro de las expresiones regulares. Si no es necesario, podemos evitar este comportamiento de la siguiente manera, liberando al motor de búsqueda de un trabajo extra:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> nov <span class="sy0">=</span> <span class="co2">/Nov(?:\.|iembre|ember)?/</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="las-llaves-">11.3.9 Las llaves "{}"</h3>
+
+<p>Comúnmente las llaves son caracteres literales cuando se utilizan por separado en una expresión regular. Para que adquieran su función de metacaracteres es necesario que encierren uno o varios números separados por coma y que estén colocados a la derecha de otra expresión regular de la siguiente forma:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> date <span class="sy0">=</span> <span class="co2">/^\d{2}\/\d{2}\/\d{2,4}$/</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>date.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;05/05/1982&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>      <span class="co1">// true</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>date.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;05/05/82&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>        <span class="co1">// true</span></pre>
+</div>
+
+<p>Son utilizados para indicar el número de veces que puede darse una coincidencia. Un número entre llaves (<code>{4}</code>) indica el número exacto de coincidencias. Dos números separados por una coma (<code>{2,4}</code>), indica que puede coincidir al menos tantas veces como el primer número (<code>2</code>), y cómo máximo tántas veces como el segundo número (<code>4</code>). De manera similar, <code>{2,}</code> significa que al menos ocurre dos veces y <code>{,4}</code>, que como máximo ocurre cuatro veces.</p>
+
+<h3 id="el-asterisco-">11.3.10 El asterisco "*"</h3>
+
+<p>El asterisco sirve para encontrar algo que se encuentra repetido 0 o más veces. Por ejemplo:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> exp <span class="sy0">=</span> <span class="co2">/[a-zA-Z]\d*/</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>exp.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;A&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>           <span class="co1">// true</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>exp.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;B0&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>          <span class="co1">// true</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>exp.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;c01&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>         <span class="co1">// true</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>exp.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;abc01234&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>    <span class="co1">// true</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>exp.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;01234&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>       <span class="co1">// false</span></pre>
+</div>
+
+<p>El asterisco equivale a la expresión <code>{0,}</code>.</p>
+
+<h3 id="el-signo-de-suma-">11.3.11 El signo de suma "+"</h3>
+
+<p>Se utiliza para encontrar una cadena que se encuentre repetida una o más veces. A diferencia del asterisco, la expresión <code>[a-zA-Z]\d+</code> encontrará "H1" pero no encontrará "H".</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> exp <span class="sy0">=</span> <span class="co2">/[a-zA-Z]\d+/</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>exp.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;A&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>           <span class="co1">// false</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>exp.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;B0&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>          <span class="co1">// true</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>exp.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;c01&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>         <span class="co1">// true</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>exp.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;abc01234&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>    <span class="co1">// true</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>exp.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;01234&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>       <span class="co1">// false</span></pre>
+</div>
+
+<p>El signo de suma equivale a la expresión <code>{1,}</code>.</p>
+
+<h3 id="grupos-anonimos">11.3.12 Grupos anónimos</h3>
+
+<p>Los grupos anónimos se establecen cada vez que se encierra una expresión regular en paréntesis, por lo que la expresión <code>([a-zA-Z]\w*?)</code> define un grupo anónimo que tendrá como resultado que el motor de búsqueda almacenará una referencia al texto que corresponda a la expresión encerrada entre los paréntesis.</p>
+
+<p>Es posible hacer referencia a estos grupos dentro de la propia expresión regular, o utilizarlos para extraer partes de la cadena de caracteres, si utilizamos los métodos que corresponden.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> exp <span class="sy0">=</span> <span class="co2">/&lt;([a-zA-Z]\w*?)&gt;.*?&lt;\/\1&gt;/</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>exp.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;&lt;font&gt;Text&lt;/font&gt;&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>       <span class="co1">// true</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>exp.<span class="me1">test</span><span class="br0">&#40;</span><span class="st0">&quot;&lt;h1&gt;Text&lt;/font&gt;&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>     <span class="co1">// false</span></pre>
+</div>
+
+<h2 id="metodos">11.4 Métodos</h2>
+
+<h3 id="regexpexecstring">11.4.1 regexp.exec(string)</h3>
+
+<p>Éste método es el más poderoso (y lento) de todos los métodos que se pueden utilizar en expresiones regulares. Si la cadena de caracteres satisface el patrón, este método devuelve un <em>array</em>. El elemento <code>0</code> contiene la cadena de caracteres que coincide con la expresión regular, el elemento <code>1</code> el texto que coincide con el grupo 1, el elemento <code>2</code> el texto que coincide con el grupo 2... Si el patrón falla, la función devuelve <code>null</code>.</p>
+
+<h3 id="regexpteststring">11.4.2 regexp.test(string)</h3>
+
+<p>Éste método es el más simple (y rápido) de todos los métodos que se pueden utilizar en expresiones regulares. Si la cadena de caracteres satisface el patrón, este método devuelve <code>true</code>, y <code>false</code> en caso contrario.</p>
+
+<h3 id="stringmatchregexp">11.4.3 string.match(regexp)</h3>
+
+<p>Éste método compara la cadena de caracteres con la expresión regular, pero su comportamiento depende del parámetro <code>g</code>. Si éste parámetro no está presente, el comportamiento es el mismo que so llamamos al método <code>regexp.exec(string)</code>. En cambio, si está presente, devuelve un array con todas las coincidencias, pero excluye los grupos.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> text <span class="sy0">=</span> <span class="st0">'&lt;html&gt;&lt;body bgcolor=linen&gt;&lt;p&gt;'</span> <span class="sy0">+</span>
+           <span class="st0">'This is &lt;b&gt;bold&lt;<span class="es0">\/</span>b&gt;!&lt;<span class="es0">\/</span>p&gt;&lt;<span class="es0">\/</span>body&gt;&lt;<span class="es0">\/</span>html&gt;'</span><span class="sy0">;</span>
+<span class="kw1">var</span> tags <span class="sy0">=</span> <span class="co2">/[^&lt;&gt;]+|&lt;(\/?)([A-Za-z]+)([^&lt;&gt;]*)&gt;/g</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> a<span class="sy0">,</span> i<span class="sy0">;</span>
+a <span class="sy0">=</span> text.<span class="me1">match</span><span class="br0">&#40;</span>tags<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">for</span> <span class="br0">&#40;</span>i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> a.<span class="me1">length</span><span class="sy0">;</span> i <span class="sy0">+=</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    document.<span class="me1">writeln</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="st0">'// ['</span> <span class="sy0">+</span> i <span class="sy0">+</span> <span class="st0">'] '</span> <span class="sy0">+</span> a<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span>.<span class="me1">entityify</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="co1">// The result is</span>
+<span class="co1">// [0] &lt;html&gt;</span>
+<span class="co1">// [1] &lt;body bgcolor=linen&gt;</span>
+<span class="co1">// [2] &lt;p&gt;</span>
+<span class="co1">// [3] This is</span>
+<span class="co1">// [4] &lt;b&gt;</span>
+<span class="co1">// [5] bold</span>
+<span class="co1">// [6] &lt;/b&gt;</span>
+<span class="co1">// [7] !</span>
+<span class="co1">// [8] &lt;/p&gt;</span>
+<span class="co1">// [9] &lt;/body&gt;</span>
+<span class="co1">// [10] &lt;/html&gt;</span></pre>
+</div>
+
+<h3 id="stringreplacesearchvalue-replacevalue">11.4.4 string.replace(searchValue, replaceValue)</h3>
+
+<p>Éste método busca y reemplaza los valores indicados, devolviendo un nuevo string. El parámetro <code>searchValue</code> puede ser una cadena de caracteres o una expresión regular. Si es un <code>string</code>, únicamente la primera aparición es reemplazada, lo que puede ser un poco confuso.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> result <span class="sy0">=</span> <span class="st0">&quot;mother_in_law&quot;</span>.<span class="me1">replace</span><span class="br0">&#40;</span><span class="st0">'_'</span><span class="sy0">,</span> <span class="st0">'-'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>result<span class="br0">&#41;</span><span class="sy0">;</span>      <span class="co1">//mother-in_law</span></pre>
+</div>
+
+<p>Si el parámetro es una expresión regular, y contiene el parámetro <code>g</code>, entonces reemplazará todas las apariciones. Si no contiene este parámetro, entonces sólo se reemplaza la primera aparición.</p>
+
+<p>El parámetros <code>replaceValue</code> puede ser un <em>string</em> o una fución. Si el parámetro es una función, ésta será llamada por cada coincidencia, y el <em>string</em> devuelto por la función será utilizado como cadena de reemplazo. El parámetro pasado a esta función corresponde con la coincidencia de texto.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> character <span class="sy0">=</span> <span class="br0">&#123;</span>
+                 <span class="st0">'&lt;'</span> <span class="sy0">:</span> <span class="st0">'&amp;lt;'</span><span class="sy0">,</span>
+                 <span class="st0">'&gt;'</span> <span class="sy0">:</span> <span class="st0">'&amp;gt;'</span><span class="sy0">,</span>
+                 <span class="st0">'&amp;'</span> <span class="sy0">:</span> <span class="st0">'&amp;amp;'</span><span class="sy0">,</span>
+                 <span class="st0">'&quot;'</span> <span class="sy0">:</span> <span class="st0">'&amp;quot;'</span>
+                <span class="br0">&#125;</span><span class="sy0">;</span>
+<span class="kw1">var</span> entities <span class="sy0">=</span> <span class="st0">&quot;&lt;&amp;&gt;&quot;</span><span class="sy0">;</span>
+entities.<span class="me1">replace</span><span class="br0">&#40;</span><span class="co2">/[&lt;&gt;&amp;&quot;]/g</span><span class="sy0">,</span>  <span class="kw1">function</span> <span class="br0">&#40;</span>c<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">return</span> character<span class="br0">&#91;</span>c<span class="br0">&#93;</span><span class="sy0">;</span>
+         <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="stringsearch">11.4.5 string.search</h3>
+
+<p>Éste método de búsqueda es igual al método <code>indexOf</code>, a excepción de que éste método toma como parámetro una expresión regular en vez de un <em>string</em>. Devuelve la posición del primer carácter que coincide con la expresión regular, si hay alguno, y <code>-1</code> si no hay coincidencias. En este caso, el parámetro <code>g</code> es ignorado.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> text <span class="sy0">=</span> <span class="st0">'and in it he says &quot;Any damn fool could'</span><span class="sy0">;</span>
+<span class="kw1">var</span> pos <span class="sy0">=</span> text.<span class="me1">search</span><span class="br0">&#40;</span><span class="co2">/[&quot;']/</span><span class="br0">&#41;</span><span class="sy0">;</span>    <span class="co1">// 18</span></pre>
+</div>
+
+<h3 id="stringsplitseparator-limit">11.4.6 string.split(separator, limit)</h3>
+
+<p>Éste método crea un array de <em>strings</em> , dividiendo el <em>string</em> original en trozos. El parámetro <code>separator</code> puede ser un <em>string</em> o una expresión regular. El parámetro opcional <code>limit</code> indica el número máximo de trozos en los que se va a dividir el <em>string</em>.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> c <span class="sy0">=</span> <span class="st0">'|a|b|c|'</span>.<span class="me1">split</span><span class="br0">&#40;</span><span class="st0">'|'</span><span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// c is ['', 'a', 'b', 'c', '']</span>
+&nbsp;
+<span class="kw1">var</span> text <span class="sy0">=</span> <span class="st0">'last,  first  ,middle'</span><span class="sy0">;</span>
+<span class="kw1">var</span> d <span class="sy0">=</span> text.<span class="me1">split</span><span class="br0">&#40;</span><span class="co2">/\s*,\s*/</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">// d is [</span>
+<span class="co1">//       'last',</span>
+<span class="co1">//       'first',</span>
+<span class="co1">//       'middle'</span>
+<span class="co1">//      ]</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 13</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej13">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-11.html#expresiones-regulares">Expresiones regulares</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>11.1</span>
+                        <a class="internal" href="capitulo-11.html#primera-expresion-regular">Primera expresión regular</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>11.2</span>
+                        <a class="internal" href="capitulo-11.html#contruccion">Contrucción</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>11.3</span>
+                        <a class="internal" href="capitulo-11.html#elementos">Elementos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>11.4</span>
+                        <a class="internal" href="capitulo-11.html#metodos">Métodos</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

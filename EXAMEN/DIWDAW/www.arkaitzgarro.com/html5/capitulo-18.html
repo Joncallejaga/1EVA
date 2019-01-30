@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="28/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Ejercicios | HTML5</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">HTML5</a></h1>
+        <p class="span3">
+                        <a href="capitulo-17.html"><span>&larr;</span> Anterior</a>
+            
+                        <a class="disabled" href="capitulo-18.html#">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="ejercicios"><span>Capítulo 18</span> Ejercicios</h1>
+        <h2 id="capitulo-2">18.1 Capítulo 2</h2>
+
+<h3 id="ej01">18.1.1 Ejercicio 1</h3>
+
+<p>Dada la siguiente página web, estructurada en XHTML, aplicar las nuevas etiquetas semánticas de HTML5 donde sea conveniente, manteniendo el mismo aspecto visual (modificar la hoja de estilos si es necesario) y funcionalidad. Realizad también los cambios necesarios en la cabecera del documento (elemento <code>&lt;head&gt;</code>).</p>
+
+<p><a href="snippets/cap20/ej01.zip">Descargar página web.</a></p>
+
+<h2 id="capitulo-3">18.2 Capítulo 3</h2>
+
+<h3 id="ej02">18.2.1 Ejercicio 2</h3>
+
+<p>Crear un formulario que contenga lo siguiente:</p>
+
+<ul>
+<li>Los 12 nuevos tipos de elementos <code>input</code>.</li>
+<li>El nuevo elemento <code>datalist</code>, que contenga algunos nombres de provincia y un campo de texto que se relacione con él.</li>
+<li>Una caja de texto (<code>&lt;input type="text"&gt;</code>), a la cual aplicar los atributos <code>autofocus</code>, <code>placeholder</code>, <code>required</code> y <code>autocomplete</code>.</li>
+<li>Una caja de texto que sólo pueda contener números (<code>&lt;input type="number"&gt;</code>), cuyos valores tienen que estar comprendidos entre 0 y 10.</li>
+<li>Un campo de selección de ficheros (<code>&lt;input type="file"&gt;</code>), al que aplicar el atributo <code>multiple</code>.</li>
+<li>Un campo de introducción de password (<code>&lt;input type="password"&gt;</code>), donde el valor introducido debe cumplir lo siguiente: debe tener una longitud mínima de 8 caracteres, comenzar por un número y terminar en una letra mayúscula.</li>
+<li>Un nuevo elemento <code>progress</code> que represente el avance de completado de campos del formulario.</li>
+</ul>
+
+<p>Acceder al formulario desde al menos 4 navegadores (2 de escritorio y 2 de dispositivos móviles), y comprobad el comportamiento y funcionamiento en cada elemento del formulario. Anotad dichos resultados en una hoja de cálculo para futuras referencias.</p>
+
+<h2 id="capitulo-4">18.3 Capítulo 4</h2>
+
+<h3 id="ej03">18.3.1 Ejercicio 3</h3>
+
+<p>Identificar las siguientes características de al menos 4 navegadores (2 de escritorio y 2 de dispositivos móviles):</p>
+
+<ul>
+<li>Cuáles de los 12 nuevos tipos de <code>input</code> soporta el navegador.</li>
+<li>Qué <em>codecs</em> de reproducción de vídeo soporta cada navegador.</li>
+<li>Qué sistema(s) de almacenamiento local soporta cada navegador.</li>
+</ul>
+
+<h3 id="ej04">18.3.2 Ejercicio 4</h3>
+
+<p>Identificar si el navegador soporta el atributo <code>placeholder</code>. En caso de no soportar dicha funcionalidad, cargar el <em>polyfill</em> correspondiente para añadir dicha funcionalidad al navegador.</p>
+
+<h2 id="capitulo-5">18.4 Capítulo 5</h2>
+
+<h3 id="ej05">18.4.1 Ejercicio 5</h3>
+
+<p>A partir del siguiente HTML, realizar los siguientes pasos:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">ul</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">li</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;user&quot;</span> data-<span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;Arkaitz Garro&quot;</span> data-city<span class="sy0">=</span><span class="st0">&quot;Donostia&quot;</span></span>
+<span class="sc2">        data-<span class="kw3">lang</span><span class="sy0">=</span><span class="st0">&quot;es&quot;</span> data-food<span class="sy0">=</span><span class="st0">&quot;Txuleta&quot;</span>&gt;</span>Arkaitz Garro<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">li</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;user&quot;</span> data-<span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;John Doe&quot;</span> data-city<span class="sy0">=</span><span class="st0">&quot;Boston&quot;</span></span>
+<span class="sc2">        data-<span class="kw3">lang</span><span class="sy0">=</span><span class="st0">&quot;en&quot;</span> data-food<span class="sy0">=</span><span class="st0">&quot;Bacon&quot;</span>&gt;</span>John Doe<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">li</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;user&quot;</span> data-<span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;Divya Resig&quot;</span> data-city<span class="sy0">=</span><span class="st0">&quot;Tokyo&quot;</span></span>
+<span class="sc2">        data-<span class="kw3">lang</span><span class="sy0">=</span><span class="st0">&quot;jp&quot;</span> data-food<span class="sy0">=</span><span class="st0">&quot;Sushi&quot;</span> data-delete<span class="sy0">=</span><span class="st0">&quot;true&quot;</span>&gt;</span>Divya Resig<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">ul</span>&gt;</span></pre>
+</div>
+
+<ul>
+<li>Obtener cada uno de los atributos <code>data-</code> de los elementos de la lista, y mostrarlos por consola.</li>
+<li>Modificar el idioma <code>es</code> por <code>es_ES</code>.</li>
+<li>Eliminar los elementos de la lista cuyo atributo <code>data-delete</code> sea <code>true</code>.</li>
+</ul>
+
+<h2 id="capitulo-6">18.5 Capítulo 6</h2>
+
+<h3 id="ej06">18.5.1 Ejercicio 6</h3>
+
+<p>Crear un reproductor de vídeo que cumple las siguientes características:</p>
+
+<ul>
+<li>Reproducir los vídeos independientemente del codec soportado por el navegador.</li>
+<li>Incluir controles de reproducción, pausa, parar, avanzar y retroceder 10 segundos, inicio y fin.</li>
+<li>Control de volumen y paso a pantalla completa.</li>
+<li>Un indicador de progreso de la reproducción.</li>
+</ul>
+
+<p>Añadir una lista de reproducción que permita seleccionar un nuevo vídeo, y éste se reproduzca sin recargar la página.</p>
+
+<div class="figure" id="figure-18-1">
+    <img src="images/cap20/ej06.png" alt="Aspecto final del reproductor" />
+
+    <p class="caption"><strong>Figura 18.1</strong> Aspecto final del reproductor</p>
+</div>
+
+
+<h2 id="capitulo-7">18.6 Capítulo 7</h2>
+
+<h3 id="ej07">18.6.1 Ejercicio 7</h3>
+
+<p>Dibujar sobre un elemento canvas, un <em>stickman</em> con un aspecto final similar al que se muestra a continuación. Seguir las siguiente indicaciones como ayuda:</p>
+
+<ul>
+<li>El tamaño inicial del canvas es de <code>200px</code> del ancho y <code>300px</code>de alto.</li>
+<li>Utilizar un rectángulo negro para pintar todo el fondo del canvas.</li>
+<li>Dibujar la cabeza con un arco completo, en las coordenadas (<code>100,50</code>), y un radio de <code>30px</code>.</li>
+<li>La sonrisa corresponde con un semiarco rojo (<code>#c00</code>), con inicio de coordenadas (<code>100,50</code>) y un radio de <code>20px</code>.</li>
+<li>Los ojos son dos circunferencias rojas situadas en las coordenadas (<code>90,45</code>) y (<code>110,45</code>) y de radio <code>3px</code>.</li>
+</ul>
+
+<div class="figure" id="figure-18-2">
+    <img src="images/cap20/ej07.png" alt="Resultado final del stickman" />
+
+    <p class="caption"><strong>Figura 18.2</strong> Resultado final del stickman</p>
+</div>
+
+
+<h2 id="capitulo-8">18.7 Capítulo 8</h2>
+
+<h3 id="ej08">18.7.1 Ejercicio 8</h3>
+
+<p>Implementad las siguientes funcionalidades utilizando <code>SessionStorage</code> y <code>LocalStorage</code>:</p>
+
+<ul>
+<li>Crear una caja de texto, a modo de editor de contenidos, y utilizando <code>SessionStorage</code> almacenar el contenido de la caja en cada pulsación de tecla. Si la página es recargada, el último contenido almacenado debe mostrarse en la caja de texto. Comprobad que cerrando la pestaña actual, o abriendo una nueva ventana, los datos no se comparten.</li>
+<li>Modificar el código anterior para utilizar <code>LocalStorage</code>. Comprobad que en este caso, aunque cierre la ventana o abra una nueva, los datos se mantienen. Añadir la posibilidad de actualizar el resto de ventanas abiertas, cada vez que se modifique el valor de la caja de texto en cualquiera de ellas.</li>
+</ul>
+
+<h3 id="ej09">18.7.2 Ejercicio 9</h3>
+
+<p>Crear un objeto que encapsule una base de datos WebSQL, que nos permitar acceder a una base de datos para añadir, modificar, eliminar y obtener registros. Dicha base de datos va a almacenar tweets procedentes de Twitter, que tienen asociado el <em>hashtag</em> #html5. Los requisitos son los siguientes:</p>
+
+<ul>
+<li>Disponer de una tabla para almacenar los tweets. Los campos mínimos son: identificador del tweet, texto, usuario, y fecha de publicación.</li>
+<li>Disponer de una tabla para almacenar los usuarios que publican los tweets. Esta tabla debe estar relacionada con la anterior. Los campos mínimos son: identificador del usuario, nombre e imagen.</li>
+<li>Crear un método <code>addTweet</code> que dado un objeto que corresponde con un tweet, lo almacene en la base de datos. Almacenar el usuario en caso de que no exista, o relacionarlo con el tweet si existe.</li>
+<li>Crear un método <code>removeTweet</code> que dado un identificador de tweet, lo elimine de la base de datos. Éste método debe devolver el tweet eliminado.</li>
+<li>Crear un método <code>updateTweet</code> que dado un objeto que corresponde con un tweet, actualice los datos correspondientes al tweet en la base de datos.</li>
+<li>Crear un método <code>getTweets</code> que dado un parámetro de fecha, me devuelva todos los tweets posteriores a esa fecha. Cada tweet debe incluir sus datos completos y el usuario que lo creó.</li>
+</ul>
+
+<p>Obtener los últimos 25 tweets que tienen como <em>hashtag</em> #html5 de la siguiente consulta a Twitter: <a href="http://search.twitter.com/search.json?q=%23html5&amp;rpp=25&amp;result_type=%22recent%22">http://search.twitter.com/search.json?q=%23html5&amp;rpp=25&amp;result_type="recent"</a></p>
+
+<p>Consultad la <a href="https://dev.twitter.com/docs/api/1/get/search">API de Twitter</a> para identificar el formato del resultado, nombres de campos, etc.</p>
+
+<h3 id="ej10">18.7.3 Ejercicio 10</h3>
+
+<p>Crear un objeto que encapsule una base de datos IndexedDB, que nos permitar acceder a una base de datos para añadir, modificar, eliminar y obtener registros. Dicha base de datos va a almacenar una sencilla lista de tareas pendientes. Los requisitos son los siguientes:</p>
+
+<ul>
+<li>Disponer de un <em>almacén</em> de tareas pendientes. Sus propiedades son: un identificador único que actúa como índice, el texto descriptivo, una propiedad que nos indique si la tarea está completada o no y la fecha/hora de creación.</li>
+<li>Crear un método <code>addTask</code> que dado un objeto que corresponde con una tarea, lo almacene en la base de datos.</li>
+<li>Crear un método <code>removeTask</code> que dado un identificador de una tarea, lo elimine de la base de datos. Éste método debe devolver la eliminada.</li>
+<li>Crear un método <code>updateTask</code> que dado un identificador de una tarea, actualice los datos correspondientes a la tarea en la base de datos.</li>
+<li>Crear un método <code>getTasks</code> que dado un parámetro booelano <em>completado</em>, nos devuelva las tareas que se encuentran completadas o no.</li>
+</ul>
+
+<h2 id="capitulo-9">18.8 Capítulo 9</h2>
+
+<h3 id="ej11">18.8.1 Ejercicio 11</h3>
+
+<p>Cread una página HTML que muestre la hora local de vuestro ordenador, y la hora del servidor de www.google.es. Los cálculos de hora local y obtención de hora del servidor, deben crearse en ficheros separados. El comportamiento es el siguiente:</p>
+
+<ul>
+<li>Todos los ficheros necesarios para realizar el ejercicio deben ser cacheados, a excepción del javascript que solicita la petición al servidor.</li>
+<li>Las peticiones de hora al servidor www.google.es se realizan a través de Ajax, en intervalos de 1 segundo. Dichas peticiones no deben realizarse si no existe conexión. En tal caso, se muestra un mensaje al usuario indicando que se ha perdido la conexión.</li>
+<li>Si se recarga la página, y no existe conexión, utilizar un <em>fallback</em> para la obtención de la hora del servidor, que muestre un mensaje al usuario indicando que se ha perdido la conexión.</li>
+</ul>
+
+<div class="figure" id="figure-18-3">
+    <img src="images/cap20/ej11.png" alt="Resultado del ejercicio con conexión" />
+
+    <p class="caption"><strong>Figura 18.3</strong> Resultado del ejercicio con conexión</p>
+</div>
+
+
+<div class="figure" id="figure-18-4">
+    <img src="images/cap20/ej11_sin.png" alt="Resultado del ejercicio sin conexión" />
+
+    <p class="caption"><strong>Figura 18.4</strong> Resultado del ejercicio sin conexión</p>
+</div>
+
+
+<p>Utilizad el siguiente código para obtener la hora de un servidor:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> srvTime<span class="br0">&#40;</span>url<span class="br0">&#41;</span><span class="br0">&#123;</span>
+    <span class="kw1">var</span> xmlHttp <span class="sy0">=</span> <span class="kw1">new</span> XMLHttpRequest<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    xmlHttp.<span class="me1">open</span><span class="br0">&#40;</span><span class="st0">'HEAD'</span><span class="sy0">,</span>url<span class="sy0">,</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    xmlHttp.<span class="me1">setRequestHeader</span><span class="br0">&#40;</span><span class="st0">&quot;Content-Type&quot;</span><span class="sy0">,</span> <span class="st0">&quot;text/html&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    xmlHttp.<span class="me1">send</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">return</span> xmlHttp.<span class="me1">getResponseHeader</span><span class="br0">&#40;</span><span class="st0">&quot;Date&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">var</span> st <span class="sy0">=</span> srvTime<span class="br0">&#40;</span><span class="st0">&quot;https://www.google.es/&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">var</span> date <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">Date</span><span class="br0">&#40;</span>st<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="capitulo-10">18.9 Capítulo 10</h2>
+
+<h3 id="ej12">18.9.1 Ejercicio 12</h3>
+
+<p>Implementar un carrito de la compra que permita arrastrar los productos a la cesta, y calcule el precio total de la compra. El proceso es el siguiente:</p>
+
+<ul>
+<li>Al pasar con el ratón sobre una imagen, el puntero cambia de aspecto (<code>cursor: move;</code>) y se permite arrastrar el contenido.</li>
+<li>Al arrastrar el elemento, la zona que contiene la cesta de la compra se ilumina.</li>
+<li>Al soltar la imagen sobre la cesta de la compra, añade el producto si no existía, mostrando la imagen, el nombre del producto, la cantidad de productos en la cesta (en este caso 1) y el coste total para ese producto.</li>
+<li>Al soltar la imagen sobre la cesta de la compra, si el producto ya se encontraba en la cesta, actualiza la cantidad de productos y su precio.</li>
+</ul>
+
+<p>Posibles mejoras para este ejercicio:</p>
+
+<ul>
+<li>Añadir la posibilidad de eliminar los productos de la cesta de la compra, arrastrándolos desde la propia cesta y soltándolos en cualquier parte de la página. En este caso, mostraríamos un mensaje de confirmación de eliminación del producto.</li>
+<li>Mantener una persistencia de datos para la cesta de la compra, que el actualizar la página no se pierdan los productos introducidos.</li>
+</ul>
+
+<p><a href="snippets/cap20/ej12.zip">Descargar sitio web.</a></p>
+
+<div class="figure" id="figure-18-5">
+    <img src="images/cap20/ej12.png" alt="Aspecto inicial de la cesta de la compra" />
+
+    <p class="caption"><strong>Figura 18.5</strong> Aspecto inicial de la cesta de la compra</p>
+</div>
+
+
+<h2 id="capitulo-11">18.10 Capítulo 11</h2>
+
+<h3 id="ej13">18.10.1 Ejercicio 13</h3>
+
+<p>Utilizando los servicios de geolocalización, realizar las siguientes tareas:</p>
+
+<ul>
+<li>Solicitar las coordenadas actuales, y mostrar dichas coordenadas (y la precisión) tanto en formato texto como un punto en el mapa.</li>
+<li>Haciendo uso del entorno de desarrollo de Android (emulador y SDK) y la herramienta <a href="http://developer.android.com/tools/debugging/ddms.html">DDMS</a>, indicar al dispositivo una posición GPS concreta. Posteriormente, modificar la implementación para solicitar continuamente la posición del dispositivo. En la herramienta DDMS, utilizar el fichero de rutas GPX que se proporciona y mostrar cada nuevo punto en el mapa.</li>
+</ul>
+
+<p><a href="snippets/cap20/ej13.zip">Descargar sitio web.</a></p>
+
+<div class="figure" id="figure-18-6">
+    <img src="images/cap20/ej13.png" alt="Posición actual en el mapa" />
+
+    <p class="caption"><strong>Figura 18.6</strong> Posición actual en el mapa</p>
+</div>
+
+
+<h2 id="capitulo-12">18.11 Capítulo 12</h2>
+
+<h3 id="ej14">18.11.1 Ejercicio 14</h3>
+
+<p>Crear un <em>Web worker</em> que dado un número entero, calcule todos los números primos comprendidos entre 1 y dicho número.</p>
+
+<p>Proporcionaremos a este <em>Worker</em> un número entero, y devolverá un <em>array</em> con todos los números primos encontrados. Mostrar el listado de números primos en el documento principal.</p>
+
+<div class="figure" id="figure-18-7">
+    <img src="images/cap20/ej14.png" alt="Resultado tras calcular los números primos" />
+
+    <p class="caption"><strong>Figura 18.7</strong> Resultado tras calcular los números primos</p>
+</div>
+
+
+<h2 id="capitulo-13">18.12 Capítulo 13</h2>
+
+<h3 id="ej15">18.12.1 Ejercicio 15</h3>
+
+<p>Implementar un servicio de chat, utilizando tecnología <em>Web Socket</em>, a partir del código proporcionado, que se describe a continuación.</p>
+
+<ul>
+<li>Se dispone de un servidor de chat, basado en Node.js, al cual deben conectarse los usuarios del chat. La dirección del servidor es <code>ws://www.arkaitzgarro.com:1337</code>.</li>
+<li>Se proporciona la interfaz básica (HTML y JavaScript) para desarrollar la aplicación. Es necesario implementar la conexión con el servidor y el intercambio de mensajes, así como la actualización de la interfaz.</li>
+<li>El protocolo de mensajes es el siguiente:
+
+<ul>
+<li>El primer mensaje a enviar al servidor es el <em>nick</em>. Tomad el valor de la caja de texto y enviarla al servidor como una cadena de texto.</li>
+<li>Una vez estamos "registrados" en el servidor, éste puede comenzar a enviarnos mensajes, tanto los existentes hasta el momento, como los nuevos que se produzcan por otros usuarios. Estos mensajes (en formato JSON) corresponden con un objeto JavaScript, cuya estructura se muestra a continuación.</li>
+<li>Finalmente, para enviar los mensajes de texto del usuario, enviamos la cadena de texto directamente al servidor.</li>
+</ul></li>
+</ul>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// Mensaje de tipo &quot;color&quot;</span>
+<span class="br0">&#123;</span>
+    type <span class="sy0">:</span> <span class="st0">&quot;color&quot;</span><span class="sy0">,</span>
+    data <span class="sy0">:</span> <span class="st0">&quot;&quot;</span> <span class="co1">// Valor del color asignado por el servidor</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="co1">// Mensaje de tipo &quot;history&quot;</span>
+<span class="br0">&#123;</span>
+    type <span class="sy0">:</span> <span class="st0">&quot;history&quot;</span><span class="sy0">,</span>
+    <span class="co1">// Un array que contiene los últimos mensajes enviados</span>
+    data <span class="sy0">:</span> <span class="br0">&#91;</span><span class="br0">&#123;</span>author<span class="sy0">,</span> text<span class="sy0">,</span> color<span class="sy0">,</span> time<span class="br0">&#125;</span><span class="br0">&#93;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="co1">// Mensaje de tipo &quot;message&quot;</span>
+<span class="br0">&#123;</span>
+    type <span class="sy0">:</span> <span class="st0">&quot;message&quot;</span><span class="sy0">,</span>
+    <span class="co1">// Un objeto que contiene un mensaje enviado por otro usuario</span>
+    data <span class="sy0">:</span> <span class="br0">&#123;</span>author<span class="sy0">,</span> text<span class="sy0">,</span> color<span class="sy0">,</span> time<span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p><a href="snippets/cap20/ej15.zip">Descargar sitio web.</a></p>
+
+<div class="figure" id="figure-18-8">
+    <img src="images/cap20/ej15.png" alt="Resultado final del chat" />
+
+    <p class="caption"><strong>Figura 18.8</strong> Resultado final del chat</p>
+</div>
+
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-18.html#ejercicios">Ejercicios</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.1</span>
+                        <a class="internal" href="capitulo-18.html#capitulo-2">Capítulo 2</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.2</span>
+                        <a class="internal" href="capitulo-18.html#capitulo-3">Capítulo 3</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.3</span>
+                        <a class="internal" href="capitulo-18.html#capitulo-4">Capítulo 4</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.4</span>
+                        <a class="internal" href="capitulo-18.html#capitulo-5">Capítulo 5</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.5</span>
+                        <a class="internal" href="capitulo-18.html#capitulo-6">Capítulo 6</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.6</span>
+                        <a class="internal" href="capitulo-18.html#capitulo-7">Capítulo 7</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.7</span>
+                        <a class="internal" href="capitulo-18.html#capitulo-8">Capítulo 8</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.8</span>
+                        <a class="internal" href="capitulo-18.html#capitulo-9">Capítulo 9</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.9</span>
+                        <a class="internal" href="capitulo-18.html#capitulo-10">Capítulo 10</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.10</span>
+                        <a class="internal" href="capitulo-18.html#capitulo-11">Capítulo 11</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.11</span>
+                        <a class="internal" href="capitulo-18.html#capitulo-12">Capítulo 12</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.12</span>
+                        <a class="internal" href="capitulo-18.html#capitulo-13">Capítulo 13</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

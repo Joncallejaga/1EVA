@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Módulo <em>Transforms</em> | CSS 3</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">CSS 3</a></h1>
+        <p class="span3">
+                        <a href="capitulo-9.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-11.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="modulo-transforms"><span>Capítulo 10</span> Módulo <em>Transforms</em></h1>
+        <p>La especificación oficial y el estado actual de desarrollo del módulo <em>Transforms</em> en CSS 3 puede consultarse en <a href="http://www.w3.org/TR/css3-transforms/">http://www.w3.org/TR/css3-transforms/</a>.</p>
+
+<p>Al modificar el espacio de coordenadas, las transformaciones CSS permiten <strong>cambiar la posición del contenido</strong> afectado sin interrumpir el flujo normal del resto de cajas. Se llevan a cabo mediante un conjunto de propiedades CSS que permiten aplicar transformaciones lineales afines a los elementos HTML. Estas transformaciones incluyen la <strong>rotación, inclinación, escala y traslación</strong> tanto en el plano como en un espacio tridimensional.</p>
+
+<h2 id="propiedades-principales">10.1 Propiedades principales</h2>
+
+<p>Se utilizan <strong>dos propiedades</strong> principales para definir las transformaciones CSS: <code>transform</code> y <code>transform-origin</code>.</p>
+
+<ul>
+<li><code>transform-origin</code>: especifica la posición de origen de la transformación. Por defecto se encuentra en el centro del elemento (como si definiésemos el punto en <code>50%</code> <code>50%</code>), pero se puede definir cualquier otro punto. Es utilizado por varias transformaciones, como rotación, escala o inclinación, que necesitan un punto inicial como parámetro.</li>
+<li><code>transform</code>: especifica las transformaciones a aplicar al elemento. Se trata de una lista de funciones de transformación separadas por espacios, que se aplican una detrás de otra.</li>
+</ul>
+
+<p>Las siguientes propiedades adicionales, añaden control adicional a las transformaciones, permitiendo incluso realizar transformaciones 3D:</p>
+
+<ul>
+<li><code>perspective</code>: permite cambiar la perspectiva de los elementos y transmitir la sensación de encontrarse en un entorno en tres dimensiones.</li>
+<li><code>perspective-origin</code>: especifica la posición de origen de la perspectiva.</li>
+<li><code>transform-style</code>: permite a los elementos transformados en 3D y a sus descendientes también transformados en 3D, compartir un espacio 3D común.</li>
+</ul>
+
+<h2 id="funciones-de-transformacion-2d">10.2 Funciones de transformación 2D</h2>
+
+<p>A continuación, se muestra el listado completo de funciones de transformación 2D disponibles en CSS 3:</p>
+
+<ul>
+<li><code>translate(&lt;translation-value&gt;[, &lt;translation-value&gt;])</code>: aplica una traslación 2D especificada por el vector <code>[tx, ty]</code>. Si no se indica el valor <code>ty</code>, su valor es 0.
+
+<ul>
+<li><code>translateX(&lt;translation-value&gt;)</code>: aplica una traslación 2D en el eje <code>x</code>.</li>
+<li><code>translateY(&lt;translation-value&gt;)</code>: aplica una traslación 2D en el eje <code>y</code>.</li>
+</ul></li>
+<li><code>scale(&lt;number&gt;[, &lt;number&gt;])</code>: aplica una operación de escalado del elementos especificada por el vector <code>[sx, sy]</code>. Si no se indica el valor <code>sy</code>, su valor es igual a <code>sx</code>.
+
+<ul>
+<li><code>scaleX(&lt;number&gt;)</code>: aplica una operación de escalado utilizando el vector de escalado <code>[sx, 1]</code>.</li>
+<li><code>scaleY(&lt;number&gt;)</code>: aplica una operación de escalado utilizando el vector de escalado <code>[1, sy]</code>.</li>
+</ul></li>
+<li><code>rotate(&lt;angle&gt;)</code>: aplica una operación de rotación especificada por los ángulos del parámetro, y tomando como origen de la roptación el punto definido por <code>transform-origin</code>.</li>
+<li><code>skew(&lt;angle&gt;[, &lt;angle&gt;])</code>: aplica una operación de inclinación especificada por el vector <code>[ax, ay]</code>. Si no se indica el valor de <code>ay</code>, su valor es 0.
+
+<ul>
+<li><code>skewX(&lt;angle&gt;)</code>: aplica una operación de inclinación en el eje <code>x</code>.</li>
+<li><code>skewY(&lt;angle&gt;)</code>: aplica una operación de inclinación en el eje <code>y</code>.</li>
+</ul></li>
+</ul>
+
+<h2 id="ejemplos-2">10.3 Ejemplos</h2>
+
+<h3 id="rotacion">10.3.1 Rotación</h3>
+
+<p>En este ejemplo se crea un <code>iframe</code> que permite utilizar la página principal de Google, rotada 90 grados desde su esquina inferior izquierda.</p>
+
+<div class="code css">
+<pre class="css">div <span class="br0">&#123;</span>
+    transform<span class="sy0">:</span> rotate<span class="br0">&#40;</span>90deg<span class="br0">&#41;</span><span class="sy0">;</span>
+    transform-origin<span class="sy0">:</span> <span class="kw1">bottom</span> <span class="kw1">left</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">iframe</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;http://www.google.com/&quot;</span> <span class="kw3">width</span><span class="sy0">=</span><span class="st0">&quot;500&quot;</span> <span class="kw3">height</span><span class="sy0">=</span><span class="st0">&quot;600&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">iframe</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre>
+</div>
+
+<h3 id="inclinacion-y-traslacion">10.3.2 Inclinación y traslación</h3>
+
+<p>En este ejemplo se crea un <code>iframe</code> que permite utiliza la página principal de Google, inclinada 10 grados y trasladada 150 pixels en el eje X.</p>
+
+<div class="code css">
+<pre class="css">div <span class="br0">&#123;</span>
+    transform<span class="sy0">:</span> skewx<span class="br0">&#40;</span>10deg<span class="br0">&#41;</span> translatex<span class="br0">&#40;</span><span class="re3">150px</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    transform-origin<span class="sy0">:</span> <span class="kw1">bottom</span> <span class="kw1">left</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">iframe</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;http://www.google.com/&quot;</span> <span class="kw3">width</span><span class="sy0">=</span><span class="st0">&quot;600&quot;</span> <span class="kw3">height</span><span class="sy0">=</span><span class="st0">&quot;500&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">iframe</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre>
+</div>
+
+<h2 id="propiedades-3d">10.4 Propiedades 3D</h2>
+
+<p>La realización de transformaciones CSS en el espacio es algo más complejo. Hay que empezar configurando el espacio 3D, dándole un punto de vista. Después, hay que configurar cómo se comportarán los elementos 2D en ese espacio tridimensional.</p>
+
+<h3 id="la-creacion-de-un-punto-de-vista-o-perspectiva">10.4.1 La creación de un punto de vista (o perspectiva)</h3>
+
+<p>El primer elemento a configurar es la perspectiva. La perspectiva es lo que da la impresión de tres dimensiones. Cuánto más lejos del espectador se encuentran los elementos, más pequeños se nos muestran.</p>
+
+<p>Cuán rápido estos elementos reducen su tamaño es definido por la propiedad <code>perspective</code>. Cuanto más pequeño es su valor, más profunda es la perspectiva.</p>
+
+<div class="figure" id="figure-10-1">
+    <img src="images/cap05/perspective.png" alt="Profundidad de la perspectiva" />
+
+    <p class="caption"><strong>Figura 10.1</strong> Profundidad de la perspectiva</p>
+</div>
+
+
+<p>El segundo elemento a configurar es la posición del espectador, con la propiedad <code>perspective-origin</code>. Por defecto, la perspectiva se centra en el espectador, lo cual no siempre es lo adecuado.</p>
+
+<div class="figure" id="figure-10-2">
+    <img src="images/cap05/perspective-origin.png" alt="Posición del espectador" />
+
+    <p class="caption"><strong>Figura 10.2</strong> Posición del espectador</p>
+</div>
+
+
+<p>Una vez realizado esto, se puede trabajar sobre el elemento en el espacio 3D.</p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 7</p>
+</div>
+
+<p><a class="internal" href="capitulo-13.html#ej07">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-10.html#modulo-transforms">Módulo <em>Transforms</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.1</span>
+                        <a class="internal" href="capitulo-10.html#propiedades-principales">Propiedades principales</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.2</span>
+                        <a class="internal" href="capitulo-10.html#funciones-de-transformacion-2d">Funciones de transformación 2D</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.3</span>
+                        <a class="internal" href="capitulo-10.html#ejemplos-2">Ejemplos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.4</span>
+                        <a class="internal" href="capitulo-10.html#propiedades-3d">Propiedades 3D</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

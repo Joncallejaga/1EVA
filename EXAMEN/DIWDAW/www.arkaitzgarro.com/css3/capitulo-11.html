@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Módulo <em>Transitions</em> | CSS 3</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">CSS 3</a></h1>
+        <p class="span3">
+                        <a href="capitulo-10.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-12.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="modulo-transitions"><span>Capítulo 11</span> Módulo <em>Transitions</em></h1>
+        <p>La especificación oficial y el estado actual de desarrollo del módulo <em>Transitions</em> en CSS 3 puede consultarse en <a href="http://www.w3.org/TR/css3-transitions/">http://www.w3.org/TR/css3-transitions/</a>.</p>
+
+<p>Las <strong>transiciones CSS</strong>, que forman parte del conjunto de especificaciones de <strong>CSS3</strong>, proporcionan una forma de controlar la velocidad de la animación al cambiar las propiedades CSS. Los cambios en las propiedades no tienen efecto inmediato, sino que se puede establecer un periodo de tiempo para que éstos se ejecuten. Por ejemplo, al cambiar el color de un elemento de blanco a negro, este cambio normalmente se ejecuta de manera inmediata. Sin embargo, con las transiciones CSS, los cambios se producen con intervalos de tiempo que siguen una curva de aceleración, y pueden ser personalizados.</p>
+
+<p>Las animaciones que implican transición entre dos estados se llaman a menudo <em>transiciones implícitas</em>, ya que los estados intermedios entre el inicial y el final son implícitamente definidos por el navegador.</p>
+
+<p><img src="images/cap06/states.png"></p>
+
+<p>Las transiciones CSS permiten decidir qué propiedades animar (mediante su inclusión explícita), cuándo comenzará esta animación (estableciendo un retraso o <em>delay</em>), cuánto durará (estableciendo una duración), y cómo se ejecutará (definiendo una función de tiempo).</p>
+
+<h2 id="propiedades-animables">11.1 Propiedades "animables"</h2>
+
+<p>Se puede definir <strong>qué propiedad debe ser animada y en qué manera</strong>. Esto permite la creación de transiciones complejas. Como la animación de algunas propiedades no tiene sentido, la <a href="http://www.w3.org/TR/css3-transitions/#animatable-types">lista de propiedades</a> "animables" se limita a un conjunto finito.</p>
+
+<p>También el valor <code>auto</code> es un caso complejo. La especificación nos dice que no debemos animar desde y hacia dicho valor. Algunos agentes de usuario, como los basados en Gecko o WebKit, implementan este requisito, que al usar animaciones con <code>auto</code> nos puede dar lugar a resultados impredecibles, dependiendo del navegador y su versión; por lo que debemos evitarlo.</p>
+
+<p>También se debería tener cuidado al utilizar una transición inmediatamente después de añadir el elemento al DOM utilizando <code>.appendChild()</code> o borrando su propiedad <code>display: none;</code>. Esto se nos muestra como si el estado inicial nunca hubiese existido y el elemento estuviese siempre en su estado final. La manera más sencilla de superar esta limitación es aplicar un <code>window.setTimeout()</code> de algunos milisegundos antes de cambiar la propiedad CSS a la que se pretende aplicar la transición.</p>
+
+<h2 id="propiedad-transition-property">11.2 Propiedad <em>transition-property</em></h2>
+
+<p>El primer paso al crear una transición, es especificar la propiedad o propiedades sobre las que se va a aplicar los efectos de la transición. Podemos decidir que sean todas las propiedades, ninguna o un listado de ellas.</p>
+
+<div class="code css">
+<pre class="css">transition-property<span class="sy0">:</span> <span class="kw2">none</span> | all | <span class="br0">&#91;</span> &lt;property<span class="sy0">&gt;</span> <span class="br0">&#93;</span> <span class="br0">&#91;</span><span class="sy0">,</span> &lt;property<span class="sy0">&gt;</span> <span class="br0">&#93;</span><span class="sy0">*</span>
+&nbsp;
+transition-property<span class="sy0">:</span> all<span class="sy0">;</span>
+transition-property<span class="sy0">:</span> <span class="kw2">none</span><span class="sy0">;</span>
+transition-property<span class="sy0">:</span> <span class="kw1">background-color</span><span class="sy0">;</span>
+transition-property<span class="sy0">:</span> <span class="kw1">background-color</span><span class="sy0">,</span> <span class="kw1">height</span><span class="sy0">,</span> <span class="kw1">width</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Si se indica la palabra reservada <code>all</code>, todas las propiedades que sean capaces de ser animadas y para las que se ha definido un cambio, serán animadas. Si se especifica <code>none</code>, ninguna propiedad será animada.</p>
+
+<h2 id="propiedad-transition-duration">11.3 Propiedad <em>transition-duration</em></h2>
+
+<p>La propiedad <code>transition-duration</code> acepta una lista separada por comas de tiempos, especificadas en segundos o milisegundos, que determinan cuánto tiempo tarda cada propiedad, en completar la transición.</p>
+
+<div class="code css">
+<pre class="css">transition-duration<span class="sy0">:</span> &lt;time<span class="sy0">&gt;</span> <span class="br0">&#91;</span><span class="sy0">,</span> &lt;time<span class="sy0">&gt;</span><span class="br0">&#93;</span><span class="sy0">*</span>
+&nbsp;
+transition-duration<span class="sy0">:</span> 2s<span class="sy0">;</span>
+transition-duration<span class="sy0">:</span> 4000ms<span class="sy0">;</span>
+transition-duration<span class="sy0">:</span> 4000ms<span class="sy0">,</span> 8000ms<span class="sy0">;</span></pre>
+</div>
+
+<h2 id="propiedad-transition-timing-function">11.4 Propiedad <em>transition-timing-function</em></h2>
+
+<p>La propiedad <code>transition-timing-function</code> es utilizada para especificar el ritmo en el que se producen los cambios durante la transición. Esto puede realizarse de dos maneras: indicando el nombre de una <em>función de tiempo</em> (<code>ease</code>, <code>linear</code>, <code>ease-in</code>, <code>ease-out</code> o <code>ease-in-out</code>) o definiendo una función de tiempo personalizada (especificando cuatro coordenadas para definir una curva bezier).</p>
+
+<div class="code css">
+<pre class="css">transition-timing-function<span class="sy0">:</span> &lt;timing-function<span class="sy0">&gt;</span> <span class="br0">&#91;</span><span class="sy0">,</span> &lt;timing-function<span class="sy0">&gt;</span><span class="br0">&#93;</span><span class="sy0">*</span>
+&nbsp;
+transition-timing-function<span class="sy0">:</span> ease<span class="sy0">;</span>
+transition-timing-function<span class="sy0">:</span> ease<span class="sy0">,</span> linear<span class="sy0">;</span>
+transition-timing-function<span class="sy0">:</span> cubic-bezier<span class="br0">&#40;</span><span class="nu0">0.6</span><span class="sy0">,</span> <span class="nu0">0.1</span><span class="sy0">,</span> <span class="nu0">0.15</span><span class="sy0">,</span> <span class="nu0">0.8</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Vemos lo primero de todo las funciones predefinidas. Este ejemplo muestra cómo se comporta cada una de las funciones. Cada caja se expandirá de <code>150px</code> a <code>300px</code>, con una duración de la transición de 3 segundos.</p>
+
+<div class="exampletransitionb">
+    <div class="ease">ease</div>
+    <div class="linear">linear</div>
+    <div class="easein">ease-in</div>
+    <div class="easeout">ease-out</div>
+    <div class="easeinout">ease-in-out</div>
+</div>
+
+<p>Además de estas funciones de tiempo predefinidas, tenemos la posibilidad de declarar nuestra propia función de tiempo, utilizando una función <code>cubic-bezier</code>.</p>
+
+<div class="figure" id="figure-11-1">
+    <img src="images/cap06/curva-bezier.png" alt="Puntos de control en una curva bezier" />
+
+    <p class="caption"><strong>Figura 11.1</strong> Puntos de control en una curva bezier</p>
+</div>
+
+
+<p>Si no se especifica ninguna función de tiempo, por defecto se aplica <code>ease</code>.</p>
+
+<h2 id="propiedad-transition-delay">11.5 Propiedad <em>transition-delay</em></h2>
+
+<p>El último paso para crear una transición, es especificar un retraso (opcional) en el inicio de la transición. Aquí también podemos especificar una lista de tiempos, en segundos o milisegundos, que determinan el inicio de la transición desde que esta se lanza. El valor por defecto es <code>0</code>, esto es, se inicia de inmediato.</p>
+
+<p>En este caso los valores negativos sí son aceptados. En este caso, la transición se iniciará tan pronto sea posible, pero dará la impresión que ya lleva tiempo ejecutándose.</p>
+
+<div class="code css">
+<pre class="css">transition-delay<span class="sy0">:</span> &lt;time<span class="sy0">&gt;</span> <span class="br0">&#91;</span><span class="sy0">,</span> &lt;time<span class="sy0">&gt;</span><span class="br0">&#93;</span><span class="sy0">*</span>
+&nbsp;
+transition-delay<span class="sy0">:</span> 5s<span class="sy0">;</span>
+transition-delay<span class="sy0">:</span> 4000ms<span class="sy0">,</span> 8000ms<span class="sy0">;</span>
+transition-delay<span class="sy0">:</span> -5s<span class="sy0">;</span></pre>
+</div>
+
+<div class="exampletransitionc">
+    <div class="minustwo">-2s delay</div>
+    <div class="no">no delay</div>
+    <div class="one">1s delay</div>
+    <div class="two">2s delay</div>
+    <div class="three">3s delay</div>
+    <div class="five">5s delay</div>
+</div>
+
+<h2 id="propiedad-transition">11.6 Propiedad <em>transition</em></h2>
+
+<p>Como de costumbre, disponemos de la propiedad <em>shorthand</em> que nos permite definir todas las propiedades de una sola vez.</p>
+
+<div class="code css">
+<pre class="css">transition<span class="sy0">:</span> &lt;transition<span class="sy0">&gt;</span> <span class="br0">&#91;</span><span class="sy0">,</span> &lt;transition<span class="sy0">&gt;</span><span class="br0">&#93;</span><span class="sy0">*</span>
+&nbsp;
+&lt;transition<span class="sy0">&gt;</span> <span class="sy0">=</span> &lt;transition-property<span class="sy0">&gt;</span> &lt;transition-duration<span class="sy0">&gt;</span>
+               &lt;transition-timing-function<span class="sy0">&gt;</span> &lt;transition-delay<span class="sy0">&gt;</span>
+&nbsp;
+transition<span class="sy0">:</span> <span class="kw1">background-color</span> 3s linear 1s<span class="sy0">;</span>
+transition<span class="sy0">:</span> 4s ease-in-out<span class="sy0">;</span>
+transition<span class="sy0">:</span> 5s<span class="sy0">;</span></pre>
+</div>
+
+<p>El único valor requerido en esta propiedad es <code>transition-duration</code>.</p>
+
+<h2 id="listas-de-valores">11.7 Listas de valores</h2>
+
+<p>Si la lista de valores de cualquier propiedad es más corta que otras, sus valores son repetidos hasta hacer que coincidan. Por ejemplo:</p>
+
+<div class="code css">
+<pre class="css">div <span class="br0">&#123;</span>
+    transition-property<span class="sy0">:</span> opacity<span class="sy0">,</span> <span class="kw1">left</span><span class="sy0">,</span> <span class="kw1">top</span><span class="sy0">,</span> <span class="kw1">height</span><span class="sy0">;</span>
+    transition-duration<span class="sy0">:</span> 3s<span class="sy0">,</span> 5s<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Esto es tratado como si fuese:</p>
+
+<div class="code css">
+<pre class="css">div <span class="br0">&#123;</span>
+    transition-property<span class="sy0">:</span> opacity<span class="sy0">,</span> <span class="kw1">left</span><span class="sy0">,</span> <span class="kw1">top</span><span class="sy0">,</span> <span class="kw1">height</span><span class="sy0">;</span>
+    transition-duration<span class="sy0">:</span> 3s<span class="sy0">,</span> 5s<span class="sy0">,</span> 3s<span class="sy0">,</span> 5s<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>De manera similar, si la lista de valores de cualquier propiedad es más larga que la de <code>transition-property</code>, es acortado, por lo que si tienes este código CSS:</p>
+
+<div class="code css">
+<pre class="css">div <span class="br0">&#123;</span>
+    transition-property<span class="sy0">:</span> opacity<span class="sy0">,</span> <span class="kw1">left</span><span class="sy0">;</span>
+    transition-duration<span class="sy0">:</span> 3s<span class="sy0">,</span> 5s<span class="sy0">,</span> 2s<span class="sy0">,</span> 1s<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Se interpreta como:</p>
+
+<div class="code css">
+<pre class="css">div <span class="br0">&#123;</span>
+    transition-property<span class="sy0">:</span> opacity<span class="sy0">,</span> <span class="kw1">left</span><span class="sy0">;</span>
+    transition-duration<span class="sy0">:</span> 3s<span class="sy0">,</span> 5s<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="finalizacion-de-una-transicion">11.8 Finalización de una transición</h2>
+
+<p>Existe un sólo evento que se dispara cuando las transiciones se completan. En todos los navegadores que cumplen el estándar, el evento es <code>transitionend</code>, en WebKit es <code>webkitTransitionEnd</code>. El evento <code>transitionend</code> ofrece dos propiedades:</p>
+
+<ul>
+<li><p><code>propertyName</code>: <em>string</em> que indica el nombre de la propiedad CSS cuya transición está completada.</p></li>
+<li><p><code>elapsedTime</code>: un <em>float</em> que indica el número de segundos que la transición ha estado ejecutándose en el momento en el que se dispara el evento. Este valor no está afectado por el valor de <code>transition-delay</code>.</p></li>
+</ul>
+
+<p>Como de costumbre, se puede utilizar el método <code>element.addEventListener()</code> para supervisar este evento:</p>
+
+<div class="code css">
+<pre class="css">el.addEventListener<span class="br0">&#40;</span><span class="st0">&quot;transitionend&quot;</span><span class="sy0">,</span> updateTransition<span class="sy0">,</span> true<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="transiciones-y-javascript">11.9 Transiciones y JavaScript</h2>
+
+<p>Las transiciones con una buena herramienta para crear una apariencia mucho más equilibrada sin tener que modificar la funcionalidad JavaScript. Por ejemplo:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Click anywhere to move the ball<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;foo&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre>
+</div>
+
+<p>Utilizando JavaScript:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> f <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">'foo'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+document.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'click'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>ev<span class="br0">&#41;</span><span class="br0">&#123;</span>
+    f.<span class="me1">style</span>.<span class="me1">left</span> <span class="sy0">=</span> <span class="br0">&#40;</span>ev.<span class="me1">clientX</span><span class="sy0">-</span><span class="nu0">25</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">'px'</span><span class="sy0">;</span>
+    f.<span class="me1">style</span>.<span class="me1">top</span> <span class="sy0">=</span> <span class="br0">&#40;</span>ev.<span class="me1">clientY</span><span class="sy0">-</span><span class="nu0">25</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">'px'</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">,</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Con CSS simplemente es necesario añadir una transición al elemento:</p>
+
+<div class="code css">
+<pre class="css">p <span class="br0">&#123;</span>
+    <span class="kw1">padding-left</span><span class="sy0">:</span> <span class="re3">60px</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">#foo {
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    background: #c00;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition:  all 1s;
+}</pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 8</p>
+</div>
+
+<p><a class="internal" href="capitulo-13.html#ej08">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-11.html#modulo-transitions">Módulo <em>Transitions</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>11.1</span>
+                        <a class="internal" href="capitulo-11.html#propiedades-animables">Propiedades "animables"</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>11.2</span>
+                        <a class="internal" href="capitulo-11.html#propiedad-transition-property">Propiedad <em>transition-property</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>11.3</span>
+                        <a class="internal" href="capitulo-11.html#propiedad-transition-duration">Propiedad <em>transition-duration</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>11.4</span>
+                        <a class="internal" href="capitulo-11.html#propiedad-transition-timing-function">Propiedad <em>transition-timing-function</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>11.5</span>
+                        <a class="internal" href="capitulo-11.html#propiedad-transition-delay">Propiedad <em>transition-delay</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>11.6</span>
+                        <a class="internal" href="capitulo-11.html#propiedad-transition">Propiedad <em>transition</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>11.7</span>
+                        <a class="internal" href="capitulo-11.html#listas-de-valores">Listas de valores</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>11.8</span>
+                        <a class="internal" href="capitulo-11.html#finalizacion-de-una-transicion">Finalización de una transición</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>11.9</span>
+                        <a class="internal" href="capitulo-11.html#transiciones-y-javascript">Transiciones y JavaScript</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

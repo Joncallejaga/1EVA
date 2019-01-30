@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="28/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Multimedia | HTML5</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">HTML5</a></h1>
+        <p class="span3">
+                        <a href="capitulo-5.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-7.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="multimedia"><span>Capítulo 6</span> Multimedia</h1>
+        <p>Hasta hace no mucho tiempo, la tecnología <em>Flash</em> era el dominador indiscutible en el campo multimedia de la web. Gracias a esta tecnología es relativamente sencillo transmitir audio y vídeo a través de la red, y realizar animaciones que de otra manera sería imposible. Prácticamente todos los navegadores tienen incorporado un <em>plugin</em> para la reproducción de archivos <em>flash</em>, por lo que la elección era clara. <strong>Entonces, ¿por qué una necesidad de cambio?</strong></p>
+
+<p>Hasta ahora, para incluir un elemento multimedia en un documento, se hacía uso del elemento <code>&lt;object&gt;</code>, cuya función es incluir un elemento externo genérico. Debido a la incompatibilidad entre navegadores, se hacía también necesario el uso del elemento <code>&lt;embed&gt;</code> y duplicar una serie de parámetros. El resultado era un código de este estilo:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">object</span> <span class="kw3">width</span><span class="sy0">=</span><span class="st0">&quot;425&quot;</span> <span class="kw3">height</span><span class="sy0">=</span><span class="st0">&quot;344&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">param</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;movie&quot;</span></span>
+<span class="sc2">        <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;http://www.youtube.com/v/9sEI1AUFJKw&amp;hl=en_GB&amp;fs=1&amp;&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">param</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">param</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;allowFullScreen&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;true&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">param</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">param</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;allowscriptaccess&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;always&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">param</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">embed</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;http://www.youtube.com/v/9sEI1AUFJKw&amp;hl=en_GB&amp;fs=1&amp;&quot;</span></span>
+<span class="sc2">        <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;application/x-shockwave-flash&quot;</span></span>
+<span class="sc2">        allowscriptaccess<span class="sy0">=</span><span class="st0">&quot;always&quot;</span></span>
+<span class="sc2">        allowfullscreen<span class="sy0">=</span><span class="st0">&quot;true&quot;</span> <span class="kw3">width</span><span class="sy0">=</span><span class="st0">&quot;425&quot;</span> <span class="kw3">height</span><span class="sy0">=</span><span class="st0">&quot;344&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">embed</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">object</span>&gt;</span></pre>
+</div>
+
+<p>Dejando de lado que el código es <em>poco amigable</em>, en este caso tenemos el problema que el navegador tiene que transmitir el vídeo a un plugin instalado en el navegador, con la esperanza que el usuario tenga instalada la versión correcta o tenga permisos para hacerlo, y muchos otros requisitos que pueden ser necesarios. Los <em>plugins</em> pueden causar que el navegador o el sistema se comporte de manera inestable, o incluso podemos crear una inseguridad a usuarios sin conocimientos técnicos, a los que se pide que descarguen e instalen un nuevo software.</p>
+
+<p>De alguna manera, podemos estar creando una barrera para ciertos usuarios, algo que <strong>no es para nada deseable</strong>.</p>
+
+<h2 id="video">6.1 Vídeo</h2>
+
+<p>Una de las mayores ventajas del elemento <code>&lt;video&gt;</code> (y <code>&lt;audio&gt;</code>) de HTML5, es que, finalmente, están totalmente integrados en la web. Ya no es necesario depender de <em>software</em> de terceros, y esto es una gran ventaja.</p>
+
+<p>Así que ahora, el elemento <code>&lt;video&gt;</code> pueden personalizarse a través de estilos CSS. Se puede cambiar su tamaño y animarlo con transiciones CSS, por ejemplo. Podemos acceder a sus propiedades a través de JavaScript, transformarlos y mostrarlos en un <code>&lt;canvas&gt;</code>. Y lo mejor de todo, es que podemos manipularlos con total libertad, ya que pertenecen al estándar. Ya no se ejecutan en una <em>caja negra</em> a la que no teníamos acceso.</p>
+
+<p>A pesar de que la etiqueta <code>&lt;video&gt;</code> se presenta como una alternativa de <em>flash</em>, sus funcionalidades van mucho más allá, como veremos a continuación.</p>
+
+<h3 id="marcado">6.1.1 Marcado</h3>
+
+<p>Para hacer funcionar el vídeo en HTML, es suficiente con incluir el siguiente marcado, de manera similar que lo hacemos con las imágenes:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">video</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;movie.webm&quot;</span>&gt;</span> <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">video</span>&gt;</span>   <span class="sc-1">&lt;!-- Esto funciona en un mundo ideal --&gt;</span></pre>
+</div>
+
+<p>Sin embargo, este ejemplo realmente no hace nada por el momento. Lo único que se muestra es el primer fotograma de la película. Esto es así porque no le hemos dicho al navegador que inicie el vídeo, ni le hemos mostrado al usuario ningún tipo de control para reproducir o pausar el vídeo.</p>
+
+<h3 id="autoplay">6.1.2 <code>autoplay</code></h3>
+
+<p>Si bien podemos indicar al navegador que reproduzca el vídeo de manera automática una vez se haya cargado la página, en realidad no es una buena práctica, ya que a muchos usuarios les parecerá una práctica muy intrusiva. Por ejemplo, los usuarios de dispositivos móviles, probablemente no querrán que el vídeo se reproduzca sin su autorización, ya que se consume ancho de banda sin haberlo permitido explícitamente. No obstante, la manera de hacerlo es la siguiente:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">video</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;movie.webm&quot;</span> autoplay&gt;</span>
+    <span class="sc-1">&lt;!-- Your fallback content here --&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">video</span>&gt;</span></pre>
+</div>
+
+<h3 id="controls">6.1.3 <code>controls</code></h3>
+
+<p>Proporcionar controles es aproximadamente un 764% mejor que reproducir el vídeo de manera automática. La manera de indicar que se muestren los controles es la siguiente:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">video</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;movie.webm&quot;</span> controls&gt;</span>
+    <span class="sc-1">&lt;!-- Your fallback content here --&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">video</span>&gt;</span></pre>
+</div>
+
+<p>Naturalmente, y al igual que ocurre con los campos de formulario, los navegadores muestran los controles de manera diferente, ya que la especificación no indica qué aspecto deben tener. De todas maneras, independientemente del aspecto, todos ellos coinciden en los controles a mostrar: reproducir/pausa, una barra de progreso y un control de volumen. Normalmente, los navegadores esconden los controles, y solamente aparecen al mover el ratón sobre el vídeo al utilizar el teclado para controlar el vídeo.</p>
+
+<div class="figure" id="figure-6-1">
+    <img src="images/cap05/video.png" alt="Controles de vídeo en Google Chrome" />
+
+    <p class="caption"><strong>Figura 6.1</strong> Controles de vídeo en Google Chrome</p>
+</div>
+
+
+<h3 id="poster">6.1.4 <code>poster</code></h3>
+
+<p>El atributo <code>poster</code> indica la imagen que el navegador debe mostrar mientras el vídeo se está descargando, o hasta que el usuario reproduce el vídeo. Esto elimina la necesidad de mostrar una imagen externa que después hay que eliminar con JavaScript. Si no se indica este atributo, el navegador muestra el primer fotograma del vídeo, que puede no ser representativo del vídeo que se va a reproducir.</p>
+
+<div class="figure" id="figure-6-2">
+    <img src="images/cap05/poster.png" alt="Fotograma <code>poster</code> del vídeo anterior" />
+
+    <p class="caption"><strong>Figura 6.2</strong> Fotograma <code>poster</code> del vídeo anterior</p>
+</div>
+
+
+<h3 id="muted">6.1.5 <code>muted</code></h3>
+
+<p>El atributo <code>muted</code>, permite que el elemento multimedia se reproduzca inicialmente sin sonido, lo que requiere una acción por parte del usuario para recuperar el volumen. En este ejemplo, el vídeo se reproduce automáticamente, pero sin sonido:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">video</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;movie.webm&quot;</span> controls autoplay loop muted&gt;</span>
+    <span class="sc-1">&lt;!-- Your fallback content here --&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">video</span>&gt;</span></pre>
+</div>
+
+<h3 id="height-width">6.1.6 <code>height</code>, <code>width</code></h3>
+
+<p>Los atributos <code>height</code> y <code>width</code> indican al navegador el tamaño del vídeo en pixels. Si no se indican estas medidas, el navegador utiliza las medidas definidas en el vídeo de origen, si están disponibles. De lo contrario, utiliza las medidas definidas en el fotograma poster, si están disponibles. Si ninguna de estas medidas está disponible, el ancho por defecto es de <code>300 pixels</code>.</p>
+
+<p>Si únicamente se especifica una de las dos medidas, el navegador automáticamente ajusta la medida de la dimensión no proporcionada, conservando la proporción del vídeo.</p>
+
+<p>Si por el contrario, se especifican las dos medidas, pero no coinciden con la proporción del vídeo original, el vídeo no se deforma a estas nuevas dimensiones, sino que se muestra en formato <a href="http://es.wikipedia.org/wiki/Letterbox">letterbox</a> manteniendo la proporción original.</p>
+
+<h3 id="loop">6.1.7 <code>loop</code></h3>
+
+<p>El atributo <code>loop</code> indica que el vídeo se reproduce de nuevo una vez que ha finalizado su reproducción.</p>
+
+<h3 id="preload">6.1.8 <code>preload</code></h3>
+
+<p>Es posible indicar al navegador que comience la descarga del vídeo antes de que el usuario inicie su reproducción.</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">video</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;movie.webm&quot;</span> controls preload&gt;</span>
+    <span class="sc-1">&lt;!-- Your fallback content here --&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">video</span>&gt;</span></pre>
+</div>
+
+<p>Existen tres valores definidos para <code>preload</code>. Si no indicamos uno en concreto, es el propio navegador el que decide qué hacer. Por ejemplo, en un dispositivo móvil, el comportamiento por defecto es no realizar ninguna descarga hasta que el usuario lo haya indicado. Es importante recordar que un desarrollador no puede controlar el comportamiento de un navegador: <code>preload</code> es un <em>consejo</em>, no un comando. El navegador tomará una decisión en función del dispositivo, las condiciones de la red y otros factores.</p>
+
+<ul>
+<li><code>preload=auto</code>: se sugiere al navegador que comience la descarga.</li>
+<li><code>preload=none</code>: se sugiere al navegador que no comience la descarga hasta que lo indique el usuario.</li>
+<li><code>preload=metadata</code>: este estado sugiere al navegador que cargue los metadatos (dimensiones, fotogramas, duración...), pero no descarga nada más hasta que el usuario lo indique.</li>
+</ul>
+
+<h3 id="src">6.1.9 <code>src</code></h3>
+
+<p>Al igual que en elemento <code>&lt;img&gt;</code>, el atributo <code>src</code> indica la localización del recurso, que el navegador debe reproducir si el navegador soporta el <em>codec</em> o formato específico. Utilizar un único atributo <code>src</code> es únicamente útil y viable en entornos totalmente controlados, donde conocemos el navegador que accede al sitio web y los <em>codecs</em> que soporta.</p>
+
+<p>Sin embargo, como no todos los navegadores pueden reproducir los mismos formatos, en entornos de producción debemos especificar más de una fuente de vídeo.</p>
+
+<h2 id="codecs-la-nueva-guerra">6.2 Codecs, la nueva guerra</h2>
+
+<p>En los primeros borradores de la especificación de HTML5, se indicaba que se debía de ofrecer soporte para al menos dos <em>codecs</em> multimedia: Ogg Vorbis para audio y Ogg Theora para vídeo. Sin embargo, estos requisitos fueron eliminados después de que Apple y Nokia se opusieran, de modo que la especificación no recomendase ningún <em>codec</em> en concreto. Esto ha creado una situación de fragmentación, con diferentes navegadores optando por diferentes formatos, basándose en sus ideologías o convicciones comerciales.</p>
+
+<p>Actualmente, hay dos <em>codecs</em> principales que debemos tener en cuenta: el nuevo formato <a href="http://www.arkaitzgarro.com/html5/www.webmproject.org">WebM</a>, construido sobre el formato VP8 que Google compró y ofrece de manera libre, y el formato MP4, que contiene el <em>codec</em> propietario H.264.</p>
+
+<div class="table" id="table-6-1">
+
+    <table>
+<thead>
+<tr>
+  <th align="left"></th>
+  <th align="center"><strong>WEBM</strong></th>
+  <th align="center"><strong>MP4</strong></th>
+  <th align="center"><strong>OGV</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left"><strong>Opera</strong></td>
+  <td align="center">Sí</td>
+  <td align="center">No</td>
+  <td align="center">Sí</td>
+</tr>
+<tr>
+  <td align="left"><strong>Firefox</strong></td>
+  <td align="center">Sí</td>
+  <td align="center">Sí</td>
+  <td align="center">Sí</td>
+</tr>
+<tr>
+  <td align="left"><strong>Chrome</strong></td>
+  <td align="center">Sí</td>
+  <td align="center">No</td>
+  <td align="center">Sí</td>
+</tr>
+<tr>
+  <td align="left"><strong>IE9+</strong></td>
+  <td align="center">No</td>
+  <td align="center">Sí</td>
+  <td align="center">No</td>
+</tr>
+<tr>
+  <td align="left"><strong>Safari</strong></td>
+  <td align="center">No</td>
+  <td align="center">Sí</td>
+  <td align="center">No</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p><em>WebM funciona en IE9+ y Safari si el usuario ha instalado los codec de manera manual.</em></p>
+
+<p>Por lo tanto, la mejor solución en estos momentos es ofrecer tanto el formato libre WebM, como el propietario H.264.</p>
+
+<h3 id="multiples-elementos-ltsourcegt">6.2.1 Multiples elementos <code>&lt;source&gt;</code></h3>
+
+<p>Para poder ofrecer ambos formatos, primeramente debemos codificarlos por separado. Existen diversas herramientas y servicios on-line para realizar esta tarea, pero quizás el más conocido sea <a href="http://www.arkaitzgarro.com/html5/www.mirovideoconverter.com">Miro Video Converter</a>. Este software, disponible para Windows y Mac, nos permite convertir los vídeos en formato Theora, o H.264 (y muchos otros) optimizados para diferentes tipos de dispositivos como iPhone, Android, PS2, etc.</p>
+
+<p>Una vez dispongamos el vídeo en los distintos formatos, es necesario indicar todas las localizaciones de estos formatos, para que sea el navegador el que decida que formato reproducir. Evidentemente, no podemos especificarlos todos dentro del atributo <code>scr</code>, por lo que tendremos que hacerlo de manera separada utilizando el elemento <code>&lt;source&gt;</code>.</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">video</span> controls&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">source</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;leverage-a-synergy.mp4&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">'video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;'</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">source</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;leverage-a-synergy.webm&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">'video/webm; codecs=&quot;vp8, vorbis&quot;'</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Your browser doesn’t support video.
+        Please download the video in <span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;leverage-a-synergy.webm&quot;</span>&gt;</span>webM<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+        or <span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;leverage-a-synergy.mp4&quot;</span>&gt;</span>MP4<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span> format.
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">video</span>&gt;</span></pre>
+</div>
+
+<h3 id="media-queries-para-video">6.2.2 Media Queries para <code>video</code></h3>
+
+<p>Los ficheros de vídeo tienden a ser pesados, y enviar un vídeo en alta calidad a un dispositivo con un tamaño de pantalla reducido es algo totalmente ineficiente. No hay ningún inconveniente en hacerlo, pero si comprimimos el vídeo y disminuimos sus dimensiones, conseguiremos reducir su tamaño (en <code>MB</code>), algo de agradecer en entornos móviles y que dependen de una conexión de datos.</p>
+
+<p>HTML5 permite utilizar el atributo <code>media</code> en el elemento <code>&lt;source&gt;</code>, ofreciendo la misma funcionalidad que los <code>Media Queries</code>en CSS3. Por lo tanto, podemos consultar al navegador por el ancho de la pantalla, la relación de aspecto, colores, etc, y definir el video correcto según las características del dispositivo.</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">video</span> controls&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">source</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;hi-res.mp4&quot;</span> <span class="kw3">media</span><span class="sy0">=</span><span class="st0">&quot;(min-device-width: 800px)&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">source</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;lo-res.mp4&quot;</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">video</span>&gt;</span></pre>
+</div>
+
+<h2 id="api-multimedia">6.3 API multimedia</h2>
+
+<p>Los elementos multimedia <code>&lt;video&gt;</code> y <code>&lt;audio&gt;</code> ofrecen un API JavaScript muy completo y fácil de utilizar. Los eventos y métodos de los elementos de audio y vídeo son exactamente los mismos, su única diferencia se da en los atributos. A continuación se muestra una tabla con el API actual:</p>
+
+<div class="table" id="table-6-2">
+
+    <table>
+<thead>
+<tr>
+  <th align="center"><strong>Atributos</strong></th>
+  <th align="center"><strong>Métodos</strong></th>
+  <th align="center"><strong>Eventos</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="center"><strong>error state</strong></td>
+  <td align="center">load()</td>
+  <td align="center">loadstart</td>
+</tr>
+<tr>
+  <td align="center">error</td>
+  <td align="center">canPlayType(type)</td>
+  <td align="center">progress</td>
+</tr>
+<tr>
+  <td align="center"><strong>network state</strong></td>
+  <td align="center">play()</td>
+  <td align="center">suspend</td>
+</tr>
+<tr>
+  <td align="center">src</td>
+  <td align="center">pause()</td>
+  <td align="center">abort</td>
+</tr>
+<tr>
+  <td align="center">currentSrc</td>
+  <td align="center">addTrack(label, kind, language)</td>
+  <td align="center">error</td>
+</tr>
+<tr>
+  <td align="center">networkState</td>
+  <td align="center"></td>
+  <td align="center">emptied</td>
+</tr>
+<tr>
+  <td align="center">preload</td>
+  <td align="center"></td>
+  <td align="center">stalled</td>
+</tr>
+<tr>
+  <td align="center">buffered</td>
+  <td align="center"></td>
+  <td align="center">play</td>
+</tr>
+<tr>
+  <td align="center"><strong>ready state</strong></td>
+  <td align="center"></td>
+  <td align="center">pause</td>
+</tr>
+<tr>
+  <td align="center">readyState</td>
+  <td align="center"></td>
+  <td align="center">loadedmetadata</td>
+</tr>
+<tr>
+  <td align="center">seeking</td>
+  <td align="center"></td>
+  <td align="center">loadeddata</td>
+</tr>
+<tr>
+  <td align="center"><strong>controls</strong></td>
+  <td align="center"></td>
+  <td align="center">waiting</td>
+</tr>
+<tr>
+  <td align="center">controls</td>
+  <td align="center"></td>
+  <td align="center">playing</td>
+</tr>
+<tr>
+  <td align="center">volume</td>
+  <td align="center"></td>
+  <td align="center">canplay</td>
+</tr>
+<tr>
+  <td align="center">muted</td>
+  <td align="center"></td>
+  <td align="center">canplaythrough</td>
+</tr>
+<tr>
+  <td align="center"><strong>tracks</strong></td>
+  <td align="center"></td>
+  <td align="center">seeking</td>
+</tr>
+<tr>
+  <td align="center">tracks</td>
+  <td align="center"></td>
+  <td align="center">seeked</td>
+</tr>
+<tr>
+  <td align="center"><strong>playback state</strong></td>
+  <td align="center"></td>
+  <td align="center">timeupdate</td>
+</tr>
+<tr>
+  <td align="center">currentTime</td>
+  <td align="center"></td>
+  <td align="center">ended</td>
+</tr>
+<tr>
+  <td align="center">startTime</td>
+  <td align="center"></td>
+  <td align="center">ratechange</td>
+</tr>
+<tr>
+  <td align="center">muted</td>
+  <td align="center"></td>
+  <td align="center"></td>
+</tr>
+<tr>
+  <td align="center">paused</td>
+  <td align="center"></td>
+  <td align="center"></td>
+</tr>
+<tr>
+  <td align="center">defaultPlaybackRate</td>
+  <td align="center"></td>
+  <td align="center"></td>
+</tr>
+<tr>
+  <td align="center">playbackRate</td>
+  <td align="center"></td>
+  <td align="center"></td>
+</tr>
+<tr>
+  <td align="center">played</td>
+  <td align="center"></td>
+  <td align="center"></td>
+</tr>
+<tr>
+  <td align="center">seekable</td>
+  <td align="center"></td>
+  <td align="center"></td>
+</tr>
+<tr>
+  <td align="center">ended</td>
+  <td align="center"></td>
+  <td align="center"></td>
+</tr>
+<tr>
+  <td align="center">autoplay</td>
+  <td align="center"></td>
+  <td align="center"></td>
+</tr>
+<tr>
+  <td align="center">loop</td>
+  <td align="center"></td>
+  <td align="center"></td>
+</tr>
+<tr>
+  <td align="center">width [video only]</td>
+  <td align="center"></td>
+  <td align="center"></td>
+</tr>
+<tr>
+  <td align="center">height [video only]</td>
+  <td align="center"></td>
+  <td align="center"></td>
+</tr>
+<tr>
+  <td align="center">videoWidth [video only]</td>
+  <td align="center"></td>
+  <td align="center"></td>
+</tr>
+<tr>
+  <td align="center">videoHeight [video only]</td>
+  <td align="center"></td>
+  <td align="center"></td>
+</tr>
+<tr>
+  <td align="center">poster [video only]</td>
+  <td align="center"></td>
+  <td align="center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Gracias a JavaScript y a este nuevo API, tenemos el control completo sobre los elementos multimedia. Esto significa que podemos crearnos nuestros propios controles, extendiendo los que nos ofrece el navegador. Un simple ejemplo de acceso al API del elemento <code>video</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript">video.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'canplay'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">this</span>.<span class="me1">volume</span> <span class="sy0">=</span> <span class="nu0">0.4</span><span class="sy0">;</span>
+    <span class="kw1">this</span>.<span class="me1">currentTime</span> <span class="sy0">=</span> <span class="nu0">10</span><span class="sy0">;</span>
+    <span class="kw1">this</span>.<span class="me1">play</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="fullscreen-video">6.4 Fullscreen video</h2>
+
+<p><em>Flash</em> ha ofrecido un modo de pantalla completa durante muchos años a la que muchos navegadores se han <em>resistido</em>. La razón principal es la seguridad; ya que si se fuerza a una aplicación o web a funcionar a pantalla completa, el usuario pierde el control del propio navegador, la barra de tareas y controles estándar del sistema operativo. Puede que el usuario no sepa después volver del modo de pantalla completa, o puede haber problemas de seguridad relacionados, como la simulación del sistema operativo, petición de password, etc.</p>
+
+<p>Este nuevo API establece un único elemento <em>full-screen</em>. Está pensado para imágenes, video y juegos que utilizan el elemento <code>canvas</code>. Una vez que un elemento pasa a pantalla completa, aparece un mensaje de forma temporal para informar al usuario de que puede presionar la tecla <code>ESC</code> en cualquier momento para volver a la ventana anterior.</p>
+
+<p>Las principales propiedad, métodos y estilos son:</p>
+
+<ul>
+<li><code>element.requestFullScreen()</code>: hace que un elemento individual pase a pantalla completa.</li>
+</ul>
+
+<div class="code javascript">
+<pre class="javascript">document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;myvideo&quot;</span><span class="br0">&#41;</span>.<span class="me1">requestFullScreen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.</pre>
+</div>
+
+<ul>
+<li><code>document.cancelFullScreen()</code>: sale del modo pantalla completa y vuelve a la vista del documento.</li>
+<li><code>document.fullScreen</code>: devuelve <code>true</code> si el navegador está en pantalla completa.</li>
+<li><code>:full-screen</code>: se trata de una pseudo-clase CSS que se aplica a un elemento cuando está en modo pantalla completa.</li>
+</ul>
+
+<p>Además, podemos modificar los estilos del elemento utilizando CSS:</p>
+
+<div class="code css">
+<pre class="css"><span class="re0">#myelement</span>
+<span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">500px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="re0">#myelement</span><span class="re2">:full-screen
+</span><span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">100%</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="re0">#myelement</span><span class="re2">:full-screen </span>img
+<span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">100%</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="audio">6.5 Audio</h2>
+
+<p>El elemento multimedia <code>audio</code> es muy similar en cuanto a funcionalidad al elemento <code>video</code>. La principal diferencia existe al indicar el atributo <code>controls</code>o no. Si lo especificamos, el elemento se mostrará en la página juntamente con los controles. Si no lo hacemos, el audio se reproducirá, pero no existirá ningún elemento visual en el documento. Por supuesto, el elemento existirá en el DOM y tendremos acceso completo a su API desde JavaScript.</p>
+
+<h3 id="marcado-2">6.5.1 Marcado</h3>
+
+<p>Para hacer funcionar el audio en HTML, al igual que con el video es suficiente con incluir lo siguiente:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">audio</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;audio.mp3&quot;</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">audio</span>&gt;</span></pre>
+</div>
+
+<p>Los formatos soportados por los navegadores son los siguientes:</p>
+
+<div class="table" id="table-6-3">
+
+    <table>
+<thead>
+<tr>
+  <th align="left"></th>
+  <th align="center"><strong>MP3</strong></th>
+  <th align="center"><strong>MP4</strong></th>
+  <th align="center"><strong>WAV</strong></th>
+  <th align="center"><strong>OGG</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left"><strong>Opera</strong></td>
+  <td align="center">No</td>
+  <td align="center">No</td>
+  <td align="center">Sí</td>
+  <td align="center">Sí</td>
+</tr>
+<tr>
+  <td align="left"><strong>Firefox</strong></td>
+  <td align="center">No</td>
+  <td align="center">No</td>
+  <td align="center">Sí</td>
+  <td align="center">Sí</td>
+</tr>
+<tr>
+  <td align="left"><strong>Chrome</strong></td>
+  <td align="center">Sí</td>
+  <td align="center">Sí</td>
+  <td align="center">Sí</td>
+  <td align="center">Sí</td>
+</tr>
+<tr>
+  <td align="left"><strong>IE9+</strong></td>
+  <td align="center">Sí</td>
+  <td align="center">Sí</td>
+  <td align="center">No</td>
+  <td align="center">No</td>
+</tr>
+<tr>
+  <td align="left"><strong>Safari</strong></td>
+  <td align="center">Sí</td>
+  <td align="center">Sí</td>
+  <td align="center">Sí</td>
+  <td align="center">No</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Por lo tanto, la mejor solución en estos momentos es ofrecer tanto el formato libre OGG, como el propietario MP3, marcado de la siguiente manera:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">audio</span> controls&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">source</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;audio.ogg&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;audio/ogg&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">source</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;audio.mp3&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;audio/mpeg&quot;</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">audio</span>&gt;</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 6</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej06">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-6.html#multimedia">Multimedia</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>6.1</span>
+                        <a class="internal" href="capitulo-6.html#video">Vídeo</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>6.2</span>
+                        <a class="internal" href="capitulo-6.html#codecs-la-nueva-guerra">Codecs, la nueva guerra</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>6.3</span>
+                        <a class="internal" href="capitulo-6.html#api-multimedia">API multimedia</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>6.4</span>
+                        <a class="internal" href="capitulo-6.html#fullscreen-video">Fullscreen video</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>6.5</span>
+                        <a class="internal" href="capitulo-6.html#audio">Audio</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

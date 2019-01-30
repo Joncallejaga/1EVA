@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Módulo <em>Color</em> | CSS 3</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">CSS 3</a></h1>
+        <p class="span3">
+                        <a href="capitulo-3.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-5.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="modulo-color"><span>Capítulo 4</span> Módulo <em>Color</em></h1>
+        <p>La especificación oficial y el estado actual de desarrollo del módulo <em>Color</em> en CSS 3 puede consultarse en <a href="http://www.w3.org/TR/css3-color/">http://www.w3.org/TR/css3-color/</a>.</p>
+
+<p>La propiedad de CSS <code>color</code> denota un color en el espacio de color sRGB. Un color puede ser descrito utilizando una <em>keyword</em>, el sistema de coordenadas cúbicas RGB o el sistema de coordenadas cilíndricas HSL. Hay que tener en cuenta que la lista de valores de color aceptados se ha ampliado en la evolución de la especificación, que culmina con los colores CSS 3.</p>
+
+<p>Aunque los valores de color CSS están definidos con precisión, pueden aparecer de manera distina en diferentes dispositivos. La mayoría de ellos no están calibrados, y algunos navegadores no soportan los distintos perfiles de color.</p>
+
+<h2 id="propiedad-opacity">4.1 Propiedad <em>opacity</em></h2>
+
+<p>Una de las características más esperadas de CSS 3 ha sido <code>opacity</code>. Gracias a esta propiedad, podemos definir el grado de transparencia de un elemento.</p>
+
+<div class="table" id="table-4-1">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>opacity</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">&lt;alphavalue&gt; &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos.</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">1</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Especifica la transparencia de un elemento.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<div class="figure" id="figure-4-1">
+    <img src="images/cap09/opacity.png" alt="Ejemplo de transparencia aplicada a un elemento" />
+
+    <p class="caption"><strong>Figura 4.1</strong> Ejemplo de transparencia aplicada a un elemento</p>
+</div>
+
+
+<h2 id="funcion-rgba">4.2 Función <em>rgba()</em></h2>
+
+<p>Los colores pueden ser definidos gracias al modelo <em>Red-Green-Blue-alpha (RGBa)</em> utilizando la notación funcional <code>rgba()</code>. <strong>RGBa</strong> extiende el modelo de color RGB para incluir el canal alfa, lo que permite la especificación de la transparencia de un color. <code>a</code> significa <code>opacity: 0.0=transparent; 1.0=opaque;</code>.</p>
+
+<div class="code css">
+<pre class="css">rgba<span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0.1</span><span class="br0">&#41;</span>    <span class="coMULTI">/* 10% opaque red */</span>
+rgba<span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0.4</span><span class="br0">&#41;</span>    <span class="coMULTI">/* 40% opaque red */</span>
+rgba<span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0.7</span><span class="br0">&#41;</span>    <span class="coMULTI">/* 70% opaque red */</span>
+rgba<span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span>  <span class="nu0">1</span><span class="br0">&#41;</span>    <span class="coMULTI">/* full opaque red */</span></pre>
+</div>
+
+<h2 id="funcion-hsl">4.3 Función <em>hsl()</em></h2>
+
+<p>Los colores también se puede definir gracias el modelo <em>Hue-Saturation-Lightness (HSL)</em> utilizando la notación funcional <code>hsl()</code>. La ventaja de <strong>HSL</strong> sobre RGB es que es más intuitivo; se pueden "adivinar" los colores que se quieren, y después ajustarlos. También es más sencillo para crear conjuntos de colores combinados (manteniendo el mismo tono y variando la luminosidad/oscuridad y saturación).</p>
+
+<p><em>Hue</em> (tono) es representado como un ángulo del círculo de color. Este ángulo viene dado como un <code>&lt;number&gt;</code> sin unidades. Por definición <code>red=0=360</code> y los otros colores se extienden alrededor del círculo, por lo tanto <code>green=120</code>, <code>blue=240</code>, etc.</p>
+
+<p>La saturación y la luminosidad son representados como porcentajes. <code>100%</code> es saturación completa y <code>0%</code> es escala de grises. <code>100%</code> en la luminosidad es blanco, <code>0%</code> es negro y <code>50%</code> es "normal".</p>
+
+<div class="code css">
+<pre class="css">hsl<span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span>  <span class="re3">100%</span><span class="sy0">,</span><span class="re3">50%</span><span class="br0">&#41;</span>    <span class="coMULTI">/* red */</span>
+hsl<span class="br0">&#40;</span><span class="nu0">30</span><span class="sy0">,</span> <span class="re3">100%</span><span class="sy0">,</span><span class="re3">50%</span><span class="br0">&#41;</span>
+hsl<span class="br0">&#40;</span><span class="nu0">60</span><span class="sy0">,</span> <span class="re3">100%</span><span class="sy0">,</span><span class="re3">50%</span><span class="br0">&#41;</span>
+hsl<span class="br0">&#40;</span><span class="nu0">90</span><span class="sy0">,</span> <span class="re3">100%</span><span class="sy0">,</span><span class="re3">50%</span><span class="br0">&#41;</span>
+hsl<span class="br0">&#40;</span><span class="nu0">120</span><span class="sy0">,</span><span class="re3">100%</span><span class="sy0">,</span><span class="re3">50%</span><span class="br0">&#41;</span>    <span class="coMULTI">/* green */</span>
+hsl<span class="br0">&#40;</span><span class="nu0">150</span><span class="sy0">,</span><span class="re3">100%</span><span class="sy0">,</span><span class="re3">50%</span><span class="br0">&#41;</span>
+hsl<span class="br0">&#40;</span><span class="nu0">180</span><span class="sy0">,</span><span class="re3">100%</span><span class="sy0">,</span><span class="re3">50%</span><span class="br0">&#41;</span>
+hsl<span class="br0">&#40;</span><span class="nu0">210</span><span class="sy0">,</span><span class="re3">100%</span><span class="sy0">,</span><span class="re3">50%</span><span class="br0">&#41;</span>
+hsl<span class="br0">&#40;</span><span class="nu0">240</span><span class="sy0">,</span><span class="re3">100%</span><span class="sy0">,</span><span class="re3">50%</span><span class="br0">&#41;</span>    <span class="coMULTI">/* blue */</span>
+hsl<span class="br0">&#40;</span><span class="nu0">270</span><span class="sy0">,</span><span class="re3">100%</span><span class="sy0">,</span><span class="re3">50%</span><span class="br0">&#41;</span>
+hsl<span class="br0">&#40;</span><span class="nu0">300</span><span class="sy0">,</span><span class="re3">100%</span><span class="sy0">,</span><span class="re3">50%</span><span class="br0">&#41;</span>
+hsl<span class="br0">&#40;</span><span class="nu0">330</span><span class="sy0">,</span><span class="re3">100%</span><span class="sy0">,</span><span class="re3">50%</span><span class="br0">&#41;</span>
+hsl<span class="br0">&#40;</span><span class="nu0">360</span><span class="sy0">,</span><span class="re3">100%</span><span class="sy0">,</span><span class="re3">50%</span><span class="br0">&#41;</span>    <span class="coMULTI">/* red */</span>
+&nbsp;
+hsl<span class="br0">&#40;</span><span class="nu0">120</span><span class="sy0">,</span><span class="re3">100%</span><span class="sy0">,</span><span class="re3">25%</span><span class="br0">&#41;</span>    <span class="coMULTI">/* dark green */</span>
+hsl<span class="br0">&#40;</span><span class="nu0">120</span><span class="sy0">,</span><span class="re3">100%</span><span class="sy0">,</span><span class="re3">50%</span><span class="br0">&#41;</span>    <span class="coMULTI">/* green */</span>
+hsl<span class="br0">&#40;</span><span class="nu0">120</span><span class="sy0">,</span><span class="re3">100%</span><span class="sy0">,</span><span class="re3">75%</span><span class="br0">&#41;</span>    <span class="coMULTI">/* light green */</span>
+&nbsp;
+hsl<span class="br0">&#40;</span><span class="nu0">120</span><span class="sy0">,</span><span class="re3">100%</span><span class="sy0">,</span><span class="re3">50%</span><span class="br0">&#41;</span>    <span class="coMULTI">/* green */</span>
+hsl<span class="br0">&#40;</span><span class="nu0">120</span><span class="sy0">,</span> <span class="re3">67%</span><span class="sy0">,</span><span class="re3">50%</span><span class="br0">&#41;</span>
+hsl<span class="br0">&#40;</span><span class="nu0">120</span><span class="sy0">,</span> <span class="re3">33%</span><span class="sy0">,</span><span class="re3">50%</span><span class="br0">&#41;</span>
+hsl<span class="br0">&#40;</span><span class="nu0">120</span><span class="sy0">,</span>  <span class="re3">0%</span><span class="sy0">,</span><span class="re3">50%</span><span class="br0">&#41;</span>
+&nbsp;
+hsl<span class="br0">&#40;</span><span class="nu0">120</span><span class="sy0">,</span> <span class="re3">60%</span><span class="sy0">,</span><span class="re3">70%</span><span class="br0">&#41;</span>    <span class="coMULTI">/* pastel green */</span></pre>
+</div>
+
+<h2 id="funcion-hsla">4.4 Función <em>hsla()</em></h2>
+
+<p>Los colores pueden definirse también utilizando la función <code>hsla()</code>. <strong>HSLa</strong> extiende el modelo de color HSL visto anteriormente para incluir el canal alfa, lo que permite definir la opacidad del color. <code>a</code> significa <code>opacity: 0.0=transparent; 1.0=opaque;</code>.</p>
+
+<div class="code css">
+<pre class="css">hsla<span class="br0">&#40;</span><span class="nu0">240</span><span class="sy0">,</span><span class="re3">100%</span><span class="sy0">,</span><span class="re3">50%</span><span class="sy0">,</span><span class="nu0">0.05</span><span class="br0">&#41;</span>   <span class="coMULTI">/* 5% opaque blue */</span>
+hsla<span class="br0">&#40;</span><span class="nu0">240</span><span class="sy0">,</span><span class="re3">100%</span><span class="sy0">,</span><span class="re3">50%</span><span class="sy0">,</span> <span class="nu0">0.4</span><span class="br0">&#41;</span>   <span class="coMULTI">/* 40% opaque blue */</span>
+hsla<span class="br0">&#40;</span><span class="nu0">240</span><span class="sy0">,</span><span class="re3">100%</span><span class="sy0">,</span><span class="re3">50%</span><span class="sy0">,</span> <span class="nu0">0.7</span><span class="br0">&#41;</span>   <span class="coMULTI">/* 70% opaque blue */</span>
+hsla<span class="br0">&#40;</span><span class="nu0">240</span><span class="sy0">,</span><span class="re3">100%</span><span class="sy0">,</span><span class="re3">50%</span><span class="sy0">,</span>   <span class="nu0">1</span><span class="br0">&#41;</span>   <span class="coMULTI">/* full opaque blue */</span></pre>
+</div>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-4.html#modulo-color">Módulo <em>Color</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.1</span>
+                        <a class="internal" href="capitulo-4.html#propiedad-opacity">Propiedad <em>opacity</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.2</span>
+                        <a class="internal" href="capitulo-4.html#funcion-rgba">Función <em>rgba()</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.3</span>
+                        <a class="internal" href="capitulo-4.html#funcion-hsl">Función <em>hsl()</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.4</span>
+                        <a class="internal" href="capitulo-4.html#funcion-hsla">Función <em>hsla()</em></a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

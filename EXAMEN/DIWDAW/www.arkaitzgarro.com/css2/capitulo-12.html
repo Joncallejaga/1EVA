@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Otros | CSS 2.1</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">CSS 2.1</a></h1>
+        <p class="span3">
+                        <a href="capitulo-11.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-13.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="otros"><span>Capítulo 12</span> Otros</h1>
+        <h2 id="version-para-imprimir">12.1 Versión para imprimir</h2>
+
+<p>La mayoría de sitios web de calidad ofrecen al usuario la posibilidad de imprimir sus contenidos mediante una versión específica para impresora de cada página.</p>
+
+<p>Estas versiones optimizadas para impresora eliminan los contenidos superfluos, modifican o eliminan las imágenes y colores de fondo y sobre todo, optimizan los contenidos de texto para facilitar su lectura.</p>
+
+<p>CSS simplifica al máximo la creación de una versión para imprimir gracias al concepto de los medios CSS. Como se sabe, los estilos CSS que se aplican a los contenidos pueden variar en función del medio a través del que se acceden (pantalla, televisor, móvil, impresora, etc.)</p>
+
+<p>De esta forma, realizar una versión para imprimir de una página HTML es tan sencillo como crear unas cuantas reglas CSS que optimicen sus contenidos para conseguir la mejor impresión.</p>
+
+<p>El sitio web A List Apart es un excelente ejemplo de cómo los sitios web de calidad crean versiones específicas para impresora de las páginas web originales. Cuando se visualiza un artículo de ese sitio web en una pantalla normal, su aspecto es el siguiente:</p>
+
+<div class="figure" id="figure-12-1">
+    <img src="images/cap12/aspecto_pantalla.png" alt="Aspecto de un artículo de A List Apart como se ve en la pantalla" />
+
+    <p class="caption"><strong>Figura 12.1</strong> Aspecto de un artículo de A List Apart como se ve en la pantalla</p>
+</div>
+
+
+<p>Además de sus contenidos, las páginas de los artículos muestran el logotipo del sitio, el menú principal de navegación y una barra lateral con varias utilidades como un buscador.</p>
+
+<p>Sin embargo, cuando se imprime la página del mismo artículo, su aspecto es el que muestra la siguiente imagen:</p>
+
+<div class="figure" id="figure-12-2">
+    <img src="images/cap12/aspecto_impresion.png" alt="specto de un artículo de A List Apart como se ve cuando se imprime" />
+
+    <p class="caption"><strong>Figura 12.2</strong> specto de un artículo de A List Apart como se ve cuando se imprime</p>
+</div>
+
+
+<p>La página impresa elimina todos los contenidos superfluos como los menús de navegación, el buscador y el formulario para añadir comentarios en el artículo. Además, modifica la estructura de la página para que la zona de contenidos ocupe toda la anchura de la página y el espacio se aproveche mejor.</p>
+
+<p>Crear una versión para imprimir similar a la mostrada en el ejemplo anterior es una tarea que no lleva más de unos pocos minutos.</p>
+
+<p>Las reglas CSS de la versión para imprimir se aplican solamente al medio print. Por lo tanto, en primer lugar se crea una nueva hoja de estilos y al enlazarla se especifica que sólo debe aplicarse en las impresoras:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">link</span> <span class="kw3">rel</span><span class="sy0">=</span><span class="st0">&quot;stylesheet&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text/css&quot;</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;/css/imprimir.css&quot;</span> <span class="kw3">media</span><span class="sy0">=</span><span class="st0">&quot;print&quot;</span> <span class="sy0">/</span>&gt;</span></pre>
+</div>
+
+<p>Normalmente, las hojas de estilos para la pantalla se aplican a todos los medios (por utilizar el valor <code>media="all"</code> al enlazarla o por no indicar ningún valor en el atributo <code>media</code>). Por este motivo, cuando se imprime una página se aplican los mismos estilos que se aplican al visualizarla en la pantalla.</p>
+
+<p>Aprovechando este comportamiento, las hojas de estilos para impresoras son muy sencillas, ya que sólo deben modificar algunos estilos aplicados en el resto de hojas de estilos.</p>
+
+<p>Por este motivo, normalmente las hojas de estilos para impresora se construyen siguiendo los pasos que se muestran a continuación:</p>
+
+<p>1) Ocultar los elementos que no se van a imprimir:</p>
+
+<div class="code css">
+<pre class="css"><span class="re0">#cabecera</span><span class="sy0">,</span> <span class="re0">#menu</span><span class="sy0">,</span> <span class="re0">#lateral</span><span class="sy0">,</span> <span class="re0">#comentarios</span> <span class="br0">&#123;</span>
+  <span class="kw1">display</span><span class="sy0">:</span> <span class="kw2">none</span> !important<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Los bloques (normalmente encerrados en elementos de tipo <code>&lt;div&gt;</code>) que no se van a imprimir se ocultan con la propiedad <code>display</code> y su valor <code>none</code>. La palabra clave <code>!important</code> aumenta la prioridad de esta regla CSS y más adelante se explica su significado.</p>
+
+<p>2) Corregir la estructura de la página:</p>
+
+<div class="code css">
+<pre class="css">body<span class="sy0">,</span> <span class="re0">#contenido</span><span class="sy0">,</span> <span class="re0">#principal</span><span class="sy0">,</span> <span class="re0">#pie</span> <span class="br0">&#123;</span>
+  <span class="kw1">float</span><span class="sy0">:</span> <span class="kw2">none</span> !important<span class="sy0">;</span>
+  <span class="kw1">width</span><span class="sy0">:</span> <span class="kw2">auto</span> !important<span class="sy0">;</span>
+  <span class="kw1">margin</span><span class="sy0">:</span>  <span class="nu0">0</span> !important<span class="sy0">;</span>
+  <span class="kw1">padding</span><span class="sy0">:</span> <span class="nu0">0</span> !important<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Normalmente, las páginas web complejas están formadas por varias columnas posicionadas mediante la propiedad <code>float</code>. Si al imprimir la página se eliminan las columnas laterales, es conveniente reajustar la anchura y el posicionamiento de la zona de contenidos y de otras zonas que sí se van a imprimir.</p>
+
+<p>3) Modificar los colores y tipos de letra:</p>
+
+<div class="code css">
+<pre class="css">body <span class="br0">&#123;</span>
+    <span class="kw1">color</span><span class="sy0">:</span> <span class="re0">#000</span><span class="sy0">;</span> <span class="kw1">font</span><span class="sy0">:</span> <span class="re3">100%</span>/<span class="re3">150%</span> Georgia<span class="sy0">,</span> <span class="st0">&quot;Times New Roman&quot;</span><span class="sy0">,</span> Times<span class="sy0">,</span> <span class="kw2">serif</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Aunque el uso de impresoras en color es mayoritario, suele ser conveniente imprimir todo el texto de las páginas de color negro, para ahorrar costes y para aumentar el contraste cuando se imprime sobre hojas de color blanco. También suele ser conveniente modificar el tipo de letra y escoger uno que facilite al máximo la lectura del texto.</p>
+
+<h3 id="imprimiendo-los-enlaces">12.1.1 Imprimiendo los enlaces</h3>
+
+<p>Uno de los principales problemas de las páginas HTML impresas es la pérdida de toda la información relativa a los enlaces. En principio, imprimir los enlaces de una página es absurdo porque no se pueden utilizar en el medio impreso.</p>
+
+<p>Sin embargo, lo que puede ser realmente útil es mostrar al lado de un enlace la dirección a la que apunta. De esta forma, al imprimir la página no se pierde la información relativa a los enlaces.</p>
+
+<p>CSS incluye una propiedad llamada <code>content</code> que permite crear nuevos contenidos de texto para añadirlos a la página HTML. Si se combina la propiedad <code>content</code> y el pseudo-elemento <code>:after</code>, es posible insertar de forma dinámica la dirección a la que apunta un enlace justo después de su texto:</p>
+
+<div class="code css">
+<pre class="css">a<span class="re2">:after </span><span class="br0">&#123;</span>
+  <span class="kw1">content</span><span class="sy0">:</span> <span class="st0">&quot; (&quot;</span> attr<span class="br0">&#40;</span>href<span class="br0">&#41;</span> <span class="st0">&quot;) &quot;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>El código CSS anterior añade después de cada enlace de la página un texto formado por la dirección a la que apunta el enlace mostrada entre paréntesis. Si se quiere añadir las direcciones antes de cada enlace, se puede utilizar el pseudo-elemento :before:</p>
+
+<div class="code css">
+<pre class="css">a<span class="re2">:before </span><span class="br0">&#123;</span>
+  <span class="kw1">content</span><span class="sy0">:</span> <span class="st0">&quot; (&quot;</span> attr<span class="br0">&#40;</span>href<span class="br0">&#41;</span> <span class="st0">&quot;) &quot;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="hacks-y-filtros">12.2 Hacks y filtros</h2>
+
+<p>Los diferentes navegadores y las diferentes versiones de cada navegador incluyen defectos y carencias en su implementación del estándar CSS 2.1. Algunos navegadores no soportan ciertas propiedades, otros las soportan a medias y otros ignoran el estándar e incorporan su propio comportamiento.</p>
+
+<p>De esta forma, diseñar una página compleja que presente un aspecto homogéneo en varios navegadores y varias versiones diferentes de cada navegador es una tarea que requiere mucho esfuerzo. Para facilitar la creación de hojas de estilos homogéneas, se han introducido los filtros y los hacks.</p>
+
+<p>A pesar de que utilizar filtros y hacks es una solución poco ortodoxa, en ocasiones es la única forma de conseguir que una página web muestre un aspecto idéntico en cualquier navegador.</p>
+
+<p>En primer lugar, los filtros permiten definir u ocultar ciertas reglas CSS para algunos navegadores específicos. Los filtros se definen aprovechando los errores de algunos navegadores (sobre todo los antiguos) a la hora de procesar las hojas de estilos.</p>
+
+<p>Un caso especial de filtro son los comentarios condicionales, que es un mecanismo propietario del navegador Internet Explorer. Los comentarios condicionales permiten incluir hojas de estilos o definir reglas CSS específicamente para una versión de Internet Explorer.</p>
+
+<p>El siguiente ejemplo carga la hoja de estilos `basico_ie.css solamente para los navegadores de tipo Internet Explorer:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc-1">&lt;!--[if IE]&gt;</span>
+<span class="sc-1">  &lt;style type=&quot;text/css&quot;&gt;</span>
+<span class="sc-1">    @import (&quot;basico_ie.css&quot;);</span>
+<span class="sc-1">  &lt;/style&gt;</span>
+<span class="sc-1">&lt;![endif]--&gt;</span></pre>
+</div>
+
+<p>Los navegadores que no son Internet Explorer ignoran las reglas CSS anteriores ya que interpretan el código anterior como un comentario de HTML (gracias a los caracteres <code>&lt;!--</code> y -->`) mientras que los navegadores de la familia Internet Explorer lo interpretan como una instrucción propia y válida.</p>
+
+<p>El filtro <code>[if IE]</code> indica que esos estilos CSS sólo deben tenerse en cuenta si el navegador es cualquier versión de Internet Explorer. Utilizando comentarios condicionales, también es posible incluir reglas CSS para versiones específicas de Internet Explorer:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc-1">&lt;!--[if gte IE 6]&gt;</span>
+<span class="sc-1">  &lt;style type=&quot;text/css&quot;&gt;</span>
+<span class="sc-1">    @import (&quot;basico_ie6.css&quot;);</span>
+<span class="sc-1">  &lt;/style&gt;</span>
+<span class="sc-1">&lt;![endif]--&gt;</span></pre>
+</div>
+
+<p>El anterior ejemplo solamente carga la hoja de estilos <code>basico_ie6.css</code> si el navegador es la versión 6 o superior de Internet Explorer, ya que <code>gte</code> se interpreta como "greater than or equal" ("igual o mayor que"). Otros valores disponibles son <code>gt</code> ("greater than" o "mayor que"), <code>lt</code> ("less than" o "menor que") y <code>lte</code> ("less than or equal" o "igual o menor que").</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc-1">&lt;!--[if gt IE 7]&gt;</span>
+<span class="sc-1">  Mayor que Internet Explorer 7</span>
+<span class="sc-1">&lt;![endif]--&gt;</span>
+&nbsp;
+<span class="sc-1">&lt;!--[if gte IE 7]&gt;</span>
+<span class="sc-1">  Mayor o igual que Internet Explorer 7</span>
+<span class="sc-1">&lt;![endif]--&gt;</span>
+&nbsp;
+<span class="sc-1">&lt;!--[if lt IE 8]&gt;</span>
+<span class="sc-1">  Menor que Internet Explorer 8</span>
+<span class="sc-1">&lt;![endif]--&gt;</span>
+&nbsp;
+<span class="sc-1">&lt;!--[if lte IE 7]&gt;</span>
+<span class="sc-1">  Igual o menor que Internet Explorer 7</span>
+<span class="sc-1">&lt;![endif]--&gt;</span></pre>
+</div>
+
+<p>Una de las mejores listas actualizadas con todos los filtros disponibles para los navegadores de los diferentes sistemas operativos se puede encontrar en <a href="http://centricle.com/ref/css/filters/">http://centricle.com/ref/css/filters/</a>.</p>
+
+<p>Por otra parte, los hacks permiten forzar el comportamiento de un navegador para que se comporte tal y como se espera. Se trata de una forma poco elegante de crear las hojas de estilos y los hacks se pueden considerar pequeños parches y chapuzas que permiten que la hoja de estilos completa se muestre tal y como se espera.</p>
+
+<p>Una de las mejores listas actualizadas con los hacks más útiles para varios navegadores de diferentes sistemas operativos se puede encontrar en: <a href="http://css-discuss.incutio.com/?page=CssHack">http://css-discuss.incutio.com/?page=CssHack</a></p>
+
+<h2 id="prioridad-de-las-declaraciones-css">12.3 Prioridad de las declaraciones CSS</h2>
+
+<p>Además de las hojas de estilos definidas por los diseñadores, los navegadores aplican a cada página otras dos hojas de estilos: la del navegador y la del usuario.</p>
+
+<p>La hoja de estilos del navegador es la primera que se aplica y se utiliza para establecer el estilo inicial por defecto a todos los elementos HTML (tamaños de letra iniciales, decoración del texto, márgenes entre elementos, etc.)</p>
+
+<p>Además de la hoja de estilos del navegador, cada usuario puede crear su propia hoja de estilos y aplicarla automáticamente a todas las páginas que visite con su navegador. Se trata de una opción muy útil para personas discapacitadas visualmente, ya que pueden aumentar el contraste y el tamaño del texto de todas las páginas para facilitar su lectura.</p>
+
+<p>La forma en la que se indica la hoja de estilo del usuario es diferente en cada navegador. A continuación se muestra cómo se hace en los navegadores más populares:</p>
+
+<p><strong>Internet Explorer</strong></p>
+
+<ol>
+<li><p>Pincha sobre el menú <code>Herramientas</code> y después sobre la opción <code>Opciones de Internet</code></p></li>
+<li><p>En la pestaña <code>General</code> que se muestra, pulsa sobre el botón <code>Accesibilidad</code> que se encuentra dentro de la sección <code>Apariencia</code></p></li>
+<li><p>En la nueva ventana que aparece, activa la opción <code>Formatear los documentos con mi hoja de estilos</code> y selecciónala pulsando sobre el botón <code>Examinar…</code></p></li>
+<li><p>Pulsa <code>Aceptar</code> hasta volver al navegador</p></li>
+</ol>
+
+<p><strong>Firefox</strong></p>
+
+<ol>
+<li><p>Guarda tu hoja de estilos en un archivo llamado <code>userContent.css</code></p></li>
+<li><p>Entra en el directorio de tu perfil de usuario de Firefox. En los sistemas operativos Windows este directorio se encuentra normalmente en <code>C:\Documents and Settings\[tu_usuario_de_windows]\Datos de programa\Mozilla\Firefox\Profiles\[cadena_aleatoria_de_letras_y_numeros].default</code></p></li>
+<li><p>Copia la hoja de estilos <code>userContent.css</code> en el directorio <code>chrome</code> de tu perfil</p></li>
+<li><p>Reinicia el navegador para que se apliquen los cambios</p></li>
+</ol>
+
+<p><strong>Safari</strong></p>
+
+<ol>
+<li><p>Pincha sobre el menú <code>Editar</code> y después sobre la opción <code>Preferencias</code></p></li>
+<li><p>Selecciona la sección <code>Avanzado</code></p></li>
+<li><p>Pincha sobre la lista desplegable llamada <code>Hoja de estilos</code> y selecciona la opción <code>Otra…</code></p></li>
+<li><p>En la ventana que aparece, selecciona tu hoja de estilos</p></li>
+</ol>
+
+<p><strong>Opera</strong></p>
+
+<ol>
+<li><p>Pincha sobre el menú <code>Herramientas</code> y después sobre la opción <code>Preferencias</code></p></li>
+<li><p>Selecciona la pestaña <code>Avanzado</code> y pulsa sobre el botón <code>Opciones de estilo…</code></p></li>
+<li><p>Pulsa sobre el botón <code>Seleccionar…</code> para seleccionar la hoja de estilos</p></li>
+<li><p>Pulsa <code>Aceptar</code> hasta volver al navegador</p></li>
+</ol>
+
+<p>El orden normal en el que se aplican las hojas de estilo es el siguiente:</p>
+
+<div class="figure" id="figure-12-3">
+    <img src="images/cap12/orden.png" alt="Orden en el que se aplican las diferentes hojas de estilos" />
+
+    <p class="caption"><strong>Figura 12.3</strong> Orden en el que se aplican las diferentes hojas de estilos</p>
+</div>
+
+
+<p>Por tanto, las reglas que menos prioridad tienen son las del CSS por defecto de los navegadores, ya que son las primeras que se aplican. A continuación se aplican las reglas definidas por los usuarios y por último se aplican las reglas CSS definidas por el diseñador, que por tanto son las que más prioridad tienen.</p>
+
+<p>Además de estas hojas de estilos, CSS define la palabra reservada <code>!important</code> para controlar la prioridad de las declaraciones de las diferentes hojas de estilos.</p>
+
+<p>Si a una declaración CSS se le añade la palabra reservada <code>!important</code>, se aumenta su prioridad. El siguiente ejemplo muestra el uso de <code>!important</code>:</p>
+
+<div class="code css">
+<pre class="css">p <span class="br0">&#123;</span>
+  <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span> !important<span class="sy0">;</span>
+  <span class="kw1">color</span><span class="sy0">:</span> <span class="kw1">blue</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Si la primera declaración no tuviera añadido el valor `!important, el color de los párrafos sería azul, ya que en el caso de declaraciones de la misma importancia, prevalece la indicada en último lugar.</p>
+
+<p>Sin embargo, como la primera declaración se ha marcado como de alta prioridad (gracias al valor <code>!important</code>), el color de los párrafos será el rojo.</p>
+
+<p>El valor <code>!important</code> no sólo afecta a las declaraciones simples, sino que varía la prioridad de las hojas de estilo. Cuando se indican declaraciones de alta prioridad, el orden en el que se aplican las hojas de estilo es el siguiente:</p>
+
+<div class="figure" id="figure-12-4">
+    <img src="images/cap12/orden2.png" alt="Orden en el que se aplican las diferentes hojas de estilos cuando se utiliza la palabra resevada important" />
+
+    <p class="caption"><strong>Figura 12.4</strong> Orden en el que se aplican las diferentes hojas de estilos cuando se utiliza la palabra resevada important</p>
+</div>
+
+
+<p>Los estilos del usuario marcados como <code>!important</code> tienen más prioridad que los estilos marcados como <code>!important</code> en la hoja de estilos del diseñador. De esta forma, ninguna página web puede sobreescribir o redefinir ninguna propiedad de alta prioridad establecida por el usuario.</p>
+
+<p>Si se aplica el valor <code>!important</code> a una propiedad de tipo <em>"shorthand"</em>, se interpreta como si se hubiera aplicado el valor <code>!important</code> a cada una de las propiedades individuales.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-12.html#otros">Otros</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>12.1</span>
+                        <a class="internal" href="capitulo-12.html#version-para-imprimir">Versión para imprimir</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>12.2</span>
+                        <a class="internal" href="capitulo-12.html#hacks-y-filtros">Hacks y filtros</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>12.3</span>
+                        <a class="internal" href="capitulo-12.html#prioridad-de-las-declaraciones-css">Prioridad de las declaraciones CSS</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

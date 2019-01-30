@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Tablas | CSS 2.1</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">CSS 2.1</a></h1>
+        <p class="span3">
+                        <a href="capitulo-9.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-11.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="tablas"><span>Capítulo 10</span> Tablas</h1>
+        <h2 id="estilos-basicos-4">10.1 Estilos básicos</h2>
+
+<p>Cuando se aplican bordes a las celdas de una tabla, el aspecto por defecto con el que se muestra en un navegador es el siguiente:</p>
+
+<div class="figure" id="figure-10-1">
+    <img src="images/cap10/bordes_tabla.png" alt="Aspecto por defecto de los bordes de una tabla" />
+
+    <p class="caption"><strong>Figura 10.1</strong> Aspecto por defecto de los bordes de una tabla</p>
+</div>
+
+
+<p>El código HTML y CSS del ejemplo anterior se muestra a continuación:</p>
+
+<div class="code css">
+<pre class="css"><span class="re1">.normal</span> <span class="br0">&#123;</span>
+  <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">250px</span><span class="sy0">;</span>
+  <span class="kw1">border</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="kw2">solid</span> <span class="re0">#000</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re1">.normal</span> th<span class="sy0">,</span> <span class="re1">.normal</span> td <span class="br0">&#123;</span>
+  <span class="kw1">border</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="kw2">solid</span> <span class="re0">#000</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">table</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;normal&quot;</span> <span class="kw3">summary</span><span class="sy0">=</span><span class="st0">&quot;Tabla genérica&quot;</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">tr</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">th</span> <span class="kw3">scope</span><span class="sy0">=</span><span class="st0">&quot;col&quot;</span>&gt;</span>A<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">th</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">th</span> <span class="kw3">scope</span><span class="sy0">=</span><span class="st0">&quot;col&quot;</span>&gt;</span>B<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">th</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">th</span> <span class="kw3">scope</span><span class="sy0">=</span><span class="st0">&quot;col&quot;</span>&gt;</span>C<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">th</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">th</span> <span class="kw3">scope</span><span class="sy0">=</span><span class="st0">&quot;col&quot;</span>&gt;</span>D<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">th</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">th</span> <span class="kw3">scope</span><span class="sy0">=</span><span class="st0">&quot;col&quot;</span>&gt;</span>E<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">th</span>&gt;</span>
+  <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">tr</span>&gt;</span>
+  ...
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">table</span>&gt;</span></pre>
+</div>
+
+<p>El estándar CSS 2.1 define dos modelos diferentes para el tratamiento de los bordes de las celdas. La propiedad que permite seleccionar el modelo de bordes es <code>border-collapse</code>:</p>
+
+<div class="table" id="table-10-1">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>border-collapse</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">collapse &#124; separate &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todas las tablas</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">separate</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Define el mecanismo de fusión de los bordes de las celdas adyacentes de una tabla</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>El modelo <code>collapse</code> fusiona de forma automática los bordes de las celdas adyacentes, mientras que el modelo <code>separate</code> fuerza a que cada celda muestre sus cuatro bordes. Por defecto, los navegadores utilizan el modelo <code>separate</code>, tal y como se puede comprobar en el ejemplo anterior.</p>
+
+<p>En general, los diseñadores prefieren el modelo <code>collapse</code> porque estéticamente resulta más atractivo y más parecido a las tablas de datos tradicionales. El ejemplo anterior se puede rehacer para mostrar la tabla con bordes sencillos y sin separación entre celdas:</p>
+
+<div class="figure" id="figure-10-2">
+    <img src="images/cap10/border-collapse.png" alt="Ejemplo de propiedad border-collapse" />
+
+    <p class="caption"><strong>Figura 10.2</strong> Ejemplo de propiedad border-collapse</p>
+</div>
+
+
+<p>El código CSS completo del ejemplo anterior se muestra a continuación:</p>
+
+<div class="code css">
+<pre class="css"><span class="re1">.normal</span> <span class="br0">&#123;</span>
+  <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">250px</span><span class="sy0">;</span>
+  <span class="kw1">border</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="kw2">solid</span> <span class="re0">#000</span><span class="sy0">;</span>
+  <span class="kw1">border-collapse</span><span class="sy0">:</span> <span class="kw2">collapse</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re1">.normal</span> th<span class="sy0">,</span> <span class="re1">.normal</span> td <span class="br0">&#123;</span>
+  <span class="kw1">border</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="kw2">solid</span> <span class="re0">#000</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">table</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;normal&quot;</span> <span class="kw3">summary</span><span class="sy0">=</span><span class="st0">&quot;Tabla genérica&quot;</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">tr</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">th</span> <span class="kw3">scope</span><span class="sy0">=</span><span class="st0">&quot;col&quot;</span>&gt;</span>A<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">th</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">th</span> <span class="kw3">scope</span><span class="sy0">=</span><span class="st0">&quot;col&quot;</span>&gt;</span>B<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">th</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">th</span> <span class="kw3">scope</span><span class="sy0">=</span><span class="st0">&quot;col&quot;</span>&gt;</span>C<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">th</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">th</span> <span class="kw3">scope</span><span class="sy0">=</span><span class="st0">&quot;col&quot;</span>&gt;</span>D<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">th</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">th</span> <span class="kw3">scope</span><span class="sy0">=</span><span class="st0">&quot;col&quot;</span>&gt;</span>E<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">th</span>&gt;</span>
+  <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">tr</span>&gt;</span>
+  ...
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">table</span>&gt;</span></pre>
+</div>
+
+<p>Aunque parece sencillo, el mecanismo que utiliza el modelo <code>collapse</code> es muy complejo, ya que cuando los bordes que se fusionan no son exactamente iguales, debe tener en cuenta la anchura de cada borde, su estilo y el tipo de celda que contiene el borde (columna, fila, grupo de filas, grupo de columnas) para determinar la prioridad de cada borde.</p>
+
+<p>Si se opta por el modelo <code>separate</code> (que es el que se aplica si no se indica lo contrario) se puede utilizar la propiedad <code>border-spacing</code> para controlar la separación entre los bordes de cada celda.</p>
+
+<div class="table" id="table-10-2">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>border-spacing</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">unidad de medida &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todas las tablas</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">0</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Establece la separación entre los bordes de las celdas adyacentes de una tabla</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Si solamente se indica como valor una medida, se asigna ese valor como separación horizontal y vertical. Si se indican dos medidas, la primera es la separación horizontal y la segunda es la separación vertical entre celdas.</p>
+
+<p>La propiedad <code>border-spacing</code> sólo controla la separación entre celdas y por tanto, no se puede utilizar para modificar el tipo de modelo de bordes que se utiliza. En concreto, si se establece un valor igual a <code>0</code> para la separación entre los bordes de las celdas, el resultado es muy diferente al modelo <code>collapse</code>:</p>
+
+<div class="figure" id="figure-10-3">
+    <img src="images/cap10/border-spacing.png" alt="Ejemplo de propiedad border-spacing" />
+
+    <p class="caption"><strong>Figura 10.3</strong> Ejemplo de propiedad border-spacing</p>
+</div>
+
+
+<p>En la tabla del ejemplo anterior, se ha establecido la propiedad <code>border-spacing: 0</code>, por lo que el navegador no introduce ninguna separación entre los bordes de las celdas. Además, como no se ha establecido de forma explícita ningún modelo de bordes, el navegador utiliza el modelo <code>separate</code>.</p>
+
+<p>El resultado es que <code>border-spacing: 0</code> muestra los bordes con una anchura doble, ya que en realidad se trata de dos bordes iguales sin separación entre ellos. Por tanto, las diferencias visuales con el modelo <code>border-collapse: collapse</code> son muy evidentes.</p>
+
+<h2 id="estilos-avanzados-4">10.2 Estilos avanzados</h2>
+
+<p>CSS define otras propiedades específicas para el control del aspecto de las tablas. Una de ellas es el tratamiento que reciben las celdas vacías de una tabla, que se controla mediante la propiedad <code>empty-cells</code>. Esta propiedad sólo se aplica cuando el modelo de bordes de la tabla es de tipo <code>separate</code>.</p>
+
+<div class="table" id="table-10-3">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>empty-cells</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">show &#124; hide &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Celdas de una tabla</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">show</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Define el mecanismo utilizado para el tratamiento de las celdas vacías de una tabla</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>El valor <code>hide</code> indica que las celdas vacías no se deben mostrar. Una celda vacía es aquella que no tiene ningún contenido, ni siquiera un espacio en blanco o un <code>&amp;nbsp;</code>.</p>
+
+<p>La siguiente imagen muestra las diferencias entre una tabla normal y una tabla con la propiedad <code>empty-cells: hide</code>:</p>
+
+<div class="figure" id="figure-10-4">
+    <img src="images/cap10/empty-cells.png" alt="Ejemplo de propiedad empty-cells" />
+
+    <p class="caption"><strong>Figura 10.4</strong> Ejemplo de propiedad empty-cells</p>
+</div>
+
+
+<p>Desafortunadamente, Internet Explorer 6 y las versiones anteriores no interpretan correctamente esta propiedad y muestran el ejemplo anterior de la siguiente manera:</p>
+
+<div class="figure" id="figure-10-5">
+    <img src="images/cap10/empty-cells2.png" alt="Internet Explorer no soporta la propiedad empty-cells" />
+
+    <p class="caption"><strong>Figura 10.5</strong> Internet Explorer no soporta la propiedad empty-cells</p>
+</div>
+
+
+<p>Por otra parte, el título de las tablas se establece mediante el elemento <code>&lt;caption&gt;</code>, que por defecto se muestra encima de los contenidos de la tabla. La propiedad <code>caption-side</code> permite controlar la posición del título de la tabla.</p>
+
+<div class="table" id="table-10-4">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>caption-side</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">top &#124; bottom &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Los elementos caption</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">top</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Establece la posición del título de la tabla</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>El valor <code>bottom</code> indica que el título de la tabla se debe mostrar debajo de los contenidos de la tabla. Si también se quiere modificar la alineación horizontal del título, debe utilizarse la propiedad <code>text-align</code>.</p>
+
+<p>A continuación se muestra el código HTML y CSS de un ejemplo sencillo de uso de la propiedad <code>caption-side</code>:</p>
+
+<div class="code css">
+<pre class="css"><span class="re1">.especial</span> <span class="br0">&#123;</span>
+  <span class="kw1">caption-side</span><span class="sy0">:</span> <span class="kw1">bottom</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">table</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;especial&quot;</span> <span class="kw3">summary</span><span class="sy0">=</span><span class="st0">&quot;Tabla genérica&quot;</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">caption</span>&gt;</span>Tabla 2.- Título especial<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">caption</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">tr</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">td</span>&gt;</span>1<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">td</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">td</span>&gt;</span>2<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">td</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">td</span>&gt;</span>3<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">td</span>&gt;</span>
+  <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">tr</span>&gt;</span>
+  ...
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">table</span>&gt;</span></pre>
+</div>
+
+<p>La siguiente imagen muestra el resultado de visualizar el ejemplo anterior en cualquier navegador:</p>
+
+<div class="figure" id="figure-10-6">
+    <img src="images/cap10/firefox.png" alt="Ejemplo de propiedad caption-side" />
+
+    <p class="caption"><strong>Figura 10.6</strong> Ejemplo de propiedad caption-side</p>
+</div>
+
+
+<div class="exercise">
+  <p class="title">Ejercicio 11</p>
+</div>
+
+<p><a class="internal" href="capitulo-14.html#ej11">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-10.html#tablas">Tablas</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.1</span>
+                        <a class="internal" href="capitulo-10.html#estilos-basicos-4">Estilos básicos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.2</span>
+                        <a class="internal" href="capitulo-10.html#estilos-avanzados-4">Estilos avanzados</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

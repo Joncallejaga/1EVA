@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Imágenes flexibles | Responsive Web Design</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">Responsive Web Design</a></h1>
+        <p class="span3">
+                        <a href="capitulo-2.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-4.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="imagenes-flexibles-2"><span>Capítulo 3</span> Imágenes flexibles</h1>
+        <p>Al finalizar el capítulo anterior, hemos dado una solución genérica para que las imágenes se muestren de una manera adaptativa, pero no hemos identificado el problema anterior a la solución.</p>
+
+<p>Teniendo en cuenta este pequeño bloque HTML:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;figure&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;robot.jpg&quot;</span> <span class="kw3">alt</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="sy0">/</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">b</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;figcaption&quot;</span>&gt;</span>Lo, the robot walks<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">b</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre>
+</div>
+
+<div class="code css">
+<pre class="css"><span class="re1">.figure</span> <span class="br0">&#123;</span>
+    <span class="kw1">float</span><span class="sy0">:</span> <span class="kw1">right</span><span class="sy0">;</span>
+    <span class="kw1">margin-bottom</span><span class="sy0">:</span> <span class="re3">0.5em</span><span class="sy0">;</span>
+    <span class="kw1">margin-left</span><span class="sy0">:</span> <span class="re3">2.53164557%</span><span class="sy0">;</span> <span class="coMULTI">/* 12px / 474px */</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">48.7341772%</span><span class="sy0">;</span> <span class="coMULTI">/* 231px / 474px */</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>El código anterior crea un bloque flotante, de ancho variable que contiene una imagen y una descripción de la misma. El problema surge cuando la imagen proporcionada supera las medidas del bloque que la contiene. La estructura no se ve afectada, y las proporciones de la columna siguen intactas, pero la imagen excede el tamaño del contenedor, produciéndose el siguiente efecto.</p>
+
+<div class="figure" id="figure-3-1">
+    <img src="images/cap03/image-width.png" alt="La imagen excede el tamaño de su contenedor" />
+
+    <p class="caption"><strong>Figura 3.1</strong> La imagen excede el tamaño de su contenedor</p>
+</div>
+
+
+<h2 id="imagenes-fluidas">3.1 Imágenes fluidas</h2>
+
+<p>La solución al problema anterior, la vimos en el capítulo anterior y es tan sencillo como aplicar la siguiente restricción a las imágenes:</p>
+
+<div class="code css">
+<pre class="css">img <span class="br0">&#123;</span>
+    <span class="kw1">max-width</span><span class="sy0">:</span> <span class="re3">100%</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>A partir de ahora, todas las imágenes del documento ocuparán como máximo el mismo tamaño que su contenedor, independientemente de su tamaño original.</p>
+
+<div class="figure" id="figure-3-2">
+    <img src="images/cap03/image-width-02.png" alt="La imagen encaja perfectamente dentro de su contenedor" />
+
+    <p class="caption"><strong>Figura 3.2</strong> La imagen encaja perfectamente dentro de su contenedor</p>
+</div>
+
+
+<p>Otra buena noticia es que el navegador redimensionará nuestra imagen, manteniendo las proporciones, en la medida que su contenedor cambie de tamaño. Además, esta regla puede ser aplicada al resto de elementos multimedia:</p>
+
+<div class="code css">
+<pre class="css">img<span class="sy0">,</span>
+<span class="kw2">embed</span><span class="sy0">,</span>
+object<span class="sy0">,</span>
+video <span class="br0">&#123;</span>
+    <span class="kw1">max-width</span><span class="sy0">:</span> <span class="re3">100%</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="imagenes-de-fondo">3.2 Imágenes de fondo</h2>
+
+<p>En 2004, Dan Cederholm <a href="http://bkaprt.com/rwd/18/">http://bkaprt.com/rwd/18/</a>, publicó un magnífico artículo para conseguir un efecto de dos columnas a partir de imágenes de fondo. La técnica es realmente muy sencilla, crear una imagen con colores diferenciados que simulasen crear columnas de un mismo alto. Este efecto se consigue con una simple regla de CSS:</p>
+
+<div class="code css">
+<pre class="css"><span class="re1">.blog</span> <span class="br0">&#123;</span>
+    <span class="kw1">background</span><span class="sy0">:</span> <span class="re0">#F8F5F2</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="st0">&quot;blog-bg.png&quot;</span><span class="br0">&#41;</span> <span class="kw2">repeat-y</span> <span class="re3">50%</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Esta técnica funciona perfectamente, pero está pensada para estructuras de ancho fijo, por lo tanto debemos adaptarla para que funcione correctamente en nuestros diseños flexibles. De nuevo, la manera para conseguirlo es aplicar la fórmula que hemos venido utilizando hasta ahora: <code>target ÷ context = result</code>.</p>
+
+<p>El primer paso es buscar el punto de transición en nuestro fondo, el <code>pixel</code> exacto donde se simula la transición entre las columnas. Vamos a suponer que el ancho inicial de nuestra columna es de <code>900px</code>, y que la separación entre las columnas se produce en el pixel <code>568</code>.</p>
+
+<div class="figure" id="figure-3-3">
+    <img src="images/cap03/faux-columns-01.png" alt="El punto de transición entre las columnas" />
+
+    <p class="caption"><strong>Figura 3.3</strong> El punto de transición entre las columnas</p>
+</div>
+
+
+<p>Con estos simples datos, podemos convertir nuestro fondo fijo para que se muestre de manera adaptativa. Para ello, aplicamos la fórmula que conocemos para calcular el nuevo punto de manera relativa:</p>
+
+<p><code>568 ÷ 900 = 0.631111111111111</code></p>
+
+<p>Así pues, nuestro valor objetivo es 63.1111111111111%.</p>
+
+<p>Es hora de obtener nuestra nueva imagen de fondo. Para ello, creamos una nueva imagen con un tamaño lo suficientemente ancho como para cubrir cualquier tamaño de ventana, por ejemplo <code>3000px</code>. Esto nos asegurará que el fondo se mostrará correctamente aunque el ancho de la ventana sea muy amplio.</p>
+
+<div class="figure" id="figure-3-4">
+    <img src="images/cap03/faux-columns-02.png" alt="Nuestro lienzo base para crear la imagen de fondo" />
+
+    <p class="caption"><strong>Figura 3.4</strong> Nuestro lienzo base para crear la imagen de fondo</p>
+</div>
+
+
+<p>Debemos calcular el nuevo punto de transición entre las columnas. Como hemos definido el ancho de nuestra imagen a <code>3000px</code>, el nuevo punto de transición es:</p>
+
+<p><code>3000 x 0.631111111111111 = 1893.333333333333</code></p>
+
+<p>Creamos las texturas necesarias para este caso, hasta y desde el punto de transición que hemos obtenido:</p>
+
+<div class="figure" id="figure-3-5">
+    <img src="images/cap03/faux-columns-03.png" alt="Creamos las texturas de nuestro fondo" />
+
+    <p class="caption"><strong>Figura 3.5</strong> Creamos las texturas de nuestro fondo</p>
+</div>
+
+
+<p>Ahora que ya tenemos preparada nuestra nueva imagen de fondo, ya solo queda aplicar los estilos necesarios para mostrarla correctamente:</p>
+
+<div class="code css">
+<pre class="css"><span class="re1">.blog</span> <span class="br0">&#123;</span>
+    <span class="kw1">background</span><span class="sy0">:</span> <span class="re0">#F8F5F2</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="st0">&quot;blog-bg.png&quot;</span><span class="br0">&#41;</span>
+        <span class="kw2">repeat-y</span> <span class="re3">63.1111111111111%</span> <span class="nu0">0</span><span class="sy0">;</span> <span class="coMULTI">/* 568px / 900px */</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Al igual que en la solución original, estamos posicionando el gráfico en la parte superior del blog y la repetimos verticalmente. La diferencia está en la nueva posición de la imagen, que hará que la imagen se muestre en su posición correcta aunque se redimensione la ventana del navegador.</p>
+
+<h3 id="imagenes-de-fondo-totalmente-flexibles">3.2.1 Imágenes de fondo totalmente flexibles</h3>
+
+<p>Realmente, la solución anterior no es del todo flexible, ya que no estamos redimensionando la imagen sino trasladándola para mostrarla correctamente. Esta solución no es válida si necesitamos una imagen de fondo que deba redimensionarse, como un logo o <code>sprites</code> que hemos utilizado en nuestros enlaces.</p>
+
+<p>La solución a este problema viene dada por la propiedad <code>background-size</code> de CSS 3, la cual nos permite realmente redimensionar las imágenes de fondo.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-3.html#imagenes-flexibles-2">Imágenes flexibles</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.1</span>
+                        <a class="internal" href="capitulo-3.html#imagenes-fluidas">Imágenes fluidas</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.2</span>
+                        <a class="internal" href="capitulo-3.html#imagenes-de-fondo">Imágenes de fondo</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

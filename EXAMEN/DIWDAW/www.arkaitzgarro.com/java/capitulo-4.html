@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="15/04/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Operadores | Java</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">Java</a></h1>
+        <p class="span3">
+                        <a href="capitulo-3.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-5.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="operadores"><span>Capítulo 4</span> Operadores</h1>
+        <p>Un operador lleva a cabo operaciones sobre uno (operador <em>unario</em>), dos (operador <em>binario</em>) o tres (operador <em>ternario</em>) datos u <em>operandos</em> de tipo primitvo devolviendo un valor determinado también de un tipo primitivo. El tipo de valor devuelto tras la evaluación depende del operador y del tipo de los operandos. Por ejemplo, los operadores <em>aritméticos</em> trabajan con operandos numéricos, llevan a cabo operaciones aritméticas básicas y devuelven el valor numérico correspondiente. Los operadores se pueden clasificar en distintos grupos según se muestra en los siguientes apartados.</p>
+
+<h2 id="operador-asignacion">4.1 Operador asignación</h2>
+
+<p>El operador asignación <code>=</code>, es un operador binario que asigna el valor del término de la derecha al operando de la izquierda. El operando de la izquierda suele ser el identificador de una variable. El término de la derecha es, en general, una expresión de un tipo de dato compatible; en particular puede ser una constante u otra variable. Como caso particular, y a diferencia de los demás operadores, este operador no se evalúa devolviendo un determinado valor.</p>
+
+<div class="figure" id="figure-4-1">
+    <img src="images/cap04/operador.png" alt="Operador asignación" />
+
+    <p class="caption"><strong>Figura 4.1</strong> Operador asignación</p>
+</div>
+
+
+<p>No debe confundirse el operador asignación (<code>=</code>) con el operador relacional de igualdad (<code>==</code>) que se verá más adelante. Además Java dispone de otros operadores que combinan la asignación con otras operaciones (operadores aritméticos <em>combinados</em>).</p>
+
+<p>En el siguiente código se muestran algunos ejemplos de uso del operador asignación con datos de distintos tipos:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> OpAsignacion <span class="br0">&#123;</span> 
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> i,j<span class="sy0">;</span>
+        <span class="kw4">double</span> x<span class="sy0">;</span>
+        <span class="kw4">char</span> c<span class="sy0">;</span>
+        <span class="kw4">boolean</span> b<span class="sy0">;</span>
+        <span class="kw3">String</span> s<span class="sy0">;</span>
+        i <span class="sy0">=</span> <span class="nu0">15</span><span class="sy0">;</span>
+        j <span class="sy0">=</span> i<span class="sy0">;</span>
+        x <span class="sy0">=</span> <span class="nu0">12.345</span><span class="sy0">;</span>
+        c <span class="sy0">=</span> <span class="st0">'A'</span><span class="sy0">;</span>
+        b <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+        s <span class="sy0">=</span> <span class="st0">&quot;Hola&quot;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;i = &quot;</span> <span class="sy0">+</span> i<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;j = &quot;</span> <span class="sy0">+</span> j<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;x = &quot;</span> <span class="sy0">+</span> x<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;c = &quot;</span> <span class="sy0">+</span> c<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;b = &quot;</span> <span class="sy0">+</span> b<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;s = &quot;</span> <span class="sy0">+</span> s<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Salida por pantalla del programa anterior:</p>
+
+<div class="code bach">
+<pre class="bach">$&gt;javac OpAsignacion.java
+&nbsp;
+$&gt;java OpAsignacion
+&nbsp;
+i = 15 
+j = 15 
+x = 12.345
+c = A 
+b = false
+s = Hola</pre>
+</div>
+
+<h2 id="operadores-aritmeticos">4.2 Operadores aritméticos</h2>
+
+<p>El lenguaje de programación Java tiene varios operadores aritméticos para los datos numéricos enteros y reales. En la siguiente tabla se resumen los diferentes operadores de esta categoría.</p>
+
+<div class="figure" id="figure-4-2">
+    <img src="images/cap04/operadores-aritmeticos-basicos.png" alt="Operadores aritméticos básicos" />
+
+    <p class="caption"><strong>Figura 4.2</strong> Operadores aritméticos básicos</p>
+</div>
+
+
+<p>El resultado exacto depende de los tipos de operando involucrados. Es conveniente tener en cuenta las siguientes peculiaridades:</p>
+
+<ul>
+<li>El resultado es de tipo <code>long</code> si, al menos, uno de los operandos es de tipo long y ninguno es real (<code>float</code> o <code>double</code>).</li>
+<li>El resultado es de tipo <code>int</code> si ninguno de los operandos es de tipo <code>long</code> y tampoco es real (<code>float</code> o <code>double</code>).</li>
+<li>El resultado es de tipo <code>double</code> si, al menos, uno de los operandos es de tipo <code>double</code>.</li>
+<li>El resultado es de tipo <code>float</code> si, al menos, uno de los operandos es de tipo <code>float</code> y  ninguno es <code>double</code>.</li>
+<li>El formato empleado para la representación de datos enteros es el complemento a dos. En la aritmética entera no se producen nunca desbordamientos (<em>overflow</em>) aunque el resultado sobrepase el intervalo de representación (<code>int</code> o <code>long</code>).</li>
+<li>La división entera se trunca hacia 0. La división o el resto de dividir por cero es una operación válida que genera una excepción <code>ArithmeticException</code> que puede dar lugar a un error de ejecución y la consiguiente interrupción de la ejecución del programa.</li>
+<li>La aritmética real (en coma flotante) puede desbordar al infinito (demasiado grande, overflow) o hacia cero (demasiado pequeño, underflow).</li>
+<li>El resultado de una expresión inválida, por ejemplo, dividir infinito por infinito, no genera una excepción ni un error de ejecución: es un valor <code>NaN</code> (Not a Number).</li>
+</ul>
+
+<h2 id="operadores-aritmeticos-incrementales">4.3 Operadores aritméticos incrementales</h2>
+
+<p>Los operadores aritméticos incrementales son operadores unarios (un único operando). El operando puede ser numérico o de tipo char y el resultado es del mismo tipo que el operando. Estos operadores pueden emplearse de dos formas dependiendo de su posición con respecto al operando.</p>
+
+<div class="figure" id="figure-4-3">
+    <img src="images/cap04/operadores-aritmeticos-incrementales.png" alt="Operadores aritméticos incrementales" />
+
+    <p class="caption"><strong>Figura 4.3</strong> Operadores aritméticos incrementales</p>
+</div>
+
+
+<p>Estos operadores suelen sustituir a veces al operador asignación y también suelen aparecer en bucles <code>for</code>.</p>
+
+<h2 id="operadores-aritmeticos-combinados">4.4 Operadores aritméticos combinados</h2>
+
+<p>Combinan un operador aritmético con el operador asignación. Como en el caso de los operadores aritméticos pueden tener operandos numéricos enteros o reales y el tipo específico de resultado numérico dependerá del tipo de éstos. En la siguiente tabla se resumen los diferentes operadores de esta categoría.</p>
+
+<div class="figure" id="figure-4-4">
+    <img src="images/cap04/operadores-aritmeticos-combinados.png" alt="Operadores aritméticos combinados" />
+
+    <p class="caption"><strong>Figura 4.4</strong> Operadores aritméticos combinados</p>
+</div>
+
+
+<h2 id="operadores-de-relacion">4.5 Operadores de relación</h2>
+
+<p>Realizan comparaciones entre datos compatibles de tipos primitivos (numéricos, carácter y booleanos) teniendo siempre un resultado booleano. Los operandos booleanos sólo pueden emplear los operadores de igualdad y desigualdad.</p>
+
+<div class="figure" id="figure-4-5">
+    <img src="images/cap04/operadores-de-relacion.png" alt="Operadores de relación" />
+
+    <p class="caption"><strong>Figura 4.5</strong> Operadores de relación</p>
+</div>
+
+
+<p>Todos los valores numéricos que se comparan con <code>NaN</code> dan como resultado <code>false</code> excepto el operador <code>!=</code> que devuelve <code>true</code>. Esto ocurre incluso si ambos valores son <code>NaN</code>.</p>
+
+<h2 id="operadores-logicos-o-booleanos">4.6 Operadores lógicos o booleanos</h2>
+
+<p>Realizan operaciones sobre datos booleanos y tienen como resultado un valor booleano. En la siguiente tabla se resumen los diferentes operadores de esta categoría.</p>
+
+<div class="figure" id="figure-4-6">
+    <img src="images/cap04/operadores-booleanos.png" alt="Operadores booleanos" />
+
+    <p class="caption"><strong>Figura 4.6</strong> Operadores booleanos</p>
+</div>
+
+
+<p>Para mejorar el rendimiento de ejecución del código es recomendable emplear en las expresiones booleanas el operador <code>&amp;&amp;</code> en lugar del operador <code>&amp;</code>. En este caso es conveniente situar la condición más propensa a ser falsa en el término de la izquierda. Esta técnica puede reducir el tiempo de ejecución del programa. De forma equivalente es preferible emplear el operador <code>||</code> al operador <code>|</code>. En este caso es conveniente colocar la condición más propensa a ser verdadera en el término de la izquierda.</p>
+
+<h2 id="el-operador-condicional">4.7 El operador condicional</h2>
+
+<p>Este operador ternario tomado de C/C++ permite devolver valores en función de una expresión lógica. Sintaxis:</p>
+
+<div class="code java">
+<pre class="java">expresionLogica <span class="sy0">?</span> expresion_1 <span class="sy0">:</span> expresion_2</pre>
+</div>
+
+<p>Si el resultado de evaluar la expresión lógica es verdadero, devuelve el valor de la primera expresión, y en caso contrario, devuelve el valor de la segunda expresión.</p>
+
+<div class="figure" id="figure-4-7">
+    <img src="images/cap04/operador-condicional.png" alt="Operador condicional" />
+
+    <p class="caption"><strong>Figura 4.7</strong> Operador condicional</p>
+</div>
+
+
+<p>La sentencia de asignación:</p>
+
+<div class="code java">
+<pre class="java">valor <span class="sy0">=</span> <span class="br0">&#40;</span>expresionLogica <span class="sy0">?</span> expresion_1 <span class="sy0">:</span> expresion_2<span class="br0">&#41;</span><span class="sy0">;</span>`</pre>
+</div>
+
+<p>como se verá más adelante es equivalente a:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">if</span> <span class="br0">&#40;</span>expresionLogica<span class="br0">&#41;</span>
+    valor <span class="sy0">=</span> expresion_1<span class="sy0">;</span>
+<span class="kw1">else</span>
+    valor <span class="sy0">=</span> expresion_2</pre>
+</div>
+
+<h2 id="operadores-de-bit">4.8 Operadores de bit</h2>
+
+<p>Tienen operandos de tipo entero (o char) y un resultado de tipo entero. Realizan operaciones con dígitos (ceros y unos) de la representación binaria de los operandos. Exceptuando al operador negación, los demás operadores son binarios. En la siguiente tabla se resumen los diferentes operadores de esta categoría.</p>
+
+<div class="figure" id="figure-4-8">
+    <img src="images/cap04/operadores-de-bit.png" alt="Operadores de bit" />
+
+    <p class="caption"><strong>Figura 4.8</strong> Operadores de bit</p>
+</div>
+
+
+<h2 id="operador-concatenacion-de-cadenas">4.9 Operador concatenación de cadenas</h2>
+
+<p>El operador concatenación <code>+</code>, es un operador binario que devuelve una cadena resultado de concatenar las dos cadenas que actúan como operandos. Si sólo uno de los operandos es de tipo cadena, el otro operando se convierte implícitamente en tipo cadena.</p>
+
+<div class="figure" id="figure-4-9">
+    <img src="images/cap04/operador-conc.png" alt="Operador concatenación" />
+
+    <p class="caption"><strong>Figura 4.9</strong> Operador concatenación</p>
+</div>
+
+
+<h2 id="separadores">4.10 Separadores</h2>
+
+<p>Existen algunos caracteres que tienen un significado especial en el lenguaje Java. En la siguiente tabla se resumen los diferentes separadores que pueden encontrarse en el código fuente de un programa.</p>
+
+<div class="figure" id="figure-4-10">
+    <img src="images/cap04/separadores.png" alt="Separadores en Java" />
+
+    <p class="caption"><strong>Figura 4.10</strong> Separadores en Java</p>
+</div>
+
+
+<h2 id="expresiones">4.11 Expresiones</h2>
+
+<p>Una expresión es una combinación de operadores y operandos que se evalúa generándose un único resultado de un tipo determinado.</p>
+
+<h2 id="prioridad-entre-operadores">4.12 Prioridad entre operadores</h2>
+
+<p>Si dos operadores se encuentran en la misma expresión, el orden en el que se evalúan puede determinar el valor de la expresión. En la siguiente tabla se muestra el orden o prioridad en el que se ejecutan los operadores que se encuentren en la misma sentencia. Los operadores de la misma prioridad se evalúan de izquierda a derecha dentro de la expresión.</p>
+
+<div class="figure" id="figure-4-11">
+    <img src="images/cap04/prioridad.png" alt="Prioridad de los operadores" />
+
+    <p class="caption"><strong>Figura 4.11</strong> Prioridad de los operadores</p>
+</div>
+
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-4.html#operadores">Operadores</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.1</span>
+                        <a class="internal" href="capitulo-4.html#operador-asignacion">Operador asignación</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.2</span>
+                        <a class="internal" href="capitulo-4.html#operadores-aritmeticos">Operadores aritméticos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.3</span>
+                        <a class="internal" href="capitulo-4.html#operadores-aritmeticos-incrementales">Operadores aritméticos incrementales</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.4</span>
+                        <a class="internal" href="capitulo-4.html#operadores-aritmeticos-combinados">Operadores aritméticos combinados</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.5</span>
+                        <a class="internal" href="capitulo-4.html#operadores-de-relacion">Operadores de relación</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.6</span>
+                        <a class="internal" href="capitulo-4.html#operadores-logicos-o-booleanos">Operadores lógicos o booleanos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.7</span>
+                        <a class="internal" href="capitulo-4.html#el-operador-condicional">El operador condicional</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.8</span>
+                        <a class="internal" href="capitulo-4.html#operadores-de-bit">Operadores de bit</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.9</span>
+                        <a class="internal" href="capitulo-4.html#operador-concatenacion-de-cadenas">Operador concatenación de cadenas</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.10</span>
+                        <a class="internal" href="capitulo-4.html#separadores">Separadores</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.11</span>
+                        <a class="internal" href="capitulo-4.html#expresiones">Expresiones</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.12</span>
+                        <a class="internal" href="capitulo-4.html#prioridad-entre-operadores">Prioridad entre operadores</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

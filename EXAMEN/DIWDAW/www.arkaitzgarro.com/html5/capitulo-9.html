@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="28/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Sin conexión | HTML5</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">HTML5</a></h1>
+        <p class="span3">
+                        <a href="capitulo-8.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-10.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="sin-conexion"><span>Capítulo 9</span> Sin conexión</h1>
+        <p>Si bien todos los navegadores tienen mecanismos de almacenamiento en caché, estos sistemas no son fiables y no siempre funcionan como debieran. HTML5 permite resolver algunas de las molestias asociadas al trabajo sin conexión mediante la interfaz <code>ApplicationCache</code>.</p>
+
+<p>Algunas de las ventajas que conlleva el uso de ésta caché para una aplicación son:</p>
+
+<ul>
+<li>Navegación sin conexión: los usuarios pueden explorar todo el sitio web sin conexión.</li>
+<li>Velocidad: los recursos almacenados en caché son locales y, por tanto, se cargan más rápido.</li>
+<li>Reducción de carga del servidor: el navegador solo descarga recursos del servidor que han cambiado.</li>
+</ul>
+
+<p>Para poder trabajar sin conexión, una aplicación únicamente necesita de un archivo de <em>manifiesto</em>, el cual indica al navegador que ficheros debe almacenar en la caché local. El contenido del manifiesto puede ser tan simple como un listado de archivos. Una vez que el navegador ha descargado y almacenado los ficheros (html, CSS, imágenes, javascripts, etc), el navegador hace uso de estos ficheros, incluso cuando el usuario actualiza la página en su navegador.</p>
+
+<p>Además de especificar qué ficheros van a ser almacenados en la caché, es posible indicar cuáles no tienen que serlo, y por tanto obligar al navegador a realizar una petición de dichos ficheros al servidor. Finalmente, si intentamos acceder a un fichero no almacenado en local, y no disponemos de conexión, podemos mostrar un recurso que previamente hemos almacenado en la caché.</p>
+
+<h2 id="el-archivo-de-manifiesto-de-cache">9.1 El archivo de manifiesto de caché</h2>
+
+<p>El archivo de manifiesto es lo que le indica al navegador cuando y qué tiene que almacenar en su caché, y qué tiene que traerse de la Web. Indicar al navegador el manifiesto que tiene que utilizar es muy sencillo:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc0">&lt;!DOCTYPE html&gt;</span>
+<span class="sc2">&lt;<span class="kw2">html</span> <span class="kw3">lang</span><span class="sy0">=</span><span class="st0">&quot;en&quot;</span> manifest<span class="sy0">=</span><span class="st0">&quot;/example.appcache&quot;</span>&gt;</span>
+    ...
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>El atributo <code>manifest</code> debe estar incluido en todas las páginas de nuestra aplicación, que queramos que se almacenen en la caché. Es decir, además de los ficheros indicados en el manifiesto, la propia página que incluye el manifiesto es almacenada en la caché. El navegador no almacenará en caché ninguna página que no contenga el atributo <code>manifest</code> (a menos que esa página aparezca explícitamente en el propio archivo de manifiesto).</p>
+
+<p>El atributo <code>manifest</code> puede señalar a una URL absoluta o a una ruta relativa, pero las URL absolutas deben tener el mismo origen que la aplicación web. Un archivo de manifiesto puede tener cualquier extensión, pero se debe mostrar con el tipo MIME correcto:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">html</span> manifest<span class="sy0">=</span><span class="st0">&quot;http://www.example.com/example.mf&quot;</span>&gt;</span>
+    ...
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>El tipo MIME con el que se deben mostrar los archivos de manifiesto es <code>text/cache-manifest</code>. Es posible que se tenga que añadir un tipo de archivo personalizado a la configuración de <code>.htaccess</code> o de tu servidor web.</p>
+
+<h3 id="estructura">9.1.1 Estructura</h3>
+
+<p>Ejemplo de un archivo de manifiesto sencillo:</p>
+
+<div class="code code">
+<pre class="code">CACHE MANIFEST
+index.html
+stylesheet.css
+images/logo.png
+scripts/main.js</pre>
+</div>
+
+<p>El archivo de manifiesto del ejemplo permite almacenar en caché los cuatro archivos especificados. El formato del manifiesto es importante:</p>
+
+<ul>
+<li>La cadena <code>CACHE MANIFEST</code> debe aparecer en la primera línea y es obligatoria.</li>
+<li>Dentro del manifiesto, los ficheros son listados dentro de categorías, también conocidos como <code>namespaces</code>. Si no se especifica ninguna categoría, todos los ficheros pertenecen a la categoría <code>CACHE</code>.</li>
+</ul>
+
+<p>Un ejemplo más complejo sería:</p>
+
+<div class="code code">
+<pre class="code">CACHE MANIFEST
+# 2010-06-18:v2
+&nbsp;
+CACHE:
+/favicon.ico
+index.html
+stylesheet.css
+images/logo.png
+scripts/main.js
+&nbsp;
+# Resources that require the user to be online.
+NETWORK:
+login.php
+/myapi
+http://api.twitter.com
+&nbsp;
+# static.html will be served if main.py is inaccessible
+# offline.jpg will be served in place of all images in images/large/
+# offline.html will be served in place of all other .html files
+FALLBACK:
+/main.py /static.html
+images/large/ images/offline.jpg
+*.html /offline.html</pre>
+</div>
+
+<p>Un archivo de manifiesto puede incluir tres categorías: <code>CACHE</code>, <code>NETWORK</code> y <code>FALLBACK</code>.</p>
+
+<ul>
+<li><code>CACHE</code>: esta es la sección predeterminada para las entradas. Los archivos incluidos en esta sección (o inmediatamente después de <code>CACHE MANIFEST</code>) se almacenarán en caché explícitamente después de descargarse por primera vez.</li>
+<li><code>NETWORK</code>: los archivos incluidos en esta sección son recursos permitidos que requieren conexión al servidor. En todas las solicitudes enviadas a estos recursos se omite la caché, incluso si el usuario está trabajando sin conexión. Se pueden utilizar caracteres comodín.</li>
+<li><code>FALLBACK</code>: se trata de una sección opcional en la que se especifican páginas alternativas en caso de no poder acceder a un recurso. La primera <code>URI</code> corresponde al recurso y la segunda, a la página alternativa. Ambas <code>URI</code> deben estar relacionadas y tener el mismo origen que el archivo de manifiesto. Se pueden utilizar caracteres comodín.</li>
+</ul>
+
+<div class="code code">
+<pre class="code">CACHE MANIFEST
+# 2010-06-18:v3
+&nbsp;
+# Explicitly cached entries
+index.html
+css/style.css
+&nbsp;
+# offline.html will be displayed if the user is offline
+FALLBACK:
+/ /offline.html
+&nbsp;
+# All other resources require the user to be online.
+NETWORK:
+*
+&nbsp;
+# Additional resources to cache
+CACHE:
+images/logo1.png
+images/logo2.png
+images/logo3.png</pre>
+</div>
+
+<blockquote>
+  <p><strong>Nota</strong></p>
+  
+  <p>Las peticiones de recursos que den como resultado un error 404 (por ejemplo una imagen no encontrada), mostrarán en este caso el fichero <code>offline.html</code></p>
+</blockquote>
+
+<h2 id="como-servir-el-manifiesto">9.2 Cómo servir el manifiesto</h2>
+
+<p>Como hemos comentado anteriormente, el manifiesto puede tener cualquier extensión (aunque se recomienda que sea .appcache), pero lo importante es que el servidor envíe el fichero con el tipo MIME correcto. Si utilizamos <em>Apache</em>, es tan sencillo como añadir la siguiente línea al fichero <code>mime.types</code>:</p>
+
+<div class="code code">
+<pre class="code">text/cache-manifest appcache</pre>
+</div>
+
+<p>Esta configuración dependerá del servidor web que utilicemos. De todas maneras, para asegurarnos que el servidor está enviando el manifiesto con la cabecera correcta, podemos utilizar una herramienta como <code>curl</code> de la siguiente manera:</p>
+
+<div class="code code">
+<pre class="code">curl -I http://mysite.com/manifest.appcache</pre>
+</div>
+
+<p>O bien a través de las herramientas de desarrollo integradas en Google Chrome, Safari y Firefox. De cualquiera de las maneras, la respuesta tendría que ser algo parecido a esto:</p>
+
+<div class="code code">
+<pre class="code">HTTP/1.1 200 OK
+Date: Mon, 13 Sep 2010 12:59:30 GMT
+Server: Apache/2.2.13 (Unix) mod_ssl/2.2.13 OpenSSL/0.9.8l DAV/2 PHP/5.3.0
+Last-Modified: Tue, 31 Aug 2010 03:11:00 GMT
+Accept-Ranges: bytes
+Content-Length: 113
+&nbsp;
+Content-Type: text/cache-manifest</pre>
+</div>
+
+<h2 id="proceso-de-cacheado">9.3 Proceso de cacheado</h2>
+
+<p>Cuando visitamos una página que hace uso de la cache de aplicación, el proceso de cacheado que se sigue es el siguiente:</p>
+
+<ol>
+<li><strong>Navegador:</strong> solicita la página http://html5app.com/</li>
+<li><strong>Servidor:</strong> devuelve index.html</li>
+<li><strong>Navegador:</strong> procesa la página index.html y solicita los recursos asociados, como imágenes, javascripts, hojas de estilos y el manifiesto.</li>
+<li><strong>Servidor:</strong> devuelve todos los recursos solicitados.</li>
+<li><strong>Navegador:</strong> procesa el manifiesto y solicita, de nuevo, todos los recursos definidos en el manifiesto. Efectivamente, se produce una doble petición.</li>
+<li><strong>Servidor:</strong> devuelve todos los recursos del manifiesto solicitados.</li>
+<li><strong>Navegador:</strong> la cache de aplicación está actualizada, y se lanzan los eventos asociados.</li>
+</ol>
+
+<p>Ahora, el navegador está listo y la caché contiene los ficheros indicados en el manifiesto. Si el manifiesto no ha cambiado, y la página se recarga, ocurre lo siguiente:</p>
+
+<ol>
+<li><strong>Navegador:</strong> vuelve a solicitar la página http://html5app.com/</li>
+<li><strong>Navegador:</strong> detecta que tiene una copia local de index.html y la sirve de manera local.</li>
+<li><strong>Navegador:</strong> procesa la página index.html y los recursos existentes en la caché se sirven de manera local.</li>
+<li><strong>Navegador:</strong> solicita de nuevo el manifiesto al servidor.</li>
+<li><strong>Servidor:</strong> devuelve un código 304 indicando que no ha cambiado nada en el manifiesto.</li>
+</ol>
+
+<p>Una vez que el navegador tiene almacenados los recursos en su caché, los sirve de manera local y después solicita el manifiesto. Como se puede ver en la siguiente captura de pantalla, Google Chrome únicamente solicita al servidor aquellos ficheros que no se encuentran en la caché de la aplicación.</p>
+
+<div class="figure" id="figure-9-1">
+    <img src="images/cap10/request.png" alt="Peticiones realizadas por Google Chrome" />
+
+    <p class="caption"><strong>Figura 9.1</strong> Peticiones realizadas por Google Chrome</p>
+</div>
+
+
+<p>Si deseamos actualizar alguno de los recursos de la aplicación, tendremos que actualizar primero el manifiesto, para obligar al navegador a solicitar de nuevo todos los recursos. Para ello, es necesario <em>marcar</em> de alguna manera que el manifiesto ha cambiado, aunque los ficheros a cachear sean los mismos. Una práctica muy sencilla es añadir una número de versión o la fecha de modificación del manifiesto:</p>
+
+<div class="code code">
+<pre class="code"># 2010-06-18:v3</pre>
+</div>
+
+<p>Una vez que el manifiesto ha cambiado, el comportamiento del navegador es el siguiente:</p>
+
+<ol>
+<li><strong>Navegador:</strong> vuelve a solicitar la página http://html5app.com/</li>
+<li><strong>Navegador:</strong> detecta que tiene una copia local de index.html y la sirve de manera local.</li>
+<li><strong>Navegador:</strong> procesa la página index.html <strong>y los recursos existentes en la caché se sirven de manera local</strong>.</li>
+<li><strong>Navegador:</strong> solicita de nuevo el manifiesto al servidor.</li>
+<li><strong>Servidor:</strong> devuelve el nuevo manifiesto modificado.</li>
+<li><strong>Navegador:</strong> procesa el manifiesto y solicita todos los recursos definidos en el manifiesto.</li>
+<li><strong>Servidor:</strong> devuelve todos los recursos del manifiesto solicitados.</li>
+<li><strong>Navegador:</strong> la cache de aplicación está actualizada, y se lanzan los eventos asociados.</li>
+</ol>
+
+<p>Hay que destacar, que a pesar de haber modificado los recursos en el navegador, estos cambios no se producen en este momento, ya que se siguen utilizando los cargados previamente. La nueva caché solo estaría disponible si volviésemos a recargar la página. Una manera de modificar este comportamiento es accediendo al objeto <code>applicationCache</code>.</p>
+
+<h2 id="actualizacion-de-la-memoria-cache">9.4 Actualización de la memoria caché</h2>
+
+<p>El objeto <code>window.applicationCache</code> permite acceder mediante JavaScript a la caché de aplicación del navegador. Su propiedad <code>status</code> permite comprobar el estado de la memoria caché, y es el encargado de notificarnos que se ha producido un cambio en la caché local.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> appCache <span class="sy0">=</span> window.<span class="me1">applicationCache</span><span class="sy0">;</span>
+<span class="kw1">switch</span> <span class="br0">&#40;</span>appCache.<span class="me1">status</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">case</span> appCache.<span class="me1">UNCACHED</span><span class="sy0">:</span> <span class="co1">// UNCACHED == 0</span>
+        <span class="kw1">return</span> <span class="st0">'UNCACHED'</span><span class="sy0">;</span> <span class="kw1">break</span><span class="sy0">;</span>
+    <span class="kw1">case</span> appCache.<span class="me1">IDLE</span><span class="sy0">:</span> <span class="co1">// IDLE == 1</span>
+        <span class="kw1">return</span> <span class="st0">'IDLE'</span><span class="sy0">;</span> <span class="kw1">break</span><span class="sy0">;</span>
+    <span class="kw1">case</span> appCache.<span class="me1">CHECKING</span><span class="sy0">:</span> <span class="co1">// CHECKING == 2</span>
+        <span class="kw1">return</span> <span class="st0">'CHECKING'</span><span class="sy0">;</span> <span class="kw1">break</span><span class="sy0">;</span>
+    <span class="kw1">case</span> appCache.<span class="me1">DOWNLOADING</span><span class="sy0">:</span> <span class="co1">// DOWNLOADING == 3</span>
+        <span class="kw1">return</span> <span class="st0">'DOWNLOADING'</span><span class="sy0">;</span> <span class="kw1">break</span><span class="sy0">;</span>
+    <span class="kw1">case</span> appCache.<span class="me1">UPDATEREADY</span><span class="sy0">:</span>  <span class="co1">// UPDATEREADY == 4</span>
+        <span class="kw1">return</span> <span class="st0">'UPDATEREADY'</span><span class="sy0">;</span> <span class="kw1">break</span><span class="sy0">;</span>
+    <span class="kw1">case</span> appCache.<span class="me1">OBSOLETE</span><span class="sy0">:</span> <span class="co1">// OBSOLETE == 5</span>
+        <span class="kw1">return</span> <span class="st0">'OBSOLETE'</span><span class="sy0">;</span> <span class="kw1">break</span><span class="sy0">;</span>
+    <span class="kw1">default</span><span class="sy0">:</span>
+        <span class="kw1">return</span> <span class="st0">'UKNOWN CACHE STATUS'</span><span class="sy0">;</span> <span class="kw1">break</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Para actualizar la caché mediante JavaScript, primero se debe hacer una llamada a <code>applicationCache.update()</code>. Al hacer esa llamada, se intentará actualizar la caché del usuario (para lo cual será necesario que haya cambiado el archivo de manifiesto). Finalmente, cuando el estado de <code>applicationCache.status</code> sea <code>UPDATEREADY</code>, al llamar a <code>applicationCache.swapCache()</code>, se sustituirá la antigua caché por la nueva.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> appCache <span class="sy0">=</span> window.<span class="me1">applicationCache</span><span class="sy0">;</span>
+&nbsp;
+appCache.<span class="me1">update</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Attempt to update the user's cache.</span>
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#40;</span>appCache.<span class="me1">status</span> <span class="sy0">==</span> window.<span class="me1">applicationCache</span>.<span class="me1">UPDATEREADY</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    appCache.<span class="me1">swapCache</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// The fetch was successful, swap in the new cache.</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Al utilizar <code>update()</code> y <code>swapCache()</code> de este modo, no se muestran los recursos actualizados a los usuarios. El flujo indicado solo sirve para pedirle al navegador que busque un nuevo archivo de manifiesto, que descargue el contenido actualizado que se especifica y que actualice la caché de la aplicación. Por tanto, la página se tiene que volver a cargar dos veces para que se muestre el nuevo contenido a los usuarios: una vez para extraer una nueva caché de aplicación y otra para actualizar el contenido de la página.</p>
+
+<p>Para que los usuarios puedan acceder a la versión más reciente del contenido de tu sitio, podemos establecer un escuchador que controle el evento <code>updateready</code> cuando se cargue la página:</p>
+
+<div class="code javascript">
+<pre class="javascript">window.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'load'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    window.<span class="me1">applicationCache</span>.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'updateready'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>window.<span class="me1">applicationCache</span>.<span class="me1">status</span> <span class="sy0">==</span> window.<span class="me1">applicationCache</span>.<span class="me1">UPDATEREADY</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="co1">// Browser downloaded a new app cache.</span>
+            <span class="co1">// Swap it in and reload the page to get the new hotness.</span>
+            window.<span class="me1">applicationCache</span>.<span class="me1">swapCache</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>confirm<span class="br0">&#40;</span><span class="st0">'A new version of this site is available. Load it?'</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                window.<span class="me1">location</span>.<span class="me1">reload</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+            <span class="co1">// Manifest didn't changed. Nothing new to server.</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Hay, además, algunos eventos adicionales que permiten controlar el estado de la caché. El navegador activa eventos para una serie de acciones (como el progreso de las descargas, la actualización de la caché de las aplicaciones y los estados de error). El siguiente fragmento permite establecer escuchadores de eventos para cada tipo de evento de caché:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> handleCacheEvent<span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span><span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">function</span> handleCacheError<span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  alert<span class="br0">&#40;</span><span class="st0">'Error: Cache failed to update!'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Fired after the first cache of the manifest.</span>
+appCache.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'cached'</span><span class="sy0">,</span> handleCacheEvent<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Checking for an update. Always the first event fired in the sequence.</span>
+appCache.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'checking'</span><span class="sy0">,</span> handleCacheEvent<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// An update was found. The browser is fetching resources.</span>
+appCache.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'downloading'</span><span class="sy0">,</span> handleCacheEvent<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// The manifest returns 404 or 410, the download failed,</span>
+<span class="co1">// or the manifest changed while the download was in progress.</span>
+appCache.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'error'</span><span class="sy0">,</span> handleCacheError<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Fired after the first download of the manifest.</span>
+appCache.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'noupdate'</span><span class="sy0">,</span> handleCacheEvent<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Fired if the manifest file returns a 404 or 410.</span>
+<span class="co1">// This results in the application cache being deleted.</span>
+appCache.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'obsolete'</span><span class="sy0">,</span> handleCacheEvent<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Fired for each resource listed in the manifest as it is being fetched.</span>
+appCache.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'progress'</span><span class="sy0">,</span> handleCacheEvent<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Fired when the manifest resources have been newly redownloaded.</span>
+appCache.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'updateready'</span><span class="sy0">,</span> handleCacheEvent<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Si no se puede descargar el archivo de manifiesto o algún recurso especificado en él, fallará todo el proceso de actualización. Si se produce ese fallo, el navegador seguirá utilizando la antigua caché de la aplicación.</p>
+
+<h2 id="eventos-online-offline">9.5 Eventos online/offline</h2>
+
+<p>Como parte de la especificación de HTML5, el objeto <code>navigator</code> incluye una propiedad que nos indica si se dispone de conexión o no, concretamente <code>navigator.onLine</code>. Sin embargo, esta propiedad no se comporta de manera correcta en la mayoría de navegadores, y únicamente cambia su estado al indicar de manera explícita que funcione en <em>modo offline</em>. Como desarrolladores, lo que realmente nos interesa es conocer si realmente hay conexión o no con el servidor.</p>
+
+<p>Una manera de identificar si existe conexión a internet, es utilizar la categoría FALLBACK del manifiesto. En esta categoría podemos indicar dos ficheros JavaScript que detectan si estamos online o no:</p>
+
+<div class="code code">
+<pre class="code">CACHE MANIFEST
+&nbsp;
+FALLBACK:
+online.js offline.js</pre>
+</div>
+
+<p><code>online.js</code> contiene:</p>
+
+<div class="code javascript">
+<pre class="javascript">setOnline<span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Y <code>offline.js</code> contiene:</p>
+
+<div class="code javascript">
+<pre class="javascript">setOnline<span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>En nuestra aplicación, creamos una función llamada <code>testOnline</code> que dinámicamente crea un elemento <code>&lt;script&gt;</code>, el cual trata de cargar el fichero <code>online.js</code>. Si la carga se realiza de manera correcta, se ejecuta el método <code>setOnline(true)</code>. Si estamos <em>offline</em>, el navegador cargará el fichero <code>offline.js</code>, ejecutando el método <code>setOnline(false)</code>.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> testOnline<span class="br0">&#40;</span>fn<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> script <span class="sy0">=</span> document.<span class="me1">createElement</span><span class="br0">&#40;</span>‘script’<span class="br0">&#41;</span>
+    script.<span class="me1">src</span> <span class="sy0">=</span> <span class="st0">'online.js'</span><span class="sy0">;</span>
+    <span class="co1">// alias the setOnline function to the new function that was passed in</span>
+    window.<span class="me1">setOnline</span> <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">&#40;</span>online<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        document.<span class="me1">body</span>.<span class="me1">removeChild</span><span class="br0">&#40;</span>script<span class="br0">&#41;</span><span class="sy0">;</span>
+        fn<span class="br0">&#40;</span>online<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="co1">// attaching script node trigger the code to run</span>
+    document.<span class="me1">body</span>.<span class="me1">appendChild</span><span class="br0">&#40;</span>script<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+testOnline<span class="br0">&#40;</span><span class="kw1">function</span> <span class="br0">&#40;</span>online<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>online<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        applicationCache.<span class="me1">update</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+        <span class="co1">// show users an unobtrusive message that they're disconnected</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 11</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej11">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-9.html#sin-conexion">Sin conexión</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.1</span>
+                        <a class="internal" href="capitulo-9.html#el-archivo-de-manifiesto-de-cache">El archivo de manifiesto de caché</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.2</span>
+                        <a class="internal" href="capitulo-9.html#como-servir-el-manifiesto">Cómo servir el manifiesto</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.3</span>
+                        <a class="internal" href="capitulo-9.html#proceso-de-cacheado">Proceso de cacheado</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.4</span>
+                        <a class="internal" href="capitulo-9.html#actualizacion-de-la-memoria-cache">Actualización de la memoria caché</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.5</span>
+                        <a class="internal" href="capitulo-9.html#eventos-online-offline">Eventos online/offline</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

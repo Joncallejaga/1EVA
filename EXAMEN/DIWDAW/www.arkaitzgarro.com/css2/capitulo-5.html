@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Posicionamiento y visualización | CSS 2.1</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">CSS 2.1</a></h1>
+        <p class="span3">
+                        <a href="capitulo-4.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-6.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="posicionamiento-y-visualizacion"><span>Capítulo 5</span> Posicionamiento y visualización</h1>
+        <p>Cuando los navegadores descargan el contenido HTML y CSS de las páginas web, aplican un procesamiento muy complejo antes de mostrar las páginas en la pantalla del usuario.</p>
+
+<p>Para cumplir con el modelo de cajas presentado en el capítulo anterior, los navegadores crean una caja para representar a cada elemento de la página HTML. Los factores que se tienen en cuenta para generar cada caja son:</p>
+
+<ul>
+<li>Las propiedades <code>width</code> y <code>height</code> de la caja (si están establecidas).</li>
+<li>El tipo de cada elemento HTML (elemento de bloque o elemento en línea).</li>
+<li>Posicionamiento de la caja (normal, relativo, absoluto, fijo o flotante).</li>
+<li>Las relaciones entre elementos (dónde se encuentra cada elemento, elementos descendientes, etc.)</li>
+<li>Otro tipo de información, como por ejemplo el tamaño de las imágenes y el tamaño de la ventana del navegador.</li>
+</ul>
+
+<p>En este capítulo se muestran los cinco tipos de posicionamientos definidos para las cajas y se presentan otras propiedades que afectan a la forma en la que se visualizan las cajas.</p>
+
+<h2 id="tipos-de-elementos">5.1 Tipos de elementos</h2>
+
+<p>El estándar HTML clasifica a todos sus elementos en dos grandes grupos: elementos en línea y elementos de bloque.</p>
+
+<p>Los elementos de bloque ("<em>block elements</em>" en inglés) siempre empiezan en una nueva línea y ocupan todo el espacio disponible hasta el final de la línea. Por su parte, los elementos en línea ("<em>inline elements</em>" en inglés) no empiezan necesariamente en nueva línea y sólo ocupan el espacio necesario para mostrar sus contenidos.</p>
+
+<p>Debido a este comportamiento, el tipo de un elemento influye de forma decisiva en la caja que el navegador crea para mostrarlo. La siguiente imagen muestra las cajas que crea el navegador para representar los diferentes elementos que forman una página HTML:</p>
+
+<div class="figure" id="figure-5-1">
+    <img src="images/cap05/cajas.png" alt="Cajas creadas por los elementos de línea y los elementos de bloque" />
+
+    <p class="caption"><strong>Figura 5.1</strong> Cajas creadas por los elementos de línea y los elementos de bloque</p>
+</div>
+
+
+<p>El primer elemento de la página anterior es un párrafo. Los párrafos son elementos de bloque y por ese motivo su caja empieza en una nueva línea y llega hasta el final de esa misma línea. Aunque los contenidos de texto del párrafo no son suficientes para ocupar toda la línea, el navegador reserva todo el espacio disponible en la primera línea.</p>
+
+<p>El segundo elemento de la página es un enlace. Los enlaces son elementos en línea, por lo que su caja sólo ocupa el espacio necesario para mostrar sus contenidos. Si después de este elemento se incluye otro elemento en línea (por ejemplo otro enlace o una imagen) el navegador mostraría los dos elementos en la misma línea, ya que existe espacio suficiente.</p>
+
+<p>Por último, el tercer elemento de la página es un párrafo que se comporta de la misma forma que el primer párrafo. En su interior, se encuentra un enlace que también se comporta de la misma forma que el enlace anterior. Así, el segundo párrafo ocupa toda una línea y el segundo enlace sólo ocupa el espacio necesario para mostrar sus contenidos.</p>
+
+<p>Por sus características, los elementos de bloque no pueden insertarse dentro de elementos en línea y tan sólo pueden aparecer dentro de otros elementos de bloque. En cambio, un elemento en línea puede aparecer tanto dentro de un elemento de bloque como dentro de otro elemento en línea.</p>
+
+<p>Los elementos en línea definidos por HTML son: <code>a, abbr, acronym, b, basefont, bdo, big, br, cite, code, dfn, em, font, i, img, input, kbd, label, q, s, samp, select, small, span, strike, strong, sub, sup, textarea, tt, u, var</code>.</p>
+
+<p>Los elementos de bloque definidos por HTML son: <code>address, blockquote, center, dir, div, dl, fieldset, form, h1, h2, h3, h4, h5, h6, hr, isindex, menu, noframes, noscript, ol, p, pre, table, ul</code>.</p>
+
+<p>Los siguientes elementos también se considera que son de bloque: <code>dd, dt, frameset, li, tbody, td, tfoot, th, thead, tr</code>.</p>
+
+<p>Los siguientes elementos pueden ser en línea y de bloque según las circunstancias: <code>button, del, iframe, ins, map, object, script</code>.</p>
+
+<h2 id="posicionamiento">5.2 Posicionamiento</h2>
+
+<p>Los navegadores crean y posicionan de forma automática todas las cajas que forman cada página HTML. No obstante, CSS permite al diseñador modificar la posición en la que se muestra cada caja.</p>
+
+<p>Utilizando las propiedades que proporciona CSS para alterar la posición de las cajas es posible realizar efectos muy avanzados y diseñar estructuras de páginas que de otra forma no serían posibles.</p>
+
+<p>El estándar de CSS define cinco modelos diferentes para posicionar una caja:</p>
+
+<ul>
+<li>Posicionamiento normal o estático: se trata del posicionamiento que utilizan los navegadores si no se indica lo contrario.</li>
+<li>Posicionamiento relativo: variante del posicionamiento normal que consiste en posicionar una caja según el posicionamiento normal y después desplazarla respecto de su posición original.</li>
+<li>Posicionamiento absoluto: la posición de una caja se establece de forma absoluta respecto de su elemento contenedor y el resto de elementos de la página ignoran la nueva posición del elemento.</li>
+<li>Posicionamiento fijo: variante del posicionamiento absoluto que convierte una caja en un elemento inamovible, de forma que su posición en la pantalla siempre es la misma independientemente del resto de elementos e independientemente de si el usuario sube o baja la página en la ventana del navegador.</li>
+<li>Posicionamiento flotante: se trata del modelo más especial de posicionamiento, ya que desplaza las cajas todo lo posible hacia la izquierda o hacia la derecha de la línea en la que se encuentran.</li>
+</ul>
+
+<p>El posicionamiento de una caja se establece mediante la propiedad <code>position</code>:</p>
+
+<div class="table" id="table-5-1">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>position</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">static &#124; relative &#124; absolute &#124; fixed &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">static</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Selecciona el posicionamiento con el que se mostrará el elemento</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>El significado de cada uno de los posibles valores de la propiedad <code>position</code> es el siguiente:</p>
+
+<ul>
+<li><code>static</code>: corresponde al posicionamiento normal o estático. Si se utiliza este valor, se ignoran los valores de las propiedades <code>top, right, bottom</code> y <code>left</code> que se verán a continuación.</li>
+<li><code>relative</code>: corresponde al posicionamiento relativo. El desplazamiento de la caja se controla con las propiedades <code>top, right, bottom</code> y <code>left</code>.</li>
+<li><code>absolute</code>: corresponde al posicionamiento absoluto. El desplazamiento de la caja también se controla con las propiedades <code>top, right, bottom</code> y <code>left</code>, pero su interpretación es mucho más compleja, ya que el origen de coordenadas del desplazamiento depende del posicionamiento de su elemento contenedor.</li>
+<li><code>fixed</code>: corresponde al posicionamiento fijo. El desplazamiento se establece de la misma forma que en el posicionamiento absoluto, pero en este caso el elemento permanece inamovible en la pantalla.</li>
+</ul>
+
+<p>La propiedad <code>position</code> no permite controlar el posicionamiento flotante, que se establece con otra propiedad llamada <code>float</code> y que se explica más adelante. Además, la propiedad <code>position</code> sólo indica cómo se posiciona una caja, pero no la desplaza.</p>
+
+<p>Normalmente, cuando se posiciona una caja también es necesario desplazarla respecto de su posición original o respecto de otro origen de coordenadas. CSS define cuatro propiedades llamadas <code>top, right, bottom</code> y <code>left</code> para controlar el desplazamiento de las cajas posicionadas:</p>
+
+<div class="table" id="table-5-2">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedades</th>
+  <th align="left"><code>top, right, bottom, left</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">unidad de medida &#124; porcentaje &#124; auto &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos posicionados</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">auto</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Indican el desplazamiento horizontal y vertical del elemento respecto de su posición original</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>En el caso del posicionamiento relativo, cada una de estas propiedades indica el desplazamiento del elemento desde la posición original de su borde superior/derecho/inferior/izquierdo. Si el posicionamiento es absoluto, las propiedades indican el desplazamiento del elemento respecto del borde superior/derecho/inferior/izquierdo de su primer elemento padre posicionado.</p>
+
+<p>En cualquiera de los dos casos, si el desplazamiento se indica en forma de porcentaje, se refiere al porcentaje sobre la anchura (propiedades <code>right</code> y <code>left</code>) o altura (propiedades <code>top</code> y <code>bottom</code>) del elemento.</p>
+
+<h2 id="posicionamiento-normal">5.3 Posicionamiento normal</h2>
+
+<p>El posicionamiento normal o estático es el modelo que utilizan por defecto los navegadores para mostrar los elementos de las páginas. En este modelo, sólo se tiene en cuenta si el elemento es de bloque o en línea, sus propiedades <code>width</code> y <code>height</code> y su contenido.</p>
+
+<p>Los elementos de bloque forman lo que CSS denomina "<em>contextos de formato de bloque</em>". En este tipo de contextos, las cajas se muestran una debajo de otra comenzando desde el principio del elemento contenedor. La distancia entre las cajas se controla mediante los márgenes verticales.</p>
+
+<div class="figure" id="figure-5-2">
+    <img src="images/cap05/posicionamiento-normal.png" alt="Posicionamiento normal de los elementos de bloque" />
+
+    <p class="caption"><strong>Figura 5.2</strong> Posicionamiento normal de los elementos de bloque</p>
+</div>
+
+
+<p>Si un elemento se encuentra dentro de otro, el elemento padre se llama "<em>elemento contenedor</em>" y determina tanto la posición como el tamaño de todas sus cajas interiores.</p>
+
+<p>Si un elemento no se encuentra dentro de un elemento contenedor, entonces su elemento contenedor es el elemento <code>&lt;body&gt;</code> de la página. Normalmente, la anchura de los elementos de bloque está limitada a la anchura de su elemento contenedor, aunque en algunos casos sus contenidos pueden desbordar el espacio disponible.</p>
+
+<p>Los elementos en línea forman los "<em>contextos de formato en línea</em>". En este tipo de contextos, las cajas se muestran una detrás de otra de forma horizontal comenzando desde la posición más a la izquierda de su elemento contenedor. La distancia entre las cajas se controla mediante los márgenes laterales.</p>
+
+<div class="figure" id="figure-5-3">
+    <img src="images/cap05/posicionamiento-enlinea.png" alt="Posicionamiento normal de los elementos en línea" />
+
+    <p class="caption"><strong>Figura 5.3</strong> Posicionamiento normal de los elementos en línea</p>
+</div>
+
+
+<p>Si las cajas en línea ocupan más espacio del disponible en su propia línea, el resto de cajas se muestran en las líneas inferiores. Si las cajas en línea ocupan un espacio menor que su propia línea, se puede controlar la distribución de las cajas mediante la propiedad text-align para centrarlas, alinearlas a la derecha o justificarlas.</p>
+
+<h2 id="posicionamiento-relativo">5.4 Posicionamiento relativo</h2>
+
+<p>El estándar CSS considera que el posicionamiento relativo es un caso particular del posicionamiento normal, aunque en la práctica presenta muchas diferencias.</p>
+
+<p>El posicionamiento relativo desplaza una caja respecto de su posición original establecida mediante el posicionamiento normal. El desplazamiento de la caja se controla con las propiedades <code>top, right, bottom</code> y <code>left</code>.</p>
+
+<p>El valor de la propiedad <code>top</code> se interpreta como el desplazamiento entre el borde superior de la caja en su posición final y el borde superior de la misma caja en su posición original.</p>
+
+<p>De la misma forma, el valor de las propiedades <code>left, right</code> y <code>bottom</code> indica respectivamente el desplazamiento entre el borde izquierdo/derecho/inferior de la caja en su posición final y el borde izquierdo/derecho/inferior de la caja original.</p>
+
+<p>Por tanto, la propiedad <code>top</code> se emplea para mover las cajas de forma descendente, la propiedad <code>bottom</code> mueve las cajas de forma ascendente, la propiedad <code>left</code> se utiliza para desplazar las cajas hacia la derecha y la propiedad <code>right</code> mueve las cajas hacia la izquierda. Este comportamiento parece poco intuitivo y es causa de errores cuando se empiezan a diseñar páginas con CSS. Si se utilizan valores negativos en las propiedades <code>top, right, bottom</code> y <code>left</code>, su efecto es justamente el inverso.</p>
+
+<p>El desplazamiento relativo de una caja no afecta al resto de cajas adyacentes, que se muestran en la misma posición que si la caja desplazada no se hubiera movido de su posición original.</p>
+
+<div class="figure" id="figure-5-4">
+    <img src="images/cap05/posicionamiento-normal-relativo.png" alt="Ejemplo de posicionamiento relativo de un elemento" />
+
+    <p class="caption"><strong>Figura 5.4</strong> Ejemplo de posicionamiento relativo de un elemento</p>
+</div>
+
+
+<p>En la imagen anterior, la caja 2 se ha desplazado lateralmente hacia la derecha y verticalmente de forma descendente. Como el resto de cajas de la página no modifican su posición, se producen solapamientos entre los contenidos de las cajas.</p>
+
+<p>Las cajas desplazadas de forma relativa no modifican su tamaño, por lo que los valores de las propiedades <code>left</code> y <code>right</code> siempre cumplen que <code>left = -right</code>.</p>
+
+<p>Si tanto <code>left</code> como <code>right</code> tienen un valor de <code>auto</code> (que es su valor por defecto) la caja no se mueve de su posición original. Si sólo el valor de <code>left</code> es auto, su valor real es <code>-right</code>. Igualmente, si sólo el valor de <code>right</code> es auto, su valor real es <code>-left</code>.</p>
+
+<p>Si tanto <code>left</code> como <code>right</code> tienen valores distintos de auto, uno de los dos valores se tiene que ignorar porque son mutuamente excluyentes. Para determinar la propiedad que se tiene en cuenta, se considera el valor de la propiedad <code>direction</code>.</p>
+
+<p>La propiedad <code>direction</code> permite establecer la dirección del texto de un contenido. Si el valor de <code>direction</code> es <code>ltr</code>, el texto se muestra de izquierda a derecha, que es el método de escritura habitual en la mayoría de países. Si el valor de direction es <code>rtl</code>, el método de escritura es de derecha a izquierda, como el utilizado por los idiomas árabe y hebreo.</p>
+
+<p>Si el valor de <code>direction</code> es <code>ltr</code>, y las propiedades <code>left</code> y <code>right</code> tienen valores distintos de <code>auto</code>, se ignora la propiedad <code>right</code> y sólo se tiene en cuenta el valor de la propiedad <code>left</code>. De la misma forma, si el valor de <code>direction</code> es <code>rtl</code>, se ignora el valor de <code>left</code> y sólo se tiene en cuenta el valor de <code>right</code>.</p>
+
+<h2 id="posicionamiento-absoluto">5.5 Posicionamiento absoluto</h2>
+
+<p>El posicionamiento absoluto se emplea para establecer de forma exacta la posición en la que se muestra la caja de un elemento. La nueva posición de la caja se indica mediante las propiedades <code>top, right, bottom</code> y <code>left</code>. La interpretación de los valores de estas propiedades es mucho más compleja que en el posicionamiento relativo, ya que en este caso dependen del posicionamiento del elemento contenedor.</p>
+
+<p>Cuando una caja se posiciona de forma absoluta, el resto de elementos de la página se ven afectados y modifican su posición. Al igual que en el posicionamiento relativo, cuando se posiciona de forma absoluta una caja es probable que se produzcan solapamientos con otras cajas.</p>
+
+<p>En el siguiente ejemplo, se posiciona de forma absoluta la caja 2:</p>
+
+<div class="figure" id="figure-5-5">
+    <img src="images/cap05/posicionamiento-absoluto.png" alt="Ejemplo de posicionamiento absoluto de un elemento" />
+
+    <p class="caption"><strong>Figura 5.5</strong> Ejemplo de posicionamiento absoluto de un elemento</p>
+</div>
+
+
+<p>La caja 2 está posicionada de forma absoluta, lo que provoca que el resto de elementos de la página modifiquen su posición. En concreto, la caja 3 deja su lugar original y pasa a ocupar el hueco dejado por la caja 2.</p>
+
+<p>El estándar de CSS 2.1 indica que las cajas posicionadas de forma absoluta "<em>salen del flujo normal de la página</em>", lo que provoca que el resto de elementos de la página se muevan y en ocasiones, ocupen la posición original en la que se encontraba la caja.</p>
+
+<p>Por otra parte, el desplazamiento de una caja posicionada de forma absoluta se controla mediante las propiedades <code>top, right, bottom</code> y <code>left</code>. A diferencia del posicionamiento relativo, la interpretación de los valores de estas propiedades depende del elemento contenedor de la caja posicionada.</p>
+
+<p>Determinar la referencia utilizada para interpretar los valores de <code>top, right, bottom</code> y <code>left</code> de una caja posicionada de forma absoluta es un proceso complejo que se compone de los siguientes pasos:</p>
+
+<ul>
+<li>Se buscan todos los elementos contenedores de la caja hasta llegar al elemento <code>&lt;body&gt;</code> de la página.</li>
+<li>Se recorren todos los elementos contenedores empezando por el más cercano a la caja y llegando hasta el <code>&lt;body&gt;</code></li>
+<li>El primer elemento contenedor que esté posicionado de cualquier forma diferente a position: <code>static</code> se convierte en la referencia que determina la posición de la caja posicionada de forma absoluta.</li>
+<li>Si ningún elemento contenedor está posicionado, la referencia es la ventana del navegador, que no debe confundirse con el elemento <code>&lt;body&gt;</code> de la página.</li>
+</ul>
+
+<p>Una vez determinada la referencia del posicionamiento absoluto, la interpretación de los valores de las propiedades <code>top, right, bottom</code> y <code>left</code> se realiza como sigue:</p>
+
+<ul>
+<li>El valor de la propiedad <code>top</code> indica el desplazamiento desde el borde superior de la caja hasta el borde superior del elemento contenedor que se utiliza como referencia.</li>
+<li>El valor de la propiedad <code>right</code> indica el desplazamiento desde el borde derecho de la caja hasta el borde derecho del elemento contenedor que se utiliza como referencia.</li>
+<li>El valor de la propiedad <code>bottom</code> indica el desplazamiento desde el borde inferior de la caja hasta el borde inferior del elemento contenedor que se utiliza como referencia.</li>
+<li>El valor de la propiedad <code>left</code> indica el desplazamiento desde el borde izquierdo de la caja hasta el borde izquierdo del elemento contenedor que se utiliza como referencia.</li>
+</ul>
+
+<p>En los siguientes ejemplos, se utiliza la página HTML que muestra la siguiente imagen:</p>
+
+<div class="figure" id="figure-5-6">
+    <img src="images/cap05/posicionamiento-absoluto-ejemplo.png" alt="Situación original antes de modificar el posicionamiento" />
+
+    <p class="caption"><strong>Figura 5.6</strong> Situación original antes de modificar el posicionamiento</p>
+</div>
+
+
+<p>A continuación, se muestra el código HTML y CSS de la página original:</p>
+
+<div class="code css">
+<pre class="css">div <span class="br0">&#123;</span>
+  <span class="kw1">border</span><span class="sy0">:</span> <span class="re3">2px</span> <span class="kw2">solid</span> <span class="re0">#CCC</span><span class="sy0">;</span>
+  <span class="kw1">padding</span><span class="sy0">:</span> <span class="re3">1em</span><span class="sy0">;</span>
+  <span class="kw1">margin</span><span class="sy0">:</span> <span class="re3">1em</span> <span class="nu0">0</span> <span class="re3">1em</span> <span class="re3">4em</span><span class="sy0">;</span>
+  <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">300px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">div</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;imagenes/imagen.png&quot;</span> <span class="kw3">alt</span><span class="sy0">=</span><span class="st0">&quot;Imagen genérica&quot;</span> <span class="sy0">/</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+  Phasellus ullamcorper velit eu ipsum. Ut pellentesque,
+  est in volutpat cursus, risus mi viverra augue, at pulvinar
+  turpis leo sed orci. Donec ipsum. Curabitur felis dui,
+  ultrices ut, sollicitudin vel, rutrum at, tellus.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre>
+</div>
+
+<p>En primer lugar, se posiciona de forma absoluta la imagen mediante la propiedad position y se indica su nueva posición mediante las propiedades <code>top</code> y <code>left</code>:</p>
+
+<div class="code css">
+<pre class="css">div img <span class="br0">&#123;</span>
+  <span class="kw1">position</span><span class="sy0">:</span> <span class="kw2">absolute</span><span class="sy0">;</span>
+  <span class="kw1">top</span><span class="sy0">:</span>  <span class="re3">50px</span><span class="sy0">;</span>
+  <span class="kw1">left</span><span class="sy0">:</span> <span class="re3">50px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>El resultado visual se muestra en la siguiente imagen:</p>
+
+<div class="figure" id="figure-5-7">
+    <img src="images/cap05/posicionamiento-absoluto-ejemplo-final.png" alt="Imagen posicionada de forma absoluta" />
+
+    <p class="caption"><strong>Figura 5.7</strong> Imagen posicionada de forma absoluta</p>
+</div>
+
+
+<p>Para posicionar la imagen de forma absoluta, el navegador realiza los siguientes pasos:</p>
+
+<ol>
+<li>Obtiene la lista de elementos contenedores de la imagen: <code>&lt;div&gt;</code> y <code>&lt;body&gt;</code>.</li>
+<li>Recorre la lista de elementos contenedores desde el más cercano a la imagen (el <code>&lt;div&gt;</code>) hasta terminar en el <code>&lt;body&gt;</code> buscando el primer elemento contenedor que esté posicionado.</li>
+<li>El posicionamiento de todos los elementos contenedores es el normal o estático, ya que ni siquiera tienen establecida la propiedad position</li>
+<li>Como ningún elemento contenedor está posicionado, la referencia es la ventana del navegador.</li>
+<li>A partir de esa referencia, la caja de la imagen se desplaza <code>50px</code> hacia la derecha (left: <code>50px</code>) y otros <code>50px</code> de forma descendente (top: <code>50px</code>).</li>
+</ol>
+
+<p>Como la imagen se posiciona de forma absoluta, el resto de elementos de la página se mueven para ocupar el lugar libre dejado por la imagen. Por este motivo, el párrafo sube hasta el principio del <code>&lt;div&gt;</code> y se produce un solapamiento con la imagen posicionada que impide ver parte de los contenidos del párrafo.</p>
+
+<p>A continuación, se modifica el ejemplo anterior posicionando de forma relativa el elemento <code>&lt;div&gt;</code> que contiene la imagen y el párrafo. La única propiedad añadida al <code>&lt;div&gt;</code> es <code>position: relative</code> por lo que el elemento contenedor se posiciona pero no se desplaza respecto de su posición original:</p>
+
+<div class="code css">
+<pre class="css">div <span class="br0">&#123;</span>
+  <span class="kw1">border</span><span class="sy0">:</span> <span class="re3">2px</span> <span class="kw2">solid</span> <span class="re0">#CCC</span><span class="sy0">;</span>
+  <span class="kw1">padding</span><span class="sy0">:</span> <span class="re3">1em</span><span class="sy0">;</span>
+  <span class="kw1">margin</span><span class="sy0">:</span> <span class="re3">1em</span> <span class="nu0">0</span> <span class="re3">1em</span> <span class="re3">4em</span><span class="sy0">;</span>
+  <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">300px</span><span class="sy0">;</span>
+  <span class="kw1">position</span><span class="sy0">:</span> <span class="kw2">relative</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+div img <span class="br0">&#123;</span>
+  <span class="kw1">position</span><span class="sy0">:</span> <span class="kw2">absolute</span><span class="sy0">;</span>
+  <span class="kw1">top</span><span class="sy0">:</span> <span class="re3">50px</span><span class="sy0">;</span>
+  <span class="kw1">left</span><span class="sy0">:</span> <span class="re3">50px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="figure" id="figure-5-8">
+    <img src="images/cap05/posicionamiento-relativo-absoluto-ejemplo.png" alt="Imagen posicionada de forma absoluta" />
+
+    <p class="caption"><strong>Figura 5.8</strong> Imagen posicionada de forma absoluta</p>
+</div>
+
+
+<p>En este caso, como el elemento contenedor de la imagen está posicionado, se convierte en la referencia para el posicionamiento absoluto. El resultado es que la posición de la imagen es muy diferente a la del ejemplo anterior. Por tanto, si se quiere posicionar un elemento de forma absoluta respecto de su elemento contenedor, es imprescindible posicionar este último. Para ello, sólo es necesario añadir la propiedad <code>position: relative</code>, por lo que no es obligatorio desplazar el elemento contenedor respecto de su posición original.</p>
+
+<h2 id="posicionamiento-fijo">5.6 Posicionamiento fijo</h2>
+
+<p>El estándar CSS considera que el posicionamiento fijo es un caso particular del posicionamiento absoluto, ya que sólo se diferencian en el comportamiento de las cajas posicionadas.</p>
+
+<p>Cuando una caja se posiciona de forma fija, la forma de obtener el origen de coordenadas para interpretar su desplazamiento es idéntica al posicionamiento absoluto. De hecho, si el usuario no mueve la página HTML en la ventana del navegador, no existe ninguna diferencia entre estos dos modelos de posicionamiento.</p>
+
+<p>La principal característica de una caja posicionada de forma fija es que su posición es inamovible dentro de la ventana del navegador. El posicionamiento fijo hace que las cajas no modifiquen su posición ni aunque el usuario suba o baje la página en la ventana de su navegador.</p>
+
+<p>Si la página se visualiza en un medio paginado (por ejemplo en una impresora) las cajas posicionadas de forma fija se repiten en todas las páginas. Esta característica puede ser útil para crear encabezados o pies de página en páginas HTML preparadas para imprimir.</p>
+
+<p>El posicionamiento fijo apenas se ha utilizado en el diseño de páginas web hasta hace poco tiempo porque el navegador Internet Explorer 6 y las versiones anteriores no lo soportan.</p>
+
+<h2 id="posicionamiento-flotante">5.7 Posicionamiento flotante</h2>
+
+<p>El posicionamiento flotante es el más difícil de comprender pero al mismo tiempo es el más utilizado. La mayoría de estructuras de las páginas web complejas están diseñadas con el posicionamiento flotante, como se verá más adelante.</p>
+
+<p>Cuando una caja se posiciona con el modelo de posicionamiento flotante, automáticamente se convierte en una caja flotante, lo que significa que se desplaza hasta la zona más a la izquierda o más a la derecha de la posición en la que originalmente se encontraba.</p>
+
+<p>La siguiente imagen muestra el resultado de posicionar de forma flotante hacia la derecha la caja 1:</p>
+
+<div class="figure" id="figure-5-9">
+    <img src="images/cap05/posicionamiento-float.png" alt="Ejemplo de posicionamiento float de una caja" />
+
+    <p class="caption"><strong>Figura 5.9</strong> Ejemplo de posicionamiento float de una caja</p>
+</div>
+
+
+<p>Cuando se posiciona una caja de forma flotante:</p>
+
+<ul>
+<li>La caja deja de pertenecer al flujo normal de la página, lo que significa que el resto de cajas ocupan el lugar dejado por la caja flotante.</li>
+<li>La caja flotante se posiciona lo más a la izquierda o lo más a la derecha posible de la posición en la que se encontraba originalmente.</li>
+</ul>
+
+<p>Si en el anterior ejemplo la caja 1 se posiciona de forma flotante hacia la izquierda, el resultado es el que muestra la siguiente imagen:</p>
+
+<div class="figure" id="figure-5-10">
+    <img src="images/cap05/posicionamiento-float-02.png" alt="Ejemplo de posicionamiento float de una caja" />
+
+    <p class="caption"><strong>Figura 5.10</strong> Ejemplo de posicionamiento float de una caja</p>
+</div>
+
+
+<p>La caja 1 es de tipo flotante, por lo que desaparece del <em>flujo normal</em> de la página y el resto de cajas ocupan su lugar. El resultado es que la caja 2 ahora se muestra donde estaba la caja 1 y la caja 3 se muestra donde estaba la caja 2.</p>
+
+<p>Al mismo tiempo, la caja 1 se desplaza todo lo posible hacia la izquierda de la posición en la que se encontraba. El resultado es que la caja 1 se muestra encima de la nueva posición de la caja 2 y tapa todos sus contenidos.</p>
+
+<p>Si existen otras cajas flotantes, al posicionar de forma flotante otra caja, se tiene en cuenta el sitio disponible. En el siguiente ejemplo se posicionan de forma flotante hacia la izquierda las tres cajas:</p>
+
+<div class="figure" id="figure-5-11">
+    <img src="images/cap05/posicionamiento-float-03.png" alt="Ejemplo de posicionamiento float de una caja" />
+
+    <p class="caption"><strong>Figura 5.11</strong> Ejemplo de posicionamiento float de una caja</p>
+</div>
+
+
+<p>En el ejemplo anterior, las cajas no se superponen entre sí porque las cajas flotantes tienen en cuenta las otras cajas flotantes existentes. Como la caja 1 ya estaba posicionada lo más a la izquierda posible, la caja 2 sólo puede colocarse al lado del borde derecho de la caja 1, que es el sitio más a la izquierda posible respecto de la zona en la que se encontraba.</p>
+
+<p>Si no existe sitio en la línea actual, la caja flotante baja a la línea inferior hasta que encuentra el sitio necesario para mostrarse lo más a la izquierda o lo más a la derecha posible en esa nueva línea:</p>
+
+<div class="figure" id="figure-5-12">
+    <img src="images/cap05/posicionamiento-float-04.png" alt="Ejemplo de posicionamiento float de una caja" />
+
+    <p class="caption"><strong>Figura 5.12</strong> Ejemplo de posicionamiento float de una caja</p>
+</div>
+
+
+<p>Las cajas flotantes influyen en la disposición de todas las demás cajas. Los elementos en línea <em>hacen sitio</em> a las cajas flotantes adaptando su anchura al espacio libre dejado por la caja desplazada. Los elementos de bloque no les hacen sitio, pero sí que adaptan sus contenidos para que no se solapen con las cajas flotantes.</p>
+
+<p>La propiedad CSS que permite posicionar de forma flotante una caja se denomina float:</p>
+
+<div class="table" id="table-5-3">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>float</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">left &#124; right &#124; none &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">none</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Establece el tipo de posicionamiento flotante del elemento</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Si se indica un valor <code>left</code>, la caja se desplaza hasta el punto más a la izquierda posible en esa misma línea (si no existe sitio en esa línea, la caja baja una línea y se muestra lo más a la izquierda posible en esa nueva línea). El resto de elementos adyacentes se adaptan y <em>fluyen</em> alrededor de la caja flotante.</p>
+
+<p>El valor <code>right</code> tiene un funcionamiento idéntico, salvo que en este caso, la caja se desplaza hacia la derecha. El valor none permite anular el posicionamiento flotante de forma que el elemento se muestre en su posición original.</p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 6</p>
+</div>
+
+<p><a class="internal" href="capitulo-14.html#ej06">Ver enunciado</a></p>
+
+<p>Los elementos que se encuentran alrededor de una caja flotante adaptan sus contenidos para que fluyan alrededor del elemento posicionado:</p>
+
+<div class="figure" id="figure-5-13">
+    <img src="images/cap05/posicionamiento-float-05.png" alt="Elementos que fluyen alrededor de un elemento posicionado mediante float" />
+
+    <p class="caption"><strong>Figura 5.13</strong> Elementos que fluyen alrededor de un elemento posicionado mediante float</p>
+</div>
+
+
+<p>La regla CSS que se aplica en la imagen del ejemplo anterior es:</p>
+
+<div class="code css">
+<pre class="css">img <span class="br0">&#123;</span>
+  <span class="kw1">float</span><span class="sy0">:</span> <span class="kw1">left</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Uno de los principales motivos para la creación del posicionamiento <code>float</code> fue precisamente la posibilidad de colocar imágenes alrededor de las cuales fluye el texto.</p>
+
+<p>CSS permite controlar la forma en la que los contenidos fluyen alrededor de los contenidos posicionados mediante <code>float</code>. De hecho, en muchas ocasiones es admisible que algunos contenidos fluyan alrededor de una imagen, pero el resto de contenidos deben mostrarse en su totalidad sin fluir alrededor de la imagen:</p>
+
+<div class="figure" id="figure-5-14">
+    <img src="images/cap05/posicionamiento-float-06.png" alt="Forzando a que un elemento no fluya alrededor de otro elemento posicionado mediante float" />
+
+    <p class="caption"><strong>Figura 5.14</strong> Forzando a que un elemento no fluya alrededor de otro elemento posicionado mediante float</p>
+</div>
+
+
+<p>La propiedad clear permite modificar el comportamiento por defecto del posicionamiento flotante para forzar a un elemento a mostrarse debajo de cualquier caja flotante. La regla CSS que se aplica al segundo párrafo del ejemplo anterior es la siguiente:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">style</span><span class="sy0">=</span><span class="st0">&quot;clear: left;&quot;</span>&gt;</span>...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<p>La definición formal de la propiedad clear se muestra a continuación:</p>
+
+<div class="table" id="table-5-4">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>clear</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">none &#124; left &#124; right &#124; both &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos de bloque</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">none</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Indica el lado del elemento que no debe ser adyacente a ninguna caja flotante</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>La propiedad <code>clear</code> indica el lado del elemento HTML que no debe ser adyacente a ninguna caja posicionada de forma flotante. Si se indica el valor <code>left</code>, el elemento se desplaza de forma descendente hasta que pueda colocarse en una línea en la que no haya ninguna caja flotante en el lado izquierdo.</p>
+
+<p>La especificación oficial de CSS explica este comportamiento como "<em>un desplazamiento descendente hasta que el borde superior del elemento esté por debajo del borde inferior de cualquier elemento flotante hacia la izquierda</em>".</p>
+
+<p>Si se indica el valor <code>right</code>, el comportamiento es análogo, salvo que en este caso se tienen en cuenta los elementos desplazados hacia la derecha.</p>
+
+<p>El valor <code>both</code> despeja los lados izquierdo y derecho del elemento, ya que desplaza el elemento de forma descendente hasta que el borde superior se encuentre por debajo del borde inferior de cualquier elemento flotante hacia la izquierda o hacia la derecha.</p>
+
+<p>Como se verá más adelante, la propiedad <code>clear</code> es imprescindible cuando se crean las estructuras de las páginas web complejas.</p>
+
+<p>Si se considera el siguiente código CSS y HTML:</p>
+
+<div class="code css">
+<pre class="css"><span class="re0">#paginacion</span> <span class="br0">&#123;</span>
+  <span class="kw1">border</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="kw2">solid</span> <span class="re0">#CCC</span><span class="sy0">;</span>
+  <span class="kw1">background-color</span><span class="sy0">:</span> <span class="re0">#E0E0E0</span><span class="sy0">;</span>
+  <span class="kw1">padding</span><span class="sy0">:</span> <span class="re3">.5em</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re1">.derecha</span>   <span class="br0">&#123;</span> <span class="kw1">float</span><span class="sy0">:</span> <span class="kw1">right</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+<span class="re1">.izquierda</span> <span class="br0">&#123;</span> <span class="kw1">float</span><span class="sy0">:</span> <span class="kw1">left</span><span class="sy0">;</span>  <span class="br0">&#125;</span>
+&lt;div id<span class="sy0">=</span><span class="st0">&quot;paginacion&quot;</span><span class="sy0">&gt;</span>
+  &lt;span class<span class="sy0">=</span><span class="st0">&quot;izquierda&quot;</span><span class="sy0">&gt;</span>&amp;laquo<span class="sy0">;</span> Anterior&lt;/span<span class="sy0">&gt;</span>
+  &lt;span class<span class="sy0">=</span><span class="st0">&quot;derecha&quot;</span><span class="sy0">&gt;</span>Siguiente &amp;raquo<span class="sy0">;</span>&lt;/span<span class="sy0">&gt;</span>
+&lt;/div<span class="sy0">&gt;</span></pre>
+</div>
+
+<p>Si se visualiza la página anterior en cualquier navegador, el resultado es el que muestra la siguiente imagen:</p>
+
+<div class="figure" id="figure-5-15">
+    <img src="images/cap05/posicionamiento-float-07.png" alt="Visualización incorrecta de dos elementos posicionados mediante float" />
+
+    <p class="caption"><strong>Figura 5.15</strong> Visualización incorrecta de dos elementos posicionados mediante float</p>
+</div>
+
+
+<p>Los elementos <code>Anterior</code> y <code>Siguiente</code> se salen de su elemento contenedor y el resultado es visualmente incorrecto. El motivo de este comportamiento es que un elemento posicionado de forma flotante ya no pertenece al flujo normal de la página HTML. Por tanto, el elemento <code>&lt;div id="paginacion"&gt;</code> en realidad no encierra ningún contenido y por eso se visualiza incorrectamente.</p>
+
+<p>La solución consiste en utilizar la propiedad overflow (que se explica más adelante) sobre el elemento contenedor:</p>
+
+<div class="code css">
+<pre class="css"><span class="re0">#paginacion</span> <span class="br0">&#123;</span>
+  <span class="kw1">border</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="kw2">solid</span> <span class="re0">#CCC</span><span class="sy0">;</span>
+  <span class="kw1">background-color</span><span class="sy0">:</span> <span class="re0">#E0E0E0</span><span class="sy0">;</span>
+  <span class="kw1">padding</span><span class="sy0">:</span> <span class="re3">.5em</span><span class="sy0">;</span>
+  <span class="kw1">overflow</span><span class="sy0">:</span> <span class="kw2">hidden</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re1">.derecha</span>   <span class="br0">&#123;</span> <span class="kw1">float</span><span class="sy0">:</span> <span class="kw1">right</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+<span class="re1">.izquierda</span> <span class="br0">&#123;</span> <span class="kw1">float</span><span class="sy0">:</span> <span class="kw1">left</span><span class="sy0">;</span>  <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Si se visualiza de nuevo la página anterior en cualquier navegador, el resultado ahora sí que es el esperado:</p>
+
+<div class="figure" id="figure-5-16">
+    <img src="images/cap05/posicionamiento-float-08.png" alt="Visualización correcta de dos elementos posicionados mediante float" />
+
+    <p class="caption"><strong>Figura 5.16</strong> Visualización correcta de dos elementos posicionados mediante float</p>
+</div>
+
+
+<h2 id="visualizacion">5.8 Visualización</h2>
+
+<p>Además de las propiedades que controlan el posicionamiento de los elementos, CSS define otras cuatro propiedades para controlar su visualización: <code>display</code>, <code>visibility</code>, <code>overflow</code> y <code>z-index</code>.</p>
+
+<p>Utilizando algunas de estas propiedades es posible ocultar y/o hacer invisibles las cajas de los elementos, por lo que son imprescindibles para realizar efectos avanzados y animaciones.</p>
+
+<h2 id="propiedades-display-y-visibility">5.9 Propiedades display y visibility</h2>
+
+<p>Las propiedades <code>display</code> y <code>visibility</code> controlan la visualización de los elementos. Las dos propiedades permiten ocultar cualquier elemento de la página. Habitualmente se utilizan junto con JavaScript para crear efectos dinámicos como mostrar y ocultar determinados textos o imágenes cuando el usuario pincha sobre ellos.</p>
+
+<p>La propiedad <code>display</code> permite ocultar completamente un elemento haciendo que desaparezca de la página. Como el elemento oculto no se muestra, el resto de elementos de la página se mueven para ocupar su lugar.</p>
+
+<p>Por otra parte, la propiedad <code>visibility</code> permite hacer invisible un elemento, lo que significa que el navegador crea la caja del elemento pero no la muestra. En este caso, el resto de elementos de la página no modifican su posición, ya que aunque la caja no se ve, sigue ocupando sitio.</p>
+
+<p>La siguiente imagen muestra la diferencia entre ocultar la caja número 5 mediante la propiedad <code>display</code> o hacerla invisible mediante la propiedad <code>visibility</code>:</p>
+
+<div class="figure" id="figure-5-17">
+    <img src="images/cap05/display.png" alt="Diferencias visuales entre las propiedades display y visibility" />
+
+    <p class="caption"><strong>Figura 5.17</strong> Diferencias visuales entre las propiedades display y visibility</p>
+</div>
+
+
+<p>En general, cuando se oculta un elemento no es deseable que siga ocupando sitio en la página, por lo que la propiedad <code>display</code> se utiliza mucho más que la propiedad <code>visibility</code>.</p>
+
+<p>A continuación se muestra la definición completa de la propiedad <code>display</code>:</p>
+
+<div class="table" id="table-5-5">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>display</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">inline &#124; block &#124; none &#124; list-item &#124; run-in &#124; inline-block &#124; table &#124; inline-table &#124; table-row-group &#124; table-header-group &#124; table-footer-group &#124; table-row &#124; table-column-group &#124; table-column &#124; table-cell &#124; table-caption &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">inline</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Permite controlar la forma de visualizar un elemento e incluso ocultarlo</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Las posibilidades de la propiedad <code>display</code> son mucho más avanzadas que simplemente ocultar elementos. En realidad, la propiedad <code>display</code> modifica la forma en la que se visualiza un elemento.</p>
+
+<p>Los valores más utilizados son <code>inline, block</code> y <code>none</code>. El valor <code>block</code> muestra un elemento como si fuera un elemento de bloque, independientemente del tipo de elemento que se trate. El valor <code>inline</code> visualiza un elemento en forma de elemento en línea, independientemente del tipo de elemento que se trate.</p>
+
+<p>El valor <code>none</code> oculta un elemento y hace que desaparezca de la página. El resto de elementos de la página se visualizan como si no existiera el elemento oculto, es decir, pueden ocupar el espacio en el que se debería visualizar el elemento.</p>
+
+<p>Como se verá más adelante, la propiedad <code>display: inline</code> se puede utilizar en las listas (<code>&lt;ul&gt;, &lt;ol&gt;</code>) que se quieren mostrar horizontalmente y la propiedad <code>display: block</code> se emplea frecuentemente para los enlaces que forman el menú de navegación.</p>
+
+<p>Por su parte, la definición completa de la propiedad visibility es mucho más sencilla:</p>
+
+<div class="table" id="table-5-6">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>visibility</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">visible &#124; hidden &#124; collapse &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">visible</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Permite hacer visibles e invisibles a los elementos</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Las posibilidades de la propiedad <code>visibility</code> son mucho más limitadas que las de la propiedad <code>display</code>, ya que sólo permite hacer visibles o invisibles a los elementos de la página.</p>
+
+<p>Inicialmente todas las cajas que componen la página son visibles. Empleando el valor <code>hidden</code> es posible convertir una caja en invisible para que no muestre sus contenidos. El resto de elementos de la página se muestran como si la caja todavía fuera visible, por lo que en el lugar donde originalmente se mostraba la caja invisible, ahora se muestra un hueco vacío.</p>
+
+<p>Por último, el valor <code>collapse</code> de la propiedad <code>visibility</code> sólo se puede utilizar en las filas, grupos de filas, columnas y grupos de columnas de una tabla. Su efecto es similar al de la propiedad <code>display</code>, ya que oculta completamente la fila y/o columna y se pueden mostrar otros contenidos en ese lugar. Si se utiliza el valor <code>collapse</code> sobre cualquier otro tipo de elemento, su efecto es idéntico al valor <code>hidden</code>.</p>
+
+<h3 id="relacion-entre-display-float-y-position">5.9.1 Relación entre display, float y position</h3>
+
+<p>Cuando se establecen las propiedades <code>display, float</code> y <code>position</code> sobre una misma caja, su interpretación es la siguiente:</p>
+
+<ul>
+<li>Si <code>display</code> vale <code>none</code>, se ignoran las propiedades <code>float</code> y <code>position</code> y la caja no se muestra en la página.</li>
+<li>Si <code>position</code> vale <code>absolute</code> o <code>fixed</code>, la caja se posiciona de forma absoluta, se considera que <code>float</code> vale <code>none</code> y la propiedad <code>display</code> vale <code>block</code> tanto para los elementos en línea como para los elementos de bloque. La posición de la caja se determina mediante el valor de las propiedades <code>top, right, bottom</code> y <code>left</code>.</li>
+</ul>
+
+<p>En cualquier otro caso, si float tiene un valor distinto de none, la caja se posiciona de forma flotante y la propiedad display vale block tanto para los elementos en línea como para los elementos de bloque.</p>
+
+<h3 id="propiedad-overflow">5.9.2 Propiedad overflow</h3>
+
+<p>Normalmente, los contenidos de un elemento se pueden mostrar en el espacio reservado para ese elemento. Sin embargo, en algunas ocasiones el contenido de un elemento no cabe en el espacio reservado para ese elemento y se desborda.</p>
+
+<p>La situación más habitual en la que el contenido sobresale de su espacio reservado es cuando se establece la anchura y/o altura de un elemento mediante la propiedad <code>width</code> y/o <code>height</code>. Otra situación habitual es la de las líneas muy largas contenidas dentro de un elemento <code>&lt;pre&gt;</code>, que hacen que la página entera sea demasiado ancha.</p>
+
+<p>CSS define la propiedad <code>overflow</code> para controlar la forma en la que se visualizan los contenidos que sobresalen de sus elementos.</p>
+
+<div class="table" id="table-5-7">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>overflow</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">visible &#124; hidden &#124; scroll &#124; auto &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Elementos de bloque y celdas de tablas</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">visible</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Permite controlar los contenidos sobrantes de un elemento</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Los valores de la propiedad overflow tienen el siguiente significado:</p>
+
+<ul>
+<li><code>visible</code>: el contenido no se corta y se muestra sobresaliendo la zona reservada para visualizar el elemento. Este es el comportamiento por defecto.</li>
+<li><code>hidden</code>: el contenido sobrante se oculta y sólo se visualiza la parte del contenido que cabe dentro de la zona reservada para el elemento.</li>
+<li><code>scroll</code>: solamente se visualiza el contenido que cabe dentro de la zona reservada para el elemento, pero también se muestran barras de scroll que permiten visualizar el resto del contenido.</li>
+<li><code>auto</code>: el comportamiento depende del navegador, aunque normalmente es el mismo que la propiedad <code>scroll</code>.</li>
+</ul>
+
+<p>La siguiente imagen muestra un ejemplo de los tres valores típicos de la propiedad <code>overflow</code>:</p>
+
+<div class="figure" id="figure-5-18">
+    <img src="images/cap05/overflow.png" alt="Ejemplo de propiedad overflow" />
+
+    <p class="caption"><strong>Figura 5.18</strong> Ejemplo de propiedad overflow</p>
+</div>
+
+
+<h3 id="propiedad-z-index">5.9.3 Propiedad z-index</h3>
+
+<p>Además de posicionar una caja de forma horizontal y vertical, CSS permite controlar la posición tridimensional de las cajas posicionadas. De esta forma, es posible indicar las cajas que se muestran delante o detrás de otras cajas cuando se producen solapamientos.</p>
+
+<p>La posición tridimensional de un elemento se establece sobre un tercer eje llamado Z y se controla mediante la propiedad <code>z-index</code>. Utilizando esta propiedad es posible crear páginas complejas con varios niveles o capas.</p>
+
+<p>A continuación se muestra la definición formal de la propiedad <code>z-index</code>:</p>
+
+<div class="table" id="table-5-8">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>z-index</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">auto &#124; numero &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Elementos que han sido posicionados explícitamente</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">auto</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Establece el nivel tridimensional en el que se muestra el elemento</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>El valor más común de la propiedad <code>z-index</code> es un número entero. Aunque la especificación oficial permite los números negativos, en general se considera el número 0 como el nivel más bajo.</p>
+
+<p>Cuanto más alto sea el valor numérico, más cerca del usuario se muestra la caja. Un elemento con <code>z-index: 10</code> se muestra por encima de los elementos con <code>z-index: 8</code> o <code>z-index: 9</code>, pero por debajo de elementos con <code>z-index: 20</code> o <code>z-index: 50</code>.</p>
+
+<div class="figure" id="figure-5-19">
+    <img src="images/cap05/zindex.png" alt="Ejemplo de propiedad z-index" />
+
+    <p class="caption"><strong>Figura 5.19</strong> Ejemplo de propiedad z-index</p>
+</div>
+
+
+<p>La propiedad <code>z-index</code> sólo tiene efecto en los elementos posicionados, por lo que es obligatorio que la propiedad <code>z-index</code> vaya acompañada de la propiedad position. Si debes posicionar un elemento pero no quieres moverlo de su posición original ni afectar al resto de elementos de la página, puedes utilizar el posicionamiento relativo (<code>position: relative</code>).</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-5.html#posicionamiento-y-visualizacion">Posicionamiento y visualización</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.1</span>
+                        <a class="internal" href="capitulo-5.html#tipos-de-elementos">Tipos de elementos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.2</span>
+                        <a class="internal" href="capitulo-5.html#posicionamiento">Posicionamiento</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.3</span>
+                        <a class="internal" href="capitulo-5.html#posicionamiento-normal">Posicionamiento normal</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.4</span>
+                        <a class="internal" href="capitulo-5.html#posicionamiento-relativo">Posicionamiento relativo</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.5</span>
+                        <a class="internal" href="capitulo-5.html#posicionamiento-absoluto">Posicionamiento absoluto</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.6</span>
+                        <a class="internal" href="capitulo-5.html#posicionamiento-fijo">Posicionamiento fijo</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.7</span>
+                        <a class="internal" href="capitulo-5.html#posicionamiento-flotante">Posicionamiento flotante</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.8</span>
+                        <a class="internal" href="capitulo-5.html#visualizacion">Visualización</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.9</span>
+                        <a class="internal" href="capitulo-5.html#propiedades-display-y-visibility">Propiedades display y visibility</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

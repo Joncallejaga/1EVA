@@ -1,0 +1,1190 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="14/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Primeros pasos con AJAX | AJAX</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">AJAX</a></h1>
+        <p class="span3">
+                        <a href="capitulo-1.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-3.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="primeros-pasos-con-ajax"><span>Capítulo 2</span> Primeros pasos con AJAX</h1>
+        <h2 id="breve-historia-de-ajax">2.1 Breve historia de AJAX</h2>
+
+<p>La historia de AJAX está íntimamente relacionada con un objeto de programación llamado <code>XMLHttpRequest</code>. El origen de este objeto se remonta al año 2000, con productos como Exchange 2000, Internet Explorer 5 y Outlook Web Access.</p>
+
+<p>Todo comenzó en 1998, cuando <strong>Alex Hopmann</strong> y su equipo se encontraban desarrollando la entonces futura versión de Exchange 2000. El punto débil del servidor de correo electrónico era su cliente vía web, llamado OWA <em>Outlook Web Access</em>).</p>
+
+<p>Durante el desarrollo de OWA, se evaluaron dos opciones: un cliente formado sólo por páginas HTML estáticas que se recargaban constantemente y un cliente realizado completamente con HTML dinámico o DHTML. Alex Hopmann pudo ver las dos opciones y se decantó por la basada en DHTML. Sin embargo, para ser realmente útil a esta última le faltaba un componente esencial: "algo" que evitara tener que enviar continuamente los formularios con datos al servidor.</p>
+
+<p>Motivado por las posibilidades futuras de OWA, Alex creó en un solo fin de semana la primera versión de lo que denominó XMLHTTP. La primera demostración de las posibilidades de la nueva tecnología fue un éxito, pero faltaba lo más difícil: incluir esa tecnología en el navegador Internet Explorer.</p>
+
+<p>Si el navegador no incluía XMLHTTP de forma nativa, el éxito del OWA se habría reducido enormemente. El mayor problema es que faltaban pocas semanas para que se lanzara la última beta de Internet Explorer 5 previa a su lanzamiento final. Gracias a sus contactos en la empresa, Alex consiguió que su tecnología se incluyera en la librería MSXML que incluye Internet Explorer.</p>
+
+<p>De hecho, el nombre del objeto (<code>XMLHTTP</code>) se eligió para tener una buena excusa que justificara su inclusión en la librería XML de Internet Explorer, ya que este objeto está mucho más relacionado con HTTP que con XML.</p>
+
+<h2 id="la-primera-aplicacion">2.2 La primera aplicación</h2>
+
+<h3 id="codigo-fuente">2.2.1 Código fuente</h3>
+
+<p>La aplicación AJAX completa más sencilla consiste en una adaptación del clásico "<em>Hola Mundo</em>". En este caso, una aplicación JavaScript descarga un archivo del servidor y muestra su contenido sin necesidad de recargar la página.</p>
+
+<p>Código fuente completo:</p>
+
+<div class="code javascript">
+<pre class="javascript">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;
+    &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Hola Mundo con AJAX&lt;/title&gt;
+&nbsp;
+<span class="sy0">&lt;</span>script type<span class="sy0">=</span><span class="st0">&quot;text/javascript&quot;</span><span class="sy0">&gt;</span>
+<span class="kw1">function</span> descargaArchivo<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="co1">// Obtener la instancia del objeto XMLHttpRequest</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>window.<span class="me1">XMLHttpRequest</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    peticion_http <span class="sy0">=</span> <span class="kw1">new</span> XMLHttpRequest<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+  <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>window.<span class="me1">ActiveXObject</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    peticion_http <span class="sy0">=</span> <span class="kw1">new</span> ActiveXObject<span class="br0">&#40;</span><span class="st0">&quot;Microsoft.XMLHTTP&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+&nbsp;
+  <span class="co1">// Preparar la funcion de respuesta</span>
+  peticion_http.<span class="me1">onreadystatechange</span> <span class="sy0">=</span> muestraContenido<span class="sy0">;</span>
+&nbsp;
+  <span class="co1">// Realizar peticion HTTP</span>
+  peticion_http.<span class="me1">open</span><span class="br0">&#40;</span><span class="st0">'GET'</span><span class="sy0">,</span> <span class="st0">'http://localhost/holamundo.txt'</span><span class="sy0">,</span> <span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  peticion_http.<span class="me1">send</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+  <span class="kw1">function</span> muestraContenido<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span>peticion_http.<span class="me1">readyState</span> <span class="sy0">==</span> <span class="nu0">4</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="kw1">if</span><span class="br0">&#40;</span>peticion_http.<span class="me1">status</span> <span class="sy0">==</span> <span class="nu0">200</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        alert<span class="br0">&#40;</span>peticion_http.<span class="me1">responseText</span><span class="br0">&#41;</span><span class="sy0">;</span>
+      <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+window.<span class="me1">onload</span> <span class="sy0">=</span> descargaArchivo<span class="sy0">;</span>
+<span class="sy0">&lt;/</span>script<span class="sy0">&gt;</span>
+&nbsp;
+&lt;/head&gt;
+&lt;body&gt;&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+
+<p>En el ejemplo anterior, cuando se carga la página se ejecuta el método JavaScript que muestra el contenido de un archivo llamado <code>holamundo.txt</code> que se encuentra en el servidor. La clave del código anterior es que la petición HTTP y la descarga de los contenidos del archivo se realizan sin necesidad de recargar la página.</p>
+
+<h3 id="analisis-detallado">2.2.2 Análisis detallado</h3>
+
+<p>La aplicación AJAX del ejemplo anterior se compone de cuatro grandes bloques: instanciar el objeto <code>XMLHttpRequest</code>, preparar la función de respuesta, realizar la petición al servidor y ejecutar la función de respuesta.</p>
+
+<p>Todas las aplicaciones realizadas con técnicas de AJAX deben instanciar en primer lugar el objeto <code>XMLHttpRequest</code>, que es el objeto clave que permite realizar comunicaciones con el servidor en segundo plano, sin necesidad de recargar las páginas.</p>
+
+<p>La implementación del objeto <code>XMLHttpRequest</code> depende de cada navegador, por lo que es necesario emplear una discriminación sencilla en función del navegador en el que se está ejecutando el código:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">if</span><span class="br0">&#40;</span>window.<span class="me1">XMLHttpRequest</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>  <span class="co1">// Navegadores que siguen los estándares</span>
+  peticion_http <span class="sy0">=</span> <span class="kw1">new</span> XMLHttpRequest<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>window.<span class="me1">ActiveXObject</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>  <span class="co1">// Navegadores obsoletos</span>
+  peticion_http <span class="sy0">=</span> <span class="kw1">new</span> ActiveXObject<span class="br0">&#40;</span><span class="st0">&quot;Microsoft.XMLHTTP&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Una vez obtenida la instancia del objeto <code>XMLHttpRequest</code>, se prepara la función que se encarga de procesar la respuesta del servidor. La propiedad <code>onreadystatechange</code> del objeto <code>XMLHttpRequest</code> permite indicar esta función directamente incluyendo su código mediante una función anónima o indicando una referencia a una función independiente. En el ejemplo anterior se indica directamente el nombre de la función:</p>
+
+<div class="code code">
+<pre class="code">peticion_http.onreadystatechange = muestraContenido;</pre>
+</div>
+
+<p>El código anterior indica que cuando la aplicación reciba la respuesta del servidor, se debe ejecutar la función <code>muestraContenido()</code>. Como es habitual, la referencia a la función se indica mediante su nombre sin paréntesis, ya que de otro modo se estaría ejecutando la función y almacenando el valor devuelto en la propiedad <code>onreadystatechange</code>.</p>
+
+<p>Después de preparar la aplicación para la respuesta del servidor, se realiza la petición HTTP al servidor:</p>
+
+<div class="code javascript">
+<pre class="javascript">peticion_http.<span class="me1">open</span><span class="br0">&#40;</span><span class="st0">'GET'</span><span class="sy0">,</span> <span class="st0">'http://localhost/prueba.txt'</span><span class="sy0">,</span> <span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+peticion_http.<span class="me1">send</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Las instrucciones anteriores realizan el tipo de petición más sencillo que se puede enviar al servidor. En concreto, se trata de una petición de tipo <code>GET</code> simple que no envía ningún parámetro al servidor. La petición HTTP se crea mediante el método <code>open()</code>, en el que se incluye el tipo de petición (<code>GET</code>), la URL solicitada (<code>http://localhost/prueba.txt</code>) y un tercer parámetro <em>true</em> que indica que la petición se realiza de manera asíncrona.</p>
+
+<p>Una vez creada la petición HTTP, se envía al servidor mediante el método <code>send()</code>. Este método incluye un parámetro que en el ejemplo anterior vale <code>null</code>. Más adelante se ven en detalle todos los métodos y propiedades que permiten hacer las peticiones al servidor.</p>
+
+<p>Por último, cuando se recibe la respuesta del servidor, la aplicación ejecuta de forma automática la función establecida anteriormente.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> muestraContenido<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>peticion_http.<span class="me1">readyState</span> <span class="sy0">==</span> <span class="nu0">4</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span>peticion_http.<span class="me1">status</span> <span class="sy0">==</span> <span class="nu0">200</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      alert<span class="br0">&#40;</span>peticion_http.<span class="me1">responseText</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La función <code>muestraContenido()</code> comprueba en primer lugar que se ha recibido la respuesta del servidor (mediante el valor de la propiedad <code>readyState</code>). Si se ha recibido alguna respuesta, se comprueba que sea válida y correcta (comprobando si el código de estado HTTP devuelto es igual a <code>200</code>). Una vez realizadas las comprobaciones, simplemente se muestra por pantalla el contenido de la respuesta del servidor (en este caso, el contenido del archivo solicitado) mediante la propiedad <code>responseText</code>.</p>
+
+<h3 id="refactorizando-la-primera-aplicacion">2.2.3 Refactorizando la primera aplicación</h3>
+
+<p>La primera aplicación AJAX mostrada anteriormente presenta algunas carencias importantes. A continuación, se refactoriza su código ampliándolo y mejorándolo para que se adapte mejor a otras situaciones. En primer lugar, se definen unas variables que se utilizan en la función que procesa la respuesta del servidor:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> READY_STATE_UNINITIALIZED <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="kw1">var</span> READY_STATE_LOADING <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+<span class="kw1">var</span> READY_STATE_LOADED <span class="sy0">=</span> <span class="nu0">2</span><span class="sy0">;</span>
+<span class="kw1">var</span> READY_STATE_INTERACTIVE <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span>
+<span class="kw1">var</span> READY_STATE_COMPLETE <span class="sy0">=</span> <span class="nu0">4</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Como se verá más adelante, la respuesta del servidor sólo puede corresponder a alguno de los cinco estados definidos por las variables anteriores. De esta forma, el código puede utilizar el nombre de cada estado en vez de su valor numérico, por lo que se facilita la lectura y el mantenimiento de las aplicaciones.</p>
+
+<p>Además, la variable que almacena la instancia del objeto <code>XMLHttpRequest</code> se va a transformar en una variable global, de forma que todas las funciones que hacen uso de ese objeto tengan acceso directo al mismo:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> peticion_http<span class="sy0">;</span></pre>
+</div>
+
+<p>A continuación, se crea una función genérica de carga de contenidos mediante AJAX:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> cargaContenido<span class="br0">&#40;</span>url<span class="sy0">,</span> metodo<span class="sy0">,</span> funcion<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  peticion_http <span class="sy0">=</span> inicializa_xhr<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+  <span class="kw1">if</span><span class="br0">&#40;</span>peticion_http<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    peticion_http.<span class="me1">onreadystatechange</span> <span class="sy0">=</span> funcion<span class="sy0">;</span>
+    peticion_http.<span class="me1">open</span><span class="br0">&#40;</span>metodo<span class="sy0">,</span> url<span class="sy0">,</span> <span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    peticion_http.<span class="me1">send</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La función definida admite tres parámetros: la URL del contenido que se va a cargar, el método utilizado para realizar la petición HTTP y una referencia a la función que procesa la respuesta del servidor.</p>
+
+<p>En primer lugar, la función <code>cargaContenido()</code> inicializa el objeto <code>XMLHttpRequest</code> (llamado <code>xhr</code> de forma abreviada). Una vez inicializado, se emplea el objeto <code>peticion_http</code> para establecer la función que procesa la respuesta del servidor. Por último, la función <code>cargaContenido()</code> realiza la petición al servidor empleando la URL y el método HTTP indicados como parámetros.</p>
+
+<p>La función <code>inicializa_xhr()</code> se emplea para encapsular la creación del objeto <code>XMLHttpRequest</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> inicializa_xhr<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>window.<span class="me1">XMLHttpRequest</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="kw1">new</span> XMLHttpRequest<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+  <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>window.<span class="me1">ActiveXObject</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="kw1">new</span> ActiveXObject<span class="br0">&#40;</span><span class="st0">&quot;Microsoft.XMLHTTP&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La función <code>muestraContenido()</code> también se refactoriza para emplear las variables globales definidas:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> muestraContenido<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>peticion_http.<span class="me1">readyState</span> <span class="sy0">==</span> READY_STATE_COMPLETE<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span>peticion_http.<span class="me1">status</span> <span class="sy0">==</span> <span class="nu0">200</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      alert<span class="br0">&#40;</span>peticion_http.<span class="me1">responseText</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Por último, la función <code>descargaArchivo()</code> simplemente realiza una llamada a la función <code>cargaContenido()</code> con los parámetros adecuados:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> descargaArchivo<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  cargaContenido<span class="br0">&#40;</span><span class="st0">&quot;http://localhost/holamundo.txt&quot;</span><span class="sy0">,</span> <span class="st0">&quot;GET&quot;</span><span class="sy0">,</span> muestraContenido<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>A continuación se muestra el código completo de la refactorización de la primera aplicación:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="sy0">&lt;!</span>DOCTYPE html PUBLIC <span class="st0">&quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span>
+    <span class="st0">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;</span><span class="sy0">&gt;</span>
+<span class="sy0">&lt;</span>html<span class="sy0">&gt;</span>
+<span class="sy0">&lt;</span>head<span class="sy0">&gt;</span>
+<span class="sy0">&lt;</span>title<span class="sy0">&gt;</span>Hola Mundo con AJAX<span class="sy0">,</span> version <span class="nu0">2</span><span class="sy0">&lt;/</span>title<span class="sy0">&gt;</span>
+&nbsp;
+<span class="sy0">&lt;</span>script type<span class="sy0">=</span><span class="st0">&quot;text/javascript&quot;</span> language<span class="sy0">=</span><span class="st0">&quot;javascript&quot;</span><span class="sy0">&gt;</span>
+&nbsp;
+<span class="kw1">var</span> READY_STATE_UNINITIALIZED<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> 
+<span class="kw1">var</span> READY_STATE_LOADING<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span> 
+<span class="kw1">var</span> READY_STATE_LOADED<span class="sy0">=</span><span class="nu0">2</span><span class="sy0">;</span>
+<span class="kw1">var</span> READY_STATE_INTERACTIVE<span class="sy0">=</span><span class="nu0">3</span><span class="sy0">;</span> 
+<span class="kw1">var</span> READY_STATE_COMPLETE<span class="sy0">=</span><span class="nu0">4</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> peticion_http<span class="sy0">;</span>
+&nbsp;
+<span class="kw1">function</span> cargaContenido<span class="br0">&#40;</span>url<span class="sy0">,</span> metodo<span class="sy0">,</span> funcion<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  peticion_http <span class="sy0">=</span> inicializa_xhr<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+  <span class="kw1">if</span><span class="br0">&#40;</span>peticion_http<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    peticion_http.<span class="me1">onreadystatechange</span> <span class="sy0">=</span> funcion<span class="sy0">;</span>
+    peticion_http.<span class="me1">open</span><span class="br0">&#40;</span>metodo<span class="sy0">,</span> url<span class="sy0">,</span> <span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    peticion_http.<span class="me1">send</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">function</span> inicializa_xhr<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>window.<span class="me1">XMLHttpRequest</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="kw1">new</span> XMLHttpRequest<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+  <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>window.<span class="me1">ActiveXObject</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="kw1">new</span> ActiveXObject<span class="br0">&#40;</span><span class="st0">&quot;Microsoft.XMLHTTP&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">function</span> muestraContenido<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>peticion_http.<span class="me1">readyState</span> <span class="sy0">==</span> READY_STATE_COMPLETE<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span>peticion_http.<span class="me1">status</span> <span class="sy0">==</span> <span class="nu0">200</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      alert<span class="br0">&#40;</span>peticion_http.<span class="me1">responseText</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">function</span> descargaArchivo<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  cargaContenido<span class="br0">&#40;</span><span class="st0">&quot;http://localhost/holamundo.txt&quot;</span><span class="sy0">,</span> <span class="st0">&quot;GET&quot;</span><span class="sy0">,</span> muestraContenido<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+window.<span class="me1">onload</span> <span class="sy0">=</span> descargaArchivo<span class="sy0">;</span>
+&nbsp;
+<span class="sy0">&lt;/</span>script<span class="sy0">&gt;</span>
+&nbsp;
+<span class="sy0">&lt;/</span>head<span class="sy0">&gt;</span>
+<span class="sy0">&lt;</span>body<span class="sy0">&gt;&lt;/</span>body<span class="sy0">&gt;</span>
+<span class="sy0">&lt;/</span>html<span class="sy0">&gt;</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 1</p>
+</div>
+
+<p><a class="internal" href="capitulo-4.html#ej01">Ver enunciado</a></p>
+
+<h2 id="metodos-y-propiedades-del-objeto-xmlhttprequest">2.3 Métodos y propiedades del objeto XMLHttpRequest</h2>
+
+<p>El objeto <code>XMLHttpRequest</code> posee muchas otras propiedades y métodos diferentes a las manejadas por la primera aplicación de AJAX. A continuación se incluye la lista completa de todas las propiedades y métodos del objeto y todos los valores numéricos de sus propiedades.</p>
+
+<p>Las propiedades definidas para el objeto <code>XMLHttpRequest</code> son:</p>
+
+<div class="table" id="table-2-1">
+
+    <table>
+<thead>
+<tr>
+  <th>Propiedad</th>
+  <th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>readyState</code></td>
+  <td>Valor numérico (entero) que almacena el estado de la petición</td>
+</tr>
+<tr>
+  <td><code>responseText</code></td>
+  <td>El contenido de la respuesta del servidor en forma de cadena de texto</td>
+</tr>
+<tr>
+  <td><code>responseXML</code></td>
+  <td>El contenido de la respuesta del servidor en formato XML. El objeto devuelto se puede procesar como un objeto DOM</td>
+</tr>
+<tr>
+  <td><code>status</code></td>
+  <td>El código de estado HTTP devuelto por el servidor (<code>200</code> para una respuesta correcta, <code>404</code> para "No encontrado", <code>500</code> para un error de servidor, etc.)</td>
+</tr>
+<tr>
+  <td><code>statusText</code></td>
+  <td>El código de estado HTTP devuelto por el servidor en forma de cadena de texto: "OK", "Not Found", "Internal Server Error", etc.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Los valores definidos para la propiedad <code>readyState</code> son los siguientes:</p>
+
+<div class="table" id="table-2-2">
+
+    <table>
+<thead>
+<tr>
+  <th>Valor</th>
+  <th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>0</code></td>
+  <td>No inicializado (objeto creado, pero no se ha ejecutado el método <code>open</code>)</td>
+</tr>
+<tr>
+  <td><code>1</code></td>
+  <td>Cargando (objeto creado, pero no se ha ejecutado el método <code>send</code>)</td>
+</tr>
+<tr>
+  <td><code>2</code></td>
+  <td>Cargado (se ha ejecutado el método <code>send</code>, pero el servidor aún no ha respondido)</td>
+</tr>
+<tr>
+  <td><code>3</code></td>
+  <td>Interactivo (se han recibido algunos datos, aunque no se puede emplear la propiedad <code>responseText</code>)</td>
+</tr>
+<tr>
+  <td><code>4</code></td>
+  <td>Completo (se han recibido todos los datos de la respuesta del servidor)</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Los métodos disponibles para el objeto <code>XMLHttpRequest</code> son los siguientes:</p>
+
+<div class="table" id="table-2-3">
+
+    <table>
+<thead>
+<tr>
+  <th>Método</th>
+  <th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>abort()</code></td>
+  <td>Detiene la petición actual</td>
+</tr>
+<tr>
+  <td><code>getAllResponseHeaders()</code></td>
+  <td>Devuelve una cadena de texto con todas las cabeceras de la respuesta del servidor</td>
+</tr>
+<tr>
+  <td><code>getResponseHeader("cabecera")</code></td>
+  <td>Devuelve una cadena de texto con el contenido de la cabecera solicitada</td>
+</tr>
+<tr>
+  <td><code>onreadystatechange</code></td>
+  <td>Responsable de manejar los eventos que se producen. Se ejecuta cada vez que se produce un cambio en el estado de la petición HTTP. Normalmente es una referencia a una función JavaScript</td>
+</tr>
+<tr>
+  <td><code>open("metodo", "url")</code></td>
+  <td>Establece los parámetros de la petición que se realiza al servidor. Los parámetros necesarios son el método HTTP empleado y la URL destino (puede indicarse de forma absoluta o relativa)</td>
+</tr>
+<tr>
+  <td><code>send(contenido)</code></td>
+  <td>Realiza la petición HTTP al servidor</td>
+</tr>
+<tr>
+  <td><code>setRequestHeader("cabecera", "valor")</code></td>
+  <td>Permite establecer cabeceras personalizadas en la petición HTTP. Se debe ejecutar el método <code>open()</code> antes que <code>setRequestHeader()</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>El método <code>open()</code> requiere dos parámetros (método HTTP y URL) y acepta de forma opcional otros tres parámetros. Definición formal del método <code>open()</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript">open<span class="br0">&#40;</span>string metodo<span class="sy0">,</span> string URL <span class="br0">&#91;</span><span class="sy0">,</span><span class="kw5">boolean</span> asincrono<span class="sy0">,</span> string usuario<span class="sy0">,</span> string password<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Por defecto, las peticiones realizadas son asíncronas. Si se indica un valor <code>false</code> al tercer parámetro, la petición se realiza de forma síncrona, esto es, se detiene la ejecución de la aplicación hasta que se recibe de forma completa la respuesta del servidor.</p>
+
+<p>No obstante, las peticiones síncronas son justamente contrarias a la filosofía de AJAX. El motivo es que una petición síncrona <em>bloquea</em> el navegador y no permite al usuario realizar ninguna acción hasta que no se haya recibido la respuesta completa del servidor. La sensación que provoca es que el navegador ha dejado de funcionar por lo que no se recomienda el uso de peticiones síncronas salvo que sea imprescindible.</p>
+
+<p>Los últimos dos parámetros opcionales permiten indicar un nombre de usuario y una contraseña válidos para acceder al recurso solicitado.</p>
+
+<p>Por otra parte, el método <code>send()</code> requiere de un parámetro que indica la información que se va a enviar al servidor junto con la petición HTTP. Si no se envían datos, se debe indicar un valor igual a <code>null</code>. En otro caso, se puede indicar como parámetro una cadena de texto, un array de bytes o un objeto XML DOM.</p>
+
+<h2 id="utilidades-y-objetos-para-ajax">2.4 Utilidades y objetos para AJAX</h2>
+
+<p>Una de las operaciones más habituales en las aplicaciones AJAX es la de obtener el contenido de un archivo o recurso del servidor. Por tanto, se va a construir un objeto que permita realizar la carga de datos del servidor simplemente indicando el recurso solicitado y la función encargada de procesar la respuesta:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> cargador <span class="sy0">=</span> <span class="kw1">new</span> net.<span class="me1">CargadorContenidos</span><span class="br0">&#40;</span><span class="st0">&quot;pagina.html&quot;</span><span class="sy0">,</span> procesaRespuesta<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>La lógica común de AJAX se encapsula en un objeto de forma que sea fácilmente reutilizable. Aplicando los conceptos de objetos de JavaScript, funciones constructoras y el uso de prototype, es posible realizar de forma sencilla el objeto cargador de contenidos.</p>
+
+<p>El siguiente código ha sido adaptado del excelente libro "Ajax in Action", escrito por Dave Crane, Eric Pascarello y Darren James y publicado por la editorial Manning.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> net <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">Object</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+net.<span class="me1">READY_STATE_UNINITIALIZED</span><span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+net.<span class="me1">READY_STATE_LOADING</span><span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span>
+net.<span class="me1">READY_STATE_LOADED</span><span class="sy0">=</span><span class="nu0">2</span><span class="sy0">;</span>
+net.<span class="me1">READY_STATE_INTERACTIVE</span><span class="sy0">=</span><span class="nu0">3</span><span class="sy0">;</span>
+net.<span class="me1">READY_STATE_COMPLETE</span><span class="sy0">=</span><span class="nu0">4</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Constructor</span>
+net.<span class="me1">CargadorContenidos</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>url<span class="sy0">,</span> funcion<span class="sy0">,</span> funcionError<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">this</span>.<span class="me1">url</span> <span class="sy0">=</span> url<span class="sy0">;</span>
+  <span class="kw1">this</span>.<span class="me1">req</span> <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+  <span class="kw1">this</span>.<span class="me1">onload</span> <span class="sy0">=</span> funcion<span class="sy0">;</span>
+  <span class="kw1">this</span>.<span class="me1">onerror</span> <span class="sy0">=</span> <span class="br0">&#40;</span>funcionError<span class="br0">&#41;</span> <span class="sy0">?</span> funcionError <span class="sy0">:</span> <span class="kw1">this</span>.<span class="me1">defaultError</span><span class="sy0">;</span>
+  <span class="kw1">this</span>.<span class="me1">cargaContenidoXML</span><span class="br0">&#40;</span>url<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+net.<span class="me1">CargadorContenidos</span>.<span class="kw1">prototype</span> <span class="sy0">=</span> <span class="br0">&#123;</span>
+  cargaContenidoXML<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span>url<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span>window.<span class="me1">XMLHttpRequest</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="kw1">this</span>.<span class="me1">req</span> <span class="sy0">=</span> <span class="kw1">new</span> XMLHttpRequest<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>window.<span class="me1">ActiveXObject</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="kw1">this</span>.<span class="me1">req</span> <span class="sy0">=</span> <span class="kw1">new</span> ActiveXObject<span class="br0">&#40;</span><span class="st0">&quot;Microsoft.XMLHTTP&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">if</span><span class="br0">&#40;</span><span class="kw1">this</span>.<span class="me1">req</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="kw1">try</span> <span class="br0">&#123;</span>
+        <span class="kw1">var</span> loader <span class="sy0">=</span> <span class="kw1">this</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">onreadystatechange</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+          loader.<span class="me1">onReadyState</span>.<span class="me1">call</span><span class="br0">&#40;</span>loader<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">open</span><span class="br0">&#40;</span><span class="st0">'GET'</span><span class="sy0">,</span> url<span class="sy0">,</span> <span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">send</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+      <span class="br0">&#125;</span> <span class="kw1">catch</span><span class="br0">&#40;</span>err<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">onerror</span>.<span class="me1">call</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+      <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+  onReadyState<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> req <span class="sy0">=</span> <span class="kw1">this</span>.<span class="me1">req</span><span class="sy0">;</span>
+    <span class="kw1">var</span> ready <span class="sy0">=</span> req.<span class="me1">readyState</span><span class="sy0">;</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span>ready <span class="sy0">==</span> net.<span class="me1">READY_STATE_COMPLETE</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="kw1">var</span> httpStatus <span class="sy0">=</span> req.<span class="me1">status</span><span class="sy0">;</span>
+      <span class="kw1">if</span><span class="br0">&#40;</span>httpStatus <span class="sy0">==</span> <span class="nu0">200</span> <span class="sy0">||</span> httpStatus <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">onload</span>.<span class="me1">call</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+      <span class="br0">&#125;</span>
+      <span class="kw1">else</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">onerror</span>.<span class="me1">call</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+      <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+  defaultError<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    alert<span class="br0">&#40;</span><span class="st0">&quot;Se ha producido un error al obtener los datos&quot;</span>
+      <span class="sy0">+</span> <span class="st0">&quot;<span class="es0">\n</span><span class="es0">\n</span>readyState:&quot;</span> <span class="sy0">+</span> <span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">readyState</span>
+      <span class="sy0">+</span> <span class="st0">&quot;<span class="es0">\n</span>status: &quot;</span> <span class="sy0">+</span> <span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">status</span> 
+      <span class="sy0">+</span> <span class="st0">&quot;<span class="es0">\n</span>headers: &quot;</span> <span class="sy0">+</span> <span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">getAllResponseHeaders</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Una vez definido el objeto <code>net</code> con su método <code>CargadorContenidos()</code>, ya es posible utilizarlo en las funciones que se encargan de mostrar el contenido del archivo del servidor:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> muestraContenido<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  alert<span class="br0">&#40;</span><span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">responseText</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">function</span> cargaContenidos<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">var</span> cargador <span class="sy0">=</span> <span class="kw1">new</span> net.<span class="me1">CargadorContenidos</span><span class="br0">&#40;</span><span class="st0">&quot;http://localhost/holamundo.txt&quot;</span><span class="sy0">,</span> muestraContenido<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+window.<span class="me1">onload</span> <span class="sy0">=</span> cargaContenidos<span class="sy0">;</span></pre>
+</div>
+
+<p>El código del cargador de contenidos hace un uso intensivo de objetos, JSON, funciones anónimas y uso del objeto <code>this</code>. Seguidamente, se detalla el funcionamiento de cada una de sus partes.</p>
+
+<p>El primer elemento importante del código fuente es la definición del objeto <code>net</code>.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> net <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">Object</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Se trata de una variable global que encapsula todas las propiedades y métodos relativos a las operaciones relacionadas con las comunicaciones por red. De cierto modo, esta variable global simula el funcionamiento de los <em>namespaces</em> ya que evita la colisión entre nombres de propiedades y métodos diferentes.</p>
+
+<p>Después de definir las constantes empleadas por el objeto <code>XMLHttpRequest</code>, se define el constructor del objeto <code>CargadorContenidos</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript">net.<span class="me1">CargadorContenidos</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>url<span class="sy0">,</span> funcion<span class="sy0">,</span> funcionError<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">this</span>.<span class="me1">url</span> <span class="sy0">=</span> url<span class="sy0">;</span>
+  <span class="kw1">this</span>.<span class="me1">req</span> <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+  <span class="kw1">this</span>.<span class="me1">onload</span> <span class="sy0">=</span> funcion<span class="sy0">;</span>
+  <span class="kw1">this</span>.<span class="me1">onerror</span> <span class="sy0">=</span> <span class="br0">&#40;</span>funcionError<span class="br0">&#41;</span> <span class="sy0">?</span> funcionError <span class="sy0">:</span> <span class="kw1">this</span>.<span class="me1">defaultError</span><span class="sy0">;</span>
+  <span class="kw1">this</span>.<span class="me1">cargaContenidoXML</span><span class="br0">&#40;</span>url<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Aunque el constructor define tres parámetros diferentes, en realidad solamente los dos primeros son obligatorios. De esta forma, se inicializa el valor de algunas variables del objeto, se comprueba si se ha definido la función que se emplea en caso de error (si no se ha definido, se emplea una función genérica definida más adelante) y se ejecuta el método responsable de cargar el recurso solicitado (<code>cargaContenidoXML</code>).</p>
+
+<div class="code javascript">
+<pre class="javascript">net.<span class="me1">CargadorContenidos</span>.<span class="kw1">prototype</span> <span class="sy0">=</span> <span class="br0">&#123;</span>
+  cargaContenidoXML<span class="sy0">:</span><span class="kw1">function</span><span class="br0">&#40;</span>url<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    ...
+  <span class="br0">&#125;</span><span class="sy0">,</span>
+  onReadyState<span class="sy0">:</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    ...
+  <span class="br0">&#125;</span><span class="sy0">,</span>
+  defaultError<span class="sy0">:</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    ...
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Los métodos empleados por el objeto <code>net.cargaContenidos</code> se definen mediante su prototipo. En este caso, se definen tres métodos diferentes: <code>cargaContenidoXML()</code> para cargar recursos de servidor, <code>onReadyState()</code> que es la función que se ejecuta cuando se recibe la respuesta del servidor y <code>defaultError()</code> que es la función que se emplea cuando no se ha definido de forma explícita una función responsable de manejar los posibles errores que se produzcan en la petición HTTP.</p>
+
+<p>La función <code>defaultError()</code> muestra un mensaje de aviso del error producido y además muestra el valor de algunas de las propiedades de la petición HTTP:</p>
+
+<div class="code javascript">
+<pre class="javascript">defaultError<span class="sy0">:</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  alert<span class="br0">&#40;</span><span class="st0">&quot;Se ha producido un error al obtener los datos&quot;</span>
+    <span class="sy0">+</span> <span class="st0">&quot;<span class="es0">\n</span><span class="es0">\n</span>readyState:&quot;</span> <span class="sy0">+</span> <span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">readyState</span>
+    <span class="sy0">+</span> <span class="st0">&quot;<span class="es0">\n</span>status: &quot;</span> <span class="sy0">+</span> <span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">status</span>
+    <span class="sy0">+</span> <span class="st0">&quot;<span class="es0">\n</span>headers: &quot;</span> <span class="sy0">+</span> <span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">getAllResponseHeaders</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>En este caso, el objeto <code>this</code> se resuelve al objeto <code>net.cargaContenidos</code>, ya que es el objeto que contiene la función anónima que se está ejecutando.</p>
+
+<p>Por otra parte, la función <code>onReadyState</code> es la encargada de gestionar la respuesta del servidor:</p>
+
+<div class="code javascript">
+<pre class="javascript">onReadyState<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">var</span> req <span class="sy0">=</span> <span class="kw1">this</span>.<span class="me1">req</span><span class="sy0">;</span>
+  <span class="kw1">var</span> ready <span class="sy0">=</span> req.<span class="me1">readyState</span><span class="sy0">;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>ready <span class="sy0">==</span> net.<span class="me1">READY_STATE_COMPLETE</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> httpStatus <span class="sy0">=</span> req.<span class="me1">status</span><span class="sy0">;</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span>httpStatus <span class="sy0">==</span> <span class="nu0">200</span> <span class="sy0">||</span> httpStatus <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="kw1">this</span>.<span class="me1">onload</span>.<span class="me1">call</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+      <span class="kw1">this</span>.<span class="me1">onerror</span>.<span class="me1">call</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Tras comprobar que la respuesta del servidor está disponible y es correcta, se realiza la llamada a la función que realmente procesa la respuesta del servidor de acuerdo a las necesidades de la aplicación.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">this</span>.<span class="me1">onload</span>.<span class="me1">call</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>El objeto <code>this</code> se resuelve como <code>net.CargadorContenidos</code>, ya que es el objeto que contiene la función que se está ejecutando. Por tanto, <code>this.onload</code> es la referencia a la función que se ha definido como responsable de procesar la respuesta del servidor (se trata de una referencia a una función externa).</p>
+
+<p>Normalmente, la función externa encargada de procesar la respuesta del servidor, requerirá acceder al objeto <code>XMLHttpRequest</code> que almacena la petición realizada al servidor. En otro caso, la función externa no será capaz de acceder al contenido devuelto por el servidor.</p>
+
+<p>Como ya se vio en los capítulos anteriores, el método <code>call()</code> es uno de los métodos definidos para el objeto <code>Function()</code>, y por tanto disponible para todas las funciones de JavaScript. Empleando el método <code>call()</code> es posible obligar a una función a ejecutarse sobre un objeto concreto. En otras palabras, empleando el método <code>call()</code> sobre una función, es posible que dentro de esa función el objeto <code>this</code> se resuelva como el objeto pasado como parámetro en el método <code>call()</code>.</p>
+
+<p>Así, la instrucción <code>this.onload.call(this);</code> se interpreta de la siguiente forma:</p>
+
+<ul>
+<li>El objeto <code>this</code> que se pasa como parámetro de <code>call()</code> se resuelve como el objeto <code>net.CargadorContenidos</code>.</li>
+<li>El objeto <code>this.onload</code> almacena una referencia a la función externa que se va a emplear para procesar la respuesta.</li>
+<li>El método <code>this.onload.call()</code> ejecuta la función cuya referencia se almacena en <code>this.onload</code>.</li>
+<li>La instrucción <code>this.onload.call(this);</code> permite ejecutar la función externa con el objeto <code>net.CargadorContenidos</code> accesible en el interior de la función mediante el objeto <code>this</code>.</li>
+</ul>
+
+<p>Por último, el método <code>cargaContenidoXML</code> se encarga de enviar la petición HTTP y realizar la llamada a la función que procesa la respuesta:</p>
+
+<div class="code javascript">
+<pre class="javascript">cargaContenidoXML<span class="sy0">:</span><span class="kw1">function</span><span class="br0">&#40;</span>url<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>window.<span class="me1">XMLHttpRequest</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">this</span>.<span class="me1">req</span> <span class="sy0">=</span> <span class="kw1">new</span> XMLHttpRequest<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+  <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>window.<span class="me1">ActiveXObject</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">this</span>.<span class="me1">req</span> <span class="sy0">=</span> <span class="kw1">new</span> ActiveXObject<span class="br0">&#40;</span><span class="st0">&quot;Microsoft.XMLHTTP&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span><span class="kw1">this</span>.<span class="me1">req</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">try</span> <span class="br0">&#123;</span>
+      <span class="kw1">var</span> loader<span class="sy0">=</span><span class="kw1">this</span><span class="sy0">;</span>
+      <span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">onreadystatechange</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        loader.<span class="me1">onReadyState</span>.<span class="me1">call</span><span class="br0">&#40;</span>loader<span class="br0">&#41;</span><span class="sy0">;</span>
+      <span class="br0">&#125;</span>
+      <span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">open</span><span class="br0">&#40;</span><span class="st0">'GET'</span><span class="sy0">,</span> url<span class="sy0">,</span> <span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+      <span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">send</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span> <span class="kw1">catch</span><span class="br0">&#40;</span>err<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="kw1">this</span>.<span class="me1">onerror</span>.<span class="me1">call</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>En primer lugar, se obtiene una instancia del objeto <code>XMLHttpRequest</code> en función del tipo de navegador. Si se ha obtenido correctamente la instancia, se ejecutan las instrucciones más importantes del método <code>cargaContenidoXML</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> loader <span class="sy0">=</span> <span class="kw1">this</span><span class="sy0">;</span>
+<span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">onreadystatechange</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  loader.<span class="me1">onReadyState</span>.<span class="me1">call</span><span class="br0">&#40;</span>loader<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">open</span><span class="br0">&#40;</span><span class="st0">'GET'</span><span class="sy0">,</span> url<span class="sy0">,</span> <span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">send</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>A continuación, se almacena la instancia del objeto actual (<code>this</code>) en la nueva variable loader. Una vez almacenada la instancia del objeto <code>net.cargadorContenidos</code>, se define la función encargada de procesar la respuesta del servidor. En la siguiente función anónima:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">onreadystatechange</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span></pre>
+</div>
+
+<p>En el interior de esa función, el objeto <code>this</code> no se resuelve en el objeto <code>net.CargadorContenidos</code>, por lo que no se puede emplear la siguiente instrucción:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">onreadystatechange</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">this</span>.<span class="me1">onReadyState</span>.<span class="me1">call</span><span class="br0">&#40;</span>loader<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Sin embargo, desde el interior de esa función anónima si es posible acceder a las variables definidas en la función exterior que la engloba. Así, desde el interior de la función anónima sí que es posible acceder a la instancia del objeto <code>net.CargadorContenidos</code> que se almacenó anteriormente.</p>
+
+<p>En el código anterior, no es obligatorio emplear la llamada al método <code>call()</code>. Se podría haber definido de la siguiente forma:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> loader<span class="sy0">=</span><span class="kw1">this</span><span class="sy0">;</span>
+<span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">onreadystatechange</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="co1">// loader.onReadyState.call(loader);</span>
+  loader.<span class="me1">onReadyState</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 2</p>
+</div>
+
+<p><a class="internal" href="capitulo-4.html#ej02">Ver enunciado</a></p>
+
+<h2 id="interaccion-con-el-servidor">2.5 Interacción con el servidor</h2>
+
+<h3 id="envio-de-parametros-con-la-peticion-http">2.5.1 Envío de parámetros con la petición HTTP</h3>
+
+<p>Hasta ahora, el objeto <code>XMLHttpRequest</code> se ha empleado para realizar peticiones HTTP sencillas. Sin embargo, las posibilidades que ofrece el objeto <code>XMLHttpRequest</code> son muy superiores, ya que también permite el envío de parámetros junto con la petición HTTP.</p>
+
+<p>El objeto <code>XMLHttpRequest</code> puede enviar parámetros tanto con el método GET como con el método POST de HTTP. En ambos casos, los parámetros se envían como una serie de pares clave/valor concatenados por símbolos <code>&amp;</code>. El siguiente ejemplo muestra una URL que envía parámetros al servidor mediante el método GET:</p>
+
+<div class="code html">
+<pre class="html5">http://localhost/aplicacion?parametro1=valor1<span class="sc1">&amp;parametro2=valor2&amp;parametro3=valor3</span></pre>
+</div>
+
+<p>La principal diferencia entre ambos métodos es que mediante el método POST los parámetros se envían en el cuerpo de la petición y mediante el método GET los parámetros se concatenan a la URL accedida. El método GET se utiliza cuando se accede a un recurso que depende de la información proporcionada por el usuario. El método POST se utiliza en operaciones que crean, borran o actualizan información.</p>
+
+<p>Técnicamente, el método GET tiene un límite en la cantidad de datos que se pueden enviar. Si se intentan enviar más de 512 bytes mediante el método GET, el servidor devuelve un error con código <code>414</code> y mensaje <code>Request-URI Too Long</code> "La URI de la petición es demasiado larga").</p>
+
+<p>Cuando se utiliza un elemento <code>&lt;form&gt;</code> de HTML, al pulsar sobre el botón de envío del formulario, se crea automáticamente la cadena de texto que contiene todos los parámetros que se envían al servidor. Sin embargo, el objeto <code>XMLHttpRequest</code> no dispone de esa posibilidad y la cadena que contiene los parámetros se debe construir manualmente.</p>
+
+<p>A continuación se incluye un ejemplo del funcionamiento del envío de parámetros al servidor. Se trata de un formulario con tres campos de texto que se validan en el servidor mediante AJAX. El código HTML también incluye un elemento <code>&lt;div&gt;</code> vacío que se utiliza para mostrar la respuesta del servidor:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">form</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">label</span> <span class="kw3">for</span><span class="sy0">=</span><span class="st0">&quot;fecha_nacimiento&quot;</span>&gt;</span>Fecha de nacimiento:<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">label</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;fecha_nacimiento&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;fecha_nacimiento&quot;</span> <span class="sy0">/</span>&gt;&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+&nbsp;
+  <span class="sc2">&lt;<span class="kw2">label</span> <span class="kw3">for</span><span class="sy0">=</span><span class="st0">&quot;codigo_postal&quot;</span>&gt;</span>Codigo postal:<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">label</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;codigo_postal&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;codigo_postal&quot;</span> <span class="sy0">/</span>&gt;&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+&nbsp;
+  <span class="sc2">&lt;<span class="kw2">label</span> <span class="kw3">for</span><span class="sy0">=</span><span class="st0">&quot;telefono&quot;</span>&gt;</span>Telefono:<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">label</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;telefono&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;telefono&quot;</span> <span class="sy0">/</span>&gt;&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+&nbsp;
+  <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;button&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;Validar datos&quot;</span> <span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">form</span>&gt;</span>
+&nbsp;
+<span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;respuesta&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre>
+</div>
+
+<p>El código JavaScript necesario para realizar la validación de los datos en el servidor se muestra a continuación:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> READY_STATE_COMPLETE<span class="sy0">=</span><span class="nu0">4</span><span class="sy0">;</span>
+<span class="kw1">var</span> peticion_http <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">function</span> inicializa_xhr<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>window.<span class="me1">XMLHttpRequest</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="kw1">new</span> XMLHttpRequest<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+  <span class="br0">&#125;</span>
+  <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>window.<span class="me1">ActiveXObject</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="kw1">new</span> ActiveXObject<span class="br0">&#40;</span><span class="st0">&quot;Microsoft.XMLHTTP&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span> 
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">function</span> crea_query_string<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">var</span> fecha <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;fecha_nacimiento&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">var</span> cp <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;codigo_postal&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">var</span> telefono <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;telefono&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+  <span class="kw1">return</span> <span class="st0">&quot;fecha_nacimiento=&quot;</span> <span class="sy0">+</span> encodeURIComponent<span class="br0">&#40;</span>fecha.<span class="me1">value</span><span class="br0">&#41;</span> <span class="sy0">+</span>
+         <span class="st0">&quot;&amp;codigo_postal=&quot;</span> <span class="sy0">+</span> encodeURIComponent<span class="br0">&#40;</span>cp.<span class="me1">value</span><span class="br0">&#41;</span> <span class="sy0">+</span>
+         <span class="st0">&quot;&amp;telefono=&quot;</span> <span class="sy0">+</span> encodeURIComponent<span class="br0">&#40;</span>telefono.<span class="me1">value</span><span class="br0">&#41;</span> <span class="sy0">+</span>
+         <span class="st0">&quot;&amp;nocache=&quot;</span> <span class="sy0">+</span> <span class="kw4">Math</span>.<span class="me1">random</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">function</span> valida<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  peticion_http <span class="sy0">=</span> inicializa_xhr<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>peticion_http<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    peticion_http.<span class="me1">onreadystatechange</span> <span class="sy0">=</span> procesaRespuesta<span class="sy0">;</span>
+    peticion_http.<span class="me1">open</span><span class="br0">&#40;</span><span class="st0">&quot;POST&quot;</span><span class="sy0">,</span> <span class="st0">&quot;http://localhost/validaDatos.php&quot;</span><span class="sy0">,</span> <span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    peticion_http.<span class="me1">setRequestHeader</span><span class="br0">&#40;</span><span class="st0">&quot;Content-Type&quot;</span><span class="sy0">,</span> <span class="st0">&quot;application/x-www-form-urlencoded&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">var</span> query_string <span class="sy0">=</span> crea_query_string<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    peticion_http.<span class="me1">send</span><span class="br0">&#40;</span>query_string<span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">function</span> procesaRespuesta<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>peticion_http.<span class="me1">readyState</span> <span class="sy0">==</span> READY_STATE_COMPLETE<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span>peticion_http.<span class="me1">status</span> <span class="sy0">==</span> <span class="nu0">200</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;respuesta&quot;</span><span class="br0">&#41;</span>.<span class="me1">innerHTML</span> <span class="sy0">=</span> peticion_http.<span class="me1">responseText</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La clave del ejemplo anterior se encuentra en estas dos líneas de código:</p>
+
+<div class="code javascript">
+<pre class="javascript">peticion_http.<span class="me1">setRequestHeader</span><span class="br0">&#40;</span><span class="st0">&quot;Content-Type&quot;</span><span class="sy0">,</span> <span class="st0">&quot;application/x-www-form-urlencoded&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+peticion_http.<span class="me1">send</span><span class="br0">&#40;</span>query_string<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>En primer lugar, si no se establece la cabecera <code>Content-Type</code> correcta, el servidor descarta todos los datos enviados mediante el método POST. De esta forma, al programa que se ejecuta en el servidor no le llega ningún parámetro. Así, para enviar parámetros mediante el método POST, es obligatorio incluir la cabecera <code>Content-Type</code> mediante la siguiente instrucción:</p>
+
+<div class="code javascript">
+<pre class="javascript">peticion_http.<span class="me1">setRequestHeader</span><span class="br0">&#40;</span><span class="st0">&quot;Content-Type&quot;</span><span class="sy0">,</span> <span class="st0">&quot;application/x-www-form-urlencoded&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Por otra parte, el método <code>send()</code> es el que se encarga de enviar los parámetros al servidor. En todos los ejemplos anteriores se utilizaba la instrucción <code>send(null)</code> para indicar que no se envían parámetros al servidor. Sin embargo, en este caso la petición si que va a enviar los parámetros.</p>
+
+<p>Como ya se ha comentado, los parámetros se envían en forma de cadena de texto con las variables y sus valores concatenados mediante el símbolo <code>&amp;</code> (esta cadena normalmente se conoce como "<em>query string</em>"). La cadena con los parámetros se construye manualmente, para lo cual se utiliza la función <code>crea_query_string()</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> crea_query_string<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">var</span> fecha <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;fecha_nacimiento&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">var</span> cp <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;codigo_postal&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">var</span> telefono <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;telefono&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+  <span class="kw1">return</span> <span class="st0">&quot;fecha_nacimiento=&quot;</span> <span class="sy0">+</span> encodeURIComponent<span class="br0">&#40;</span>fecha.<span class="me1">value</span><span class="br0">&#41;</span> <span class="sy0">+</span>
+         <span class="st0">&quot;&amp;codigo_postal=&quot;</span> <span class="sy0">+</span> encodeURIComponent<span class="br0">&#40;</span>cp.<span class="me1">value</span><span class="br0">&#41;</span> <span class="sy0">+</span>
+         <span class="st0">&quot;&amp;telefono=&quot;</span> <span class="sy0">+</span> encodeURIComponent<span class="br0">&#40;</span>telefono.<span class="me1">value</span><span class="br0">&#41;</span> <span class="sy0">+</span>
+         <span class="st0">&quot;&amp;nocache=&quot;</span> <span class="sy0">+</span> <span class="kw4">Math</span>.<span class="me1">random</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La función anterior obtiene el valor de todos los campos del formulario y los concatena junto con el nombre de cada parámetro para formar la cadena de texto que se envía al servidor. El uso de la función <code>encodeURIComponent()</code> es imprescindible para evitar problemas con algunos caracteres especiales.</p>
+
+<p>La función <code>encodeURIComponent()</code> reemplaza todos los caracteres que no se pueden utilizar de forma directa en las URL por su representación hexadecimal. Las letras, números y los caracteres <code>- _ . ! ~ * ' ( )</code> no se modifican, pero todos los demás caracteres se sustituyen por su equivalente hexadecimal.</p>
+
+<p>Las sustituciones más conocidas son las de los espacios en blanco por <code>%20</code>, y la del símbolo <code>&amp;</code> por <code>%26</code>. Sin embargo, como se muestra en el siguiente ejemplo, también se sustituyen todos los acentos y cualquier otro carácter que no se puede incluir directamente en una URL:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> cadena <span class="sy0">=</span> <span class="st0">&quot;cadena de texto&quot;</span><span class="sy0">;</span>
+<span class="kw1">var</span> cadena_segura <span class="sy0">=</span> encodeURIComponent<span class="br0">&#40;</span>cadena<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">// cadena_segura = &quot;cadena%20de%20texto&quot;;</span>
+&nbsp;
+<span class="kw1">var</span> cadena <span class="sy0">=</span> <span class="st0">&quot;otra cadena &amp; caracteres problemáticos / : =&quot;</span><span class="sy0">;</span>
+<span class="kw1">var</span> cadena_segura <span class="sy0">=</span> encodeURIComponent<span class="br0">&#40;</span>cadena<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">// cadena_segura = &quot;otra%20cadena%20%26%20caracteres%20problem%C3%A1ticos%20%2F%20%3A%20%3D&quot;;</span></pre>
+</div>
+
+<p>JavaScript incluye una función contraria llamada <code>decodeURIComponent()</code> y que realiza la transformación inversa. Además, también existen las funciones <code>encodeURI()</code> y <code>decodeURI()</code> que codifican/decodifican una URL completa. La principal diferencia entre <code>encodeURIComponent()</code> y <code>encodeURI()</code> es que esta última no codifica los caracteres <code>; / ? : @ &amp; = + $ , #</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> cadena <span class="sy0">=</span> <span class="st0">&quot;http://www.ejemplo.com/ruta1/index.php?parametro=valor con ñ y &amp;&quot;</span><span class="sy0">;</span>
+<span class="kw1">var</span> cadena_segura <span class="sy0">=</span> encodeURIComponent<span class="br0">&#40;</span>cadena<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">// cadena_segura = &quot;http%3A%2F%2Fwww.ejemplo.com%2Fruta1%2Findex.php%3Fparametro%3Dvalor%20con%20%C3%B1%20y%20%26&quot;;</span>
+&nbsp;
+<span class="kw1">var</span> cadena_segura <span class="sy0">=</span> encodeURI<span class="br0">&#40;</span>cadena<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// cadena_segura = &quot;http://www.ejemplo.com/ruta1/index.php?parametro=valor%20con%20%C3%B1%20y%20&quot;;</span></pre>
+</div>
+
+<p>Por último, la función <code>crea_query_string()</code> añade al final de la cadena un parámetro llamado <code>nocache</code> y que contiene un número aleatorio (creado mediante el método <code>Math.random()</code>). Añadir un parámetro aleatorio adicional a las peticiones GET y POST es una de las estrategias más utilizadas para evitar problemas con la caché de los navegadores. Como cada petición varía al menos en el valor de uno de los parámetros, el navegador está obligado siempre a realizar la petición directamente al servidor y no utilizar su cache.</p>
+
+<p>En este ejemplo sencillo, el servidor simplemente devuelve el resultado de una supuesta validación de los datos enviados mediante AJAX:</p>
+
+<div class="figure" id="figure-2-1">
+    <img src="images/cap02/validar-datos.png" alt="Mostrando el resultado devuelto por el servidor" />
+
+    <p class="caption"><strong>Figura 2.1</strong> Mostrando el resultado devuelto por el servidor</p>
+</div>
+
+
+<p>En las aplicaciones reales, las validaciones de datos mediante AJAX sólo se utilizan en el caso de validaciones complejas que no se pueden realizar mediante el uso de código JavaScript básico. En general, las validaciones complejas requieren el uso de bases de datos: comprobar que un nombre de usuario no esté previamente registrado, comprobar que la localidad se corresponde con el código postal indicado, validar fechas libres en un hotel, etc.</p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 3</p>
+</div>
+
+<p><a class="internal" href="capitulo-4.html#ej03">Ver enunciado</a></p>
+
+<h3 id="refactorizando-la-utilidad-netcargadorcontenidos">2.5.2 Refactorizando la utilidad net.CargadorContenidos</h3>
+
+<p>La utilidad diseñada anteriormente para la carga de contenidos y recursos almacenados en el servidor, solamente está preparada para realizar peticiones HTTP sencillas mediante GET. A continuación se refactoriza esa utilidad para que permita las peticiones POST y el envío de parámetros al servidor.</p>
+
+<p>El primer cambio necesario es el de adaptar el constructor para que se puedan especificar los nuevos parámetros:</p>
+
+<div class="code javascript">
+<pre class="javascript">net.<span class="me1">CargadorContenidos</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>url<span class="sy0">,</span> funcion<span class="sy0">,</span> funcionError<span class="sy0">,</span> metodo<span class="sy0">,</span> parametros<span class="sy0">,</span> contentType<span class="br0">&#41;</span> <span class="br0">&#123;</span>...<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Se han añadido tres nuevos parámetros: el método HTTP empleado, los parámetros que se envían al servidor junto con la petición y el valor de la cabecera <code>content-type</code>.</p>
+
+<p>A continuación, se sustituye la instrucción <code>this.req.open('GET', url, true);</code> por esta otra:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">open</span><span class="br0">&#40;</span>metodo<span class="sy0">,</span> url<span class="sy0">,</span> <span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>El siguiente paso es añadir (si así se indica) la cabecera <code>Content-Type</code> de la petición:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">if</span><span class="br0">&#40;</span>contentType<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">setRequestHeader</span><span class="br0">&#40;</span><span class="st0">&quot;Content-Type&quot;</span><span class="sy0">,</span> contentType<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Por último, se sustituye la instrucción <code>this.req.send(null);</code> por esta otra:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">send</span><span class="br0">&#40;</span>parametros<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Así, el código completo de la solución refactorizada es el siguiente:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> net <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">Object</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+net.<span class="me1">READY_STATE_UNINITIALIZED</span><span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> 
+net.<span class="me1">READY_STATE_LOADING</span><span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span> 
+net.<span class="me1">READY_STATE_LOADED</span><span class="sy0">=</span><span class="nu0">2</span><span class="sy0">;</span> 
+net.<span class="me1">READY_STATE_INTERACTIVE</span><span class="sy0">=</span><span class="nu0">3</span><span class="sy0">;</span> 
+net.<span class="me1">READY_STATE_COMPLETE</span><span class="sy0">=</span><span class="nu0">4</span><span class="sy0">;</span> 
+&nbsp;
+<span class="co1">// Constructor</span>
+net.<span class="me1">CargadorContenidos</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>url<span class="sy0">,</span> funcion<span class="sy0">,</span> funcionError<span class="sy0">,</span> metodo<span class="sy0">,</span> parametros<span class="sy0">,</span> contentType<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">this</span>.<span class="me1">url</span> <span class="sy0">=</span> url<span class="sy0">;</span>
+  <span class="kw1">this</span>.<span class="me1">req</span> <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+  <span class="kw1">this</span>.<span class="me1">onload</span> <span class="sy0">=</span> funcion<span class="sy0">;</span>
+  <span class="kw1">this</span>.<span class="me1">onerror</span> <span class="sy0">=</span> <span class="br0">&#40;</span>funcionError<span class="br0">&#41;</span> <span class="sy0">?</span> funcionError <span class="sy0">:</span> <span class="kw1">this</span>.<span class="me1">defaultError</span><span class="sy0">;</span>
+  <span class="kw1">this</span>.<span class="me1">cargaContenidoXML</span><span class="br0">&#40;</span>url<span class="sy0">,</span> metodo<span class="sy0">,</span> parametros<span class="sy0">,</span> contentType<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+net.<span class="me1">CargadorContenidos</span>.<span class="kw1">prototype</span> <span class="sy0">=</span> <span class="br0">&#123;</span>
+  cargaContenidoXML<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span>url<span class="sy0">,</span> metodo<span class="sy0">,</span> parametros<span class="sy0">,</span> contentType<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span>window.<span class="me1">XMLHttpRequest</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="kw1">this</span>.<span class="me1">req</span> <span class="sy0">=</span> <span class="kw1">new</span> XMLHttpRequest<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>window.<span class="me1">ActiveXObject</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="kw1">this</span>.<span class="me1">req</span> <span class="sy0">=</span> <span class="kw1">new</span> ActiveXObject<span class="br0">&#40;</span><span class="st0">&quot;Microsoft.XMLHTTP&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">if</span><span class="br0">&#40;</span><span class="kw1">this</span>.<span class="me1">req</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="kw1">try</span> <span class="br0">&#123;</span>
+        <span class="kw1">var</span> loader <span class="sy0">=</span> <span class="kw1">this</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">onreadystatechange</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+          loader.<span class="me1">onReadyState</span>.<span class="me1">call</span><span class="br0">&#40;</span>loader<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">open</span><span class="br0">&#40;</span>metodo<span class="sy0">,</span> url<span class="sy0">,</span> <span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span>contentType<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+          <span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">setRequestHeader</span><span class="br0">&#40;</span><span class="st0">&quot;Content-Type&quot;</span><span class="sy0">,</span> contentType<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">send</span><span class="br0">&#40;</span>parametros<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">catch</span><span class="br0">&#40;</span>err<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+          <span class="kw1">this</span>.<span class="me1">onerror</span>.<span class="me1">call</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+  onReadyState<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> req <span class="sy0">=</span> <span class="kw1">this</span>.<span class="me1">req</span><span class="sy0">;</span> 
+    <span class="kw1">var</span> ready <span class="sy0">=</span> req.<span class="me1">readyState</span><span class="sy0">;</span> 
+    <span class="kw1">if</span><span class="br0">&#40;</span>ready <span class="sy0">==</span> net.<span class="me1">READY_STATE_COMPLETE</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> 
+      <span class="kw1">var</span> httpStatus <span class="sy0">=</span> req.<span class="me1">status</span><span class="sy0">;</span> 
+      <span class="kw1">if</span><span class="br0">&#40;</span>httpStatus <span class="sy0">==</span> <span class="nu0">200</span> <span class="sy0">||</span> httpStatus <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> 
+        <span class="kw1">this</span>.<span class="me1">onload</span>.<span class="me1">call</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+      <span class="br0">&#125;</span>
+      <span class="kw1">else</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">onerror</span>.<span class="me1">call</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+      <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+  defaultError<span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    alert<span class="br0">&#40;</span><span class="st0">&quot;Se ha producido un error al obtener los datos&quot;</span>
+      <span class="sy0">+</span> <span class="st0">&quot;<span class="es0">\n</span><span class="es0">\n</span>readyState:&quot;</span> <span class="sy0">+</span> <span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">readyState</span>
+      <span class="sy0">+</span> <span class="st0">&quot;<span class="es0">\n</span>status: &quot;</span> <span class="sy0">+</span> <span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">status</span>
+      <span class="sy0">+</span> <span class="st0">&quot;<span class="es0">\n</span>headers: &quot;</span> <span class="sy0">+</span> <span class="kw1">this</span>.<span class="me1">req</span>.<span class="me1">getAllResponseHeaders</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="aplicaciones-complejas">2.6 Aplicaciones complejas</h2>
+
+<h3 id="envio-de-parametros-mediante-xml">2.6.1 Envío de parámetros mediante XML</h3>
+
+<p>La flexibilidad del objeto <code>XMLHttpRequest</code> permite el envío de los parámetros por otros medios alternativos a la tradicional <em>query string</em>. De esta forma, si la aplicación del servidor así lo requeire, es posible realizar una petición al servidor enviando los parámetros en formato XML.</p>
+
+<p>A continuación se modifica el ejemplo anterior para enviar los datos del usuario en forma de documento XML. En primer lugar, se modifica la llamada a la función que construye la <em>query string</em>:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> valida<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  peticion_http <span class="sy0">=</span> inicializa_xhr<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>peticion_http<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    peticion_http.<span class="me1">onreadystatechange</span> <span class="sy0">=</span> procesaRespuesta<span class="sy0">;</span>
+    peticion_http.<span class="me1">open</span><span class="br0">&#40;</span><span class="st0">&quot;POST&quot;</span><span class="sy0">,</span> <span class="st0">&quot;http://localhost/validaDatos.php&quot;</span><span class="sy0">,</span> <span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">var</span> parametros_xml <span class="sy0">=</span> crea_xml<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    peticion_http.<span class="me1">setRequestHeader</span><span class="br0">&#40;</span><span class="st0">&quot;Content-Type&quot;</span><span class="sy0">,</span> <span class="st0">&quot;application/x-www-form-urlencoded&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    peticion_http.<span class="me1">send</span><span class="br0">&#40;</span>parametros_xml<span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Seguidamente, se crea la función <code>crea_xml()</code> que se encarga de construir el documento XML que contiene los parámetros enviados al servidor:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> crea_xml<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">var</span> fecha <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;fecha_nacimiento&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">var</span> cp <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;codigo_postal&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">var</span> telefono <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;telefono&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+  <span class="kw1">var</span> xml <span class="sy0">=</span> <span class="st0">&quot;&lt;parametros&gt;&quot;</span><span class="sy0">;</span>
+  xml <span class="sy0">=</span> xml <span class="sy0">+</span> <span class="st0">&quot;&lt;fecha_nacimiento&gt;&quot;</span> <span class="sy0">+</span> fecha.<span class="me1">value</span> <span class="sy0">+</span> <span class="st0">&quot;&lt;<span class="es0">\/</span>fecha_nacimiento&gt;&quot;</span><span class="sy0">;</span>
+  xml <span class="sy0">=</span> xml <span class="sy0">+</span> <span class="st0">&quot;&lt;codigo_postal&gt;&quot;</span> <span class="sy0">+</span> cp.<span class="me1">value</span> <span class="sy0">+</span> <span class="st0">&quot;&lt;<span class="es0">\/</span>codigo_postal&gt;&quot;</span><span class="sy0">;</span>
+  xml <span class="sy0">=</span> xml <span class="sy0">+</span> <span class="st0">&quot;&lt;telefono&gt;&quot;</span> <span class="sy0">+</span> telefono.<span class="me1">value</span> <span class="sy0">+</span> <span class="st0">&quot;&lt;<span class="es0">\/</span>telefono&gt;&quot;</span><span class="sy0">;</span>
+  xml <span class="sy0">=</span> xml <span class="sy0">+</span> <span class="st0">&quot;&lt;<span class="es0">\/</span>parametros&gt;&quot;</span><span class="sy0">;</span>
+  <span class="kw1">return</span> xml<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>El código de la función anterior emplea el carácter <code>\</code> en el cierre de todas las etiquetas XML. El motivo es que las etiquetas de cierre XML y HTML (al contrario que las etiquetas de apertura) se interpretan en el mismo lugar en el que se encuentran, por lo que si no se incluyen esos caracteres <code>\</code> el código no validaría siguiendo el estándar XHTML de forma estricta.</p>
+
+<p>El método <code>send()</code> del objeto <code>XMLHttpRequest</code> permite el envío de una cadena de texto y de un documento XML. Sin embargo, en el ejemplo anterior se ha optado por una solución intermedia: una cadena de texto que representa un documento XML. El motivo es que no existe a día de hoy un método robusto y que se pueda emplear en la mayoría de navegadores para la creación de documentos XML completos.</p>
+
+<h3 id="procesando-respuestas-xml">2.6.2 Procesando respuestas XML</h3>
+
+<p>Además del envío de parámetros en formato XML, el objeto <code>XMLHttpRequest</code> también permite la recepción de respuestas de servidor en formato XML. Una vez obtenida la respuesta del servidor mediante la propiedad <code>petición_http.responseXML</code>, es posible procesarla empleando los métodos DOM de manejo de documentos XML/HTML.</p>
+
+<p>En este caso, se modifica la respuesta del servidor para que no sea un texto sencillo, sino que la respuesta esté definida mediante un documento XML:</p>
+
+<div class="code xml">
+<pre class="xml"><span class="sc3"><span class="re1">&lt;respuesta<span class="re2">&gt;</span></span></span>
+  <span class="sc3"><span class="re1">&lt;mensaje<span class="re2">&gt;</span></span></span>...<span class="sc3"><span class="re1">&lt;/mensaje<span class="re2">&gt;</span></span></span>
+  <span class="sc3"><span class="re1">&lt;parametros<span class="re2">&gt;</span></span></span>
+    <span class="sc3"><span class="re1">&lt;telefono<span class="re2">&gt;</span></span></span>...<span class="sc3"><span class="re1">&lt;/telefono<span class="re2">&gt;</span></span></span>
+    <span class="sc3"><span class="re1">&lt;codigo_postal<span class="re2">&gt;</span></span></span>...<span class="sc3"><span class="re1">&lt;/codigo_postal<span class="re2">&gt;</span></span></span>
+    <span class="sc3"><span class="re1">&lt;fecha_nacimiento<span class="re2">&gt;</span></span></span>...<span class="sc3"><span class="re1">&lt;/fecha_nacimiento<span class="re2">&gt;</span></span></span>
+  <span class="sc3"><span class="re1">&lt;/parametros<span class="re2">&gt;</span></span></span>
+<span class="sc3"><span class="re1">&lt;/respuesta<span class="re2">&gt;</span></span></span></pre>
+</div>
+
+<p>La respuesta del servidor incluye un mensaje sobre el éxito o fracaso de la operación de validación de los parámetros y además incluye la lista completa de parámetros enviados al servidor.</p>
+
+<p>La función encargada de procesar la respuesta del servidor se debe modificar por completo para tratar el nuevo tipo de respuesta recibida:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> procesaRespuesta<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>peticion_http.<span class="me1">readyState</span> <span class="sy0">==</span> READY_STATE_COMPLETE<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span>peticion_http.<span class="me1">status</span> <span class="sy0">==</span> <span class="nu0">200</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="kw1">var</span> documento_xml <span class="sy0">=</span> peticion_http.<span class="me1">responseXML</span><span class="sy0">;</span>
+      <span class="kw1">var</span> root <span class="sy0">=</span> documento_xml.<span class="me1">getElementsByTagName</span><span class="br0">&#40;</span><span class="st0">&quot;respuesta&quot;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+      <span class="kw1">var</span> mensajes <span class="sy0">=</span> root.<span class="me1">getElementsByTagName</span><span class="br0">&#40;</span><span class="st0">&quot;mensaje&quot;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">;</span>
+      <span class="kw1">var</span> mensaje <span class="sy0">=</span> mensajes.<span class="me1">firstChild</span>.<span class="me1">nodeValue</span><span class="sy0">;</span>
+&nbsp;
+      <span class="kw1">var</span> parametros <span class="sy0">=</span> root.<span class="me1">getElementsByTagName</span><span class="br0">&#40;</span><span class="st0">&quot;parametros&quot;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+      <span class="kw1">var</span> telefono <span class="sy0">=</span> parametros.<span class="me1">getElementsByTagName</span><span class="br0">&#40;</span><span class="st0">&quot;telefono&quot;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">firstChild</span>.<span class="me1">nodeValue</span><span class="sy0">;</span>
+      <span class="kw1">var</span> fecha_nacimiento <span class="sy0">=</span> parametros.<span class="me1">getElementsByTagName</span><span class="br0">&#40;</span><span class="st0">&quot;fecha_nacimiento&quot;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">firstChild</span>.<span class="me1">nodeValue</span><span class="sy0">;</span>
+      <span class="kw1">var</span> codigo_postal <span class="sy0">=</span> parametros.<span class="me1">getElementsByTagName</span><span class="br0">&#40;</span><span class="st0">&quot;codigo_postal&quot;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">firstChild</span>.<span class="me1">nodeValue</span><span class="sy0">;</span>
+&nbsp;
+      document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;respuesta&quot;</span><span class="br0">&#41;</span>.<span class="me1">innerHTML</span> <span class="sy0">=</span> mensaje <span class="sy0">+</span> <span class="st0">&quot;&lt;br/&gt;&quot;</span> <span class="sy0">+</span> <span class="st0">&quot;Fecha nacimiento = &quot;</span> <span class="sy0">+</span> fecha_nacimiento <span class="sy0">+</span> <span class="st0">&quot;&lt;br/&gt;&quot;</span> <span class="sy0">+</span> <span class="st0">&quot;Codigo postal = &quot;</span> <span class="sy0">+</span> codigo_postal <span class="sy0">+</span> <span class="st0">&quot;&lt;br/&gt;&quot;</span> <span class="sy0">+</span> <span class="st0">&quot;Telefono = &quot;</span> <span class="sy0">+</span> telefono<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>El primer cambio importante es el de obtener el contenido de la respuesta del servidor. Hasta ahora, siempre se utilizaba la propiedad <code>responseText</code>, que devuelve el texto simple que incluye la respuesta del servidor. Cuando se procesan respuestas en formato XML, se debe utilizar la propiedad <code>responseXML</code>.</p>
+
+<p>El valor devuelto por <code>responseXML</code> es un documento XML que contiene la respuesta del servidor. Como se trata de un documento XML, es posible utilizar con sus contenidos todas las funciones DOM que se vieron en el capítulo correspondiente a DOM.</p>
+
+<p>Aunque el manejo de repuestas XML es mucho más pesado y requiere el uso de numerosas funciones DOM, su utilización se hace imprescindible para procesar respuestas muy complejas o respuestas recibidas por otros sistemas que exportan sus respuestas internas a un formato estándar XML.</p>
+
+<p>El mecanismo para obtener los datos varía mucho según cada documento XML, pero en general, se trata de obtener el valor almacenado en algunos elementos XML que a su vez pueden ser descendientes de otros elementos. Para obtener el primer elemento que se corresponde con una etiqueta XML, se utiliza la siguiente instrucción:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> elemento <span class="sy0">=</span> root.<span class="me1">getElementsByTagName</span><span class="br0">&#40;</span><span class="st0">&quot;nombre_etiqueta&quot;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>En este caso, se busca la primera etiqueta <code>&lt;nombre_etiqueta&gt;</code> que se encuentra dentro del elemento <code>root</code> (en este caso se trata de la raíz del documento XML). Para ello, se buscan todas las etiquetas <code>&lt;nombre_etiqueta&gt;</code> del documento y se obtiene la primera mediante <code>[0]</code>, que corresponde al primer elemento del array de elementos.</p>
+
+<p>Una vez obtenido el elemento, para obtener su valor se debe acceder a su primer nodo hijo (que es el nodo de tipo texto que almacena el valor) y obtener la propiedad <code>nodeValue</code>, que es la propiedad que guarda el texto correspondiente al valor de la etiqueta:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> valor <span class="sy0">=</span> elemento.<span class="me1">firstChild</span>.<span class="me1">nodeValue</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Normalmente, las dos instrucciones anteriores se unen en una sola instrucción:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> tfno <span class="sy0">=</span> parametros.<span class="me1">getElementsByTagName</span><span class="br0">&#40;</span><span class="st0">&quot;telefono&quot;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">firstChild</span>.<span class="me1">nodeValue</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 4</p>
+</div>
+
+<p><a class="internal" href="capitulo-4.html#ej04">Ver enunciado</a></p>
+
+<h3 id="parametros-y-respuestas-json">2.6.3 Parámetros y respuestas JSON</h3>
+
+<p>Aunque el formato XML está soportado por casi todos los lenguajes de programación, por muchas aplicaciones y es una tecnología madura y probada, en algunas ocasiones es más útil intercambiar información con el servidor en formato JSON.</p>
+
+<p>JSON es un formato mucho más compacto y ligero que XML. Además, es mucho más fácil de procesar en el navegador del usuario. Afortunadamente, cada vez existen más utilidades para procesar y generar el formato JSON en los diferentes lenguajes de programación del servidor (PHP, Java, C#, etc.)</p>
+
+<p>El ejemplo mostrado anteriormente para procesar las respuestas XML del servidor se puede reescribir utilizando respuestas JSON. En este caso, la respuesta que genera el servidor es mucho más concisa:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="br0">&#123;</span>
+    mensaje<span class="sy0">:</span> <span class="st0">&quot;...&quot;</span><span class="sy0">,</span>
+    parametros<span class="sy0">:</span> <span class="br0">&#123;</span> telefono<span class="sy0">:</span> <span class="st0">&quot;...&quot;</span><span class="sy0">,</span>
+                  codigo_postal<span class="sy0">:</span> <span class="st0">&quot;...&quot;</span><span class="sy0">,</span>
+                  fecha_nacimiento<span class="sy0">:</span> <span class="st0">&quot;...&quot;</span>
+                <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Considerando el nuevo formato de la respuesta, es necesario modificar la función que se encarga de procesar la respuesta del servidor:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> procesaRespuesta<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>http_request.<span class="me1">readyState</span> <span class="sy0">==</span> READY_STATE_COMPLETE<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>http_request.<span class="me1">status</span> <span class="sy0">==</span> <span class="nu0">200</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> respuesta_json <span class="sy0">=</span> http_request.<span class="me1">responseText</span><span class="sy0">;</span>
+    <span class="kw1">var</span> objeto_json <span class="sy0">=</span> JSON.<span class="me1">parse</span><span class="br0">&#40;</span>respuesta_json<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">var</span> mensaje <span class="sy0">=</span> objeto_json.<span class="me1">mensaje</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">var</span> telefono <span class="sy0">=</span> objeto_json.<span class="me1">parametros</span>.<span class="me1">telefono</span><span class="sy0">;</span>
+    <span class="kw1">var</span> fecha_nacimiento <span class="sy0">=</span> objeto_json.<span class="me1">parametros</span>.<span class="me1">fecha_nacimiento</span><span class="sy0">;</span>
+    <span class="kw1">var</span> codigo_postal <span class="sy0">=</span> objeto_json.<span class="me1">parametros</span>.<span class="me1">codigo_postal</span><span class="sy0">;</span>
+&nbsp;
+    document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;respuesta&quot;</span><span class="br0">&#41;</span>.<span class="me1">innerHTML</span> <span class="sy0">=</span> mensaje <span class="sy0">+</span> <span class="st0">&quot;&lt;br&gt;&quot;</span> <span class="sy0">+</span> <span class="st0">&quot;Fecha nacimiento = &quot;</span> <span class="sy0">+</span> fecha_nacimiento <span class="sy0">+</span> <span class="st0">&quot;&lt;br&gt;&quot;</span> <span class="sy0">+</span> <span class="st0">&quot;Codigo postal = &quot;</span> <span class="sy0">+</span> codigo_postal <span class="sy0">+</span> <span class="st0">&quot;&lt;br&gt;&quot;</span> <span class="sy0">+</span> <span class="st0">&quot;Telefono = &quot;</span> <span class="sy0">+</span> telefono<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La respuesta JSON del servidor se obtiene mediante la propiedad responseText:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> respuesta_json <span class="sy0">=</span> http_request.<span class="me1">responseText</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Sin embargo, esta propiedad solamente devuelve la respuesta del servidor en forma de cadena de texto. Para trabajar con el código JSON devuelto, se debe transformar esa cadena de texto en un objeto JSON. La forma más sencilla de realizar esa conversión es mediante la función <code>eval()</code>, en la que deben añadirse paréntesis al principio y al final para realizar la evaluación de forma correcta:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> objeto_json <span class="sy0">=</span> eval<span class="br0">&#40;</span><span class="st0">&quot;(&quot;</span><span class="sy0">+</span>respuesta_json<span class="sy0">+</span><span class="st0">&quot;)&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">var</span> objeto_json <span class="sy0">=</span> JSON.<span class="me1">parse</span><span class="br0">&#40;</span>respuesta_json<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Una vez realizada la transformación, el objeto JSON ya permite acceder a sus métodos y propiedades mediante la notación de puntos tradicional. Comparado con las respuestas XML, este procedimiento permite acceder a la información devuelta por el servidor de forma mucho más simple:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// Con JSON</span>
+<span class="kw1">var</span> fecha_nacimiento <span class="sy0">=</span> objeto_json.<span class="me1">parametros</span>.<span class="me1">fecha_nacimiento</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Con XML</span>
+<span class="kw1">var</span> parametros <span class="sy0">=</span> root.<span class="me1">getElementsByTagName</span><span class="br0">&#40;</span><span class="st0">&quot;parametros&quot;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">;</span>
+<span class="kw1">var</span> fecha_nacimiento <span class="sy0">=</span> parametros.<span class="me1">getElementsByTagName</span><span class="br0">&#40;</span><span class="st0">&quot;fecha_nacimiento&quot;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">firstChild</span>.<span class="me1">nodeValue</span><span class="sy0">;</span></pre>
+</div>
+
+<p>También es posible el envío de los parámetros en formato JSON. Sin embargo, no es una tarea tan sencilla como la creación de un documento XML. Así, se han diseñado utilidades específicas para la transformación de objetos JavaScript a cadenas de texto que representan el objeto en formato JSON. Esta librería se puede descargar desde el sitio web <a href="http://www.arkaitzgarro.com/ajax/www.json.org">www.json.org</a>.</p>
+
+<p>Para emplearla, se añade la referencia en el código de la página:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">script</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text/javascript&quot;</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;json.js&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">script</span>&gt;</span></pre>
+</div>
+
+<p>Una vez referenciada la librería, se emplea el método <code>stringify</code> para realizar la transformación:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> objeto_json <span class="sy0">=</span> JSON.<span class="me1">stringify</span><span class="br0">&#40;</span>objeto<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Además de las librerías para JavaScript, están disponibles otras librerías para muchos otros lenguajes de programación habituales. Empleando la librería desarrollada para Java, es posible procesar la petición JSON realizada por un cliente:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw5">import</span> org.<span class="me1">json</span>.<span class="me1">JSONObject</span><span class="sy0">;</span>
+...
+<span class="kw4">String</span> cadena_json <span class="sy0">=</span> <span class="st0">&quot;{propiedad: valor, codigo_postal: otro_valor}&quot;</span><span class="sy0">;</span>
+JSONObject objeto_json <span class="sy0">=</span> <span class="kw1">new</span> JSONObject<span class="br0">&#40;</span>cadena_json<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw4">String</span> codigo_postal <span class="sy0">=</span> objeto_json.<span class="me1">getString</span><span class="br0">&#40;</span><span class="st0">&quot;codigo_postal&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 6</p>
+</div>
+
+<p><a class="internal" href="capitulo-4.html#ej06">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-2.html#primeros-pasos-con-ajax">Primeros pasos con AJAX</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.1</span>
+                        <a class="internal" href="capitulo-2.html#breve-historia-de-ajax">Breve historia de AJAX</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.2</span>
+                        <a class="internal" href="capitulo-2.html#la-primera-aplicacion">La primera aplicación</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.3</span>
+                        <a class="internal" href="capitulo-2.html#metodos-y-propiedades-del-objeto-xmlhttprequest">Métodos y propiedades del objeto XMLHttpRequest</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.4</span>
+                        <a class="internal" href="capitulo-2.html#utilidades-y-objetos-para-ajax">Utilidades y objetos para AJAX</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.5</span>
+                        <a class="internal" href="capitulo-2.html#interaccion-con-el-servidor">Interacción con el servidor</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.6</span>
+                        <a class="internal" href="capitulo-2.html#aplicaciones-complejas">Aplicaciones complejas</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

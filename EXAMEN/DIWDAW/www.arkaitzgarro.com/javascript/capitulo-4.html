@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="08/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Operadores | JavaScript</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">JavaScript</a></h1>
+        <p class="span3">
+                        <a href="capitulo-3.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-5.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="operadores"><span>Capítulo 4</span> Operadores</h1>
+        <p>Los operadores permiten manipular el valor de las variables, realizar operaciones matemáticas con sus valores y comparar diferentes variables. De esta forma, los operadores permiten a los programas realizar cálculos complejos y tomar decisiones lógicas en función de comparaciones y otros tipos de condiciones.</p>
+
+<h2 id="asignacion">4.1 Asignación</h2>
+
+<p>El operador de asignación es el más utilizado y el más sencillo. Este operador se utiliza para guardar un valor específico en una variable. El símbolo utilizado es <code>=</code> (no confundir con el operador <code>==</code> que se verá más adelante):</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> numero1 <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span></pre>
+</div>
+
+<p>A la izquierda del operador, siempre debe indicarse el nombre de una variable. A la derecha del operador, se pueden indicar variables, valores, condiciones lógicas, etc:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> numero1 <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span>
+<span class="kw1">var</span> numero2 <span class="sy0">=</span> <span class="nu0">4</span><span class="sy0">;</span>
+&nbsp;
+<span class="coMULTI">/* Error, la asignación siempre se realiza a una variable,
+    por lo que en la izquierda no se puede indicar un número */</span>
+<span class="nu0">5</span> <span class="sy0">=</span> numero1<span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Ahora, la variable numero1 vale 5</span>
+numero1 <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Ahora, la variable numero1 vale 4</span>
+numero1 <span class="sy0">=</span> numero2<span class="sy0">;</span></pre>
+</div>
+
+<h2 id="aritmeticos">4.2 Aritméticos</h2>
+
+<p>JavaScript permite realizar manipulaciones matemáticas sobre el valor de las variables numéricas. Los operadores definidos son: suma (<code>+</code>), resta (<code>-</code>), multiplicación (<code>*</code>), división (<code>/</code>) y módulo (<code>%</code>). Ejemplo:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> numero1 <span class="sy0">=</span> <span class="nu0">10</span><span class="sy0">;</span>
+<span class="kw1">var</span> numero2 <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+&nbsp;
+resultado <span class="sy0">=</span> numero1 <span class="sy0">/</span> numero2<span class="sy0">;</span>  <span class="co1">// resultado = 2</span>
+resultado <span class="sy0">=</span> <span class="nu0">3</span> <span class="sy0">+</span> numero1<span class="sy0">;</span>        <span class="co1">// resultado = 13</span>
+resultado <span class="sy0">=</span> numero2 – <span class="nu0">4</span><span class="sy0">;</span>        <span class="co1">// resultado = 1</span>
+resultado <span class="sy0">=</span> numero1 <span class="sy0">*</span> numero <span class="nu0">2</span><span class="sy0">;</span> <span class="co1">// resultado = 50</span>
+resultado <span class="sy0">=</span> numero1 <span class="sy0">%</span> numero2<span class="sy0">;</span>  <span class="co1">// resultado = 0</span>
+&nbsp;
+numero1 <span class="sy0">=</span> <span class="nu0">9</span><span class="sy0">;</span>
+numero2 <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+resultado <span class="sy0">=</span> numero1 <span class="sy0">%</span> numero2<span class="sy0">;</span>  <span class="co1">// resultado = 4</span></pre>
+</div>
+
+<p>Los operadores matemáticos también se pueden combinar con el operador de asignación para abreviar su notación:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> numero1 <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+numero1 <span class="sy0">+=</span> <span class="nu0">3</span><span class="sy0">;</span>   <span class="co1">// numero1 = numero1 + 3 = 8</span>
+numero1 <span class="sy0">-=</span> <span class="nu0">1</span><span class="sy0">;</span>   <span class="co1">// numero1 = numero1 - 1 = 4</span>
+numero1 <span class="sy0">*=</span> <span class="nu0">2</span><span class="sy0">;</span>   <span class="co1">// numero1 = numero1 * 2 = 10</span>
+numero1 <span class="sy0">/=</span> <span class="nu0">5</span><span class="sy0">;</span>   <span class="co1">// numero1 = numero1 / 5 = 1</span>
+numero1 <span class="sy0">%=</span> <span class="nu0">4</span><span class="sy0">;</span>   <span class="co1">// numero1 = numero1 % 4 = 1</span></pre>
+</div>
+
+<p>Existen dos operadores especiales que solamente son válidos para las variables numéricas y se utilizan para incrementar o decrementar en una unidad el valor de una variable.</p>
+
+<p>Ejemplo:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> numero <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+<span class="sy0">++</span>numero<span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>numero<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// numero = 6</span></pre>
+</div>
+
+<p>El operador de incremento se indica mediante el prefijo <code>++</code> en el nombre de la variable. El resultado es que el valor de esa variable se incrementa en una unidad. Por tanto, el anterior ejemplo es equivalente a:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> numero <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+numero <span class="sy0">=</span> numero <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>numero<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// numero = 6</span></pre>
+</div>
+
+<p>De forma equivalente, el operador decremento (indicado como un prefijo -- en el nombre de la variable) se utiliza para decrementar el valor de la variable:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> numero <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+<span class="sy0">--</span>numero<span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>numero<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// numero = 4</span></pre>
+</div>
+
+<p>El anterior ejemplo es equivalente a:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> numero <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+numero <span class="sy0">=</span> numero <span class="sy0">-</span> <span class="nu0">1</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>numero<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// numero = 4</span></pre>
+</div>
+
+<p>Los operadores de incremento y decremento no solamente se pueden indicar como prefijo del nombre de la variable, sino que también es posible utilizarlos como sufijo. En este caso, su comportamiento es similar pero muy diferente. En el siguiente ejemplo:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> numero <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+numero<span class="sy0">++;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span>numero<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// numero = 6</span></pre>
+</div>
+
+<p>El resultado de ejecutar el script anterior es el mismo que cuando se utiliza el operador <code>++numero</code>, por lo que puede parecer que es equivalente indicar el operador <code>++</code> delante o detrás del identificador de la variable. Sin embargo, el siguiente ejemplo muestra sus diferencias:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> numero1 <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+<span class="kw1">var</span> numero2 <span class="sy0">=</span> <span class="nu0">2</span><span class="sy0">;</span>
+numero3 <span class="sy0">=</span> numero1<span class="sy0">++</span> <span class="sy0">+</span> numero2<span class="sy0">;</span>
+<span class="co1">// numero3 = 7, numero1 = 6</span>
+&nbsp;
+<span class="kw1">var</span> numero1 <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+<span class="kw1">var</span> numero2 <span class="sy0">=</span> <span class="nu0">2</span><span class="sy0">;</span>
+numero3 <span class="sy0">=</span> <span class="sy0">++</span>numero1 <span class="sy0">+</span> numero2<span class="sy0">;</span>
+<span class="co1">// numero3 = 8, numero1 = 6</span></pre>
+</div>
+
+<p>Si el operador <code>++</code> se indica como prefijo del identificador de la variable, su valor se incrementa <strong>antes</strong> de realizar cualquier otra operación. Si el operador <code>++</code> se indica como sufijo del identificador de la variable, su valor se incrementa <strong>después</strong> de ejecutar la sentencia en la que aparece.</p>
+
+<p>Por tanto, en la instrucción <code>numero3 = numero1++ + numero2;</code>, el valor de <code>numero1</code> se incrementa después de realizar la operación (primero se suma y <code>numero3</code> vale <code>7</code>, después se incrementa el valor de <code>numero1</code> y vale <code>6</code>). Sin embargo, en la instrucción <code>numero3 = ++numero1 + numero2;</code>, en primer lugar se incrementa el valor de <code>numero1</code> y después se realiza la suma (primero se incrementa <code>numero1</code> y vale <code>6</code>, después se realiza la suma y <code>numero3</code> vale `8).</p>
+
+<h2 id="logicos">4.3 Lógicos</h2>
+
+<p>Los operadores lógicos son imprescindibles para realizar aplicaciones complejas, ya que se utilizan para tomar decisiones sobre las instrucciones que debería ejecutar el programa en función de ciertas condiciones. El resultado de cualquier operación que utilice operadores lógicos siempre es un valor lógico o <code>booleano</code>.</p>
+
+<h3 id="negacion">4.3.1 Negación</h3>
+
+<p>Uno de los operadores lógicos más utilizados es el de la negación. Se utiliza para obtener el valor contrario al valor de la variable:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> visible <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span><span class="sy0">!</span>visible<span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// Muestra &quot;false&quot; y no &quot;true&quot;</span></pre>
+</div>
+
+<p>La negación lógica se obtiene prefijando el símbolo <code>!</code> al identificador de la variable. El funcionamiento de este operador se resume en la siguiente tabla:</p>
+
+<div class="table" id="table-4-1">
+
+    <table>
+<thead>
+<tr>
+  <th>variable</th>
+  <th>!variable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>true</code></td>
+  <td><code>false</code></td>
+</tr>
+<tr>
+  <td><code>false</code></td>
+  <td><code>true</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Si la variable original es de tipo <em>booleano</em>, es muy sencillo obtener su negación. Sin embargo, ¿qué sucede cuando la variable es un número o una cadena de texto? Para obtener la negación en este tipo de variables, se realiza en primer lugar su conversión a un valor booleano:</p>
+
+<ul>
+<li>Si la variable contiene un número, se transforma en <code>false</code> si vale <code>0</code> y en <code>true</code> para cualquier otro número (positivo o negativo, decimal o entero).</li>
+<li>Si la variable contiene una cadena de texto, se transforma en <code>false</code> si la cadena es vacía (<code>""</code>) y en <code>true</code> en cualquier otro caso.</li>
+</ul>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> cantidad <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+vacio <span class="sy0">=</span> <span class="sy0">!</span>cantidad<span class="sy0">;</span>  <span class="co1">// vacio = true</span>
+&nbsp;
+cantidad <span class="sy0">=</span> <span class="nu0">2</span><span class="sy0">;</span>
+vacio <span class="sy0">=</span> <span class="sy0">!</span>cantidad<span class="sy0">;</span>  <span class="co1">// vacio = false</span>
+&nbsp;
+<span class="kw1">var</span> mensaje <span class="sy0">=</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+mensajeVacio <span class="sy0">=</span> <span class="sy0">!</span>mensaje<span class="sy0">;</span>  <span class="co1">// mensajeVacio = true</span>
+&nbsp;
+mensaje <span class="sy0">=</span> <span class="st0">&quot;Bienvenido&quot;</span><span class="sy0">;</span>
+mensajeVacio <span class="sy0">=</span> <span class="sy0">!</span>mensaje<span class="sy0">;</span>  <span class="co1">// mensajeVacio = false</span></pre>
+</div>
+
+<h3 id="and">4.3.2 AND</h3>
+
+<p>La operación lógica <code>AND</code> obtiene su resultado combinando dos valores booleanos. El operador se indica mediante el símbolo <code>&amp;&amp;</code> y su resultado solamente es <code>true</code> si los dos operandos son <code>true</code>:</p>
+
+<div class="table" id="table-4-2">
+
+    <table>
+<thead>
+<tr>
+  <th>variable1</th>
+  <th>variable2</th>
+  <th>variable1 &amp;&amp; variable2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>true</code></td>
+  <td><code>true</code></td>
+  <td><code>true</code></td>
+</tr>
+<tr>
+  <td><code>true</code></td>
+  <td><code>false</code></td>
+  <td><code>false</code></td>
+</tr>
+<tr>
+  <td><code>false</code></td>
+  <td><code>true</code></td>
+  <td><code>false</code></td>
+</tr>
+<tr>
+  <td><code>false</code></td>
+  <td><code>false</code></td>
+  <td><code>false</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> valor1 <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+<span class="kw1">var</span> valor2 <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+resultado <span class="sy0">=</span> valor1 <span class="sy0">&amp;&amp;</span> valor2<span class="sy0">;</span> <span class="co1">// resultado = false</span>
+&nbsp;
+valor1 <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+valor2 <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+resultado <span class="sy0">=</span> valor1 <span class="sy0">&amp;&amp;</span> valor2<span class="sy0">;</span> <span class="co1">// resultado = true</span></pre>
+</div>
+
+<h3 id="or">4.3.3 OR</h3>
+
+<p>La operación lógica <code>OR</code> también combina dos valores booleanos. El operador se indica mediante el símbolo <code>||</code> y su resultado es true si alguno de los dos operandos es <code>true</code>:</p>
+
+<div class="table" id="table-4-3">
+
+    <table>
+<thead>
+<tr>
+  <th>variable1</th>
+  <th>variable2</th>
+  <th>variable1 &#124;&#124; variable2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>true</code></td>
+  <td><code>true</code></td>
+  <td><code>true</code></td>
+</tr>
+<tr>
+  <td><code>true</code></td>
+  <td><code>false</code></td>
+  <td><code>false</code></td>
+</tr>
+<tr>
+  <td><code>false</code></td>
+  <td><code>true</code></td>
+  <td><code>true</code></td>
+</tr>
+<tr>
+  <td><code>false</code></td>
+  <td><code>false</code></td>
+  <td><code>false</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> valor1 <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+<span class="kw1">var</span> valor2 <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+resultado <span class="sy0">=</span> valor1 <span class="sy0">||</span> valor2<span class="sy0">;</span> <span class="co1">// resultado = true</span>
+&nbsp;
+valor1 <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+valor2 <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+resultado <span class="sy0">=</span> valor1 <span class="sy0">||</span> valor2<span class="sy0">;</span> <span class="co1">// resultado = false</span></pre>
+</div>
+
+<h2 id="relacionales">4.4 Relacionales</h2>
+
+<p>Los operadores relacionales definidos por JavaScript son idénticos a los que definen las matemáticas: mayor que (<code>&gt;</code>), menor que (<code>&lt;</code>), mayor o igual (<code>&gt;=</code>), menor o igual (<code>&lt;=</code>), igual que (<code>==</code>) y distinto de (<code>!=</code>).</p>
+
+<p>Los operadores que relacionan variables son imprescindibles para realizar cualquier aplicación compleja. El resultado de todos estos operadores siempre es un valor booleano:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> numero1 <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span>
+<span class="kw1">var</span> numero2 <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+resultado <span class="sy0">=</span> numero1 <span class="sy0">&gt;</span> numero2<span class="sy0">;</span>  <span class="co1">// resultado = false</span>
+resultado <span class="sy0">=</span> numero1 <span class="sy0">&lt;</span> numero2<span class="sy0">;</span>  <span class="co1">// resultado = true</span>
+&nbsp;
+numero1 <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+numero2 <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+resultado <span class="sy0">=</span> numero1 <span class="sy0">&gt;=</span> numero2<span class="sy0">;</span> <span class="co1">// resultado = true</span>
+resultado <span class="sy0">=</span> numero1 <span class="sy0">&lt;=</span> numero2<span class="sy0">;</span> <span class="co1">// resultado = true</span>
+resultado <span class="sy0">=</span> numero1 <span class="sy0">==</span> numero2<span class="sy0">;</span> <span class="co1">// resultado = true</span>
+resultado <span class="sy0">=</span> numero1 <span class="sy0">!=</span> numero2<span class="sy0">;</span> <span class="co1">// resultado = false</span></pre>
+</div>
+
+<p>Se debe tener especial cuidado con el operador de igualdad (<code>==</code>), ya que es el origen de la mayoría de errores de programación, incluso para los usuarios que ya tienen cierta experiencia desarrollando scripts. El operador <code>==</code> se utiliza para comparar el valor de dos variables, por lo que es muy diferente del operador <code>=</code>, que se utiliza para asignar un valor a una variable:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// El operador &quot;=&quot; asigna valores</span>
+<span class="kw1">var</span> numero1 <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+resultado <span class="sy0">=</span> numero1 <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span>  <span class="co1">// numero1 = 3 y resultado = 3</span>
+&nbsp;
+<span class="co1">// El operador &quot;==&quot; compara variables</span>
+<span class="kw1">var</span> numero1 <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+resultado <span class="sy0">=</span> numero1 <span class="sy0">==</span> <span class="nu0">3</span><span class="sy0">;</span> <span class="co1">// numero1 = 5 y resultado = false</span></pre>
+</div>
+
+<p>Los operadores relacionales también se pueden utilizar con variables de tipo cadena de texto:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> texto1 <span class="sy0">=</span> <span class="st0">&quot;hola&quot;</span><span class="sy0">;</span>
+<span class="kw1">var</span> texto2 <span class="sy0">=</span> <span class="st0">&quot;hola&quot;</span><span class="sy0">;</span>
+<span class="kw1">var</span> texto3 <span class="sy0">=</span> <span class="st0">&quot;adios&quot;</span><span class="sy0">;</span>
+&nbsp;
+resultado <span class="sy0">=</span> texto1 <span class="sy0">==</span> texto3<span class="sy0">;</span> <span class="co1">// resultado = false</span>
+resultado <span class="sy0">=</span> texto1 <span class="sy0">!=</span> texto2<span class="sy0">;</span> <span class="co1">// resultado = false</span>
+resultado <span class="sy0">=</span> texto3 <span class="sy0">&gt;=</span> texto2<span class="sy0">;</span> <span class="co1">// resultado = false</span></pre>
+</div>
+
+<p>Cuando se utilizan cadenas de texto, los operadores "mayor que" (<code>&gt;</code>) y "menor que" (<code>&lt;</code>) siguen un razonamiento no intuitivo: se compara letra a letra comenzando desde la izquierda hasta que se encuentre una diferencia entre las dos cadenas de texto. Para determinar si una letra es mayor o menor que otra, las mayúsculas se consideran menores que las minúsculas y las primeras letras del alfabeto son menores que las últimas (<code>a</code> es menor que <code>b</code>, <code>b</code> es menor que <code>c</code>, <code>A</code> es menor que <code>a</code>, etc.)</p>
+
+<h2 id="typeof">4.5 <code>typeof</code></h2>
+
+<p>El operador <code>typeof</code> se emplea para determinar el tipo de dato que almacena una variable. Su uso es muy sencillo, ya que sólo es necesario indicar el nombre de la variable cuyo tipo se quiere averiguar:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myFunction <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'hola'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> myObject <span class="sy0">=</span> <span class="br0">&#123;</span>
+    foo <span class="sy0">:</span> <span class="st0">'bar'</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> myArray <span class="sy0">=</span> <span class="br0">&#91;</span> <span class="st0">'a'</span><span class="sy0">,</span> <span class="st0">'b'</span><span class="sy0">,</span> <span class="st0">'c'</span> <span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> myString <span class="sy0">=</span> <span class="st0">'hola'</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> myNumber <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">typeof</span> myFunction<span class="sy0">;</span>   <span class="co1">// devuelve 'function'</span>
+<span class="kw1">typeof</span> myObject<span class="sy0">;</span>     <span class="co1">// devuelve 'object'</span>
+<span class="kw1">typeof</span> myArray<span class="sy0">;</span>      <span class="co1">// devuelve 'object' -- tenga cuidado</span>
+<span class="kw1">typeof</span> myString<span class="sy0">;</span>     <span class="co1">// devuelve 'string'</span>
+<span class="kw1">typeof</span> myNumber<span class="sy0">;</span>     <span class="co1">// devuelve 'number'</span>
+&nbsp;
+<span class="kw1">typeof</span> <span class="kw2">null</span><span class="sy0">;</span>         <span class="co1">// devuelve 'object' -- tenga cuidado</span>
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#40;</span>myArray.<span class="me1">push</span> <span class="sy0">&amp;&amp;</span> myArray.<span class="me1">slice</span> <span class="sy0">&amp;&amp;</span> myArray.<span class="me1">join</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// probablemente sea un vector</span>
+    <span class="co1">// (este estilo es llamado, en inglés, &quot;duck typing&quot;)</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#40;</span><span class="kw4">Object</span>.<span class="kw1">prototype</span>.<span class="me1">toString</span>.<span class="me1">call</span><span class="br0">&#40;</span>myArray<span class="br0">&#41;</span> <span class="sy0">===</span> <span class="st0">'[object Array]'</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// definitivamente es un vector;</span>
+    <span class="co1">// esta es considerada la forma más robusta</span>
+    <span class="co1">// de determinar si un valor es un vector.</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Los posibles valores de retorno del operador son: <code>undefined</code>, <code>boolean</code>, <code>number</code>, <code>string</code> para cada uno de los tipos primitivos y <code>object</code> para los valores de referencia y también para los valores de tipo <code>null</code>.</p>
+
+<p>El operador <code>typeof</code> no distingue entre las variables declaradas pero no inicializadas y las variables que ni siquiera han sido declaradas:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> variable1<span class="sy0">;</span>
+&nbsp;
+<span class="co1">// devuelve &quot;undefined&quot;, aunque la variable1 ha sido declarada</span>
+<span class="kw1">typeof</span> variable1<span class="sy0">;</span>
+<span class="co1">// devuelve &quot;undefined&quot;, la variable2 no ha sido declarada</span>
+<span class="kw1">typeof</span> variable2<span class="sy0">;</span></pre>
+</div>
+
+<h2 id="instanceof">4.6 <code>instanceof</code></h2>
+
+<p>El operador <code>typeof</code> no es suficiente para trabajar con tipos de referencia, ya que devuelve el valor <code>object</code> para cualquier objeto independientemente de su tipo. Por este motivo, JavaScript define el operador <code>instanceof</code> para determinar la clase concreta de un objeto.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> variable1 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">String</span><span class="br0">&#40;</span><span class="st0">&quot;hola mundo&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">typeof</span> variable1<span class="sy0">;</span>             <span class="co1">// devuelve &quot;object&quot;</span>
+variable1 <span class="kw1">instanceof</span> <span class="kw4">String</span><span class="sy0">;</span>  <span class="co1">// devuelve true</span></pre>
+</div>
+
+<p>El operador <code>instanceof</code> sólo devuelve como valor <code>true</code> o <code>false</code>. De esta forma, <code>instanceof</code> no devuelve directamente la clase de la que ha instanciado la variable, sino que se debe comprobar cada posible tipo de clase individualmente.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-4.html#operadores">Operadores</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.1</span>
+                        <a class="internal" href="capitulo-4.html#asignacion">Asignación</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.2</span>
+                        <a class="internal" href="capitulo-4.html#aritmeticos">Aritméticos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.3</span>
+                        <a class="internal" href="capitulo-4.html#logicos">Lógicos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.4</span>
+                        <a class="internal" href="capitulo-4.html#relacionales">Relacionales</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.5</span>
+                        <a class="internal" href="capitulo-4.html#typeof"><code>typeof</code></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.6</span>
+                        <a class="internal" href="capitulo-4.html#instanceof"><code>instanceof</code></a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

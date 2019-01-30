@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="18/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>¿Qué es HTTP? | XHTML</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">XHTML</a></h1>
+        <p class="span3">
+                        <a href="index.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-2.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="que-es-http"><span>Capítulo 1</span> ¿Qué es HTTP?</h1>
+        <h2 id="http-es-simple">1.1 HTTP es simple</h2>
+
+<p><strong>HTTP</strong> (Hypertext Transfer Protocol) es un conjunto de reglas acordadas para transferir texto con atributos propios de Internet, que permite a dos máquinas comunicarse entre sí.</p>
+
+<p>Se trata de un protocolo de transferencia de texto que opera a través de solicitudes entre un <strong>cliente</strong> y un <strong>servidor</strong>.
+HTTP es el término utilizado para describir este sencillo lenguaje basado en texto. No importa cómo se desarrolle, el objetivo del servidor será siempre entender y devolver respuestas de texto sencillo.</p>
+
+<p>Es también uno de los protocolos que cierra la brecha entre los grupos de creación de redes y desarrollo de aplicaciones, ya que contiene información que es utilizada por los dos en la entrega y el desarrollo de aplicaciones basadas en web.</p>
+
+<div class="figure" id="figure-1-1">
+    <img src="images/cap01/http.png" alt="Proceso de una petición web" />
+
+    <p class="caption"><strong>Figura 1.1</strong> Proceso de una petición web</p>
+</div>
+
+
+<h2 id="paso-1-el-cliente-manda-una-peticion">1.2 Paso 1: el cliente manda una Petición</h2>
+
+<p>Cada conversación en la web comienza con una petición. Esta petición es un mensaje de texto creado por un cliente (navegador, app) en un formato especial conocido como HTTP.
+El cliente envía esta petición a un servidor, y entonces espera la respuesta.</p>
+
+<p>Una petición en lenguaje HTTP sería algo así:</p>
+
+<pre><code>GET / HTTP/1.1
+Host: google.com
+Accept: text/html
+User-Agent: Chrome/31.0.1650.57 (Macintosh; Intel Mac OS X 10_9_0)
+</code></pre>
+
+<p>Este simple mensaje comunica todo lo necesario acerca de qué recurso exactamente está solicitando el cliente.</p>
+
+<p>La primera línea de una petición HTTP es la más importante y contiene dos cosas:</p>
+
+<ul>
+<li>el <strong>URI</strong> (Uniform Resource Identifier)</li>
+<li>el <strong>método HTTP</strong></li>
+</ul>
+
+<p>El URI <code>(e.g. /, /contact, etc)</code> es la única dirección o ubicación que identifica el recurso que el cliente quiere.</p>
+
+<p>El método HTTP <code>(e.g. GET)</code> define lo que quieres hacer con el recurso. Los métodos HTTP son los verbos de la petición y definen las pocas maneras comunes que pueden actuar sobre el recurso:</p>
+
+<ul>
+<li><code>GET</code> Recuperar el recurso del servidor</li>
+<li><code>POST</code> Crear un recurso en el servidor</li>
+<li><code>PUT</code> Actualizar el recurso en el servidor</li>
+<li><code>DELETE</code> Borrar el recurso del servidor</li>
+</ul>
+
+<p>Teniendo esto en cuenta, es muy fácil imaginarse cómo debería ser una petición HTTP para eliminar una entrada específica de un blog, por ejemplo:</p>
+
+<pre><code>DELETE /blog/15 HTTP/1.1
+</code></pre>
+
+<p>Aunque hay nueve métodos HTTP definidos por la especificación HTTP, muchos de ellos no son muy utilizados. En realidad, muchos navegadores modernos no son compatibles con los métodos <code>PUT</code> y <code>DELETE</code>.</p>
+
+<p>Además de la primera línea, una petición HTTP contiene invariablemente otras líneas de datos llamadas <em>request headers</em> o cabeceras.
+Estas cabeceras pueden suministrar una amplia gama de información como el servidor <em>(Host)</em>, los formatos de respuesta que acepta el cliente <em>(Accept)</em> y la aplicación que utiliza el cliente para realizar la solicitud <em>(User-Agent)</em>.</p>
+
+<h2 id="paso-2-el-servidor-devuelve-una-respuesta">1.3 Paso 2: el servidor devuelve una Respuesta</h2>
+
+<p>Una vez que el servidor ha recibido la petición, sabe exactamente qué recurso necesita el cliente (via URI) y qué es lo que el cliente quiere hacer con ese recurso (via método HTTP).</p>
+
+<p>Traducido a HTTP, la respuesta enviada al navegador será algo como esto:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Date: Sun, 01 Dec 2013 18:17:45 GMT
+Server: Apache/2.2.22 (Ubuntu)
+Content-Type: text/html
+
+&lt;html&gt;
+      &lt;!-- ... --&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>La respuesta HTTP contiene el recurso solicitado (el contenido HTML en este caso), así como otra información acerca de la respuesta.
+La primera línea es especialmente importante y contiene el código de estado de respuesta HTTP (200 en este caso).
+El código de estado comunica el resultado global de la solicitud.
+Existen diferentes códigos de estado que nos indican éxito, error o que el cliente necesita hacer algo (e.g. redirigir a otra página). Los códigos de estado más comunes son:</p>
+
+<ul>
+<li><code>200 OK</code>. Indica éxito.</li>
+<li><code>304 Not Modified</code>. Esto muestra que el recurso en cuestión no ha cambiado y que el navegador debe cargarlo desde su caché.</li>
+<li><code>404 Not Found</code>. Esto sugiere que el recurso no se encuentra en el servidor.</li>
+<li><code>401 Authorization Required</code>. Esto indica que el recurso está protegido y quiere unos credenciales válidos antes de que el servidor pueda conceder el acceso.</li>
+<li><code>500 Internal Error</code>. Esto significa que el servidor ha tenido un problema procesando la petición.</li>
+</ul>
+
+<p>Al igual que la petición, una respuesta HTTP contiene piezas de información adicionales conocidas como cabeceras HTTP o <em>headers</em>. Por ejemplo, una importante cabecera de respuesta HTTP es <em>Content-Type</em>. El cuerpo o <em>body</em> de un mismo recurso puede ser devuelto en múltiples formatos diferentes como HTML, XML o JSON y la cabecera <em>Content-Type</em> utiliza <em>Internet Media Types</em> como texto/html para decirle al cliente qué formato está devolviendo.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-1.html#que-es-http">¿Qué es HTTP?</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.1</span>
+                        <a class="internal" href="capitulo-1.html#http-es-simple">HTTP es simple</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.2</span>
+                        <a class="internal" href="capitulo-1.html#paso-1-el-cliente-manda-una-peticion">Paso 1: el cliente manda una Petición</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.3</span>
+                        <a class="internal" href="capitulo-1.html#paso-2-el-servidor-devuelve-una-respuesta">Paso 2: el servidor devuelve una Respuesta</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

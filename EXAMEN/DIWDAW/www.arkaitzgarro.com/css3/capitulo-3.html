@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Módulo <em>Basic User Interface</em> | CSS 3</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">CSS 3</a></h1>
+        <p class="span3">
+                        <a href="capitulo-2.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-4.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="modulo-basic-user-interface"><span>Capítulo 3</span> Módulo <em>Basic User Interface</em></h1>
+        <p>La especificación oficial y el estado actual de desarrollo del módulo <em>Basic User Interface</em> en CSS 3 puede consultarse en <a href="http://www.w3.org/TR/css3-ui/">http://www.w3.org/TR/css3-ui/</a>.</p>
+
+<h2 id="box-sizing">3.1 <em>box-sizing</em></h2>
+
+<p>La propiedad CSS <code>box-sizing</code> se usa para alterar el <em>box model</em> o modelo de caja por defecto usado para calcular alturas y anchuras de elementos. Es posible usar esta propiedad para emular el comportamiento de navegadores que no soportan correctamente la especificación de <em>box model</em> de CSS.</p>
+
+<p>El <em>box model</em> o modelo de caja en CSS funciona de la siguiente manera:</p>
+
+<p><code>width</code> + <code>padding</code> + <code>border</code> = actual visible/rendered width of box</p>
+
+<p><code>height</code> + <code>padding</code> + <code>border</code> = actual visible/rendered height of box</p>
+
+<p><img src="images/cap03/widthbox.png"></p>
+
+<p>La sintaxis de la propiedad <code>box-sizing</code> es la siguiente:</p>
+
+<div class="table" id="table-3-1">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>box-sizing</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">content-box &#124; padding-box &#124; border-box</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos que aceptan <code>width</code> o <code>height</code></td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">content-box</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Indica el componente del modelo de caja que se toma como referencia para calcular el alto o ancho de un elemento</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Los valores que puede tomar esta propiedad son los siguientes:</p>
+
+<ul>
+<li><code>content-box</code>: este es el estilo por defecto especificado en el estándar de CSS. Las propiedades <code>width</code> y <code>height</code> se miden incluyendo sólo el contenido, pero no el borde, margen o relleno.</li>
+<li><code>padding-box</code>: las propiedades <code>width</code> y <code>height</code> incluyen el tamaño del relleno pero no incluyen el borden ni margen.</li>
+<li><code>border-box</code>: las propiedades <code>width</code> y <code>height</code> incluyen el relleno y el borde, pero no el margen.</li>
+</ul>
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* support Firefox, WebKit, Opera and IE8+ */</span>
+<span class="re1">.example</span> <span class="br0">&#123;</span>
+    box-sizing<span class="sy0">:</span> border-box<span class="sy0">;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">500px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="overflow-x-y-overflow-y">3.2 <em>overflow-x</em> y <em>overflow-y</em></h2>
+
+<p>Las propiedades <code>overflow</code> son utilizadas para controlar el comportamiento del contenido dentro de un elemento de bloque. Especifican si recortan el contenido, muestran una barra de desplazamiento o contenido "se sale" de un elemento de bloque cuando se desborda en los bordes izquierdo y derecho (x) o superior e inferior (y).</p>
+
+<div class="table" id="table-3-2">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>overflow-x</code>, <code>overflow-y</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">visible &#124; hidden &#124; scroll &#124; auto &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos de bloque e <code>inline-block</code></td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">auto</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Indica el comportamiento del contenido al superar el tamaño de su contenedor</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-3.html#modulo-basic-user-interface">Módulo <em>Basic User Interface</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.1</span>
+                        <a class="internal" href="capitulo-3.html#box-sizing"><em>box-sizing</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.2</span>
+                        <a class="internal" href="capitulo-3.html#overflow-x-y-overflow-y"><em>overflow-x</em> y <em>overflow-y</em></a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

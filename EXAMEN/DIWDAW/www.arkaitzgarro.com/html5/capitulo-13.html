@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="28/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>WebSockets | HTML5</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">HTML5</a></h1>
+        <p class="span3">
+                        <a href="capitulo-12.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-14.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="websockets"><span>Capítulo 13</span> WebSockets</h1>
+        <h2 id="introduccion">13.1 Introducción</h2>
+
+<p>Internet se ha creado en gran parte a partir del llamado paradigma solicitud/respuesta de HTTP. Un cliente carga una página web, se cierra la conexión y no ocurre nada hasta que el usuario hace clic en un enlace o envía un formulario.</p>
+
+<p>Hace ya algún tiempo que existen tecnologías que permiten al servidor enviar datos al cliente en el mismo momento que detecta que hay nuevos datos disponibles. Se conocen como "Push" o "Comet". Uno de los trucos más comunes para crear la ilusión de una conexión iniciada por el servidor se denomina <em>Long Polling</em>. Con el <em>Long Polling</em>, el cliente abre una conexión HTTP con el servidor, el cual la mantiene abierta hasta que se envíe una respuesta. Cada vez que el servidor tenga datos nuevos, enviará la respuesta. El <em>Long Polling</em> y otras técnicas funcionan bastante bien y de hecho ha sido utilizadas en muchas aplicaciones como el chat de Gmail.</p>
+
+<p>Los <em>WebSockets</em> nos ofrecen una conexión bidireccional entre el servidor y el navegador. Esta conexión se produce en tiempo real y se mantiene permanentemente abierta hasta que se cierre de manera explícita. Esto significa que cuando el servidor quiere enviar datos al servidor, el mensaje se traslada inmediatamente. Efectivamente, esto es lo que sucedía al utilizar <em>tecnologías</em> como Comet, pero se conseguía utilizando una serie de <em>trucos</em>. Si esto no funcionada, siempre era posible utilizar Ajax para conseguir un resultado parecido, pero sobrecargando el servidor de manera innecesaria.</p>
+
+<p>Si disponemos de un socket abierto, el servidor puede enviar datos a todos los clientes conectados a ese socket, sin tener que estar constantemente procesando peticiones de Ajax. La ventaja en cuanto a rendimiento y escalabilidad es bastante evidente al utilizar <em>WebSockets</em>.</p>
+
+<p>La latencia en las comunicaciones es otro de los beneficios de utilizar <em>WebSockets</em>. Como el socket está siempre abierto y escuchando, los datos son enviados inmediatamente desde el servidor al navegador, reduciendo el tiempo al mínimo, en comparación con un paradigma basado en Ajax, donde hay que realizar una petición, procesar la respuesta y enviarla de nuevo de vuelta.</p>
+
+<p>Finalmente, los datos a transmitir se reducen también de manera drástica, pasando de un mínimo de 200-300 bytes en peticiones Ajax, a 10-20 bytes utilizando websockets.</p>
+
+<h2 id="crear-un-websocket">13.2 Crear un WebSocket</h2>
+
+<p>El API de WebSocket es realmente sencillo de utilizar. Actualmente, los navegadores únicamente soportan el envío de cadenas de caracteres, y se realiza de una manera muy similar a la que utilizábamos para enviar mensajes en los <em>Web Workers</em>. El API está limitado a métodos para abrir la conexión, enviar y recibir datos y cerrar la conexión.</p>
+
+<p>Para abrir una conexión <code>WebSocket</code>, sólo tenemos que ejecutar el constructor WebSocket, que toma como parámetro la URL del socket a abrir. Hay que tener en cuenta que el protocolo a utilizar es <code>ws://</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> socket <span class="sy0">=</span> <span class="kw1">new</span> WebSocket<span class="br0">&#40;</span><span class="st0">'ws://html5rocks.websocket.org/tweets'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>También existe un protocolo <code>wss://</code> para conexiones <em>WebSocket</em> seguras, de la misma forma que se utiliza <code>https://</code> para las conexiones <code>HTTP</code> seguras.</p>
+
+<p>La URL que utilizamos para conectarnos con el <em>WebSocket</em> no tiene por qué pertenecer al mismo dominio que nuestro documento, por lo que podemos conectarnos a servicios de terceros sin problemas, expandiendo las posibilidades de nuestra aplicación.</p>
+
+<h2 id="comunicacion-con-el-servidor">13.3 Comunicación con el servidor</h2>
+
+<p>Cuando se establece una conexión con el servidor (cuando el evento <code>open</code> se activa), se puede empezar a enviar datos al servidor con el método <code>send</code> a través del socket creado.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// Send new Tweet</span>
+socket.<span class="me1">send</span><span class="br0">&#40;</span><span class="st0">&quot;Hey there, I'm using WebSockets&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>De la misma forma, el servidor puede enviarnos mensajes en cualquier momento. Cada vez que esto ocurra, se activa el evento <code>onmessage</code>. Los datos enviados por el servidor se encuentran en la propiedad <code>data</code> del objeto <code>event</code>.</p>
+
+<div class="code javascript">
+<pre class="javascript">socket.<span class="me1">onmessage</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>event<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> data <span class="sy0">=</span> JSON.<span class="me1">parse</span><span class="br0">&#40;</span>event.<span class="me1">data</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>data.<span class="me1">action</span> <span class="sy0">==</span> <span class="st0">'joined'</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        initiliseChat<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+        showNewMessage<span class="br0">&#40;</span>data.<span class="me1">who</span><span class="sy0">,</span> data.<span class="me1">text</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>El API incorpora además dos eventos que se disparan cuando el socket se abre y está listo, y cuando éste se va a cerrar:</p>
+
+<div class="code javascript">
+<pre class="javascript">socket.<span class="me1">onopen</span>  <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span><span class="br0">&#123;</span> log<span class="br0">&#40;</span><span class="st0">&quot;Welcome - status &quot;</span><span class="sy0">+</span><span class="kw1">this</span>.<span class="me1">readyState</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+socket.<span class="me1">onclose</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span><span class="br0">&#123;</span> log<span class="br0">&#40;</span><span class="st0">&quot;Disconnected - status &quot;</span><span class="sy0">+</span><span class="kw1">this</span>.<span class="me1">readyState</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="websocket-en-el-servidor">13.4 WebSocket en el servidor</h2>
+
+<p>Al utilizar los <em>WebSocket</em>, se crea un patrón de uso completamente nuevo para las aplicaciones de servidor. Aunque las pilas de servidor tradicionales como <code>LAMP</code> están diseñadas a partir del ciclo de solicitud-respuesta de <code>HTTP</code>, a menudo dan problemas si hay muchas conexiones <code>WebSocket</code> abiertas. Mantener un gran número de conexiones abiertas de forma simultánea requiere una arquitectura capaz de recibir un alto nivel de concurrencia sin consumir muchos recursos. Estas arquitecturas suelen estar basadas en subprocesos o sistemas de <code>E/S</code> asíncronos.</p>
+
+<p>En el próximo capítulo sobre <em>Server-Sent Events</em>, veremos una implementación de un servidor web basado en JavaScript, llamado <a href="http://nodejs.org/">Node.js</a>.</p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 15</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej15">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-13.html#websockets">WebSockets</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>13.1</span>
+                        <a class="internal" href="capitulo-13.html#introduccion">Introducción</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>13.2</span>
+                        <a class="internal" href="capitulo-13.html#crear-un-websocket">Crear un WebSocket</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>13.3</span>
+                        <a class="internal" href="capitulo-13.html#comunicacion-con-el-servidor">Comunicación con el servidor</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>13.4</span>
+                        <a class="internal" href="capitulo-13.html#websocket-en-el-servidor">WebSocket en el servidor</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

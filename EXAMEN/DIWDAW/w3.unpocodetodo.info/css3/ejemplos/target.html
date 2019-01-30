@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  <meta name="viewport" content="width=device-width" />
+  
+  <meta name="description" content="Ejemplo de texto tridimensional utilizando la propiedad text-shadow de CSS3 ( varias sombras )." />
+  <meta name="keywords" content="ejemplo, texto 3D, texto tridimensional, text-shadow, sombras m&uacute;ltiples, CSS3, HTML5, "/>
+  <meta name="author" content="enxaneta.info" />
+  <meta property="og:title" content="Ejemplo de texto tridimensional en CSS3" /> 
+  <meta property="og:type" content="website" /> 
+  <meta property="og:image" content="http://w3.unpocodetodo.info/images/w3_og.png" />  
+  <meta property="og:url" content="w3.unpocodetodo.info/ejemplos/texto3d.html" /> 
+  <meta property="og:site_name" content="w3.unpocodetodo.info" /> 
+  <meta property="og:description" content="Ejemplo de texto tridimensional utilizando la propiedad text-shadow de CSS3 ( varias sombras )." /> 
+  
+  <link rel="icon" type="image/png" href="../../images/w3.png" />
+  <!--<link rel="icon" type="image/png" href="/img/favicon.png">-->
+  <!-- 57x57 older iPhone and Android devices -->
+  <!--<link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon-precomposed.png">-->
+  <!-- iPad 1 and 2 & iPad mini -->
+  <link rel="apple-touch-icon" sizes="72x72" href="../../images/apple-touch-icon-72x72.png">
+  <!-- iPhone 4, 4S, 5 and iPod Touch -->
+  <link rel="apple-touch-icon" sizes="114x114" href="../../images/apple-touch-icon-114x114.png">
+  <!-- iPad 3rd gen -->
+  <link rel="apple-touch-icon" sizes="144x144" href="../../images/apple-touch-icon-144x144.png"> 
+  
+<title>El selector :target</title>
+<style>
+#contenido{ margin:0 auto; max-width:700px; padding:2em;}
+.articles:before, 
+.articles:after{
+	 content : "";
+	 display : table;	
+}
+.articles:after {
+ clear : both;
+ }
+
+article{
+	padding:.5em 2em;
+	margin-bottom:2em;
+	background-color:white;
+	border: 1px solid #ededed;
+	width:38.5%;
+	float:left;
+	height:250px;
+	-webkit-transition : border-color 3s, background-color 3s;
+    transition : border-color 3s, background-color 3s;
+	}
+article:nth-child(2n){float:right;}
+article:nth-last-child(-n+2){margin-bottom:0;}
+
+@media only screen and (max-width:768px){
+article{
+	width:83%;
+	float:none!important;
+	height:auto;
+	margin-bottom:2em!important;
+	}
+article:last-child{margin-bottom:0!important;}	
+		
+}
+
+
+.nota{ color:red;}
+#top{ height:1px; visibility:hidden;}
+:target
+{
+border-color:#b0b0b0;
+background-color: #ffffef;
+}
+p[id^="noticias"]{ margin-bottom:2em;}
+</style>
+</head>
+<body>
+<a id="top"></a>
+<div id="contenido"><h1>El selector :target</h1>
+
+<p><a href="target.html#articulo1">Ir a art&iacute;culo 1</a></p>
+<p><a href="target.html#articulo2">Ir a art&iacute;culo 2</a></p>
+<p><a href="target.html#articulo3">Ir a art&iacute;culo 3</a></p>
+<p><a href="target.html#articulo4">Ir a art&iacute;culo 4</a></p>
+<p><a href="target.html#articulo5">Ir a art&iacute;culo 5</a></p>
+<p><a href="target.html#articulo6">Ir a art&iacute;culo 6</a></p>
+
+<p>Haz clic en los enlaces de arriba y el pseudo-selector <code>:target</code> har&aacute; destacar el articulo enlazado.</p>
+
+<div class="articles">
+
+<article id="articulo1"><h2>Art&iacute;culo 1</h2>
+<p id="p1">S&oacute;lo los espejos de azabache de sus ojos son duros cual dos escarabajos de cristal negro. Y el borriquillo se despachaba contra el viento, intentando, in&uacute;tilmente, arrancar del fango la carreta, al grito sollozante de la chiquilla.</p>
+<p><a href="target.html#top">ARRIBA</a></p></article>
+
+<article id="articulo2"><h2>Art&iacute;culo 2
+</h2>
+  <p id="p6">Come cuanto le doy. S&oacute;lo los espejos de azabache de sus ojos son duros cual dos escarabajos de cristal negro. As&iacute; no tendr&aacute;n en su memoria la tristeza de mis maldades, de mis cinismos, de mis impertinencias.</p>
+
+<p><a href="target.html#top">ARRIBA</a></p>
+</article>
+
+<article id="articulo3"><h2>Art&iacute;culo 3</h2>
+<p id="p7">Y el borriquillo se despachaba contra el viento, intentando, in&uacute;tilmente, arrancar del fango la carreta, al grito sollozante de la chiquilla. S&oacute;lo los espejos de azabache de sus ojos son duros cual dos escarabajos de cristal negro. </p>
+<p><a href="target.html#top">ARRIBA</a></p></article>
+
+<article id="articulo4"><h2>Art&iacute;culo 4</h2>
+<p id="p1">S&oacute;lo los espejos de azabache de sus ojos son duros cual dos escarabajos de cristal negro. Y el borriquillo se despachaba contra el viento, intentando, in&uacute;tilmente, arrancar del fango la carreta, al grito sollozante de la chiquilla.</p>
+<p><a href="target.html#top">ARRIBA</a></p></article>
+
+<article id="articulo5"><h2>Art&iacute;culo 5
+</h2>
+  <p id="p6">Come cuanto le doy. S&oacute;lo los espejos de azabache de sus ojos son duros cual dos escarabajos de cristal negro. As&iacute; no tendr&aacute;n en su memoria la tristeza de mis maldades, de mis cinismos, de mis impertinencias.</p>
+
+<p><a href="target.html#top">ARRIBA</a></p></article>
+
+<article id="articulo6"><h2>Art&iacute;culo 6</h2>
+<p id="p7">Y el borriquillo se despachaba contra el viento, intentando, in&uacute;tilmente, arrancar del fango la carreta, al grito sollozante de la chiquilla. S&oacute;lo los espejos de azabache de sus ojos son duros cual dos escarabajos de cristal negro. </p>
+<p><a href="target.html#top">ARRIBA</a></p></article></div>
+
+<p class="nota"><b>Nota:</b> Internet Explorer 8 y m&aacute;s antiguos no soportan el selector <code>:target</code>.</p>
+
+</div>
+
+</body>
+</html>

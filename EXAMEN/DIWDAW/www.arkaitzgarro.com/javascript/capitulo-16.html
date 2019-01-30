@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="08/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Formularios | JavaScript</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">JavaScript</a></h1>
+        <p class="span3">
+                        <a href="capitulo-15.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-17.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="formularios"><span>Capítulo 16</span> Formularios</h1>
+        <p>La programación de aplicaciones que contienen formularios web siempre ha sido una de las tareas fundamentales de JavaScript. De hecho, una de las principales razones por las que se inventó el lenguaje de programación JavaScript fue la necesidad de validar los datos de los formularios directamente en el navegador del usuario. De esta forma, se evitaba recargar la página cuando el usuario cometía errores al rellenar los formularios.</p>
+
+<p>No obstante, la aparición de las aplicaciones AJAX ha relevado al tratamiento de formularios como la principal actividad de JavaScript. Ahora, el principal uso de JavaScript es el de las comunicaciones asíncronas con los servidores y el de la manipulación dinámica de las aplicaciones. De todas formas, el manejo de los formularios sigue siendo un requerimiento imprescindible para cualquier programador de JavaScript.</p>
+
+<h2 id="propiedades-basicas-de-formularios-y-elementos">16.1 Propiedades básicas de formularios y elementos</h2>
+
+<p>JavaScript dispone de numerosas propiedades y funciones que facilitan la programación de aplicaciones que manejan formularios. En primer lugar, cuando se carga una página web, el navegador crea automáticamente un array llamado <code>forms</code> y que contiene la referencia a todos los formularios de la página.</p>
+
+<p>Para acceder al array <code>forms</code>, se utiliza el objeto <code>document</code>, por lo que <code>document.forms</code> es el array que contiene todos los formularios de la página. Como se trata de un array, el acceso a cada formulario se realiza con la misma sintaxis de los arrays. La siguiente instrucción accede al primer formulario de la página:</p>
+
+<div class="code javascript">
+<pre class="javascript">document.<span class="me1">forms</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Además del array de formularios, el navegador crea automáticamente un array llamado <code>elements</code> por cada uno de los formularios de la página. Cada array <code>elements</code> contiene la referencia a todos los elementos (cuadros de texto, botones, listas desplegables, etc.) de ese formulario. Utilizando la sintaxis de los arrays, la siguiente instrucción obtiene el primer elemento del primer formulario de la página:</p>
+
+<div class="code javascript">
+<pre class="javascript">document.<span class="me1">forms</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">elements</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>La sintaxis de los arrays no siempre es tan concisa. El siguiente ejemplo muestra cómo obtener directamente el último elemento del primer formulario de la página:</p>
+
+<div class="code javascript">
+<pre class="javascript">document.<span class="me1">forms</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">elements</span><span class="br0">&#91;</span>document.<span class="me1">forms</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">elements</span>.<span class="me1">length</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Aunque esta forma de acceder a los formularios es rápida y sencilla, tiene un inconveniente muy grave. ¿Qué sucede si cambia el diseño de la página y en el código HTML se cambia el orden de los formularios originales o se añaden nuevos formularios? El problema es que <em>"el primer formulario de la página"</em> ahora podría ser otro formulario diferente al que espera la aplicación.</p>
+
+<p>En un entorno tan cambiante como el diseño web, es muy difícil confiar en que el orden de los formularios se mantenga estable en una página web. Por este motivo, siempre debería evitarse el acceso a los formularios de una página mediante el array <code>document.forms</code>.</p>
+
+<p>Una forma de evitar los problemas del método anterior consiste en acceder a los formularios de una página a través de su nombre (atributo <code>name</code>) o a través de su atributo <code>id</code>. El objeto <code>document</code> permite acceder directamente a cualquier formulario mediante su atributo <code>name</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> formularioPrincipal <span class="sy0">=</span> document.<span class="me1">formulario</span><span class="sy0">;</span>
+<span class="kw1">var</span> formularioSecundario <span class="sy0">=</span> document.<span class="me1">otro_formulario</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">form</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;formulario&quot;</span> &gt;</span>
+  ...
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">form</span>&gt;</span>
+&nbsp;
+<span class="sc2">&lt;<span class="kw2">form</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;otro_formulario&quot;</span> &gt;</span>
+  ...
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">form</span>&gt;</span></pre>
+</div>
+
+<p>Accediendo de esta forma a los formularios de la página, el script funciona correctamente aunque se reordenen los formularios o se añadan nuevos formularios a la página. Los elementos de los formularios también se pueden acceder directamente mediante su atributo name:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> formularioPrincipal <span class="sy0">=</span> document.<span class="me1">formulario</span><span class="sy0">;</span>
+<span class="kw1">var</span> primerElemento <span class="sy0">=</span> document.<span class="me1">formulario</span>.<span class="me1">elemento</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">form</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;formulario&quot;</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;elemento&quot;</span> <span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">form</span>&gt;</span></pre>
+</div>
+
+<p>Obviamente, también se puede acceder a los formularios y a sus elementos utilizando las funciones DOM de acceso directo a los nodos. El siguiente ejemplo utiliza la habitual función <code>document.getElementById()</code> para acceder de forma directa a un formulario y a uno de sus elementos:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> formularioPrincipal <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;formulario&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">var</span> primerElemento <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;elemento&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">form</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;formulario&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;formulario&quot;</span> &gt;</span>
+  <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;elemento&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;elemento&quot;</span> <span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">form</span>&gt;</span></pre>
+</div>
+
+<p>Independientemente del método utilizado para obtener la referencia a un elemento de formulario, cada elemento dispone de las siguientes propiedades útiles para el desarrollo de las aplicaciones:</p>
+
+<ul>
+<li><code>type</code>: indica el tipo de elemento que se trata. Para los elementos de tipo <code>&lt;input&gt;</code> (<code>text</code>, <code>button</code>, <code>checkbox</code>, etc.) coincide con el valor de su atributo <code>type</code>. Para las listas desplegables normales (elemento <code>&lt;select&gt;</code>) su valor es <code>select-one</code>, lo que permite diferenciarlas de las listas que permiten seleccionar varios elementos a la vez y cuyo tipo es <code>select-multiple</code>. Por último, en los elementos de tipo <code>&lt;textarea&gt;</code>, el valor de type es <code>textarea</code>.</li>
+<li><code>form</code>: es una referencia directa al formulario al que pertenece el elemento. Así, para acceder al formulario de un elemento, se puede utilizar <code>document.getElementById("id_del_elemento").form</code></li>
+<li><code>name</code>: obtiene el valor del atributo <code>name</code> de XHTML. Solamente se puede leer su valor, por lo que no se puede modificar.</li>
+<li><code>value</code>: permite leer y modificar el valor del atributo <code>value</code> de XHTML. Para los campos de texto (<code>&lt;input type="text"&gt;</code> y <code>&lt;textarea&gt;</code>) obtiene el texto que ha escrito el usuario. Para los botones obtiene el texto que se muestra en el botón. Para los elementos <em>checkbox</em> y <em>radiobutton</em> no es muy útil, como se verá más adelante</li>
+</ul>
+
+<p>Por último, los eventos más utilizados en el manejo de los formularios son los siguientes:</p>
+
+<ul>
+<li><code>onclick</code>: evento que se produce cuando se pincha con el ratón sobre un elemento. Normalmente se utiliza con cualquiera de los tipos de botones que permite definir XHTML (<code>&lt;input type="button"&gt;</code>, <code>&lt;input type="submit"&gt;</code>, <code>&lt;input type="image"&gt;</code>).</li>
+<li><code>onchange</code>: evento que se produce cuando el usuario cambia el valor de un elemento de texto (<code>&lt;input type="text"&gt;</code> o <code>&lt;textarea&gt;</code>). También se produce cuando el usuario selecciona una opción en una lista desplegable (<code>&lt;select&gt;</code>). Sin embargo, el evento sólo se produce si después de realizar el cambio, el usuario pasa al siguiente campo del formulario, lo que técnicamente se conoce como que <em>"el otro campo de formulario ha perdido el foco"</em>.</li>
+<li><code>onfocus</code>: evento que se produce cuando el usuario selecciona un elemento del formulario.</li>
+<li><code>onblur</code>: evento complementario de <code>onfocus</code>, ya que se produce cuando el usuario ha deseleccionado un elemento por haber seleccionado otro elemento del formulario. Técnicamente, se dice que el elemento anterior "ha perdido el foco".</li>
+</ul>
+
+<h2 id="utilidades-basicas-para-formularios">16.2 Utilidades básicas para formularios</h2>
+
+<h3 id="obtener-el-valor-de-los-campos-de-formulario">16.2.1 Obtener el valor de los campos de formulario</h3>
+
+<p>La mayoría de técnicas JavaScript relacionadas con los formularios requieren leer y/o modificar el valor de los campos del formulario. Por tanto, a continuación se muestra cómo obtener el valor de los campos de formulario más utilizados.</p>
+
+<h4 id="cuadro-de-texto-y-textarea">16.2.1.1 Cuadro de texto y textarea</h4>
+
+<p>El valor del texto mostrado por estos elementos se obtiene y se establece directamente mediante la propiedad value.</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;texto&quot;</span> <span class="sy0">/</span>&gt;</span></pre>
+</div>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> valor <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;texto&quot;</span><span class="br0">&#41;</span>.<span class="me1">value</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">textarea</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;parrafo&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">textarea</span>&gt;</span></pre>
+</div>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> valor <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;parrafo&quot;</span><span class="br0">&#41;</span>.<span class="me1">value</span><span class="sy0">;</span></pre>
+</div>
+
+<h4 id="radiobutton">16.2.1.2 Radiobutton</h4>
+
+<p>Cuando se dispone de un grupo de <em>radiobuttons</em>, generalmente no se quiere obtener el valor del atributo <code>value</code> de alguno de ellos, sino que lo importante es conocer cuál de todos los <em>radiobuttons</em> se ha seleccionado. La propiedad <code>checked</code> devuelve <code>true</code> para el <em>radiobutton</em> seleccionado y <code>false</code> en cualquier otro caso. Si por ejemplo se dispone del siguiente grupo de <em>radiobuttons</em>:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;radio&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;si&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;pregunta&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;pregunta_si&quot;</span><span class="sy0">/</span>&gt;</span> SI
+<span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;radio&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;no&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;pregunta&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;pregunta_no&quot;</span><span class="sy0">/</span>&gt;</span> NO
+<span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;radio&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;nsnc&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;pregunta&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;pregunta_nsnc&quot;</span><span class="sy0">/</span>&gt;</span> NS/NC</pre>
+</div>
+
+<p>El siguiente código permite determinar si cada radiobutton ha sido seleccionado o no:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> elementos <span class="sy0">=</span> document.<span class="me1">getElementsByName</span><span class="br0">&#40;</span><span class="st0">&quot;pregunta&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">for</span><span class="br0">&#40;</span><span class="kw1">var</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;</span>elementos.<span class="me1">length</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot; Elemento: &quot;</span> <span class="sy0">+</span> elementos<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">value</span> <span class="sy0">+</span> <span class="st0">&quot;<span class="es0">\n</span> Seleccionado: &quot;</span> <span class="sy0">+</span> elementos<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">checked</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h4 id="checkbox">16.2.1.3 Checkbox</h4>
+
+<p>Los elementos de tipo <em>checkbox</em> son muy similares a los radiobutton, salvo que en este caso se debe comprobar cada <em>checkbox</em> de forma independiente del resto. El motivo es que los grupos de radiobutton son mutuamente excluyentes y sólo se puede seleccionar uno de ellos cada vez. Por su parte, los <em>checkbox</em> se pueden seleccionar de forma independiente respecto de los demás.</p>
+
+<p>Si se dispone de los siguientes checkbox:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;checkbox&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;condiciones&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;condiciones&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;condiciones&quot;</span><span class="sy0">/</span>&gt;</span> He leído y acepto las condiciones
+<span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;checkbox&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;privacidad&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;privacidad&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;privacidad&quot;</span><span class="sy0">/</span>&gt;</span> He leído la política de privacidad</pre>
+</div>
+
+<p>Utilizando la propiedad checked, es posible comprobar si cada checkbox ha sido seleccionado:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> elemento <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;condiciones&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot; Elemento: &quot;</span> <span class="sy0">+</span> elemento.<span class="me1">value</span> <span class="sy0">+</span> <span class="st0">&quot;<span class="es0">\n</span> Seleccionado: &quot;</span> <span class="sy0">+</span> elemento.<span class="me1">checked</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+elemento <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;privacidad&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot; Elemento: &quot;</span> <span class="sy0">+</span> elemento.<span class="me1">value</span> <span class="sy0">+</span> <span class="st0">&quot;<span class="es0">\n</span> Seleccionado: &quot;</span> <span class="sy0">+</span> elemento.<span class="me1">checked</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h4 id="select">16.2.1.4 Select</h4>
+
+<p>Las listas desplegables (<code>&lt;select&gt;</code>) son los elementos en los que es más difícil obtener su valor. Si se dispone de una lista desplegable como la siguiente:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">select</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;opciones&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;opciones&quot;</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;1&quot;</span>&gt;</span>Primer valor<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;2&quot;</span>&gt;</span>Segundo valor<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;3&quot;</span>&gt;</span>Tercer valor<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;4&quot;</span>&gt;</span>Cuarto valor<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">select</span>&gt;</span></pre>
+</div>
+
+<p>En general, lo que se requiere es obtener el valor del atributo <code>value</code> de la opción (<code>&lt;option&gt;</code>) seleccionada por el usuario. Obtener este valor no es sencillo, ya que se deben realizar una serie de pasos. Además, para obtener el valor seleccionado, deben utilizarse las siguientes propiedades:</p>
+
+<ul>
+<li><code>options</code>, es un array creado automáticamente por el navegador para cada lista desplegable y que contiene la referencia a todas las opciones de esa lista. De esta forma, la primera opción de una lista se puede obtener mediante <code>document.getElementById("id_de_la_lista").options[0]</code>.</li>
+<li><code>selectedIndex</code>, cuando el usuario selecciona una opción, el navegador actualiza automáticamente el valor de esta propiedad, que guarda el índice de la opción seleccionada. El índice hace referencia al array <code>options</code> creado automáticamente por el navegador para cada lista.</li>
+</ul>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// Obtener la referencia a la lista</span>
+<span class="kw1">var</span> lista <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;opciones&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Obtener el índice de la opción que se ha seleccionado</span>
+<span class="kw1">var</span> indiceSeleccionado <span class="sy0">=</span> lista.<span class="me1">selectedIndex</span><span class="sy0">;</span>
+<span class="co1">// Con el índice y el array &quot;options&quot;, obtener la opción seleccionada</span>
+<span class="kw1">var</span> opcionSeleccionada <span class="sy0">=</span> lista.<span class="me1">options</span><span class="br0">&#91;</span>indiceSeleccionado<span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Obtener el valor y el texto de la opción seleccionada</span>
+<span class="kw1">var</span> textoSeleccionado <span class="sy0">=</span> opcionSeleccionada.<span class="me1">text</span><span class="sy0">;</span>
+<span class="kw1">var</span> valorSeleccionado <span class="sy0">=</span> opcionSeleccionada.<span class="me1">value</span><span class="sy0">;</span>
+&nbsp;
+console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Opción seleccionada: &quot;</span> <span class="sy0">+</span> textoSeleccionado <span class="sy0">+</span> <span class="st0">&quot;<span class="es0">\n</span> Valor de la opción: &quot;</span> <span class="sy0">+</span> valorSeleccionado<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Como se ha visto, para obtener el valor del atributo <code>value</code> correspondiente a la opción seleccionada por el usuario, es necesario realizar varios pasos. No obstante, normalmente se abrevian todos los pasos necesarios en una única instrucción:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> lista <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;opciones&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Obtener el valor de la opción seleccionada</span>
+<span class="kw1">var</span> valorSeleccionado <span class="sy0">=</span> lista.<span class="me1">options</span><span class="br0">&#91;</span>lista.<span class="me1">selectedIndex</span><span class="br0">&#93;</span>.<span class="me1">value</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Obtener el texto que muestra la opción seleccionada</span>
+<span class="kw1">var</span> valorSeleccionado <span class="sy0">=</span> lista.<span class="me1">options</span><span class="br0">&#91;</span>lista.<span class="me1">selectedIndex</span><span class="br0">&#93;</span>.<span class="me1">text</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Lo más importante es no confundir el valor de la propiedad <code>selectedIndex</code> con el valor correspondiente a la propiedad <code>value</code> de la opción seleccionada. En el ejemplo anterior, la primera opción tiene un <code>value</code> igual a <code>1</code>. Sin embargo, si se selecciona esta opción, el valor de <code>selectedIndex</code> será <code>0</code>, ya que es la primera opción del array <code>options</code> (y los arrays empiezan a contar los elementos en el número <code>0</code>).</p>
+
+<h3 id="establecer-el-foco-en-un-elemento">16.2.2 Establecer el foco en un elemento</h3>
+
+<p>En programación, cuando un elemento está seleccionado y se puede escribir directamente en el o se puede modificar alguna de sus propiedades, se dice que tiene el foco del programa.</p>
+
+<p>Si un cuadro de texto de un formulario tiene el foco, el usuario puede escribir directamente en el sin necesidad de pinchar previamente con el ratón en el interior del cuadro. Igualmente, si una lista desplegable tiene el foco, el usuario puede seleccionar una opción directamente subiendo y bajando con las flechas del teclado.</p>
+
+<p>Al pulsar repetidamente la tecla <code>TABULADOR</code> sobre una página web, los diferentes elementos (enlaces, imágenes, campos de formulario, etc.) van obteniendo el foco del navegador (el elemento seleccionado cada vez suele mostrar un pequeño borde punteado).</p>
+
+<p>Si en una página web el formulario es el elemento más importante, como por ejemplo en una página de búsqueda o en una página con un formulario para registrarse, se considera una buena práctica de usabilidad el asignar automáticamente el foco al primer elemento del formulario cuando se carga la página.</p>
+
+<p>Para asignar el foco a un elemento de XHTML, se utiliza la función <code>focus()</code>. El siguiente ejemplo asigna el foco a un elemento de formulario cuyo atributo <code>id</code> es igual a <code>primero</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript">document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;primero&quot;</span><span class="br0">&#41;</span>.<span class="me1">focus</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">form</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;formulario&quot;</span> <span class="kw3">action</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;primero&quot;</span> <span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">form</span>&gt;</span></pre>
+</div>
+
+<p>Ampliando el ejemplo anterior, se puede asignar automáticamente el foco del programa al primer elemento del primer formulario de la página, independientemente del id del formulario y de los elementos:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">if</span><span class="br0">&#40;</span>document.<span class="me1">forms</span>.<span class="me1">length</span> <span class="sy0">&gt;</span> <span class="nu0">0</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>document.<span class="me1">forms</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">elements</span>.<span class="me1">length</span> <span class="sy0">&gt;</span> <span class="nu0">0</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    document.<span class="me1">forms</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">elements</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">focus</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>El código anterior comprueba que existe al menos un formulario en la página mediante el tamaño del array <code>forms</code>. Si su tamaño es mayor que <code>0</code>, se utiliza este primer formulario. Empleando la misma técnica, se comprueba que el formulario tenga al menos un elemento (<code>if(document.forms[0].elements.length &gt; 0)</code>). En caso afirmativo, se establece el foco del navegador en el primer elemento del primer formulario (<code>document.forms[0].elements[0].focus();</code>).</p>
+
+<p>Para que el ejemplo anterior sea completamente correcto, se debe añadir una comprobación adicional. El campo de formulario que se selecciona no debería ser de tipo <code>hidden</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">if</span><span class="br0">&#40;</span>document.<span class="me1">forms</span>.<span class="me1">length</span> <span class="sy0">&gt;</span> <span class="nu0">0</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw1">var</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> document.<span class="me1">forms</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">elements</span>.<span class="me1">length</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> campo <span class="sy0">=</span> document.<span class="me1">forms</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">elements</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span>campo.<span class="me1">type</span> <span class="sy0">!=</span> <span class="st0">&quot;hidden&quot;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      campo.<span class="me1">focus</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+      <span class="kw1">break</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h3 id="evitar-el-envio-duplicado-de-un-formulario">16.2.3 Evitar el envío duplicado de un formulario</h3>
+
+<p>Uno de los problemas habituales con el uso de formularios web es la posibilidad de que el usuario pulse dos veces seguidas sobre el botón "Enviar". Si la conexión del usuario es demasiado lenta o la respuesta del servidor se hace esperar, el formulario original sigue mostrándose en el navegador y por ese motivo, el usuario tiene la tentación de volver a pinchar sobre el botón de "Enviar".</p>
+
+<p>En la mayoría de los casos, el problema no es grave e incluso es posible controlarlo en el servidor, pero puede complicarse en formularios de aplicaciones importantes como las que implican transacciones económicas.</p>
+
+<p>Por este motivo, una buena práctica en el diseño de aplicaciones web suele ser la de deshabilitar el botón de envío después de la primera pulsación. El siguiente ejemplo muestra el código necesario:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">form</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;formulario&quot;</span> <span class="kw3">action</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>
+  ...
+  <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;button&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;Enviar&quot;</span> <span class="kw3">onclick</span><span class="sy0">=</span><span class="st0">&quot;this.disabled=true; this.value=’Enviando...’; this.form.submit()&quot;</span> <span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">form</span>&gt;</span></pre>
+</div>
+
+<p>Cuando se pulsa sobre el botón de envío del formulario, se produce el evento <code>onclick</code> sobre el botón y por tanto, se ejecutan las instrucciones JavaScript contenidas en el atributo <code>onclick</code>:</p>
+
+<ol>
+<li>En primer lugar, se deshabilita el botón mediante la instrucción <code>this.disabled = true;</code>. Esta es la única instrucción necesaria si sólo se quiere deshabilitar un botón.</li>
+<li>A continuación, se cambia el mensaje que muestra el botón. Del original "Enviar" se pasa al más adecuado "Enviando..."</li>
+<li>Por último, se envía el formulario mediante la función <code>submit()</code> en la siguiente instrucción: <code>this.form.submit()</code></li>
+</ol>
+
+<p>El botón del ejemplo anterior está definido mediante un botón de tipo <code>&lt;input type="button" /&gt;</code>, ya que el código JavaScript mostrado no funciona correctamente con un botón de tipo <code>&lt;input type="submit" /&gt;. Si se utiliza un botón de tipo</code>submit`, el botón se deshabilita antes de enviar el formulario y por tanto el formulario acaba sin enviarse.</p>
+
+<h3 id="limitar-el-tamano-de-caracteres-de-un-textarea">16.2.4 Limitar el tamaño de caracteres de un textarea</h3>
+
+<p>La carencia más importante de los campos de formulario de tipo textarea es la imposibilidad de limitar el máximo número de caracteres que se pueden introducir, de forma similar al atributo <code>maxlength</code> de los cuadros de texto normales.</p>
+
+<p>JavaScript permite añadir esta característica de forma muy sencilla. En primer lugar, hay que recordar que con algunos eventos (como <code>onkeypress</code>, <code>onclick</code> y <code>onsubmit</code>) se puede evitar su comportamiento normal si se devuelve el valor <code>false</code>.</p>
+
+<p>Evitar el comportamiento normal equivale a modificar completamente el comportamiento habitual del evento. Si por ejemplo se devuelve el valor <code>false</code> en el evento <code>onkeypress</code>, la tecla pulsada por el usuario no se tiene en cuenta. Si se devuelve <code>false</code> en el evento <code>onclick</code> de un elemento como un enlace, el navegador no carga la página indicada por el enlace.</p>
+
+<p>Si un evento devuelve el valor <code>true</code>, su comportamiento es el habitual:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">textarea</span> <span class="kw3">onkeypress</span><span class="sy0">=</span><span class="st0">&quot;return true;&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">textarea</span>&gt;</span></pre>
+</div>
+
+<p>En el textarea del ejemplo anterior, el usuario puede escribir cualquier carácter, ya que el evento <code>onkeypress</code> devuelve <code>true</code> y por tanto, su comportamiento es el normal y la tecla pulsada se transforma en un carácter dentro del textarea.</p>
+
+<p>Sin embargo, en el siguiente ejemplo:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">textarea</span> <span class="kw3">onkeypress</span><span class="sy0">=</span><span class="st0">&quot;return false;&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">textarea</span>&gt;</span></pre>
+</div>
+
+<p>Como el valor devuelto por el evento <code>onkeypress</code> es igual a <code>false</code>, el navegador no ejecuta el comportamiento por defecto del evento, es decir, la tecla presionada no se transforma en ningún carácter dentro del textarea. No importa las veces que se pulsen las teclas y no importa la tecla pulsada, ese textarea no permitirá escribir ningún carácter.</p>
+
+<p>Aprovechando esta característica, es sencillo limitar el número de caracteres que se pueden escribir en un elemento de tipo textarea: se comprueba si se ha llegado al máximo número de caracteres permitido y en caso afirmativo se evita el comportamiento habitual del evento y por tanto, los caracteres adicionales no se añaden al textarea:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> limita<span class="br0">&#40;</span>maximoCaracteres<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">var</span> elemento <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;texto&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>elemento.<span class="me1">value</span>.<span class="me1">length</span> <span class="sy0">&gt;=</span> maximoCaracteres <span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+  <span class="kw1">else</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="kw2">true</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">textarea</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;texto&quot;</span> <span class="kw3">onkeypress</span><span class="sy0">=</span><span class="st0">&quot;return limita(100);&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">textarea</span>&gt;</span></pre>
+</div>
+
+<p>En el ejemplo anterior, con cada tecla pulsada se compara el número total de caracteres del textarea con el máximo número de caracteres permitido. Si el número de caracteres es igual o mayor que el límite, se devuelve el valor <code>false</code> y por tanto, se evita el comportamiento por defecto de <code>onkeypress</code> y la tecla no se añade.</p>
+
+<h3 id="restringir-los-caracteres-permitidos-en-un-cuadro-de-texto">16.2.5 Restringir los caracteres permitidos en un cuadro de texto</h3>
+
+<p>En ocasiones, puede ser útil bloquear algunos caracteres determinados en un cuadro de texto. Si por ejemplo un cuadro de texto espera que se introduzca un número, puede ser interesante no permitir al usuario introducir ningún carácter que no sea numérico.</p>
+
+<p>Igualmente, en algunos casos puede ser útil impedir que el usuario introduzca números en un cuadro de texto. Utilizando el evento <code>onkeypress</code> y unas cuantas sentencias JavaScript, el problema se resuelve fácilmente:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> permite<span class="br0">&#40;</span>elEvento<span class="sy0">,</span> permitidos<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="co1">// Variables que definen los caracteres permitidos</span>
+  <span class="kw1">var</span> numeros <span class="sy0">=</span> <span class="st0">&quot;0123456789&quot;</span><span class="sy0">;</span>
+  <span class="kw1">var</span> caracteres <span class="sy0">=</span> <span class="st0">&quot; abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ&quot;</span><span class="sy0">;</span>
+  <span class="kw1">var</span> numeros_caracteres <span class="sy0">=</span> numeros <span class="sy0">+</span> caracteres<span class="sy0">;</span>
+  <span class="kw1">var</span> teclas_especiales <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">8</span><span class="sy0">,</span> <span class="nu0">37</span><span class="sy0">,</span> <span class="nu0">39</span><span class="sy0">,</span> <span class="nu0">46</span><span class="br0">&#93;</span><span class="sy0">;</span>
+  <span class="co1">// 8 = BackSpace, 46 = Supr, 37 = flecha izquierda, 39 = flecha derecha</span>
+&nbsp;
+  <span class="co1">// Seleccionar los caracteres a partir del parámetro de la función</span>
+  <span class="kw1">switch</span><span class="br0">&#40;</span>permitidos<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">case</span> <span class="st0">'num'</span><span class="sy0">:</span>
+      permitidos <span class="sy0">=</span> numeros<span class="sy0">;</span>
+      <span class="kw1">break</span><span class="sy0">;</span>
+    <span class="kw1">case</span> <span class="st0">'car'</span><span class="sy0">:</span>
+      permitidos <span class="sy0">=</span> caracteres<span class="sy0">;</span>
+      <span class="kw1">break</span><span class="sy0">;</span>
+    <span class="kw1">case</span> <span class="st0">'num_car'</span><span class="sy0">:</span>
+      permitidos <span class="sy0">=</span> numeros_caracteres<span class="sy0">;</span>
+      <span class="kw1">break</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+&nbsp;
+  <span class="co1">// Obtener la tecla pulsada</span>
+  <span class="kw1">var</span> evento <span class="sy0">=</span> elEvento <span class="sy0">||</span> window.<span class="me1">event</span><span class="sy0">;</span>
+  <span class="kw1">var</span> codigoCaracter <span class="sy0">=</span> evento.<span class="me1">charCode</span> <span class="sy0">||</span> evento.<span class="me1">keyCode</span><span class="sy0">;</span>
+  <span class="kw1">var</span> caracter <span class="sy0">=</span> <span class="kw4">String</span>.<span class="me1">fromCharCode</span><span class="br0">&#40;</span>codigoCaracter<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+  <span class="co1">// Comprobar si la tecla pulsada es alguna de las teclas especiales</span>
+  <span class="co1">// (teclas de borrado y flechas horizontales)</span>
+  <span class="kw1">var</span> tecla_especial <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+  <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw1">var</span> i <span class="kw1">in</span> teclas_especiales<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span>codigoCaracter <span class="sy0">==</span> teclas_especiales<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      tecla_especial <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+      <span class="kw1">break</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span>
+&nbsp;
+  <span class="co1">// Comprobar si la tecla pulsada se encuentra en los caracteres permitidos</span>
+  <span class="co1">// o si es una tecla especial</span>
+  <span class="kw1">return</span> permitidos.<span class="me1">indexOf</span><span class="br0">&#40;</span>caracter<span class="br0">&#41;</span> <span class="sy0">!=</span> <span class="sy0">-</span><span class="nu0">1</span> <span class="sy0">||</span> tecla_especial<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5">// Sólo números
+<span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;texto&quot;</span> <span class="kw3">onkeypress</span><span class="sy0">=</span><span class="st0">&quot;return permite(event, 'num')&quot;</span> <span class="sy0">/</span>&gt;</span>
+&nbsp;
+// Sólo letras
+<span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;texto&quot;</span> <span class="kw3">onkeypress</span><span class="sy0">=</span><span class="st0">&quot;return permite(event, 'car')&quot;</span> <span class="sy0">/</span>&gt;</span>
+&nbsp;
+// Sólo letras o números
+<span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;texto&quot;</span> <span class="kw3">onkeypress</span><span class="sy0">=</span><span class="st0">&quot;return permite(event, 'num_car')&quot;</span> <span class="sy0">/</span>&gt;</span></pre>
+</div>
+
+<p>El funcionamiento del script anterior se basa en permitir o impedir el comportamiento habitual del evento <code>onkeypress</code>. Cuando se pulsa una tecla, se comprueba si el carácter de esa tecla se encuentra dentro de los caracteres permitidos para ese elemento <code>&lt;input&gt;</code>.</p>
+
+<p>Si el carácter se encuentra dentro de los caracteres permitidos, se devuelve <code>true</code> y por tanto el comportamiento de <code>onkeypress</code> es el habitual y la tecla se escribe. Si el carácter no se encuentra dentro de los caracteres permitidos, se devuelve <code>false</code> y por tanto se impide el comportamiento normal de <code>onkeypress</code> y la tecla no llega a escribirse en el input.</p>
+
+<p>Además, el script anterior siempre permite la pulsación de algunas teclas <em>especiales</em>. En concreto, las teclas <code>BackSpace</code> y <code>Supr</code> para borrar caracteres y las teclas <code>Flecha Izquierda</code> y <code>Flecha Derecha</code> para moverse en el cuadro de texto siempre se pueden pulsar independientemente del tipo de caracteres permitidos.</p>
+
+<h2 id="validacion">16.3 Validación</h2>
+
+<p>La principal utilidad de JavaScript en el manejo de los formularios es la validación de los datos introducidos por los usuarios. Antes de enviar un formulario al servidor, se recomienda validar mediante JavaScript los datos insertados por el usuario. De esta forma, si el usuario ha cometido algún error al rellenar el formulario, se le puede notificar de forma instantánea, sin necesidad de esperar la respuesta del servidor.</p>
+
+<p>Notificar los errores de forma inmediata mediante JavaScript mejora la satisfacción del usuario con la aplicación (lo que técnicamente se conoce como "mejorar la experiencia de usuario") y ayuda a reducir la carga de procesamiento en el servidor.</p>
+
+<p>Normalmente, la validación de un formulario consiste en llamar a una función de validación cuando el usuario pulsa sobre el botón de envío del formulario. En esta función, se comprueban si los valores que ha introducido el usuario cumplen las restricciones impuestas por la aplicación.</p>
+
+<p>Aunque existen tantas posibles comprobaciones como elementos de formulario diferentes, algunas comprobaciones son muy habituales: que se rellene un campo obligatorio, que se seleccione el valor de una lista desplegable, que la dirección de email indicada sea correcta, que la fecha introducida sea lógica, que se haya introducido un número donde así se requiere, etc.</p>
+
+<p>A continuación se muestra el código JavaScript básico necesario para incorporar la validación a un formulario:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">form</span> <span class="kw3">action</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="kw3">method</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span> <span class="kw3">onsubmit</span><span class="sy0">=</span><span class="st0">&quot;return validacion()&quot;</span>&gt;</span>
+  ...
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">form</span>&gt;</span></pre>
+</div>
+
+<p>Y el esquema de la función validacion() es el siguiente:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> validacion<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">if</span> <span class="br0">&#40;</span>condicion que debe cumplir el primer campo del formulario<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// Si no se cumple la condicion...</span>
+    console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'[ERROR] El campo debe tener un valor de...'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+  <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>condicion que debe cumplir el segundo campo del formulario<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// Si no se cumple la condicion...</span>
+    console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'[ERROR] El campo debe tener un valor de...'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+  ...
+  <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>condicion que debe cumplir el último campo del formulario<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// Si no se cumple la condicion...</span>
+    console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'[ERROR] El campo debe tener un valor de...'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+&nbsp;
+  <span class="co1">// Si el script ha llegado a este punto, todas las condiciones</span>
+  <span class="co1">// se han cumplido, por lo que se devuelve el valor true</span>
+  <span class="kw1">return</span> <span class="kw2">true</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>El funcionamiento de esta técnica de validación se basa en el comportamiento del evento <code>onsubmit</code> de JavaScript. Al igual que otros eventos como <code>onclick</code> y <code>onkeypress</code>, el evento <code>'onsubmit</code> varía su comportamiento en función del valor que se devuelve.</p>
+
+<p>Así, si el evento <code>onsubmit</code> devuelve el valor <code>true</code>, el formulario se envía como lo haría normalmente. Sin embargo, si el evento <code>onsubmit</code> devuelve el valor <code>false</code>, el formulario no se envía. La clave de esta técnica consiste en comprobar todos y cada uno de los elementos del formulario. En cuando se encuentra un elemento incorrecto, se devuelve el valor <code>false</code>. Si no se encuentra ningún error, se devuelve el valor <code>true</code>.</p>
+
+<p>Por lo tanto, en primer lugar se define el evento <code>onsubmit</code> del formulario como:</p>
+
+<div class="code javascript">
+<pre class="javascript">onsubmit<span class="sy0">=</span><span class="st0">&quot;return validacion()&quot;</span></pre>
+</div>
+
+<p>Como el código JavaScript devuelve el valor resultante de la función <code>validacion()</code>, el formulario solamente se enviará al servidor si esa función devuelve <code>true</code>. En el caso de que la función <code>validacion()</code> devuelva <code>false</code>, el formulario permanecerá sin enviarse.</p>
+
+<p>Dentro de la función <code>validacion()</code> se comprueban todas las condiciones impuestas por la aplicación. Cuando no se cumple una condición, se devuelve <code>false</code> y por tanto el formulario no se envía. Si se llega al final de la función, todas las condiciones se han cumplido correctamente, por lo que se devuelve <code>true</code> y el formulario se envía.</p>
+
+<p>La notificación de los errores cometidos depende del diseño de cada aplicación. En el código del ejemplo anterior simplemente se muestran mensajes mediante la función <code>console.log()</code> indicando el error producido. Las aplicaciones web mejor diseñadas muestran cada mensaje de error al lado del elemento de formulario correspondiente y también suelen mostrar un mensaje principal indicando que el formulario contiene errores.</p>
+
+<p>Una vez definido el esquema de la función <code>validacion()</code>, se debe añadir a esta función el código correspondiente a todas las comprobaciones que se realizan sobre los elementos del formulario. A continuación, se muestran algunas de las validaciones más habituales de los campos de formulario.</p>
+
+<h3 id="validar-un-campo-de-texto-obligatorio">16.3.1 Validar un campo de texto obligatorio</h3>
+
+<p>Se trata de forzar al usuario a introducir un valor en un cuadro de texto o textarea en los que sea obligatorio. La condición en JavaScript se puede indicar como:</p>
+
+<div class="code javascript">
+<pre class="javascript">valor <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;campo&quot;</span><span class="br0">&#41;</span>.<span class="me1">value</span><span class="sy0">;</span>
+<span class="kw1">if</span><span class="br0">&#40;</span> valor <span class="sy0">==</span> <span class="kw2">null</span> <span class="sy0">||</span> valor.<span class="me1">length</span> <span class="sy0">==</span> <span class="nu0">0</span> <span class="sy0">||</span> <span class="co2">/^\s+$/</span>.<span class="me1">test</span><span class="br0">&#40;</span>valor<span class="br0">&#41;</span> <span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Para que se de por completado un campo de texto obligatorio, se comprueba que el valor introducido sea válido, que el número de caracteres introducido sea mayor que cero y que no se hayan introducido sólo espacios en blanco.</p>
+
+<p>La palabra reservada <code>null</code> es un valor especial que se utiliza para indicar <em>"ningún valor"</em>. Si el valor de una variable es <code>null</code>, la variable no contiene ningún valor de tipo objeto, array, numérico, cadena de texto o booleano.</p>
+
+<p>La segunda parte de la condición obliga a que el texto introducido tenga una longitud superior a cero caracteres, esto es, que no sea un texto vacío.</p>
+
+<p>Por último, la tercera parte de la condición <code>(/^\s+$/.test(valor))</code> obliga a que el valor introducido por el usuario no sólo esté formado por espacios en blanco. Esta comprobación se basa en el uso de "expresiones regulares", un recurso habitual en cualquier lenguaje de programación pero que por su gran complejidad no se van a estudiar. Por lo tanto, sólo es necesario copiar literalmente esta condición, poniendo especial cuidado en no modificar ningún carácter de la expresión.</p>
+
+<h3 id="validar-un-campo-de-texto-con-valores-numericos">16.3.2 Validar un campo de texto con valores numéricos</h3>
+
+<p>Se trata de obligar al usuario a introducir un valor numérico en un cuadro de texto. La condición JavaScript consiste en:</p>
+
+<div class="code javascript">
+<pre class="javascript">valor <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;campo&quot;</span><span class="br0">&#41;</span>.<span class="me1">value</span><span class="sy0">;</span>
+<span class="kw1">if</span><span class="br0">&#40;</span> isNaN<span class="br0">&#40;</span>valor<span class="br0">&#41;</span> <span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Si el contenido de la variable <code>valor</code> no es un número válido, no se cumple la condición. La ventaja de utilizar la función interna <code>isNaN()</code> es que simplifica las comprobaciones, ya que JavaScript se encarga de tener en cuenta los decimales, signos, etc.</p>
+
+<p>A continuación se muestran algunos resultados de la función <code>isNaN()</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript">isNaN<span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span><span class="sy0">;</span>          <span class="co1">// false</span>
+isNaN<span class="br0">&#40;</span><span class="st0">&quot;3&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>        <span class="co1">// false</span>
+isNaN<span class="br0">&#40;</span><span class="nu0">3.3545</span><span class="br0">&#41;</span><span class="sy0">;</span>     <span class="co1">// false</span>
+isNaN<span class="br0">&#40;</span><span class="nu0">32323.345</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// false</span>
+isNaN<span class="br0">&#40;</span><span class="sy0">+</span><span class="nu0">23.2</span><span class="br0">&#41;</span><span class="sy0">;</span>      <span class="co1">// false</span>
+isNaN<span class="br0">&#40;</span><span class="st0">&quot;-23.2&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>    <span class="co1">// false</span>
+isNaN<span class="br0">&#40;</span><span class="st0">&quot;23a&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>      <span class="co1">// true</span>
+isNaN<span class="br0">&#40;</span><span class="st0">&quot;23.43.54&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// true</span></pre>
+</div>
+
+<h3 id="validar-que-se-ha-seleccionado-una-opcion-de-una-lista">16.3.3 Validar que se ha seleccionado una opción de una lista</h3>
+
+<p>Se trata de obligar al usuario a seleccionar un elemento de una lista desplegable. El siguiente código JavaScript permite conseguirlo:</p>
+
+<div class="code javascript">
+<pre class="javascript">indice <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;opciones&quot;</span><span class="br0">&#41;</span>.<span class="me1">selectedIndex</span><span class="sy0">;</span>
+<span class="kw1">if</span><span class="br0">&#40;</span> indice <span class="sy0">==</span> <span class="kw2">null</span> <span class="sy0">||</span> indice <span class="sy0">==</span> <span class="nu0">0</span> <span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">select</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;opciones&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;opciones&quot;</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;&quot;</span>&gt;</span>- Selecciona un valor -<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;1&quot;</span>&gt;</span>Primer valor<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;2&quot;</span>&gt;</span>Segundo valor<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">option</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;3&quot;</span>&gt;</span>Tercer valor<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">option</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">select</span>&gt;</span></pre>
+</div>
+
+<p>A partir de la propiedad <code>selectedIndex</code>, se comprueba si el índice de la opción seleccionada es válido y además es distinto de cero. La primera opción de la lista (<code>- Selecciona un valor –</code>) no es válida, por lo que no se permite el valor <code>0</code> para esta propiedad <code>selectedIndex</code>.</p>
+
+<h3 id="validar-una-direccion-de-email">16.3.4 Validar una dirección de email</h3>
+
+<p>Se trata de obligar al usuario a introducir una dirección de email con un formato válido. Por tanto, lo que se comprueba es que la dirección parezca válida, ya que no se comprueba si se trata de una cuenta de correo electrónico real y operativa. La condición JavaScript consiste en:</p>
+
+<div class="code javascript">
+<pre class="javascript">valor <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;campo&quot;</span><span class="br0">&#41;</span>.<span class="me1">value</span><span class="sy0">;</span>
+<span class="kw1">if</span><span class="br0">&#40;</span> <span class="sy0">!</span><span class="br0">&#40;</span><span class="co2">/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)/</span>.<span class="me1">test</span><span class="br0">&#40;</span>valor<span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La comprobación se realiza nuevamente mediante las expresiones regulares, ya que las direcciones de correo electrónico válidas pueden ser muy diferentes. Por otra parte, como el estándar que define el formato de las direcciones de correo electrónico es muy complejo, la expresión regular anterior es una simplificación. Aunque esta regla valida la mayoría de direcciones de correo electrónico utilizadas por los usuarios, no soporta todos los diferentes formatos válidos de email.</p>
+
+<h3 id="validar-una-fecha">16.3.5 Validar una fecha</h3>
+
+<p>Las fechas suelen ser los campos de formulario más complicados de validar por la multitud de formas diferentes en las que se pueden introducir. El siguiente código asume que de alguna forma se ha obtenido el año, el mes y el día introducidos por el usuario:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> ano <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;ano&quot;</span><span class="br0">&#41;</span>.<span class="me1">value</span><span class="sy0">;</span>
+<span class="kw1">var</span> mes <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;mes&quot;</span><span class="br0">&#41;</span>.<span class="me1">value</span><span class="sy0">;</span>
+<span class="kw1">var</span> dia <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;dia&quot;</span><span class="br0">&#41;</span>.<span class="me1">value</span><span class="sy0">;</span>
+&nbsp;
+valor <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">Date</span><span class="br0">&#40;</span>ano<span class="sy0">,</span> mes<span class="sy0">,</span> dia<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">if</span><span class="br0">&#40;</span> <span class="sy0">!</span>isNaN<span class="br0">&#40;</span>valor<span class="br0">&#41;</span> <span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La función <code>Date(ano, mes, dia)</code> es una función interna de JavaScript que permite construir fechas a partir del año, el mes y el día de la fecha. Es muy importante tener en cuenta que el número de mes se indica de <code>0</code> a <code>11</code>, siendo <code>0</code> el mes de Enero y <code>11</code> el mes de Diciembre. Los días del mes siguen una numeración diferente, ya que el mínimo permitido es <code>1</code> y el máximo <code>31</code>.</p>
+
+<p>La validación consiste en intentar construir una fecha con los datos proporcionados por el usuario. Si los datos del usuario no son correctos, la fecha no se puede construir correctamente y por tanto la validación del formulario no será correcta.</p>
+
+<h3 id="validar-un-numero-de-dni">16.3.6 Validar un número de DNI</h3>
+
+<p>Se trata de comprobar que el número proporcionado por el usuario se corresponde con un número válido de Documento Nacional de Identidad o DNI. Aunque para cada país o región los requisitos del documento de identidad de las personas pueden variar, a continuación se muestra un ejemplo genérico fácilmente adaptable. La validación no sólo debe comprobar que el número esté formado por ocho cifras y una letra, sino que también es necesario comprobar que la letra indicada es correcta para el número introducido:</p>
+
+<div class="code javascript">
+<pre class="javascript">valor <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;campo&quot;</span><span class="br0">&#41;</span>.<span class="me1">value</span><span class="sy0">;</span>
+<span class="kw1">var</span> letras <span class="sy0">=</span> <span class="br0">&#91;</span><span class="st0">'T'</span><span class="sy0">,</span> <span class="st0">'R'</span><span class="sy0">,</span> <span class="st0">'W'</span><span class="sy0">,</span> <span class="st0">'A'</span><span class="sy0">,</span> <span class="st0">'G'</span><span class="sy0">,</span> <span class="st0">'M'</span><span class="sy0">,</span> <span class="st0">'Y'</span><span class="sy0">,</span> <span class="st0">'F'</span><span class="sy0">,</span> <span class="st0">'P'</span><span class="sy0">,</span> <span class="st0">'D'</span><span class="sy0">,</span> <span class="st0">'X'</span><span class="sy0">,</span> <span class="st0">'B'</span><span class="sy0">,</span> <span class="st0">'N'</span><span class="sy0">,</span> <span class="st0">'J'</span><span class="sy0">,</span> <span class="st0">'Z'</span><span class="sy0">,</span> <span class="st0">'S'</span><span class="sy0">,</span> <span class="st0">'Q'</span><span class="sy0">,</span> <span class="st0">'V'</span><span class="sy0">,</span> <span class="st0">'H'</span><span class="sy0">,</span> <span class="st0">'L'</span><span class="sy0">,</span> <span class="st0">'C'</span><span class="sy0">,</span> <span class="st0">'K'</span><span class="sy0">,</span> <span class="st0">'E'</span><span class="sy0">,</span> <span class="st0">'T'</span><span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">if</span><span class="br0">&#40;</span> <span class="sy0">!</span><span class="br0">&#40;</span><span class="co2">/^\d{8}[A-Z]$/</span>.<span class="me1">test</span><span class="br0">&#40;</span>valor<span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">if</span><span class="br0">&#40;</span>valor.<span class="me1">charAt</span><span class="br0">&#40;</span><span class="nu0">8</span><span class="br0">&#41;</span> <span class="sy0">!=</span> letras<span class="br0">&#91;</span><span class="br0">&#40;</span>valor.<span class="me1">substring</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">8</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">%</span>23<span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La primera comprobación asegura que el formato del número introducido es el correcto, es decir, que está formado por 8 números seguidos y una letra. Si la letra está al principio de los números, la comprobación sería <code>/^[A-Z]\d{8}$/</code>. Si en vez de ocho números y una letra, se requieren diez números y dos letras, la comprobación sería <code>/^\d{10}[A-Z]{2}$/</code> y así sucesivamente.</p>
+
+<p>La segunda comprobación aplica el algoritmo de cálculo de la letra del DNI y la compara con la letra proporcionada por el usuario. El algoritmo de cada documento de identificación es diferente, por lo que esta parte de la validación se debe adaptar convenientemente.</p>
+
+<h3 id="validar-un-numero-de-telefono">16.3.7 Validar un número de teléfono</h3>
+
+<p>Los números de teléfono pueden ser indicados de formas muy diferentes: con prefijo nacional, con prefijo internacional, agrupado por pares, separando los números con guiones, etc.</p>
+
+<p>El siguiente script considera que un número de teléfono está formado por nueve dígitos consecutivos y sin espacios ni guiones entre las cifras:</p>
+
+<div class="code javascript">
+<pre class="javascript">valor <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;campo&quot;</span><span class="br0">&#41;</span>.<span class="me1">value</span><span class="sy0">;</span>
+<span class="kw1">if</span><span class="br0">&#40;</span> <span class="sy0">!</span><span class="br0">&#40;</span><span class="co2">/^\d{9}$/</span>.<span class="me1">test</span><span class="br0">&#40;</span>valor<span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Una vez más, la condición de JavaScript se basa en el uso de expresiones regulares, que comprueban si el valor indicado es una sucesión de nueve números consecutivos. A continuación se muestran otras expresiones regulares que se pueden utilizar para otros formatos de número de teléfono:</p>
+
+<div class="table" id="table-16-1">
+
+    <table>
+<thead>
+<tr>
+  <th>Número</th>
+  <th>Expresión regular</th>
+  <th>Formato</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>900900900</code></td>
+  <td><code>/^\d{9}$/</code></td>
+  <td>9 cifras seguidas</td>
+</tr>
+<tr>
+  <td><code>900-900-900</code></td>
+  <td><code>/^\d{3}-\d{3}-\d{3}$/</code></td>
+  <td>9 cifras agrupadas de 3 en 3 y separadas por guiones</td>
+</tr>
+<tr>
+  <td><code>900 900900</code></td>
+  <td><code>/^\d{3}\s\d{6}$/</code></td>
+  <td>9 cifras, las 3 primeras separadas por un espacio</td>
+</tr>
+<tr>
+  <td><code>900 90 09 00</code></td>
+  <td><code>/^\d{3}\s\d{2}\s\d{2}\s\d{2}$/</code></td>
+  <td>9 cifras, las 3 primeras separadas por un espacio, las siguientes agrupadas de 2 en 2</td>
+</tr>
+<tr>
+  <td><code>(900) 900900</code></td>
+  <td><code>/^\(\d{3}\)\s\d{6}$/</code></td>
+  <td>9 cifras, las 3 primeras encerradas por paréntesis y un espacio de separación respecto del resto</td>
+</tr>
+<tr>
+  <td><code>+34 900900900</code></td>
+  <td><code>/^\+\d{2,3}\s\d{9}$/</code></td>
+  <td>Prefijo internacional (<code>+</code> seguido de 2 o 3 cifras), espacio en blanco y 9 cifras consecutivas</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<h3 id="validar-que-un-checkbox-ha-sido-seleccionado">16.3.8 Validar que un checkbox ha sido seleccionado</h3>
+
+<p>Si un elemento de tipo <em>checkbox</em> se debe seleccionar de forma obligatoria, JavaScript permite comprobarlo de forma muy sencilla:</p>
+
+<div class="code javascript">
+<pre class="javascript">elemento <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;campo&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">if</span><span class="br0">&#40;</span> <span class="sy0">!</span>elemento.<span class="me1">checked</span> <span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Si se trata de comprobar que todos los checkbox del formulario han sido seleccionados, es más fácil utilizar un bucle:</p>
+
+<div class="code javascript">
+<pre class="javascript">formulario <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;formulario&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">for</span><span class="br0">&#40;</span><span class="kw1">var</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;</span>formulario.<span class="me1">elements</span>.<span class="me1">length</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">var</span> elemento <span class="sy0">=</span> formulario.<span class="me1">elements</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>elemento.<span class="me1">type</span> <span class="sy0">==</span> <span class="st0">&quot;checkbox&quot;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span><span class="sy0">!</span>elemento.<span class="me1">checked</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h3 id="validar-que-un-radiobutton-ha-sido-seleccionado">16.3.9 Validar que un radiobutton ha sido seleccionado</h3>
+
+<p>Aunque se trata de un caso similar al de los <em>checkbox</em>, la validación de los <em>radiobutton</em> presenta una diferencia importante: en general, la comprobación que se realiza es que el usuario haya seleccionado algún <em>radiobutton</em> de los que forman un determinado grupo. Mediante JavaScript, es sencillo determinar si se ha seleccionado algún <em>radiobutton</em> de un grupo:</p>
+
+<div class="code javascript">
+<pre class="javascript">opciones <span class="sy0">=</span> document.<span class="me1">getElementsByName</span><span class="br0">&#40;</span><span class="st0">&quot;opciones&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> seleccionado <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+<span class="kw1">for</span><span class="br0">&#40;</span><span class="kw1">var</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;</span>opciones.<span class="me1">length</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>opciones<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">checked</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    seleccionado <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+    <span class="kw1">break</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">if</span><span class="br0">&#40;</span><span class="sy0">!</span>seleccionado<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>El anterior ejemplo recorre todos los <em>radiobutton</em> que forman un grupo y comprueba elemento por elemento si ha sido seleccionado. Cuando se encuentra el primer <em>radiobutton</em> seleccionado, se sale del bucle y se indica que al menos uno ha sido seleccionado.</p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 21</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej21">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-16.html#formularios">Formularios</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>16.1</span>
+                        <a class="internal" href="capitulo-16.html#propiedades-basicas-de-formularios-y-elementos">Propiedades básicas de formularios y elementos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>16.2</span>
+                        <a class="internal" href="capitulo-16.html#utilidades-basicas-para-formularios">Utilidades básicas para formularios</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>16.3</span>
+                        <a class="internal" href="capitulo-16.html#validacion">Validación</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="18/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Etiquetas, atributos y elementos | XHTML</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">XHTML</a></h1>
+        <p class="span3">
+                        <a href="capitulo-2.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-4.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="etiquetas-atributos-y-elementos"><span>Capítulo 3</span> Etiquetas, atributos y elementos</h1>
+        <p>Las <strong>etiquetas</strong> son la estructura básica del HTML. Estas etiquetas o <em>tags</em> se componen y contienen otras propiedades, como son los <strong>atributos</strong> y el <strong>contenido</strong>.</p>
+
+<p><strong>HTML</strong> define un total de 91 etiquetas, de las cuales 10 se consideran obsoletas. Sin embargo, una etiqueta por sí sola a veces no contiene la suficiente información para estar completamente definida. Para ello contamos con los <strong>atributos</strong>: pares <em>nombre-valor</em> separados por "=" y escritos en la etiqueta inicial de un elemento después del nombre del elemento. El valor puede estar encerrado entre "comillas dobles" o 'simples'. Existen, también, algunos atributos que afectan al elemento por su presencia en la etiqueta de inicio, como puede ser el atributo <code>ismap</code> para el elemento <code>&lt;img&gt;</code>.</p>
+
+<p>Esta sería la <strong>estructura general de una línea de código en lenguaje HTML</strong>:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;tag attribute1<span class="sy0">=</span><span class="st0">&quot;value1&quot;</span> attribute2<span class="sy0">=</span><span class="st0">&quot;value2&quot;</span>&gt;</span>content<span class="sc2">&lt;<span class="sy0">/</span>tag&gt;</span></pre>
+</div>
+
+<p>O lo que es lo mismo, con un ejemplo:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;http://www.enlace.com&quot;</span> <span class="kw3">target</span><span class="sy0">=</span><span class="st0">&quot;_blank&quot;</span>&gt;</span>Ejemplo de enlace<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span></pre>
+</div>
+
+<p>Donde:</p>
+
+<ul>
+<li><code>&lt;a&gt;</code> es la etiqueta o <em>tag</em> inicial y <code>&lt;/a&gt;</code> la etiqueta de cierre.</li>
+<li><code>href</code> y <code>target</code> son los atributos.</li>
+<li><code>http://www.enlace.com</code> y <code>_blank</code> son las variables.</li>
+<li><code>Ejemplo de enlace</code> es el contenido.</li>
+</ul>
+
+<p>Aunque también existen elementos vacíos que no necesitan <em>tag</em> de cierre, cuya estructura sería ésta:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;tag attribute1<span class="sy0">=</span><span class="st0">&quot;value1&quot;</span> attribute2<span class="sy0">=</span><span class="st0">&quot;value2&quot;</span> <span class="sy0">/</span>&gt;</span></pre>
+</div>
+
+<p>Estos elementos vacíos no constan de contenido, como por ejemplo, los <em>tags</em> <code>&lt;br&gt;</code> o <code>&lt;img&gt;</code>.</p>
+
+<h2 id="tipos-de-atributos">3.1 Tipos de atributos</h2>
+
+<p>Aunque cada una de las etiquetas HTML define sus propios atributos, encontramos algunos comunes a muchas o casi todas las etiquetas, que se dividen en cuatro grupos según su funcionalidad:</p>
+
+<ul>
+<li>Atributos <strong>básicos</strong></li>
+<li>Atributos de <strong>internacionalización</strong></li>
+<li>Atributos de <strong>eventos</strong></li>
+<li>Atributos de <strong>foco</strong></li>
+</ul>
+
+<h3 id="atributos-basicos">3.1.1 Atributos básicos</h3>
+
+<p>Los atributos básicos se utilizan en la mayoría de etiquetas <strong>HTML</strong> y <strong>XHTML</strong>, aunque adquieren mayor sentido cuando se utilizan hojas de estilo en cascada (<strong>CSS</strong>):</p>
+
+<div class="table" id="table-3-1">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Atributo</th>
+  <th align="left">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><code>id="texto"</code></td>
+  <td align="left">Establece un indicador único a cada elemento</td>
+</tr>
+<tr>
+  <td align="right"><code>class="texto"</code></td>
+  <td align="left">Establece la clase CSS que se aplica a los estilos del elemento</td>
+</tr>
+<tr>
+  <td align="right"><code>style="texto"</code></td>
+  <td align="left">Aplica de forma directa los estilos CSS de un elemento</td>
+</tr>
+<tr>
+  <td align="right"><code>title="texto"</code></td>
+  <td align="left">Establece el título del elemento (Mejora la accesibilidad)</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<h3 id="atributos-de-internacionalizacion-o-i18n">3.1.2 Atributos de internacionalización o <em>i18n</em></h3>
+
+<p>Estos atributos se utilizan en aquellas páginas que muestran sus contenidos en varios <strong>idiomas</strong> y las que quieran indicar de forma explícita el idioma de sus contenidos:</p>
+
+<div class="table" id="table-3-2">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Atributo</th>
+  <th align="left">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><code>lang="codigo"</code></td>
+  <td align="left">Indica el idioma del elemento</td>
+</tr>
+<tr>
+  <td align="right"><code>xml:lang="codigo"</code></td>
+  <td align="left">Indica el idioma del elemento, aunque tiene más prioridad que el atributo anterior y es obligatorio si se incluye el atributo <code>lang</code></td>
+</tr>
+<tr>
+  <td align="right"><code>dir</code></td>
+  <td align="left">Indica la dirección del texto</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<h3 id="atributos-de-eventos">3.1.3 Atributos de eventos</h3>
+
+<p>Estos atributos se utilizan en las páginas web que incluyen código <strong>JavaScript</strong> para realizar acciones dinámicas sobre los elementos de la página.</p>
+
+<p><strong>Pueden ser utilizados por: <em>todos los elementos</em></strong></p>
+
+<div class="table" id="table-3-3">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Atributos</th>
+  <th align="left">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><code>onclick</code></td>
+  <td align="left">Ejecuta la acción cuando se realiza un clic sobre el elemento</td>
+</tr>
+<tr>
+  <td align="right"><code>ondblclick</code></td>
+  <td align="left">Ejecuta la acción cuando se realiza un doble clic sobre el elemento</td>
+</tr>
+<tr>
+  <td align="right"><code>onmousedown</code></td>
+  <td align="left">Ejecuta la acción cuando se detecta el botón pulsado del ratón</td>
+</tr>
+<tr>
+  <td align="right"><code>onmouseup</code></td>
+  <td align="left">Ejecuta la acción cuando se detecta que se ha soltado el botón del ratón</td>
+</tr>
+<tr>
+  <td align="right"><code>onmousemove</code></td>
+  <td align="left">Ejecuta la acción cuando se detecta el movimiento del ratón sobre el elemento</td>
+</tr>
+<tr>
+  <td align="right"><code>onmouseout</code></td>
+  <td align="left">Ejecuta la acción cuando el ratón abandona el elemento</td>
+</tr>
+<tr>
+  <td align="right"><code>onmouseover</code></td>
+  <td align="left">Ejecuta la acción cuando se detecta que el ratón se sitúa sobre el elemento</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p><strong>Pueden ser utilizados por: <code>&lt;body&gt;</code></strong></p>
+
+<div class="table" id="table-3-4">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Atributos</th>
+  <th align="left">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><code>onload</code></td>
+  <td align="left">Ejecuta la acción cuando se carga el documento</td>
+</tr>
+<tr>
+  <td align="right"><code>onunload</code></td>
+  <td align="left">Ejecuta la acción cuando se abandona el documento</td>
+</tr>
+<tr>
+  <td align="right"><code>onresize</code></td>
+  <td align="left">Ejecuta la acción cuando se ha modificado el tamaño de la ventana del navegador</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p><strong>Pueden ser utilizados por: <em>elementos de formulario</em> y <code>&lt;body&gt;</code></strong></p>
+
+<div class="table" id="table-3-5">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Atributos</th>
+  <th align="left">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><code>onkeydown</code></td>
+  <td align="left">Ejecuta la acción cuando se detecta que la tecla esta pulsada</td>
+</tr>
+<tr>
+  <td align="right"><code>onkeyup</code></td>
+  <td align="left">Ejecuta la acción cuando se detecta que se ha soltado la tecla pulsada</td>
+</tr>
+<tr>
+  <td align="right"><code>onkeypress</code></td>
+  <td align="left">Ejecuta la acción cuando se pulsa una tecla</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p><strong>Pueden ser utilizados por: <em>varios</em></strong></p>
+
+<div class="table" id="table-3-6">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Atributos</th>
+  <th align="left">Descripción</th>
+  <th align="center">Elementos que pueden usarlo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><code>onblur</code></td>
+  <td align="left">Ejecuta la acción cuando el elemento pierde el foco bien sea a través del ratón o por navegación tabulada</td>
+  <td align="center"><code>&lt;button&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;label&gt;</code>, <code>&lt;select&gt;</code>, <code>&lt;textarea&gt;</code>, <code>&lt;body&gt;</code></td>
+</tr>
+<tr>
+  <td align="right"><code>onfocus</code></td>
+  <td align="left">Ejecuta la acción cuando el elemento obtiene el foco bien sea a través del ratón o por navegación tabulada</td>
+  <td align="center"><code>&lt;button&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;label&gt;</code>, <code>&lt;select&gt;</code>, <code>&lt;textarea&gt;</code>, <code>&lt;body&gt;</code></td>
+</tr>
+<tr>
+  <td align="right"><code>onchange</code></td>
+  <td align="left">Ejecuta la acción cuando el valor de un control ha sido modificado</td>
+  <td align="center"><code>&lt;input&gt;</code>, <code>&lt;select&gt;</code>, <code>&lt;textarea&gt;</code></td>
+</tr>
+<tr>
+  <td align="right"><code>onreset</code></td>
+  <td align="left">Ejecuta la acción cuando el formulario es restablecido a sus valores por defecto</td>
+  <td align="center"><code>&lt;form&gt;</code></td>
+</tr>
+<tr>
+  <td align="right"><code>onselect</code></td>
+  <td align="left">Ejecuta la acción cuando un usuario selecciona texto en un campo de texto</td>
+  <td align="center"><code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code></td>
+</tr>
+<tr>
+  <td align="right"><code>onsubmit</code></td>
+  <td align="left">Ejecuta la acción cuando el formulario es enviado</td>
+  <td align="center"><code>&lt;form&gt;</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<h3 id="atributos-de-foco">3.1.4 Atributos de foco</h3>
+
+<p>Se le denomina <strong>foco</strong> o <em>focus</em>, cuando un control o elemento del documento ha sido seleccionado. Cuando ese elemento deja de estar seleccionado, "pierde el foco" y es el nuevo elemento seleccionado el que se dice que tiene "el foco".</p>
+
+<div class="table" id="table-3-7">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Atributos</th>
+  <th align="left">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><code>accesskey="letra"</code></td>
+  <td align="left">Establece una tecla de acceso rápido a un elemento HTML</td>
+</tr>
+<tr>
+  <td align="right"><code>tabindex="numero"</code></td>
+  <td align="left">Establece la posición del elemento en el orden de tabulación de la página (valor entre 0 y 32.767)</td>
+</tr>
+<tr>
+  <td align="right"><code>onfocus</code>, <code>onblur</code></td>
+  <td align="left">Controlan los eventos JavaScript que se ejecutan cuando el elemento obtiene o pierde el foco</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<h2 id="elementos">3.2 Elementos</h2>
+
+<p>Además de etiquetas y atributos, HTML define el término <strong>elemento</strong> para referirse a las partes que componen los documentos HTML. Como ya hemos mencionado antes, la estructura general de una línea de código en lenguaje HTML sería ésta:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;tag attribute1<span class="sy0">=</span><span class="st0">&quot;value1&quot;</span> attribute2<span class="sy0">=</span><span class="st0">&quot;value2&quot;</span>&gt;</span>content<span class="sc2">&lt;<span class="sy0">/</span>tag&gt;</span></pre>
+</div>
+
+<p>El lenguaje HTML clasifica a todos los elementos en dos grupos: <strong>elementos en línea</strong> o <em>inline elements</em> y <strong>elementos en bloque</strong> o <em>block elements</em>.</p>
+
+<p>La diferencia entre ambos viene dada por el <strong>modelo de contenido</strong>, por el <strong>formato</strong> y la <strong>dirección</strong>. La principal diferencia entre los dos tipos de elementos es la forma en la que ocupan el espacio disponible en la página: los <strong>elementos en bloque</strong> siempre empiezan en una nueva línea y ocupan todo el espacio disponible hasta el final de la línea, mientras que los <strong>elementos en línea</strong> sólo ocupan el espacio necesario para mostrar sus contenidos.</p>
+
+<h3 id="elementos-en-linea-definidos-por-html">3.2.1 Elementos en línea (definidos por HTML)</h3>
+
+<div class="table" id="table-3-8">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Atributos</th>
+  <th align="left">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><code>a</code></td>
+  <td align="left">Define un anchor (anclaje o hipervínculo)</td>
+</tr>
+<tr>
+  <td align="right"><code>abbr</code></td>
+  <td align="left">Marca las abreviaturas del texto y proporciona el significado de esas abreviaturas</td>
+</tr>
+<tr>
+  <td align="right"><code>acronym</code></td>
+  <td align="left">Marca las siglas o acrónimos del texto y proporciona el significado de esas siglas</td>
+</tr>
+<tr>
+  <td align="right"><code>b</code></td>
+  <td align="left">Indica que el texto debe ser representado e  <em>bold</em> (o negrita)</td>
+</tr>
+<tr>
+  <td align="right"><code>basefont</code></td>
+  <td align="left">Permite cambiar algunas propiedades del texto</td>
+</tr>
+<tr>
+  <td align="right"><code>bdo</code></td>
+  <td align="left">Anulación del algoritmo bidireccional (en referencia a la dirección de la escritura)</td>
+</tr>
+<tr>
+  <td align="right"><code>big</code></td>
+  <td align="left">Muestra el texto marcado con un tamaño de fuente más grande</td>
+</tr>
+<tr>
+  <td align="right"><code>br</code></td>
+  <td align="left"><em>line break</em> - ruptura (o salto) de línea</td>
+</tr>
+<tr>
+  <td align="right"><code>cite</code></td>
+  <td align="left">Se emplea para marcar una cita o una referencia a otras fuentes</td>
+</tr>
+<tr>
+  <td align="right"><code>code</code></td>
+  <td align="left">Delimita el texto considerado un fragmento de código fuente</td>
+</tr>
+<tr>
+  <td align="right"><code>dfn</code></td>
+  <td align="left">Marca las definiciones de ciertos términos y proporciona el significado de éstos</td>
+</tr>
+<tr>
+  <td align="right"><code>em</code></td>
+  <td align="left"><em>emphasis</em> – énfasis</td>
+</tr>
+<tr>
+  <td align="right"><code>font</code></td>
+  <td align="left">Indica el tamaño, color, o fuente del texto que contiene</td>
+</tr>
+<tr>
+  <td align="right"><code>i</code></td>
+  <td align="left">Muestra el texto marcado con un estilo en <em>cursiva</em> o itálica</td>
+</tr>
+<tr>
+  <td align="right"><code>img</code></td>
+  <td align="left">Imagen</td>
+</tr>
+<tr>
+  <td align="right"><code>input</code></td>
+  <td align="left">Posibilita y define la introducción de datos en el formulario</td>
+</tr>
+<tr>
+  <td align="right"><code>kbd</code></td>
+  <td align="left">Indicar al usuario el texto que debe introducir</td>
+</tr>
+<tr>
+  <td align="right"><code>label</code></td>
+  <td align="left">Asocia un rótulo o etiqueta a un campo de un formulario</td>
+</tr>
+<tr>
+  <td align="right"><code>q</code></td>
+  <td align="left"><em>short quotations</em> - cita corta</td>
+</tr>
+<tr>
+  <td align="right"><code>s</code></td>
+  <td align="left"><em>strike-through</em> - tachado</td>
+</tr>
+<tr>
+  <td align="right"><code>samp</code></td>
+  <td align="left">Sirve identificar una muestra de los caracteres que forman la salida o el resultado de algún proceso</td>
+</tr>
+<tr>
+  <td align="right"><code>select</code></td>
+  <td align="left">Crea un contenedor mediante el cual el usuario puede seleccionar de una lista de opciones</td>
+</tr>
+<tr>
+  <td align="right"><code>small</code></td>
+  <td align="left">Aplica al texto marcado un tamaño de fuente más pequeño</td>
+</tr>
+<tr>
+  <td align="right"><code>span</code></td>
+  <td align="left">Es un contenedor genérico en línea. Sirve para para aplicar estilo al texto o agrupar elementos en línea</td>
+</tr>
+<tr>
+  <td align="right"><code>strike</code></td>
+  <td align="left">Muestra el texto tachado con una linea horizontal</td>
+</tr>
+<tr>
+  <td align="right"><code>strong</code></td>
+  <td align="left">Marca con especial énfasis las partes más importantes de un texto</td>
+</tr>
+<tr>
+  <td align="right"><code>sub</code></td>
+  <td align="left">Crea un subíndice posicionando el texto marcado por debajo de la linea</td>
+</tr>
+<tr>
+  <td align="right"><code>sup</code></td>
+  <td align="left">Crea un superíndice posicionando el texto marcado por encima de la linea</td>
+</tr>
+<tr>
+  <td align="right"><code>textarea</code></td>
+  <td align="left">Crea un control de entrada de texto multilínea</td>
+</tr>
+<tr>
+  <td align="right"><code>tt</code></td>
+  <td align="left">Representa como texto de teletipo o ancho fijo</td>
+</tr>
+<tr>
+  <td align="right"><code>u</code></td>
+  <td align="left">Muestra el texto subrayado</td>
+</tr>
+<tr>
+  <td align="right"><code>var</code></td>
+  <td align="left">Marca variables de programas y similares</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<h3 id="elementos-en-bloque-definidos-por-html">3.2.2 Elementos en bloque (definidos por HTML)</h3>
+
+<div class="table" id="table-3-9">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Atributos</th>
+  <th align="left">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><code>address</code></td>
+  <td align="left">Contiene la información de contacto con los autores del documento</td>
+</tr>
+<tr>
+  <td align="right"><code>blockquote</code></td>
+  <td align="left">Indica que el texto que encierra es una cita textual de otro texto externos</td>
+</tr>
+<tr>
+  <td align="right"><code>center</code></td>
+  <td align="left">Crea una caja en bloque con el contenido centrado</td>
+</tr>
+<tr>
+  <td align="right"><code>dir</code></td>
+  <td align="left">Crea listas multicolumna de directorios</td>
+</tr>
+<tr>
+  <td align="right"><code>div</code></td>
+  <td align="left">Es un elemento en bloque genérico y sirve para crear secciones o agrupar contenidos</td>
+</tr>
+<tr>
+  <td align="right"><code>dl</code></td>
+  <td align="left">Crea una lista de definiciones</td>
+</tr>
+<tr>
+  <td align="right"><code>fieldset</code></td>
+  <td align="left">Permite organizar en grupos los campos de un formulario</td>
+</tr>
+<tr>
+  <td align="right"><code>form</code></td>
+  <td align="left">Actúa como contenedor de controles. Representa un formulario</td>
+</tr>
+<tr>
+  <td align="right"><code>h1</code>, <code>h2</code>, <code>h3</code>, <code>h4</code>, <code>h5</code>, <code>h6</code></td>
+  <td align="left">Crea un encabezado o título de primer, segundo, tercer, cuarto, quinto o sexto nivel para una sección del documento respectivamente</td>
+</tr>
+<tr>
+  <td align="right"><code>hr</code></td>
+  <td align="left">Crea una linea de separación horizontal</td>
+</tr>
+<tr>
+  <td align="right"><code>isindex</code></td>
+  <td align="left">Crea un control de entrada de texto de una línea</td>
+</tr>
+<tr>
+  <td align="right"><code>menu</code></td>
+  <td align="left">Crea un menú</td>
+</tr>
+<tr>
+  <td align="right"><code>noframes</code></td>
+  <td align="left">(sin marcos) - aporta contenidos alternativos a los marcos</td>
+</tr>
+<tr>
+  <td align="right"><code>nos-cript</code></td>
+  <td align="left">Contenedor de contenido alternativo para la representación no basada en <em>scripts</em></td>
+</tr>
+<tr>
+  <td align="right"><code>ol</code></td>
+  <td align="left">Crea una lista ordenada</td>
+</tr>
+<tr>
+  <td align="right"><code>p</code></td>
+  <td align="left">Párrafo</td>
+</tr>
+<tr>
+  <td align="right"><code>pre</code></td>
+  <td align="left">Permite que el texto conserve el formato y sea mostrado tal cual</td>
+</tr>
+<tr>
+  <td align="right"><code>table</code></td>
+  <td align="left">Tabla</td>
+</tr>
+<tr>
+  <td align="right"><code>ul</code></td>
+  <td align="left">Crea una lista no ordenada</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<h3 id="mas-elementos-considerados-en-bloque">3.2.3 Más elementos considerados en bloque</h3>
+
+<div class="table" id="table-3-10">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Atributos</th>
+  <th align="left">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><code>dd</code></td>
+  <td align="left">Descripción de una definición</td>
+</tr>
+<tr>
+  <td align="right"><code>dt</code></td>
+  <td align="left">Término definido</td>
+</tr>
+<tr>
+  <td align="right"><code>frame-set</code></td>
+  <td align="left">Subdivisión en ventanas</td>
+</tr>
+<tr>
+  <td align="right"><code>li</code></td>
+  <td align="left">Objeto de lista</td>
+</tr>
+<tr>
+  <td align="right"><code>tbody</code></td>
+  <td align="left">Cuerpo de tabla</td>
+</tr>
+<tr>
+  <td align="right"><code>td</code></td>
+  <td align="left">Celda de datos de una tabla</td>
+</tr>
+<tr>
+  <td align="right"><code>tfoot</code></td>
+  <td align="left">Pie de tabla</td>
+</tr>
+<tr>
+  <td align="right"><code>th</code></td>
+  <td align="left">Celda de encabezado de tabla</td>
+</tr>
+<tr>
+  <td align="right"><code>thead</code></td>
+  <td align="left">Cabecera de tabla</td>
+</tr>
+<tr>
+  <td align="right"><code>tr</code></td>
+  <td align="left">Fila de una tabla</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<h3 id="elementos-que-pueden-ser-en-linea-y-en-bloque">3.2.4 Elementos que pueden ser en línea y en bloque</h3>
+
+<div class="table" id="table-3-11">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Atributos</th>
+  <th align="left">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><code>button</code></td>
+  <td align="left">Botón</td>
+</tr>
+<tr>
+  <td align="right"><code>del</code></td>
+  <td align="left">Texto borrado</td>
+</tr>
+<tr>
+  <td align="right"><code>iframe</code></td>
+  <td align="left">Subventana en línea</td>
+</tr>
+<tr>
+  <td align="right"><code>ins</code></td>
+  <td align="left">Texto insertado</td>
+</tr>
+<tr>
+  <td align="right"><code>map</code></td>
+  <td align="left">Mapa de imágenes en el lado del cliente</td>
+</tr>
+<tr>
+  <td align="right"><code>object</code></td>
+  <td align="left">Objeto genérico incluído</td>
+</tr>
+<tr>
+  <td align="right"><code>script</code></td>
+  <td align="left">Sentencias de <em>script</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<div class="exercise">
+  <p class="title">Ejercicio 1</p>
+</div>
+
+<p><a class="internal" href="capitulo-14.html#ej01">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-3.html#etiquetas-atributos-y-elementos">Etiquetas, atributos y elementos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.1</span>
+                        <a class="internal" href="capitulo-3.html#tipos-de-atributos">Tipos de atributos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.2</span>
+                        <a class="internal" href="capitulo-3.html#elementos">Elementos</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

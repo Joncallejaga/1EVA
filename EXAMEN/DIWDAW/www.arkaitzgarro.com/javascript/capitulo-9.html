@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="08/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Herencia | JavaScript</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">JavaScript</a></h1>
+        <p class="span3">
+                        <a href="capitulo-8.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-10.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="herencia"><span>Capítulo 9</span> Herencia</h1>
+        <p>JavaScript en un lenguaje orientado a objetos basado en prototipos, en lugar de estar basado en clases. Debido a esta básica diferencia, es menos evidente entender cómo JavaScript nos permite crear herencia entre objetos, y heredar las propiedades y sus valores.</p>
+
+<h2 id="prototype">9.1 Prototype</h2>
+
+<p>Todos los objetos de JavaScript enlazan con un objeto prototipo del que heredan todas sus propiedades. Los objetos creado a través de literales, están enlazados con <code>Object.prototype</code>, un objeto estándar incluido en JavaScript.</p>
+
+<p>Cuando creamos un objeto nuevo, tenemos la posibilidad de seleccionar cuál será su prototipo. El mecanismo que JavaScript proporciona para hacer esto es desordenado y complejo, pero se puede simplificar de manera significativa. Vamos a añadir un método de creación a nuestro objeto. El método <code>create</code> crea un nuevo objeto que utiliza un objeto antiguo como su prototipo.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// Shape - superclass</span>
+<span class="kw1">function</span> Shape<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">this</span>.<span class="me1">x</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="kw1">this</span>.<span class="me1">y</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+Shape.<span class="kw1">prototype</span>.<span class="me1">move</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>x<span class="sy0">,</span> y<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">this</span>.<span class="me1">x</span> <span class="sy0">+=</span> x<span class="sy0">;</span>
+    <span class="kw1">this</span>.<span class="me1">y</span> <span class="sy0">+=</span> y<span class="sy0">;</span>
+    console.<span class="me1">info</span><span class="br0">&#40;</span><span class="st0">&quot;Shape moved.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Rectangle - subclass</span>
+<span class="kw1">function</span> Rectangle<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    Shape.<span class="me1">call</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//call super constructor.</span>
+<span class="br0">&#125;</span>
+&nbsp;
+Rectangle.<span class="kw1">prototype</span> <span class="sy0">=</span> <span class="kw4">Object</span>.<span class="me1">create</span><span class="br0">&#40;</span>Shape.<span class="kw1">prototype</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> rect <span class="sy0">=</span> <span class="kw1">new</span> Rectangle<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+rect <span class="kw1">instanceof</span> Rectangle   <span class="co1">// true.</span>
+rect <span class="kw1">instanceof</span> Shape       <span class="co1">// true.</span>
+&nbsp;
+rect.<span class="me1">move</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Outputs, &quot;Shape moved.&quot;</span></pre>
+</div>
+
+<p>Para los navegadores que no soportan la función <code>create</code>, podemos extender el objeto de JavaSript <code>Object</code> para incluir esta funcionalidad:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">if</span> <span class="br0">&#40;</span><span class="kw1">typeof</span> <span class="kw4">Object</span>.<span class="me1">create</span> <span class="sy0">!==</span> <span class="st0">'function'</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw4">Object</span>.<span class="me1">create</span> <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">&#40;</span>o<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">var</span> F <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span><span class="br0">&#125;</span><span class="sy0">;</span>
+        F.<span class="kw1">prototype</span> <span class="sy0">=</span> o<span class="sy0">;</span>
+        <span class="kw1">return</span> <span class="kw1">new</span> F<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="kw1">var</span> another_stooge <span class="sy0">=</span> <span class="kw4">Object</span>.<span class="me1">create</span><span class="br0">&#40;</span>stooge<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>El prototipo enlazado no se ve afectado por las modificaciones. Si realizamos cambios en un objeto, el objeto prototipo no se ve afectado.</p>
+
+<div class="code javascript">
+<pre class="javascript">another_stooge<span class="br0">&#91;</span><span class="st0">'first-name'</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="st0">'Harry'</span><span class="sy0">;</span>
+another_stooge<span class="br0">&#91;</span><span class="st0">'middle-name'</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="st0">'Moses'</span><span class="sy0">;</span>
+another_stooge.<span class="me1">nickname</span> <span class="sy0">=</span> <span class="st0">'Moe'</span><span class="sy0">;</span></pre>
+</div>
+
+<p>El enlace de los prototipos es únicamente utilizado cuando accedemos a los datos. Si intentamos acceder al valor de una propiedad, y esa propiedad no existe en el objeto, entonces JavaScript va a intentar obtener ese valor del prototipo del objeto. Y si ese objeto tampoco dispone de la propiedad, lo intentará obtener de sucesivos prototipos, hasta que finalmente se encuentre con <code>Object.prototype</code>. Si la propiedad no existe en ninguno de los prototipos, entonces el valor devuelto es <code>undefined</code>.</p>
+
+<p>La relación de prototipos es dinámica. Si nosotros añadimos una nueva propiedad a un prototipo, entonces esta propiedad estará inmediatamente accesible para el resto de prototipos que estén basados en ese prototipo:</p>
+
+<div class="code javascript">
+<pre class="javascript">stooge.<span class="me1">profession</span> <span class="sy0">=</span> <span class="st0">'actor'</span><span class="sy0">;</span>
+another_stooge.<span class="me1">profession</span>       <span class="co1">// 'actor'</span></pre>
+</div>
+
+<h2 id="clases-vs-prototipos">9.2 Clases vs. Prototipos</h2>
+
+<p>Los lenguajes orientados a objetos basados en clases como Java o C++, se basan en el concepto de dos entidades distintas: la clase y las instancias.</p>
+
+<ul>
+<li>Una <em>clase</em> define todas las propiedades que caracteriza a una serie de objetos. La <em>clase</em> es algo abstracto, no como las instancias de los objetos que describe. Por ejemplo, una clase <code>Empleado</code>, puede representar un conjunto concreto de empleados.</li>
+<li>Una <em>instancia</em>, en cambio, es una representación concreta de esa <em>clase</em>. Por ejemplo, <em>Victoria</em> puede ser una instancia concreta de la <em>clase</em> <code>Empleado</code>, es decir, representa de manera concreta a un empleado. Una instancia tiene exactamente las mismas propiedades que la clase padre (Ni más, ni menos).</li>
+</ul>
+
+<p>Un lenguaje basado en prototipos, como JavaScript, no hace esta distinción: simplemente maneja objetos. Este tipo de lenguajes tiene la noción de objetos <em>prototipo</em>, objetos usados como platilla para obtener las propiedades iniciales de un objeto. Cualquier objeto puede especificar su propias propieades, tanto en el momento que los creamos como en tiempo de ejecución. Además, cualquier objeto puede asociarse como prototipo a otro objeto, permitiendo compartir todas sus propiedades.</p>
+
+<h2 id="definiendo-una-clase">9.3 Definiendo una clase</h2>
+
+<p>Un lenguaje basado en clases, definimos la clase de manera independiente. En esta definición, especificamos los constructores, que son utilizamos para crear las instancias de las clases. Un método constructor, puede especificar los valores iniciales de una instancia de una clase, y realizar las operaciones necesarias a la hora de crear el objeto. Utilizamos el operador <code>new</code>, conjuntamente con el nombre del constructor, para crear nuevas instancias.</p>
+
+<p>JavaScript sigue un modelo similar, pero no separa la definición de las propiedades del constructor. En este caso, definimos una función <em>constructora</em> para crear los objetos con un conjunto inicial de propiedades y valores. Cualquier función de JavaScript puede ser utilizada como constructor. Utilizamos el operador <code>new</code>, conjuntamente con el nombre de la función <em>constructora</em>, para crear nuevas instancias.</p>
+
+<h2 id="subclases-y-herencia">9.4 Subclases y herencia</h2>
+
+<p>En un lenguaje basado en clases, es posible crear estructura de clases a través de su definición. En esta definición, podemos especificar que la nueva clase es una subclase de una clase que ya existe. Esta subclase, hereda todas las propiedades de la superclase, y además puede añadir o modificar las propiedades heredadas.</p>
+
+<p>JavaScript implementa una herencia que nos permite asociar un objeto prototipo con una función constructora. De esta manera, el nuevo objeto hereda todas las propiedades del objeto prototipo.</p>
+
+<h2 id="diferencias-con-un-lenguaje-basado-en-clases">9.5 Diferencias con un lenguaje basado en clases</h2>
+
+<p>La siguiente tabla muestra un pequeño resumen de las diferencias entre un lenguaje basado en clases, como Java, y un lenguaje basado en prototipos, como JavaScript.</p>
+
+<div class="table" id="table-9-1">
+
+    <table>
+<thead>
+<tr>
+  <th>Basado en clases (Java)</th>
+  <th>Basado en prototipos (JavaScript)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Clase e instancia son dos entidades diferentes</td>
+  <td>Todos los objetos son instancias</td>
+</tr>
+<tr>
+  <td>Las clases se definen de manera explícita, y se instancias a través de su método constructor.</td>
+  <td>Las clases se definen y crean con las funciones constructoras.</td>
+</tr>
+<tr>
+  <td>Un objeto se instancia con el operador <code>new</code>.</td>
+  <td>Un objeto se instancia con el operador <code>new</code>.</td>
+</tr>
+<tr>
+  <td>La estructura de clases se crea utilizando la definición de clases.</td>
+  <td>La estructura de clases se crea asignando un objeto como prototipo.</td>
+</tr>
+<tr>
+  <td>La herencia de propiedades se realiza a través de la cadena de clases.</td>
+  <td>La herencia de propiedades se realiza a través de la cadena de prototipos.</td>
+</tr>
+<tr>
+  <td>La definición de clases especifica todas las propiedades de una instancia de una clase. No se pueden añadir propiedades en tiempo de ejecución.</td>
+  <td>La función constructora o el prototipo especifican unas propiedades iniciales. Se pueden añadir o eliminar estas propiedades en tiempo de ejecución, en un objeto concreto o a un conjunto de objetos.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<h2 id="creando-la-herencia">9.6 Creando la herencia</h2>
+
+<p>Veamos como se implementa esta herencia en JavaScript, a través de un simple ejemplo. Queremos implementar la siguiente estructura:</p>
+
+<ul>
+<li>Un <code>Empleado</code> se define con las propiedades <code>nombre</code> (cuyo valor por defecto es una cadena vacía), y un <code>departamento</code> (cuyo valor por defecto es "General").</li>
+<li>Un <code>Director</code> está basado en <code>Empleado</code>. Añade la propiedad <code>informes</code> (cuyo valor por defecto es un array vacío).</li>
+<li>Un <code>Trabajador</code> está basado también en <code>Empleado</code>. Añade la propiedad <code>proyectos</code> (cuyo valor por defecto es un array vacío).</li>
+<li>Un <code>Ingeniero</code> está basado en <code>Trabajador</code>. Añade la propiedad <code>maquina</code> (cuyo valor por defecto es una cadena vacía) y sobreescribe la propiedad <code>departamento</code> con el valor "Ingeniería".</li>
+</ul>
+
+<p>Codificación en JavaScript:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> Empleado <span class="br0">&#40;</span>nombre<span class="sy0">,</span> departamento<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">this</span>.<span class="me1">nombre</span> <span class="sy0">=</span> nombre <span class="sy0">||</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+  <span class="kw1">this</span>.<span class="me1">departamento</span> <span class="sy0">=</span> departamento <span class="sy0">||</span> <span class="st0">&quot;General&quot;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">function</span> Director <span class="br0">&#40;</span>nombre<span class="sy0">,</span> departamento<span class="sy0">,</span> informes<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">this</span>.<span class="me1">base</span> <span class="sy0">=</span> Empleado<span class="sy0">;</span>
+  <span class="kw1">this</span>.<span class="me1">base</span><span class="br0">&#40;</span>nombre<span class="sy0">,</span> departamento<span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">this</span>.<span class="me1">informes</span> <span class="sy0">=</span> informes <span class="sy0">||</span> <span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+Director.<span class="kw1">prototype</span> <span class="sy0">=</span> <span class="kw1">new</span> Empleado<span class="sy0">;</span>
+&nbsp;
+<span class="kw1">function</span> Obrero <span class="br0">&#40;</span>nombre<span class="sy0">,</span> departamento<span class="sy0">,</span> proyectos<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">this</span>.<span class="me1">base</span> <span class="sy0">=</span> Empleado<span class="sy0">;</span>
+  <span class="kw1">this</span>.<span class="me1">base</span><span class="br0">&#40;</span>nombre<span class="sy0">,</span> departamento<span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">this</span>.<span class="me1">proyectos</span> <span class="sy0">=</span> proyectos <span class="sy0">||</span> <span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+Obrero.<span class="kw1">prototype</span> <span class="sy0">=</span> <span class="kw1">new</span> Empleado<span class="sy0">;</span>
+&nbsp;
+<span class="kw1">function</span> Ingeniero <span class="br0">&#40;</span>nombre<span class="sy0">,</span> proyectos<span class="sy0">,</span> maquina<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">this</span>.<span class="me1">base</span> <span class="sy0">=</span> Obrero<span class="sy0">;</span>
+  <span class="kw1">this</span>.<span class="me1">base</span><span class="br0">&#40;</span>nombre<span class="sy0">,</span> <span class="st0">&quot;Ingeniería&quot;</span><span class="sy0">,</span> proyectos<span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">this</span>.<span class="me1">maquina</span> <span class="sy0">=</span> maquina <span class="sy0">||</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+Ingeniero.<span class="kw1">prototype</span> <span class="sy0">=</span> <span class="kw1">new</span> Obrero<span class="sy0">;</span></pre>
+</div>
+
+<p>Supongamos que queremos crear un nuevo <code>Ingeniero</code> de la siguiente manera:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> arkaitz <span class="sy0">=</span> <span class="kw1">new</span> Ingeniero<span class="br0">&#40;</span><span class="st0">&quot;Garro, Arkaitz&quot;</span><span class="sy0">,</span>
+                            <span class="br0">&#91;</span><span class="st0">&quot;xhtml&quot;</span><span class="sy0">,</span> <span class="st0">&quot;javascript&quot;</span><span class="sy0">,</span> <span class="st0">&quot;html5&quot;</span><span class="br0">&#93;</span><span class="sy0">,</span>
+                            <span class="st0">&quot;Chrome&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>JavaScript sigue el siguiente proceso:</p>
+
+<ol>
+<li>El operador <code>new</code> creará un objeto genérico y asignará a la propiedad <code>__proto__</code> el valor de <code>Ingeniero.prototype</code>.</li>
+<li>El operador <code>new</code> pasará el nuevo objeto creado al constructor de <code>Ingeniero</code>, como valor de la palabra reservada <code>this</code>.</li>
+<li>El constructor crea una nueva propiedad llamada <code>base</code> para este objeto, y le asigna el valor del constructor <code>Obrero</code>. Esto convierte el constructor de <code>Obrero</code>en un método del objeto <code>Ingeniero</code>. El nombre <code>base</code>no hace referencia a ninguna palabra reservada, es simplemente para hacer referencia al padre.</li>
+<li>El constructor llama al método <code>base</code>, pasando como argumentos dos de sus argumentos (<code>"Garro, Arkaitz"</code> y <code>["xhtml", "javascript", "html5"]</code>), además de la cadena de caracteres "Ingeniería". Indicar este parámetro fijo, hace que todos los objetos creados de tipo <code>Ingeniero</code>, tengan el mismo valor para la propiedad <code>departamento</code>, sobreescribiendo la el valor original de <code>Empleado</code>.</li>
+<li>Al llamar al método <code>base</code>, JavaScript asocia la palabra reservada <code>this</code> al objeto creado en el paso 1. En consecuencia, la función <code>Obrero</code> pasa los valores <code>"Garro, Arkaitz"</code> y <code>["xhtml", "javascript", "html5"]</code> al constructor de <code>Empleado</code>. Cuando se completa este paso, la función <code>Obrero</code> asigna el valor de los projectos a su propiedad.</li>
+<li>Una vez finalizado el método <code>base</code>, el constructor de <code>Ingeniero</code> asigna el valor <code>Chrome</code> a la propiedad <code>maquina</code>.</li>
+<li>Una vez finalizado el constructor, JavaScript asigna el nuevo objeto a la variable <code>arkaitz</code>.</li>
+</ol>
+
+<h2 id="determinando-la-relacion-entre-instancias">9.7 Determinando la relación entre instancias</h2>
+
+<p>La búsqueda de propiedades en JavaScript comienza en las propias propiedades del objeto, y si este nombre de propiedad no se encuentra, consulta las propiedades del objeto especial <code>__proto__</code>. Este proceso se realiza de manera recursiva.</p>
+
+<p>La propiedad especial <code>__proto__</code> se define cuando un objeto es construido: su valor corresponde con la propiedad <code>prototype</code> del constructor. Así, la expresión <code>new Foo()</code> crea un objeto con la propiedad <code>__proto__ == Foo.prototype</code>. En consecuencia, los cambios producidos en <code>Foo.prototype</code> alteran la búsqueda de propiedades de todos los objetos creados con <code>new Foo()</code>.</p>
+
+<p>Todo objeto tiene una propiedad <code>__proto__</code>, así como una propiedad <code>prototype</code>. Por lo tanto, los objetos pueden relacionarse a través de esta propiedad. Un ejemplo:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> arkaitz <span class="sy0">=</span> <span class="kw1">new</span> Ingeniero<span class="br0">&#40;</span><span class="st0">&quot;Garro, Arkaitz&quot;</span><span class="sy0">,</span>
+                            <span class="br0">&#91;</span><span class="st0">&quot;xhtml&quot;</span><span class="sy0">,</span> <span class="st0">&quot;javascript&quot;</span><span class="sy0">,</span> <span class="st0">&quot;html5&quot;</span><span class="br0">&#93;</span><span class="sy0">,</span>
+                            <span class="st0">&quot;Chrome&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>En este objeto, todas las siguientes sentencias se cumplen:</p>
+
+<div class="code javascript">
+<pre class="javascript">arkaitz.<span class="kw3">__proto__</span> <span class="sy0">==</span> Ingeniero.<span class="kw1">prototype</span><span class="sy0">;</span>
+arkaitz.<span class="kw3">__proto__</span>.<span class="kw3">__proto__</span> <span class="sy0">==</span> Obrero.<span class="kw1">prototype</span><span class="sy0">;</span>
+arkaitz.<span class="kw3">__proto__</span>.<span class="kw3">__proto__</span>.<span class="kw3">__proto__</span> <span class="sy0">==</span> Empleado.<span class="kw1">prototype</span><span class="sy0">;</span>
+arkaitz.<span class="kw3">__proto__</span>.<span class="kw3">__proto__</span>.<span class="kw3">__proto__</span>.<span class="kw3">__proto__</span> <span class="sy0">==</span> <span class="kw4">Object</span>.<span class="kw1">prototype</span><span class="sy0">;</span>
+arkaitz.<span class="kw3">__proto__</span>.<span class="kw3">__proto__</span>.<span class="kw3">__proto__</span>.<span class="kw3">__proto__</span>.<span class="kw3">__proto__</span> <span class="sy0">==</span> <span class="kw2">null</span><span class="sy0">;</span></pre>
+</div>
+
+<p>De esta manera, podemos counstruir una función apara saber si un objeto es una variable es una instancia de una objeto.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> instanceOf<span class="br0">&#40;</span>object<span class="sy0">,</span> constructor<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+   while <span class="br0">&#40;</span>object <span class="sy0">!=</span> <span class="kw2">null</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="kw1">if</span> <span class="br0">&#40;</span>object <span class="sy0">==</span> constructor.<span class="kw1">prototype</span><span class="br0">&#41;</span>
+         <span class="kw1">return</span> <span class="kw2">true</span><span class="sy0">;</span>
+      <span class="kw1">if</span> <span class="br0">&#40;</span><span class="kw1">typeof</span> object <span class="sy0">==</span> <span class="st0">'xml'</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> constructor.<span class="kw1">prototype</span> <span class="sy0">==</span> XML.<span class="kw1">prototype</span><span class="sy0">;</span>
+      <span class="br0">&#125;</span>
+      object <span class="sy0">=</span> object.<span class="kw3">__proto__</span><span class="sy0">;</span>
+   <span class="br0">&#125;</span>
+   <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+instanceOf <span class="br0">&#40;</span>arkaitz<span class="sy0">,</span> Engineer<span class="br0">&#41;</span>      <span class="co1">// true</span>
+instanceOf <span class="br0">&#40;</span>arkaitz<span class="sy0">,</span> WorkerBee<span class="br0">&#41;</span>     <span class="co1">// true</span>
+instanceOf <span class="br0">&#40;</span>arkaitz<span class="sy0">,</span> Employee<span class="br0">&#41;</span>      <span class="co1">// true</span>
+instanceOf <span class="br0">&#40;</span>arkaitz<span class="sy0">,</span> <span class="kw4">Object</span><span class="br0">&#41;</span>        <span class="co1">// true</span>
+&nbsp;
+instanceOf <span class="br0">&#40;</span>arkaitz<span class="sy0">,</span> SalesPerson<span class="br0">&#41;</span>   <span class="co1">// false</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 11</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej11">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-9.html#herencia">Herencia</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.1</span>
+                        <a class="internal" href="capitulo-9.html#prototype">Prototype</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.2</span>
+                        <a class="internal" href="capitulo-9.html#clases-vs-prototipos">Clases vs. Prototipos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.3</span>
+                        <a class="internal" href="capitulo-9.html#definiendo-una-clase">Definiendo una clase</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.4</span>
+                        <a class="internal" href="capitulo-9.html#subclases-y-herencia">Subclases y herencia</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.5</span>
+                        <a class="internal" href="capitulo-9.html#diferencias-con-un-lenguaje-basado-en-clases">Diferencias con un lenguaje basado en clases</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.6</span>
+                        <a class="internal" href="capitulo-9.html#creando-la-herencia">Creando la herencia</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.7</span>
+                        <a class="internal" href="capitulo-9.html#determinando-la-relacion-entre-instancias">Determinando la relación entre instancias</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

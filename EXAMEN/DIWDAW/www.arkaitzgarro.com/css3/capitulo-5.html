@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Módulo <em>Backgrounds and Borders</em> | CSS 3</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">CSS 3</a></h1>
+        <p class="span3">
+                        <a href="capitulo-4.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-6.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="modulo-backgrounds-and-borders"><span>Capítulo 5</span> Módulo <em>Backgrounds and Borders</em></h1>
+        <p>La especificación oficial y el estado actual de desarrollo del módulo <em>Backgrounds and Borders</em> en CSS 3 puede consultarse en <a href="http://www.w3.org/TR/css3-background/">http://www.w3.org/TR/css3-background/</a>.</p>
+
+<h2 id="bordes">5.1 Bordes</h2>
+
+<h3 id="propiedades-border-42-42-radius">5.1.1 Propiedades <em>border-&#42;-&#42;-radius</em></h3>
+
+<p>La propiedad <code>border-radius</code> permite definir <em>esquinas redondeadas</em> en los elementos de una manera muy sencilla, sin necesidad de utilizar imágenes o una estructura de <code>div</code> muy compleja. Las <em>esquinas redondeadas</em> pueden ser creadas de manera independiente utilizando las cuatro propiedades individuales <code>border-*-radius</code> (<code>border-bottom-left-radius</code>, <code>border-bottom-right-radius</code>, <code>border-top-left-radius</code> y <code>border-top-right-radius</code>). La curva o radio de cada esquina se define usando uno o dos radios que definen su forma. Si únicamente definimos un radio, tenemos un <strong>círculo</strong>, si definimos dos radios tenemos una <strong>elipse</strong>.</p>
+
+<div class="code css">
+<pre class="css">border-<span class="sy0">*</span>-<span class="sy0">*</span>-radius<span class="sy0">:</span> <span class="br0">&#91;</span> &lt;length<span class="sy0">&gt;</span> | &lt;%<span class="sy0">&gt;</span> <span class="br0">&#93;</span> <span class="br0">&#91;</span> &lt;length<span class="sy0">&gt;</span> | &lt;%<span class="sy0">&gt;</span> <span class="br0">&#93;</span>?
+&nbsp;
+<span class="kw1">border-top-left-radius</span><span class="sy0">:</span> <span class="re3">10px</span> <span class="re3">5px</span><span class="sy0">;</span>
+<span class="kw1">border-bottom-right-radius</span><span class="sy0">:</span> <span class="re3">10%</span> <span class="re3">5%</span><span class="sy0">;</span>
+<span class="kw1">border-top-right-radius</span><span class="sy0">:</span> <span class="re3">10px</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Las siguientes imágenes muestran un ejemplo de cómo pueden definirse los diferentes radios de un borde:</p>
+
+<div class="figure" id="figure-5-1">
+    <img src="images/cap07/border-radius.png" alt="Diferentes radios de borde" />
+
+    <p class="caption"><strong>Figura 5.1</strong> Diferentes radios de borde</p>
+</div>
+
+
+<h3 id="propiedad-border-radius">5.1.2 Propiedad <em>border-radius</em></h3>
+
+<p>Esta propiedad es una forma abreviada (<em>shorthand</em>) de establecer las cuatro propiedades <code>border-top-left-radius</code>, <code>border-top-right-radius</code>, <code>border-bottom-right-radius</code> y <code>border-bottom-left-radius</code>.</p>
+
+<div class="table" id="table-5-1">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>border-radius</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">[ &lt;length&gt; &#124; &lt;percentage&gt; ]{1,4} [ / [ &lt;length&gt; &#124; &lt;percentage&gt; ]{1,4} ]?</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos, pero los navegadores no están obligados a aplicarlo a los elementos <code>table</code> y <code>inline-table</code> cuando <code>border-collapse</code> es <code>collapse</code>. El comportamiento de los elementos internos de una tabla no está definido por el momento.</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left"><code>border-bottom-left-radius: 0</code>, <code>border-bottom-right-radius: 0</code>, <code>border-top-left-radius: 0</code>, <code>border-top-right-radius: 0</code></td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Define el radio de las esquinas</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Si se define el primer conjunto de valores, éste indica el radio horizontal de las esquinas. El segundo conjunto de valores, hace referencia al radio vertical. Si únicamente se define el primer conjunto de valores, hacer referencia al radio horizontal y vertical. El valor del radio puede ser:</p>
+
+<ul>
+<li><p><code>&lt;lenght&gt;</code>: se puede expresar en cualquier unidad permitida por los tipos de datos del <code>&lt;lenght&gt;</code> en CSS. Los valores negativos no son válidos.</p></li>
+<li><p><code>&lt;percentage&gt;</code>: los porcentajes para el eje horizontal se refieren a la anchura de la caja y los porcentajes para el eje vertical se refieren a la altura. Los valores negativos no son válidos.</p></li>
+</ul>
+
+<div class="table" id="table-5-2">
+
+    <table>
+<thead>
+<tr>
+  <th align="left">Valores</th>
+  <th align="center">Gráficamente</th>
+  <th align="left">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left"><code>radius</code></td>
+  <td align="center"><img src="images/cap07/value1.png" alt="Border radius sintax"></td>
+  <td align="left">Es un <code>&lt;lenght&gt;</code> o <code>&lt;percentage&gt;</code> que indica un radio a utilizar para el borde en cada esquina del elemento.</td>
+</tr>
+<tr>
+  <td align="left"><code>top-left-and-bottom-right</code></td>
+  <td align="center"><img src="images/cap07/value2.png" alt="Border radius sintax"></td>
+  <td align="left">Es un <code>&lt;lenght&gt;</code> o <code>&lt;percentage&gt;</code> que indica un radio a utilizar para el borde en las esquinas superior-izquierda e inferior-derecha del elemento.</td>
+</tr>
+<tr>
+  <td align="left"><code>top-right-and-bottom-left</code></td>
+  <td align="center"><img src="images/cap07/value3.png" alt="Border radius sintax"></td>
+  <td align="left">Es un <code>&lt;lenght&gt;</code> o <code>&lt;percentage&gt;</code> que indica un radio a utilizar para el borde en las esquinas superior-derecha e inferior-izquierda del elemento.</td>
+</tr>
+<tr>
+  <td align="left"><code>top-left</code></td>
+  <td align="center"><img src="images/cap07/value4.png" alt="Border radius sintax"></td>
+  <td align="left">Es un <code>&lt;lenght&gt;</code> o <code>&lt;percentage&gt;</code> que indica un radio a utilizar para el borde en la esquina superior-izquierda del elemento.</td>
+</tr>
+<tr>
+  <td align="left"><code>top-right</code></td>
+  <td align="center"><img src="images/cap07/value5.png" alt="Border radius sintax"></td>
+  <td align="left">Es un <code>&lt;lenght&gt;</code> o <code>&lt;percentage&gt;</code> que indica un radio a utilizar para el borde en la esquina superior-derecha del elemento.</td>
+</tr>
+<tr>
+  <td align="left"><code>bottom-right</code></td>
+  <td align="center"><img src="images/cap07/value6.png" alt="Border radius sintax"></td>
+  <td align="left">Es un <code>&lt;lenght&gt;</code> o <code>&lt;percentage&gt;</code> que indica un radio a utilizar para el borde en la esquina inferior-derecha del elemento.</td>
+</tr>
+<tr>
+  <td align="left"><code>bottom-left</code></td>
+  <td align="center"><img src="images/cap07/value7.png" alt="Border radius sintax"></td>
+  <td align="left">Es un <code>&lt;lenght&gt;</code> o <code>&lt;percentage&gt;</code> que indica un radio a utilizar para el borde en la esquina inferior-izquierda del elemento.</td>
+</tr>
+<tr>
+  <td align="left"><code>inherit</code></td>
+  <td align="center"></td>
+  <td align="left">Es una palabra clave que indica que los cuatro valores se heredan del valor calculado del elemento padre.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<div class="code css">
+<pre class="css"><span class="kw1">border-radius</span><span class="sy0">:</span> <span class="re3">5px</span> <span class="re3">10px</span> <span class="re3">5px</span> <span class="re3">10px</span> / <span class="re3">10px</span> <span class="re3">5px</span> <span class="re3">10px</span> <span class="re3">5px</span><span class="sy0">;</span>
+<span class="kw1">border-radius</span><span class="sy0">:</span> <span class="re3">5px</span><span class="sy0">;</span>
+<span class="kw1">border-radius</span><span class="sy0">:</span> <span class="re3">5px</span> <span class="re3">10px</span> / <span class="re3">10px</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 2</p>
+</div>
+
+<p><a class="internal" href="capitulo-13.html#ej02">Ver enunciado</a></p>
+
+<h2 id="sombras">5.2 Sombras</h2>
+
+<p>La propiedad <code>box-shadow</code> es otra de las características más esperadas de CSS 3. Permite aplicar de una manera muy sencilla sombras a los elementos (internas o externas), especificando el color, la separación y la definición.</p>
+
+<p>La propiedad <code>box-shadow</code> acepta lista de valores de sombras separados por comas, cada una de ellas con una longitud de 2 a 4 valores (es posible especificar la separación horizontal, vertical, la definición de la sombra y la distancia de la misma con respecto al borde), un color opcional y de finir si la sombra es interna o externa.</p>
+
+<div class="table" id="table-5-3">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>box-shadow</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">none | &lt;shadow&gt; [ , &lt;shadow&gt; ]*</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos.</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">none</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Define el radio de las esquinas</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Donde <code>&lt;shadow&gt;</code>:</p>
+
+<div class="code css">
+<pre class="css">&lt;shadow<span class="sy0">&gt;</span> <span class="sy0">=</span> <span class="kw2">inset</span>? &amp;&amp; <span class="br0">&#91;</span> &lt;length<span class="sy0">&gt;</span><span class="br0">&#123;</span><span class="nu0">2</span><span class="sy0">,</span><span class="nu0">4</span><span class="br0">&#125;</span> &amp;&amp; &lt;color<span class="sy0">&gt;</span>? <span class="br0">&#93;</span></pre>
+</div>
+
+<p>Los posibles valores de <code>&lt;length&gt;</code> son:</p>
+
+<ul>
+<li>El primer valor indica la separación horizontal de la sombra. Un valor positivo desplaza la sombra hacia la derecha de la caja, mientras que un valor negativo la desplazará hacia la izquierda.</li>
+<li>El segundo valor indica la separación vertical de la sombra. Un valor positivo desplaza la sombra debajo de la caja, mientras que un valor negativo la desplazará hacia arriba.</li>
+<li>El tercer valor es el radio del desenfoque. Si el valor es <code>0</code> (no se aceptan valores negativos) la sombra será muy nítida. Para valores mayores que <code>0</code>, la sombra se va difuminando.</li>
+<li>El cuarto valor es la distancia de propagación. Un valor positivo hace que la sombra se expanda en todas las direcciones según el valor. Valores negativos causan que la sombra se contraiga.</li>
+</ul>
+
+<div class="code css">
+<pre class="css">box-shadow<span class="sy0">:</span> <span class="re3">10px</span> <span class="re3">10px</span><span class="sy0">;</span>
+box-shadow<span class="sy0">:</span> <span class="re3">10px</span> <span class="re3">10px</span> <span class="re3">5px</span> <span class="re0">#888</span><span class="sy0">;</span>
+box-shadow<span class="sy0">:</span> <span class="kw2">inset</span> <span class="re3">2px</span> <span class="re3">2px</span> <span class="re3">2px</span> <span class="re3">2px</span> <span class="kw1">black</span><span class="sy0">;</span>
+box-shadow<span class="sy0">:</span> <span class="re3">10px</span> <span class="re3">10px</span> <span class="re0">#888</span><span class="sy0">,</span> <span class="re3">-10px</span> <span class="re3">-10px</span> <span class="re0">#f4f4f4</span><span class="sy0">,</span> <span class="re3">0px</span> <span class="re3">0px</span> <span class="re3">5px</span> <span class="re3">5px</span> <span class="re0">#cc6600</span><span class="sy0">;</span></pre>
+</div>
+
+<p>El siguiente diagrama muestra un ejemplo del efecto de aplicar los efectos de desenfoque y propagación de la sombra:</p>
+
+<div class="figure" id="figure-5-2">
+    <img src="images/cap07/box-shadow.png" alt="Ejemplo de aplicar desenfoque y propagación" />
+
+    <p class="caption"><strong>Figura 5.2</strong> Ejemplo de aplicar desenfoque y propagación</p>
+</div>
+
+
+<p>Los efectos de sombra son aplicados de arriba hacia debajo, es decir, la primera sombra de la lista está sobre las demás. Las sombras no influyen en la estructura del del documento y pueden solaparse entre ellas. En terminos de pila y orden de pintado, las sombras externas son pintadas debajo del fondo del elemento, y las sombras internas son pintadas encima del fondo del elemento.</p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 3</p>
+</div>
+
+<p><a class="internal" href="capitulo-13.html#ej03">Ver enunciado</a></p>
+
+<h2 id="fondos">5.3 Fondos</h2>
+
+<p>CSS 3 añade nuevas posibilidades a la hora de trabajar con imágenes de fondo. Ahora podemos definir varias imágenes de fondo y especificar su tamaño.</p>
+
+<h3 id="fondos-multiples">5.3.1 Fondos múltiples</h3>
+
+<p>Con CSS3 se pueden aplicar <strong>fondos múltiples</strong> a los elementos. Estos se colocan en <strong>capas</strong> una encima de la otra con el primer fondo en la parte superior y el último en la parte posterior. Sólamente el último fondo puede incluir un color de fondo.</p>
+
+<p>Un ejemplo muy sencillo:</p>
+
+<div class="examplemultiplebackgrounds">
+    <p>Esta caja tiene dos imágenes de fondo, la primera es una oveja y la segunda es la hierba con el cielo de fondo.</p>
+</div>
+
+<div class="code css">
+<pre class="css">#<span class="kw1">background</span> <span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">500px</span><span class="sy0">;</span>
+    <span class="kw1">height</span><span class="sy0">:</span> <span class="re3">250px</span><span class="sy0">;</span>
+    <span class="kw1">background-image</span><span class="sy0">:</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="co2">sheep.png</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="co2">betweengrassandsky.png</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">background-position</span><span class="sy0">:</span> <span class="kw2">center</span> <span class="kw1">bottom</span><span class="sy0">,</span> <span class="kw1">left</span> <span class="kw1">top</span><span class="sy0">;</span>
+    <span class="kw1">background-repeat</span><span class="sy0">:</span> <span class="kw2">no-repeat</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Las múltiples imágenes de fondo pueden especificarse indicando todas las imágenes de fondo separadas por comas, en la propiedad <code>background-image</code>, donde cada una de las imágenes crea una nueva capa.</p>
+
+<div class="table" id="table-5-4">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>background-image</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">&lt;bg-image&gt; [ , &lt;bg-image&gt; ]*</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos.</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">Ninguno</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Especifica los fondos de un elemento.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<h3 id="posicionar-los-fondos">5.3.2 Posicionar los fondos</h3>
+
+<p>Podemos definir la posición de cada uno de los fondo a través de la propiedad <code>background-position</code>, utilizando las mismas palabras clave definidas en CSS 2.1.</p>
+
+<div class="table" id="table-5-5">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>background-position</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">&lt;position&gt; [ , &lt;position&gt; ]*</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos.</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">0% 0%</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Especifica la posición de las imágenes de fondo definidas.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Cada uno de los valores separados por comas hacer referencia a las imágenes de fondo definidas en la propiedad <code>background-image</code>. Si se definen más valores que imágenes de fondo, los valores sobrantes son ignorados. Por ejemplo, si definimos tres imágenes de fondo, y cinco posiciones, las dos últimas serán igonoradas.</p>
+
+<p>De igual manera, si se especifican menos posiciones que imágenes de fondo, la lista de valores se repite desde el primer elemento, tantas veces como sea necesario.</p>
+
+<h3 id="escalar-imagenes-de-fondo">5.3.3 Escalar imágenes de fondo</h3>
+
+<p>Otra de las propiedades introducidas en CSS 3 ha sido <code>background-size</code>. Esta propiedad permite ajustar el <strong>tamaño de las imágenes de fondo</strong>, en lugar del comportamiento predeterminado de mosaico, utilizando medidas estándar, porcentajes o las palabras reservadas <code>contain</code> y <code>cover</code>.</p>
+
+<p>Un ejemplo muy sencillo:</p>
+
+<div class="examplebackgroundsize1">
+    <span>background-size: auto;</span>
+</div>
+
+<div class="examplebackgroundsize2">
+    <span>background-size: 275px 125px;</span>
+</div>
+
+<div class="code css">
+<pre class="css"><span class="re0">#background1</span> <span class="br0">&#123;</span>
+    background-size<span class="sy0">:</span> <span class="kw2">auto</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#background2</span> <span class="br0">&#123;</span>
+    background-size<span class="sy0">:</span> <span class="re3">275px</span> <span class="re3">125px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Como en otras muchas propiedades de <code>background</code>, es posible especificar los distintos valores separados por comas.</p>
+
+<div class="table" id="table-5-6">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>background-size</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">&lt;bg-size&gt; [, &lt;bg-size&gt;]*</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos.</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">Ver propiedades individuales</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Especifica los tamaños de fondos de un elemento.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Donde:</p>
+
+<div class="code css">
+<pre class="css">&lt;bg-size<span class="sy0">&gt;</span> <span class="sy0">=</span> <span class="br0">&#91;</span> &lt;length<span class="sy0">&gt;</span> | &lt;percentage<span class="sy0">&gt;</span> | <span class="kw2">auto</span> <span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">2</span><span class="br0">&#125;</span> | cover | contain</pre>
+</div>
+
+<p>Ejemplo:</p>
+
+<div class="code css">
+<pre class="css">background-size<span class="sy0">:</span> <span class="re3">200px</span><span class="sy0">;</span>
+background-size<span class="sy0">:</span> <span class="re3">200px</span> <span class="re3">100px</span><span class="sy0">;</span>
+background-size<span class="sy0">:</span> <span class="re3">200px</span> <span class="re3">100px</span><span class="sy0">,</span> <span class="re3">400px</span> <span class="re3">200px</span><span class="sy0">;</span>
+background-size<span class="sy0">:</span> <span class="kw2">auto</span> <span class="re3">200px</span><span class="sy0">;</span>
+background-size<span class="sy0">:</span> <span class="re3">50%</span> <span class="re3">25%</span><span class="sy0">;</span>
+background-size<span class="sy0">:</span> contain<span class="sy0">;</span>
+background-size<span class="sy0">:</span> cover<span class="sy0">;</span></pre>
+</div>
+
+<p>Al especificar los valores de <code>&lt;lenght&gt;</code> o <code>&lt;percentage&gt;</code>, su comportamiento es el esperado y es el que conocemos por ejemplo con las imágenes. Si especificamos un valor, este hace referencia al ancho (manteniendo el alto proporcional) y si especificamos dos valores, estos hacen referencia al ancho y alto respectivamente.</p>
+
+<h4 id="valores-especiales-contain-y-cover">5.3.3.1 Valores especiales <em>contain</em> y <em>cover</em></h4>
+
+<p>Además de los valores <code>&lt;lenght&gt;</code> y <code>&lt;percentage&gt;</code> que se comportan de la manera que conocemos hasta ahora, la propiedad <code>background-size</code> admite dos valores especiales: <code>contain</code> y <code>cover</code>.</p>
+
+<ul>
+<li><p><code>contain</code>: en este caso, la imagen es redimensionada manteniendo sus proporciones originales, de tal manera que cada lado sea tan grande como sea posible mientras que no exceda la longitud del lado correspondiente del contenedor. La imagen nunca excede el tamaño de su contenedor, por lo que si no coincide con el tamaño de su contenedor, pueden existir zonas del fondo que no queden cubiertas por la imagen.</p></li>
+<li><p><code>cover</code>: en este otro caso, la imagen es redimensionada manteniendo sus proporciones originales, de tal manera que el área completa del fondo es siempre cubierta por la imagen de fondo. En este caso, el tamaño de la imagen siempre es igual o superior al área del fondo a cubrir, pudiendo existir zonas de la imagen que no sean visibles.</p></li>
+</ul>
+
+<h3 id="propiedad-shorthand">5.3.4 Propiedad <em>shorthand</em></h3>
+
+<p>Es posible utilizar la propiedad <em>shorthand</em> <code>background</code> para especificar los distintos fondos y sus propiedades en una misma sentencia, indicando los distintos fondos separados por comas. Si se desea especificar un color de fondo, éste únicamente puede ser definido en el último valor de la propiedad.</p>
+
+<div class="table" id="table-5-7">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>background</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">[ &lt;bg-layer&gt; , ]* &lt;final-bg-layer&gt;</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos.</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">Ver propiedades individuales</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Especifica los fondos de un elemento.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Donde:</p>
+
+<div class="code css">
+<pre class="css">&lt;bg-layer<span class="sy0">&gt;</span> <span class="sy0">=</span> &lt;bg-image<span class="sy0">&gt;</span> || &lt;bg-position<span class="sy0">&gt;</span> <span class="br0">&#91;</span> / &lt;bg-size<span class="sy0">&gt;</span> <span class="br0">&#93;</span>? || &lt;repeat-style<span class="sy0">&gt;</span> || &lt;attachment<span class="sy0">&gt;</span> || &lt;box<span class="sy0">&gt;</span><span class="br0">&#123;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">2</span><span class="br0">&#125;</span>
+&nbsp;
+&lt;final-bg-layer<span class="sy0">&gt;</span> <span class="sy0">=</span> &lt;bg-image<span class="sy0">&gt;</span> || &lt;bg-position<span class="sy0">&gt;</span> <span class="br0">&#91;</span> / &lt;bg-size<span class="sy0">&gt;</span> <span class="br0">&#93;</span>? || &lt;repeat-style<span class="sy0">&gt;</span> || &lt;attachment<span class="sy0">&gt;</span> || &lt;box<span class="sy0">&gt;</span><span class="br0">&#123;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">2</span><span class="br0">&#125;</span> || &lt;background-color<span class="sy0">&gt;</span></pre>
+</div>
+
+<p>Ejemplo:</p>
+
+<div class="code css">
+<pre class="css"><span class="kw1">background</span><span class="sy0">:</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="co2">sheep.png</span><span class="br0">&#41;</span> <span class="kw2">center</span> <span class="kw1">bottom</span> <span class="kw2">no-repeat</span><span class="sy0">,</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="co2">betweengrassandsky.png</span><span class="br0">&#41;</span> <span class="kw1">left</span> <span class="kw1">top</span> <span class="kw2">no-repeat</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 4</p>
+</div>
+
+<p><a class="internal" href="capitulo-13.html#ej04">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-5.html#modulo-backgrounds-and-borders">Módulo <em>Backgrounds and Borders</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.1</span>
+                        <a class="internal" href="capitulo-5.html#bordes">Bordes</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.2</span>
+                        <a class="internal" href="capitulo-5.html#sombras">Sombras</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.3</span>
+                        <a class="internal" href="capitulo-5.html#fondos">Fondos</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

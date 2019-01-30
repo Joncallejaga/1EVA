@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Módulo <em>Image Values and Replaced Content</em> | CSS 3</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">CSS 3</a></h1>
+        <p class="span3">
+                        <a href="capitulo-5.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-7.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="modulo-image-values-and-replaced-content"><span>Capítulo 6</span> Módulo <em>Image Values and Replaced Content</em></h1>
+        <p>La especificación oficial y el estado actual de desarrollo del módulo <em>Image Values and Replaced Content</em> en CSS 3 puede consultarse en <a href="http://www.w3.org/TR/css3-images/">http://www.w3.org/TR/css3-images/</a>.</p>
+
+<h2 id="css-gradients">6.1 CSS gradients</h2>
+
+<p>Los degradados CSS son los nuevos tipo de <code>&lt;image&gt;</code> añadidos en el módulo de imagen de CSS3. Utilizar los degradados de CSS permite mostrar <strong>transiciones suaves entre dos o más colores</strong>; esto permite a su vez evistar el uso de imágenes para lograr estos efectos, lo que reduce mucho el tiempo de descarga y el uso de ancho de banda. Además, debido a que el degradado es generado por el navegador, los objetos con degradados se ven mejor cuando se acercan, y se puede ajustar el diseño de una manera mucho más flexible.</p>
+
+<p>Los navegadores soportan dos tipos de degradados: <strong>lineal</strong>, que se define con la función <code>linear-gradient</code> y <strong>radial</strong>, definido con <code>radial-gradient</code>.</p>
+
+<h2 id="degradados-lineales">6.2 Degradados lineales</h2>
+
+<p>Para crear un degradado lineal, se establece un punto de partida y una dirección (especificado como un ángulo) a lo largo del cual se aplica dicho degradado.</p>
+
+<h3 id="degradados-lineales-simples">6.2.1 Degradados lineales simples</h3>
+
+<div class="table" id="table-6-1">
+
+    <table class="standard-table">
+  <tbody>
+    <tr>
+      <td class="header">Screen Shot</td>
+      <td class="header">Live Demo</td>
+    </tr>
+    <tr>
+      <td><img alt="linear_gradient.png" src="images/cap11/linear_gradient.png" style="text-align: center;"></td>
+      <td>
+        <div style="width: 100px; height: 100px; border: 1px solid rgb(51, 51, 51); background: -moz-linear-gradient(top, blue, white); background: -moz-linear-gradient(to bottom, blue, white); background: -ms-linear-gradient(top, blue, white); background: -o-linear-gradient(top, blue, white); background: -webkit-linear-gradient(top, blue, white);">
+           </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* The old syntax, deprecated, but still needed, prefixed, for WebKit-based and old browsers */</span>
+<span class="kw1">background</span><span class="sy0">:</span> -prefix-linear-gradient<span class="br0">&#40;</span><span class="kw1">top</span><span class="sy0">,</span> <span class="kw1">blue</span><span class="sy0">,</span> <span class="kw2">white</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+&nbsp;
+<span class="coMULTI">/* The new syntax needed by standard-compliant browsers (Opera 12.1, IE 10, Fx 16 onwards), without prefix */</span>
+<span class="kw1">background</span><span class="sy0">:</span> linear-gradient<span class="br0">&#40;</span>to <span class="kw1">bottom</span><span class="sy0">,</span> <span class="kw1">blue</span><span class="sy0">,</span> <span class="kw2">white</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Cambiando el mismo degradado para que se represente de izquierda a derecha:</p>
+
+<div class="table" id="table-6-2">
+
+    <table class="standard-table">
+  <tbody>
+    <tr>
+      <td class="header">Screen Shot</td>
+      <td class="header">Live Demo</td>
+    </tr>
+    <tr>
+      <td><img alt="blinear_gradient2.png" class="internal default" src="images/cap11/linear_gradient2.png"></td>
+      <td>
+        <div style="width: 100px; height: 100px; border: 1px solid rgb(51, 51, 51); background: -moz-linear-gradient(left, blue, white); background: -moz-linear-gradient(to right, blue, white); background: -ms-linear-gradient(left, blue, white); background: -o-linear-gradient(left, blue, white); background: -webkit-linear-gradient(left, blue, white);">
+           </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* The old syntax, deprecated, but still needed, prefixed, for WebKit-based and old browsers */</span>
+<span class="kw1">background</span><span class="sy0">:</span> -prefix-linear-gradient<span class="br0">&#40;</span><span class="kw1">left</span><span class="sy0">,</span> <span class="kw1">blue</span><span class="sy0">,</span> <span class="kw2">white</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+&nbsp;
+<span class="coMULTI">/* The new syntax needed by standard-compliant browsers (Opera 12.1, IE 10, Fx 16 onwards), without prefix */</span>
+<span class="kw1">background</span><span class="sy0">:</span> linear-gradient<span class="br0">&#40;</span>to <span class="kw1">right</span><span class="sy0">,</span> <span class="kw1">blue</span><span class="sy0">,</span> <span class="kw2">white</span><span class="br0">&#41;</span><span class="sy0">;</span> </pre>
+</div>
+
+<p>Y en diagonal:</p>
+
+<div class="table" id="table-6-3">
+
+    <table class="standard-table">
+  <tbody>
+    <tr>
+      <td class="header">Screen Shot</td>
+      <td class="header">Live Demo</td>
+    </tr>
+    <tr>
+      <td><img alt="linear_gradient3.png" class="internal default" src="images/cap11/linear_gradient3.png"></td>
+      <td>
+        <div style="width: 100px; height: 100px; border: 1px solid rgb(51, 51, 51); background: -moz-linear-gradient(left top, blue, white); background: -moz-linear-gradient(to bottom right, blue, white); background: -ms-linear-gradient(left top, blue, white); background: -o-linear-gradient(left top, blue, white); background: -webkit-linear-gradient(left top, blue, white);">
+           </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* The old syntax, deprecated, but still needed, prefixed, for WebKit-based and old browsers */</span>
+<span class="kw1">background</span><span class="sy0">:</span> -prefix-linear-gradient<span class="br0">&#40;</span><span class="kw1">left</span> <span class="kw1">top</span><span class="sy0">,</span> <span class="kw1">blue</span><span class="sy0">,</span> <span class="kw2">white</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+&nbsp;
+<span class="coMULTI">/* The new syntax needed by standard-compliant browsers (Opera 12.1, IE 10, Fx 16 onwards), without prefix */</span>
+<span class="kw1">background</span><span class="sy0">:</span> linear-gradient<span class="br0">&#40;</span>to <span class="kw1">bottom</span> <span class="kw1">right</span><span class="sy0">,</span> <span class="kw1">blue</span><span class="sy0">,</span> <span class="kw2">white</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="angulos">6.2.2 Ángulos</h3>
+
+<p>Si no se especifica ningún ángulo, se determina uno de manera automática en función de la dirección dada. Si se desea más control sobre la dirección del degradado, se puede establecer específicamente dicho ángulo.</p>
+
+<p>Por ejemplo, aquí tenemos dos degradados, el primero con una dirección hacia la derecha, y el segundo con un ángulo de 70 grados.</p>
+
+<p><img src="images/cap11/angle.png"></p>
+
+<p>El de la derecha utiliza CSS de esta manera:</p>
+
+<div class="code css">
+<pre class="css"><span class="kw1">background</span><span class="sy0">:</span> linear-gradient<span class="br0">&#40;</span>70deg<span class="sy0">,</span> <span class="kw1">black</span><span class="sy0">,</span> <span class="kw2">white</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>El ángulo se especifica como un ñangulo entre una línea horizontal y la línea de degradado, yendo hacia la izquierda. En otras palabras, <code>0deg</code> crea un degradado vertical desde la parte inferior a la parte superior, y <code>90deg</code> genera un degradado horizontal de izquierda a derecha.</p>
+
+<p><img src="images/cap11/angle2.png"></p>
+
+<div class="code css">
+<pre class="css"><span class="kw1">background</span><span class="sy0">:</span> linear-gradient<span class="br0">&#40;</span>&lt;angle<span class="sy0">&gt;,</span> <span class="kw2">red</span><span class="sy0">,</span> <span class="kw2">white</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="color-stops">6.2.3 Color stops</h3>
+
+<p>Los <em>color stops</em> son los puntos de la línea de degradado que tendrán un color específico en dicho lugar. La ubicación se puede especificar con un porcentaje de la longitud de la línea o como una longitud absoluta. Se puede especificar tantas paradas de color como se quiera con el fin de conseguir el efecto deseado.</p>
+
+<p>0% representaría el punto de partida y 100% el punto final. Sin embargo, se pueden utilizar los valores fuera de ese rango si es necesario para obtener el efecto deseado.</p>
+
+<p>Ejemplo de tres paradas de color:</p>
+
+<div class="table" id="table-6-4">
+
+    <table class="standard-table">
+  <tbody>
+    <tr>
+      <td class="header">Screen Shot</td>
+      <td class="header">Live Demo</td>
+    </tr>
+    <tr>
+      <td><img alt="colorstop1.png" class="internal default" src="images/cap11/colorstop.png"></td>
+      <td>
+        <div style="width: 100px; height: 100px; border: 1px solid rgb(51, 51, 51); background: -moz-linear-gradient(center top , blue, white 80%, orange); background: -moz-linear-gradient(to bottom, blue, white 80%, orange); background: -ms-linear-gradient(center top , blue, white 80%, orange); background: -o-linear-gradient(center top , blue, white 80%, orange); background: -webkit-linear-gradient(top , blue, white 80%, orange); background: linear-gradient(to bottom, blue, white 80%, orange);">
+           </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* The old syntax, deprecated, but still needed, prefixed, for WebKit-based and old browsers */</span>
+<span class="kw1">background</span><span class="sy0">:</span> -prefix-linear-gradient<span class="br0">&#40;</span><span class="kw1">top</span><span class="sy0">,</span> <span class="kw1">blue</span><span class="sy0">,</span> <span class="kw2">white</span> <span class="re3">80%</span><span class="sy0">,</span> orange<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="coMULTI">/* The new syntax needed by standard-compliant browsers (Opera 12.1, IE 10, Fx 16 onwards), without prefix */</span>
+<span class="kw1">background</span><span class="sy0">:</span> linear-gradient<span class="br0">&#40;</span>to <span class="kw1">bottom</span><span class="sy0">,</span> <span class="kw1">blue</span><span class="sy0">,</span> <span class="kw2">white</span> <span class="re3">80%</span><span class="sy0">,</span> orange<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Ejemplo de variedad de colores:</p>
+
+<div class="table" id="table-6-5">
+
+    <table class="standard-table">
+  <tbody>
+    <tr>
+      <td class="header">Screen Shot</td>
+      <td class="header">Live Demo</td>
+    </tr>
+    <tr>
+      <td><img alt="colorstop2.png" class="internal default" src="images/cap11/colorstop2.png"></td>
+      <td>
+        <div style="width: 100px; height: 100px; border: 1px solid rgb(51, 51, 51); background: -moz-linear-gradient(left, red, orange, yellow, green, blue) repeat scroll 0% 0% transparent; background: -moz-linear-gradient(to right, red, orange, yellow, green, blue) repeat scroll 0% 0% transparent; background: -ms-linear-gradient(left, red, orange, yellow, green, blue) repeat scroll 0% 0% transparent; background: -o-linear-gradient(left, red, orange, yellow, green, blue) repeat scroll 0% 0% transparent; background: -webkit-linear-gradient(left, red, orange, yellow, green, blue) repeat scroll 0% 0% transparent;">
+           </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* The old syntax, deprecated, but still needed, prefixed, for WebKit-based and old browsers */</span>
+<span class="kw1">background</span><span class="sy0">:</span> -prefix-linear-gradient<span class="br0">&#40;</span><span class="kw1">left</span><span class="sy0">,</span> <span class="kw2">red</span><span class="sy0">,</span> orange<span class="sy0">,</span> <span class="kw2">yellow</span><span class="sy0">,</span> <span class="kw2">green</span><span class="sy0">,</span> <span class="kw1">blue</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="coMULTI">/* The new syntax needed by standard-compliant browsers (Opera 12.1, IE 10, Fx 16 onwards), without prefix */</span>
+<span class="kw1">background</span><span class="sy0">:</span> linear-gradient<span class="br0">&#40;</span>to <span class="kw1">right</span><span class="sy0">,</span> <span class="kw2">red</span><span class="sy0">,</span> orange<span class="sy0">,</span> <span class="kw2">yellow</span><span class="sy0">,</span> <span class="kw2">green</span><span class="sy0">,</span> <span class="kw1">blue</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="transparencia">6.2.4 Transparencia</h3>
+
+<p>Los degradados admiten transparencia. Se puede utilizar, por ejemplo, con múltiples fondos o para crear efectos en imágenes de fondo. Por ejemplo:</p>
+
+<p><img src="images/cap11/transparency.png"></p>
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* The old syntax, deprecated, but still needed, prefixed, for WebKit-based and old browsers */</span>
+<span class="kw1">background</span><span class="sy0">:</span> linear-gradient<span class="br0">&#40;</span><span class="kw1">left</span><span class="sy0">,</span> rgba<span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">,</span> rgba<span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="co2">http://foo.com/image.jpg</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="coMULTI">/* The new syntax needed by standard-compliant browsers (Opera 12.1, IE 10, Fx 16 onwards), without prefix */</span> 
+<span class="kw1">background</span><span class="sy0">:</span> linear-gradient<span class="br0">&#40;</span>to <span class="kw1">right</span><span class="sy0">,</span> rgba<span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">,</span> rgba<span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="co2">http://foo.com/image.jpg</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="degradados-radiales">6.3 Degradados radiales</h2>
+
+<p>Los <strong>degradados radiales</strong> se especifican usando la función <code>radial-gradient</code>. La sintaxis es similar a los degradados lineales, excepto en que se puede especificar la forma final del degradado (circular o elíptico) así como el tamaño. Por defecto, la forma final es una elipse con las mismas proporciones que la caja contenedora.</p>
+
+<h3 id="color-stops-2">6.3.1 Color stops</h3>
+
+<p>Un ejemplo sería:</p>
+
+<div class="table" id="table-6-6">
+
+    <table class="standard-table">
+  <tbody>
+    <tr>
+      <td class="header">Screen Shot</td>
+      <td class="header">Live Demo</td>
+    </tr>
+    <tr>
+      <td><img alt="colorstop3.png" class="internal default" src="images/cap11/colorstop3.png"></td>
+      <td>
+        <div style="width: 100px; height: 100px; border: 1px solid rgb(51, 51, 51); background: -moz-linear-gradient(left, red, orange, yellow, green, blue) repeat scroll 0% 0% transparent; background: -moz-radial-gradient(red, yellow, rgb(30, 144, 255)); background: -ms-radial-gradient(red, yellow, rgb(30, 144, 255)); background: -o-radial-gradient(red, yellow, rgb(30, 144, 255)); background: -webkit-radial-gradient(red, yellow, rgb(30, 144, 255));">
+           </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<div class="code css">
+<pre class="css"><span class="kw1">background</span><span class="sy0">:</span> radial-gradient<span class="br0">&#40;</span><span class="kw2">red</span><span class="sy0">,</span> <span class="kw2">yellow</span><span class="sy0">,</span> <span class="kw2">rgb</span><span class="br0">&#40;</span><span class="nu0">30</span><span class="sy0">,</span> <span class="nu0">144</span><span class="sy0">,</span> <span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Y un segundo ejemplo con localizaciones específicas:</p>
+
+<div class="table" id="table-6-7">
+
+    <table class="standard-table">
+  <tbody>
+    <tr>
+      <td class="header">Screen Shot</td>
+      <td class="header">Live Demo</td>
+    </tr>
+    <tr>
+      <td><img alt="colorstop4.png" class="internal default" src="images/cap11/colorstop4.png"></td>
+      <td>
+        <div style="width: 100px; height: 100px; border: 1px solid rgb(51, 51, 51); background: -moz-radial-gradient(red 5%, yellow 25%, #1E90FF 50%); background: -ms-radial-gradient(red 5%, yellow 25%, #1E90FF 50%); background: -o-radial-gradient(red 5%, yellow 25%, #1E90FF 50%); background: -webkit-radial-gradient(red 5%, yellow 25%, #1E90FF 50%);">
+           </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<div class="code css">
+<pre class="css"><span class="kw1">background</span><span class="sy0">:</span> radial-gradient<span class="br0">&#40;</span><span class="kw2">red</span> <span class="re3">5%</span><span class="sy0">,</span> <span class="kw2">yellow</span> <span class="re3">25%</span><span class="sy0">,</span> <span class="re0">#1E90FF</span> <span class="re3">50%</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="tamano">6.3.2 Tamaño</h3>
+
+<p>Ésta es una de las áreas en las que los degradados radiales se diferencias de los lineales. Se puede proporcionar un valor de tamaño que especifica el punto que define el tamaño del círculo o elipse.</p>
+
+<p><strong>Ejemplos para elipses</strong></p>
+
+<p>Ejemplo con <code>closest-side</code> (el tamaño es establecido por la distancia entre el punto de partida o centro y el lugar más próximo a la caja contenedora):</p>
+
+<div class="table" id="table-6-8">
+
+    <table class="standard-table">
+  <tbody>
+    <tr>
+      <td class="header">Screen Shot</td>
+      <td class="header">Live Demo</td>
+    </tr>
+    <tr>
+      <td><img alt="size.png" class="internal default" src="images/cap11/size.png"></td>
+      <td>
+        <div style="width: 250px; height: 100px; border: 1px solid rgb(51, 51, 51); background: -moz-radial-gradient(ellipse closest-side, red, yellow 10%, #1E90FF 50%, white); background: -ms-radial-gradient(ellipse closest-side, red, yellow 10%, #1E90FF 50%, white); background: -o-radial-gradient(ellipse closest-side, red, yellow 10%, #1E90FF 50%, white); background: -webkit-radial-gradient(ellipse closest-side, red, yellow 10%, #1E90FF 50%, white);">
+           </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<div class="code css">
+<pre class="css"><span class="kw1">background</span><span class="sy0">:</span> radial-gradient<span class="br0">&#40;</span>ellipse closest-side<span class="sy0">,</span> <span class="kw2">red</span><span class="sy0">,</span> <span class="kw2">yellow</span> <span class="re3">10%</span><span class="sy0">,</span> <span class="re0">#1E90FF</span> <span class="re3">50%</span><span class="sy0">,</span> <span class="kw2">white</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Ejemplo similar con <code>farthest-corner</code>:</p>
+
+<div class="table" id="table-6-9">
+
+    <table class="standard-table">
+  <tbody>
+    <tr>
+      <td class="header">Screen Shot</td>
+      <td class="header">Live Demo</td>
+    </tr>
+    <tr>
+      <td><img alt="size2.png" class="internal default" src="images/cap11/size2.png"></td>
+      <td>
+        <div style="width: 250px; height: 100px; border: 1px solid rgb(51, 51, 51); background: -moz-radial-gradient(ellipse farthest-corner, red, yellow 10%, #1E90FF 50%, white); background: -ms-radial-gradient(ellipse farthest-corner, red, yellow 10%, #1E90FF 50%, white); background: -o-radial-gradient(ellipse farthest-corner, red, yellow 10%, #1E90FF 50%, white); background: -webkit-radial-gradient(ellipse farthest-corner, red, yellow 10%, #1E90FF 50%, white);">
+           </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<div class="code css">
+<pre class="css"><span class="kw1">background</span><span class="sy0">:</span> radial-gradient<span class="br0">&#40;</span>ellipse farthest-corner<span class="sy0">,</span> <span class="kw2">red</span><span class="sy0">,</span> <span class="kw2">yellow</span> <span class="re3">10%</span><span class="sy0">,</span> <span class="re0">#1E90FF</span> <span class="re3">50%</span><span class="sy0">,</span> <span class="kw2">white</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p><strong>Ejemplos para círculos</strong></p>
+
+<p>Ejemplo con <code>closest-side</code>:</p>
+
+<div class="table" id="table-6-10">
+
+    <table class="standard-table">
+  <tbody>
+    <tr>
+      <td class="header">Screen Shot</td>
+      <td class="header">Live Demo</td>
+    </tr>
+    <tr>
+      <td><img alt="size3.png" class="internal default" src="images/cap11/size3.png"></td>
+      <td>
+        <div style="width: 250px; height: 100px; border: 1px solid rgb(51, 51, 51); background: -moz-radial-gradient(circle closest-side, red, yellow 10%, #1E90FF 50%, white); background: -ms-radial-gradient(circle closest-side, red, yellow 10%, #1E90FF 50%, white); background: -o-radial-gradient(circle closest-side, red, yellow 10%, #1E90FF 50%, white); background: -webkit-radial-gradient(circle closest-side, red, yellow 10%, #1E90FF 50%, white);">
+           </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<div class="code css">
+<pre class="css"><span class="kw1">background</span><span class="sy0">:</span> radial-gradient<span class="br0">&#40;</span><span class="kw2">circle</span> closest-side<span class="sy0">,</span> <span class="kw2">red</span><span class="sy0">,</span> <span class="kw2">yellow</span> <span class="re3">10%</span><span class="sy0">,</span> <span class="re0">#1E90FF</span> <span class="re3">50%</span><span class="sy0">,</span> <span class="kw2">white</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="repeticion-de-degradados">6.4 Repetición de degradados</h2>
+
+<p>Las propiedades <code>linear-gradient</code> y <code>radial-gradient</code> no admiten automáticamente la repetición de los <em>color stops</em>. Sin embargo, las propiedades <code>repeating-linear-gradient</code> y <code>repeating-radial-gradient</code> sí ofrecen esta funcionalidad.</p>
+
+<h3 id="ejemplos">6.4.1 Ejemplos</h3>
+
+<p>Este ejemplo utiliza <code>repeating-linear-gradient</code>:</p>
+
+<div class="table" id="table-6-11">
+
+    <table class="standard-table">
+  <tbody>
+    <tr>
+      <td class="header">Screen Shot</td>
+      <td class="header">Live Demo</td>
+    </tr>
+    <tr>
+      <td><img alt="repeat1.png" class="internal default" src="images/cap11/repeat1.png" style=""></td>
+      <td>
+        <div style="width: 100px; height: 100px; border: 1px solid rgb(51, 51, 51); background: -moz-repeating-linear-gradient(top left -45deg, red, red 5px, white 5px, white 10px); background: -ms-repeating-linear-gradient(top left -45deg, red, red 5px, white 5px, white 10px); background: -o-repeating-linear-gradient(top left -45deg, red, red 5px, white 5px, white 10px); background: -webkit-repeating-linear-gradient(-45deg, red, red 5px, white 5px, white 10px);">
+           </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<div class="code css">
+<pre class="css"><span class="kw1">background</span><span class="sy0">:</span> repeating-linear-gradient<span class="br0">&#40;</span>-45deg<span class="sy0">,</span> <span class="kw2">red</span><span class="sy0">,</span> <span class="kw2">red</span> <span class="re3">5px</span><span class="sy0">,</span> <span class="kw2">white</span> <span class="re3">5px</span><span class="sy0">,</span> <span class="kw2">white</span> <span class="re3">10px</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Otro ejemplo con esta misma propiedad:</p>
+
+<p><img src="images/cap11/repeat2.png"></p>
+
+<div class="code css">
+<pre class="css"><span class="kw1">background-color</span><span class="sy0">:</span> <span class="re0">#000</span><span class="sy0">;</span>
+<span class="kw1">background-image</span><span class="sy0">:</span> repeating-linear-gradient<span class="br0">&#40;</span>90deg<span class="sy0">,</span> <span class="kw2">transparent</span><span class="sy0">,</span> <span class="kw2">transparent</span> <span class="re3">50px</span><span class="sy0">,</span>
+    rgba<span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">127</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0.25</span><span class="br0">&#41;</span> <span class="re3">50px</span><span class="sy0">,</span> rgba<span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">127</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0.25</span><span class="br0">&#41;</span> <span class="re3">56px</span><span class="sy0">,</span> <span class="kw2">transparent</span> <span class="re3">56px</span><span class="sy0">,</span> <span class="kw2">transparent</span> <span class="re3">63px</span><span class="sy0">,</span>
+    rgba<span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">127</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0.25</span><span class="br0">&#41;</span> <span class="re3">63px</span><span class="sy0">,</span> rgba<span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">127</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0.25</span><span class="br0">&#41;</span> <span class="re3">69px</span><span class="sy0">,</span> <span class="kw2">transparent</span> <span class="re3">69px</span><span class="sy0">,</span> <span class="kw2">transparent</span> <span class="re3">116px</span><span class="sy0">,</span>
+    rgba<span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">206</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0.25</span><span class="br0">&#41;</span> <span class="re3">116px</span><span class="sy0">,</span> rgba<span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">206</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0.25</span><span class="br0">&#41;</span> <span class="re3">166px</span><span class="br0">&#41;</span><span class="sy0">,</span>
+repeating-linear-gradient<span class="br0">&#40;</span>0deg<span class="sy0">,</span> <span class="kw2">transparent</span><span class="sy0">,</span> <span class="kw2">transparent</span> <span class="re3">50px</span><span class="sy0">,</span> rgba<span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">127</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0.25</span><span class="br0">&#41;</span> <span class="re3">50px</span><span class="sy0">,</span>
+    rgba<span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">127</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0.25</span><span class="br0">&#41;</span> <span class="re3">56px</span><span class="sy0">,</span> <span class="kw2">transparent</span> <span class="re3">56px</span><span class="sy0">,</span> <span class="kw2">transparent</span> <span class="re3">63px</span><span class="sy0">,</span> rgba<span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">127</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0.25</span><span class="br0">&#41;</span> <span class="re3">63px</span><span class="sy0">,</span>
+    rgba<span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">127</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0.25</span><span class="br0">&#41;</span> <span class="re3">69px</span><span class="sy0">,</span> <span class="kw2">transparent</span> <span class="re3">69px</span><span class="sy0">,</span> <span class="kw2">transparent</span> <span class="re3">116px</span><span class="sy0">,</span> rgba<span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">206</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0.25</span><span class="br0">&#41;</span> <span class="re3">116px</span><span class="sy0">,</span>
+    rgba<span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">206</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0.25</span><span class="br0">&#41;</span> <span class="re3">166px</span><span class="br0">&#41;</span><span class="sy0">,</span>
+repeating-linear-gradient<span class="br0">&#40;</span>-45deg<span class="sy0">,</span> <span class="kw2">transparent</span><span class="sy0">,</span> <span class="kw2">transparent</span> <span class="re3">5px</span><span class="sy0">,</span> rgba<span class="br0">&#40;</span><span class="nu0">143</span><span class="sy0">,</span> <span class="nu0">77</span><span class="sy0">,</span> <span class="nu0">63</span><span class="sy0">,</span> <span class="nu0">0.25</span><span class="br0">&#41;</span> <span class="re3">5px</span><span class="sy0">,</span>
+    rgba<span class="br0">&#40;</span><span class="nu0">143</span><span class="sy0">,</span> <span class="nu0">77</span><span class="sy0">,</span> <span class="nu0">63</span><span class="sy0">,</span> <span class="nu0">0.25</span><span class="br0">&#41;</span> <span class="re3">10px</span><span class="br0">&#41;</span><span class="sy0">,</span>
+repeating-linear-gradient<span class="br0">&#40;</span>45deg<span class="sy0">,</span> <span class="kw2">transparent</span><span class="sy0">,</span> <span class="kw2">transparent</span> <span class="re3">5px</span><span class="sy0">,</span> rgba<span class="br0">&#40;</span><span class="nu0">143</span><span class="sy0">,</span> <span class="nu0">77</span><span class="sy0">,</span> <span class="nu0">63</span><span class="sy0">,</span> <span class="nu0">0.25</span><span class="br0">&#41;</span> <span class="re3">5px</span><span class="sy0">,</span>
+    rgba<span class="br0">&#40;</span><span class="nu0">143</span><span class="sy0">,</span> <span class="nu0">77</span><span class="sy0">,</span> <span class="nu0">63</span><span class="sy0">,</span> <span class="nu0">0.25</span><span class="br0">&#41;</span> <span class="re3">10px</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Y un ejemplo de repetición de un degradado radial:</p>
+
+<div class="table" id="table-6-12">
+
+    <table class="standard-table">
+  <tbody>
+    <tr>
+      <td class="header">Screen Shot</td>
+      <td class="header">Live Demo</td>
+    </tr>
+    <tr>
+      <td><img alt="repeat3.png" class="internal default" src="images/cap11/repeat3.png"></td>
+      <td>
+        <div style="width: 100px; height: 100px; border: 1px solid rgb(51, 51, 51); background: -moz-repeating-radial-gradient(black, black 5px, white 5px, white 10px); background: -ms-repeating-radial-gradient(black, black 5px, white 5px, white 10px); background: -o-repeating-radial-gradient(black, black 5px, white 5px, white 10px); background: -webkit-repeating-radial-gradient(black, black 5px, white 5px, white 10px);">
+           </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<div class="code css">
+<pre class="css"><span class="kw1">background</span><span class="sy0">:</span> repeating-radial-gradient<span class="br0">&#40;</span><span class="kw1">black</span><span class="sy0">,</span> <span class="kw1">black</span> <span class="re3">5px</span><span class="sy0">,</span> <span class="kw2">white</span> <span class="re3">5px</span><span class="sy0">,</span> <span class="kw2">white</span> <span class="re3">10px</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-6.html#modulo-image-values-and-replaced-content">Módulo <em>Image Values and Replaced Content</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>6.1</span>
+                        <a class="internal" href="capitulo-6.html#css-gradients">CSS gradients</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>6.2</span>
+                        <a class="internal" href="capitulo-6.html#degradados-lineales">Degradados lineales</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>6.3</span>
+                        <a class="internal" href="capitulo-6.html#degradados-radiales">Degradados radiales</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>6.4</span>
+                        <a class="internal" href="capitulo-6.html#repeticion-de-degradados">Repetición de degradados</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

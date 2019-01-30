@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="14/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Eventos Personalizados | jQuery</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">jQuery</a></h1>
+        <p class="span3">
+                        <a href="capitulo-10.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-12.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="eventos-personalizados"><span>Capítulo 11</span> Eventos Personalizados</h1>
+        <h2 id="introduccion-a-los-eventos-personalizados">11.1 Introducción a los Eventos Personalizados</h2>
+
+<p>Todos estamos familiarizados con los eventos básicos — <code>click</code>, <code>mouseover</code>, <code>focus</code>, <code>blur</code>, <code>submit</code>, etc. — que surgen a partir de la interacción del usuario con el navegador.</p>
+
+<p>Los eventos personalizados permiten conocer el mundo de la programación orientada a eventos (en inglés <em>event-driven programming</em>). En este capítulo, se utilizará el sistema de eventos personalizados de jQuery para crear una simple aplicación de búsqueda en <em>Twitter</em>.</p>
+
+<p>En un primer momento puede ser difícil entender el requisito de utilizar eventos personalizados, ya que los eventos convencionales permiten satisfacer todas las necesidades. Sin embargo, los eventos personalizados ofrecen una nueva forma de pensar la programación en JavaScript. En lugar de enfocarse en el elemento que ejecuta una acción, los eventos personalizados ponen la atención en el elemento en donde la acción va a ocurrir. Este concepto brinda varios beneficios:</p>
+
+<ul>
+<li>Los comportamientos del elemento objetivo pueden ser ejecutados por diferentes elementos utilizando el mismo código.</li>
+<li>Los comportamientos pueden ser ejecutados en múltiples, similares elementos objetivos a la vez.</li>
+<li>Los comportamientos son asociados de forma más clara con el elemento objetivo, haciendo que el código sea más fácil de leer y mantener.</li>
+</ul>
+
+<p>Un ejemplo es la mejor forma de explicar el asunto. Suponga que posee una lámpara incandescente en una habitación de una casa. La lámpara actualmente esta encendida. La misma es controlada por dos interruptores de tres posiciones y un <em>clapper</em> (interruptor activado por aplausos):</p>
+
+<div class="code xml">
+<pre class="xml"><span class="sc3"><span class="re1">&lt;div</span> <span class="re0">class</span>=<span class="st0">&quot;room&quot;</span> <span class="re0">id</span>=<span class="st0">&quot;kitchen&quot;</span><span class="re2">&gt;</span></span>
+    <span class="sc3"><span class="re1">&lt;div</span> <span class="re0">class</span>=<span class="st0">&quot;lightbulb on&quot;</span><span class="re2">&gt;</span><span class="re1">&lt;/div<span class="re2">&gt;</span></span></span>
+    <span class="sc3"><span class="re1">&lt;div</span> <span class="re0">class</span>=<span class="st0">&quot;switch&quot;</span><span class="re2">&gt;</span><span class="re1">&lt;/div<span class="re2">&gt;</span></span></span>
+    <span class="sc3"><span class="re1">&lt;div</span> <span class="re0">class</span>=<span class="st0">&quot;switch&quot;</span><span class="re2">&gt;</span><span class="re1">&lt;/div<span class="re2">&gt;</span></span></span>
+    <span class="sc3"><span class="re1">&lt;div</span> <span class="re0">class</span>=<span class="st0">&quot;clapper&quot;</span><span class="re2">&gt;</span><span class="re1">&lt;/div<span class="re2">&gt;</span></span></span></pre>
+</div>
+
+<p>Ejecutando el <em>clapper</em> o alguno de los interruptores, el estado de la lampara cambia. A los interruptores o al <em>clapper</em> no le interesan si la lámpara esta prendida o apagada, tan solo quieren cambiar su estado</p>
+
+<p>Sin la utilización de eventos personalizados, es posible escribir la rutina de la siguiente manera:</p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'.switch, .clapper'</span><span class="br0">&#41;</span>.<span class="me1">click</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> $light <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span>.<span class="me1">parent</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">find</span><span class="br0">&#40;</span><span class="st0">'.lightbulb'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>$light.<span class="me1">hasClass</span><span class="br0">&#40;</span><span class="st0">'on'</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        $light.<span class="me1">removeClass</span><span class="br0">&#40;</span><span class="st0">'on'</span><span class="br0">&#41;</span>.<span class="me1">addClass</span><span class="br0">&#40;</span><span class="st0">'off'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+        $light.<span class="me1">removeClass</span><span class="br0">&#40;</span><span class="st0">'off'</span><span class="br0">&#41;</span>.<span class="me1">addClass</span><span class="br0">&#40;</span><span class="st0">'on'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Por otro lado, utilizando eventos personalizados, el código queda así:</p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'.lightbulb'</span><span class="br0">&#41;</span>.<span class="me1">on</span><span class="br0">&#40;</span><span class="st0">'changeState'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> $light <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>$light.<span class="me1">hasClass</span><span class="br0">&#40;</span><span class="st0">'on'</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        $light.<span class="me1">removeClass</span><span class="br0">&#40;</span><span class="st0">'on'</span><span class="br0">&#41;</span>.<span class="me1">addClass</span><span class="br0">&#40;</span><span class="st0">'off'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+        $light.<span class="me1">removeClass</span><span class="br0">&#40;</span><span class="st0">'off'</span><span class="br0">&#41;</span>.<span class="me1">addClass</span><span class="br0">&#40;</span><span class="st0">'on'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+$<span class="br0">&#40;</span><span class="st0">'.switch, .clapper'</span><span class="br0">&#41;</span>.<span class="me1">click</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span>.<span class="me1">parent</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">find</span><span class="br0">&#40;</span><span class="st0">'.lightbulb'</span><span class="br0">&#41;</span>.<span class="me1">trigger</span><span class="br0">&#40;</span><span class="st0">'changeState'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Algo importante ha sucedido: el comportamiento de la lámpara se ha movido, antes estaba en los interruptores y en el <em>clapper</em>, ahora se encuentra en la misma lámpara.</p>
+
+<p>También es posible hacer el ejemplo un poco más interesante. Suponga que se ha añadido otra habitación a la casa, junto con un interruptor general, como se muestra a continuación:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;room&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;kitchen&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;lightbulb on&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;switch&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;switch&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;clapper&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;room&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;bedroom&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;lightbulb on&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;switch&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;switch&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;clapper&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;master_switch&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre>
+</div>
+
+<p>Si existe alguna lámpara prendida en la casa, es posible apagarlas a través del interruptor general, de igual forma si existen luces apagadas, es posible prenderlas con dicho interruptor. Para realizar esta tarea, se agregan dos eventos personalizados más a la lámpara: <code>turnOn</code> y <code>turnOff</code>. A través de una lógica en el evento <code>changeState</code> se decide qué evento personalizado utilizar:</p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'.lightbulb'</span><span class="br0">&#41;</span>
+    .<span class="me1">on</span><span class="br0">&#40;</span><span class="st0">'changeState'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">var</span> $light <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>$light.<span class="me1">hasClass</span><span class="br0">&#40;</span><span class="st0">'on'</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            $light.<span class="me1">trigger</span><span class="br0">&#40;</span><span class="st0">'turnOff'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+            $light.<span class="me1">trigger</span><span class="br0">&#40;</span><span class="st0">'turnOn'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span>
+    .<span class="me1">on</span><span class="br0">&#40;</span><span class="st0">'turnOn'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span>.<span class="me1">removeClass</span><span class="br0">&#40;</span><span class="st0">'off'</span><span class="br0">&#41;</span>.<span class="me1">addClass</span><span class="br0">&#40;</span><span class="st0">'on'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span>
+    .<span class="me1">on</span><span class="br0">&#40;</span><span class="st0">'turnOff'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span>.<span class="me1">removeClass</span><span class="br0">&#40;</span><span class="st0">'off'</span><span class="br0">&#41;</span>.<span class="me1">addClass</span><span class="br0">&#40;</span><span class="st0">'on'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+$<span class="br0">&#40;</span><span class="st0">'.switch, .clapper'</span><span class="br0">&#41;</span>.<span class="me1">click</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span>.<span class="me1">parent</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">find</span><span class="br0">&#40;</span><span class="st0">'.lightbulb'</span><span class="br0">&#41;</span>.<span class="me1">trigger</span><span class="br0">&#40;</span><span class="st0">'changeState'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+$<span class="br0">&#40;</span><span class="st0">'#master_switch'</span><span class="br0">&#41;</span>.<span class="me1">click</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>$<span class="br0">&#40;</span><span class="st0">'.lightbulb.on'</span><span class="br0">&#41;</span>.<span class="me1">length</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        $<span class="br0">&#40;</span><span class="st0">'.lightbulb'</span><span class="br0">&#41;</span>.<span class="me1">trigger</span><span class="br0">&#40;</span><span class="st0">'turnOff'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+        $<span class="br0">&#40;</span><span class="st0">'.lightbulb'</span><span class="br0">&#41;</span>.<span class="me1">trigger</span><span class="br0">&#40;</span><span class="st0">'turnOn'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Note como el comportamiento del interruptor general se ha vinculado al interruptor general mientras que el comportamiento de las lámparas pertenece a las lámparas.</p>
+
+<blockquote>
+  <p><strong>Nota</strong></p>
+  
+  <p>Si esta acostumbrado a la programación orientada a objetos, puede resultar útil pensar de los eventos personalizados como métodos de objetos. En términos generales, el objeto al que pertenece el método se crea a partir del selector jQuery. Vincular el evento personalizado <code>changeState</code> a todos los elementos <code>$(‘.light’)</code> es similar a tener una clase llamada <code>Light</code> con un método <code>changeState</code>, y luego instanciar nuevos objetos <code>Light</code> por cada elemento.</p>
+</blockquote>
+
+<p><strong>Recapitulación: $.fn.on y $.fn.trigger</strong></p>
+
+<p>En el mundo de los eventos personalizados, existen dos métodos importantes de jQuery: <code>$.fn.on</code> y <code>$.fn.trigger</code>. En el capítulo dedicado a eventos se explicó la utilización de estos dos métodos para trabajar con eventos del usuario; en este capítulo es importante recordar 2 puntos:</p>
+
+<ul>
+<li>El método <code>$.fn.on</code> toma como argumentos un tipo de evento y una función controladora de evento. Opcionalmente, puede recibir información asociada al evento como segundo argumento, desplazando como tercer argumento a la función controladora de evento. Cualquier información pasada estará disponible a la función controladora a través de la propiedad <code>data</code> del objeto del evento. A su vez, la función controladora recibe el objeto del evento como primer argumento.</li>
+<li>El método <code>$.fn.trigger</code> toma como argumentos el tipo de evento y opcionalmente, puede tomar un vector con valores. Estos valores serán pasados a la función controladora de eventos como argumentos luego del objeto del evento.</li>
+</ul>
+
+<p>A continuación se muestra un ejemplo de utilización de <code>$.fn.on</code> y <code>$.fn.trigger</code> en donde se utiliza información personalizada en ambos casos:</p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span>document<span class="br0">&#41;</span>.<span class="me1">on</span><span class="br0">&#40;</span><span class="st0">'myCustomEvent'</span><span class="sy0">,</span> <span class="br0">&#123;</span> foo <span class="sy0">:</span> <span class="st0">'bar'</span> <span class="br0">&#125;</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="sy0">,</span> arg1<span class="sy0">,</span> arg2<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    console.<span class="me1">log</span><span class="br0">&#40;</span>e.<span class="me1">data</span>.<span class="me1">foo</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// 'bar'</span>
+    console.<span class="me1">log</span><span class="br0">&#40;</span>arg1<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// 'bim'</span>
+    console.<span class="me1">log</span><span class="br0">&#40;</span>arg2<span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// 'baz'</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+$<span class="br0">&#40;</span>document<span class="br0">&#41;</span>.<span class="me1">trigger</span><span class="br0">&#40;</span><span class="st0">'myCustomEvent'</span><span class="sy0">,</span> <span class="br0">&#91;</span> <span class="st0">'bim'</span><span class="sy0">,</span> <span class="st0">'baz'</span> <span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="un-ejemplo-de-aplicacion">11.1.1 Un Ejemplo de Aplicación</h3>
+
+<p>Para demostrar el poder de los eventos personalizados, se desarrollará una simple herramienta para buscar en <em>Twitter</em>. Dicha herramienta ofrecerá varias maneras para que el usuario realice una búsqueda: ingresando el término a buscar en una caja de texto o consultando los "temas de moda" de <em>Twitter</em>.</p>
+
+<p>Los resultados de cada término se mostrarán en un contenedor de resultados; dichos resultados podrán expandirse, colapsarse, refrescarse y removerse, ya sea de forma individual o conjunta.</p>
+
+<p>El resultado final de la aplicación será el siguiente:</p>
+
+<p><strong>Figura 11.1. La aplicación finalizada</strong></p>
+
+<div class="figure" id="figure-11-1">
+    <img src="images/cap11/70415e9fffab1c47953f5264ecf722fe.png" alt="La aplicación finalizada" />
+
+    <p class="caption"><strong>Figura 11.1</strong> La aplicación finalizada</p>
+</div>
+
+
+<h4 id="iniciacion">11.1.1.1 Iniciación</h4>
+
+<p>Se empieza con un HTML básico:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">h1</span>&gt;</span>Twitter Search<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h1</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;button&quot;</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;get_trends&quot;</span></span>
+<span class="sc2">    <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;Load Trending Terms&quot;</span> <span class="sy0">/</span>&gt;</span>
+&nbsp;
+<span class="sc2">&lt;<span class="kw2">form</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;input_text&quot;</span></span>
+<span class="sc2">        <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;search_term&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;submit&quot;</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;input_submit&quot;</span></span>
+<span class="sc2">        <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;Add Search Term&quot;</span> <span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">form</span>&gt;</span>
+&nbsp;
+<span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;twitter&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;template results&quot;</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>Search Results for
+        <span class="sc2">&lt;<span class="kw2">span</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;search_term&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">span</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre>
+</div>
+
+<p>El HTML posee un contenedor (#twitter) para el widget, una plantilla para los resultados (oculto con CSS) y un simple formulario en donde el usuario puede escribir el término a buscar.</p>
+
+<p>Existen dos tipos de elementos en los cuales actuar: los contenedores de resultados y el contenedor <em>Twitter</em>.</p>
+
+<p>Los contenedores de resultados son el corazón de la aplicación. Se creará una extensión para preparar cada contenedor una vez que éste se agrega al contenedor <em>Twitter</em>. Además, entre otras cosas, la extensión vinculará los eventos personalizados por cada contenedor y añadirá en la parte superior derecha de cada contenedor botones que ejecutarán acciones. Cada contenedor de resultados tendrá los siguientes eventos personalizados:</p>
+
+<dl>
+<dt>refresh</dt>
+<dd>Señala que la información del contenedor se esta actualizando y dispara la petición que busca los datos para el término de búsqueda.</dd>
+
+<dt>populate</dt>
+<dd>Recibe la información JSON y la utiliza para rellenar el contenedor.</dd>
+
+<dt>remove</dt>
+<dd>Remueve el contenedor de la página luego de que el usuario confirme la acción. Dicha confirmación puede omitirse si se pasa <code>true</code> como segundo argumento del controlador de evento. El evento además remueve el término asociado con el contenedor de resultados del objeto global que contiene los términos de búsqueda.</dd>
+
+<dt>collapse</dt>
+<dd>Añade una clase al contenedor, la cual ocultará el resultado a través de CSS. Además cambiará el botón de "Colapsar" a "Expandir".</dd>
+
+<dt>expand</dt>
+<dd>Remueve la clase del contenedor que añade el evento <em>collapse</em>. Además cambiará el botón de "Expandir" a "Colapsar".</dd>
+</dl>
+
+<p>Además, la extensión es responsable de añadir los botones de acciones al contenedor, vinculando un evento <code>click</code> a cada botón y utilizando la clase de cada ítem para determinar qué evento personalizado será ejecutado en cada contenedor de resultados.</p>
+
+<div class="code javascript">
+<pre class="javascript">$.<span class="me1">fn</span>.<span class="me1">twitterResult</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>settings<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">each</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">var</span> $results <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">,</span>
+            $actions <span class="sy0">=</span> $.<span class="me1">fn</span>.<span class="me1">twitterResult</span>.<span class="me1">actions</span> <span class="sy0">=</span>
+                $.<span class="me1">fn</span>.<span class="me1">twitterResult</span>.<span class="me1">actions</span> <span class="sy0">||</span>
+                $.<span class="me1">fn</span>.<span class="me1">twitterResult</span>.<span class="me1">createActions</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span>
+            $a <span class="sy0">=</span> $actions.<span class="me1">clone</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">prependTo</span><span class="br0">&#40;</span>$results<span class="br0">&#41;</span><span class="sy0">,</span>
+            term <span class="sy0">=</span> settings.<span class="me1">term</span><span class="sy0">;</span>
+&nbsp;
+        $results.<span class="me1">find</span><span class="br0">&#40;</span><span class="st0">'span.search_term'</span><span class="br0">&#41;</span>.<span class="me1">text</span><span class="br0">&#40;</span>term<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        $.<span class="me1">each</span><span class="br0">&#40;</span>
+            <span class="br0">&#91;</span><span class="st0">'refresh'</span><span class="sy0">,</span> <span class="st0">'populate'</span><span class="sy0">,</span> <span class="st0">'remove'</span><span class="sy0">,</span> <span class="st0">'collapse'</span><span class="sy0">,</span> <span class="st0">'expand'</span><span class="br0">&#93;</span><span class="sy0">,</span>
+            <span class="kw1">function</span><span class="br0">&#40;</span>i<span class="sy0">,</span> ev<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                $results.<span class="me1">bind</span><span class="br0">&#40;</span>
+                    ev<span class="sy0">,</span>
+                    <span class="br0">&#123;</span> term <span class="sy0">:</span> term <span class="br0">&#125;</span><span class="sy0">,</span>
+                    $.<span class="me1">fn</span>.<span class="me1">twitterResult</span>.<span class="me1">events</span><span class="br0">&#91;</span>ev<span class="br0">&#93;</span>
+                <span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="co1">// utiliza la clase de cada acción para determinar</span>
+        <span class="co1">// que evento se ejecutará en el panel de resultados</span>
+        $a.<span class="me1">find</span><span class="br0">&#40;</span><span class="st0">'li'</span><span class="br0">&#41;</span>.<span class="me1">click</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="co1">// pasa el elemento &lt;li&gt; clickeado en la función</span>
+            <span class="co1">// para que se pueda manipular en caso de ser necesario</span>
+            $results.<span class="me1">trigger</span><span class="br0">&#40;</span>$<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span>.<span class="me1">attr</span><span class="br0">&#40;</span><span class="st0">'class'</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#91;</span> $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span> <span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+$.<span class="me1">fn</span>.<span class="me1">twitterResult</span>.<span class="me1">createActions</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> $<span class="br0">&#40;</span><span class="st0">'&lt;ul class=&quot;actions&quot; /&gt;'</span><span class="br0">&#41;</span>.<span class="me1">append</span><span class="br0">&#40;</span>
+        <span class="st0">'&lt;li class=&quot;refresh&quot;&gt;Refresh&lt;/li&gt;'</span> <span class="sy0">+</span>
+        <span class="st0">'&lt;li class=&quot;remove&quot;&gt;Remove&lt;/li&gt;'</span> <span class="sy0">+</span>
+        <span class="st0">'&lt;li class=&quot;collapse&quot;&gt;Collapse&lt;/li&gt;'</span>
+    <span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+$.<span class="me1">fn</span>.<span class="me1">twitterResult</span>.<span class="me1">events</span> <span class="sy0">=</span> <span class="br0">&#123;</span>
+    refresh <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+           <span class="co1">// indica que los resultados se estan actualizando</span>
+        <span class="kw1">var</span> $this <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span>.<span class="me1">addClass</span><span class="br0">&#40;</span><span class="st0">'refreshing'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        $this.<span class="me1">find</span><span class="br0">&#40;</span><span class="st0">'p.tweet'</span><span class="br0">&#41;</span>.<span class="me1">remove</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        $results.<span class="me1">append</span><span class="br0">&#40;</span><span class="st0">'&lt;p class=&quot;loading&quot;&gt;Loading ...&lt;/p&gt;'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">        // obtiene la información de Twitter en formato jsonp
+        $.getJSON(
+            'http://search.twitter.com/search.json?q=' +
+                escape(e.data.term) + '&amp;rpp=5&amp;callback=?',
+            function(json) {
+                $this.trigger('populate', [ json ]);
+            }
+        );
+    },
+&nbsp;
+    populate : function(e, json) {
+        var results = json.results;
+        var $this = $(this);
+&nbsp;
+        $this.find('p.loading').remove();
+&nbsp;
+        $.each(results, function(i,result) {
+            var tweet = '&lt;p class=&quot;tweet&quot;&gt;' +
+                '&lt;a href=&quot;http://twitter.com/' +
+                result.from_user +
+                '&quot;&gt;' +
+                result.from_user +
+                '&lt;/a&gt;: ' +
+                result.text +
+                ' &lt;span class=&quot;date&quot;&gt;' +
+                result.created_at +
+                '&lt;/span&gt;' +
+            '&lt;/p&gt;';
+            $this.append(tweet);
+        });
+&nbsp;
+        // indica que los resultados
+        // ya se han actualizado
+        $this.removeClass('refreshing');
+    },
+&nbsp;
+    remove : function(e, force) {
+        if (
+            !force &amp;&amp;
+            !confirm('Remove panel for term ' + e.data.term + '?')
+        ) {
+            return;
+        }
+        $(this).remove();</pre>
+</div>
+
+<div class="code code">
+<pre class="code">        // indica que ya no se tendrá
+        // un panel para el término
+        search_terms[e.data.term] = 0;
+    },
+&nbsp;
+    collapse : function(e) {
+        $(this).find('li.collapse').removeClass('collapse')
+            .addClass('expand').text('Expand');
+&nbsp;
+        $(this).addClass('collapsed');
+    },
+&nbsp;
+    expand : function(e) {
+        $(this).find('li.expand').removeClass('expand')
+            .addClass('collapse').text('Collapse');
+&nbsp;
+        $(this).removeClass('collapsed');
+    }
+};</pre>
+</div>
+
+<p>El contenedor <em>Twitter</em>, posee solo dos eventos personalizados:</p>
+
+<dl>
+<dt>getResults</dt>
+<dd>Recibe un término de búsqueda y comprueba si ya no existe un contenedor de resultados para dicho término. En caso de no existir, añade un contenedor utilizando la plantilla de resultados, lo configura utilizando la extensión <code>$.fn.twitterResult</code> (mostrada anteriormente) y luego ejecuta el evento <code>refresh</code> con el fin de cargar correctamente los resultados. Finalmente, guarda el término buscado para no tener volver a pedir los datos sobre la búsqueda.</dd>
+
+<dt>getTrends</dt>
+<dd>Consulta a <em>Twitter</em> el listado de los 10 primeros "términos de moda", interactúa con ellos y ejecuta el evento <code>getResults</code> por cada uno, de tal modo que añade un contenedor de resultados por cada término.</dd>
+</dl>
+
+<p>Vinculaciones en el contenedor <em>Twitter</em>:</p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'#twitter'</span><span class="br0">&#41;</span>
+    .<span class="me1">on</span><span class="br0">&#40;</span><span class="st0">'getResults'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="sy0">,</span> term<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="co1">// se comprueba que ya no exista una caja para el término</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span>search_terms<span class="br0">&#91;</span>term<span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">var</span> $this <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">var</span> $template <span class="sy0">=</span> $this.<span class="me1">find</span><span class="br0">&#40;</span><span class="st0">'div.template'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+            <span class="co1">// realiza una copia de la plantilla</span>
+            <span class="co1">// y la inserta como la primera caja de resultados</span>
+            $results <span class="sy0">=</span> $template.<span class="me1">clone</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.
+                <span class="me1">removeClass</span><span class="br0">&#40;</span><span class="st0">'template'</span><span class="br0">&#41;</span>.
+                <span class="me1">insertBefore</span><span class="br0">&#40;</span>$this.<span class="me1">find</span><span class="br0">&#40;</span><span class="st0">'div:first'</span><span class="br0">&#41;</span><span class="br0">&#41;</span>.
+                <span class="me1">twitterResult</span><span class="br0">&#40;</span><span class="br0">&#123;</span>
+                    <span class="st0">'term'</span> <span class="sy0">:</span> term
+                <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+            <span class="co1">// carga el contenido utilizando el evento personalizado &quot;refresh&quot;</span>
+            <span class="co1">// vinculado al contenedor de resultados</span>
+            $results.<span class="me1">trigger</span><span class="br0">&#40;</span><span class="st0">'refresh'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            search_terms<span class="br0">&#91;</span>term<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span>
+    .<span class="me1">on</span><span class="br0">&#40;</span><span class="st0">'getTrends'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">var</span> $this <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        $.<span class="me1">getJSON</span><span class="br0">&#40;</span><span class="st0">'http://api.twitter.com/1/trends/1.json?callback=?'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>json<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">var</span> trends <span class="sy0">=</span> json<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">trends</span><span class="sy0">;</span>
+                $.<span class="me1">each</span><span class="br0">&#40;</span>trends<span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>i<span class="sy0">,</span> trend<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    $this.<span class="me1">trigger</span><span class="br0">&#40;</span><span class="st0">'getResults'</span><span class="sy0">,</span> <span class="br0">&#91;</span> trend.<span class="me1">name</span> <span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Hasta ahora, se ha escrito una gran cantidad de código que no realiza nada, lo cual no esta mal. Se han especificado todos los comportamientos que se desean para los elementos núcleos y se ha creado un sólido marco para la creación rápida de la interfaz.</p>
+
+<p>A continuación, se conecta la caja de búsqueda y el botón para cargar los "Temas de moda". En la caja de texto, se captura el término ingresado y se pasa al mismo tiempo que se ejecuta el evento <code>getResults</code>. Por otro lado, haciendo click en el botón para cargar los "Temas de moda", se ejecuta el evento <code>getTrends</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'form'</span><span class="br0">&#41;</span>.<span class="me1">submit</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    e.<span class="me1">preventDefault</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">var</span> term <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="st0">'#search_term'</span><span class="br0">&#41;</span>.<span class="me1">val</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    $<span class="br0">&#40;</span><span class="st0">'#twitter'</span><span class="br0">&#41;</span>.<span class="me1">trigger</span><span class="br0">&#40;</span><span class="st0">'getResults'</span><span class="sy0">,</span> <span class="br0">&#91;</span> term <span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+$<span class="br0">&#40;</span><span class="st0">'#get_trends'</span><span class="br0">&#41;</span>.<span class="me1">click</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    $<span class="br0">&#40;</span><span class="st0">'#twitter'</span><span class="br0">&#41;</span>.<span class="me1">trigger</span><span class="br0">&#40;</span><span class="st0">'getTrends'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Añadiendo botones con un ID apropiado, es posible remover, colapsar, expandir y refrescar todos los contenedores de resultados al mismo tiempo. Para el botón que remueve el contenedor, notar que se esta pasando <code>true</code> al controlador del evento como segundo argumento, indicando que no se desea una confirmación del usuario para remover el contenedor.</p>
+
+<div class="code javascript">
+<pre class="javascript">$.<span class="me1">each</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="st0">'refresh'</span><span class="sy0">,</span> <span class="st0">'expand'</span><span class="sy0">,</span> <span class="st0">'collapse'</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>i<span class="sy0">,</span> ev<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    $<span class="br0">&#40;</span><span class="st0">'#'</span> <span class="sy0">+</span> ev<span class="br0">&#41;</span>.<span class="me1">click</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span> $<span class="br0">&#40;</span><span class="st0">'#twitter div.results'</span><span class="br0">&#41;</span>.<span class="me1">trigger</span><span class="br0">&#40;</span>ev<span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+$<span class="br0">&#40;</span><span class="st0">'#remove'</span><span class="br0">&#41;</span>.<span class="me1">click</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>confirm<span class="br0">&#40;</span><span class="st0">'Remove all results?'</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        $<span class="br0">&#40;</span><span class="st0">'#twitter div.results'</span><span class="br0">&#41;</span>.<span class="me1">trigger</span><span class="br0">&#40;</span><span class="st0">'remove'</span><span class="sy0">,</span> <span class="br0">&#91;</span> <span class="kw2">true</span> <span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h4 id="conclusion-2">11.1.1.2 Conclusión</h4>
+
+<p>Los eventos personalizados ofrecen una nueva manera de pensar el código: ellos ponen el énfasis en el objetivo de un comportamiento, no en el elemento que lo activa. Si se toma el tiempo desde el principio para explicar las piezas de su aplicación, así como los comportamientos que esas piezas necesitan exhibir, los eventos personalizados proveen una manera poderosa para "hablar" con esas piezas, ya sea de una en una o en masa.</p>
+
+<p>Una vez que los comportamientos se han descripto, se convierte en algo trivial ejecutarlos desde cualquier lugar, lo que permite la rápida creación y experimentación de opciones de interfaz. Finalmente, los eventos personalizados también permiten mejorar la lectura del código y su mantenimiento, haciendo clara la relación entre un elemento y su comportamiento.</p>
+
+<p>Puede ver la aplicación completa en los archivos <code>demos/custom-events/custom-events.html</code> y <code>demos/custom-events/js/custom-events.js</code> del material que componen este libro.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-11.html#eventos-personalizados">Eventos Personalizados</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>11.1</span>
+                        <a class="internal" href="capitulo-11.html#introduccion-a-los-eventos-personalizados">Introducción a los Eventos Personalizados</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

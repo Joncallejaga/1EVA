@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="28/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Drag and Drop | HTML5</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">HTML5</a></h1>
+        <p class="span3">
+                        <a href="capitulo-9.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-11.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="drag-and-drop"><span>Capítulo 10</span> Drag and Drop</h1>
+        <p>Durante años, hemos utilizado bibliotecas como <em>jQuery</em> y <em>Dojo</em> para conseguir funcionalidades complejas en las <em>interfaces</em> de usuario como las animaciones, las esquinas redondeadas y la función de arrastrar y soltar. Esta última funcionalidad (<em>Drag and Drop, DnD</em>) tiene una gran importancia en HTML5, y de hecho se ha integrado en el API. En la especificación, este API se define como un mecanismo basado en eventos, donde identificamos los elementos que deseamos arrastrar con el atributo <code>draggable</code> y desde JavaScript escuchamos los eventos que se producen, para proporcionar la funcionalidad deseada.</p>
+
+<p>Por defecto, todos los enlaces, imágenes y nodos de texto (o selecciones de texto) de un documento HTML son arrastables, pero no hay ningún evento asociado a estas acciones, por lo que poco más podemos hacer, a excepción de la funcionalidad que nos ofrezca el navegador o el propio sistema operativo (guardar las imágenes en el escritorio, crear ficheros de texto, etc).</p>
+
+<h2 id="deteccion-de-la-funcionalidad">10.1 Detección de la funcionalidad</h2>
+
+<p>Aunque la compatibilidad actual de los navegadores con esta API es bastante amplia, hay que tener en cuenta que los dispositivos móviles no soportan esta funcionalidad. Si nuestro sitio web está siendo accedido desde un dispositivo móvil, y tenemos implementada esta funcionalidad (por ejemplo en una cesta de la compra), debemos proveer otra solución para que nuestro sitio web se comporte de manera correcta, y no perjudicar la experiencia del usuario.</p>
+
+<p>La manera mas sencilla de comprobar la disponibilidad de este API, es utilizar la biblioteca <em>Modernizr</em>, la cual nos indica si el navegador soporta esta funcionalidad:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">if</span> <span class="br0">&#40;</span>Modernizr.<span class="me1">draganddrop</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// Browser supports HTML5 DnD.</span>
+<span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+    <span class="co1">// Fallback to a library solution or disable DnD.</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="creacion-de-contenido-arrastrable">10.2 Creación de contenido <em>arrastrable</em></h2>
+
+<p>Hacer que un elemento se pueda arrastrar es muy sencillo. Solo hay que establecer el atributo <code>draggable="true"</code> en el elemento que se quiere mover. La función de arrastre se puede habilitar prácticamente en cualquier elemento, incluidos archivos, imágenes, enlaces, listas u otros nodos DOM.</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;columns&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;column&quot;</span> <span class="kw3">draggable</span><span class="sy0">=</span><span class="st0">&quot;true&quot;</span>&gt;&lt;<span class="kw2">header</span>&gt;</span>A<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">header</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;column&quot;</span> <span class="kw3">draggable</span><span class="sy0">=</span><span class="st0">&quot;true&quot;</span>&gt;&lt;<span class="kw2">header</span>&gt;</span>B<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">header</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;column&quot;</span> <span class="kw3">draggable</span><span class="sy0">=</span><span class="st0">&quot;true&quot;</span>&gt;&lt;<span class="kw2">header</span>&gt;</span>C<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">header</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre>
+</div>
+
+<p>Una <em>ayuda visual</em> al usuario, para indicar que un elemento es arrastable, es transformar el aspecto tanto del elemento como del cursor. Con CSS esto es muy sencillo:</p>
+
+<div class="code css">
+<pre class="css"><span class="br0">&#91;</span>draggable<span class="br0">&#93;</span> <span class="br0">&#123;</span>
+    user-select<span class="sy0">:</span> <span class="kw2">none</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re1">.column</span><span class="re2">:hover </span><span class="br0">&#123;</span>
+    <span class="kw1">border</span><span class="sy0">:</span> <span class="re3">2px</span> <span class="kw2">dotted</span> <span class="re0">#666666</span><span class="sy0">;</span>
+    <span class="kw1">background-color</span><span class="sy0">:</span> <span class="re0">#ccc</span><span class="sy0">;</span>
+    <span class="kw1">border-radius</span><span class="sy0">:</span> <span class="re3">10px</span><span class="sy0">;</span>
+    box-shadow<span class="sy0">:</span> <span class="kw2">inset</span> <span class="nu0">0</span> <span class="nu0">0</span> <span class="re3">3px</span> <span class="re0">#000</span><span class="sy0">;</span>
+    <span class="kw1">cursor</span><span class="sy0">:</span> move<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="eventos-de-arrastre">10.3 Eventos de arrastre</h2>
+
+<p>La especificación define hasta siete eventos que son lanzados tanto por los elementos de origen (los que son arrastrados) com para los elementos de destino (donde <em>soltamos</em> el elemento arrastrado). Son los siguientes:</p>
+
+<ul>
+<li><code>dragstart</code>: comienza el arrastrado. El <code>target</code> del evento hace referencia al elemento que está siendo arrastrado.</li>
+<li><code>drag</code>: el elemento se ha movido. El <code>target</code> del evento hace referencia al elemento que está siendo arrastrado. Este evento se dispara tantas veces como se mueva el elemento.</li>
+<li><code>dragenter</code>: se dispara cuando un elemento que está siendo arrastrado entra en un contenedor. El <code>target</code> del evento hace referencia al elemento contenedor.</li>
+<li><code>dragleave</code>: el elemento arrastrado ha salido del contenedor. El <code>target</code> del evento hace referencia al elemento contenedor.</li>
+<li><code>dragover</code>: el elemento se ha movido dentro del contenedor. El <code>target</code> del evento hace referencia al elemento contenedor. Como el comportamiento por defecto es denegar el <code>drop</code>, la función debe retornar el valor <code>false</code> o llamar al método <code>preventDefault</code> del evento para que indicar que se puede el soltar elemento.</li>
+<li><code>drop</code>: el elemento arrastrado has sido exitosamente soltado en el elemento contenedor. El <code>target</code> del evento hace referencia al elemento contenedor.</li>
+<li><code>dragend</code>: se ha dejado de arrastrar el elemento, con éxito o no. El <code>target</code> del evento hace referencia al elemento arrastrado.</li>
+</ul>
+
+<p>Para organizar el flujo de <em>DnD</em>, necesitamos un elemento de origen (en el que se origina el movimiento de arrastre), la carga de datos (la información que va asociada al elemento arrastrado) y un elemento de destino (el área en la que se soltarán los datos). El elemento de origen puede ser una imagen, una lista, un enlace, un objeto de archivo, un bloque de HTML o cualquier otro elemento, al igual que la zona de destino.</p>
+
+<h3 id="comienzo-de-la-operacion-de-arrastre">10.3.1 Comienzo de la operación de arrastre</h3>
+
+<p>Una vez que se haya definido el atributo <code>draggable="true"</code> en los elementos que queremos convertir en arrastables, debemos añadir los escuchadores necesarios para reaccionar antes los eventos que se lanzan desde los elementos. El primer evento de los que define la especificación se produce cuando un elemento comienza a ser arrastrado. Un ejemplo muy sencillo en el que cambiamos la transparencia de un elemento al comenzar a ser arrastrado:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> handleDragStart<span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">this</span>.<span class="me1">style</span>.<span class="me1">opacity</span> <span class="sy0">=</span> <span class="st0">'0.4'</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">var</span> cols <span class="sy0">=</span> document.<span class="me1">querySelectorAll</span><span class="br0">&#40;</span><span class="st0">'#columns .column'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#91;</span><span class="br0">&#93;</span>.<span class="me1">forEach</span>.<span class="me1">call</span><span class="br0">&#40;</span>cols<span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>col<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    col.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'dragstart'</span><span class="sy0">,</span> handleDragStart<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>No debemos olvidarnos de volver a fijar la transparencia del elemento en el 100% una vez completada la operación de arrastre, ya que de otro modo, seguiría siendo transparente una vez finalizado la operación de arrastre.</p>
+
+<h3 id="dragenter-dragover-y-dragleave">10.3.2 <code>dragenter</code>, <code>dragover</code> y <code>dragleave</code></h3>
+
+<p>Los controladores de eventos <code>dragenter</code>, <code>dragover</code> y <code>dragleave</code> se pueden utilizar para proporcionar pistas visuales adicionales durante el proceso de arrastre. Por ejemplo, el borde de un elemento de destino se puede convertir en una línea discontinua al realizar una operación de arrastre. De esa forma, los usuarios podrán distinguir cuáles son los elementos de destino donde pueden soltar lo que están arrastrando.</p>
+
+<div class="code css">
+<pre class="css"><span class="re1">.column</span><span class="re1">.over</span> <span class="br0">&#123;</span>
+    <span class="kw1">border</span><span class="sy0">:</span> <span class="re3">2px</span> <span class="kw2">dashed</span> <span class="re0">#000</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> handleDragStart<span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">this</span>.<span class="me1">style</span>.<span class="me1">opacity</span> <span class="sy0">=</span> <span class="st0">'0.4'</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">function</span> handleDragOver<span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>e.<span class="me1">preventDefault</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        e.<span class="me1">preventDefault</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Necessary. Allows us to drop.</span>
+    <span class="br0">&#125;</span>
+    e.<span class="me1">dataTransfer</span>.<span class="me1">dropEffect</span> <span class="sy0">=</span> <span class="st0">'move'</span><span class="sy0">;</span>
+    <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">function</span> handleDragEnter<span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// this / e.target is the current hover target.</span>
+    <span class="kw1">this</span>.<span class="me1">classList</span>.<span class="me1">add</span><span class="br0">&#40;</span><span class="st0">'over'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">function</span> handleDragLeave<span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">this</span>.<span class="me1">classList</span>.<span class="me1">remove</span><span class="br0">&#40;</span><span class="st0">'over'</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// this / e.target is previous target element.</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">var</span> cols <span class="sy0">=</span> document.<span class="me1">querySelectorAll</span><span class="br0">&#40;</span><span class="st0">'#columns .column'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#91;</span><span class="br0">&#93;</span>.<span class="me1">forEach</span>.<span class="me1">call</span><span class="br0">&#40;</span>cols<span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>col<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    col.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'dragstart'</span><span class="sy0">,</span> handleDragStart<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    col.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'dragenter'</span><span class="sy0">,</span> handleDragEnter<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    col.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'dragover'</span><span class="sy0">,</span> handleDragOver<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    col.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'dragleave'</span><span class="sy0">,</span> handleDragLeave<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Algunas consideraciones en el código anterior. Cuando <em>algo</em> es soltado sobre un elemento, se dispara el evento <code>dragover</code>, y tenemos la posibilidad de leer el objeto <code>event.dataTransfer</code>. Este objeto contiene los datos asociados a las operaciones de arrastre, como veremos más adelante. Tal y como hemos comentado anteriormente, cuando soltamos un elemento, hay que impedir el comportamiento predeterminado del navegador, que es denegar el <code>drop</code>.</p>
+
+<h3 id="finalizacion-de-la-operacion-de-arrastre">10.3.3 Finalización de la operación de arrastre</h3>
+
+<p>Para que se procese la operación de soltar, se debe añadir un escuchador para los eventos <code>drop</code> y <code>dragend</code>. En este controlador, habrá que impedir el comportamiento predeterminado del navegador para este tipo de operaciones, que puede ser abrir un enlace o mostrar una imagen. Para ello, evitamos la propagación del evento con <code>e.stopPropagation()</code>.</p>
+
+<p>En nuestro ejemplo utilizaremos <code>dragend</code> para eliminar la clase <code>over</code> de cada columna:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> handleDrop<span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// this / e.target is current target element.</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>e.<span class="me1">stopPropagation</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        e.<span class="me1">stopPropagation</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// stops the browser from redirecting.</span>
+    <span class="br0">&#125;</span>
+    <span class="co1">// See the section on the DataTransfer object.</span>
+    <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">function</span> handleDragEnd<span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// this/e.target is the source node.</span>
+    <span class="br0">&#91;</span><span class="br0">&#93;</span>.<span class="me1">forEach</span>.<span class="me1">call</span><span class="br0">&#40;</span>cols<span class="sy0">,</span> <span class="kw1">function</span> <span class="br0">&#40;</span>col<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        col.<span class="me1">classList</span>.<span class="me1">remove</span><span class="br0">&#40;</span><span class="st0">'over'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">var</span> cols <span class="sy0">=</span> document.<span class="me1">querySelectorAll</span><span class="br0">&#40;</span><span class="st0">'#columns .column'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#91;</span><span class="br0">&#93;</span>.<span class="me1">forEach</span>.<span class="me1">call</span><span class="br0">&#40;</span>cols<span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>col<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    col.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'dragstart'</span><span class="sy0">,</span> handleDragStart<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    col.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'dragenter'</span><span class="sy0">,</span> handleDragEnter<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    col.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'dragover'</span><span class="sy0">,</span> handleDragOver<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    col.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'dragleave'</span><span class="sy0">,</span> handleDragLeave<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    col.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'drop'</span><span class="sy0">,</span> handleDrop<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    col.<span class="me1">addEventListener</span><span class="br0">&#40;</span><span class="st0">'dragend'</span><span class="sy0">,</span> handleDragEnd<span class="sy0">,</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="el-objeto-datatransfer">10.3.4 El objeto datatransfer</h3>
+
+<p>La propiedad <code>dataTransfer</code> es el centro de desarrollo de toda la actividad de la función <em>DnD</em>, ya que contiene los datos que se envían en la acción de arrastre. La propiedad <code>dataTransfer</code> se establece en el evento <code>dragstart</code> y se lee/procesa en el evento <code>drop</code>. Al activar <code>e.dataTransfer.setData(format, data)</code>, se establece el contenido del objeto en el tipo MIME y se transmite la carga de datos en forma de argumentos.</p>
+
+<p>En nuestro ejemplo, la carga de datos se ha establecido en el propio HTML del elemento de origen:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> dragSrcEl <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+<span class="kw1">function</span> handleDragStart<span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">this</span>.<span class="me1">style</span>.<span class="me1">opacity</span> <span class="sy0">=</span> <span class="st0">'0.4'</span><span class="sy0">;</span>
+    dragSrcEl <span class="sy0">=</span> <span class="kw1">this</span><span class="sy0">;</span>
+    e.<span class="me1">dataTransfer</span>.<span class="me1">effectAllowed</span> <span class="sy0">=</span> <span class="st0">'move'</span><span class="sy0">;</span>
+    e.<span class="me1">dataTransfer</span>.<span class="me1">setData</span><span class="br0">&#40;</span><span class="st0">'text/html'</span><span class="sy0">,</span> <span class="kw1">this</span>.<span class="me1">innerHTML</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p><code>dataTransfer</code> también tiene el formato <code>getData</code> necesario para la extracción de los datos de arrastre por tipo de MIME. A continuación se indica la modificación necesaria para el procesamiento de la acción de arrastre de un elemento:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> handleDrop<span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// this/e.target is current target element.</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>e.<span class="me1">stopPropagation</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            e.<span class="me1">stopPropagation</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Stops some browsers from redirecting.</span>
+    <span class="br0">&#125;</span>
+    <span class="co1">// Don't do anything if dropping the same column we're dragging.</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>dragSrcEl <span class="sy0">!=</span> <span class="kw1">this</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="co1">// Set the source column's HTML to the HTML of the columnwe dropped on.</span>
+            dragSrcEl.<span class="me1">innerHTML</span> <span class="sy0">=</span> <span class="kw1">this</span>.<span class="me1">innerHTML</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">innerHTML</span> <span class="sy0">=</span> e.<span class="me1">dataTransfer</span>.<span class="me1">getData</span><span class="br0">&#40;</span><span class="st0">'text/html'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Hemos añadido una variable global llamada <code>dragSrcEl</code> para facilitar el cambio de posición de la columna. En <code>handleDragStart()</code>, la propiedad <code>innerHTML</code> de la columna de origen se almacena en esa variable y, posteriormente, se lee en <code>handleDrop()</code> para cambiar el HTML de las columnas de origen y destino.</p>
+
+<h2 id="arrastre-de-archivos">10.4 Arrastre de archivos</h2>
+
+<p>Las API de <em>DnD</em> permiten arrastrar archivos del escritorio a una aplicación web en la ventana del navegador.</p>
+
+<p>Para arrastrar un archivo desde el escritorio, se deben utilizar los eventos de <em>DnD</em> del mismo modo que otros tipos de contenido. La diferencia principal se encuentra en el controlador drop. En lugar de utilizar <code>dataTransfer.getData()</code> para acceder a los archivos, sus datos se encuentran en la propiedad <code>dataTransfer.files</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> handleDrop<span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    e.<span class="me1">stopPropagation</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="co1">// Stops some browsers from redirecting.</span>
+    e.<span class="me1">preventDefault</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">var</span> files <span class="sy0">=</span> e.<span class="me1">dataTransfer</span>.<span class="me1">files</span><span class="sy0">;</span>
+    <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw1">var</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">,</span> f<span class="sy0">;</span> f <span class="sy0">=</span> files<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="co1">// Read the File objects in this FileList.</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 12</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej12">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-10.html#drag-and-drop">Drag and Drop</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.1</span>
+                        <a class="internal" href="capitulo-10.html#deteccion-de-la-funcionalidad">Detección de la funcionalidad</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.2</span>
+                        <a class="internal" href="capitulo-10.html#creacion-de-contenido-arrastrable">Creación de contenido <em>arrastrable</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.3</span>
+                        <a class="internal" href="capitulo-10.html#eventos-de-arrastre">Eventos de arrastre</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.4</span>
+                        <a class="internal" href="capitulo-10.html#arrastre-de-archivos">Arrastre de archivos</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

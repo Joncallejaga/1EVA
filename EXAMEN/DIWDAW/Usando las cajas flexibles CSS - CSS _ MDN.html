@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<!-- saved from url=(0100)https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS -->
+<html lang="es" dir="ltr" class=""><head prefix="og: http://ogp.me/ns#"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <script async="" src="./Usando las cajas flexibles CSS - CSS _ MDN_files/analytics.js.descarga"></script><script>(function(d) { d.className = d.className.replace(/\bno-js/, ''); })(document.documentElement);</script>
+  <title>Usando las cajas flexibles CSS - CSS | MDN</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index, follow">
+
+  
+<link rel="preload" href="https://developer.mozilla.org/static/fonts/locales/ZillaSlab-Regular.subset.bbc33fb47cf6.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="home" href="https://developer.mozilla.org/es/">
+    <link rel="license" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#license">
+  
+
+  
+    
+    
+
+    <link href="./Usando las cajas flexibles CSS - CSS _ MDN_files/mdn.415aca58da91.css" rel="stylesheet" type="text/css">
+
+    
+  
+
+    <link href="./Usando las cajas flexibles CSS - CSS _ MDN_files/wiki.57db05fe0cc3.css" rel="stylesheet" type="text/css">
+
+
+    
+
+  <link href="./Usando las cajas flexibles CSS - CSS _ MDN_files/locale-es.d798f0544bdf.css" rel="stylesheet" type="text/css">
+
+  
+    <script>
+    // Mozilla DNT Helper
+    /* This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/. */ if(typeof Mozilla==='undefined'){var Mozilla={}}Mozilla.dntEnabled=function(dnt,ua){'use strict';var dntStatus=dnt||navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;var userAgent=ua||navigator.userAgent;var anomalousWinVersions=['Windows NT 6.1','Windows NT 6.2','Windows NT 6.3'];var fxMatch=userAgent.match(/Firefox\/(\d+)/);var ieRegEx=/MSIE|Trident/i;var isIE=ieRegEx.test(userAgent);var platform=userAgent.match(/Windows.+?(?=;)/g);if(isIE&&typeof Array.prototype.indexOf!=='function'){return false}else if(fxMatch&&parseInt(fxMatch[1],10)<32){dntStatus='Unspecified'}else if(isIE&&platform&&anomalousWinVersions.indexOf(platform.toString())!==-1){dntStatus='Unspecified'}else{dntStatus={'0':'Disabled','1':'Enabled'}[dntStatus]||'Unspecified'}return dntStatus==='Enabled'?true:false};
+    // only load GA if DNT is not enabled
+    if (Mozilla && !Mozilla.dntEnabled()) {
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-36116321-5', 'mozilla.org');
+        ga('set', 'anonymizeIp', true);
+
+        
+
+        // dimension9 == "Section editing"
+        
+            // dimension12 == 'Page Revision'
+            ga('set', 'dimension12', '1404605');
+            // dimension17 == 'English Slug'
+            ga('set', 'dimension17', 'Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes');
+
+        (function() {
+            // http://cfsimplicity.com/61/removing-analytics-clutter-from-campaign-urls
+            var win = window;
+            var removeUtms = function(){
+                var location = win.location;
+                if (location.href.indexOf('utm') != -1 && win.history.replaceState) {
+                    win.history.replaceState({}, '', location.pathname);
+                }
+            };
+
+            ga('send', 'pageview', {'hitCallback': removeUtms});
+        })();
+    }
+</script>
+  
+
+  
+    <script>
+    // util for setting performance marks and mesaures
+    var mdn=window.mdn||{};mdn.perf={getDuration:function(e){"use strict";if(void 0!==performance.getEntriesByName)return performance.getEntriesByName(e)[0].duration;console.error("performance.getEntriesByName is not supported by your user-agent")},setMark:function(e){"use strict";if(void 0!==performance.mark)try{performance.mark(e)}catch(e){console.error("Error while setting performance mark: ",e)}else console.error("performance.mark is not supported by your user-agent")},setMeasure:function(e){"use strict";void 0!==performance.measure?performance.measure(e.measureName,e.startMark,e.endMark):console.error("performance.measure is not supported by your user-agent")}};
+    /* util specifically for postMessages sent from the
+       `head` of the interactive examples iframe */
+    function handlePerfMarks(e){e.measureName?(window.mdn.perf.setMark(e.markName),window.mdn.perf.setMeasure({measureName:e.measureName,startMark:e.startMark,endMark:e.endMark}),ga&&ga.create&&ga("send",{hitType:"timing",timingCategory:"RUM - Interactive Examples",timingVar:e.measureName,timingValue:window.mdn.perf.getDuration(e.measureName)||0})):window.mdn.perf.setMark(e.markName)}function perfMsgHandler(e){"use strict";var a=window.mdn.interactiveEditor.editorUrl||"https://interactive-examples.mdn.mozilla.net",r=e.data;if(e.origin!==a)return!1;r.markName&&-1<r.markName.indexOf("interactive-editor-")&&handlePerfMarks(r)}window.addEventListener("message",perfMsgHandler,!1);
+</script>
+
+    <!-- common social tags -->
+    
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://developer.mozilla.org/static/img/opengraph-logo.72382e605ce3.png">
+    <meta property="og:site_name" content="Documentación web de MDN">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://developer.mozilla.org/static/img/opengraph-logo.72382e605ce3.png">
+    <meta name="twitter:site" content="@MozDevNet">
+    <meta name="twitter:creator" content="@MozDevNet">
+    <link rel="search" type="application/opensearchdescription+xml" href="https://developer.mozilla.org/es/search/xml" title="Documentación web de MDN">
+    
+  
+  <!-- third-generation iPad with high-resolution Retina display: -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://developer.mozilla.org/static/img/favicon144.e7e21ca263ca.png">
+  <!-- iPhone with high-resolution Retina display: -->
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://developer.mozilla.org/static/img/favicon114.d526f38b09c5.png">
+  <!-- first- and second-generation iPad: -->
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://developer.mozilla.org/static/img/favicon72.cc65d1d762a0.png">
+  <!-- non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+  <link rel="apple-touch-icon-precomposed" href="https://developer.mozilla.org/static/img/favicon57.de33179910ae.png">
+  <!-- basic favicon -->
+  <link rel="shortcut icon" href="https://developer.mozilla.org/static/img/favicon32.7f3da72dcea1.png">
+  <!--[if IE]>
+  <meta http-equiv="imagetoolbar" content="no">
+  <script type="text/javascript" src="https://developer.mozilla.org/static/build/js/html5shiv.ae1ac46eaf58.js" charset="utf-8"></script>
+  <![endif]-->
+
+  
+  <link rel="dns-prefetch" href="https://interactive-examples.mdn.mozilla.net/" pr="0.75">
+  <link rel="preconnect" href="https://interactive-examples.mdn.mozilla.net/" pr="0.75">
+
+  <link rel="alternate" type="application/json" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS$json">
+  <link rel="canonical" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS">
+
+  
+  <link rel="alternate" hreflang="es" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS" title="Usando las cajas flexibles CSS">
+  
+    
+      <link rel="alternate" hreflang="en-US" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes" title="Using CSS Flexible Boxes">
+    
+      <link rel="alternate" hreflang="bn-BD" href="https://developer.mozilla.org/bn-BD/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes" title="Using CSS flexible boxes">
+    
+      <link rel="alternate" hreflang="ca" href="https://developer.mozilla.org/ca/docs/Web/CSS/CSS_Flexible_Box_Layout/Utilitzar_model_flexible_caixes_CSS" title="Utilitzar el model de caixes flexible de CSS">
+    
+      <link rel="alternate" hreflang="de" href="https://developer.mozilla.org/de/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes" title="Using CSS flexible boxes">
+    
+      <link rel="alternate" hreflang="fr" href="https://developer.mozilla.org/fr/docs/Web/CSS/CSS_Flexible_Box_Layout/Utilisation_des_flexbox_en_CSS" title="Utilisation de boîtes flexibles de CSS">
+    
+      <link rel="alternate" hreflang="it" href="https://developer.mozilla.org/it/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes" title="Using CSS flexible boxes">
+    
+      <link rel="alternate" hreflang="ja" href="https://developer.mozilla.org/ja/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes" title="CSS flexible box の利用">
+    
+      <link rel="alternate" hreflang="ko" href="https://developer.mozilla.org/ko/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes" title="Using CSS Flexible Boxes">
+    
+      <link rel="alternate" hreflang="pt-BR" href="https://developer.mozilla.org/pt-BR/docs/CSS/Usando_caixas_flexiveis_css" title="Usando CSS flexible boxes (Caixas Flexíveis)">
+    
+      <link rel="alternate" hreflang="ru" href="https://developer.mozilla.org/ru/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes" title="Используем CSS Flexible Boxes">
+    
+      <link rel="alternate" hreflang="uk" href="https://developer.mozilla.org/uk/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes" title="Використання CSS flexible-боксів">
+    
+      <link rel="alternate" hreflang="zh-CN" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes" title="使用 CSS 弹性盒子">
+    
+      <link rel="alternate" hreflang="zh-TW" href="https://developer.mozilla.org/zh-TW/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes" title="CSS彈性盒子用法">
+    
+  
+
+  <!-- document-specific social tags -->
+  <meta property="og:title" content="Usando las cajas flexibles CSS">
+  <meta property="og:url" content="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS">
+  <meta name="twitter:url" content="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS">
+  <meta name="twitter:title" content="Usando las cajas flexibles CSS">
+  
+  <meta property="og:description" content="La propiedad Flexible Box, o flexbox, de CSS3 es un modo de diseño que permite colocar los elementos de una página para que se comporten de forma predecible cuando el diseño de la página debe acomodarse a diferentes tamaños de pantalla y diferentes dispositivos. Para muchas aplicaciones, el modelo &quot;caja flexible&quot; produce una mejora sobre el modelo &quot;bloque&quot; porque no utiliza la propiedad float, ni hace que los márgenes del contenedor flexible interfieran con los márgenes de sus contenidos.">
+  <meta name="description" content="La propiedad Flexible Box, o flexbox, de CSS3 es un modo de diseño que permite colocar los elementos de una página para que se comporten de forma predecible cuando el diseño de la página debe acomodarse a diferentes tamaños de pantalla y diferentes dispositivos. Para muchas aplicaciones, el modelo &quot;caja flexible&quot; produce una mejora sobre el modelo &quot;bloque&quot; porque no utiliza la propiedad float, ni hace que los márgenes del contenedor flexible interfieran con los márgenes de sus contenidos.">
+  <meta name="twitter:description" content="La propiedad Flexible Box, o flexbox, de CSS3 es un modo de diseño que permite colocar los elementos de una página para que se comporten de forma predecible cuando el diseño de la página debe acomodarse a diferentes tamaños de pantalla y diferentes dispositivos. Para muchas aplicaciones, el modelo &quot;caja flexible&quot; produce una mejora sobre el modelo &quot;bloque&quot; porque no utiliza la propiedad float, ni hace que los márgenes del contenedor flexible interfieran con los márgenes de sus contenidos.">
+  
+
+<script async="" data-manual="true" src="./Usando las cajas flexibles CSS - CSS _ MDN_files/syntax-prism.c3ad62e11c30.js.descarga"></script></head>
+<body data-slug="Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS" contextmenu="edit-history-menu" data-search-url="" class="document">
+
+  <script>
+    // make sure global mdn object exists
+    var mdn = window.mdn || {};
+
+    (function(win) {
+        'use strict';
+
+        (function(){
+  var FLAGS = {
+    'kumaediting': false,'page_move': false,'section_edit': false,'spam_checks_enabled': true,'spam_submissions_enabled': false,'spam_admin_override': false,'spam_spammer_override': false,'spam_testing_mode': false,'sg_task_completion': true,'contrib_beta': false,'recurring_payment_beta': false
+    },
+    SWITCHES = {
+    'welcome_email': true,'application_ACAO': true,'store_revision_ips': true,'foundation_callout': false,'helpful-survey-2': true,'wiki_spam_training': true,'registration_disabled': false
+    },
+    SAMPLES = {
+    
+    };
+  window.waffle = {
+    "flag_is_active": function waffle_flag(flag_name) {
+      
+      return !!FLAGS[flag_name];
+    },
+    "switch_is_active": function waffle_switch(switch_name) {
+      
+      return !!SWITCHES[switch_name];
+    },
+    "sample_is_active": function waffle_sample(sample_name) {
+      
+      return !!SAMPLES[sample_name];
+    },
+    "FLAGS": FLAGS,
+    "SWITCHES": SWITCHES,
+    "SAMPLES": SAMPLES
+  };
+})();
+
+
+        // This needs to be set before ckeditor.js loads
+        window.CKEDITOR_BASEPATH = '/static/js/libs/ckeditor/build/ckeditor/';
+
+        // Site configuration
+        win.mdn.ckeditor = {};
+        win.mdn.features = {};
+        win.mdn.siteUrl = '';
+        win.mdn.staticPath = 'https://developer.mozilla.org/static/';
+        win.mdn.wiki = {
+            autosuggestTitleUrl: '/es/docs/get-documents'
+        };
+        win.mdn.assets = {
+            css: {
+                'editor-content': ['https://developer.mozilla.org/static/build/styles/editor-content.ccb4a232ac54.css','https://developer.mozilla.org/static/build/styles/editor-locale-es.d798f0544bdf.css',
+                ],
+
+                'wiki-compat-tables': ['https://developer.mozilla.org/static/build/styles/wiki-compat-tables.139878ae189f.css',]
+            },
+            js: {
+                'syntax-prism': ['https://developer.mozilla.org/static/build/js/syntax-prism.c3ad62e11c30.js',],
+                'wiki-compat-tables': ['https://developer.mozilla.org/static/build/js/wiki-compat-tables.3a4ab2cc8ca1.js',]
+            }
+        };
+
+        win.mdn.notifications = [];
+        win.mdn.contributions = {
+            enabled: true,
+            popup: false
+        };
+
+        
+
+        // interactive editor config
+        win.mdn.interactiveEditor = {
+            siteUrl: "https://developer.mozilla.org",
+            editorUrl: "https://interactive-examples.mdn.mozilla.net"
+        };
+        win.mdn.langCookieName = "django_language";
+
+    })(this);
+</script>
+    
+    <ul id="nav-access">
+  <li><a href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#content" id="skip-main">Saltar al contenido principal</a></li>
+  <li><a id="skip-language" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#language">Seleccionar idioma</a></li>
+  <li><a href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#q" id="skip-search">Saltar a la búsqueda</a></li>
+</ul>
+
+    <!-- Header -->
+    <header id="main-header" class="header-main">
+      <a href="https://developer.mozilla.org/es/" class="logo">Documentación web de MDN</a>
+      <div class="nav-toolbox-wrapper">
+        <nav id="main-nav" class="nav-main" role="navigation">
+    <ul>
+        <li class="nav-main-item">
+            <a href="https://developer.mozilla.org/es/docs/Web">Tecnologías
+                <svg class="icon icon-caret-down" xmlns="http://www.w3.org/2000/svg" width="16" height="28" viewBox="0 0 16 28"><path d="M16 11a.99.99 0 0 1-.297.703l-7 7C8.516 18.89 8.265 19 8 19s-.516-.109-.703-.297l-7-7A.996.996 0 0 1 0 11c0-.547.453-1 1-1h14c.547 0 1 .453 1 1z"></path></svg>
+            </a>
+            <div class="submenu js-submenu" id="nav-tech-submenu">
+                <div class="submenu-column">
+                  <ul>
+                    <li><a href="https://developer.mozilla.org/es/docs/Web/HTML">HTML</a></li>
+                    <li><a href="https://developer.mozilla.org/es/docs/Web/CSS">CSS</a></li>
+                    <li><a href="https://developer.mozilla.org/es/docs/Web/JavaScript">JavaScript</a></li>
+                    <li><a href="https://developer.mozilla.org/es/docs/Web/Guide/Graphics">Gráficos</a></li>
+                    <li><a href="https://developer.mozilla.org/es/docs/Web/HTTP">HTTP</a></li>
+                    <li><a href="https://developer.mozilla.org/es/docs/Web/API">APIs / DOM</a></li>
+                    <li><a href="https://developer.mozilla.org/es/docs/Mozilla/Add-ons/WebExtensions">Extensiones de navegador</a></li>
+                    <li><a href="https://developer.mozilla.org/es/docs/Web/MathML">MathML</a></li>
+                  </ul>
+                </div>
+            </div>
+        </li>
+        <li class="nav-main-item">
+            <a href="https://developer.mozilla.org/es/docs/Learn">Referencias y guías
+                <svg class="icon icon-caret-down" xmlns="http://www.w3.org/2000/svg" width="16" height="28" viewBox="0 0 16 28"><path d="M16 11a.99.99 0 0 1-.297.703l-7 7C8.516 18.89 8.265 19 8 19s-.516-.109-.703-.297l-7-7A.996.996 0 0 1 0 11c0-.547.453-1 1-1h14c.547 0 1 .453 1 1z"></path></svg>
+            </a>
+            <div class="submenu js-submenu" id="nav-learn-submenu">
+                <div class="submenu-column">
+                  <ul>
+                    <li><a href="https://developer.mozilla.org/es/docs/Learn">Aprender desarrollo web</a></li>
+                    <li><a href="https://developer.mozilla.org/es/docs/Web/Tutorials">Tutoriales</a></li>
+                    <li><a href="https://developer.mozilla.org/es/docs/Web/Reference">Referencias</a></li>
+                    <li><a href="https://developer.mozilla.org/es/docs/Web/Guide">Guías para desarrolladores</a></li>
+                    <li><a href="https://developer.mozilla.org/es/docs/Web/Accessibility">Accesibilidad</a></li>
+                    <li><a href="https://developer.mozilla.org/es/docs/Games">Desarrollo de juegos</a></li>
+                    <li><a href="https://developer.mozilla.org/es/docs/Web">...más documentos</a></li>
+                  </ul>
+                </div>
+            </div>
+        </li>
+        <li class="nav-main-item">
+            <a href="https://developer.mozilla.org/es/docs/MDN/Feedback">Comentarios
+                <svg class="icon icon-caret-down" xmlns="http://www.w3.org/2000/svg" width="16" height="28" viewBox="0 0 16 28"><path d="M16 11a.99.99 0 0 1-.297.703l-7 7C8.516 18.89 8.265 19 8 19s-.516-.109-.703-.297l-7-7A.996.996 0 0 1 0 11c0-.547.453-1 1-1h14c.547 0 1 .453 1 1z"></path></svg>
+            </a>
+            <div class="submenu js-submenu" id="nav-contact-submenu">
+              <div class="submenu-column">
+                <ul>
+                  <li>
+                      <a href="https://support.mozilla.org/">Obtén ayuda de Firefox
+                          <svg class="icon icon-external-link" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M22 14.5v5c0 2.484-2.016 4.5-4.5 4.5h-13A4.502 4.502 0 0 1 0 19.5v-13C0 4.016 2.016 2 4.5 2h11c.281 0 .5.219.5.5v1c0 .281-.219.5-.5.5h-11A2.507 2.507 0 0 0 2 6.5v13C2 20.875 3.125 22 4.5 22h13c1.375 0 2.5-1.125 2.5-2.5v-5c0-.281.219-.5.5-.5h1c.281 0 .5.219.5.5zM28 1v8c0 .547-.453 1-1 1a.99.99 0 0 1-.703-.297l-2.75-2.75L13.36 17.14c-.094.094-.234.156-.359.156s-.266-.063-.359-.156l-1.781-1.781c-.094-.094-.156-.234-.156-.359s.063-.266.156-.359L21.048 4.454l-2.75-2.75a.996.996 0 0 1-.297-.703c0-.547.453-1 1-1h8c.547 0 1 .453 1 1z"></path></svg>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="https://stackoverflow.com/">Obtén ayuda de desarrollo web
+                          <svg class="icon icon-external-link" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M22 14.5v5c0 2.484-2.016 4.5-4.5 4.5h-13A4.502 4.502 0 0 1 0 19.5v-13C0 4.016 2.016 2 4.5 2h11c.281 0 .5.219.5.5v1c0 .281-.219.5-.5.5h-11A2.507 2.507 0 0 0 2 6.5v13C2 20.875 3.125 22 4.5 22h13c1.375 0 2.5-1.125 2.5-2.5v-5c0-.281.219-.5.5-.5h1c.281 0 .5.219.5.5zM28 1v8c0 .547-.453 1-1 1a.99.99 0 0 1-.703-.297l-2.75-2.75L13.36 17.14c-.094.094-.234.156-.359.156s-.266-.063-.359-.156l-1.781-1.781c-.094-.094-.156-.234-.156-.359s.063-.266.156-.359L21.048 4.454l-2.75-2.75a.996.996 0 0 1-.297-.703c0-.547.453-1 1-1h8c.547 0 1 .453 1 1z"></path></svg>
+                      </a>
+                  </li>
+                </ul>
+                <ul>
+                  <li>
+                      <a href="https://developer.mozilla.org/es/docs/MDN/Community">Únete a la comunidad de MDN</a>
+                  </li>
+                  <li>
+                      <a target="_blank" rel="noopener" href="https://bugzilla.mozilla.org/form.doc?bug_file_loc=https%3A//developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS">Denuncia un problema de contenido
+                          <svg class="icon icon-external-link" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M22 14.5v5c0 2.484-2.016 4.5-4.5 4.5h-13A4.502 4.502 0 0 1 0 19.5v-13C0 4.016 2.016 2 4.5 2h11c.281 0 .5.219.5.5v1c0 .281-.219.5-.5.5h-11A2.507 2.507 0 0 0 2 6.5v13C2 20.875 3.125 22 4.5 22h13c1.375 0 2.5-1.125 2.5-2.5v-5c0-.281.219-.5.5-.5h1c.281 0 .5.219.5.5zM28 1v8c0 .547-.453 1-1 1a.99.99 0 0 1-.703-.297l-2.75-2.75L13.36 17.14c-.094.094-.234.156-.359.156s-.266-.063-.359-.156l-1.781-1.781c-.094-.094-.156-.234-.156-.359s.063-.266.156-.359L21.048 4.454l-2.75-2.75a.996.996 0 0 1-.297-.703c0-.547.453-1 1-1h8c.547 0 1 .453 1 1z"></path></svg>
+                      </a>
+                  </li>
+                  <li>
+                      <a target="_blank" rel="noopener" href="https://bugzilla.mozilla.org/form.mdn">Informar de un error
+                          <svg class="icon icon-external-link" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M22 14.5v5c0 2.484-2.016 4.5-4.5 4.5h-13A4.502 4.502 0 0 1 0 19.5v-13C0 4.016 2.016 2 4.5 2h11c.281 0 .5.219.5.5v1c0 .281-.219.5-.5.5h-11A2.507 2.507 0 0 0 2 6.5v13C2 20.875 3.125 22 4.5 22h13c1.375 0 2.5-1.125 2.5-2.5v-5c0-.281.219-.5.5-.5h1c.281 0 .5.219.5.5zM28 1v8c0 .547-.453 1-1 1a.99.99 0 0 1-.703-.297l-2.75-2.75L13.36 17.14c-.094.094-.234.156-.359.156s-.266-.063-.359-.156l-1.781-1.781c-.094-.094-.156-.234-.156-.359s.063-.266.156-.359L21.048 4.454l-2.75-2.75a.996.996 0 0 1-.297-.703c0-.547.453-1 1-1h8c.547 0 1 .453 1 1z"></path></svg>
+                      </a>
+                  </li>
+                </ul>
+              </div>
+          </div>
+      </li>
+  </ul>
+</nav>
+        <div id="toolbox" class="toolbox">
+  <ul>
+    
+    <li class="nav-login"><div class="login">
+    
+        
+        <a href="https://developer.mozilla.org/users/github/login/?next=%2Fes%2Fdocs%2FWeb%2FCSS%2FCSS_Flexible_Box_Layout%2FUsando_las_cajas_flexibles_CSS" class="login-link js-login-link" data-service="GitHub" rel="nofollow">
+            Iniciar sesión<svg class="icon icon-github" xmlns="http://www.w3.org/2000/svg" width="24" height="28" viewBox="0 0 24 28" aria-label="GitHub" role="img" focusable="false">
+    <title>Github</title>
+    <path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-.609.109-.828-.266-.828-.578 0-.391.016-1.687.016-3.297 0-1.125-.375-1.844-.812-2.219 2.672-.297 5.484-1.313 5.484-5.922 0-1.313-.469-2.375-1.234-3.219.125-.313.531-1.531-.125-3.187-1-.313-3.297 1.234-3.297 1.234a11.28 11.28 0 0 0-6 0S6.704 6.656 5.704 6.969c-.656 1.656-.25 2.875-.125 3.187-.766.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-.344.313-.656.844-.766 1.609-.688.313-2.438.844-3.484-1-.656-1.141-1.844-1.234-1.844-1.234-1.172-.016-.078.734-.078.734.781.359 1.328 1.75 1.328 1.75.703 2.141 4.047 1.422 4.047 1.422 0 1 .016 1.937.016 2.234 0 .313-.219.688-.828.578C3.439 23.796.002 19.296.002 13.999c0-6.625 5.375-12 12-12zM4.547 19.234c.031-.063-.016-.141-.109-.187-.094-.031-.172-.016-.203.031-.031.063.016.141.109.187.078.047.172.031.203-.031zm.484.532c.063-.047.047-.156-.031-.25-.078-.078-.187-.109-.25-.047-.063.047-.047.156.031.25.078.078.187.109.25.047zm.469.703c.078-.063.078-.187 0-.297-.063-.109-.187-.156-.266-.094-.078.047-.078.172 0 .281s.203.156.266.109zm.656.656c.063-.063.031-.203-.063-.297-.109-.109-.25-.125-.313-.047-.078.063-.047.203.063.297.109.109.25.125.313.047zm.891.391c.031-.094-.063-.203-.203-.25-.125-.031-.266.016-.297.109s.063.203.203.234c.125.047.266 0 .297-.094zm.984.078c0-.109-.125-.187-.266-.172-.141 0-.25.078-.25.172 0 .109.109.187.266.172.141 0 .25-.078.25-.172zm.906-.156c-.016-.094-.141-.156-.281-.141-.141.031-.234.125-.219.234.016.094.141.156.281.125s.234-.125.219-.219z"></path>
+</svg>
+        </a>
+    
+</div></li>
+  </ul>
+</div>
+      </div>
+      <form id="nav-main-search" action="https://developer.mozilla.org/es/search" method="get" role="search" class="nav-main-search">
+  <div class="search-wrap">
+    <label for="main-q" class="offscreen">Buscar</label>
+    <input type="search" id="main-q" name="q" placeholder="Buscar" data-value="" value="" aria-hidden="true">
+    <span class="search-trigger">
+        <svg class="icon icon-search" xmlns="http://www.w3.org/2000/svg" width="26" height="28" viewBox="0 0 26 28" aria-hidden="true">
+    <path d="M18 13c0-3.859-3.141-7-7-7s-7 3.141-7 7 3.141 7 7 7 7-3.141 7-7zm8 13c0 1.094-.906 2-2 2a1.96 1.96 0 0 1-1.406-.594l-5.359-5.344a10.971 10.971 0 0 1-6.234 1.937c-6.078 0-11-4.922-11-11s4.922-11 11-11 11 4.922 11 11c0 2.219-.672 4.406-1.937 6.234l5.359 5.359c.359.359.578.875.578 1.406z"></path>
+</svg>
+    </span>
+    <button type="submit" class="offscreen">Buscar</button>
+    <button type="button" id="close-header-search" class="close-header-search transparent">
+        <span class="offscreen">Cerrar búsqueda</span>
+        <svg class="icon icon-close" xmlns="http://www.w3.org/2000/svg" width="22" height="28" viewBox="0 0 22 28" aria-hidden="true"><path d="M20.281 20.656c0 .391-.156.781-.438 1.062l-2.125 2.125c-.281.281-.672.438-1.062.438s-.781-.156-1.062-.438L11 19.249l-4.594 4.594c-.281.281-.672.438-1.062.438s-.781-.156-1.062-.438l-2.125-2.125c-.281-.281-.438-.672-.438-1.062s.156-.781.438-1.062L6.751 15l-4.594-4.594c-.281-.281-.438-.672-.438-1.062s.156-.781.438-1.062l2.125-2.125c.281-.281.672-.438 1.062-.438s.781.156 1.062.438L11 10.751l4.594-4.594c.281-.281.672-.438 1.062-.438s.781.156 1.062.438l2.125 2.125c.281.281.438.672.438 1.062s-.156.781-.438 1.062L15.249 15l4.594 4.594c.281.281.438.672.438 1.062z"></path></svg>
+    </button>
+  </div>
+</form>
+    </header> 
+
+  <!-- Content will go here -->
+  <main id="content" role="main">
+      
+  <!-- heading -->
+  <div id="wiki-document-head" class="document-head">
+    <div class="center">
+      <div class="document-title">
+        <h1>Usando las cajas flexibles CSS</h1>
+      </div>
+
+      <!-- action buttons -->
+      <div class="document-actions">
+        
+
+  
+    
+    
+  
+
+  
+    
+  
+
+  
+
+  <ul class="page-buttons">
+      <li>
+          <button id="languages-menu" class="transparent" aria-haspopup="true" aria-owns="languages-menu-submenu" aria-expanded="false">
+              <svg class="icon icon-language" xmlns="http://www.w3.org/2000/svg" width="24" height="28" viewBox="0 0 24 28" aria-hidden="true">
+    <path d="M10.219 16.844c-.031.109-.797-.25-1-.328-.203-.094-1.125-.609-1.359-.766s-1.125-.891-1.234-.938a28.275 28.275 0 0 1-2.094 2.828c-.281.328-1.125 1.391-1.641 1.719-.078.047-.531.094-.594.063.25-.187.969-1.078 1.281-1.437.391-.453 2.25-3.047 2.562-3.641.328-.594 1.312-2.562 1.359-2.75-.156-.016-1.391.406-1.719.516-.313.094-1.172.297-1.234.344-.063.063-.016.25-.047.313s-.313.203-.484.234a1.647 1.647 0 0 1-.734 0c-.203-.047-.391-.25-.438-.328 0 0-.063-.094-.078-.359.187-.063.5-.078.844-.172s1.188-.344 1.641-.5 1.328-.484 1.594-.547c.281-.047.984-.516 1.359-.641s.641-.281.656-.203 0 .422-.016.516c-.016.078-.766 1.547-.875 1.781-.063.125-.5.953-1.203 2.047.25.109.781.328 1 .438.266.125 2.125.906 2.219.938s.266.75.234.875zM7.016 9.25c.047.266-.031.375-.063.438-.156.297-.547.5-.781.594s-.625.187-.938.187c-.141-.016-.422-.063-.766-.406-.187-.203-.328-.75-.266-.688s.516.125.719.078.688-.187.906-.25c.234-.078.703-.203.859-.219.156 0 .281.063.328.266zm10.906 2.016l.984 3.547-2.172-.656zM.609 23.766l10.844-3.625V4.016L.609 7.657v16.109zM20 18.813l1.594.484-2.828-10.266-1.563-.484-3.375 8.375 1.594.484.703-1.719 3.297 1.016zM12.141 3.781l8.953 2.875V.718zM17 24.453l2.469.203-.844 2.5L18 26.125c-1.266.812-2.828 1.437-4.312 1.687-.453.094-.969.187-1.422.187h-1.313c-1.656 0-4.672-.984-5.984-1.937-.094-.078-.125-.141-.125-.25 0-.172.125-.297.281-.297.141 0 .875.453 1.078.547 1.406.703 3.375 1.344 4.953 1.344 1.953 0 3.281-.25 5.063-1.016.516-.234.969-.531 1.453-.797zm7-16.859v16.859c-12.078-3.844-12.094-3.844-12.094-3.844C11.656 20.718.453 24.5.297 24.5a.3.3 0 0 1-.281-.203c0-.016-.016-.031-.016-.047V7.406c.016-.047.031-.125.063-.156.094-.109.219-.141.313-.172.047-.016 1-.328 2.328-.781v-6l8.719 3.094C11.532 3.36 21.251 0 21.392 0c.172 0 .313.125.313.328v6.531z"></path>
+</svg>
+              <span>Idiomas</span>
+          </button>
+
+        <div class="submenu js-submenu" id="languages-menu-submenu">
+          <div class="submenu-column">
+            <ul id="translations">
+              
+                
+                
+                
+                  <li lang="en-US"><bdi><a rel="internal" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes" data-locale="en-US" title="Inglés (EE.UU.)">English (US) (en-US)</a></bdi></li>
+                
+                  <li lang="bn-BD"><bdi><a rel="internal" href="https://developer.mozilla.org/bn-BD/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes" data-locale="bn-BD" title="Bengalí (Bangladesh)">বাংলা (বাংলাদেশ) (bn-BD)</a></bdi></li>
+                
+                  <li lang="ca"><bdi><a rel="internal" href="https://developer.mozilla.org/ca/docs/Web/CSS/CSS_Flexible_Box_Layout/Utilitzar_model_flexible_caixes_CSS" data-locale="ca" title="Catalán">Català (ca)</a></bdi></li>
+                
+                  <li lang="de"><bdi><a rel="internal" href="https://developer.mozilla.org/de/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes" data-locale="de" title="Alemán">Deutsch (de)</a></bdi></li>
+                
+                  <li lang="fr"><bdi><a rel="internal" href="https://developer.mozilla.org/fr/docs/Web/CSS/CSS_Flexible_Box_Layout/Utilisation_des_flexbox_en_CSS" data-locale="fr" title="Francés">Français (fr)</a></bdi></li>
+                
+                  <li lang="it"><bdi><a rel="internal" href="https://developer.mozilla.org/it/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes" data-locale="it" title="Italiano">Italiano (it)</a></bdi></li>
+                
+                  <li lang="ja"><bdi><a rel="internal" href="https://developer.mozilla.org/ja/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes" data-locale="ja" title="Japonés">日本語 (ja)</a></bdi></li>
+                
+                  <li lang="ko"><bdi><a rel="internal" href="https://developer.mozilla.org/ko/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes" data-locale="ko" title="Coreano">한국어 (ko)</a></bdi></li>
+                
+                  <li lang="pt-BR"><bdi><a rel="internal" href="https://developer.mozilla.org/pt-BR/docs/CSS/Usando_caixas_flexiveis_css" data-locale="pt-BR" title="Portugués (Brasil)">Português (do&nbsp;Brasil) (pt-BR)</a></bdi></li>
+                
+                  <li lang="ru"><bdi><a rel="internal" href="https://developer.mozilla.org/ru/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes" data-locale="ru" title="Ruso">Русский (ru)</a></bdi></li>
+                
+                  <li lang="uk"><bdi><a rel="internal" href="https://developer.mozilla.org/uk/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes" data-locale="uk" title="Ucraniano">Українська (uk)</a></bdi></li>
+                
+                  <li lang="zh-CN"><bdi><a rel="internal" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes" data-locale="zh-CN" title="Chino (simplificado)">中文 (简体) (zh-CN)</a></bdi></li>
+                
+                  <li lang="zh-TW"><bdi><a rel="internal" href="https://developer.mozilla.org/zh-TW/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes" data-locale="zh-TW" title="Chino (tradicional)">正體中文 (繁體) (zh-TW)</a></bdi></li>
+                
+              
+
+              
+            </ul>
+          </div>
+        </div>
+      </li>
+      
+      <li class="page-buttons-edit">
+          <a href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS$edit" class="button neutral" id="edit-button" rel="nofollow">
+              <svg class="icon icon-pencil" xmlns="http://www.w3.org/2000/svg" width="24" height="28" viewBox="0 0 24 28" aria-hidden="true">
+    <path d="M5.672 24l1.422-1.422-3.672-3.672L2 20.328V22h2v2h1.672zm8.172-14.5a.329.329 0 0 0-.344-.344.368.368 0 0 0-.266.109l-8.469 8.469a.366.366 0 0 0-.109.266c0 .203.141.344.344.344a.368.368 0 0 0 .266-.109l8.469-8.469a.366.366 0 0 0 .109-.266zM13 6.5l6.5 6.5-13 13H0v-6.5zM23.672 8c0 .531-.219 1.047-.578 1.406L20.5 12 14 5.5l2.594-2.578c.359-.375.875-.594 1.406-.594s1.047.219 1.422.594l3.672 3.656c.359.375.578.891.578 1.422z"></path>
+</svg>
+              Editar
+          </a>
+      </li>
+      
+
+        
+
+        <li class="page-buttons-advanced">
+            <button id="advanced-menu" class="only-icon" aria-haspopup="true" aria-owns="advanced-menu-submenu" aria-expanded="false">
+                <svg class="icon icon-gear" xmlns="http://www.w3.org/2000/svg" width="24" height="28" viewBox="0 0 24 28" aria-hidden="true">
+    <path d="M16 14c0-2.203-1.797-4-4-4s-4 1.797-4 4 1.797 4 4 4 4-1.797 4-4zm8-1.703v3.469c0 .234-.187.516-.438.562l-2.891.438a8.86 8.86 0 0 1-.609 1.422c.531.766 1.094 1.453 1.672 2.156.094.109.156.25.156.391s-.047.25-.141.359c-.375.5-2.484 2.797-3.016 2.797a.795.795 0 0 1-.406-.141l-2.156-1.687a9.449 9.449 0 0 1-1.422.594c-.109.953-.203 1.969-.453 2.906a.573.573 0 0 1-.562.438h-3.469c-.281 0-.531-.203-.562-.469l-.438-2.875a9.194 9.194 0 0 1-1.406-.578l-2.203 1.672c-.109.094-.25.141-.391.141s-.281-.063-.391-.172c-.828-.75-1.922-1.719-2.578-2.625a.607.607 0 0 1 .016-.718c.531-.719 1.109-1.406 1.641-2.141a8.324 8.324 0 0 1-.641-1.547l-2.859-.422A.57.57 0 0 1 0 15.705v-3.469c0-.234.187-.516.422-.562l2.906-.438c.156-.5.359-.969.609-1.437a37.64 37.64 0 0 0-1.672-2.156c-.094-.109-.156-.234-.156-.375s.063-.25.141-.359c.375-.516 2.484-2.797 3.016-2.797.141 0 .281.063.406.156L7.828 5.94a9.449 9.449 0 0 1 1.422-.594c.109-.953.203-1.969.453-2.906a.573.573 0 0 1 .562-.438h3.469c.281 0 .531.203.562.469l.438 2.875c.484.156.953.344 1.406.578l2.219-1.672c.094-.094.234-.141.375-.141s.281.063.391.156c.828.766 1.922 1.734 2.578 2.656a.534.534 0 0 1 .109.344c0 .141-.047.25-.125.359-.531.719-1.109 1.406-1.641 2.141.266.5.484 1.016.641 1.531l2.859.438a.57.57 0 0 1 .453.562z"></path>
+</svg>
+                <span>Avanzado</span>
+            </button>
+            <div class="submenu js-submenu" id="advanced-menu-submenu">
+                <!-- this page -->
+                <div class="submenu-column">
+                    <div class="title">Avanzado</div>
+                    <ul>
+                        <li><a href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS$history" rel="nofollow">Historial</a></li>
+                        
+                        
+                        
+
+
+                
+
+                <li class="page-print"><a href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#" onclick="return window.print();">Imprimir este artículo</a></li>
+            </ul>
+          </div>
+        </div>
+  </li></ul>
+      </div>
+    </div>
+  </div>
+  
+  <div id="toc" class="toc">
+    <div class="center">
+      <div class="toc-head">Saltar a:</div>
+        <ol class="toc-links">
+          <li><a rel="internal" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#El_concepto_de_cajas_flexibles" class="toc-current">El concepto de "cajas flexibles"</a></li><li><a rel="internal" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#Vocabulario_de_cajas_flexibles" class="toc-current">Vocabulario de "cajas flexibles"</a></li><li><a rel="internal" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#Dise%C3%B1ando_una_caja_flexible">Diseñando una "caja flexible"</a></li><li><a rel="internal" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#Consideraciones_de_los_elementos_flexibles">Consideraciones de los elementos flexibles</a></li><li><a rel="internal" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#Propiedades_de_las_cajas_flexibles">Propiedades de las "cajas flexibles"</a></li><li><a rel="internal" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#Ejemplos">Ejemplos</a></li><li><a rel="internal" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#%C3%81rea_de_juego">Área de juego</a></li><li><a rel="internal" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#Cosas_a_tener_en_mente">Cosas a tener en mente</a></li><li><a rel="internal" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#Compatibilidad_de_Navegadores">Compatibilidad de Navegadores</a></li><li><a rel="internal" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#Ver_tambi%C3%A9n">Ver también</a>
+        </li></ol>
+    </div>
+  </div>
+  
+
+      <div class="center clear">
+      
+
+    <div class="wiki-main-content" id="document-main"><div class="center">
+      <!-- start the main content container -->
+        <div id="wiki-column-container" class="wiki-left-present">
+
+          <!-- content row with three strips -->
+          <div class="column-container column-container-reverse">
+
+            <!-- center: main article content -->
+            <div id="wiki-content" class="column-main wiki-column text-content">
+
+              
+
+              
+              
+
+              
+
+              
+                
+              
+              
+
+              <!-- just the article content -->
+              <article id="wikiArticle">
+                
+                  
+                    <div></div>
+
+<p><span class="seoSummary">La propiedad <strong>Flexible Box</strong>, o&nbsp;<strong>flexbox</strong>, de CSS3 es un&nbsp;<a href="https://developer.mozilla.org/es/docs/Web/CSS/Layout_mode">modo de diseño</a>&nbsp;que permite colocar los elementos de una página para que se comporten de forma predecible cuando el diseño de la página debe acomodarse a diferentes tamaños de pantalla y diferentes dispositivos. Para muchas aplicaciones, el modelo "caja flexible" produce una mejora sobre el modelo "bloque" porque no utiliza la propiedad&nbsp;<span style="font-family: courier new,andale mono,monospace;">float</span>, ni hace que los márgenes del contenedor flexible interfieran con los márgenes de sus contenidos.</span></p>
+
+<p>Muchos diseñadores verán que el modelo "caja flexible" es más sencillo de utilizar. Los elementos "hijos" de una "caja flexible" pueden colocarse en cualquier dirección y pueden tener dimensiones flexibles para adapterse al espacio visible. Posicionar los elementos "hijos" es por tanto mucho más sencillo, y los diseños complejos pueden hacerse más fácilmente y con código más limpio, ya que el orden de visualización de los elementos es independiente del orden que estos tengan en el código fuente. Esta independencia afecta intencionadamente únicamente a la representación visual, dejando el orden de locución y navegación a lo que diga el código fuente.</p>
+
+<div class="note"><strong>Nota:</strong> Aunque la especificación del diseño de "cajas flexibles" de CSS está en fase de "candidata a recomendación", no todos los navegadores la han implementado. La implementación de WebKit requiere el prefijo&nbsp;<code>-webkit</code>; Internet Explorer implementa una versión antigua de la especificación, con prefijo; Opera 12.10 implementa la última versión, sin prefijo. Revisa la tabla de compatibilidad de cada propiedad para saber cuál es el estado actual de compatibilidad.</div>
+
+<h2 id="El_concepto_de_cajas_flexibles">El concepto de "cajas flexibles"<a class="local-anchor" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#El_concepto_de_cajas_flexibles" data-heading-id="El_concepto_de_cajas_flexibles"><svg class="icon icon-link" version="1.1" width="24" height="28" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg><span>Section</span></a></h2>
+
+<p>Lo que caracteriza un diseño flexible es su habilidad para alterar el ancho y alto de sus elementos para ajustarse lo mejor posible al espacio disponible en cualquier dispositivo. Un contenedor flexible expande sus elementos para rellenar el espacio libre, o los comprime para evitar que rebasen el área prevista.</p>
+
+<p>El algoritmo del modelo de diseño de "cajas flexibles" no parte de niguna dirección predeterminada, al contrario de lo que ocurre con el modelo "bloque", que asume una disposición vertical de los elementos, o lo que pasa con el modelo "en línea", que asume una disposición horizontal. Mientras que el modelo "bloque" funciona bien para páginas, se queda muy corto cuando se trata de aplicaciones en las que hay que tener en cuenta el cambio de orientación del dispositivo o los cambios de tamaño realizados por los gestos del usuario. El modelo de "cajas flexibles" es más apropiado para diseños de pequeña escala, mientras que el (emergente) modelo "rejilla" es adecuado para diseños de gran escala. Ambos son parte del gran esfuerzo que el "CSS Working Group" está realizando para proveer de mayor interoperabilidad a las aplicaciones web con todo tipo de usuarios, distintos modos de escritura, y otras necesidades de flexibilidad.</p>
+
+<h2 id="Vocabulario_de_cajas_flexibles">Vocabulario de "cajas flexibles"<a class="local-anchor" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#Vocabulario_de_cajas_flexibles" data-heading-id="Vocabulario_de_cajas_flexibles"><svg class="icon icon-link" version="1.1" width="24" height="28" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg><span>Section</span></a></h2>
+
+<p>Aunque al hablar de las "cajas flexibles" nos olvidamos de términos como "horizontal/en línea" y "vertical/bloque", se hace necesario emplear una nueva terminología. Fíjate en el siguiente diagrama para afianzar el vocabulario empleado en sus elementos. Se muestra un contenedor flexible que tiene una&nbsp;<code>flex-direction</code> de tipo&nbsp;<code>row</code>, que significa que los elementos flexibles se muestra uno a continuación del otro horizontalmente a lo largo del eje principal (main axis) de acuerdo con el modo de escritura preestablecido, y en este caso, la dirección en que el texto de los elementos fluye es de izquierda-a-derecha.</p>
+
+<p><img src="./Usando las cajas flexibles CSS - CSS _ MDN_files/flex_terms.png" alt="flex_terms.png" class="default internal"></p>
+
+<dl>
+ <dt>Contenedor flexible (Flex container)</dt>
+ <dd>El elemento "padre" que contiene los elementos flexibles. Un contenedor flexible se define usando los valores&nbsp;<code>flex</code>&nbsp;o&nbsp;<code>inline-flex</code>&nbsp;en la propiedad&nbsp;<a rel="internal" href="https://developer.mozilla.org/en/CSS/display" title="display"><code>display</code></a>.</dd>
+ <dt>Elemento flexible (Flex item)</dt>
+ <dd>
+ <p>Cada hijo de un contenedor flex se convierte en un elemento flexible. Si hay texto directamente incluido en el contenedor flexible, se envuelve automáticamente en un elemento flexible anónimo.</p>
+ </dd>
+ <dt>Ejes</dt>
+ <dd>
+ <p>Cada diseño de "caja flexible" sigue dos ejes. El&nbsp;<strong>eje principal</strong> es el eje a lo largo del cual los elementos flexibles se suceden unos a otros. El&nbsp;<strong>eje secundario</strong>&nbsp;es el eje perpendicular al&nbsp;<strong>eje principal</strong>.</p>
+
+ <ul>
+  <li>La propiedad&nbsp;<code><a rel="internal" href="https://developer.mozilla.org/en/CSS/flex-direction" title="flex-direction">flex-direction</a></code>&nbsp;establece el eje principal.</li>
+  <li>La propiedad&nbsp;<a rel="internal" href="https://developer.mozilla.org/en/CSS/justify-content" title="en/CSS/justify-content"><code>justify-content</code></a>&nbsp;define cómo los elementos flexibles se disponen a lo largo del eje principal en la línea en curso.</li>
+  <li>La propiedad&nbsp;<a href="https://developer.mozilla.org/en/CSS/align-items" title="en/CSS/align-items"><code>align-items</code></a>&nbsp;define cómo los elementos flexibles se disponen a lo largo del eje secundario de la línea en curso.</li>
+  <li>La propiedad&nbsp;<a href="https://developer.mozilla.org/en/CSS/align-self" title="en/CSS/align-self"><code>align-self</code></a>&nbsp;define cómo cada elemento flexible se alinea respecto al eje secundario, y sustituye al valor por defecto establecido por&nbsp;<code>align-items.</code></li>
+ </ul>
+ </dd>
+ <dt>Direcciones</dt>
+ <dd>
+ <p>Los lados&nbsp;<strong>inicio principal</strong>/<strong>fin principal (main start/main end)&nbsp;</strong>e&nbsp;<strong>inicio secundario</strong>/<strong>fin&nbsp;</strong><strong>secundario (cross start/cross end)</strong>&nbsp;del contenedor flexible describen el origen y final del flujo de los elementos flexibles. Estos siguen los eje principal y secundario según el vector establecido por&nbsp;<code>writing-mode</code> (izquierda-a-derecha, derecha-a-izquierda, etc.).</p>
+
+ <ul>
+  <li>La propiedad&nbsp;<a rel="internal" href="https://developer.mozilla.org/en/CSS/order" title="en/CSS/order"><code>order</code></a>&nbsp;asigna elementos a grupos ordinales y determina qué elementos aparecen primero.</li>
+  <li>La propiedad&nbsp;<a rel="internal" href="https://developer.mozilla.org/en/CSS/flex-flow" title="flex-flow"><code>flex-flow</code></a>&nbsp;property combina las propiedades&nbsp;<a rel="internal" href="https://developer.mozilla.org/en/CSS/flex-direction" title="flex-direction"><code>flex-direction</code></a>&nbsp;y&nbsp;<a rel="internal" href="https://developer.mozilla.org/en/CSS/flex-wrap" title="flex-wrap"><code>flex-wrap</code></a>&nbsp;para colocar los elementos flexibles.</li>
+ </ul>
+ </dd>
+ <dt>Líneas</dt>
+ <dd>
+ <p>Los elementos flexibles pueden disponerse en una sola o varias líneas de acuerdo con la propiedad&nbsp;<a rel="internal" href="https://developer.mozilla.org/en/CSS/flex-wrap" title="flex-wrap"><code>flex-wrap</code></a>, que controla la dirección del eje secundario y la dirección en la que las nuevas líneas se apilan.</p>
+ </dd>
+ <dt>Dimensiones</dt>
+ <dd>
+ <p>Los términos equivalentes a "altura" y "anchura" usados en los elementos flexibles son&nbsp;<strong>tamaño principal (main size)</strong>&nbsp;and&nbsp;<strong>tamaño secundario (cross size),</strong>&nbsp;que respectivamente siguen al eje principal y al eje secundario del contenedor flexible.</p>
+
+ <ul>
+  <li>La propiedades&nbsp;<code><a href="https://developer.mozilla.org/en/CSS/min-height" title="/en/CSS/min-height">min-height</a></code>&nbsp;y&nbsp;<code><a href="https://developer.mozilla.org/en/CSS/min-width" title="/en/CSS/min-width">min-width</a></code>&nbsp;tienen un nuevo valor,&nbsp;<code>auto</code>&nbsp;que establece el tamaño mínimo de un elemento flexible.</li>
+  <li>La propiedad&nbsp;<a rel="internal" href="https://developer.mozilla.org/en/CSS/flex" title="en/CSS/flex"><code>flex</code></a>&nbsp;combina las propiedades&nbsp;<code><a rel="internal" href="https://developer.mozilla.org/en/CSS/flex-basis" title="en/CSS/flex-basis">flex-basis</a></code>,&nbsp;<a rel="internal" href="https://developer.mozilla.org/en/CSS/flex-grow" title="en/CSS/flex-grow"><code>flex-grow</code></a>, y&nbsp;<a rel="internal" href="https://developer.mozilla.org/en/CSS/flex-shrink" title="en/CSS/flex-shrink"><code>flex-shrink</code></a>&nbsp;para establecer el grado de flexibilidad de los elementos flexibles.</li>
+ </ul>
+ </dd>
+</dl>
+
+<h2 id="Diseñando_una_caja_flexible">Diseñando una "caja flexible"<a class="local-anchor" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#Dise%C3%B1ando_una_caja_flexible" data-heading-id="Diseñando_una_caja_flexible"><svg class="icon icon-link" version="1.1" width="24" height="28" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg><span>Section</span></a></h2>
+
+<p>Para indicar que unos elementos tienen este estilo CSS, asigna la propiedad&nbsp;<a href="https://developer.mozilla.org/en/CSS/display" title="/en/CSS/display">display</a>&nbsp;así:</p>
+
+<pre class="brush: css line-numbers  language-css"><code class=" language-css"><span class="token property">display</span> <span class="token punctuation">:</span> flex<span class="line-numbers-rows" aria-hidden="true"><span></span></span></code></pre>
+
+<p>o</p>
+
+<pre class="brush: css line-numbers  language-css"><code class=" language-css"><span class="token property">display</span> <span class="token punctuation">:</span> inline-flex<span class="line-numbers-rows" aria-hidden="true"><span></span></span></code></pre>
+
+<p>Haciendo esto, se define el elemento como contenedor flexible y todos sus "hijos" como elementos flexibles.&nbsp;El valor&nbsp;<code>flex</code>&nbsp;hace que el contenedor flexible sea un bloque dentro del elemento "padre" al que pertenezca. El valor&nbsp;<code>inline-flex</code>&nbsp;hace que el contenedor flexible sea un elemento "en línea" dentro del elemento "padre" al que pertenezca.</p>
+
+<div class="note"><strong>Nota:</strong> Cuando utilices un prefijo para el tipo de navegador, ponlo en la propiedad "display" no en el atributo "display". Por ejemplo,&nbsp;<code>display : -webkit-flex</code>.</div>
+
+<h2 id="Consideraciones_de_los_elementos_flexibles">Consideraciones de los elementos flexibles<a class="local-anchor" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#Consideraciones_de_los_elementos_flexibles" data-heading-id="Consideraciones_de_los_elementos_flexibles"><svg class="icon icon-link" version="1.1" width="24" height="28" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg><span>Section</span></a></h2>
+
+<p>El texto que se encuentre directamente dentro de un contenedor flexible, será automáticamente envuelto en un elemento flexible anónimo. Sin embargo, si un elemento flexible contiene solamente espacios en blanco no será mostrado, como si tuviera la propiedad&nbsp;<code style="color: rgb(93,86,54); font-size: 14px;">display:none</code>.</p>
+
+<p>Los "hijos" de un contenedor flexible que tengan un posicionamiento absoluto, se situarán de manera que su posición estática se determine en referencia a la esquina del <strong>inicio principal (main start)</strong> de su contenedor flexible.</p>
+
+<p>Actualmente, debido a un problema conocido, asignar <code style="font-size: 14px;">visibility:collapse</code>&nbsp;a un elemento flexible causa que sea tratado como si fuera&nbsp;<code style="font-size: 14px;">display:none</code>&nbsp;en vez de lo que se supone que debería ocurrir, es decir, como si fuera&nbsp;<code style="font-size: 14px;">visibility:hidden</code>. La alternativa mientras se resuelve este problema es usar&nbsp;<code>visibility:hidden</code> para elementos flexibles que deban comportarse como&nbsp;<code>visibility:collapse</code>.</p>
+
+<p>Los márgenes de elementos flexibles adyacentes no se colapsan. Usando márgenes&nbsp;<code>auto</code> se absorbe el espacio extra vertical y horizontalmente y puede ser utilizado para alinear o separar elementos flexibles adyacentes. Ver&nbsp;<a rel="noopener" href="http://dev.w3.org/csswg/css3-flexbox/#auto-margins" class="external external-icon" title="http://dev.w3.org/csswg/css3-flexbox/#auto-margins">Aligning with 'auto' margins</a>&nbsp;en la especificación "W3C Flexible Box Layout Model" para más detalles al respecto.</p>
+
+<p>Para asegurar un tamaño mínimo por defecto de los elementos flexibles, usa&nbsp;<code>min-width:auto</code> y/o&nbsp;<code>min-height:auto</code>. Para los elementos flexibles, el valor de atributo&nbsp;<code>auto</code>&nbsp;calcula la mínima anchura/altura del elemento para que no sea menor que la anchura/altura de su contenido, garantizando que el elemento es mostrado suficientemente grande como para que se vea su contenido. Ver <a href="https://developer.mozilla.org/es/docs/Web/CSS/min-width" title="La propiedad min-width se usa para determinar la anchura mínima de un elemento. Previene que la propiedad width pueda ser inferior que min-width."><code>min-width</code></a>&nbsp; y <a href="https://developer.mozilla.org/es/docs/Web/CSS/min-height" title="La propiedad min-height se utiliza para definir la altura mínima de un elemento dado. Impide que el valor de la propiedad height llegue a ser más pequeña que la especificada en la altura mínima (min-height)."><code>min-height</code></a> para más detalles al respecto.</p>
+
+<p>Las propiedades de alineación de "cajas flexibles" realizan un "verdadero" centrado en CSS. Esto significa que los elementos flexibles permanecerán centrados, incluso si estos rebasan su contenedor flexible. Esto puede llegar a ser un problema, ya que si sobrepasan el tope superior de la página o el izquierdo (en escritura LTR de izquierda-a-derecha) o el derecho (en escritura RTL de derecha-a-izquierda), no se puede desplazar hacia ese área, incluso habiendo contenido allí. En el futuro, las propiedades de alineación se ampliarán para que tengan una opción "safe" (seguro) para controlar esta situación. De momento, si esto te preocupa, puedes usar los márgenes para conseguir el centrado, ya que estos responderán de modo seguro parando el centrado si se sobrepasan los límites. En vez de usar las propiedades&nbsp;<code>align-</code>, simplemente pon márgenes automáticos en los elementos flexibles que quieras centrar. En vez de usar las propiedades&nbsp;<code>justify-</code>, pon márgenes automáticos en los límites exteriores del primer y último elemento flexible del contenedor flexible. Los márgenes automáticos se adaptarán asumiendo el espacio sobrante, centrando los elementos flexibles donde sobre espacio, y cambiando a alineación normal donde no sobre espacio. Sin embargo, si tratas de reemplazar&nbsp;<code>justify-content</code> con "centrado-basado-en-márgenes" en una "caja flexible" multi-línea, probablemente no funcionará, ya que tendrías que poner márgenes en el primer y último elemento de cada línea. A menos que puedas predecir qué elementos encajarán en cada línea, no tendrás una respuesta fiable usando el "<span style="line-height: inherit;">centrado-basado-en-márgenes</span><span style="line-height: inherit;">" en el eje principal al reemplazar la propiedad&nbsp;</span><code style="font-size: 14px; line-height: inherit;">justify-content</code><span style="line-height: inherit;">.</span></p>
+
+<p>Recuerda que mientras el orden en que se muestran los elementos es independiente de su orden en el código fuente, esta independecia afecta solamente a la representación visual, y no al orden de locución y navegación que seguirán el orden establecido en el código fuente. Incluso la propiedad <a href="https://developer.mozilla.org/es/docs/Web/CSS/order" title="La propiedad CSS order especifica el orden utilizado para disponer los elementos en su contenedor flexible. Los elementos estarán dispuestos en orden ascendente según el valor de order. Los elementos con el mismo valor de order se dispondrán en el orden en el cual aparecen en el código fuente."><code>order</code></a> no afectará a la secuencia de locución ni de navegación. Así que los desarrolladores deben preocuparse del orden de los elementos adecuadamente en el código fuente para que no se deteriore la accesibilidad del documento.&nbsp;</p>
+
+<h2 id="Propiedades_de_las_cajas_flexibles">Propiedades de las "cajas flexibles"<a class="local-anchor" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#Propiedades_de_las_cajas_flexibles" data-heading-id="Propiedades_de_las_cajas_flexibles"><svg class="icon icon-link" version="1.1" width="24" height="28" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg><span>Section</span></a></h2>
+
+<h3 id="Propiedades_que_no_afectan_a_las_cajas_flexibles" class="highlight-spanned"><span class="highlight-span">Propiedades que no afectan a las "cajas flexibles"</span><a class="local-anchor" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#Propiedades_que_no_afectan_a_las_cajas_flexibles" data-heading-id="Propiedades_que_no_afectan_a_las_cajas_flexibles"><svg class="icon icon-link" version="1.1" width="24" height="28" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg><span>Section</span></a></h3>
+
+<p>Como las "cajas flexibles" emplean un algoritmo diferente, alguna propiedades no tienen sentido para un contenedor flexible.</p>
+
+<ul>
+ <li>Propiedades column-* del <a href="https://developer.mozilla.org/en/CSS/Using_CSS_multi-column_layouts" title="/en/CSS/Using_CSS_multi-column_layouts">Módulo Multicol</a>&nbsp;no tienen ningún efecto en un elemento flexible.</li>
+ <li><a href="https://developer.mozilla.org/es/docs/Web/CSS/float" title="La propiedad float especifica si un elemento debe salir del flujo normal y aparecer a la izquierda o a la derecha de su contenedor, donde los elementos de texto y los en línea aparecerán a su alrededor."><code>float</code></a> y <a href="https://developer.mozilla.org/es/docs/Web/CSS/clear" title="La propiedad CSS clear especifica si un elemento puede estar al lado de elementos flotantes que lo preceden o si debe ser movido (cleared) debajo de ellos. La propiedad clear aplica a ambos elementos flotantes y no flotantes."><code>clear</code></a> no tienen ningún efecto en un elemento flexible. Usar&nbsp;<code>float</code>&nbsp;causa que la propiedad&nbsp;<code>display</code>&nbsp;del elemento se comporte como&nbsp;<code>block</code>.</li>
+ <li><a href="https://developer.mozilla.org/es/docs/Web/CSS/vertical-align" title="La propiedad vertical-align de CSS especifica el alineado vertical de un elemento en línea o una celda de una tabla."><code>vertical-align</code></a> no tiene efecto en la alineación de los elementos flexibles.</li>
+</ul>
+
+<h2 id="Ejemplos">Ejemplos<a class="local-anchor" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#Ejemplos" data-heading-id="Ejemplos"><svg class="icon icon-link" version="1.1" width="24" height="28" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg><span>Section</span></a></h2>
+
+<h3 id="Ejemplo_básico_flex" class="highlight-spanned"><span class="highlight-span">Ejemplo básico "flex"</span><a class="local-anchor" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#Ejemplo_b%C3%A1sico_flex" data-heading-id="Ejemplo_básico_flex"><svg class="icon icon-link" version="1.1" width="24" height="28" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg><span>Section</span></a></h3>
+
+<p>Este ejemplo básico muestra como aplicar "flexibilidad" a un elemento y como sus "hijos" se comportan flexiblemente.&nbsp;</p>
+
+<pre class="brush:html; line-numbers  language-html"><code class=" language-html">​<span class="token doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style language-css">
+
+   <span class="token selector"><span class="token class">.flex</span>
+   </span><span class="token punctuation">{</span>
+      <span class="token comment" spellcheck="true">/* basic styling */</span>
+      <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">350</span>px<span class="token punctuation">;</span>
+      <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">200</span>px<span class="token punctuation">;</span>
+      <span class="token property">border</span><span class="token punctuation">:</span> <span class="token number">1</span>px solid <span class="token hexcode">#555</span><span class="token punctuation">;</span>
+      <span class="token property">font</span><span class="token punctuation">:</span> <span class="token number">14</span>px Arial<span class="token punctuation">;</span>
+
+      <span class="token comment" spellcheck="true">/* flexbox setup */</span>
+      <span class="token property">display</span><span class="token punctuation">:</span> -webkit-flex<span class="token punctuation">;</span>
+      <span class="token property">-webkit-flex-direction</span><span class="token punctuation">:</span> row<span class="token punctuation">;</span>
+
+      <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+      <span class="token property">flex-direction</span><span class="token punctuation">:</span> row<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token selector"><span class="token class">.flex</span> &gt; div
+   </span><span class="token punctuation">{</span>
+      <span class="token property">-webkit-flex</span><span class="token punctuation">:</span> <span class="token number">1</span> <span class="token number">1</span> auto<span class="token punctuation">;</span>
+      <span class="token property">flex</span><span class="token punctuation">:</span> <span class="token number">1</span> <span class="token number">1</span> auto<span class="token punctuation">;</span>
+
+      <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">30</span>px<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* To make the transition work nicely.  (Transitions to/from
+                      "width:auto" are buggy in Gecko and Webkit, at least.
+                      See http://bugzil.la/731886 for more info.) */</span>
+
+      <span class="token property">-webkit-transition</span><span class="token punctuation">:</span> width <span class="token number">0.7</span>s ease-out<span class="token punctuation">;</span>
+      <span class="token property">transition</span><span class="token punctuation">:</span> width <span class="token number">0.7</span>s ease-out<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token comment" spellcheck="true">/* colors */</span>
+   <span class="token selector"><span class="token class">.flex</span> &gt; div<span class="token pseudo-class">:nth-child(1)</span></span><span class="token punctuation">{</span> <span class="token property">background</span> <span class="token punctuation">:</span> <span class="token hexcode">#009246</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+   <span class="token selector"><span class="token class">.flex</span> &gt; div<span class="token pseudo-class">:nth-child(2)</span></span><span class="token punctuation">{</span> <span class="token property">background</span> <span class="token punctuation">:</span> <span class="token hexcode">#F1F2F1</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+   <span class="token selector"><span class="token class">.flex</span> &gt; div<span class="token pseudo-class">:nth-child(3)</span></span><span class="token punctuation">{</span> <span class="token property">background</span> <span class="token punctuation">:</span> <span class="token hexcode">#CE2B37</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+   <span class="token selector"><span class="token class">.flex</span> &gt; div<span class="token pseudo-class">:hover</span>
+   </span><span class="token punctuation">{</span>
+        <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">200</span>px<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+   
+   </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+    
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>Flexbox nuovo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>flex<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>uno<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>due<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>tre<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span><span class="line-numbers-rows" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Ejemplo_de_Diseño_del_Santo_Gríal" class="highlight-spanned"><span class="highlight-span">Ejemplo de "Diseño del Santo Gríal"</span><a class="local-anchor" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#Ejemplo_de_Dise%C3%B1o_del_Santo_Gr%C3%ADal" data-heading-id="Ejemplo_de_Diseño_del_Santo_Gríal"><svg class="icon icon-link" version="1.1" width="24" height="28" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg><span>Section</span></a></h3>
+
+<p>Este ejemplo muestra como la "caja flexible" proporciona la habilidad de cambiar dinámicamente el diseño para distintas resoluciones de pantalla. El diagrama siguiente ilustra la transformación.</p>
+
+<p><img src="./Usando las cajas flexibles CSS - CSS _ MDN_files/HolyGrailLayout.png" alt="HolyGrailLayout.png" class="default internal"></p>
+
+<p>Aquí se muestra el caso en que el diseño de la página adaptado a un navegador tiene que mostrarse óptimamente en un smartphone. No solamente los elementos se reducen de tamaño, sino que el orden en que se muestran también cambia. La "caja flexible" lo hace muy sencillo.</p>
+
+<pre class="brush:html; line-numbers  language-html"><code class=" language-html">​
+<span class="token doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style language-css">
+
+  <span class="token selector">body </span><span class="token punctuation">{</span>
+   <span class="token property">font</span><span class="token punctuation">:</span> <span class="token number">24</span>px Helvetica<span class="token punctuation">;</span>
+   <span class="token property">background</span><span class="token punctuation">:</span> <span class="token hexcode">#999999</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token selector"><span class="token id">#main</span> </span><span class="token punctuation">{</span>
+   <span class="token property">min-height</span><span class="token punctuation">:</span> <span class="token number">800</span>px<span class="token punctuation">;</span>
+   <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token number">0</span>px<span class="token punctuation">;</span>
+   <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">0</span>px<span class="token punctuation">;</span>
+   <span class="token property">display</span><span class="token punctuation">:</span> -webkit-flex<span class="token punctuation">;</span>
+   <span class="token property">display</span><span class="token punctuation">:</span>         flex<span class="token punctuation">;</span>
+   <span class="token property">-webkit-flex-flow</span><span class="token punctuation">:</span> row<span class="token punctuation">;</span>
+           <span class="token property">flex-flow</span><span class="token punctuation">:</span> row<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+ 
+  <span class="token selector"><span class="token id">#main</span> &gt; article </span><span class="token punctuation">{</span>
+   <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token number">4</span>px<span class="token punctuation">;</span>
+   <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">5</span>px<span class="token punctuation">;</span>
+   <span class="token property">border</span><span class="token punctuation">:</span> <span class="token number">1</span>px solid <span class="token hexcode">#cccc33</span><span class="token punctuation">;</span>
+   <span class="token property">border-radius</span><span class="token punctuation">:</span> <span class="token number">7</span>pt<span class="token punctuation">;</span>
+   <span class="token property">background</span><span class="token punctuation">:</span> <span class="token hexcode">#dddd88</span><span class="token punctuation">;</span>
+   <span class="token property">-webkit-flex</span><span class="token punctuation">:</span> <span class="token number">3</span> <span class="token number">1</span> <span class="token number">60%</span><span class="token punctuation">;</span>
+           <span class="token property">flex</span><span class="token punctuation">:</span> <span class="token number">3</span> <span class="token number">1</span> <span class="token number">60%</span><span class="token punctuation">;</span>
+   <span class="token property">-webkit-order</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">;</span>
+           <span class="token property">order</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+  
+  <span class="token selector"><span class="token id">#main</span> &gt; nav </span><span class="token punctuation">{</span>
+   <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token number">4</span>px<span class="token punctuation">;</span>
+   <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">5</span>px<span class="token punctuation">;</span>
+   <span class="token property">border</span><span class="token punctuation">:</span> <span class="token number">1</span>px solid <span class="token hexcode">#8888bb</span><span class="token punctuation">;</span>
+   <span class="token property">border-radius</span><span class="token punctuation">:</span> <span class="token number">7</span>pt<span class="token punctuation">;</span>
+   <span class="token property">background</span><span class="token punctuation">:</span> <span class="token hexcode">#ccccff</span><span class="token punctuation">;</span>
+   <span class="token property">-webkit-flex</span><span class="token punctuation">:</span> <span class="token number">1</span> <span class="token number">6</span> <span class="token number">20%</span><span class="token punctuation">;</span>
+           <span class="token property">flex</span><span class="token punctuation">:</span> <span class="token number">1</span> <span class="token number">6</span> <span class="token number">20%</span><span class="token punctuation">;</span>
+   <span class="token property">-webkit-order</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">;</span>
+           <span class="token property">order</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+  
+  <span class="token selector"><span class="token id">#main</span> &gt; aside </span><span class="token punctuation">{</span>
+   <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token number">4</span>px<span class="token punctuation">;</span>
+   <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">5</span>px<span class="token punctuation">;</span>
+   <span class="token property">border</span><span class="token punctuation">:</span> <span class="token number">1</span>px solid <span class="token hexcode">#8888bb</span><span class="token punctuation">;</span>
+   <span class="token property">border-radius</span><span class="token punctuation">:</span> <span class="token number">7</span>pt<span class="token punctuation">;</span>
+   <span class="token property">background</span><span class="token punctuation">:</span> <span class="token hexcode">#ccccff</span><span class="token punctuation">;</span>
+   <span class="token property">-webkit-flex</span><span class="token punctuation">:</span> <span class="token number">1</span> <span class="token number">6</span> <span class="token number">20%</span><span class="token punctuation">;</span>
+           <span class="token property">flex</span><span class="token punctuation">:</span> <span class="token number">1</span> <span class="token number">6</span> <span class="token number">20%</span><span class="token punctuation">;</span>
+   <span class="token property">-webkit-order</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">;</span>
+           <span class="token property">order</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+ 
+  <span class="token selector">header, footer </span><span class="token punctuation">{</span>
+   <span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>
+   <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token number">4</span>px<span class="token punctuation">;</span>
+   <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">5</span>px<span class="token punctuation">;</span>
+   <span class="token property">min-height</span><span class="token punctuation">:</span> <span class="token number">100</span>px<span class="token punctuation">;</span>
+   <span class="token property">border</span><span class="token punctuation">:</span> <span class="token number">1</span>px solid <span class="token hexcode">#eebb55</span><span class="token punctuation">;</span>
+   <span class="token property">border-radius</span><span class="token punctuation">:</span> <span class="token number">7</span>pt<span class="token punctuation">;</span>
+   <span class="token property">background</span><span class="token punctuation">:</span> <span class="token hexcode">#ffeebb</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+ 
+  <span class="token comment" spellcheck="true">/* Too narrow to support three columns */</span>
+  <span class="token atrule"><span class="token rule">@media</span> all and <span class="token punctuation">(</span><span class="token property">max-width</span><span class="token punctuation">:</span> 640px<span class="token punctuation">)</span></span> <span class="token punctuation">{</span>
+  
+   <span class="token selector"><span class="token id">#main</span>, <span class="token id">#page</span> </span><span class="token punctuation">{</span>
+    <span class="token property">-webkit-flex-flow</span><span class="token punctuation">:</span> column<span class="token punctuation">;</span>
+            <span class="token property">flex-flow</span><span class="token punctuation">:</span> column<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token selector"><span class="token id">#main</span> &gt; article, <span class="token id">#main</span> &gt; nav, <span class="token id">#main</span> &gt; aside </span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/* Return them to document order */</span>
+    <span class="token property">-webkit-order</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token property">order</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+  
+   <span class="token selector"><span class="token id">#main</span> &gt; nav, <span class="token id">#main</span> &gt; aside, header, footer </span><span class="token punctuation">{</span>
+    <span class="token property">min-height</span><span class="token punctuation">:</span> <span class="token number">50</span>px<span class="token punctuation">;</span>
+    <span class="token property">max-height</span><span class="token punctuation">:</span> <span class="token number">50</span>px<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+ </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>header</span><span class="token punctuation">&gt;</span></span>header<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>header</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>main<span class="token punctuation">'</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>article</span><span class="token punctuation">&gt;</span></span>article<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>article</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nav</span><span class="token punctuation">&gt;</span></span>nav<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nav</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>aside</span><span class="token punctuation">&gt;</span></span>aside<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>aside</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>footer</span><span class="token punctuation">&gt;</span></span>footer<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>footer</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span><span class="line-numbers-rows" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Área_de_juego">Área de juego<a class="local-anchor" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#%C3%81rea_de_juego" data-heading-id="Área_de_juego"><svg class="icon icon-link" version="1.1" width="24" height="28" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg><span>Section</span></a></h2>
+
+<p>Hay varias áreas de juego de "cajas flexibles" disponibles on-line para experimentar:</p>
+
+<ul>
+ <li><a rel="noopener" href="http://demo.agektmr.com/flexbox/" class="external external-icon" title="http://demo.agektmr.com/flexbox/">Flexbox Playground</a></li>
+ <li><a rel="noopener" href="http://the-echoplex.net/flexyboxes" class="external external-icon" title="http://the-echoplex.net/flexyboxes">Flexy Boxes</a></li>
+</ul>
+
+<h2 id="Cosas_a_tener_en_mente">Cosas a tener en mente<a class="local-anchor" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#Cosas_a_tener_en_mente" data-heading-id="Cosas_a_tener_en_mente"><svg class="icon icon-link" version="1.1" width="24" height="28" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg><span>Section</span></a></h2>
+
+<p>El algoritmo de las "cajas flexibles" puede ser un poco complejo de entender a veces. Hay una serie de cosas a considerar para evitar "sorpresas" cuando se utilizan las "cajas flexibles".</p>
+
+<p>Las "cajas flexibles" se comportan en función del <a href="https://developer.mozilla.org/en-US/docs/CSS/writing-mode" title="https://developer.mozilla.org/en-US/docs/CSS/writing-mode">modo de escritura</a> establecido. Esto siginifica que <strong>inicio principal</strong> (<strong>main start</strong>) y <strong>fin principal</strong> (<strong>main end</strong>) se disponen de según la posición de <strong>inicio</strong> (<strong>start</strong>) y <strong>fin</strong> (<strong>end</strong>).</p>
+
+<p><strong>inicio secundario (cross start)</strong> y <strong>fin secundario</strong> (<strong>cross end)</strong> confían en la definición de la posición <strong>inicio</strong> (<strong>start)</strong> o <strong>antes</strong> (<strong>before)</strong> que depende del valor de&nbsp;<a href="https://developer.mozilla.org/en/CSS/direction" title="direction"><code>direction</code></a>.</p>
+
+<p>Los saltos de página son posibles en el diseño de "cajas flexibles" siempre que la propiedad&nbsp;<code>break-</code> lo permita. Las propiedades CSS3 <code>break-after</code>, <code>break-before</code> y <code>break-inside</code> así como las propiedades CSS 2.1&nbsp;<code>page-break-before</code>, <code>page-break-after</code> y <code>page-break-inside</code>&nbsp;se aceptan en los contenedores flexibles, también en los elementos flexibles que ellos contienen, y también en los elementos que esos elementos flexibles a su vez contienen.</p>
+
+<h2 id="Compatibilidad_de_Navegadores">Compatibilidad de Navegadores<a class="local-anchor" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#Compatibilidad_de_Navegadores" data-heading-id="Compatibilidad_de_Navegadores"><svg class="icon icon-link" version="1.1" width="24" height="28" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg><span>Section</span></a></h2>
+
+<p></p><p class="warning"><strong><a rel="noopener" href="https://github.com/mdn/browser-compat-data" class="external external-icon">We're converting our compatibility data into a machine-readable JSON format</a></strong>.
+            This compatibility table still uses the old format,
+            because we haven't yet converted the data it contains.
+            <strong><a rel="nofollow" href="https://developer.mozilla.org/es/docs/MDN/Contribute/Structures/Compatibility_tables" class="new">Find out how you can help!</a></strong></p>
+
+<div class="htab">
+    <a id="AutoCompatibilityTable" name="AutoCompatibilityTable"></a>
+    <ul>
+        <li class="selected"><a>Escritorio</a></li>
+        <li><a>Móvil</a></li>
+    </ul>
+<div id="compat-desktop" style="display: block;">
+<table class="compat-table">
+ <tbody>
+  <tr>
+   <th>Caraterística</th>
+   <th>Firefox (Gecko)</th>
+   <th>Chrome</th>
+   <th>Internet Explorer</th>
+   <th>Opera</th>
+   <th>Safari</th>
+  </tr>
+  <tr>
+   <td>Soporte Básico</td>
+   <td><a href="https://developer.mozilla.org/en-US/Firefox/Releases/18" title="Publicado en 2013-01-08.">18.0</a> (18.0)<span class="inlineIndicator prefixBox prefixBoxInline" title="prefix"><a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/Guide/Prefixes" class="new" title="The name of this feature is prefixed with &#39;-moz&#39; as this browser considers it experimental">-moz</a></span>(Behind a pref) [2]<br>
+    <a href="https://developer.mozilla.org/en-US/Firefox/Releases/22" title="Publicado en 2013-06-25.">22.0</a> (22.0)</td>
+   <td>21.0<span class="inlineIndicator prefixBox prefixBoxInline" title="prefix"><a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/Guide/Prefixes" class="new" title="The name of this feature is prefixed with &#39;-webkit&#39; as this browser considers it experimental">-webkit</a></span></td>
+   <td>10<span class="inlineIndicator prefixBox prefixBoxInline" title="prefix"><a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/Guide/Prefixes" class="new" title="The name of this feature is prefixed with &#39;-ms&#39; as this browser considers it experimental">-ms</a></span>(partial)</td>
+   <td>12.1</td>
+   <td>3.1<span class="inlineIndicator prefixBox prefixBoxInline" title="prefix"><a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/Guide/Prefixes" class="new" title="The name of this feature is prefixed with &#39;-webkit&#39; as this browser considers it experimental">-webkit</a></span>(partial)<br>
+    6.1<span class="inlineIndicator prefixBox prefixBoxInline" title="prefix"><a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/Guide/Prefixes" class="new" title="The name of this feature is prefixed with &#39;-webkit&#39; as this browser considers it experimental">-webkit</a></span><br>
+    9</td>
+  </tr>
+ </tbody>
+</table>
+</div><div id="compat-mobile" style="display: none;">
+<table class="compat-table">
+ <tbody>
+  <tr>
+   <th>Caraterística</th>
+   <th>Firefox Mobile (Gecko)</th>
+   <th>Android</th>
+   <th>IE&nbsp;Phone</th>
+   <th>Opera Mobile</th>
+   <th>Safari Mobile</th>
+  </tr>
+  <tr>
+   <td>Soporte Básico</td>
+   <td>18.0 (18.0)<span class="inlineIndicator prefixBox prefixBoxInline" title="prefix"><a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/Guide/Prefixes" class="new" title="The name of this feature is prefixed with &#39;-moz&#39; as this browser considers it experimental">-moz</a></span>(Behind a pref) [2]<br>
+    22.0 (22.0)</td>
+   <td><span style="color: rgb(255, 153, 0);" title="Compatibilidad desconocida, por favor actualízala.">?</span></td>
+   <td>10<span class="inlineIndicator prefixBox prefixBoxInline" title="prefix"><a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/Guide/Prefixes" class="new" title="The name of this feature is prefixed with &#39;-ms&#39; as this browser considers it experimental">-ms</a></span>(partial)<br>
+    11</td>
+   <td>12.1</td>
+   <td>
+    <p>3.2<span class="inlineIndicator prefixBox prefixBoxInline" title="prefix"><a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/Guide/Prefixes" class="new" title="The name of this feature is prefixed with &#39;-webkit&#39; as this browser considers it experimental">-webkit</a></span>(partial)<br>
+     7.1<span class="inlineIndicator prefixBox prefixBoxInline" title="prefix"><a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/Guide/Prefixes" class="new" title="The name of this feature is prefixed with &#39;-webkit&#39; as this browser considers it experimental">-webkit</a></span><br>
+     9.0</p>
+   </td>
+  </tr>
+ </tbody>
+</table>
+</div></div><p></p>
+
+
+
+
+
+<h3 id="Notas" class="highlight-spanned"><span class="highlight-span">Notas</span><a class="local-anchor" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#Notas" data-heading-id="Notas"><svg class="icon icon-link" version="1.1" width="24" height="28" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg><span>Section</span></a></h3>
+
+<p>[1] Internet Explorer 10 y&nbsp;Safari soportan un antiguo borrador de la especificación que es incompatible. No han sido actualizados para soportar la versión final.</p>
+
+<p>[2] Firefox soporta solamente la "caja flexible" con una sola línea. Para activar el soporte de "caja flexible" el usuario tiene que cambiar la preferencia about:config "layout.css.flexbox.enabled" a <code>true</code>.</p>
+
+<p>[3] El navegador de Android hasta la versión 4.3 soporta un borrador&nbsp;antiguo&nbsp;e incompatible de la especificación. Android 4.4 ha sido actualizado para dar soporte a la versión final.</p>
+
+<p>[4] Mientras que en la implementación inicial en Opera 12.10&nbsp;<code>flexbox&nbsp;</code>no estaba en el prefijo, obtuvo prefijos en las versiones de la 15 a la 16 de Opera y 15 a 19 de Opera Mobile con&nbsp;<span class="inlineIndicator prefixBox prefixBoxInline" title="prefix"><a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/Guide/Prefixes" class="new" title="The name of this feature is prefixed with &#39;-webkit&#39; as this browser considers it experimental">-webkit</a></span>. Este prefijo, fue eliminado de nuevo en Opera 17 y Opera Mobile 24.</p>
+
+<p>[5] Hasta Firefox 29, especificar&nbsp;<code>visibility: collapse</code>&nbsp;en un elemento&nbsp;flex causaba que fuera tratado como si fuera&nbsp;<code>display: none&nbsp;</code>en vez del comportamiento pretendido, tratándolo como si fuera&nbsp;<code>visibility: hidden</code>. El método alternativo sugerido es usar&nbsp;<code>visibility: hidden</code>&nbsp;para los elementos flex que debieran comportarse como si huberan sido designados&nbsp;<code>visibility: collapse</code>. Para más información, ver&nbsp;<a rel="noopener" href="https://bugzilla.mozilla.org/show_bug.cgi?id=783470" class="external external-icon" title="FIXED: implement &quot;visibility: collapse&quot; behavior on flexbox">error&nbsp;783470</a>.</p>
+
+<h2 id="Ver_también">Ver también<a class="local-anchor" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS#Ver_tambi%C3%A9n" data-heading-id="Ver_también"><svg class="icon icon-link" version="1.1" width="24" height="28" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg><span>Section</span></a></h2>
+
+<ul>
+ <li><a rel="noopener" href="https://github.com/philipwalton/flexbugs" class="external external-icon">El Proyecto Flexbugs</a>&nbsp;para información de errores en implementación de flexbox en navegadores.</li>
+</ul>
+                  
+                
+              </article>
+
+              <!-- contributors -->
+              <div class="wiki-block contributors">
+                <h2 class="offscreen">Etiquetas y colaboradores del documento</h2>
+                
+                
+
+                
+                  <div class="contributors-sub">
+                    <svg class="icon icon-group" xmlns="http://www.w3.org/2000/svg" width="30" height="28" viewBox="0 0 30 28" aria-hidden="true">
+    <path d="M9.266 14a5.532 5.532 0 0 0-4.141 2H3.031C1.468 16 0 15.25 0 13.516 0 12.25-.047 8 1.937 8c.328 0 1.953 1.328 4.062 1.328.719 0 1.406-.125 2.078-.359A7.624 7.624 0 0 0 7.999 10c0 1.422.453 2.828 1.266 4zM26 23.953C26 26.484 24.328 28 21.828 28H8.172C5.672 28 4 26.484 4 23.953 4 20.422 4.828 15 9.406 15c.531 0 2.469 2.172 5.594 2.172S20.063 15 20.594 15C25.172 15 26 20.422 26 23.953zM10 4c0 2.203-1.797 4-4 4S2 6.203 2 4s1.797-4 4-4 4 1.797 4 4zm11 6c0 3.313-2.688 6-6 6s-6-2.688-6-6 2.688-6 6-6 6 2.688 6 6zm9 3.516C30 15.25 28.531 16 26.969 16h-2.094a5.532 5.532 0 0 0-4.141-2A7.066 7.066 0 0 0 22 10a7.6 7.6 0 0 0-.078-1.031A6.258 6.258 0 0 0 24 9.328C26.109 9.328 27.734 8 28.062 8c1.984 0 1.937 4.25 1.937 5.516zM28 4c0 2.203-1.797 4-4 4s-4-1.797-4-4 1.797-4 4-4 4 1.797 4 4z"></path>
+</svg>
+                    <strong>Colaboradores en esta página:</strong>
+                    
+        <a href="https://developer.mozilla.org/es/profiles/VictorSan45">VictorSan45</a>, 
+    
+        <a href="https://developer.mozilla.org/es/profiles/NeXuZZ-SCM">NeXuZZ-SCM</a>, 
+    
+        <a href="https://developer.mozilla.org/es/profiles/Tonylu11">Tonylu11</a>, 
+    
+        <a href="https://developer.mozilla.org/es/profiles/javier_junin">javier_junin</a>, 
+    
+        <a href="https://developer.mozilla.org/es/profiles/AlePerez92">AlePerez92</a>, 
+    
+        <a href="https://developer.mozilla.org/es/profiles/MMariscal">MMariscal</a>, 
+    
+        <a href="https://developer.mozilla.org/es/profiles/fscholz">fscholz</a>, 
+    
+        <a href="https://developer.mozilla.org/es/profiles/ArcangelZith">ArcangelZith</a>, 
+    
+        <a href="https://developer.mozilla.org/es/profiles/FNK">FNK</a>, 
+    
+        <a href="https://developer.mozilla.org/es/profiles/rippe2hl">rippe2hl</a>, 
+    
+        <a href="https://developer.mozilla.org/es/profiles/StripTM">StripTM</a>, 
+    
+        <a href="https://developer.mozilla.org/es/profiles/joan.leon">joan.leon</a>, 
+    
+        <a href="https://developer.mozilla.org/es/profiles/arturo_sanz">arturo_sanz</a>
+    
+                  </div>
+                
+
+                
+                  <div class="contributors-sub">
+                    <svg class="icon icon-clock" xmlns="http://www.w3.org/2000/svg" width="24" height="28" viewBox="0 0 24 28" aria-hidden="true">
+    <path d="M14 8.5v7c0 .281-.219.5-.5.5h-5a.494.494 0 0 1-.5-.5v-1c0-.281.219-.5.5-.5H12V8.5c0-.281.219-.5.5-.5h1c.281 0 .5.219.5.5zm6.5 5.5c0-4.688-3.813-8.5-8.5-8.5S3.5 9.313 3.5 14s3.813 8.5 8.5 8.5 8.5-3.813 8.5-8.5zm3.5 0c0 6.625-5.375 12-12 12S0 20.625 0 14 5.375 2 12 2s12 5.375 12 12z"></path>
+</svg>
+                    <strong>Última actualización por:</strong>
+                    <a href="https://developer.mozilla.org/es/profiles/VictorSan45">VictorSan45</a>,
+                    <time datetime="2018-08-12T15:57:02.498417-07:00">12 ago. 2018 15:57:02</time>
+                  </div>
+                
+              </div>
+            </div>
+
+            
+              <!-- quick links and approvals strip -->
+              <div id="wiki-left" class="column-strip wiki-column">
+
+                <!-- crumbs -->
+                
+  
+    <nav class="crumbs" role="navigation">
+      <ol typeof="BreadcrumbList" vocab="https://schema.org/" aria-label="hilos de araña">
+        
+          <li property="itemListElement" typeof="ListItem" class="crumb">
+            <a href="https://developer.mozilla.org/es/docs/Web" property="item" typeof="WebPage">
+              <span property="name">Tecnología web para desarrolladores</span>
+            </a>
+            <meta property="position" content="1">
+          </li>
+        
+          <li property="itemListElement" typeof="ListItem" class="crumb">
+            <a href="https://developer.mozilla.org/es/docs/Web/CSS" property="item" typeof="WebPage">
+              <span property="name">CSS</span>
+            </a>
+            <meta property="position" content="2">
+          </li>
+        
+          <li property="itemListElement" typeof="ListItem" class="crumb">
+            <a href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout" property="item" typeof="WebPage">
+              <span property="name">CSS Flexible Box Layout</span>
+            </a>
+            <meta property="position" content="3">
+          </li>
+        
+        <li property="itemListElement" typeof="ListItem" class="crumb">
+          <span property="name" aria-current="page">Usando las cajas flexibles CSS</span>
+        </li>
+      </ol>
+    </nav>
+  
+
+                
+                  <!-- quick links -->
+                  
+  <div class="quick-links" id="quick-links">
+    <div class="quick-links-head">Temas relacionados</div>
+    <ol><li><strong><a href="https://developer.mozilla.org/es/docs/Web/CSS">CSS</a></strong></li><li><strong><a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/CSS/Reference" class="new">Referencia CSS</a></strong></li><li><strong><a href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout">CSS Flexible Box Layout</a></strong></li><li class="toggle"><details open=""><summary>Guías</summary><ol><li><a href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container" title="Una de las razones por las que flexbox atrajo rápidamente el interés de los desarrolladores web es que por primera vez en la web se ha conseguido unas posibilidades compleatas de alineamiento de elementos. Se habilita la alineación vertical, de modo que por fin existe una manera rápida y facil de centrar una caja.  A lo largo de esta guía, vamos a desarrollar un exhaustivo recorrido  sobre el funcionamiento de las propiedades de alineamiento y justificación en Flexbox.">Aligning Items in a Flex Container</a></li><li><a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Backwards_Compatibility_of_Flexbox" class="new" title="Flexbox is very well supported across modern browsers, however there are a few issues that you might run into. In this guide we will look at how well flexbox is supported in browsers, and look at some potential issues, resources and methods for creating workarounds and fallbacks.">Backwards Compatibility of Flexbox</a> <a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Backwards_Compatibility_of_Flexbox$translate" class="new" style="opacity: 0.5;" title="Nuestros voluntarios aún no han traducido este artículo al Español. ¡Únete a nosotros y ayuda a traducirlo!">[Traducir]</a></li><li><a href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Conceptos_Basicos_de_Flexbox" title="El Módulo de Caja Flexible, comúnmente llamado flexbox, fue diseñado como un modelo unidimensional de layout, y como un método que pueda ayudar a distribuir el espacio entre los ítems de una interfaz y mejorar las capacidades de alineación. Este artículo hace un repaso de las principales características de flexbox, las que exploraremos con mayor detalle en el resto de estas guías.">Conceptos Básicos de flexbox</a></li><li><a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Controlling_Ratios_of_Flex_Items_Along_the_Main_Ax" class="new" title="In this guide we will be exploring the three properties that are applied to flex items, which enable us to control the size and flexibility of the items along the main axis — flex-grow, flex-shrink, and flex-basis. Fully understanding how these properties work with growing and shrinking items is the real key to mastering flexbox.">Controlling Ratios of Flex Items Along the Main Axis</a> <a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Controlling_Ratios_of_Flex_Items_Along_the_Main_Ax$translate" class="new" style="opacity: 0.5;" title="Nuestros voluntarios aún no han traducido este artículo al Español. ¡Únete a nosotros y ayuda a traducirlo!">[Traducir]</a></li><li><a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Mixins" class="new" title="This article provides a set of mixins for those who want to mess around with flexbox using the native support of current browsers.">Cross-browser Flexbox mixins</a> <a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Mixins$translate" class="new" style="opacity: 0.5;" title="Nuestros voluntarios aún no han traducido este artículo al Español. ¡Únete a nosotros y ayuda a traducirlo!">[Traducir]</a></li><li><a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Mastering_Wrapping_of_Flex_Items" class="new" title="Flexbox was designed as a single dimensional layout, meaning that it deals with laying out items as a row or as a column — but not both at once. There is however the ability to wrap flex items onto new lines, creating new rows if flex-direction is row and new columns if flex-direction is column. In this guide I will explain how this works, what it is designed for and what situations really require CSS Grid Layout rather than flexbox.">Mastering Wrapping of Flex Items</a> <a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Mastering_Wrapping_of_Flex_Items$translate" class="new" style="opacity: 0.5;" title="Nuestros voluntarios aún no han traducido este artículo al Español. ¡Únete a nosotros y ayuda a traducirlo!">[Traducir]</a></li><li><a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Ordering_Flex_Items" class="new" title="New layout methods such as Flexbox and Grid bring with them the possibility of controlling the order of content. In this article we will take a look at ways in which you can change the visual order of your content when using Flexbox. We will also consider the implications of reordering items from an accessibility point of view.">Ordering Flex Items</a> <a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Ordering_Flex_Items$translate" class="new" style="opacity: 0.5;" title="Nuestros voluntarios aún no han traducido este artículo al Español. ¡Únete a nosotros y ayuda a traducirlo!">[Traducir]</a></li><li><a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Relationship_of_Flexbox_to_Other_Layout_Methods" class="new" title="In this article we will take a look at how Flexbox fits in with all the other CSS modules. We’ll find out which specifications you also need to take notice of if you want to learn flexbox, and find out why flexbox is different to some other modules.">Relationship of flexbox to other layout methods</a> <a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Relationship_of_Flexbox_to_Other_Layout_Methods$translate" class="new" style="opacity: 0.5;" title="Nuestros voluntarios aún no han traducido este artículo al Español. ¡Únete a nosotros y ayuda a traducirlo!">[Traducir]</a></li><li><a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Typical_Use_Cases_of_Flexbox" class="new" title="In this guide we will take a look at some of the common use cases for flexbox — those places where it makes more sense than another layout method.">Typical use cases of Flexbox</a> <a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Typical_Use_Cases_of_Flexbox$translate" class="new" style="opacity: 0.5;" title="Nuestros voluntarios aún no han traducido este artículo al Español. ¡Únete a nosotros y ayuda a traducirlo!">[Traducir]</a></li></ol></details></li><li class="toggle"><details open=""><summary>Propiedades</summary><ol><li><a href="https://developer.mozilla.org/es/docs/Web/CSS/align-content" title="La propiedad CSS align-content ajusta las líneas dentro de un contenedor flex cuando hay espacio extra en el eje transversal."><code>align-content</code></a></li><li><a href="https://developer.mozilla.org/es/docs/Web/CSS/align-items" title="La propiedad CSS align-items alinea los elementos de la línea flexible actual de la misma forma que justify-content, pero en dirección perpendicular."><code>align-items</code></a></li><li><a href="https://developer.mozilla.org/es/docs/Web/CSS/align-self" title="La propiedad CSS align-self alinea los elementos flexibles de la línea flexible actual, reemplazando el valor de align-items. Si el límite transversal de alguno de los elementos está definido como auto, el valor de align-self es ignorado."><code>align-self</code></a></li><li><a href="https://developer.mozilla.org/es/docs/Web/CSS/flex" title=""><code>flex</code></a></li><li><a href="https://developer.mozilla.org/es/docs/Web/CSS/flex-basis" title="La propiedad de CSS flex-basis especifíca la base flexible, la cual es el tamaño inicial de un elemento flexible. Ésta propiedad determina el tamaño de una caja de contenidos a no ser que se haya especificado de otra forma usando box-sizing."><code>flex-basis</code></a></li><li><a href="https://developer.mozilla.org/es/docs/Web/CSS/flex-direction" title="La propiedad CSS flex-direction especifica cómo colocar los objetos flexibles en el contenedor flexible definiendo el eje principal y la dirección (normal o al revés)."><code>flex-direction</code></a></li><li><a href="https://developer.mozilla.org/es/docs/Web/CSS/flex-flow" title="La propiedad CSS flex-flow  es una propiedad atajo para las propiedades individuales flex-direction y flex-wrap."><code>flex-flow</code></a></li><li><a href="https://developer.mozilla.org/es/docs/Web/CSS/flex-grow" title="La propiedad flex-grow de CSS especifica el factor de crecimiento de un elemento flexible. Se especifica qué cantidad de espacio debe ocupar el elemento dentro del contenedor flexible."><code>flex-grow</code></a></li><li><a href="https://developer.mozilla.org/es/docs/Web/CSS/flex-shrink" title="La propiedad CSS flex-shrink especifica el factor de contracción de un flex item. Los flex items se encogerán para llenar el contenedor de acuerdo a su número flex-shrink , cuando el tamaño por defecto de los flex items sea mayor al de su contenedor flex container."><code>flex-shrink</code></a></li><li><a href="https://developer.mozilla.org/es/docs/Web/CSS/flex-wrap" title="La propiedad flex-wrap de CSS  especifica si los elementos &quot;hijos&quot; son obligados a permanecer en una misma línea o pueden fluir en varias líneas. Si la cobertura (wrap) está permitida, esta propiedad también te permite controlar la dirección en la cual serán apilados los elementos."><code>flex-wrap</code></a></li><li><a href="https://developer.mozilla.org/es/docs/Web/CSS/justify-content" title="La propiedad CSS justify-content define cómo el navegador distribuye el espacio entre y alrededor de los items flex, a lo largo del eje principal de su contenedor."><code>justify-content</code></a></li><li><a href="https://developer.mozilla.org/es/docs/Web/CSS/order" title="La propiedad CSS order especifica el orden utilizado para disponer los elementos en su contenedor flexible. Los elementos estarán dispuestos en orden ascendente según el valor de order. Los elementos con el mismo valor de order se dispondrán en el orden en el cual aparecen en el código fuente."><code>order</code></a></li><li><a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/CSS/place-content" class="new" title="The place-content CSS shorthand property sets both the align-content and justify-content properties."><code>place-content</code></a> <a rel="nofollow" href="https://developer.mozilla.org/es/docs/Web/CSS/place-content$translate" class="new" style="opacity: 0.5;" title="Nuestros voluntarios aún no han traducido este artículo al Español. ¡Únete a nosotros y ayuda a traducirlo!">[Traducir]</a></li></ol></details></li></ol>
+  </div>
+                
+
+                <!-- approvals -->
+                
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div> <!-- ends "main-content" -->
+
+    
+      <div class="newsletter-box">
+        <div class="newsletter">
+    <form id="newsletterForm" class="newsletter-form nodisable" name="newsletter-form" action="https://www.mozilla.org/en-US/newsletter/" method="post">
+        <div class="newsletter-head">
+            <h2 class="newsletter-teaser">Aprender lo mejor del desarrollo web</h2>
+            <p class="newsletter-description">Obtén lo mejor y más reciente de MDN directamente en tu bandeja de entrada.</p>
+            
+            <p class="newsletter-lang">Por ahora, el boletín solo está disponible en inglés.</p>
+            
+        </div>
+
+        <div class="newsletter-fields">
+            <input type="hidden" id="fmt" name="fmt" value="H">
+            <input type="hidden" id="newsletterNewslettersInput" name="newsletters" value="app-dev">
+            <div id="newsletterErrors" class="newsletter-errors"></div>
+
+            <div id="newsletterEmail" class="form-group newsletter-group-email">
+                <label for="newsletterEmailInput" class="form-label offscreen">Correo electrónico</label>
+                <input type="email" id="newsletterEmailInput" name="email" class="form-input newsletter-input-email" required="" placeholder="you@example.com" size="30">
+            </div>
+
+            <div id="newsletterPrivacy" class="form-group form-group-agree newsletter-group-privacy hidden">
+                <input type="checkbox" id="newsletterPrivacyInput" name="privacy" required="">
+                <label for="newsletterPrivacyInput">
+                Estoy de acuerdo con que Mozilla administre mis datos según la <a href="https://www.mozilla.org/privacy/"> Política de privacidad</a>.
+                </label>
+            </div>
+            <div id="newsletterSubmit" class="newsletter-group-submit">
+                <button id="newsletter-submit" type="submit" class="button neutral newsletter-submit">
+                    Suscribirse<svg class="icon icon-arrow" xmlns="http://www.w3.org/2000/svg" width="23" height="28" viewBox="0 0 23 28" aria-hidden="true">
+    <path d="M23 15a2.01 2.01 0 0 1-.578 1.422L12.25 26.594c-.375.359-.891.578-1.422.578s-1.031-.219-1.406-.578L8.25 25.422c-.375-.375-.594-.891-.594-1.422s.219-1.047.594-1.422L12.828 18h-11C.703 18 0 17.062 0 16v-2c0-1.062.703-2 1.828-2h11L8.25 7.406a1.96 1.96 0 0 1 0-2.812l1.172-1.172c.375-.375.875-.594 1.406-.594s1.047.219 1.422.594l10.172 10.172c.375.359.578.875.578 1.406z"></path>
+</svg>
+                </button>
+            </div>
+        </div>
+    </form>
+    <div id="newsletterThanks" class="newsletter-thanks hidden">
+        <h2>¡Gracias! Comprueba tu correo para confirmar la subscripción.</h2>
+        <p>Si no has confirmado nunca una subscripción a boletines relacionados con Mozilla, tendrás que hacerlo. Comprueba tu correo o carpeta de spam para ver si recibiste un correo nuestro.
+        </p>
+    </div>
+    <button id="newsletterHide" type="button" class="only-icon newsletter-hide">
+        <span>Ocultar registro al boletín</span>
+        <svg class="icon icon-close" xmlns="http://www.w3.org/2000/svg" width="22" height="28" viewBox="0 0 22 28" aria-hidden="true"><path d="M20.281 20.656c0 .391-.156.781-.438 1.062l-2.125 2.125c-.281.281-.672.438-1.062.438s-.781-.156-1.062-.438L11 19.249l-4.594 4.594c-.281.281-.672.438-1.062.438s-.781-.156-1.062-.438l-2.125-2.125c-.281-.281-.438-.672-.438-1.062s.156-.781.438-1.062L6.751 15l-4.594-4.594c-.281-.281-.438-.672-.438-1.062s.156-.781.438-1.062l2.125-2.125c.281-.281.672-.438 1.062-.438s.781.156 1.062.438L11 10.751l4.594-4.594c.281-.281.672-.438 1.062-.438s.781.156 1.062.438l2.125 2.125c.281.281.438.672.438 1.062s-.156.781-.438 1.062L15.249 15l4.594 4.594c.281.281.438.672.438 1.062z"></path></svg>
+    </button>
+</div>
+      </div>
+    
+
+  <menu type="context" id="edit-history-menu">
+    <menuitem data-action="/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS$edit" label="Editar página"></menuitem>
+    <menuitem data-action="/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS$history" label="Ver historial de la página"></menuitem>
+  </menu>
+
+      </div>
+  </main>
+
+  <!-- Footer -->
+    <footer id="nav-footer" class="nav-footer">
+      <div class="center">
+          <a href="https://developer.mozilla.org/es/" class="nav-footer-logo">Documentación web de MDN</a>
+<div class="footer-group footer-group-mdn">
+  <h2 class="footer-title">MDN</h2>
+  <ul class="footer-list">
+    <li><a href="https://developer.mozilla.org/es/docs/Web">Tecnologías web</a></li>
+    <li><a href="https://developer.mozilla.org/es/docs/Learn">Aprender Desarrollo web</a></li>
+    <li><a href="https://developer.mozilla.org/docs/MDN/About">Acerca de MDN</a></li>
+    <li><a href="https://developer.mozilla.org/es/docs/MDN/Feedback">Comentarios</a></li>
+    <li class="footer-social">
+        <a href="https://twitter.com/mozdevnet">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-twitter" width="26" height="28" viewBox="0 0 26 28" aria-label="Twitter" role="img" focusable="false">
+    <title>Twitter</title>
+    <path d="M25.312 6.375a10.85 10.85 0 0 1-2.531 2.609c.016.219.016.438.016.656 0 6.672-5.078 14.359-14.359 14.359-2.859 0-5.516-.828-7.75-2.266.406.047.797.063 1.219.063 2.359 0 4.531-.797 6.266-2.156a5.056 5.056 0 0 1-4.719-3.5c.313.047.625.078.953.078.453 0 .906-.063 1.328-.172a5.048 5.048 0 0 1-4.047-4.953v-.063a5.093 5.093 0 0 0 2.281.641 5.044 5.044 0 0 1-2.25-4.203c0-.938.25-1.797.688-2.547a14.344 14.344 0 0 0 10.406 5.281 5.708 5.708 0 0 1-.125-1.156 5.045 5.045 0 0 1 5.047-5.047 5.03 5.03 0 0 1 3.687 1.594 9.943 9.943 0 0 0 3.203-1.219 5.032 5.032 0 0 1-2.219 2.781c1.016-.109 2-.391 2.906-.781z"></path>
+</svg>
+        </a>
+    </li>
+    <li class="footer-social">
+        <a href="https://github.com/mdn/">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-github" width="24" height="28" viewBox="0 0 24 28" aria-label="GitHub" role="img" focusable="false">
+    <title>GitHub</title>
+    <path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-.609.109-.828-.266-.828-.578 0-.391.016-1.687.016-3.297 0-1.125-.375-1.844-.812-2.219 2.672-.297 5.484-1.313 5.484-5.922 0-1.313-.469-2.375-1.234-3.219.125-.313.531-1.531-.125-3.187-1-.313-3.297 1.234-3.297 1.234a11.28 11.28 0 0 0-6 0S6.704 6.656 5.704 6.969c-.656 1.656-.25 2.875-.125 3.187-.766.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-.344.313-.656.844-.766 1.609-.688.313-2.438.844-3.484-1-.656-1.141-1.844-1.234-1.844-1.234-1.172-.016-.078.734-.078.734.781.359 1.328 1.75 1.328 1.75.703 2.141 4.047 1.422 4.047 1.422 0 1 .016 1.937.016 2.234 0 .313-.219.688-.828.578C3.439 23.796.002 19.296.002 13.999c0-6.625 5.375-12 12-12zM4.547 19.234c.031-.063-.016-.141-.109-.187-.094-.031-.172-.016-.203.031-.031.063.016.141.109.187.078.047.172.031.203-.031zm.484.532c.063-.047.047-.156-.031-.25-.078-.078-.187-.109-.25-.047-.063.047-.047.156.031.25.078.078.187.109.25.047zm.469.703c.078-.063.078-.187 0-.297-.063-.109-.187-.156-.266-.094-.078.047-.078.172 0 .281s.203.156.266.109zm.656.656c.063-.063.031-.203-.063-.297-.109-.109-.25-.125-.313-.047-.078.063-.047.203.063.297.109.109.25.125.313.047zm.891.391c.031-.094-.063-.203-.203-.25-.125-.031-.266.016-.297.109s.063.203.203.234c.125.047.266 0 .297-.094zm.984.078c0-.109-.125-.187-.266-.172-.141 0-.25.078-.25.172 0 .109.109.187.266.172.141 0 .25-.078.25-.172zm.906-.156c-.016-.094-.141-.156-.281-.141-.141.031-.234.125-.219.234.016.094.141.156.281.125s.234-.125.219-.219z"></path>
+</svg>
+        </a>
+    </li>
+  </ul>
+</div>
+
+          <a href="https://mozilla.org/" class="nav-footer-mozilla">Mozilla</a>
+<div class="footer-group footer-group-mozilla">
+  <h2 class="footer-title">Mozilla</h2>
+  <ul class="footer-list">
+    <li><a href="https://www.mozilla.org/about/">Acerca de</a></li>
+    <li><a href="https://www.mozilla.org/contact/">Contáctanos</a></li>
+    <li><a href="https://www.mozilla.org/firefox/?utm_source=developer.mozilla.org&amp;utm_campaign=footer&amp;utm_medium=referral">Firefox</a></li>
+    <li class="footer-social">
+        <a href="https://twitter.com/mozilla">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-twitter" width="26" height="28" viewBox="0 0 26 28" aria-label="Twitter" role="img" focusable="false">
+    <title>Twitter</title>
+    <path d="M25.312 6.375a10.85 10.85 0 0 1-2.531 2.609c.016.219.016.438.016.656 0 6.672-5.078 14.359-14.359 14.359-2.859 0-5.516-.828-7.75-2.266.406.047.797.063 1.219.063 2.359 0 4.531-.797 6.266-2.156a5.056 5.056 0 0 1-4.719-3.5c.313.047.625.078.953.078.453 0 .906-.063 1.328-.172a5.048 5.048 0 0 1-4.047-4.953v-.063a5.093 5.093 0 0 0 2.281.641 5.044 5.044 0 0 1-2.25-4.203c0-.938.25-1.797.688-2.547a14.344 14.344 0 0 0 10.406 5.281 5.708 5.708 0 0 1-.125-1.156 5.045 5.045 0 0 1 5.047-5.047 5.03 5.03 0 0 1 3.687 1.594 9.943 9.943 0 0 0 3.203-1.219 5.032 5.032 0 0 1-2.219 2.781c1.016-.109 2-.391 2.906-.781z"></path>
+</svg>
+        </a>
+    </li>
+    <li class="footer-social">
+        <a href="https://www.facebook.com/mozilla">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-facebook" width="16" height="28" viewBox="0 0 16 28" aria-label="Facebook" role="img" focusable="false">
+    <title>Facebook</title>
+    <path d="M14.984.187v4.125h-2.453c-1.922 0-2.281.922-2.281 2.25v2.953h4.578l-.609 4.625H10.25v11.859H5.469V14.14H1.485V9.515h3.984V6.109C5.469 2.156 7.891 0 11.422 0c1.687 0 3.141.125 3.563.187z"></path>
+</svg>
+        </a>
+    </li>
+    <li class="footer-social">
+        <a href="https://www.instagram.com/mozillagram/">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-instagram" width="24" height="28" viewBox="0 0 24 28" aria-label="Instagram" role="img" focusable="false">
+    <title>Instagram</title>
+    <path d="M16 14c0-2.203-1.797-4-4-4s-4 1.797-4 4 1.797 4 4 4 4-1.797 4-4zm2.156 0c0 3.406-2.75 6.156-6.156 6.156S5.844 17.406 5.844 14 8.594 7.844 12 7.844s6.156 2.75 6.156 6.156zm1.688-6.406c0 .797-.641 1.437-1.437 1.437S16.97 8.39 16.97 7.594s.641-1.437 1.437-1.437 1.437.641 1.437 1.437zM12 4.156c-1.75 0-5.5-.141-7.078.484-.547.219-.953.484-1.375.906s-.688.828-.906 1.375c-.625 1.578-.484 5.328-.484 7.078s-.141 5.5.484 7.078c.219.547.484.953.906 1.375s.828.688 1.375.906c1.578.625 5.328.484 7.078.484s5.5.141 7.078-.484c.547-.219.953-.484 1.375-.906s.688-.828.906-1.375c.625-1.578.484-5.328.484-7.078s.141-5.5-.484-7.078c-.219-.547-.484-.953-.906-1.375s-.828-.688-1.375-.906C17.5 4.015 13.75 4.156 12 4.156zM24 14c0 1.656.016 3.297-.078 4.953-.094 1.922-.531 3.625-1.937 5.031s-3.109 1.844-5.031 1.937c-1.656.094-3.297.078-4.953.078s-3.297.016-4.953-.078c-1.922-.094-3.625-.531-5.031-1.937S.173 20.875.08 18.953C-.014 17.297.002 15.656.002 14s-.016-3.297.078-4.953c.094-1.922.531-3.625 1.937-5.031s3.109-1.844 5.031-1.937c1.656-.094 3.297-.078 4.953-.078s3.297-.016 4.953.078c1.922.094 3.625.531 5.031 1.937s1.844 3.109 1.937 5.031C24.016 10.703 24 12.344 24 14z"></path>
+</svg>
+        </a>
+    </li>
+  </ul>
+</div>
+
+          
+  
+    <form class="languages go" method="get" action="https://developer.mozilla.org/es/docs/Web">
+      <label for="language">Otros idiomas:</label>
+      <select id="language" class="wiki-l10n" name="next" dir="ltr">
+        <option title="Español" data-locale="es" value="/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Usando_las_cajas_flexibles_CSS" selected="">
+          Español (es)
+        </option>
+        
+          <option title="Inglés (EE.UU.)" data-locale="es" value="/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes">
+            English (US) (en-US)
+          </option>
+          <option title="Bengalí (Bangladesh)" data-locale="es" value="/bn-BD/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes">
+            বাংলা (বাংলাদেশ) (bn-BD)
+          </option>
+          <option title="Catalán" data-locale="es" value="/ca/docs/Web/CSS/CSS_Flexible_Box_Layout/Utilitzar_model_flexible_caixes_CSS">
+            Català (ca)
+          </option>
+          <option title="Alemán" data-locale="es" value="/de/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes">
+            Deutsch (de)
+          </option>
+          <option title="Francés" data-locale="es" value="/fr/docs/Web/CSS/CSS_Flexible_Box_Layout/Utilisation_des_flexbox_en_CSS">
+            Français (fr)
+          </option>
+          <option title="Italiano" data-locale="es" value="/it/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes">
+            Italiano (it)
+          </option>
+          <option title="Japonés" data-locale="es" value="/ja/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes">
+            日本語 (ja)
+          </option>
+          <option title="Coreano" data-locale="es" value="/ko/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes">
+            한국어 (ko)
+          </option>
+          <option title="Portugués (Brasil)" data-locale="es" value="/pt-BR/docs/CSS/Usando_caixas_flexiveis_css">
+            Português (do&nbsp;Brasil) (pt-BR)
+          </option>
+          <option title="Ruso" data-locale="es" value="/ru/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes">
+            Русский (ru)
+          </option>
+          <option title="Ucraniano" data-locale="es" value="/uk/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes">
+            Українська (uk)
+          </option>
+          <option title="Chino (simplificado)" data-locale="es" value="/zh-CN/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes">
+            中文 (简体) (zh-CN)
+          </option>
+          <option title="Chino (tradicional)" data-locale="es" value="/zh-TW/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes">
+            正體中文 (繁體) (zh-TW)
+          </option>
+      </select>
+      <noscript><button type="submit">Ir</button></noscript>
+    </form>
+  
+
+
+          
+            <ul class="footer-tos">
+              <li><a href="https://www.mozilla.org/about/legal/terms/mozilla">Condiciones</a></li>
+              <li><a href="https://www.mozilla.org/privacy/websites/">Privacidad</a></li>
+              <li><a href="https://www.mozilla.org/privacy/websites/#cookies">Cookies</a></li>
+            </ul>
+
+            <div id="license" class="contentinfo">
+              <p>© 2005-2018 Mozilla y colaboradores individuales.</p> <p>El contenido está disponible bajo <a href="https://developer.mozilla.org/en-US/docs/MDN/About#Copyrights_and_licenses">estas licencias</a>.</p>
+            </div>
+          
+      </div>
+    </footer> 
+
+  <!-- site js -->
+  
+    
+    <!--[if lte IE 8]><script type="text/javascript" src="https://developer.mozilla.org/static/build/js/selectivizr.8bb9e662e963.js" charset="utf-8"></script><![endif]-->
+
+    
+    <script src="./Usando las cajas flexibles CSS - CSS _ MDN_files/javascript.6751b1317e4b.js.descarga"></script>
+    <script type="text/javascript" src="./Usando las cajas flexibles CSS - CSS _ MDN_files/main.0ed22a584ec2.js.descarga" charset="utf-8"></script>
+    <script>
+    if (window.mdn && mdn.analytics) mdn.analytics.trackOutboundLinks();
+  </script>
+    
+  
+
+    <script async="" type="text/javascript" src="./Usando las cajas flexibles CSS - CSS _ MDN_files/wiki.2780b51fe209.js.descarga" charset="utf-8"></script>
+
+
+
+  
+
+  
+
+  
+    <script async="" type="text/javascript" src="./Usando las cajas flexibles CSS - CSS _ MDN_files/task-completion.1ac205b5b74e.js.descarga" charset="utf-8"></script>
+  
+
+  
+    <script async="" type="text/javascript" src="./Usando las cajas flexibles CSS - CSS _ MDN_files/newsletter.a85c5c2892e5.js.descarga" charset="utf-8"></script>
+  
+
+
+
+<div class="notification-tray" role="status" aria-live="polite"><div class="notification info question" data-processed="true"><div class="notification-img"><i aria-hidden="true" class="icon-question-sign"></i></div><div class="notification-message">¿Contestarías a 4 preguntas? <a id="task-link" target="_blank" href="https://www.surveygizmo.com/s3/2980494/do-or-do-not?&amp;t=1542185680164&amp;p=%2Fes%2Fdocs%2FWeb%2FCSS%2FCSS_Flexible_Box_Layout%2FUsando_las_cajas_flexibles_CSS&amp;c=1579469804.1542184480">Abre la encuesta en una nueva pestaña</a> y rellénala cuando termines en el sitio. ¡Gracias!</div><button class="close" title="Cerrar notificación"><svg class="icon icon-close" version="1.1" width="24" height="28" viewBox="0 0 24 28" aria-hidden="true" focusable="false"><path d="M20.281 20.656c0 0.391-0.156 0.781-0.438 1.062l-2.125 2.125c-0.281 0.281-0.672 0.438-1.062 0.438s-0.781-0.156-1.062-0.438l-4.594-4.594-4.594 4.594c-0.281 0.281-0.672 0.438-1.062 0.438s-0.781-0.156-1.062-0.438l-2.125-2.125c-0.281-0.281-0.438-0.672-0.438-1.062s0.156-0.781 0.438-1.062l4.594-4.594-4.594-4.594c-0.281-0.281-0.438-0.672-0.438-1.062s0.156-0.781 0.438-1.062l2.125-2.125c0.281-0.281 0.672-0.438 1.062-0.438s0.781 0.156 1.062 0.438l4.594 4.594 4.594-4.594c0.281-0.281 0.672-0.438 1.062-0.438s0.781 0.156 1.062 0.438l2.125 2.125c0.281 0.281 0.438 0.672 0.438 1.062s-0.156 0.781-0.438 1.062l-4.594 4.594 4.594 4.594c0.281 0.281 0.438 0.672 0.438 1.062z"></path></svg></button></div></div></body></html>

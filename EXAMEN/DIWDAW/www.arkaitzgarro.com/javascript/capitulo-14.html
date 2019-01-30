@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="08/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>BOM (Browser Object Model) | JavaScript</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">JavaScript</a></h1>
+        <p class="span3">
+                        <a href="capitulo-13.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-15.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="bom-browser-object-model"><span>Capítulo 14</span> BOM (Browser Object Model)</h1>
+        <h2 id="introduccion-a-bom">14.1 Introducción a BOM</h2>
+
+<p>Las versiones 3.0 de los navegadores Internet Explorer y Netscape Navigator introdujeron el concepto de Browser Object Model o BOM, que permite acceder y modificar las propiedades de las ventanas del propio navegador.</p>
+
+<p>Mediante BOM, es posible redimensionar y mover la ventana del navegador, modificar el texto que se muestra en la barra de estado y realizar muchas otras manipulaciones no relacionadas con el contenido de la página HTML.</p>
+
+<p>El mayor inconveniente de BOM es que, al contrario de lo que sucede con DOM, ninguna entidad se encarga de estandarizarlo o definir unos mínimos de interoperabilidad entre navegadores.</p>
+
+<p>Algunos de los elementos que forman el BOM son los siguientes:</p>
+
+<ul>
+<li>Crear, mover, redimensionar y cerrar ventanas de navegador.</li>
+<li>Obtener información sobre el propio navegador.</li>
+<li>Propiedades de la página actual y de la pantalla del usuario.</li>
+<li>Gestión de cookies.</li>
+<li>Objetos ActiveX en Internet Explorer.</li>
+</ul>
+
+<p>El BOM está compuesto por varios objetos relacionados entre sí. El siguiente esquema muestra los objetos de BOM y su relación:</p>
+
+<div class="figure" id="figure-14-1">
+    <img src="images/cap06/jerarquia.png" alt="Jerarquía de objetos que forman el BOM" />
+
+    <p class="caption"><strong>Figura 14.1</strong> Jerarquía de objetos que forman el BOM</p>
+</div>
+
+
+<p>En el esquema anterior, los objetos mostrados con varios recuadros superpuestos son arrays. El resto de objetos, representados por un rectángulo individual, son objetos simples. En cualquier caso, todos los objetos derivan del objeto <code>window</code>.</p>
+
+<h2 id="el-objeto-window">14.2 El objeto window</h2>
+
+<p>El objeto <code>window</code> representa la ventana completa del navegador. Mediante este objeto, es posible mover, redimensionar y manipular la ventana actual del navegador. Incluso es posible abrir y cerrar nuevas ventanas de navegador.</p>
+
+<p>Como todos los demás objetos heredan directa o indirectamente del objeto <code>window</code>, no es necesario indicarlo de forma explícita en el código JavaScript. En otras palabras:</p>
+
+<div class="code javascript">
+<pre class="javascript">window.<span class="me1">forms</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">===</span> forms<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>
+window.<span class="me1">document</span> <span class="sy0">===</span> document</pre>
+</div>
+
+<p>BOM define cuatro métodos para manipular el tamaño y la posición de la ventana:</p>
+
+<ul>
+<li><code>moveBy(x, y)</code> desplaza la posición de la ventana <code>x</code> píxel hacia la derecha y <code>y</code> píxel hacia abajo. Se permiten desplazamientos negativos para mover la ventana hacia la izquierda o hacia arriba.</li>
+<li><code>moveTo(x, y)</code> desplaza la ventana del navegador hasta que la esquina superior izquierda se encuentre en la posición <code>(x, y)</code> de la pantalla del usuario. Se permiten desplazamientos negativos, aunque ello suponga que parte de la ventana no se visualiza en la pantalla.</li>
+<li><code>resizeBy(x, y)</code> redimensiona la ventana del navegador de forma que su nueva anchura sea igual a <code>(anchura_anterior + x)</code> y su nueva altura sea igual a <code>(altura_anterior + y)</code>. Se pueden emplear valores negativos para reducir la anchura y/o altura de la ventana.</li>
+<li><code>resizeTo(x, y)</code> redimensiona la ventana del navegador hasta que su anchura sea igual a <code>x</code> y su altura sea igual a <code>y</code>. No se permiten valores negativos.</li>
+</ul>
+
+<p>Los navegadores son cada vez menos permisivos con la modificación mediante JavaScript de las propiedades de sus ventanas. De hecho, la mayoría de navegadores permite a los usuarios bloquear el uso de JavaScript para realizar cambios de este tipo. De esta forma, una aplicación nunca debe suponer que este tipo de funciones están disponibles y funcionan de forma correta.</p>
+
+<p>A continuación se muestran algunos ejemplos de uso de estas funciones:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// Mover la ventana 20 píxel hacia la derecha y 30 píxel hacia abajo</span>
+window.<span class="me1">moveBy</span><span class="br0">&#40;</span><span class="nu0">20</span><span class="sy0">,</span> <span class="nu0">30</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Redimensionar la ventana hasta un tamaño de 250 x 250</span>
+window.<span class="me1">resizeTo</span><span class="br0">&#40;</span><span class="nu0">250</span><span class="sy0">,</span> <span class="nu0">250</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Agrandar la altura de la ventana en 50 píxel</span>
+window.<span class="me1">resizeBy</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">50</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Colocar la ventana en la esquina izquierda superior de la ventana</span>
+window.<span class="me1">moveTo</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Además de desplazar y redimensionar la ventana del navegador, es posible averiguar la posición y tamaño actual de la ventana. Sin embargo, la ausencia de un estándar para BOM provoca que cada navegador implemente su propio método:</p>
+
+<ul>
+<li>Internet Explorer proporciona las propiedades <code>window.screenLeft</code> y <code>window.screenTop</code> para obtener las coordenadas de la posición de la ventana. No es posible obtener el tamaño de la ventana completa, sino solamente del área visible de la página (es decir, sin barra de estado ni menús). Las propiedades que proporcionan estas dimensiones son <code>document.body.offsetWidth</code> y <code>document.body.offsetHeight</code>.</li>
+<li>Los navegadores de la familia Mozilla, Safari y Opera proporcionan las propiedades <code>window.screenX</code> y <code>window.screenY</code> para obtener la posición de la ventana. El tamaño de la zona visible de la ventana se obtiene mediante <code>window.innerWidth</code> y <code>window.innerHeight</code>, mientras que el tamaño total de la ventana se obtiene mediante <code>window.outerWidth</code> y <code>window.outerHeight</code>.</li>
+</ul>
+
+<h2 id="control-de-tiempos">14.3 Control de tiempos</h2>
+
+<p>Al contrario que otros lenguajes de programación, JavaScript no incorpora un método <code>wait()</code> que detenga la ejecución del programa durante un tiempo determinado. Sin embargo, JavaScript proporciona los métodos <code>setTimeout()</code> y <code>setInterval()</code> que se pueden emplear para realizar tareas similares.</p>
+
+<p>El método <code>setTimeout()</code> permite ejecutar una función al transcurrir un determinado periodo de tiempo:</p>
+
+<div class="code javascript">
+<pre class="javascript">setTimeout<span class="br0">&#40;</span><span class="st0">&quot;console.log('Han transcurrido 3 segundos desde que me programaron')&quot;</span><span class="sy0">,</span> <span class="nu0">3000</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>El método <code>setTimeout()</code> requiere dos argumentos. El primero es el código que se va a ejecutar o una referencia a la función que se debe ejecutar. El segundo argumento es el tiempo, en milisegundos, que se espera hasta que comienza la ejecución del código. El ejemplo anterior se puede rehacer utilizando una función:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> muestraMensaje<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Han transcurrido 3 segundos desde que me programaron&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+setTimeout<span class="br0">&#40;</span>muestraMensaje<span class="sy0">,</span> <span class="nu0">3000</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Como es habitual, cuando se indica la referencia a la función no se incluyen los paréntesis, ya que de otro modo, se ejecuta la función en el mismo instante en que se establece el intervalo de ejecución.</p>
+
+<p>Cuando se establece una cuenta atrás, la función <code>setTimeout()</code> devuelve el identificador de esa nueva cuenta atrás. Empleando ese identificador y la función <code>clearTimeout()</code> es posible impedir que se ejecute el código pendiente:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> muestraMensaje<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Han transcurrido 3 segundos desde que me programaron&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="kw1">var</span> id <span class="sy0">=</span> setTimeout<span class="br0">&#40;</span>muestraMensaje<span class="sy0">,</span> <span class="nu0">3000</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Antes de que transcurran 3 segundos, se decide eliminar la ejecución pendiente</span>
+clearTimeout<span class="br0">&#40;</span>id<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Además de programar la ejecución futura de una función, JavaScript también permite establecer la ejecución periódica y repetitiva de una función. El método necesario es <code>setInterval()</code> y su funcionamiento es idéntico al mostrado para <code>setTimeout()</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> muestraMensaje<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Este mensaje se muestra cada segundo&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+setInterval<span class="br0">&#40;</span>muestraMensaje<span class="sy0">,</span> <span class="nu0">1000</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>De forma análoga a <code>clearTimeout()</code>, también existe un método que permite eliminar una repetición periódica y que en este caso se denomina <code>clearInterval()</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> muestraMensaje<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Este mensaje se muestra cada segundo&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">var</span> id <span class="sy0">=</span> setInterval<span class="br0">&#40;</span>muestraMensaje<span class="sy0">,</span> <span class="nu0">1000</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Despues de ejecutarse un determinado número de veces, se elimina el intervalo</span>
+clearInterval<span class="br0">&#40;</span>id<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="el-objeto-document">14.4 El objeto document</h2>
+
+<p>El objeto <code>document</code> es el único que pertenece tanto al DOM (como se vio en el capítulo anterior) como al BOM. Desde el punto de vista del BOM, el objeto <code>document</code> proporciona información sobre la propia página HTML.</p>
+
+<p>Algunas de las propiedades más importantes definidas por el objeto <code>document</code> son:</p>
+
+<div class="table" id="table-14-1">
+
+    <table>
+<thead>
+<tr>
+  <th>Propiedad</th>
+  <th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>lastModified</code></td>
+  <td>La fecha de la última modificación de la página</td>
+</tr>
+<tr>
+  <td><code>referrer</code></td>
+  <td>La URL desde la que se accedió a la página (es decir, la página anterior en el array <code>history</code>)</td>
+</tr>
+<tr>
+  <td><code>title</code></td>
+  <td>El texto de la etiqueta <code>&lt;title&gt;</code></td>
+</tr>
+<tr>
+  <td><code>URL</code></td>
+  <td>La URL de la página actual del navegador</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Las propiedades <code>title</code> y <code>URL</code> son de lectura y escritura, por lo que además de obtener su valor, se puede establecer de forma directa:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// modificar el título de la página</span>
+document.<span class="me1">title</span> <span class="sy0">=</span> <span class="st0">&quot;Nuevo titulo&quot;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// llevar al usuario a otra página diferente</span>
+document.<span class="me1">URL</span> <span class="sy0">=</span> <span class="st0">&quot;http://nueva_pagina&quot;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Además de propiedades, el objeto <code>document</code> contiene varios arrays con información sobre algunos elementos de la página:</p>
+
+<div class="table" id="table-14-2">
+
+    <table>
+<thead>
+<tr>
+  <th>Array</th>
+  <th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>anchors</code></td>
+  <td>Contiene todas las "anclas" de la página (los enlaces de tipo  <code>&lt;a name="nombre_ancla"&gt;&lt;/a&gt;</code>)</td>
+</tr>
+<tr>
+  <td><code>applets</code></td>
+  <td>Contiene todos los applets de la página</td>
+</tr>
+<tr>
+  <td><code>embeds</code></td>
+  <td>Contiene todos los objetos embebidos en la página mediante la etiqueta <code>&lt;embed&gt;</code></td>
+</tr>
+<tr>
+  <td><code>forms</code></td>
+  <td>Contiene todos los formularios de la página</td>
+</tr>
+<tr>
+  <td><code>images</code></td>
+  <td>Contiene todas las imágenes de la página</td>
+</tr>
+<tr>
+  <td><code>links</code></td>
+  <td>Contiene todos los enlaces de la página (los elementos de tipo <code>&lt;a href="enlace.html"&gt;&lt;/a&gt;</code>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Los elementos de cada array del objeto <code>document</code> se pueden acceder mediante su índice numérico o mediante el nombre del elemento en la página HTML. Si se considera por ejemplo la siguiente página HTML:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">html</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">head</span>&gt;&lt;<span class="kw2">title</span>&gt;</span>Pagina de ejemplo<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Primer parrafo de la pagina<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;otra_pagina.html&quot;</span>&gt;</span>Un enlace<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;logo.jpg&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;logotipo&quot;</span><span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">form</span> <span class="kw3">method</span><span class="sy0">=</span><span class="st0">&quot;post&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;consultas&quot;</span>&gt;</span>
+      <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;id&quot;</span> <span class="sy0">/</span>&gt;</span>
+      <span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;submit&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;Enviar&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">form</span>&gt;</span>
+  <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>Para acceder a los elementos de la página se pueden emplear las funciones DOM o los objetos de BOM:</p>
+
+<ul>
+<li>Párrafo: <code>document.getElementsByTagName("p")</code></li>
+<li>Enlace: <code>document.links[0]</code></li>
+<li>Imagen: <code>document.images[0] o document.images["logotipo"]</code></li>
+<li>Formulario: <code>document.forms[0] o document.forms["consultas"]</code></li>
+</ul>
+
+<p>Una vez obtenida la referencia al elemento, se puede acceder al valor de sus atributos HTML utilizando las propiedades de DOM. De esta forma, el método del formulario se obtiene mediante <code>document.forms["consultas"].method</code> y la ruta de la imagen es <code>document.images[0].src</code>.</p>
+
+<h2 id="el-objeto-location">14.5 El objeto location</h2>
+
+<p>El objeto <code>location</code> es uno de los objetos más útiles del BOM. Debido a la falta de estandarización, <code>location</code> es una propiedad tanto del objeto <code>window</code> como del objeto <code>document</code>.</p>
+
+<p>El objeto <code>location</code> representa la URL de la página HTML que se muestra en la ventana del navegador y proporciona varias propiedades útiles para el manejo de la URL:</p>
+
+<div class="table" id="table-14-3">
+
+    <table>
+<thead>
+<tr>
+  <th>Propiedad</th>
+  <th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>hash</code></td>
+  <td>El contenido de la URL que se encuentra después del signo <code>#</code> (para los enlaces de las anclas) <code>http://www.ejemplo.com/ruta1/ruta2/pagina.html#seccion hash</code> = <code>#seccion</code></td>
+</tr>
+<tr>
+  <td><code>host</code></td>
+  <td>El nombre del servidor <code>http://www.ejemplo.com/ruta1/ruta2/pagina.html#seccion host</code> = <code>www.ejemplo.com</code></td>
+</tr>
+<tr>
+  <td><code>hostname</code></td>
+  <td>La mayoría de las veces coincide con <code>host</code>, aunque en ocasiones, se eliminan las <code>www</code> del principio <code>http://www.ejemplo.com/ruta1/ruta2/pagina.html#seccion hostname</code> = <code>www.ejemplo.com</code></td>
+</tr>
+<tr>
+  <td><code>href</code></td>
+  <td>La URL completa de la página actual <code>http://www.ejemplo.com/ruta1/ruta2/pagina.html#seccion URL</code> = <code>http://www.ejemplo.com/ruta1/ruta2/pagina.html#seccion</code></td>
+</tr>
+<tr>
+  <td><code>pathname</code></td>
+  <td>Todo el contenido que se encuentra después del host <code>http://www.ejemplo.com/ruta1/ruta2/pagina.html#seccion pathname</code> = <code>/ruta1/ruta2/pagina.html</code></td>
+</tr>
+<tr>
+  <td><code>port</code></td>
+  <td>Si se especifica en la URL, el puerto accedido <code>http://www.ejemplo.com:8080/ruta1/ruta2/pagina.html#seccion port</code> = <code>8080</code> La mayoría de URL no proporcionan un puerto, por lo que su contenido es vacío <code>http://www.ejemplo.com/ruta1/ruta2/pagina.html#seccion port</code> = (vacío)</td>
+</tr>
+<tr>
+  <td><code>protocol</code></td>
+  <td>El protocolo empleado por la URL, es decir, todo lo que se encuentra antes de las dos barras inclinadas <code>// http://www.ejemplo.com/ruta1/ruta2/pagina.html#seccion protocol</code> = <code>http:</code></td>
+</tr>
+<tr>
+  <td><code>search</code></td>
+  <td>Todo el contenido que se encuentra tras el símbolo <code>?</code>, es decir, la consulta o <em>"query string"</em> <code>http://www.ejemplo.com/pagina.php?variable1=valor1&amp;variable2=valor2 search</code> = <code>?variable1=valor1&amp;variable2=valor2</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>De todas las propiedades, la más utilizada es <code>location.href</code>, que permite obtener o establecer la dirección de la página que se muestra en la ventana del navegador.</p>
+
+<p>Además de las propiedades de la tabla anterior, el objeto <code>location</code> contiene numerosos métodos y funciones. Algunos de los métodos más útiles son los siguientes:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// Método assign()</span>
+location.<span class="me1">assign</span><span class="br0">&#40;</span><span class="st0">&quot;http://www.ejemplo.com&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// Equivalente a location.href = &quot;http://www.ejemplo.com&quot;</span>
+&nbsp;
+<span class="co1">// Método replace()</span>
+location.<span class="me1">replace</span><span class="br0">&#40;</span><span class="st0">&quot;http://www.ejemplo.com&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">// Similar a assign(), salvo que se borra la página actual del array history del navegador</span>
+&nbsp;
+<span class="co1">// Método reload()</span>
+location.<span class="me1">reload</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="coMULTI">/* Recarga la página. Si el argumento es true, se carga la página desde el servidor. Si es false, se carga desde la cache del navegador */</span></pre>
+</div>
+
+<h2 id="el-objeto-navigator">14.6 El objeto navigator</h2>
+
+<p>El objeto <code>navigator</code> es uno de los primeros objetos que incluyó el BOM y permite obtener información sobre el propio navegador. En Internet Explorer, el objeto <code>navigator</code> también se puede acceder a través del objeto <code>clientInformation</code>.</p>
+
+<p>Aunque es uno de los objetos menos estandarizados, algunas de sus propiedades son comunes en casi todos los navegadores. A continuación se muestran algunas de esas propiedades:</p>
+
+<div class="table" id="table-14-4">
+
+    <table>
+<thead>
+<tr>
+  <th>Propiedad</th>
+  <th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>appCodeName</code></td>
+  <td>Cadena que representa el nombre del navegador (normalmente es <code>Mozilla</code>)</td>
+</tr>
+<tr>
+  <td><code>appName</code></td>
+  <td>Cadena que representa el nombre oficial del navegador</td>
+</tr>
+<tr>
+  <td><code>appMinorVersion</code></td>
+  <td>(Sólo Internet Explorer) Cadena que representa información extra sobre la versión del navegador</td>
+</tr>
+<tr>
+  <td><code>appVersion</code></td>
+  <td>Cadena que representa la versión del navegador</td>
+</tr>
+<tr>
+  <td><code>browserLanguage</code></td>
+  <td>Cadena que representa el idioma del navegador</td>
+</tr>
+<tr>
+  <td><code>cookieEnabled</code></td>
+  <td>Boolean que indica si las cookies están habilitadas</td>
+</tr>
+<tr>
+  <td><code>cpuClass</code></td>
+  <td>(Sólo Internet Explorer) Cadena que representa el tipo de CPU del usuario ("x86", "68K", "PPC", "Alpha", "Other")</td>
+</tr>
+<tr>
+  <td><code>javaEnabled</code></td>
+  <td>Boolean que indica si Java está habilitado</td>
+</tr>
+<tr>
+  <td><code>language</code></td>
+  <td>Cadena que representa el idioma del navegador</td>
+</tr>
+<tr>
+  <td><code>mimeTypes</code></td>
+  <td>Array de los tipos MIME registrados por el navegador</td>
+</tr>
+<tr>
+  <td><code>onLine</code></td>
+  <td>(Sólo Internet Explorer) Boolean que indica si el navegador está conectado a Internet</td>
+</tr>
+<tr>
+  <td><code>oscpu</code></td>
+  <td>(Sólo Firefox) Cadena que representa el sistema operativo o la CPU</td>
+</tr>
+<tr>
+  <td><code>platform</code></td>
+  <td>Cadena que representa la plataforma sobre la que se ejecuta el navegador</td>
+</tr>
+<tr>
+  <td><code>plugins</code></td>
+  <td>Array con la lista de plugins instalados en el navegador</td>
+</tr>
+<tr>
+  <td><code>preference()</code></td>
+  <td>(Sólo Firefox) Método empleado para establecer preferencias en el navegador</td>
+</tr>
+<tr>
+  <td><code>product</code></td>
+  <td>Cadena que representa el nombre del producto (normalmente, es <code>Gecko</code>)</td>
+</tr>
+<tr>
+  <td><code>productSub</code></td>
+  <td>Cadena que representa información adicional sobre el producto (normalmente, la versión del motor Gecko)</td>
+</tr>
+<tr>
+  <td><code>securityPolicy</code></td>
+  <td>Sólo Firefox</td>
+</tr>
+<tr>
+  <td><code>systemLanguage</code></td>
+  <td>(Sólo Internet Explorer) Cadena que representa el idioma del sistema operativo</td>
+</tr>
+<tr>
+  <td><code>userAgent</code></td>
+  <td>Cadena que representa la cadena que el navegador emplea para identificarse en los servidores</td>
+</tr>
+<tr>
+  <td><code>userLanguage</code></td>
+  <td>(Sólo Explorer) Cadena que representa el idioma del sistema operativo</td>
+</tr>
+<tr>
+  <td><code>userProfile</code></td>
+  <td>(Sólo Explorer) Objeto que permite acceder al perfil del usuario</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>El objeto <code>navigator</code> se emplea habitualmente para detectar el tipo y/o versión del navegador en las aplicaciones cuyo código difiere para cada navegador. Además, se emplea para detectar si el navegador tiene habilitadas las cookies y Java y también para comprobar los plugins disponibles en el navegador.</p>
+
+<h2 id="el-objeto-screen">14.7 El objeto screen</h2>
+
+<p>El objeto screen se utiliza para obtener información sobre la pantalla del usuario. Uno de los datos más importantes que proporciona el objeto screen es la resolución del monitor en el que se están visualizando las páginas.</p>
+
+<p>Las siguientes propiedades están disponibles en el objeto screen:</p>
+
+<div class="table" id="table-14-5">
+
+    <table>
+<thead>
+<tr>
+  <th>Propiedad</th>
+  <th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>availHeight</code></td>
+  <td>Altura de pantalla disponible para las ventanas</td>
+</tr>
+<tr>
+  <td><code>availWidth</code></td>
+  <td>Anchura de pantalla disponible para las ventanas</td>
+</tr>
+<tr>
+  <td><code>colorDepth</code></td>
+  <td>Profundidad de color de la pantalla (32 bits normalmente)</td>
+</tr>
+<tr>
+  <td><code>height</code></td>
+  <td>Altura total de la pantalla en píxel</td>
+</tr>
+<tr>
+  <td><code>width</code></td>
+  <td>Anchura total de la pantalla en píxel</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>La altura/anchura de pantalla disponible para las ventanas es menor que la altura/anchura total de la pantalla, ya que se tiene en cuenta el tamaño de los elementos del sistema operativo como por ejemplo la barra de tareas y los bordes de las ventanas del navegador.</p>
+
+<p>Además de la elaboración de estadísticas de los equipos de los usuarios, las propiedades del objeto <code>screen</code> se utilizan por ejemplo para determinar cómo y cuanto se puede redimensionar una ventana y para colocar una ventana centrada en la pantalla del usuario.</p>
+
+<p>El siguiente ejemplo redimensiona una nueva ventana al tamaño máximo posible según la pantalla del usuario:</p>
+
+<div class="code javascript">
+<pre class="javascript">window.<span class="me1">moveTo</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+window.<span class="me1">resizeTo</span><span class="br0">&#40;</span>screen.<span class="me1">availWidth</span><span class="sy0">,</span> screen.<span class="me1">availHeight</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-14.html#bom-browser-object-model">BOM (Browser Object Model)</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>14.1</span>
+                        <a class="internal" href="capitulo-14.html#introduccion-a-bom">Introducción a BOM</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>14.2</span>
+                        <a class="internal" href="capitulo-14.html#el-objeto-window">El objeto window</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>14.3</span>
+                        <a class="internal" href="capitulo-14.html#control-de-tiempos">Control de tiempos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>14.4</span>
+                        <a class="internal" href="capitulo-14.html#el-objeto-document">El objeto document</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>14.5</span>
+                        <a class="internal" href="capitulo-14.html#el-objeto-location">El objeto location</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>14.6</span>
+                        <a class="internal" href="capitulo-14.html#el-objeto-navigator">El objeto navigator</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>14.7</span>
+                        <a class="internal" href="capitulo-14.html#el-objeto-screen">El objeto screen</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

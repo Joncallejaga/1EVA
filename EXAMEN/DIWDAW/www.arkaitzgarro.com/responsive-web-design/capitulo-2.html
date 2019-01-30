@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Estructura de rejilla flexible | Responsive Web Design</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">Responsive Web Design</a></h1>
+        <p class="span3">
+                        <a href="capitulo-1.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-3.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="estructura-de-rejilla-flexible"><span>Capítulo 2</span> Estructura de rejilla flexible</h1>
+        <p>Los diseños basados en rejilla han sido utilizados ampliamente en sectores como el diseño gráfico, pero tardaron en ser adoptados por la web. Estos diseños consisten en una serie de columnas que permiten ordenar y estructurar los contenidos (texto, imágenes, media...) de una manera ordenada y uniforme. Una estructura clásica de rejilla es la que se muestra en la siguiente imagen:</p>
+
+<div class="figure" id="figure-2-1">
+    <img src="images/cap02/simple-grid.png" alt="Estructura de rejilla utilizada para tipografía" />
+
+    <p class="caption"><strong>Figura 2.1</strong> Estructura de rejilla utilizada para tipografía</p>
+</div>
+
+
+<p>Se pueden observar claramente las líneas verticales y horizontales utilizadas para posicionar los elementos en el lienzo, así como los márgenes que separan los distintos elementos. De esta manera tan simple, es posible crear diseños con un aspecto visual uniforme.</p>
+
+<h2 id="crear-una-rejilla-flexible">2.1 Crear una rejilla flexible</h2>
+
+<p>Mientras que los <code>media query</code> ofrecen la potencia real para desarrollar un sitio web adaptativo, es posible ahorrar trabajo y código utilizando una aproximación en base a rejillas flexibles. Utilizando este tipo de rejillas, podemos asegurar que el sitio web se redimensiona en función del espacio disponible, sin la necesidad de utilizar <code>media query</code>. Posteriormente es posible utilizar <code>media query</code> si es necesario realizar cambios significativos en la estructura de la web.</p>
+
+<p>Vamos a ver cinco componentes que nos permitirán construir una rejilla flexible, y cómo utilizarlas:</p>
+
+<ul>
+<li>Fuentes flexibles</li>
+<li>Contenedores flexibles</li>
+<li>Márgenes flexibles</li>
+<li>Rellenos flexibles</li>
+<li>Imágenes flexibles</li>
+</ul>
+
+<h3 id="fuentes-flexibles">2.1.1 Fuentes flexibles</h3>
+
+<p>El método tradicional utilizado para dar estilo a las fuentes es utilizar pixels. Esto da un control exacto a los diseñadores a la hora de definir su tamaño, pero lo ideal es comenzar a pesar de manera proporcional. Utiliza valores proporcionales a la hora de definir los tamaños del texto, nos ahorrará mucho tiempo y líneas de código en nuestros <code>media query</code>. Si deseamos aumentar o reducir el tamaño de nuestro texto, con indicar el tamaño de letra del elemento padre sería suficiente, ya que el resto de elementos se verían afectados de manera inmediata.</p>
+
+<p>La manera correcta de conseguir este comportamiento es utilizar medidas basadas en <code>em</code>. Además, debemos aplicar una regla muy sencilla para calcular el tamaño de letra concreto para cada caso:</p>
+
+<p><code>target ÷ context = result</code></p>
+
+<p>Donde <strong>target</strong> es el tamaño de fuente que queremos mostrar y <code>context</code> es el tamaño de fuente base de nuestro navegador (generalmente son <code>16px</code> para la mayoría de navegadores).</p>
+
+<p>Así pues, si deseamos mostrar un texto con un tamaño de <code>32px</code>, su tamaño en <code>em</code> se calcularía de la siguiente manera:</p>
+
+<p><code>32px ÷ 16px = 2</code></p>
+
+<p>Al utilizar esta fórmula, lo normal es obtener un número con mucho decimales. Lo ideal es mantener estos decimales, ya que el navegador es capaz de interpretarlos y siempre será mucho más preciso que no disponer de ellos. Además, es recomendable indicar el cálculo realizado junto a la regla de CSS, como referencia a futuro y en caso de necesitar cambiarlo.</p>
+
+<div class="code css">
+<pre class="css"><span class="kw1">font-size</span><span class="sy0">:</span> <span class="re3">2em</span> <span class="coMULTI">/* 32px/16px */</span></pre>
+</div>
+
+<h3 id="contenedores-flexibles">2.1.2 Contenedores flexibles</h3>
+
+<p>La magia de la fórmula anterior es que no sólo se puede aplicar a tamaños de fuente, sino que funciona correctamente para crear la estructura de una web a través de etiquetas <code>div</code>.</p>
+
+<p>Utilicemos como ejemplo el tema <a href="http://my.studiopress.com/themes/genesis/">Genesis</a> de Wordpress. En la siguiente imagen se puede ver que se ha optado por un diseño de <code>960px</code>de ancho, dividido en una cabecera con dos contenedores y un cuerpo con tres contenedores, ambos separados por un espacio de <code>20px</code>.</p>
+
+<div class="figure" id="figure-2-2">
+    <img src="images/cap02/genesis.png" alt="Estructura del tema Genesis" />
+
+    <p class="caption"><strong>Figura 2.2</strong> Estructura del tema Genesis</p>
+</div>
+
+
+<p>Este es el HTML correspondiente a la estructura:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;wrap&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;header&quot;</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;title-area&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;widget-area&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;inner&quot;</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;content-sidebar-wrap&quot;</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;content&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+            <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;sidebar&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;sidebar-alt&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre>
+</div>
+
+<p>Y la el código CSS base de la estructura:</p>
+
+<div class="code css">
+<pre class="css"><span class="re0">#wrap</span> <span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">960px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#header</span> <span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">960px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#title-area</span> <span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">400px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#header</span> <span class="re1">.widget-area</span> <span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">540px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#inner</span> <span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">960px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#content-sidebar-wrap</span> <span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">790px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+#<span class="kw1">content</span> <span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">470px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#sidebar</span> <span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">300px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#sidebar-alt</span> <span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">150px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Conociendo los valores objetivo, la primera tarea es establecer nuestro <strong>ancho base</strong>. Esta medida hace referencia al ancho que hemos definido a nuestro layout sin aplicar ningún diseño adaptativo. Como medida general, suele adoptarse como ancho base un 90% del área visible de la pantalla, lo que permite seguir manteniendo toda la estructura y contenidos de la web siempre visibles.</p>
+
+<p>A la hora de aplicar la fórmula, la única diferencia es que en este caso no vamos a hacer uso de la unida de medida <code>em</code>, sino de porcentajes, por lo que debemos multiplicar el resultados por 100. Si aplicamos la fórmula a la estructura anterior, el resultado sería el siguiente:</p>
+
+<div class="code css">
+<pre class="css"><span class="re0">#wrap</span> <span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">90%</span><span class="sy0">;</span>
+    <span class="kw1">max-width</span><span class="sy0">:</span> <span class="re3">960px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#header</span> <span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">100%</span><span class="sy0">;</span> <span class="coMULTI">/* 960px/960 */</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#title-area</span> <span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">41.666667%</span> <span class="coMULTI">/* 400px/960 */</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#header</span> <span class="re1">.widget-area</span> <span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">56.25%</span> <span class="coMULTI">/* 540px/960 */</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#inner</span> <span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">100%</span> <span class="coMULTI">/* 960px/960 */</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#content-sidebar-wrap</span> <span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">82.291667%</span> <span class="coMULTI">/* 790px/960 */</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+#<span class="kw1">content</span> <span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">48.958333%</span> <span class="coMULTI">/* 470px/960 */</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#sidebar</span> <span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">31.25%</span> <span class="coMULTI">/* 300px/960 */</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#sidebar-alt</span> <span class="br0">&#123;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">15.625%</span> <span class="coMULTI">/* 150px/960 */</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="figure" id="figure-2-3">
+    <img src="images/cap02/flexible-grid.png" alt="Resultado de aplicar contenedores flexibles" />
+
+    <p class="caption"><strong>Figura 2.3</strong> Resultado de aplicar contenedores flexibles</p>
+</div>
+
+
+<p>Ahora que tenemos nuestros contenedores flexibles, el siguiente paso es obtener el mismo comportamiento para los márgenes y rellenos.</p>
+
+<h3 id="margenes-flexibles">2.1.3 Márgenes flexibles</h3>
+
+<p>Para determinar la medida de los márgenes, vamos a utilizar la anchura del elemento contenedor. Tomemos como ejemplo la barra lateral. En este caso, el margen lateral izquierdo está definido a <code>25px</code>, mientras que el ancho del contenedor es de <code>150px</code>. Por lo tanto, la manera de calcular el nuevo margen es dividir el <code>25px</code> (<code>target</code>) entre 150px (<code>context</code>), dando como resultado <code>16.666667%</code></p>
+
+<div class="code css">
+<pre class="css"><span class="re1">.widget-area</span> ul <span class="br0">&#123;</span>
+    <span class="kw1">margin</span><span class="sy0">:</span> <span class="re3">10px</span> <span class="nu0">0</span> <span class="nu0">0</span> <span class="re3">25px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re1">.widget-area</span> ul <span class="br0">&#123;</span>
+    <span class="kw1">margin</span><span class="sy0">:</span> <span class="re3">10px</span> <span class="nu0">0</span> <span class="nu0">0</span> <span class="re3">16.666667%</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h3 id="rellenos-flexibles">2.1.4 Rellenos flexibles</h3>
+
+<p>En este caso, el comportamiento es exactamente igual al utilizado para calcular la media de los márgenes. Dividimos el relleno actual, <code>10px</code>, entre la anchura del elemento contenedor <code>300px</code>, dando como resultado un relleno del 3.33333%.</p>
+
+<div class="code css">
+<pre class="css"><span class="re1">.enews</span> p <span class="br0">&#123;</span>
+    <span class="kw1">padding</span><span class="sy0">:</span> <span class="re3">5px</span> <span class="re3">10px</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re1">.enews</span> p <span class="br0">&#123;</span>
+    <span class="kw1">padding</span><span class="sy0">:</span> <span class="re3">5px</span> <span class="re3">3.33333%</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h3 id="imagenes-flexibles">2.1.5 Imágenes flexibles</h3>
+
+<p>El último punto a tener en cuenta es el comportamiento de las imágenes. Por suerte, este es el caso más sencillo. Es suficiente con definir el ancho máximo de las imágenes al <code>100%</code> (todo el ancho de su contenedor).</p>
+
+<div class="code css">
+<pre class="css">img <span class="br0">&#123;</span>
+    <span class="kw1">max-width</span><span class="sy0">:</span> <span class="re3">100%</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-2.html#estructura-de-rejilla-flexible">Estructura de rejilla flexible</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>2.1</span>
+                        <a class="internal" href="capitulo-2.html#crear-una-rejilla-flexible">Crear una rejilla flexible</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

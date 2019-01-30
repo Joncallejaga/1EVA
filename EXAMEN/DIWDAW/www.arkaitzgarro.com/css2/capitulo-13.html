@@ -1,0 +1,1170 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>CSS Avanzado | CSS 2.1</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">CSS 2.1</a></h1>
+        <p class="span3">
+                        <a href="capitulo-12.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-14.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="css-avanzado"><span>Capítulo 13</span> CSS Avanzado</h1>
+        <h2 id="tecnicas-imprescindibles">13.1 Técnicas imprescindibles</h2>
+
+<p>En las próximas secciones se muestran las siguientes técnicas imprescindibles:</p>
+
+<ul>
+<li><p>Propiedades shorthand para crear hojas de estilos concisas.</p></li>
+<li><p>Limpiar floats, para trabajar correctamente con los elementos posicionados de forma flotante.</p></li>
+<li><p>Cómo crear elementos de la misma altura, imprescindible para el layout o estructura de las páginas.</p></li>
+<li><p>Rollovers y sprites CSS para mejorar el tiempo de respuesta de las páginas.</p></li>
+</ul>
+
+<h3 id="propiedades-shorthand-2">13.1.1 Propiedades shorthand</h3>
+
+<p>Algunas propiedades del estándar CSS 2.1 son especiales, ya que permiten establecer simultáneamente el valor de varias propiedades diferentes. Este tipo de propiedades se denominan "<em>propiedades shorthand</em>" y todos los diseñadores web profesionales las utilizan.</p>
+
+<p>La gran ventaja de las <em>propiedades shorthand</em> es que permiten crear hojas de estilos mucho más concisas y por tanto, mucho más fáciles de leer. A continuación se incluye a modo de referencia la definición formal de las seis propiedades shorthand disponibles en el estándar CSS 2.1.</p>
+
+<p>Si se considera la siguiente hoja de estilos:</p>
+
+<div class="code css">
+<pre class="css">p <span class="br0">&#123;</span>
+  <span class="kw1">font-style</span><span class="sy0">:</span> <span class="kw2">normal</span><span class="sy0">;</span>
+  <span class="kw1">font-variant</span><span class="sy0">:</span> <span class="kw2">small-caps</span><span class="sy0">;</span>
+  <span class="kw1">font-weight</span><span class="sy0">:</span> <span class="kw2">bold</span><span class="sy0">;</span>
+  <span class="kw1">font-size</span><span class="sy0">:</span> <span class="re3">1.5em</span><span class="sy0">;</span>
+  <span class="kw1">line-height</span><span class="sy0">:</span> <span class="nu0">1.5</span><span class="sy0">;</span>
+  <span class="kw1">font-family</span><span class="sy0">:</span> Arial<span class="sy0">,</span> <span class="kw2">sans-serif</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+div <span class="br0">&#123;</span>
+  <span class="kw1">margin-top</span><span class="sy0">:</span> <span class="re3">5px</span><span class="sy0">;</span>
+  <span class="kw1">margin-right</span><span class="sy0">:</span> <span class="re3">10px</span><span class="sy0">;</span>
+  <span class="kw1">margin-bottom</span><span class="sy0">:</span> <span class="re3">5px</span><span class="sy0">;</span>
+  <span class="kw1">margin-left</span><span class="sy0">:</span> <span class="re3">10px</span><span class="sy0">;</span>
+  <span class="kw1">padding-top</span><span class="sy0">:</span> <span class="re3">3px</span><span class="sy0">;</span>
+  <span class="kw1">padding-right</span><span class="sy0">:</span> <span class="re3">5px</span><span class="sy0">;</span>
+  <span class="kw1">padding-bottom</span><span class="sy0">:</span> <span class="re3">10px</span><span class="sy0">;</span>
+  <span class="kw1">padding-left</span><span class="sy0">:</span> <span class="re3">7px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+h1 <span class="br0">&#123;</span>
+  <span class="kw1">background-color</span><span class="sy0">:</span> <span class="re0">#FFFFFF</span><span class="sy0">;</span>
+  <span class="kw1">background-image</span><span class="sy0">:</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="st0">&quot;imagenes/icono.png&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">background-repeat</span><span class="sy0">:</span> <span class="kw2">no-repeat</span><span class="sy0">;</span>
+  <span class="kw1">background-position</span><span class="sy0">:</span> <span class="re3">10px</span> <span class="re3">5px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Utilizando las propiedades shorthand es posible convertir las 24 líneas que ocupa la hoja de estilos anterior en sólo 10 líneas, manteniendo los mismos estilos:</p>
+
+<div class="code css">
+<pre class="css">p <span class="br0">&#123;</span>
+  <span class="kw1">font</span><span class="sy0">:</span> <span class="kw2">normal</span> <span class="kw2">small-caps</span> <span class="kw2">bold</span> <span class="re3">1.5em</span>/<span class="nu0">1.5</span> Arial<span class="sy0">,</span> <span class="kw2">sans-serif</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+div <span class="br0">&#123;</span>
+  <span class="kw1">margin</span><span class="sy0">:</span> <span class="re3">5px</span> <span class="re3">10px</span><span class="sy0">;</span>
+  <span class="kw1">padding</span><span class="sy0">:</span> <span class="re3">3px</span> <span class="re3">5px</span> <span class="re3">10px</span> <span class="re3">7px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+h1 <span class="br0">&#123;</span>
+  <span class="kw1">background</span><span class="sy0">:</span> <span class="re0">#FFF</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="st0">&quot;imagenes/icono.png&quot;</span><span class="br0">&#41;</span> <span class="kw2">no-repeat</span> <span class="re3">10px</span> <span class="re3">5px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h3 id="limpiar-floats">13.1.2 Limpiar floats</h3>
+
+<p>La principal característica de los elementos posicionados de forma flotante mediante la propiedad <code>float</code> es que desaparecen del flujo normal del documento. De esta forma, es posible que algunos o todos los elementos flotantes se salgan de su elemento contenedor.</p>
+
+<p>La siguiente imagen muestra un elemento contenedor que encierra a dos elementos de texto. Como los elementos interiores están posicionados de forma flotante y el elemento contenedor no dispone de más contenidos, el resultado es el siguiente:</p>
+
+<div class="figure" id="figure-13-1">
+    <img src="images/cap13/float.png" alt="Los elementos posicionados de forma flotante se salen de su elemento contenedor" />
+
+    <p class="caption"><strong>Figura 13.1</strong> Los elementos posicionados de forma flotante se salen de su elemento contenedor</p>
+</div>
+
+
+<p>El código HTML y CSS del ejemplo anterior se muestra a continuación:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;contenedor&quot;</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;izquierda&quot;</span>&gt;</span>Lorem ipsum dolor sit amet, consectetuer
+  adipiscing elit. Duis molestie turpis vitae ante.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;derecha&quot;</span>&gt;</span>Lorem ipsum dolor sit amet, consectetuer
+  adipiscing elit. Nulla bibendum mi non lacus.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre>
+</div>
+
+<div class="code css">
+<pre class="css"><span class="re0">#contenedor</span> <span class="br0">&#123;</span>
+  <span class="kw1">border</span><span class="sy0">:</span> <span class="kw2">thick</span> <span class="kw2">solid</span> <span class="re0">#000</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#izquierda</span> <span class="br0">&#123;</span>
+  <span class="kw1">float</span><span class="sy0">:</span> <span class="kw1">left</span><span class="sy0">;</span>
+  <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">40%</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#derecha</span> <span class="br0">&#123;</span>
+  <span class="kw1">float</span><span class="sy0">:</span> <span class="kw1">right</span><span class="sy0">;</span>
+  <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">40%</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La solución tradicional de este problema consiste en añadir un elemento invisible después de todos los elementos posicionados de forma flotante para forzar a que el elemento contenedor tenga la altura suficiente. Los elementos invisibles más utilizados son <code>&lt;div&gt;</code>, <code>&lt;br&gt;</code> y <code>&lt;p&gt;</code>.</p>
+
+<p>De esta forma, si se añade un elemento <code>&lt;div&gt;</code> invisible con la propiedad clear de CSS en el ejemplo anterior:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;contenedor&quot;</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;izquierda&quot;</span>&gt;</span>Lorem ipsum dolor sit amet, consectetuer
+  adipiscing elit. Duis molestie turpis vitae ante.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;derecha&quot;</span>&gt;</span>Lorem ipsum dolor sit amet, consectetuer
+  adipiscing elit. Nulla bibendum mi non lacus.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+&nbsp;
+  <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">style</span><span class="sy0">=</span><span class="st0">&quot;clear: both&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre>
+</div>
+
+<p>Ahora el elemento contenedor se visualiza correctamente porque encierra a todos sus elementos:</p>
+
+<div class="figure" id="figure-13-2">
+    <img src="images/cap13/clear.png" alt="Solución tradicional al problema de los elementos posicionados de forma flotante" />
+
+    <p class="caption"><strong>Figura 13.2</strong> Solución tradicional al problema de los elementos posicionados de forma flotante</p>
+</div>
+
+
+<p>La técnica de corregir los problemas ocasionados por los elementos posicionados de forma flotante se suele denominar "<em>limpiar los float</em>".</p>
+
+<p>Aunque añadir un elemento invisible corrige correctamente el problema, se trata de una solución poco elegante e incorrecta desde el punto de vista semántico. No tiene ningún sentido añadir un elemento vacío en el código HTML, sobre todo si ese elemento se utiliza exclusivamente para corregir el aspecto de los contenidos.</p>
+
+<p>Afortunadamente, existe una solución alternativa para <em>limpiar los float</em> que no obliga a añadir nuevos elementos HTML y que además es elegante y muy sencilla. La solución consiste en utilizar la propiedad <code>overflow</code> de CSS sobre el elemento contenedor.</p>
+
+<p>Si se modifica el código CSS anterior y se incluye la siguiente regla:</p>
+
+<div class="code css">
+<pre class="css"><span class="re0">#contenedor</span> <span class="br0">&#123;</span>
+  <span class="kw1">border</span><span class="sy0">:</span>   <span class="kw2">thick</span> <span class="kw2">solid</span> <span class="re0">#000</span><span class="sy0">;</span>
+  <span class="kw1">overflow</span><span class="sy0">:</span> <span class="kw2">hidden</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Ahora, el contenedor encierra correctamente a los dos elementos <code>&lt;div&gt;</code> interiores y no es necesario añadir ningún elemento adicional en el código HTML. Además del valor hidden, también es posible utilizar el valor auto obteniendo el mismo resultado.</p>
+
+<h3 id="elementos-de-la-misma-altura">13.1.3 Elementos de la misma altura</h3>
+
+<p>Hasta hace unos años, la estructura de las páginas web complejas se creaba mediante tablas HTML. Aunque esta solución presenta muchos inconvenientes, su principal ventaja es que todas las columnas que forman la página son de la misma altura.</p>
+
+<p>Normalmente, cuando se crea la estructura de una página compleja, se desea que todas las columnas que la forman tengan la misma altura. De hecho, cuando algunas o todas las columnas tienen imágenes o colores de fondo, esta característica es imprescindible para obtener un diseño correcto.</p>
+
+<p>Sin embargo, como el contenido de cada columna suele ser variable, no es posible determinar la altura de la columna más alta y por tanto, no es posible hacer que todas las columnas tengan la misma altura directamente con la propiedad <code>height</code>.</p>
+
+<p>Cuando se utiliza una tabla para crear la estructura de la página, este problema no existe porque cada columna de la estructura se corresponde con una celda de datos de la tabla. Sin embargo, cuando se diseña la estructura de la página utilizando sólo CSS, el problema no es tan fácil de solucionar. Afortunadamente, existen varias soluciones para asegurar que dos elementos tengan la misma altura.</p>
+
+<p>El truco consiste en añadir un espacio de relleno inferior (<code>padding-bottom</code>) muy grande a todas las columnas y después añadirles un margen inferior negativo (<code>margin-bottom</code>) del mismo tamaño.</p>
+
+<div class="code css">
+<pre class="css"><span class="re0">#contenedor</span> <span class="br0">&#123;</span>
+  <span class="kw1">overflow</span><span class="sy0">:</span> <span class="kw2">hidden</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#columna1</span><span class="sy0">,</span> <span class="re0">#columna2</span><span class="sy0">,</span> <span class="re0">#columna3</span> <span class="br0">&#123;</span>
+  <span class="kw1">padding-bottom</span><span class="sy0">:</span> <span class="re3">32767px</span><span class="sy0">;</span>
+  <span class="kw1">margin-bottom</span><span class="sy0">:</span> <span class="re3">-32767px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>El valor utilizado en el espacio de relleno y en el margen inferior de las columnas debe ser tan grande como la altura esperada para la columna más alta. Para evitar quedarse corto, se recomienda utilizar valores a partir de <code>10.000</code> píxeles.</p>
+
+<p>Los dos principales problemas que presenta esta solución son los siguientes:</p>
+
+<ul>
+<li>Se pueden producir errores al imprimir la página con el navegador Internet Explorer.</li>
+<li>Si se utilizan enlaces de tipo ancla en cualquier columna, al pulsar sobre el enlace las columnas se desplazan de forma ascendente y desaparecen de la página.</li>
+</ul>
+
+<p>Otra solución al problema de los elementos de la misma altura es la que presentó el diseñador Dan Cederholm en su célebre artículo Faux Columns. Si la solución anterior consitía en engañar al navegador, esta segunda solución se basa en engañar al ojo del usuario.</p>
+
+<p>La solución de las columnas falsas consiste en establecer una imagen de fondo repetida verticalmente en el elemento contenedor. Como el contenedor es tan alto como la columna más alta, su imagen de fondo da la sensación de que todas las columnas son de la misma altura.</p>
+
+<div class="figure" id="figure-13-3">
+    <img src="images/cap13/columns.png" alt="Las columnas parecen de la misma altura porque el elemento contenedor muestra una imagen de fondo repetida verticalmente" />
+
+    <p class="caption"><strong>Figura 13.3</strong> Las columnas parecen de la misma altura porque el elemento contenedor muestra una imagen de fondo repetida verticalmente</p>
+</div>
+
+
+<p>El principal inconveniente de esta técnica es que sólo se puede emplear cuando la estructura de la página es de anchura fija, es decir, cuando su diseño no es líquido y no se adapta a la anchura de la ventana del navegador.</p>
+
+<p>Las dos soluciones planteadas hasta el momento consisten en trucos para engañar a los navegadores y a los usuarios. A continuación se presenta la única solución técnicamente correcta para forzar a que dos elementos muestren la misma altura.</p>
+
+<p>La solución fue propuesta por el diseñador Roger Johansson en su artículo Equal height boxes with CSS y se basa en el uso avanzado de la propiedad <code>display</code> de CSS.</p>
+
+<p>En primer lugar, es necesario añadir un elemento adicional (<code>&lt;div id="contenidos"&gt;</code>) en el código HTML de la página:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;contenedor&quot;</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;contenidos&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;columna1&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;columna2&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;columna3&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+  <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre>
+</div>
+
+<p>A continuación, se utiliza la propiedad display de CSS para mostrar los elementos <code>&lt;div&gt;</code> anteriores como si fueran celdas de una tabla de datos:</p>
+
+<div class="code css">
+<pre class="css"><span class="re0">#contenedor</span> <span class="br0">&#123;</span>
+  <span class="kw1">display</span><span class="sy0">:</span> table<span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#contenidos</span> <span class="br0">&#123;</span>
+  <span class="kw1">display</span><span class="sy0">:</span> <span class="kw2">table-row</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#columna1</span><span class="sy0">,</span> <span class="re0">#columna2</span><span class="sy0">,</span> <span class="re0">#columna3</span> <span class="br0">&#123;</span>
+  <span class="kw1">display</span><span class="sy0">:</span> <span class="kw2">table-cell</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Gracias a la propiedad <code>display</code> de CSS, cualquier elemento se puede comportar como una tabla, una fila de tabla o una celda de tabla, independientemente del tipo de elemento que se trate.</p>
+
+<p>De esta forma, los elementos <code>&lt;div&gt;</code> que forman las columnas de la página en realidad se comportan como celdas de tabla, lo que permite que el navegador las muestre con la misma altura.</p>
+
+<h3 id="rollovers-y-sprites">13.1.4 Rollovers y sprites</h3>
+
+<p>Según varios estudios realizados por Yahoo!, hasta el 80% de la mejora en el rendimiento de la descarga de páginas web depende de la parte del cliente. En el artículo <a href="http://yuiblog.com/blog/2006/11/28/performance-research-part-1/">Performance Research, Part 1: What the 80/20 Rule Tells Us about Reducing HTTP Requests Yahoo!</a> explica que generar dinámicamente el código HTML de la página y servirla ocupa el 20% del tiempo total de descarga de la página. El 80% del tiempo restante los navegadores descargan las imágenes, archivos JavaScript, hojas de estilos y cualquier otro tipo de archivo enlazado.</p>
+
+<p>Además, en la mayoría de páginas web <em>normales</em>, la mayor parte de ese 80% del tiempo se dedica a la descarga de las imágenes. Por tanto, aunque los mayores esfuerzos siempre se centran en reducir el tiempo de generación dinámica de las páginas, se consigue más y con menos esfuerzo mejorando la descarga de las imágenes.</p>
+
+<p>La idea para mejorar el rendimiento de una página que descarga por ejemplo 15 imágenes consiste en crear una única imagen grande que incluya las 15 imágenes individuales y utilizar las propiedades CSS de las imágenes de fondo para mostrar cada imagen. Esta técnica se presentó en el artículo <a href="http://www.alistapart.com/articles/sprites">CSS Sprites: Image Slicing’s Kiss of Death</a> y desde entonces se conoce con el nombre de sprites CSS.</p>
+
+<p>El siguiente ejemplo explica el uso de los <em>sprites</em> CSS en un sitio web que muestra la previsión meteorológica de varias localidades utilizando iconos:</p>
+
+<div class="figure" id="figure-13-4">
+    <img src="images/cap13/sprite01.png" alt="Aspecto de la previsión meteorológica mostrada con iconos" />
+
+    <p class="caption"><strong>Figura 13.4</strong> Aspecto de la previsión meteorológica mostrada con iconos</p>
+</div>
+
+
+<p>La solución tradicional para crear la página anterior consiste en utilizar cuatro elementos <img> en el código HTML y disponer de cuatro imágenes correspondientes a los cuatro iconos:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">h3</span>&gt;</span>Previsiones meteorológicas<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h3</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;localidad1&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;imagenes/sol.png&quot;</span> <span class="sy0">/</span>&gt;</span>
+    Localidad 1: soleado, máx: 35º, mín: 23º
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;localidad2&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;imagenes/sol_nubes.png&quot;</span> <span class="sy0">/</span>&gt;</span>
+    Localidad 2: nublado, máx: 25º, mín: 13º
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;localidad3&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;imagenes/nubes.png&quot;</span> <span class="sy0">/</span>&gt;</span>
+    Localidad 3: muy nublado, máx: 22º, mín: 10º
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;localidad4&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;imagenes/tormentas.png&quot;</span> <span class="sy0">/</span>&gt;</span>
+    Localidad 4: tormentas, máx: 23º, mín: 11º
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<p>Aunque es una solución sencilla y que funciona muy bien, se trata de una solución completamente ineficiente. El navegador debe descargar cuatro imágenes diferentes para mostrar la página, por lo que debe realizar cuatro peticiones al servidor.</p>
+
+<p>Después del tamaño de los archivos descargados, el número de peticiones realizadas al servidor es el factor que más penaliza el rendimiento en la descarga de páginas web. Utilizando la técnica de los sprites CSS se va a rehacer el ejemplo anterior para conseguir el mismo efecto con una sola imagen y por tanto, una sola petición al servidor.</p>
+
+<p>El primer paso consiste en crear una imagen grande que incluya las cuatro imágenes individuales. Como los iconos son cuadrados de tamaño <code>32px</code>, se crea una imagen de <code>32px</code> x <code>128px</code>:</p>
+
+<div class="figure" id="figure-13-5">
+    <img src="images/cap13/sprite02.png" alt="Creando un sprite de CSS a partir de varias imágenes individuales" />
+
+    <p class="caption"><strong>Figura 13.5</strong> Creando un sprite de CSS a partir de varias imágenes individuales</p>
+</div>
+
+
+<p>Para facilitar el uso de esta técnica, todas las imágenes individuales ocupan el mismo sitio dentro de la imagen grande. De esta forma, los cálculos necesarios para desplazar la imagen de fondo se simplifican al máximo.</p>
+
+<p>El siguiente paso consiste en simplificar el código HTML:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">h3</span>&gt;</span>Previsiones meteorológicas<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h3</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;localidad1&quot;</span>&gt;</span>
+    Localidad 1: soleado, máx: 35º, mín: 23º
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;localidad2&quot;</span>&gt;</span>
+    Localidad 2: nublado, máx: 25º, mín: 13º
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;localidad3&quot;</span>&gt;</span>
+    Localidad 3: muy nublado, máx: 22º, mín: 10º
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;localidad4&quot;</span>&gt;</span>
+    Localidad 4: tormentas, máx: 23º, mín: 11º
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<p>La clave de la técnica de los sprites CSS consiste en mostrar las imágenes mediante la propiedad <code>background-image</code>. Para mostrar cada vez una imagen diferente, se utiliza la propiedad <code>background-position</code> que desplaza la imagen de fondo teniendo en cuenta la posición de cada imagen individual dentro de la imagen grande:</p>
+
+<div class="code css">
+<pre class="css"><span class="re0">#localidad1</span><span class="sy0">,</span> <span class="re0">#localidad2</span><span class="sy0">,</span> <span class="re0">#localidad3</span><span class="sy0">,</span> <span class="re0">#localidad4</span> <span class="br0">&#123;</span>
+  <span class="kw1">padding-left</span><span class="sy0">:</span> <span class="re3">38px</span><span class="sy0">;</span>
+  <span class="kw1">height</span><span class="sy0">:</span> <span class="re3">32px</span><span class="sy0">;</span>
+  <span class="kw1">line-height</span><span class="sy0">:</span> <span class="re3">32px</span><span class="sy0">;</span>
+  <span class="kw1">background-image</span><span class="sy0">:</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="st0">&quot;imagenes/sprite.png&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">background-repeat</span><span class="sy0">:</span> <span class="kw2">no-repeat</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#localidad1</span> <span class="br0">&#123;</span>
+  <span class="kw1">background-position</span><span class="sy0">:</span> <span class="nu0">0</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="re0">#localidad2</span> <span class="br0">&#123;</span>
+  <span class="kw1">background-position</span><span class="sy0">:</span> <span class="nu0">0</span> <span class="re3">-32px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="re0">#localidad3</span> <span class="br0">&#123;</span>
+  <span class="kw1">background-position</span><span class="sy0">:</span> <span class="nu0">0</span> <span class="re3">-64px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="re0">#localidad4</span> <span class="br0">&#123;</span>
+  <span class="kw1">background-position</span><span class="sy0">:</span> <span class="nu0">0</span> <span class="re3">-96px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La siguiente imagen muestra lo que sucede con el segundo párrafo:</p>
+
+<div class="figure" id="figure-13-6">
+    <img src="images/cap13/sprite03.png" alt="Funcionamiento de la técnica de los sprites CSS" />
+
+    <p class="caption"><strong>Figura 13.6</strong> Funcionamiento de la técnica de los sprites CSS</p>
+</div>
+
+
+<p>El párrafo tiene establecida una altura de <code>32px</code>, idéntica al tamaño de los iconos. Después de añadir un <code>padding-left</code> al párrafo, se añade la imagen de fondo mediante <code>background-image</code>. Para cambiar de una imagen a otra, sólo es necesario desplazar de forma ascendente o descendente la imagen grande.</p>
+
+<p>Si se quiere mostrar la segunda imagen, se desplaza de forma ascendente la imagen grande. Para desplazarla en ese sentido, se utilizan valores negativos en el valor indicado en la propiedad <code>background-position</code>. Por último, como la imagen grande ha sido especialmente preparada, se sabe que el desplazamiento necesario son <code>32 píxel</code>, por lo que la regla CSS de este segundo elemento resulta en:</p>
+
+<div class="code css">
+<pre class="css"><span class="re0">#localidad2</span> <span class="br0">&#123;</span>
+  <span class="kw1">padding-left</span><span class="sy0">:</span> <span class="re3">38px</span><span class="sy0">;</span>
+  <span class="kw1">height</span><span class="sy0">:</span> <span class="re3">32px</span><span class="sy0">;</span>
+  <span class="kw1">line-height</span><span class="sy0">:</span> <span class="re3">32px</span><span class="sy0">;</span>
+  <span class="kw1">background-image</span><span class="sy0">:</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="st0">&quot;imagenes/sprite.png&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">background-repeat</span><span class="sy0">:</span> <span class="kw2">no-repeat</span><span class="sy0">;</span>
+  <span class="kw1">background-position</span><span class="sy0">:</span> <span class="nu0">0</span> <span class="re3">-32px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La solución original utilizaba cuatro imágenes y realizaba cuatro peticiones al servidor. La solución basada en sprites CSS sólo realiza una conexión para descargar una sola imagen. Además, los iconos del proyecto Tango que se han utilizado en este ejemplo ocupan 7.441 bytes cuando se suman los tamaños de los cuatro iconos por separado. Por su parte, la imagen grande que contiene los cuatro iconos sólo ocupa 2.238 bytes.</p>
+
+<p>Los <em>sprites</em> que incluyen todas sus imágenes verticalmente son los más fáciles de manejar. Si en el ejemplo anterior se emplea un sprite con las imágenes dispuestas también horizontalmente:</p>
+
+<div class="figure" id="figure-13-7">
+    <img src="images/cap13/sprite04.png" alt="Sprite complejo que dispone las imágenes de forma vertical y horizontal" />
+
+    <p class="caption"><strong>Figura 13.7</strong> Sprite complejo que dispone las imágenes de forma vertical y horizontal</p>
+</div>
+
+
+<p>Aparentemente, utilizar este nuevo sprite sólo implica que la imagen de fondo se debe desplazar también horizontalmente:</p>
+
+<div class="code css">
+<pre class="css"><span class="re0">#localidad1</span><span class="sy0">,</span> <span class="re0">#localidad2</span><span class="sy0">,</span> <span class="re0">#localidad3</span><span class="sy0">,</span> <span class="re0">#localidad4</span> <span class="br0">&#123;</span>
+  <span class="kw1">padding-left</span><span class="sy0">:</span> <span class="re3">38px</span><span class="sy0">;</span>
+  <span class="kw1">height</span><span class="sy0">:</span> <span class="re3">32px</span><span class="sy0">;</span>
+  <span class="kw1">line-height</span><span class="sy0">:</span> <span class="re3">32px</span><span class="sy0">;</span>
+  <span class="kw1">background-image</span><span class="sy0">:</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="st0">&quot;imagenes/sprite.png&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">background-repeat</span><span class="sy0">:</span> <span class="kw2">no-repeat</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#localidad1</span> <span class="br0">&#123;</span>
+  <span class="kw1">background-position</span><span class="sy0">:</span> <span class="nu0">0</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="re0">#localidad2</span> <span class="br0">&#123;</span>
+  <span class="kw1">background-position</span><span class="sy0">:</span> <span class="re3">-32px</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="re0">#localidad3</span> <span class="br0">&#123;</span>
+  <span class="kw1">background-position</span><span class="sy0">:</span> <span class="nu0">0</span> <span class="re3">-32px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="re0">#localidad4</span> <span class="br0">&#123;</span>
+  <span class="kw1">background-position</span><span class="sy0">:</span> <span class="re3">-32px</span> <span class="re3">-32px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>El problema del <em>sprite</em> anterior es que cuando una imagen tiene a su derecha o a su izquierda otras imágenes, estas también se ven:</p>
+
+<div class="figure" id="figure-13-8">
+    <img src="images/cap13/sprite05.png" alt="Errores producidos por utilizar un sprite complejo" />
+
+    <p class="caption"><strong>Figura 13.8</strong> Errores producidos por utilizar un sprite complejo</p>
+</div>
+
+
+<p>La solución de este problema es sencilla, aunque requiere algún cambio en el código HTML:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">h3</span>&gt;</span>Previsiones meteorológicas<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h3</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;localidad1&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;imagenes/pixel.gif&quot;</span> <span class="sy0">/</span>&gt;</span>
+    Localidad 1: soleado, máx: 35º, mín: 23º
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;localidad2&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;imagenes/pixel.gif&quot;</span> <span class="sy0">/</span>&gt;</span>
+    Localidad 2: nublado, máx: 25º, mín: 13º
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;localidad3&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;imagenes/pixel.gif&quot;</span> <span class="sy0">/</span>&gt;</span>
+    Localidad 3: muy nublado, máx: 22º, mín: 10º
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;localidad4&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;imagenes/pixel.gif&quot;</span> <span class="sy0">/</span>&gt;</span>
+    Localidad 4: tormentas, máx: 23º, mín: 11º
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<p>El código anterior muestra uno de los trucos habituales para manejar sprites complejos. En primer lugar se añade una imagen transparente de <code>1px</code> x <code>1px</code> a todos los elementos mediante una etiqueta <code>&lt;img&gt;</code>. A continuación, desde CSS se establece una imagen de fondo a cada elemento <code>&lt;img&gt;</code> y se limita su tamaño para que no deje ver las imágenes que se encuentran cerca:</p>
+
+<div class="code css">
+<pre class="css"><span class="re0">#localidad1</span> img<span class="sy0">,</span> <span class="re0">#localidad2</span> img<span class="sy0">,</span> <span class="re0">#localidad3</span> img<span class="sy0">,</span> <span class="re0">#localidad4</span> img <span class="br0">&#123;</span>
+  <span class="kw1">height</span><span class="sy0">:</span> <span class="re3">32px</span><span class="sy0">;</span>
+  <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">32px</span><span class="sy0">;</span>
+  <span class="kw1">background-image</span><span class="sy0">:</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="st0">&quot;imagenes/sprite2.png&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">background-repeat</span><span class="sy0">:</span> <span class="kw2">no-repeat</span><span class="sy0">;</span>
+  <span class="kw1">vertical-align</span><span class="sy0">:</span> <span class="kw2">middle</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re0">#localidad1</span> img <span class="br0">&#123;</span>
+  <span class="kw1">background-position</span><span class="sy0">:</span> <span class="nu0">0</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="re0">#localidad2</span> img <span class="br0">&#123;</span>
+  <span class="kw1">background-position</span><span class="sy0">:</span> <span class="re3">-32px</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="re0">#localidad3</span> img <span class="br0">&#123;</span>
+  <span class="kw1">background-position</span><span class="sy0">:</span> <span class="nu0">0</span> <span class="re3">-32px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="re0">#localidad4</span> img <span class="br0">&#123;</span>
+  <span class="kw1">background-position</span><span class="sy0">:</span> <span class="re3">-32px</span> <span class="re3">-32px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Utilizar <em>sprites</em> CSS es una de las técnicas más eficaces para mejorar los tiempos de descarga de las páginas web complejas. La siguiente imagen muestra un <em>sprite</em> complejo que incluye 241 iconos del proyecto Tango y sólo ocupa 42 KB:</p>
+
+<div class="figure" id="figure-13-9">
+    <img src="images/cap13/sprite05.png" alt="Sprite complejo que incluye 210 iconos en una sola imagen" />
+
+    <p class="caption"><strong>Figura 13.9</strong> Sprite complejo que incluye 210 iconos en una sola imagen</p>
+</div>
+
+
+<p>La mayoría de sitios web profesionales utilizan <em>sprites</em> para mostrar sus imágenes de adorno. La siguiente imagen muestra un <em>sprite</em> del sitio web Flickr:</p>
+
+<div class="figure" id="figure-13-10">
+    <img src="images/cap13/flickr-sprite.png.v5" alt="Un sprite utilizado por el sitio web Flickr" />
+
+    <p class="caption"><strong>Figura 13.10</strong> Un sprite utilizado por el sitio web Flickr</p>
+</div>
+
+
+<p>Los principales inconvenientes de los <em>sprites</em> CSS son la poca flexibilidad que ofrece (añadir o modificar una imagen individual no es inmediato) y el esfuerzo necesario para crear el <em>sprite</em>.</p>
+
+<p>Afortunadamente, existen aplicaciones web como <a href="http://spritegen.website-performance.org/">CSS Sprite Generator</a> que generan el <em>sprite</em> a partir de un archivo comprimido en formato ZIP con todas las imágenes individuales.</p>
+
+<h2 id="selectores-2">13.2 Selectores</h2>
+
+<p>Conocer y dominar todos los selectores de CSS es imprescindible para crear diseños web profesionales. El estándar de CSS 2.1 incluye una docena de tipos diferentes de selectores, que permiten seleccionar de forma muy precisa elementos individuales o conjuntos de elementos dentro de una página web.</p>
+
+<p>Utilizando solamente los cinco selectores básicos de CSS 2.1 (universal, de tipo, descendente, de clase y de id) es posible diseñar cualquier página web. No obstante, los selectores avanzados de CSS 2.1 permiten simplificar las reglas CSS y también el código HTML.</p>
+
+<h3 id="selector-de-hijos-2">13.2.1 Selector de hijos</h3>
+
+<p>Se trata de un selector similar al selector descendente, pero muy diferente en su funcionamiento. Se utiliza para seleccionar un elemento que es <em>hijo</em> de otro elemento y se indica mediante el "<em>signo de mayor que</em>" (<code>&gt;</code>).</p>
+
+<p>Mientras que en el selector descendente sólo importa que un elemento esté dentro de otro, independientemente de lo profundo que se encuentre, en el selector de hijos el elemento debe ser <em>hijo</em> directo de otro elemento.</p>
+
+<div class="code css">
+<pre class="css">p <span class="sy0">&gt;</span> span <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw1">blue</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">span</span>&gt;</span>Texto1<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">span</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+&nbsp;
+<span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">span</span>&gt;</span>Texto2<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">span</span>&gt;</span>
+  <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<p>En el ejemplo anterior, el selector <code>p &gt; span</code> se interpreta como "<em>cualquier elemento <code>&lt;span&gt;</code> que sea hijo directo de un elemento <code>&lt;p&gt;</code></em>", por lo que el primer elemento <code>&lt;span&gt;</code> cumple la condición del selector. Sin embargo, el segundo elemento <code>&lt;span&gt;</code> no la cumple porque es descendiente pero no es hijo directo de un elemento <code>&lt;p&gt;</code>.</p>
+
+<p>Utilizando el mismo ejemplo anterior se pueden comparar las diferencias entre el selector descendente y el selector de hijos:</p>
+
+<div class="code css">
+<pre class="css">p a <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+p <span class="sy0">&gt;</span> a <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enlace1<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+&nbsp;
+<span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">span</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enlace2<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+  <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">span</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<p>El primer selector es de tipo descendente (<code>p a</code>) y por tanto se aplica a todos los elementos <code>&lt;a&gt;</code> que se encuentran dentro de elementos <code>&lt;p&gt;</code>. En este caso, los estilos de este selector se aplican a los dos enlaces.</p>
+
+<p>El segundo selector es de hijos (<code>p &gt; a</code>) por lo que obliga a que el elemento <code>&lt;a&gt;</code> sea hijo directo de un elemento <code>&lt;p&gt;</code>. Por tanto, los estilos del selector <code>p &gt; a</code> no se aplican al segundo enlace del ejemplo anterior.</p>
+
+<h3 id="selector-adyacente-2">13.2.2 Selector adyacente</h3>
+
+<p>El selector adyacente se emplea para seleccionar elementos que son hermanos (su elemento padre es el mismo) y están seguidos en el código HTML. Este selector emplea en su sintaxis el símbolo <code>+</code>. Si se considera el siguiente ejemplo:</p>
+
+<div class="code css">
+<pre class="css">h1 <span class="sy0">+</span> h2 <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">h1</span>&gt;</span>Titulo1<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h1</span>&gt;</span>
+&nbsp;
+    <span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>Subtítulo<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+    ...
+&nbsp;
+    <span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>Otro subtítulo<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+    ...
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span></pre>
+</div>
+
+<p>Los estilos del selector <code>h1 + h2</code> se aplican al primer elemento <code>&lt;h2&gt;</code> de la página, pero no al segundo <code>&lt;h2&gt;</code>, ya que:</p>
+
+<ul>
+<li>El elemento padre de <code>&lt;h1&gt;</code> es <code>&lt;body&gt;</code>, el mismo padre que el de los dos elementos <code>&lt;h2&gt;</code>. Así, los dos elementos <code>&lt;h2&gt;</code> cumplen la primera condición del selector adyacente.</li>
+<li>El primer elemento <code>&lt;h2&gt;</code> aparece en el código HTML justo después del elemento <code>&lt;h1&gt;</code>, por lo que este elemento <code>&lt;h2&gt;</code> también cumple la segunda condición del selector adyacente.</li>
+<li>Por el contrario, el segundo elemento <code>&lt;h2&gt;</code> no aparece justo después del elemento <code>&lt;h1&gt;</code>, por lo que no cumple la segunda condición del selector adyacente y por tanto no se le aplican los estilos de <code>h1 + h2</code>.</li>
+</ul>
+
+<p>El siguiente ejemplo puede ser útil para los textos que se muestran como libros:</p>
+
+<div class="code css">
+<pre class="css">p <span class="sy0">+</span> p <span class="br0">&#123;</span> <span class="kw1">text-indent</span><span class="sy0">:</span> <span class="re3">1.5em</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>En muchos libros es habitual que la primera línea de todos los párrafos esté indentada, salvo la primera línea del primer párrafo. El selector <code>p + p</code> selecciona todos los párrafos que están dentro de un mismo elemento padre y que estén precedidos por otro párrafo. En otras palabras, el selector <code>p + p</code> selecciona todos los párrafos de un elemento salvo el primer párrafo.</p>
+
+<p>El selector adyacente requiere que los dos elementos sean hermanos, por lo que su elemento padre debe ser el mismo. Si se considera el siguiente ejemplo:</p>
+
+<div class="code css">
+<pre class="css">p <span class="sy0">+</span> p <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Lorem ipsum dolor sit amet...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Lorem ipsum dolor sit amet...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">div</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Lorem ipsum dolor sit amet...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre>
+</div>
+
+<p>En el ejemplo anterior, solamente el segundo párrafo se ve de color rojo, ya que:</p>
+
+<ul>
+<li>El primer párrafo no va precedido de ningún otro párrafo, por lo que no cumple una de las condiciones de <code>p + p</code></li>
+<li>El segundo párrafo va precedido de otro párrafo y los dos comparten el mismo padre, por lo que se cumplen las dos condiciones del selector <code>p + p</code> y el párrafo muestra su texto de color rojo.</li>
+<li>El tercer párrafo se encuentra dentro de un elemento <code>&lt;div&gt;</code>, por lo que no se cumple ninguna condición del selector <code>p + p</code> ya que ni va precedido de un párrafo ni comparte padre con ningún otro párrafo.</li>
+</ul>
+
+<h3 id="selector-de-atributos-2">13.2.3 Selector de atributos</h3>
+
+<p>El último tipo de selectores avanzados lo forman los selectores de atributos, que permiten seleccionar elementos HTML en función de sus atributos y/o valores de esos atributos.</p>
+
+<p>Los cuatro tipos de selectores de atributos son:</p>
+
+<ul>
+<li><code>[nombre_atributo]</code>, selecciona los elementos que tienen establecido el atributo llamado nombre_atributo, independientemente de su valor.</li>
+<li><code>[nombre_atributo=valor]</code>, selecciona los elementos que tienen establecido un atributo llamado nombre_atributo con un valor igual a valor.</li>
+<li><code>[nombre_atributo~=valor]</code>, selecciona los elementos que tienen establecido un atributo llamado nombre_atributo y cuyo valor es una lista de palabras separadas por espacios en blanco en la que al menos una de ellas es exactamente igual a valor.</li>
+<li><code>[nombre_atributo|=valor]</code>, selecciona los elementos que tienen establecido un atributo llamado nombre_atributo y cuyo valor es una serie de palabras separadas con guiones, pero que comienza con valor. Este tipo de selector sólo es útil para los atributos de tipo lang que indican el idioma del contenido del elemento.</li>
+</ul>
+
+<p>A continuación se muestran algunos ejemplos de estos tipos de selectores:</p>
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* Se muestran de color azul todos los enlaces que tengan un atributo &quot;class&quot;, independientemente de su valor */</span>
+a<span class="br0">&#91;</span>class<span class="br0">&#93;</span> <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw1">blue</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Se muestran de color azul todos los enlaces que tengan un atributo &quot;class&quot; con el valor &quot;externo&quot; */</span>
+a<span class="br0">&#91;</span>class<span class="sy0">=</span><span class="st0">&quot;externo&quot;</span><span class="br0">&#93;</span> <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw1">blue</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Se muestran de color azul todos los enlaces que apunten al sitio &quot;http://www.ejemplo.com&quot; */</span>
+a<span class="br0">&#91;</span>href<span class="sy0">=</span><span class="st0">&quot;http://www.ejemplo.com&quot;</span><span class="br0">&#93;</span> <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw1">blue</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Se muestran de color azul todos los enlaces que tengan un atributo &quot;class&quot; en el que al menos uno de sus valores sea &quot;externo&quot; */</span>
+a<span class="br0">&#91;</span>class~<span class="sy0">=</span><span class="st0">&quot;externo&quot;</span><span class="br0">&#93;</span> <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw1">blue</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Selecciona todos los elementos de la página cuyo atributo &quot;lang&quot; sea igual a &quot;en&quot;, es decir, todos los elementos en inglés */</span>
+<span class="sy0">*</span><span class="br0">&#91;</span>lang<span class="sy0">=</span>en<span class="br0">&#93;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Selecciona todos los elementos de la página cuyo atributo &quot;lang&quot; empiece por &quot;es&quot;, es decir, &quot;es&quot;, &quot;es-ES&quot;, &quot;es-AR&quot;, etc. */</span>
+<span class="sy0">*</span><span class="br0">&#91;</span>lang|<span class="sy0">=</span><span class="st0">&quot;es&quot;</span><span class="br0">&#93;</span> <span class="br0">&#123;</span> <span class="kw1">color</span> <span class="sy0">:</span> <span class="kw2">red</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<h3 id="pseudo-clases-2">13.2.4 Pseudo-clases</h3>
+
+<h4 id="la-pseudo-clase-first-child">13.2.4.1 La pseudo-clase :first-child</h4>
+
+<p>La pseudo-clase <code>:first-child</code> selecciona el primer elemento hijo de un elemento. Si se considera el siguiente ejemplo:</p>
+
+<div class="code css">
+<pre class="css">p em<span class="re2">:first-child </span><span class="br0">&#123;</span>
+  <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Lorem <span class="sc2">&lt;<span class="kw2">span</span>&gt;&lt;<span class="kw2">em</span>&gt;</span>ipsum dolor<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">em</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">span</span>&gt;</span> sit amet, consectetuer adipiscing elit. Praesent odio sem, tempor quis, <span class="sc2">&lt;<span class="kw2">em</span>&gt;</span>auctor eu<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">em</span>&gt;</span>, tempus at, enim. Praesent nulla ante, <span class="sc2">&lt;<span class="kw2">em</span>&gt;</span>ultricies<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">em</span>&gt;</span> id, porttitor ut, pulvinar quis, dui.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<p>El selector <code>p em:first-child</code> selecciona el primer elemento <code>&lt;em&gt;</code> que sea hijo de un elemento y que se encuentre dentro de un elemento <code>&lt;p&gt;</code>. Por tanto, en el ejemplo anterior sólo el primer <code>&lt;em&gt;</code> se ve de color rojo.</p>
+
+<p>La pseudo-clase <code>:first-child</code> también se puede utilizar en los selectores simples, como se muestra a continuación:</p>
+
+<div class="code css">
+<pre class="css">p<span class="re2">:first-child </span><span class="br0">&#123;</span> ... <span class="br0">&#125;</span></pre>
+</div>
+
+<p>La regla CSS anterior aplica sus estilos al primer párrafo de cualquier elemento. Si se modifica el ejemplo anterior y se utiliza un selector compuesto:</p>
+
+<div class="code css">
+<pre class="css">p<span class="re2">:first-child </span>em <span class="br0">&#123;</span>
+  <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Lorem <span class="sc2">&lt;<span class="kw2">span</span>&gt;&lt;<span class="kw2">em</span>&gt;</span>ipsum dolor<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">em</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">span</span>&gt;</span> sit amet, consectetuer
+    adipiscing elit. Praesent odio sem, tempor quis, <span class="sc2">&lt;<span class="kw2">em</span>&gt;</span>auctor eu<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">em</span>&gt;</span>,
+    tempus at, enim.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+&nbsp;
+    <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Lorem <span class="sc2">&lt;<span class="kw2">span</span>&gt;&lt;<span class="kw2">em</span>&gt;</span>ipsum dolor<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">em</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">span</span>&gt;</span> sit amet, consectetuer
+    adipiscing elit. Praesent odio sem, tempor quis, <span class="sc2">&lt;<span class="kw2">em</span>&gt;</span>auctor eu<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">em</span>&gt;</span>,
+    tempus at, enim.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+&nbsp;
+    <span class="sc2">&lt;<span class="kw2">div</span>&gt;</span>
+      <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Lorem <span class="sc2">&lt;<span class="kw2">span</span>&gt;&lt;<span class="kw2">em</span>&gt;</span>ipsum dolor<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">em</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">span</span>&gt;</span> sit amet, consectetuer
+      adipiscing elit. Praesent odio sem, tempor quis, <span class="sc2">&lt;<span class="kw2">em</span>&gt;</span>auctor eu<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">em</span>&gt;</span>,
+      tempus at, enim.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span></pre>
+</div>
+
+<p>El selector <code>p:first-child em</code> selecciona todos aquellos elementos <code>&lt;em&gt;</code> que se encuentren dentro de un elemento <code>&lt;p&gt;</code> que sea el primer hijo de cualquier otro elemento.</p>
+
+<p>El primer párrafo del ejemplo anterior es el primer hijo de <code>&lt;body&gt;</code>, por lo que sus <code>&lt;em&gt;</code> se ven de color rojo. El segundo párrafo de la página no es el primer hijo de ningún elemento, por lo que sus elementos <code>&lt;em&gt;</code> interiores no se ven afectados. Por último, el tercer párrafo de la página es el primer hijo del elemento <code>&lt;div&gt;</code>, por lo que sus elementos <code>&lt;em&gt;</code> se ven de la misma forma que los del primer párrafo.</p>
+
+<h4 id="las-pseudo-clases-link-y-visited">13.2.4.2 Las pseudo-clases :link y :visited</h4>
+
+<p>Las pseudo-clases <code>:link</code> y <code>:visited</code> se pueden utilizar para aplicar diferentes estilos a los enlaces de una misma página:</p>
+
+<ul>
+<li>La pseudo-clase <code>:link</code> se aplica a todos los enlaces que todavía no han sido visitados por el usuario.</li>
+<li>La pseudo-clase <code>:visited</code> se aplica a todos los enlaces que han sido visitados al menos una vez por el usuario.</li>
+</ul>
+
+<p>El navegador gestiona de forma automática el cambio de enlace no visitado a enlace visitado. Aunque el usuario puede borrar la cache y el historial de navegación de forma explícita, los navegadores también borran de forma periódica la lista de enlaces visitados.</p>
+
+<p>Por su propia definición, las pseudo-clases <code>:link</code> y <code>:visited</code> son mutuamente excluyentes, de forma que un mismo enlace no puede estar en los dos estados de forma simultánea.</p>
+
+<p>Como los navegadores muestran por defecto los enlaces de color azul y los enlaces visitados de color morado, es habitual modificar los estilos para adaptarlos a la guía de estilo del sitio web:</p>
+
+<div class="code css">
+<pre class="css">a<span class="re2">:link    </span><span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span>   <span class="br0">&#125;</span>
+a<span class="re2">:visited </span><span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">green</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<h4 id="las-pseudo-clases-hover-active-y-focus">13.2.4.3 Las pseudo-clases :hover, :active y :focus</h4>
+
+<p>Las pseudo-clases <code>:hover</code>, <code>:active</code> y <code>:focus</code> permiten al diseñador web variar los estilos de un elemento en respuesta a las acciones del usuario. Al contrario que las pseudo-clases <code>:link</code> y <code>:visited</code> que sólo se pueden aplicar a los enlaces, estas pseudo-clases se pueden aplicar a cualquier elemento.</p>
+
+<p>A continuación se indican las acciones del usuario que activan cada pseudo-clase:</p>
+
+<ul>
+<li><code>:hover</code>, se activa cuando el usuario pasa el ratón o cualquier otro elemento apuntador por encima de un elemento.</li>
+<li><code>:active</code>, se activa cuando el usuario activa un elemento, por ejemplo cuando pulsa con el ratón sobre un elemento. El estilo se aplica durante un espacio de tiempo prácticamente imperceptible, ya que sólo dura desde que el usuario pulsa el botón del ratón hasta que lo suelta.</li>
+<li><code>:focus</code>, se activa cuando el elemento tiene el foco del navegador, es decir, cuando el elemento está seleccionado. Normalmente se aplica a los elementos <code>&lt;input&gt;</code> de los formularios cuando están activados y por tanto, se puede escribir directamente en esos campos.</li>
+</ul>
+
+<p>De las definiciones anteriores se desprende que un mismo elemento puede verse afectado por varias pseudo-clases diferentes de forma simultánea. Cuando se pulsa por ejemplo un enlace que fue visitado previamente, al enlace le afectan las pseudo-clases <code>:visited</code>, <code>:hover</code> y <code>:active</code>.</p>
+
+<p>Debido a esta característica y al comportamiento en cascada de los estilos CSS, es importante cuidar el orden en el que se establecen las diferentes pseudo-clases. El siguiente ejemplo muestra el único orden correcto para establecer las cuatro pseudo-clases principales en un enlace:</p>
+
+<div class="code css">
+<pre class="css">a<span class="re2">:link    </span><span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+a<span class="re2">:visited </span><span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+a<span class="re2">:hover   </span><span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+a<span class="re2">:active  </span><span class="br0">&#123;</span> ... <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Por último, también es posible aplicar estilos combinando varias pseudo-clases compatibles entre sí. La siguiente regla CSS por ejemplo sólo se aplica a aquellos enlaces que están seleccionados y en los que el usuario pasa el ratón por encima:</p>
+
+<div class="code css">
+<pre class="css">a<span class="re2">:focus</span><span class="re2">:hover </span><span class="br0">&#123;</span> ... <span class="br0">&#125;</span></pre>
+</div>
+
+<h4 id="la-pseudo-clase-lang">13.2.4.4 La pseudo-clase :lang</h4>
+
+<p>La pseudo-clase <code>:lang</code> se emplea para seleccionar elementos en función de su idioma. Los navegadores utilizan los atributos <code>lang</code>, las etiquetas <code>&lt;meta&gt;</code> y la información de la respuesta del servidor para determinar el idioma de cada elemento.</p>
+
+<p>Si se considera el siguiente ejemplo:</p>
+
+<div class="code css">
+<pre class="css">p <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw1">blue</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+p<span class="sy0">:</span>lang<span class="br0">&#40;</span>es<span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Los párrafos del ejemplo anterior se ven de color azul, salvo los párrafos cuyo contenido esté escrito en español, que se ven de color rojo.</p>
+
+<p>Como los navegadores actuales no son capaces de inferir el idioma de un elemento a partir de su contenido, el uso de esta clase está muy limitado salvo que la página utilice de forma explícita los atributos `lang:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">lang</span><span class="sy0">=</span><span class="st0">&quot;en&quot;</span>&gt;</span>Lorem ipsum dolor sit amet...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">lang</span><span class="sy0">=</span><span class="st0">&quot;fr&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Lorem ipsum dolor sit amet...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">lang</span><span class="sy0">=</span><span class="st0">&quot;es_ES&quot;</span>&gt;</span>Lorem ipsum dolor sit amet...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">lang</span><span class="sy0">=</span><span class="st0">&quot;en&quot;</span>&gt;</span>Lorem ipsum dolor sit amet...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">ul</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">li</span> <span class="kw3">lang</span><span class="sy0">=</span><span class="st0">&quot;fr&quot;</span>&gt;</span>Lorem ipsum dolor sit amet...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">ul</span>&gt;</span></pre>
+</div>
+
+<p>La pseudo-clase <code>:lang(xx)</code> es muy diferente al selector de atributos `[lang|=xx], tal y como muestran las siguientes reglas:</p>
+
+<div class="code css">
+<pre class="css"><span class="sy0">*</span><span class="br0">&#91;</span>lang|<span class="sy0">=</span>es<span class="br0">&#93;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>  <span class="coMULTI">/* selector de atributo */</span>
+<span class="sy0">*:</span>lang<span class="br0">&#40;</span>es<span class="br0">&#41;</span>  <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>  <span class="coMULTI">/* pseudo-clase */</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">body</span> <span class="kw3">lang</span><span class="sy0">=</span><span class="st0">&quot;es&quot;</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Lorem ipsum dolor sit amet...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span></pre>
+</div>
+
+<p>El selector <code>*[lang|=es]</code> selecciona todos los elementos de la página que tengan un atributo llamado <code>lang</code> cuyo valor empiece por <code>es</code>. En el ejemplo anterior, solamente el elemento <code>&lt;body&gt;</code> cumple con la condición del selector.</p>
+
+<p>Por otra parte, el selector <code>*:lang(es)</code> selecciona todos los elementos de la página cuyo idioma sea el español, sin tener en cuenta el método empleado por el navegador para averiguar el idioma de cada elemento. En este caso, tanto el elemento <code>&lt;body&gt;</code> como el elemento <code>&lt;p&gt;</code> cumplen esta condición.</p>
+
+<h2 id="pseudo-elementos">13.3 Pseudo-elementos</h2>
+
+<p>Los selectores de CSS, las pseudo-clases y todos los elementos HTML no son suficientes para poder aplicar estilos a algunos elementos especiales. Si se desea por ejemplo cambiar el estilo de la primera línea de texto de un elemento, no es posible hacerlo con las utilidades anteriores.</p>
+
+<p>La primera línea del texto normalmente es variable porque el usuario puede aumentar y disminuir la ventana del navegador, puede disponer de más o menos resolución en su monitor y también puede aumentar o disminuir el tamaño de letra del texto.</p>
+
+<p>La única forma de poder seleccionar estos elementos especiales es mediante los pseudo-elementos definidos por CSS para este propósito.</p>
+
+<h3 id="el-pseudo-elemento-first-line">13.3.1 El pseudo-elemento :first-line</h3>
+
+<p>El pseudo-elemento <code>:first-line</code> permite seleccionar la primera línea de texto de un elemento. Así, la siguiente regla CSS muestra en mayúsculas la primera línea de cada párrafo:</p>
+
+<div class="code css">
+<pre class="css">p<span class="re2">:first-line </span><span class="br0">&#123;</span> <span class="kw1">text-transform</span><span class="sy0">:</span> <span class="kw2">uppercase</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Este pseudo-elemento sólo se puede utilizar con los elementos de bloque y las celdas de datos de las tablas.</p>
+
+<p>Se pueden combinar varios pseudo-elementos de tipo :first-line para crear efectos avanzados:</p>
+
+<div class="code css">
+<pre class="css">div<span class="re2">:first-line </span><span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+p<span class="re2">:first-line </span><span class="br0">&#123;</span> <span class="kw1">text-transform</span><span class="sy0">:</span> <span class="kw2">uppercase</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">div</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Lorem ipsum dolor sit amet...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Lorem ipsum dolor sit amet...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Lorem ipsum dolor sit amet...<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre>
+</div>
+
+<p>En el ejemplo anterior, la primera línea del primer párrafo también es la primera línea del elemento <code>&lt;div&gt;</code>, por lo que se le aplican las dos reglas CSS y su texto se ve en mayúsculas y de color rojo.</p>
+
+<h3 id="el-pseudo-elemento-first-letter">13.3.2 El pseudo-elemento :first-letter</h3>
+
+<p>El pseudo-elemento :first-letter permite seleccionar la primera letra de la primera línea de texto de un elemento. De esta forma, la siguiente regla CSS muestra en mayúsculas la primera letra del texto de cada párrafo:</p>
+
+<div class="code css">
+<pre class="css">p<span class="re2">:first-letter </span><span class="br0">&#123;</span> <span class="kw1">text-transform</span><span class="sy0">:</span> <span class="kw2">uppercase</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Los signos de puntuación y los caracteres como las comillas que se encuentran antes y después de la primera letra también se ven afectados por este pseudo-elemento.</p>
+
+<p>Este pseudo-elemento sólo se puede utilizar con los elementos de bloque y las celdas de datos de las tablas.</p>
+
+<h3 id="los-pseudo-elementos-before-y-after">13.3.3 Los pseudo-elementos :before y :after</h3>
+
+<p>Los pseudo-elementos <code>:before</code> y <code>:after</code> se utilizan en combinación con la propiedad content de CSS para añadir contenidos antes o después del contenido original de un elemento.</p>
+
+<p>Las siguientes reglas CSS añaden el texto <code>Capítulo -</code> delante de cada título de sección <code>&lt;h1&gt;</code> y el carácter <code>.</code> detrás de cada párrafo de la página:</p>
+
+<div class="code css">
+<pre class="css">h1<span class="re2">:before </span><span class="br0">&#123;</span> <span class="kw1">content</span><span class="sy0">:</span> <span class="st0">&quot;Capítulo - &quot;</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+p<span class="re2">:after   </span><span class="br0">&#123;</span> <span class="kw1">content</span><span class="sy0">:</span> <span class="st0">&quot;.&quot;</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>El contenido insertado mediante los pseudo-elementos <code>:before</code> y <code>:after</code> se tiene en cuenta en los otros pseudo-elementos <code>:first-line</code> y <code>:first-letter</code>.</p>
+
+<h2 id="propiedades-avanzadas">13.4 Propiedades avanzadas</h2>
+
+<p>El estándar CSS 2.1 incluye 115 propiedades que abarcan el modelo de cajas (box model), la tipografía, las tablas, las listas, el posicionamiento de los elementos, la generación de contenidos y los medios impresos y auditivos.</p>
+
+<p>Aunque la mayoría de diseñadores web conocen y utilizan casi todas las propiedades de CSS 2.1, no siempre hacen uso de todas sus posibilidades. Algunas propiedades de CSS 2.1 han sido infrautilizadas hasta hace poco tiempo porque los navegadores no las soportaban.</p>
+
+<h3 id="propiedad-display">13.4.1 Propiedad display</h3>
+
+<div class="table" id="table-13-1">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>display</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">inline &#124; block &#124; list-item &#124; run-in &#124; inline-block &#124; table &#124; inline-table &#124; table-row-group &#124; table-header-group &#124; table-footer-group &#124; table-row &#124; table-column-group &#124; table-column &#124; table-cell &#124; table-caption &#124; none &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todas los elementos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">inline</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Establece el tipo de caja generada por un elemento</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>La propiedad <code>display</code> es una de las propiedades CSS más infrautilizadas. Aunque todos los diseñadores conocen esta propiedad y utilizan sus valores <code>inline</code>, <code>block</code> y <code>none</code>, las posibilidades de <code>display</code> son mucho más avanzadas.</p>
+
+<p>De hecho, la propiedad <code>display</code> es una de las más complejas de CSS 2.1, ya que establece el tipo de la caja que genera cada elemento. La propiedad <code>display</code> es tan compleja que casi ningún navegador es capaz de mostrar correctamente todos sus valores.</p>
+
+<p>El valor más sencillo de <code>display</code> es <code>none</code> que hace que el elemento no genere ninguna caja. El resultado es que el elemento desaparece por completo de la página y no ocupa sitio, por lo que los elementos adyacentes ocupan su lugar. Si se utiliza la propiedad <code>display: none</code> sobre un elemento, todos sus descendientes también desaparecen por completo de la página.</p>
+
+<p>Si se quiere hacer un elemento invisible, es decir, que no se vea pero que siga ocupando el mismo sitio, se debe utilizar la propiedad <code>visibility</code>. La propiedad <code>display: none</code> se utiliza habitualmente en aplicaciones web dinámicas creadas con JavaScript y que muestran/ocultan contenidos cuando el usuario realiza alguna acción como pulsar un botón o un enlace.</p>
+
+<p>Los otros dos valores más utilizados son <code>block</code> e <code>inline</code> que hacen que la caja de un elemento sea de bloque o en línea respectivamente. El siguiente ejemplo muestra un párrafo y varios enlaces a los que se les ha añadido un borde para mostrar el espacio ocupado por cada caja:</p>
+
+<div class="example">
+<p style="border: 2px solid #000; padding: 3px;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+
+<a style="border: 2px dashed #C00; padding: 3px;" href="capitulo-13.html#">Lorem ipsum</a>
+<a style="border: 2px dashed #C00; padding: 3px;" href="capitulo-13.html#">Donec mollis nunc in leo</a>
+<a style="border: 2px dashed #C00; padding: 3px;" href="capitulo-13.html#">Vivamus fermentum</a>
+</div>
+
+<p>Como el párrafo es por defecto un elemento de bloque ("<em>block element</em>"), ocupa todo el espacio disponible hasta el final de su línea, aunque sus contenidos no ocupen todo el sitio. Por su parte, los enlaces por defecto son elementos en línea ("<em>inline element</em>"), por lo que su caja sólo ocupa el espacio necesario para mostrar sus contenidos.</p>
+
+<p>Si se aplica la propiedad <code>display: inline</code> al párrafo del ejemplo anterior, su caja se convierte en un elemento en línea y por tanto sólo ocupa el espacio necesario para mostrar sus contenidos:</p>
+
+<div class="example">
+<p style="border: 2px solid #000; display: inline; padding: 3px;"><strong>[display: inline]</strong> Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+
+<a style="border: 2px dashed #C00; padding: 3px;" href="capitulo-13.html#">Lorem ipsum</a>
+<a style="border: 2px dashed #C00; padding: 3px;" href="capitulo-13.html#">Donec mollis nunc in leo</a>
+<a style="border: 2px dashed #C00; padding: 3px;" href="capitulo-13.html#">Vivamus fermentum</a>
+</div>
+
+<p>Para visualizar más claramente el cambio en el tipo de caja, el siguiente ejemplo muestra un mismo párrafo largo con <code>display: block</code> y <code>display: inline</code>:</p>
+
+<div class="example">
+<p style="border: 2px solid #000; display: block; padding: 3px;"><strong>[display: block]</strong> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed non sem quis tellus vulputate lobortis. Vivamus fermentum, tortor id ornare ultrices, ligula ipsum tincidunt pede, et blandit sem pede suscipit pede. Nulla cursus porta sem. Donec mollis nunc in leo.</p>
+<p style="border: 2px solid #000; display: inline; padding: 3px;"><strong>[display: inline]</strong> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed non sem quis tellus vulputate lobortis. Vivamus fermentum, tortor id ornare ultrices, ligula ipsum tincidunt pede, et blandit sem pede suscipit pede. Nulla cursus porta sem. Donec mollis nunc in leo.</p>
+</div>
+
+<p>De la misma forma, si en los enlaces del ejemplo anterior se emplea la propiedad <code>display: block</code> se transforman en elementos de bloque, por lo que siempre empiezan en una nueva línea y siempre ocupan todo el espacio disponible en la línea, aunque sus contenidos no ocupen todo el sitio:</p>
+
+<div class="example">
+<p style="border: 2px solid #000; padding: 3px;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+<a style="border: 2px dashed #C00; padding: 3px; margin: 3px 0; display: block;" href="capitulo-13.html#"><strong>[display: block]</strong> Lorem ipsum</a>
+<a style="border: 2px dashed #C00; padding: 3px; margin: 3px 0; display: block;" href="capitulo-13.html#"><strong>[display: block]</strong> Donec mollis nunc in leo</a>
+<a style="border: 2px dashed #C00; padding: 3px; margin: 3px 0; display: block;" href="capitulo-13.html#"><strong>[display: block]</strong> Vivamus fermentum</a>
+</div>
+
+<p>Uno de los valores más curiosos de display es <code>inline-block</code>, que crea cajas que son de bloque y en línea de forma simultánea. Una caja de tipo <code>inline-block</code> se comporta como si fuera de bloque, pero respecto a los elementos que la rodean es una caja en línea.</p>
+
+<p>El enlace del siguiente ejemplo es de tipo <code>inline-block</code>, lo que permite por ejemplo establecerle un tamaño mediante la propiedad <code>width</code>:</p>
+
+<div class="example">
+<p style="border: 2px solid #000; padding: 3px;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed non sem quis tellus vulputate lobortis. Vivamus fermentum, tortor id ornare ultrices, ligula ipsum tincidunt pede, et blandit sem pede suscipit pede. Nulla cursus porta sem. Donec mollis nunc in leo. <a class="internal" href="../index.html" style="display: inline-block; border: 2px dashed #C00; width: 25%; padding: 3px; margin: 5px;"><strong>[display: inline-block, width: 25%]</strong> Quisque semper, magna sed pharetra tincidunt, quam urna dapibus dolor, a dignissim sem neque id purus. Etiam luctus viverra nisi.</a> Integer lobortis accumsan felis. Cras venenatis. Morbi cursus, tellus vitae iaculis pulvinar, turpis nibh posuere nisl, sed vehicula massa orci at dui. Morbi pede ipsum, porta quis, venenatis et, ullamcorper in, metus. Nulla facilisi. Quisque laoreet molestie mi. Ut mollis elit eget urna.</p>
+</div>
+
+<p>Otro de los valores definidos por la propiedad display es <code>list-item</code>, que hace que cualquier elemento de cualquier tipo se muestre como si fuera un elemento de una lista (elemento <code>&lt;li&gt;</code>). El siguiente ejemplo muestra tres párrafos que utilizan la propiedad <code>display: list-item</code> para simular que son una lista de elementos de tipo <code>&lt;ul&gt;</code>:</p>
+
+<div class="example">
+<p style="display: list-item; margin-left: 2em">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+<p style="display: list-item; margin-left: 2em">Sed non sem quis tellus vulputate lobortis.</p>
+<p style="display: list-item; margin-left: 2em">Vivamus fermentum, tortor id ornare ultrices, ligula ipsum tincidunt pede, et blandit sem pede suscipit pede.</p>
+</div>
+
+<p>A continuación se muestra el código HTML del ejemplo anterior:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">style</span><span class="sy0">=</span><span class="st0">&quot;display: list-item; margin-left: 2em&quot;</span>&gt;</span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">style</span><span class="sy0">=</span><span class="st0">&quot;display: list-item; margin-left: 2em&quot;</span>&gt;</span>Sed non sem quis tellus vulputate lobortis.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">style</span><span class="sy0">=</span><span class="st0">&quot;display: list-item; margin-left: 2em&quot;</span>&gt;</span>Vivamus fermentum, tortor id ornare ultrices, ligula ipsum tincidunt pede, et blandit sem pede suscipit pede.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<p>Los elementos con la propiedad <code>display: list-item</code> son exactamente iguales que los elementos <code>&lt;li&gt;</code> a efectos de su visualización, por lo que se pueden utilizar las propiedades de listas como <code>list-style-type</code>, <code>list-style-image</code>, <code>list-style-position</code> y <code>list-style</code>.</p>
+
+<p>Otro de los valores curiosos de la propiedad <code>display</code> es <code>run-in</code>, que genera una caja de bloque o una caja en línea dependiendo del contexto, es decir, dependiendo de sus elementos adyacentes. El comportamiento de las cajas de tipo <code>run-in</code> se rige por las siguientes reglas:</p>
+
+<ul>
+<li>Si la caja <code>run-in</code> contiene una caja de bloque, la caja <code>run-in</code> se convierte en una caja de bloque.</li>
+<li>Si después de la caja <code>run-in</code> se encuentra una caja de bloque (que no esté posicionada de forma absoluta y tampoco esté posicionada de forma flotante), la caja <code>run-in</code> se convierte en una caja en línea en el interior de la caja de bloque.</li>
+<li>En cualquier otro caso, la caja <code>run-in</code> se convierte en una caja de bloque.</li>
+</ul>
+
+<div class="example">
+<p style="display: run-in; border: 2px dashed #C00; padding: 3px;"><strong>[display: run-in]</strong> Lorem ipsum</p>
+<p style="display: block; border: 2px solid #000; padding: 3px;"><strong>[display: block]</strong> dolor sit amet, consectetuer adipiscing elit.</p>
+
+<p style="display: run-in; border: 2px dashed #C00; padding: 3px;"><strong>[display: run-in]</strong> Lorem ipsum</p>
+<p style="display: inline; border: 2px solid #000; padding: 3px;"><strong>[display: inline]</strong> dolor sit amet, consectetuer adipiscing elit.</p>
+</div>
+
+<p>El estándar CSS 2.1 incluye un ejemplo del posible uso del valor <code>run-in</code>. En este ejemplo, un título de sección <code>&lt;h3&gt;</code> crea una caja <code>run-in</code>, de forma que cuando va seguido de un párrafo, el titular se mete dentro del párrafo:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">h3</span> <span class="kw3">style</span><span class="sy0">=</span><span class="st0">&quot;display: run-in&quot;</span>&gt;</span>Lorem ipsum dolor sit amet<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h3</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Sed non sem quis tellus vulputate lobortis. Vivamus fermentum, tortor id ornare ultrices, ligula ipsum tincidunt pede, et blandit sem pede suscipit pede. Nulla cursus porta sem. Donec mollis nunc in leo. Integer lobortis accumsan felis.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<p>El resto de valores de la propiedad <code>display</code> están relacionados con las tablas y hacen que un elemento se muestre como si fuera una parte de una tabla: fila, columna, celda o grupos de filas/columnas. Los valores definidos por la propiedad <code>display</code> son <code>inline-table, table-row-group, table-header-group, table-footer-group, table-row, table-column-group, table-column, table-cell, table-caption</code>.</p>
+
+<p>Aunque los valores relacionados con las tablas son los más avanzados, también son los que peor soportan los navegadores. A continuación se muestra un ejemplo con tres párrafos de texto que establecen la propiedad <code>display: table-cell</code>:</p>
+
+<div class="example">
+<p style="display: table-cell; padding: 5px;"><strong>[display: table-cell]</strong> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas non tortor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed fermentum lorem a velit.</p>
+
+<p style="display: table-cell; padding: 5px;"><strong>[display: table-cell]</strong> In molestie suscipit libero. Cras sem. Nunc non tellus et urna mattis tempor. Nulla nec tellus a quam hendrerit venenatis. Suspendisse pellentesque odio et est. Morbi sed nisl sed dui consequat sodales.</p>
+
+<p style="display: table-cell; padding: 5px;"><strong>[display: table-cell]</strong> Morbi sed nisl sed dui consequat sodales. Vivamus ornare felis nec est. Phasellus massa justo, ornare sed, malesuada a, dignissim a, nibh. Vestibulum vitae nunc at lectus euismod feugiat. Nullam eleifend. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In ut ipsum.</p>
+</div>
+
+<p>La propiedad <code>display: table-cell</code> hace que cualquier elemento se muestre como si fuera una celda de una tabla. Como en el ejemplo anterior los tres elementos <code>&lt;p&gt;</code> utilizan la propiedad <code>display: table-cell</code>, el resultado es visualmente idéntico a utilizar una tabla y tres elementos <code>&lt;td&gt;</code>.</p>
+
+<h3 id="propiedad-content">13.4.2 Propiedad content</h3>
+
+<div class="table" id="table-13-2">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>content</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">(string &#124;| uri &#124;| counter &#124;| attr &#124;| open-quote &#124;| close-quote &#124;| no-open-quote &#124;| no-close-quote) &#124; normal &#124; none &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Solamente a los pseudo-elementos before y after</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">normal</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Genera contenido de forma dinámica</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>La propiedad <code>content</code> es una de las propiedades CSS más poderosas y a la vez más controvertidas. La propiedad <code>content</code> se emplea para generar nuevo contenido de forma dinámica e insertarlo en la página HTML. Como CSS es un lenguaje de hojas de estilos cuyo único propósito es controlar el aspecto o presentación de los contenidos, algunos diseñadores defienden que no es correcto generar nuevos contenidos mediante CSS.</p>
+
+<p>En primer lugar, el estándar CSS 2.1 indica que la propiedad <code>content</code> sólo puede utilizarse en los pseudo-elementos <code>:before</code> y <code>:after</code>. Como su propio nombre indica, estos pseudo-elementos permiten seleccionar (y por tanto modificar) la parte anterior o posterior de un elemento de la página.</p>
+
+<p>El siguiente ejemplo muestra cómo añadir la palabra <code>Capítulo</code> delante del contenido de cada título de sección <code>&lt;h1&gt;</code>:</p>
+
+<div class="code css">
+<pre class="css">h1<span class="re2">:before </span><span class="br0">&#123;</span>
+  <span class="kw1">content</span><span class="sy0">:</span> <span class="st0">&quot;Capítulo &quot;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Los pseudo-elementos <code>:before</code> y <code>:after</code> se pueden utilizar sobre cualquier elemento de la página. El siguiente ejemplo añade la palabra <code>Nota:</code> delante de cada párrafo cuya clase CSS sea nota:</p>
+
+<div class="code css">
+<pre class="css">p<span class="re1">.nota</span><span class="re2">:before </span><span class="br0">&#123;</span>
+  <span class="kw1">content</span><span class="sy0">:</span> <span class="st0">&quot;Nota: &quot;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Combinando las propiedades <code>content</code> y <code>quotes</code> con los pseudo-elementos <code>:before</code> y <code>:after</code>, se pueden añadir de forma dinámica comillas de apertura y de cierre a todos los elementos <code>&lt;blockquote&gt;</code> de la página:</p>
+
+<div class="code css">
+<pre class="css">blockquote<span class="re2">:before </span><span class="br0">&#123;</span>
+  <span class="kw1">content</span><span class="sy0">:</span> <span class="kw2">open-quote</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+blockquote<span class="re2">:after </span><span class="br0">&#123;</span>
+  <span class="kw1">content</span><span class="sy0">:</span> <span class="kw2">close-quote</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+blockquote <span class="br0">&#123;</span>
+  <span class="kw1">quotes</span><span class="sy0">:</span> <span class="st0">&quot;«&quot;</span> <span class="st0">&quot;»&quot;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Los contenidos insertados dinámicamente en un elemento son a todos los efectos parte de ese mismo elemento, por lo que heredan el valor de todas sus propiedades CSS.</p>
+
+<p>Los dos valores más sencillos de la propiedad <code>content</code> son <code>none</code> y <code>normal</code>. En la práctica, estos dos valores tienen el mismo efecto ya que hacen que el pseudo-elemento no se genere.</p>
+
+<p>El siguiente valor que se puede indicar en la propiedad <code>content</code> es una cadena de texto. En el estándar CSS 2.1, una cadena de texto es un conjunto de uno o más caracteres encerrados por las comillas dobles (<code>"</code>) o las comillas simples (<code>'</code>). Si la cadena contiene comillas dobles, se encierra con las comillas simples y viceversa. Si una cadena de texto tiene tanto comillas simples como dobles, las comillas problemáticas se modifican y se les añade la barra invertida \ por delante:</p>
+
+<div class="code css">
+<pre class="css">p<span class="re2">:before </span><span class="br0">&#123;</span>
+  <span class="kw1">content</span><span class="sy0">:</span> <span class="st0">&quot;Contenido generado \&quot;</span>dinámicamente\<span class="st0">&quot; mediante CSS. &quot;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="re0">#ultimo</span><span class="re2">:after </span><span class="br0">&#123;</span>
+  <span class="kw1">content</span><span class="sy0">:</span> <span class="st0">&quot; Fin de los 'contenidos' de la página.&quot;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Las cadenas de texto sólo permiten incluir texto básico. Si se incluye alguna etiqueta HTML en la cadena de texto, el navegador muestra la etiqueta tal y como está escrita, ya que no las interpreta. Para incluir un salto de línea en el contenido generado, se utiliza el caracter especial <code>\A</code></p>
+
+<p>El siguiente valor aceptado por la propiedad <code>content</code> es una URL, que suele utilizarse para indicar la URL de una imagen que se quiere añadir de forma dinámica al contenido. La sintaxis es idéntica al resto de URL que se pueden indicar en otras propiedades CSS:</p>
+
+<div class="code css">
+<pre class="css">span<span class="re1">.especial</span><span class="re2">:after </span><span class="br0">&#123;</span>
+  <span class="kw1">content</span><span class="sy0">:</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="st0">&quot;imagenes/imagen.png&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Otros valores que se pueden indicar en la propiedad content son <code>open-quote</code>, <code>close-quote</code>, <code>no-open-quote</code> y <code>no-close-quote</code>. Los dos primeros indican que se debe mostar una comilla de apertura o de cierre respectivamente. Las comillas utilizadas se establecen mediante la propiedad quotes:</p>
+
+<div class="code css">
+<pre class="css">blockquote <span class="br0">&#123;</span> <span class="kw1">quotes</span><span class="sy0">:</span> <span class="st0">&quot;«&quot;</span> <span class="st0">&quot;»&quot;</span> <span class="st0">'&quot;'</span> <span class="st0">'&quot;'</span> <span class="br0">&#125;</span>
+blockquote<span class="re2">:before </span><span class="br0">&#123;</span>
+  <span class="kw1">content</span><span class="sy0">:</span> <span class="kw2">open-quote</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+blockquote<span class="re2">:after </span><span class="br0">&#123;</span>
+  <span class="kw1">content</span><span class="sy0">:</span> <span class="kw2">close-quote</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Los valores <code>no-open-quote</code> y <code>no-close-quote</code> se utilizan para no mostrar ninguna comilla en ese elemento, pero incrementando el nivel de anidamiento de las comillas. De esta forma se puede evitar mostrar una comilla en un determinado elemento mientras se mantiene la jerarquía de comillas establecida por la propiedad <code>quotes</code>.</p>
+
+<p>Uno de los valores más avanzados de la propiedad <code>content</code> es <code>attr()</code>, que permite obtener el valor de un atributo del elemento sobre el que se utiliza la propiedad <code>content</code>. En el siguiente ejemplo, se modifican los elementos <code>&lt;abbr&gt;</code> y <code>&lt;acronym&gt;</code> para que muestren entre paréntesis el valor de sus atributos <code>title</code>:</p>
+
+<div class="code css">
+<pre class="css">abbr<span class="re2">:after</span><span class="sy0">,</span> acronym<span class="re2">:after </span><span class="br0">&#123;</span>
+  <span class="kw1">content</span><span class="sy0">:</span> <span class="st0">&quot; (&quot;</span> attr<span class="br0">&#40;</span>title<span class="br0">&#41;</span> <span class="st0">&quot;)&quot;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>El valor de la propiedad <code>content</code> anterior en realidad es la combinación de tres valores:</p>
+
+<ul>
+<li>Cadena de texto " (", que es el paréntesis de apertura tras el cual se muestra el valor del atributo title.</li>
+<li>Atributo title del elemento obtenido mediante attr(title)</li>
+<li>Cadena de texto ")", que es el paréntesis de cierre que se muestra detrás del valor del atributo title.</li>
+</ul>
+
+<p>Si el elemento no dispone del atributo solicitado, la función <code>attr(nombre_del_atributo)</code> devuelve una cadena de texto vacía. Utilizando <code>attr()</code> solamente se puede obtener el valor de los atributos del elemento al que se aplica la propiedad <code>content</code>.</p>
+
+<p>La función <code>attr()</code> es muy útil por ejemplo para mostrar la dirección a la que apuntan los enlaces de la página:</p>
+
+<div class="code css">
+<pre class="css">a<span class="re2">:after </span><span class="br0">&#123;</span>
+  <span class="kw1">content</span><span class="sy0">:</span> <span class="st0">&quot; (&quot;</span> attr<span class="br0">&#40;</span>href<span class="br0">&#41;</span> <span class="st0">&quot;)&quot;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-13.html#css-avanzado">CSS Avanzado</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>13.1</span>
+                        <a class="internal" href="capitulo-13.html#tecnicas-imprescindibles">Técnicas imprescindibles</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>13.2</span>
+                        <a class="internal" href="capitulo-13.html#selectores-2">Selectores</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>13.3</span>
+                        <a class="internal" href="capitulo-13.html#pseudo-elementos">Pseudo-elementos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>13.4</span>
+                        <a class="internal" href="capitulo-13.html#propiedades-avanzadas">Propiedades avanzadas</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

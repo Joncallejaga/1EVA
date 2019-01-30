@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang=”es”>
+
+<head>
+    <meta http-equiv="content-type" />
+
+    <script type="text/javascript">
+        var inicio = prompt("Inicio mm/dd/yyyy");
+        var fin = prompt("Inicio mm/dd/yyyy");
+        alert(calcularDias(inicio, fin));
+        function calcularDias(fechaIni, fechaFin) {
+            var fecha1 = new Date(fechaIni);
+            var fecha2 = new Date(fechaFin);
+            var diasDif = fecha2.getTime() - fecha1.getTime();
+            var dias = Math.round(diasDif / (1000 * 60 * 60 * 24));
+            return "Han pasado " + diasDif + " dias";
+        };
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

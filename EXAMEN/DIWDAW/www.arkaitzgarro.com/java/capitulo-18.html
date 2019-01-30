@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="15/04/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Interfaces | Java</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">Java</a></h1>
+        <p class="span3">
+                        <a href="capitulo-17.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-19.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="interfaces"><span>Capítulo 18</span> Interfaces</h1>
+        <p>Una <em>interfaz</em> es una especie de plantilla para la construcción de clases. Normalmente una interfaz se compone de un conjunto de declaraciones de <strong>cabeceras</strong> de <strong>métodos</strong> (sin implementar, de forma similar a un método abstracto) que especifican un <strong>protocolo de comportamiento</strong> para una o varias clases. Además, una clase puede implementar una o varias interfaces: en ese caso, la clase debe proporcionar la declaración y definición de <strong>todos</strong> los métodos de cada una de las interfaces o bien declararse como clase <code>abstract</code>. Por otro lado, una interfaz puede emplearse también para declarar <strong>constantes</strong> que luego puedan ser utilizadas por otras clases.</p>
+
+<p>Una <em>interfaz</em> puede parecer similar a una <em>clase abstracta</em>, pero existen una serie de diferencias entre una interfaz y una clase abstracta:</p>
+
+<ul>
+<li><strong>Todos</strong> los métodos de una interfaz se declaran implícitamente como abstractos y públicos.</li>
+<li>Una clase abstracta no puede <em>implementar</em> los métodos declarados como abstractos, una interfaz no puede <em>implementar</em> ningún método (ya que todos son abstractos).</li>
+<li>Una interfaz no declara variables de instancia.</li>
+<li>Una clase puede implementar varias interfaces, pero sólo puede tener una clase ascendiente directa.</li>
+<li>Una clase abstracta pertenece a una jerarquía de clases mientras que una interfaz <strong>no</strong> pertenece a una jerarquía de clases. En consecuencia, clases sin relación de herencia pueden implementar la misma interfaz.</li>
+</ul>
+
+<h2 id="declaracion-de-una-interfaz">18.1 Declaración de una interfaz</h2>
+
+<p>La declaración de una interfaz es similar a una clase, aunque emplea la palabra reservada <code>interface</code> en lugar de <code>class</code> y no incluye ni la declaración de variables de instancia ni la implementación del cuerpo de los métodos (sólo las cabeceras). La sintaxis de declaración de una interfaz es la siguiente:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">public</span> <span class="kw1">interface</span> IdentificadorInterfaz <span class="br0">&#123;</span>
+    <span class="co1">// Cuerpo de la interfaz ...</span>
+<span class="br0">&#125;</span> </pre>
+</div>
+
+<p>Una interfaz declarada como <code>public</code> debe ser definida en un archivo con el mismo nombre de la interfaz y con extensión .java. Las cabeceras de los métodos declarados en el cuerpo de la interfaz se separan entre sí por caracteres de punto y coma y todos son declarados implícitamente como <code>public</code> y <code>abstract</code> (se pueden omitir). Por su parte, todas las constantes incluidas en una interfaz se declaran implícitamente como <code>public</code>, <code>static</code> y <code>final</code> (también se pueden omitir) y es necesario inicializarlas en la misma sentencia de declaración.</p>
+
+<p>Por ejemplo, la interfaz <code>Modificacion</code> declara la cabecera de un único método:</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/**
+ * Declaracion de la interfaz Modificacion
+ */</span>
+<span class="kw1">public</span> <span class="kw1">interface</span> Modificacion <span class="br0">&#123;</span>
+    <span class="kw4">void</span> incremento<span class="br0">&#40;</span><span class="kw4">int</span> a<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>que se almacena en el archivo fuente <code>Modificacion.java</code> y que, al compilarse:</p>
+
+<div class="code bash">
+<pre class="bash"><span class="co4">$</span><span class="sy0">&gt;</span>javac Modificacion.java</pre>
+</div>
+
+<p>genera un archivo <code>Modificacion.class</code>. Al no corresponder a una clase que implementa un método main, este archivo no puede ejecutarse con el intérprete de Java.</p>
+
+<p>Segundo ejemplo: la interfaz <code>constantes</code> declara dos constantes reales con el siguiente código fuente:</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/**
+ * Declaracion de la interfaz Constantes
+ */</span>
+<span class="kw1">public</span> <span class="kw1">interface</span> Constantes <span class="br0">&#123;</span>
+    <span class="kw4">double</span> VALOR_MAXIMO <span class="sy0">=</span> <span class="nu0">10000000.0</span><span class="sy0">;</span>
+    <span class="kw4">double</span> VALOR_MINIMO <span class="sy0">=</span> <span class="sy0">-</span><span class="nu0">0.01</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>que se almacena en el archivo fuente <code>Constantes.java</code> y que, al compilarse, genera un archivo <code>Constantes.class</code></p>
+
+<p>Tercer ejemplo: la interfaz <code>Numerico</code> declara una constante real y dos cabeceras de métodos con el siguiente código fuente:</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/**
+ * Declaracion de la interfaz Numerico
+ */</span>
+<span class="kw1">public</span> <span class="kw1">interface</span> Numerico <span class="br0">&#123;</span>
+    <span class="kw4">double</span> EPSILON <span class="sy0">=</span> <span class="nu0">0.000001</span><span class="sy0">;</span>
+    <span class="kw4">void</span> establecePrecision<span class="br0">&#40;</span><span class="kw4">float</span> p<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw4">void</span> estableceMaximo<span class="br0">&#40;</span><span class="kw4">float</span> m<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>que se almacena en el archivo fuente <code>Numerico.java</code> y que, al compilarse, genera un archivo <code>Numerico.class</code>. </p>
+
+<h2 id="implementacion-de-una-interfaz-en-una-clase">18.2 Implementación de una interfaz en una clase</h2>
+
+<p>Para declarar una clase que implemente una interfaz es necesario utilizar la palabra reservada <code>implements</code> en la cabecera de declaración de la clase. Las cabeceras de los métodos (identificador y número y tipo de parámetros) deben aparecer en la clase tal y como aparecen en la interfaz implementada. Por ejemplo, la clase <code>Acumulador</code> implementa la interfaz <code>Modificacion</code> y por lo tanto debe declarar un método <code>incremento</code>:</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/**
+ * Declaracion de la clase Acumulador
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> Acumulador <span class="kw1">implements</span> Modificacion <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> valor<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Acumulador <span class="br0">&#40;</span><span class="kw4">int</span> i<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">valor</span> <span class="sy0">=</span> i<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> daValor <span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">valor</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> incremento <span class="br0">&#40;</span><span class="kw4">int</span> a<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">valor</span> <span class="sy0">+=</span> a<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Esta cabecera con la palabra <code>implements</code>... implica la obligación de la clase <code>Acumulador</code> de definir el método <code>incremento</code> declarado en la interfaz <code>Modificacion</code>. El siguiente código muestra un ejemplo de uso de la clase <code>Acumulador</code>.</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/**
+ * Demostracion de la clase Acumulador
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> PruebaAcumulador <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main <span class="br0">&#40;</span><span class="kw3">String</span> <span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        Acumulador p <span class="sy0">=</span> <span class="kw1">new</span> Acumulador<span class="br0">&#40;</span><span class="nu0">25</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p.<span class="me1">incremento</span><span class="br0">&#40;</span><span class="nu0">12</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>p.<span class="me1">daValor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La compilación y posterior ejecución del código anterior origina la siguiente salida por pantalla:</p>
+
+<div class="code bash">
+<pre class="bash">$<span class="sy0">&gt;</span>javac PruebaAcumulador.java
+$<span class="sy0">&gt;</span>java PruebaAcumulador
+<span class="nu0">37</span></pre>
+</div>
+
+<p>La clase <code>Acumulador</code> tendría también la posibilidad de utilizar directamente las constantes declaradas en la interfaz si las hubiera.</p>
+
+<p>Para poder emplear una constante declarada en una interfaz, las clases que no implementen esa interfaz deben anteponer el identificador de la interfaz al de la constante.</p>
+
+<h2 id="jerarquia-entre-interfaces">18.3 Jerarquía entre interfaces</h2>
+
+<p>La <em>jerarquía</em> entre interfaces permite la <em>herencia</em> simple y múltiple. Es decir, tanto la declaración de una clase, como la de una interfaz pueden incluir la implementación de otras interfaces. Los identificadores de las interfaces se separan por comas. Por ejemplo, la interfaz <code>Una</code> implementa otras dos interfaces: <code>Dos</code> y <code>Tres</code>.</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">public</span> <span class="kw1">interface</span> Una <span class="kw1">implements</span> Dos, Tres <span class="br0">&#123;</span>
+    <span class="co1">// Cuerpo de la interfaz ...</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Las clases que implementan la interfaz <code>Una</code> también lo hacen con <code>Dos</code> y <code>Tres</code>.</p>
+
+<p>Otro ejemplo: pueden construirse dos interfaces, <code>Constantes</code> y <code>Variaciones</code>, y una clase, <code>Factura</code>, que las implementa:</p>
+
+<div class="code java">
+<pre class="java"><span class="co1">// Declaracion de la interfaz Constantes</span>
+<span class="kw1">public</span> <span class="kw1">interface</span> Constantes <span class="br0">&#123;</span>
+    <span class="kw4">double</span> valorMaximo <span class="sy0">=</span> <span class="nu0">10000000.0</span><span class="sy0">;</span>
+    <span class="kw4">double</span> valorMinimo <span class="sy0">=</span> <span class="sy0">-</span><span class="nu0">0.01</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="co1">// Declaracion de la interfaz Variaciones</span>
+<span class="kw1">public</span> <span class="kw1">interface</span> Variaciones <span class="br0">&#123;</span>
+    <span class="kw4">void</span> asignaValor<span class="br0">&#40;</span><span class="kw4">double</span> x<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw4">void</span> rebaja<span class="br0">&#40;</span><span class="kw4">double</span> t<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="co1">// Declaracion de la clase Factura</span>
+<span class="kw1">public</span> <span class="kw1">class</span> Factura <span class="kw1">implements</span> Constantes, Variaciones <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw4">double</span> totalSinIVA<span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw1">final</span> <span class="kw1">static</span> <span class="kw4">double</span> IVA <span class="sy0">=</span> <span class="nu0">0.16</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">double</span> sinIVA<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">totalSinIVA</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">double</span> conIVA<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">totalSinIVA</span> <span class="sy0">*</span> <span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">+</span>IVA<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> asignaValor<span class="br0">&#40;</span><span class="kw4">double</span> x<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="kw1">this</span>.<span class="me1">valorMinimo</span><span class="sy0">&lt;</span>x<span class="br0">&#41;</span>
+            <span class="kw1">this</span>.<span class="me1">totalSinIVA</span><span class="sy0">=</span>x<span class="sy0">;</span>
+        <span class="kw1">else</span>
+            <span class="kw1">this</span>.<span class="me1">totalSinIVA</span><span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> rebaja<span class="br0">&#40;</span><span class="kw4">double</span> t<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">totalSinIVA</span> <span class="sy0">*=</span> <span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">-</span>t<span class="sy0">/</span><span class="nu0">100</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main <span class="br0">&#40;</span><span class="kw3">String</span> <span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        factura a <span class="sy0">=</span> <span class="kw1">new</span> Factura<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        a.<span class="me1">asignaValor</span><span class="br0">&#40;</span><span class="nu0">250.0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;El precio sin IVA es: &quot;</span> <span class="sy0">+</span> a.<span class="me1">sinIVA</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;El precio con IVA es: &quot;</span> <span class="sy0">+</span> a.<span class="me1">conIVA</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Rebajado durante el mes de mayo un 20%&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        a.<span class="me1">rebaja</span><span class="br0">&#40;</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Rebajado sin IVA es: &quot;</span> <span class="sy0">+</span> a.<span class="me1">sinIVA</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Rebajado con IVA es: &quot;</span> <span class="sy0">+</span> a.<span class="me1">conIVA</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Si una interfaz implementa otra, incluye todas sus constantes y declaraciones de métodos, aunque puede redefinir tanto constantes como métodos.</p>
+
+<p><strong>Importante</strong>: Es peligroso modificar una interfaz ya que las clases dependientes dejan de funcionar hasta que éstas implementen los nuevos métodos.</p>
+
+<p>Una clase puede simultáneamente descender de otra clase e implementar una o varias interfaces. En este caso la seccion <code>implements</code> se coloca a continuación de <code>extends</code> en la cabecera de declaración de la clase. Por ejemplo:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> ClaseDescendiente <span class="kw1">extends</span> ClaseAscendiente <span class="kw1">implements</span> Interfaz <span class="br0">&#123;</span>
+    ...
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="utilizacion-de-una-interfaz-como-un-tipo-de-dato">18.4 Utilización de una interfaz como un tipo de dato</h2>
+
+<p>Al declarar una interfaz, se declara un nuevo tipo de referencia. Pueden emplearse identificadores de interfaz en cualquier lugar donde se pueda utilizar el identificador de un tipo de dato (o de una clase). El objetivo es garantizar la sustituibilidad por cualquier instancia de una clase que la implemente. Por ejemplo, puede emplearse como tipo de un parámetro de un método:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> Calculos <span class="br0">&#123;</span>
+     <span class="kw1">public</span> <span class="kw4">void</span> asignacion<span class="br0">&#40;</span>Variaciones x<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#123;</span>
+        ...
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Sólo una instancia de una clase que implemente la interfaz puede asignarse al parámetro cuyo tipo corresponde al identificador de la interfaz. Esta facultad se puede aprovechar dentro la propia interfaz. Por ejemplo:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">public</span> <span class="kw1">interface</span> <span class="kw3">Comparable</span> <span class="br0">&#123;</span> 
+    <span class="co1">// La instancia que llama a esMayor (this) y el parametro otra </span>
+    <span class="co1">// deben ser de la misma clase o de clases que implementen esta interfaz</span>
+    <span class="co1">// La funcion devuelve 1, 0, -1 si this es mayor, igual o menor que otra</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> esMayor<span class="br0">&#40;</span><span class="kw3">Comparable</span> otra<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>En algún caso puede ser útil declarar una interfaz vacía como, por ejemplo:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">public</span> <span class="kw1">interface</span> Marcador <span class="br0">&#123;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Esta declaración es totalmente válida ya que no es obligatorio incluir dentro de una interfaz la declaración de una constante o la cabecera de un método. La utilidad de estas interfaces reside en la posibilidad de ser empleadas como tipos de dato para especificar clases sin necesidad de obligar a éstas a implementar algún método en concreto. Una interfaz no es una clase pero se considera un tipo en Java y puede ser utilizado como tal.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-18.html#interfaces">Interfaces</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.1</span>
+                        <a class="internal" href="capitulo-18.html#declaracion-de-una-interfaz">Declaración de una interfaz</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.2</span>
+                        <a class="internal" href="capitulo-18.html#implementacion-de-una-interfaz-en-una-clase">Implementación de una interfaz en una clase</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.3</span>
+                        <a class="internal" href="capitulo-18.html#jerarquia-entre-interfaces">Jerarquía entre interfaces</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>18.4</span>
+                        <a class="internal" href="capitulo-18.html#utilizacion-de-una-interfaz-como-un-tipo-de-dato">Utilización de una interfaz como un tipo de dato</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="28/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Dataset | HTML5</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">HTML5</a></h1>
+        <p class="span3">
+                        <a href="capitulo-4.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-6.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="dataset"><span>Capítulo 5</span> Dataset</h1>
+        <p>Gracias a HTML5, ahora tenemos la posibilidad de incorporar atributos de datos personalizados en todos los elementos HTML. Hasta la aparición de estos atributos, la manera de lograr un comportamiento similar (asociar datos a elementos), era incluir estos datos como clases CSS en los elementos, y acceder a ellos a través de jQuery, de una manera como la siguiente:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">input</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;spaceship shields-5 lives-3 energy-75&quot;</span>&gt;</span></pre>
+</div>
+
+<p>Una vez definidos los "atributos", era necesario acceder a estas clases y realizar un trabajo extra para extraer su nombre y su valor (convertir <code>energy-75</code>en <code>energy = 75</code>).</p>
+
+<p>Afortunadamente, esto ya no es necesario, gracias a los atributos <code>dataset</code>. Estos nuevos atributos de datos personalizados constan de dos partes:</p>
+
+<ul>
+<li>Nombre del atributo: el nombre del atributo de datos debe ser de al menos un carácter de largo y debe tener el prefijo <code>data-</code>. No debe contener letras mayúsculas.</li>
+<li>Valor del atributo: el valor del atributo puede ser cualquier <em>string</em> o cadena. Con esta sintaxis, podemos añadir cualquier dato que necesitemos a nuestra aplicación, como se muestra a continuación:</li>
+</ul>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">ul</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;vegetable-seeds&quot;</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">li</span> data-spacing<span class="sy0">=</span><span class="st0">&quot;10cm&quot;</span> data-sowing-time<span class="sy0">=</span><span class="st0">&quot;March to June&quot;</span>&gt;</span>Carrots<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">li</span> data-spacing<span class="sy0">=</span><span class="st0">&quot;30cm&quot;</span> data-sowing-time<span class="sy0">=</span><span class="st0">&quot;February to March&quot;</span>&gt;</span>Celery<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">li</span> data-spacing<span class="sy0">=</span><span class="st0">&quot;3cm&quot;</span> data-sowing-time<span class="sy0">=</span><span class="st0">&quot;March to September&quot;</span>&gt;</span>Radishes<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">li</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">ul</span>&gt;</span></pre>
+</div>
+
+<p>Ahora podemos usar estos datos almacenados en nuestro sitio para crear una experiencia de usuario más rica y atractiva. Imagina que cuando un usuario hace clic en un "vegetable", una nueva capa se abre en el explorador que muestra la separación de semillas e instrucciones de siembra. Gracias a los atributos <code>data-</code> que hemos añadido a nuestros elementos <code>&lt;li&gt;</code>, ahora podemos mostrar esta información al instante sin tener que preocuparnos de hacer ninguna llamada <code>AJAX</code> y sin tener que hacer ninguna consulta a las bases de datos del servidor.</p>
+
+<p>Prefijar los atributos personalizados con <code>data-</code> asegura que van a ser completamente ignorados por el agente de usuario. Por lo que al navegador y al usuario final de la web se refiere, no existe esta información.</p>
+
+<blockquote>
+  <p>Custom data attributes are intended to store custom data private to the page or application, for which there are no more appropriate attributes or elements.
+  These attributes are not intended for use by software that is independent of the site that uses the attributes.
+  Every HTML element may have any number of custom data attributes specified, with any value.</p>
+</blockquote>
+
+<p><a href="http://www.w3.org/TR/2010/WD-html5-20101019/elements.html#embedding-custom-non-visible-data-with-the-data-attributes">W3C Specification</a></p>
+
+<p>Esto es, los atributos de datos personalizados están destinadas a almacenar los datos personalizados que son de interés exclusivamente para la página o la aplicación, para los que no hay atributos o elementos más apropiados. Estos atributos no están destinados para un uso externo (a través de un software independiente al sitio que los utiliza). Cada elemento HTML puede tener un número indefinido de atributos de datos personalizados, con cualquier valor.</p>
+
+<h2 id="utilizacion-de-los-data-attributes">5.1 Utilización de los <em>data attributes</em></h2>
+
+<p>Como los atributos de datos personalizados son válidos en HTML5, pueden ser utilizados en cualquier navegador que soporte <em>HTML5 doctypes</em>. Estas son algunas de las formas en las que pueden ser utilizados:</p>
+
+<ul>
+<li>Para almacenar la altura inicial o la opacidad de un elemento que pudiera ser necesaria en los cálculos de animación JavaScript posteriores.</li>
+<li>Para almacenar los parámetros para una película de Flash que se carga a través de JavaScript.</li>
+<li>Para almacenar los datos estadísticos de una web.</li>
+<li>Para almacenar los datos acerca de la salud, munición o vida de un elemento en un juego JavaScript.</li>
+<li>Para poder añadir subtítulos a un <code>&lt;video&gt;</code>.</li>
+</ul>
+
+<p>Y éstas algunas de las situaciones para las que no se deben usar los <em>data attributes</em>:</p>
+
+<ul>
+<li>Los atributos de datos personalizados no deben usarse si hay un atributo o elemento existente que es más adecuado.</li>
+<li>Éstos tampoco tienen la intención de competir con microformatos. En la especificación queda claro que los datos no están pensados para ser usados públicamente. El software externo no debe interactuar con ellos.</li>
+<li>La presencia/ausencia de un atributo de datos personalizado no se deben utilizar como una referencia para los estilos de CSS. Si se hace, podría sugerir que los datos que se están almacenando son de importancia inmediata para el usuario y se deberían marcar de una manera más accesible.</li>
+</ul>
+
+<h2 id="data-attributes-y-javascript">5.2 <em>data attributes</em> y JavaScript</h2>
+
+<p>Ahora que comprendemos el funcionamiento de los atributos de datos personalizados y cuándo se utilizan, deberíamos centrarnos en cómo interactuar con ellos utilizando JavaScript.</p>
+
+<p>Si quisiéramos recuperar o actualizar estos atributos utilizando JavaScript, podríamos hacerlo utilizando los métodos <code>getAttribute</code> y <code>setAttribute</code>.</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;strawberry-plant&quot;</span> data-fruit<span class="sy0">=</span><span class="st0">&quot;12&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre>
+</div>
+
+<div class="code javascript">
+<pre class="javascript"><span class="sy0">&lt;</span>script<span class="sy0">&gt;</span>
+<span class="co1">// &quot;Getting&quot; data-attributes using getAttribute</span>
+<span class="kw1">var</span> plant <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;strawberry-plant&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">var</span> fruitCount <span class="sy0">=</span> plant.<span class="me1">getAttribute</span><span class="br0">&#40;</span><span class="st0">&quot;data-fruit&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// fruitCount = &quot;12&quot;</span>
+&nbsp;
+<span class="co1">// &quot;Setting&quot; data-attributes using setAttribute</span>
+plant.<span class="me1">setAttribute</span><span class="br0">&#40;</span><span class="st0">&quot;data-fruit&quot;</span><span class="sy0">,</span><span class="st0">&quot;7&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Pesky birds</span>
+<span class="sy0">&lt;/</span>script<span class="sy0">&gt;</span></pre>
+</div>
+
+<p>Este método funcionará en todos los navegadores modernos, pero no es la manera en la que los <em>data attributes</em> deben ser utilizados. La mejor manera para lograr lo mismo es mediante el acceso a la propiedad <code>dataset</code> de un elemento. Al utilizar este método, en lugar de utilizar el nombre del atributo completo, se puede prescindir del prefijo <code>data-</code> y referirse a los atributos de datos personalizados utilizando directamente los nombres que se han asignado.</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;sunflower&quot;</span> data-leaves<span class="sy0">=</span><span class="st0">&quot;47&quot;</span> data-plant-<span class="kw3">height</span><span class="sy0">=</span><span class="st0">&quot;2.4m&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre>
+</div>
+
+<div class="code javascript">
+<pre class="javascript"><span class="sy0">&lt;</span>script<span class="sy0">&gt;</span>
+<span class="co1">// &quot;Getting&quot; data-attributes using dataset</span>
+<span class="kw1">var</span> plant <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;sunflower&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">var</span> leaves <span class="sy0">=</span> plant.<span class="me1">dataset</span>.<span class="me1">leaves</span><span class="sy0">;</span> <span class="co1">// leaves = 47;</span>
+&nbsp;
+<span class="co1">// &quot;Setting&quot; data-attributes using dataset</span>
+<span class="kw1">var</span> tallness <span class="sy0">=</span> plant.<span class="me1">dataset</span>.<span class="me1">plantHeight</span><span class="sy0">;</span> <span class="co1">// &quot;plant-height&quot; -&gt; &quot;plantHeight&quot;</span>
+plant.<span class="me1">dataset</span>.<span class="me1">plantHeight</span> <span class="sy0">=</span> <span class="st0">&quot;3.6m&quot;</span><span class="sy0">;</span>  <span class="co1">// Cracking fertiliser</span>
+<span class="sy0">&lt;/</span>script<span class="sy0">&gt;</span></pre>
+</div>
+
+<p>Si en algún momento un atributo <code>data-</code> específico ya no es necesario, es posible eliminarlo por completo del elemento DOM estableciendo un valor nulo.</p>
+
+<div class="code javascript">
+<pre class="javascript">plant.<span class="me1">dataset</span>.<span class="me1">leaves</span> <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span></pre>
+</div>
+
+<p>En conclusión, los <em>data attributes</em> personalizados son una buena manera de simplificar el almacenamiento de datos de la aplicación en las páginas web.</p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 5</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej05">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-5.html#dataset">Dataset</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.1</span>
+                        <a class="internal" href="capitulo-5.html#utilizacion-de-los-data-attributes">Utilización de los <em>data attributes</em></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.2</span>
+                        <a class="internal" href="capitulo-5.html#data-attributes-y-javascript"><em>data attributes</em> y JavaScript</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

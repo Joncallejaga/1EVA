@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Enlaces | CSS 2.1</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">CSS 2.1</a></h1>
+        <p class="span3">
+                        <a href="capitulo-6.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-8.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="enlaces"><span>Capítulo 7</span> Enlaces</h1>
+        <h2 id="estilos-basicos">7.1 Estilos básicos</h2>
+
+<h3 id="tamano-color-y-decoracion">7.1.1 Tamaño, color y decoración</h3>
+
+<p>Los estilos más sencillos que se pueden aplicar a los enlaces son los que modifican su tamaño de letra, su color y la decoración del texto del enlace. Utilizando las propiedades <code>text-decoration</code> y <code>font-weight</code> se pueden conseguir estilos como los que se muestran en la siguiente imagen:</p>
+
+<div class="figure" id="figure-7-1">
+    <img src="images/cap07/ejemplo_enlaces.png" alt="Ejemplo de enlaces con estilos diferentes" />
+
+    <p class="caption"><strong>Figura 7.1</strong> Ejemplo de enlaces con estilos diferentes</p>
+</div>
+
+
+<p>A continuación se muestran las reglas CSS del ejemplo anterior:</p>
+
+<div class="code css">
+<pre class="css">a <span class="br0">&#123;</span> <span class="kw1">margin</span><span class="sy0">:</span> <span class="re3">1em</span> <span class="nu0">0</span><span class="sy0">;</span> <span class="kw1">display</span><span class="sy0">:</span> <span class="kw2">block</span><span class="sy0">;</span><span class="br0">&#125;</span>
+&nbsp;
+<span class="re1">.alternativo</span> <span class="br0">&#123;</span><span class="kw1">color</span><span class="sy0">:</span> <span class="re0">#CC0000</span><span class="sy0">;</span><span class="br0">&#125;</span>
+<span class="re1">.simple</span> <span class="br0">&#123;</span><span class="kw1">text-decoration</span><span class="sy0">:</span> <span class="kw2">none</span><span class="sy0">;</span><span class="br0">&#125;</span>
+<span class="re1">.importante</span> <span class="br0">&#123;</span><span class="kw1">font-weight</span><span class="sy0">:</span> <span class="kw2">bold</span><span class="sy0">;</span> <span class="kw1">font-size</span><span class="sy0">:</span> <span class="re3">1.3em</span><span class="sy0">;</span><span class="br0">&#125;</span>
+<span class="re1">.raro</span> <span class="br0">&#123;</span><span class="kw1">text-decoration</span><span class="sy0">:</span><span class="kw2">overline</span><span class="sy0">;</span><span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enlace con el estilo por defecto<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;alternativo&quot;</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enlace de color rojo<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;simple&quot;</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enlace sin subrayado<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;importante&quot;</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enlace muy importante<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;raro&quot;</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enlace con un estilo raro<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span></pre>
+</div>
+
+<h3 id="pseudo-clases">7.1.2 Pseudo-clases</h3>
+
+<p>CSS también permite aplicar diferentes estilos a un mismo enlace en función de su estado. De esta forma, es posible cambiar el aspecto de un enlace cuando por ejemplo el usuario pasa el ratón por encima o cuando el usuario pincha sobre ese enlace.</p>
+
+<p>Como con los atributos <code>id</code> o <code>class</code> no es posible aplicar diferentes estilos a un mismo elemento en función de su estado, CSS introduce un nuevo concepto llamado pseudo-clases. En concreto, CSS define las siguientes cuatro pseudo-clases:</p>
+
+<ul>
+<li><p><code>:link</code>, aplica estilos a los enlaces que apuntan a páginas o recursos que aún no han sido visitados por el usuario.</p></li>
+<li><p><code>:visited</code>, aplica estilos a los enlaces que apuntan a recursos que han sido visitados anteriormente por el usuario. El historial de enlaces visitados se borra automáticamente cada cierto tiempo y el usuario también puede borrarlo manualmente.</p></li>
+<li><p><code>:hover</code>, aplica estilos al enlace sobre el que el usuario ha posicionado el puntero del ratón.</p></li>
+<li><p><code>:active</code>, aplica estilos al enlace que está pinchando el usuario. Los estilos sólo se aplican desde que el usuario pincha el botón del ratón hasta que lo suelta, por lo que suelen ser unas pocas décimas de segundo.
+Como se sabe, por defecto los navegadores muestran los enlaces no visitados de color azul y subrayados y los enlaces visitados de color morado. Las pseudo-clases anteriores permiten modificar completamente ese aspecto por defecto y por eso casi todas las páginas las utilizan.</p></li>
+</ul>
+
+<p>El siguiente ejemplo muestra cómo ocultar el subrayado cuando el usuario pasa el ratón por encima de cualquier enlace de la página:</p>
+
+<div class="code css">
+<pre class="css">a<span class="re2">:hover </span><span class="br0">&#123;</span> <span class="kw1">text-decoration</span><span class="sy0">:</span> <span class="kw2">none</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Aplicando las reglas anteriores, los navegadores ocultan el subrayado del enlace sobre el que se posiciona el ratón:</p>
+
+<div class="figure" id="figure-7-2">
+    <img src="images/cap07/ocultar_subrayado.png" alt="Ocultando el subrayado de los enlaces al pasar el ratón por encima" />
+
+    <p class="caption"><strong>Figura 7.2</strong> Ocultando el subrayado de los enlaces al pasar el ratón por encima</p>
+</div>
+
+
+<p>Las pseudo-clases siempre incluyen dos puntos (<code>:</code>) por delante de su nombre y siempre se añaden a continuación del elemento al que se aplican, sin dejar ningún espacio en blanco por delante:</p>
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* Incorrecto: el nombre de la pseudo-clase no se puede separar de los dos puntos iniciales */</span>
+a<span class="sy0">:</span> visited <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Incorrecto: la pseudo-clase siempre se añade a continuación del elemento al         que modifica */</span>
+a <span class="re2">:visited </span><span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Correcto: la pseudo-clase modifica el comportamiento del elemento &lt;a&gt; */</span>
+a<span class="re2">:visited </span><span class="br0">&#123;</span> ... <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Las pseudo-clases también se pueden combinar con cualquier otro selector complejo:</p>
+
+<div class="code css">
+<pre class="css">a<span class="re1">.importante</span><span class="re2">:visited </span><span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+a<span class="re0">#principal</span><span class="re2">:hover </span><span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+div<span class="re0">#menu</span> ul li a<span class="re1">.primero</span><span class="re2">:active </span><span class="br0">&#123;</span> ... <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Cuando se aplican varias pseudo-clases diferentes sobre un mismo enlace, se producen colisiones entre los estilos de algunas pseudo-clases. Si se pasa por ejemplo el ratón por encima de un enlace visitado, se aplican los estilos de las pseudo-clases <code>:hover</code> y <code>:visited</code>. Si el usuario pincha sobre un enlace no visitado, se aplican las pseudo-clases <code>:hover</code>, <code>:link</code> y <code>:active</code> y así sucesivamente.</p>
+
+<p>Si se definen varias pseudo-clases sobre un mismo enlace, el único orden que asegura que todos los estilos de las pseudo-clases se aplican de forma coherente es el siguiente: <code>:link</code>, <code>:visited</code>, <code>:hover</code> y <code>:active</code>. De hecho, en muchas hojas de estilos es habitual establecer los estilos de los enlaces de la siguiente forma:</p>
+
+<div class="code css">
+<pre class="css">a<span class="re2">:link</span><span class="sy0">,</span> a<span class="re2">:visited </span><span class="br0">&#123;</span>
+  ...
+<span class="br0">&#125;</span>
+&nbsp;
+a<span class="re2">:hover</span><span class="sy0">,</span> a<span class="re2">:active </span><span class="br0">&#123;</span>
+  ...
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Las pseudo-clases <code>:link</code> y <code>:visited</code> solamente están definidas para los enlaces, pero las pseudo-clases <code>:hover</code> y <code>:active</code> se definen para todos los elementos HTML. Desafortunadamente, Internet Explorer 6 y sus versiones anteriores solamente las soportan para los enlaces.</p>
+
+<p>También es posible combinar en un mismo elemento las pseudo-clases que son compatibles entre sí:</p>
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* Los estilos se aplican cuando el usuario pasa el ratón por encima de un
+    enlace que todavía no ha visitado */</span>
+a<span class="re2">:link</span><span class="re2">:hover </span><span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Los estilos se aplican cuando el usuario pasa el ratón por encima de un 
+    enlace que ha visitado previamente */</span>
+a<span class="re2">:visited</span><span class="re2">:hover </span><span class="br0">&#123;</span> ... <span class="br0">&#125;</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 8</p>
+</div>
+
+<p><a class="internal" href="capitulo-14.html#ej08">Ver enunciado</a></p>
+
+<h2 id="estilos-avanzados">7.2 Estilos avanzados</h2>
+
+<h3 id="decoracion-personalizada">7.2.1 Decoración personalizada</h3>
+
+<p>La propiedad <code>text-decoration</code> permite añadir o eliminar el subrayado de los enlaces. Sin embargo, el aspecto del subrayado lo controla automáticamente el navegador, por lo que su color siempre es el mismo que el del texto del enlace y su anchura es proporcional al tamaño de letra.</p>
+
+<p>No obstante, utilizando la propiedad `border-bottom es posible añadir cualquier tipo de subrayado para los enlaces de las páginas. El siguiente ejemplo muestra algunos enlaces con el subrayado personalizado:</p>
+
+<div class="figure" id="figure-7-3">
+    <img src="images/cap07/border.png" alt="Enlaces con subrayado personalizado mediante la propiedad border" />
+
+    <p class="caption"><strong>Figura 7.3</strong> Enlaces con subrayado personalizado mediante la propiedad border</p>
+</div>
+
+
+<p>Las reglas CSS definidas en el ejemplo anterior se muestran a continuación:</p>
+
+<div class="code css">
+<pre class="css">a <span class="br0">&#123;</span> <span class="kw1">margin</span><span class="sy0">:</span> <span class="re3">1em</span> <span class="nu0">0</span><span class="sy0">;</span> <span class="kw1">float</span><span class="sy0">:</span> <span class="kw1">left</span><span class="sy0">;</span> <span class="kw1">clear</span><span class="sy0">:</span> <span class="kw1">left</span><span class="sy0">;</span> <span class="kw1">text-decoration</span><span class="sy0">:</span> <span class="kw2">none</span><span class="sy0">;</span><span class="br0">&#125;</span>
+<span class="re1">.simple</span> <span class="br0">&#123;</span><span class="kw1">text-decoration</span><span class="sy0">:</span> <span class="kw2">underline</span><span class="sy0">;</span><span class="br0">&#125;</span>
+<span class="re1">.color</span> <span class="br0">&#123;</span> <span class="kw1">border-bottom</span><span class="sy0">:</span> <span class="kw2">medium</span> <span class="kw2">solid</span> <span class="re0">#CC0000</span><span class="sy0">;</span><span class="br0">&#125;</span>
+<span class="re1">.ancho</span> <span class="br0">&#123;</span><span class="kw1">border-bottom</span><span class="sy0">:</span> <span class="kw2">thick</span> <span class="kw2">solid</span><span class="sy0">;</span><span class="br0">&#125;</span>
+<span class="re1">.separado</span> <span class="br0">&#123;</span><span class="kw1">border-bottom</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="kw2">solid</span><span class="sy0">;</span> <span class="kw1">padding-bottom</span><span class="sy0">:</span> <span class="re3">.6em</span><span class="sy0">;</span><span class="br0">&#125;</span>
+<span class="re1">.discontinuo</span> <span class="br0">&#123;</span><span class="kw1">border-bottom</span><span class="sy0">:</span> <span class="kw2">thin</span> <span class="kw2">dashed</span><span class="sy0">;</span><span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;simple&quot;</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enlace con el estilo por defecto<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;color&quot;</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enlace un subrayado de otro color<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;ancho&quot;</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enlace con un subrayado muy ancho<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;separado&quot;</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enlace con un subrayado muy separado<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;discontinuo&quot;</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enlace con un subrayado discontinuo<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span></pre>
+</div>
+
+<h3 id="imagenes-segun-el-tipo-de-enlace">7.2.2 Imágenes según el tipo de enlace</h3>
+
+<p>En ocasiones, puede resultar útil incluir un pequeño icono al lado de un enlace para indicar el tipo de contenido que enlaza, como por ejemplo un archivo comprimido o un documento con formato PDF.</p>
+
+<p>Este tipo de imágenes son puramente decorativas en vez de imágenes de contenido, por lo que se deberían añadir con CSS y no con elementos de tipo <code>&lt;img&gt;</code>. Utilizando la propiedad <code>background</code> (y <code>background-image</code>) se puede personalizar el aspecto de los enlaces para que incluyan un pequeño icono a su lado.</p>
+
+<p>La técnica consiste en mostrar una imagen de fondo sin repetición en el enlace y añadir el `padding necesario al texto del enlace para que no se solape con la imagen de fondo.</p>
+
+<p>El siguiente ejemplo personaliza el aspecto de dos enlaces añadiéndoles una imagen de fondo:</p>
+
+<div class="figure" id="figure-7-4">
+    <img src="images/cap07/personalizacion.png" alt="Personalizando el aspecto de los enlaces en función de su tipo" />
+
+    <p class="caption"><strong>Figura 7.4</strong> Personalizando el aspecto de los enlaces en función de su tipo</p>
+</div>
+
+
+<p>Las reglas CSS necesarias se muestran a continuación:</p>
+
+<div class="code css">
+<pre class="css">a <span class="br0">&#123;</span> <span class="kw1">margin</span><span class="sy0">:</span> <span class="re3">1em</span> <span class="nu0">0</span><span class="sy0">;</span> <span class="kw1">float</span><span class="sy0">:</span> <span class="kw1">left</span><span class="sy0">;</span> <span class="kw1">clear</span><span class="sy0">:</span> <span class="kw1">left</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+&nbsp;
+<span class="re1">.rss</span> <span class="br0">&#123;</span>
+  <span class="kw1">color</span><span class="sy0">:</span> <span class="re0">#E37529</span><span class="sy0">;</span>
+  <span class="kw1">padding</span><span class="sy0">:</span> <span class="nu0">0</span> <span class="nu0">0</span> <span class="nu0">0</span> <span class="re3">18px</span><span class="sy0">;</span>
+  <span class="kw1">background</span><span class="sy0">:</span> <span class="re0">#FFF</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="co2">imagenes/rss.gif</span><span class="br0">&#41;</span> <span class="kw2">no-repeat</span> <span class="kw1">left</span> <span class="kw2">center</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="re1">.pdf</span> <span class="br0">&#123;</span>
+  <span class="kw1">padding</span><span class="sy0">:</span> <span class="nu0">0</span> <span class="nu0">0</span> <span class="nu0">0</span> <span class="re3">22px</span><span class="sy0">;</span>
+  <span class="kw1">background</span><span class="sy0">:</span> <span class="re0">#FFF</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="co2">imagenes/pdf.png</span><span class="br0">&#41;</span> <span class="kw2">no-repeat</span> <span class="kw1">left</span> <span class="kw2">center</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enlace con el estilo por defecto<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+&nbsp;
+<span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;rss&quot;</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enlace a un archivo RSS<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+&nbsp;
+<span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;pdf&quot;</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enlace a un documento PDF<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span></pre>
+</div>
+
+<h3 id="mostrar-los-enlaces-como-si-fueran-botones">7.2.3 Mostrar los enlaces como si fueran botones</h3>
+
+<p>Las propiedades definidas por CSS permiten mostrar los enlaces con el aspecto de un botón, lo que puede ser útil en formularios en los que no se utilizan elementos específicos para crear botones.</p>
+
+<p>El siguiente ejemplo muestra un enlace simple formateado como un botón:</p>
+
+<div class="figure" id="figure-7-5">
+    <img src="images/cap07/enlace_boton.png" alt="Mostrando un enlace como si fuera un botón" />
+
+    <p class="caption"><strong>Figura 7.5</strong> Mostrando un enlace como si fuera un botón</p>
+</div>
+
+
+<p>Las reglas CSS utilizadas en el ejemplo anterior son las siguientes:</p>
+
+<div class="code css">
+<pre class="css">a <span class="br0">&#123;</span> <span class="kw1">margin</span><span class="sy0">:</span> <span class="re3">1em</span> <span class="nu0">0</span><span class="sy0">;</span> <span class="kw1">float</span><span class="sy0">:</span> <span class="kw1">left</span><span class="sy0">;</span> <span class="kw1">clear</span><span class="sy0">:</span> <span class="kw1">left</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+a<span class="re1">.boton</span> <span class="br0">&#123;</span>
+  <span class="kw1">text-decoration</span><span class="sy0">:</span> <span class="kw2">none</span><span class="sy0">;</span>
+  <span class="kw1">background</span><span class="sy0">:</span> <span class="re0">#EEE</span><span class="sy0">;</span>
+  <span class="kw1">color</span><span class="sy0">:</span> <span class="re0">#222</span><span class="sy0">;</span>
+  <span class="kw1">border</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="kw2">outset</span> <span class="re0">#CCC</span><span class="sy0">;</span>
+  <span class="kw1">padding</span><span class="sy0">:</span> <span class="re3">.1em</span> <span class="re3">.5em</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+a<span class="re1">.boton</span><span class="re2">:hover </span><span class="br0">&#123;</span>
+  <span class="kw1">background</span><span class="sy0">:</span> <span class="re0">#CCB</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+a<span class="re1">.boton</span><span class="re2">:active </span><span class="br0">&#123;</span>
+  <span class="kw1">border</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="kw2">inset</span> <span class="re0">#000</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;boton&quot;</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Guardar<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">a</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;boton&quot;</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;#&quot;</span>&gt;</span>Enviar<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">a</span>&gt;</span></pre>
+</div>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-7.html#enlaces">Enlaces</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.1</span>
+                        <a class="internal" href="capitulo-7.html#estilos-basicos">Estilos básicos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.2</span>
+                        <a class="internal" href="capitulo-7.html#estilos-avanzados">Estilos avanzados</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

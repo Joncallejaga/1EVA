@@ -1,0 +1,114 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<link rel="stylesheet" href="css/flexbox-styles.css">
+<script src="js/modernizr.js"></script>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0" />
+  
+  <meta name="description" content="Un ejemplo de maquetaci&oacute;n web utilizando cajas flexibles (flexbox)." />
+  <meta name="keywords" content="ejemplo, maquetaci&oacute;n, layout, flexbox, cajas flexibles, CSS3, HTML5 "/>
+  <meta name="author" content="enxaneta.info" />
+  <meta property="og:title" content="Ejemplo de texto tridimensional en CSS3" /> 
+  <meta property="og:type" content="website" /> 
+  <meta property="og:image" content="http://w3.unpocodetodo.info/images/w3_og.png" />  
+  <meta property="og:url" content="w3.unpocodetodo.info/ejemplos/texto3d.html" /> 
+  <meta property="og:site_name" content="w3.unpocodetodo.info" /> 
+  <meta property="og:description" content="Ejemplo maquetaci&oacute;n utilizando flexbox CSS3." /> 
+  
+  <link rel="icon" type="image/png" href="../../images/w3.png" />
+  <!--<link rel="icon" type="image/png" href="/img/favicon.png">-->
+  <!-- 57x57 older iPhone and Android devices -->
+  <!--<link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon-precomposed.png">-->
+  <!-- iPad 1 and 2 & iPad mini -->
+  <link rel="apple-touch-icon" sizes="72x72" href="../../images/apple-touch-icon-72x72.png">
+  <!-- iPhone 4, 4S, 5 and iPod Touch -->
+  <link rel="apple-touch-icon" sizes="114x114" href="../../images/apple-touch-icon-114x114.png">
+  <!-- iPad 3rd gen -->
+  <link rel="apple-touch-icon" sizes="144x144" href="../../images/apple-touch-icon-144x144.png"> 
+  
+<title>test flexbox</title>
+
+
+</head>
+
+<body>
+<div id="contenedor" class="flex-container column">
+<header id="encabezado"><h1>#encabezado</h1></header>
+<section class="flex-container justify-space-between row">
+   <aside id="lateral" class="flex-container column">
+        <h4>#lateral</h4>
+    	<article class="row-1">
+        <h4>.row-1</h4>
+        <p>En el arroyo grande que la lluvia hab&iacute;a dilatado hasta la vi&ntilde;a.</p>
+        </article>
+        <article class="row-1">
+        <h4>.row-1</h4>
+        <p>As&iacute; no tendr&aacute;n en su memoria la tristeza de mis maldades</p>
+        </article>
+        <article class="row-1">
+        <h4>.row-1</h4>
+        <p>S&oacute;lo los espejos de azabache de sus ojos son duros cual dos escarabajos de cristal negro..</p>
+        </article>
+        <article class="row-1">
+        <h4>.row-1</h4>
+        <p>Con su llorosa alegr&iacute;a, me ofreci&oacute; dos escogidas naranjas finas.</p>
+        </article>
+    </aside>
+    <section id="central" class="flex-container column">
+    <h4>#central</h4>
+    <!--<p><a href="http://msdn.microsoft.com/en-us/library/ie/dn265027(v=vs.85).aspx">http://msdn.microsoft.com/en-us/library/ie/dn265027(v=vs.85).aspx</a></p>-->
+    <p>En el arroyo grande que la lluvia hab&iacute;a dilatado hasta la vi&ntilde;a, nos encontramos, atascada, una vieja carretilla, perdida toda bajo su carga de hierba y de naranjas. As&iacute; no tendr&aacute;n en su memoria la tristeza de mis maldades, de mis cinismos, de mis impertinencias. Cuando paso sobre &eacute;l, los domingos, por las últimas callejas del pueblo, los hombres del campo, vestidos de limpio y despaciosos, se quedan mir&aacute;ndolo: -Tien 'asero. Con su llorosa alegr&iacute;a, me ofreci&oacute; dos escogidas naranjas, finas, pesadas, redondas.</p>
+    
+    <h5>#escaparate <small>( .flex-container .justify-space-between .wrap .row )</small></h5>
+    <div id="escaparate" class="flex-container justify-space-between wrap row"><!--justify-space-between-->
+    
+        <article class="row-3">
+        <h4>.row-3</h4>
+        <p>En el arroyo grande que la lluvia hab&iacute;a dilatado hasta la vi&ntilde;a.</p>
+        </article>
+        <article class="row-3">
+        <h4>.row-3</h4>
+        <p>As&iacute; no tendr&aacute;n en su memoria la tristeza de mis maldades</p>
+        </article>
+        <article class="row-3">
+        <h4>.row-3</h4>
+        <p>S&oacute;lo los espejos de azabache de sus ojos son duros cual dos escarabajos de cristal negro.</p>
+        </article>        
+        <article class="row-2">
+        <h4>.row-2</h4>
+        <p>S&oacute;lo los espejos de azabache de sus ojos son duros cual dos escarabajos de cristal negro.</p>
+        </article>
+        <article class="row-2 last">
+        <h4>.row-2</h4>
+        <p>Con su llorosa alegr&iacute;a, me ofreci&oacute; dos escogidas naranjas finas.</p>
+        </article>
+        
+    </div>
+    <h5>Algo m&aacute;s</h5>
+    <p>Ojal&aacute; pensaran del mismo modo que yo pienso․ Pero no; ser&aacute; mejor que no piensen. Lo llamo dulcemente: ¿Platero? y viene a m&iacute; con un trotecillo alegre que parece que se r&iacute;e en no s&eacute; qu&eacute; cascabeleo ideal. Acero y plata de luna, al mismo tiempo. S&oacute;lo los espejos de azabache de sus ojos son duros cual dos escarabajos de cristal negro. Le gustan las naranjas mandarinas, las uvas moscateles, todas de &aacute;mbar; los higos morados, con su cristalina gotita de miel. Con su llorosa alegr&iacute;a, me ofreci&oacute; dos escogidas naranjas, finas, pesadas, redondas.</p>
+    </section>
+    <nav id="nav">
+    <h4>#nav</h4>
+    	<ul class="flex-container column">
+  <li><a href="../flex-box.php">Cajas flexibles</a></li>
+  <li><a href="../flex-direction.php">flex-direction</a></li>
+  <li><a href="../flex-wrap.php">flex-wrap</a></li>
+  <li><a href="../flex-align-items.php">.align-items</a></li>
+  <li><a href="../flex-justify-content.php">justify-content</a></li>
+  <li><a href="../flex-align-content.php">align-content</a></li>
+  <li><a href="../flex-align-self.php">align-self</a></li>
+  <li><a href="../flex-abreviado.php">la propiedad flex</a></li>
+   <li><a href="../flex-order.php">la propiedad order</a></li>
+ 
+        </ul>
+    </nav>
+
+<p class="clearfix">&nbsp;</p>
+</section>
+<footer id="pie"><p>#pie <a target="_blank" href="http://caniuse.com/#search=flex">can i use flexbox?</a></p></footer>
+</div>
+</body>
+</html>

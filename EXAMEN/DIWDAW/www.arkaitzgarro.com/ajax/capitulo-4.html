@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="14/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Ejercicios | AJAX</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">AJAX</a></h1>
+        <p class="span3">
+                        <a href="capitulo-3.html"><span>&larr;</span> Anterior</a>
+            
+                        <a class="disabled" href="capitulo-4.html#">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="ejercicios"><span>Capítulo 4</span> Ejercicios</h1>
+        <h2 id="capitulo-2">4.1 Capítulo 2</h2>
+
+<h3 id="ej01">4.1.1 Ejercicio 1</h3>
+
+<p>A partir de la página web proporcionada, añadir el código JavaScript necesario para que:</p>
+
+<ul>
+<li>Al cargar la página, el cuadro de texto debe mostrar por defecto la URL de la propia página.</li>
+<li>Al pulsar el botón "Mostrar Contenidos", se debe descargar mediante peticiones AJAX el contenido correspondiente a la URL introducida por el usuario. El contenido de la respuesta recibida del servidor se debe mostrar en la zona de "Contenidos del archivo".</li>
+<li>En la zona "Estados de la petición" se debe mostrar en todo momento el estado en el que se encuentra la petición (No inicializada, cargando, completada, etc.)</li>
+<li>Mostrar el contenido de todas las cabeceras de la respuesta del servidor en la zona "Cabeceras HTTP de la respuesta del servidor".</li>
+<li>Mostrar el código y texto de estado de la respuesta del servidor en la zona "Código de estado".</li>
+</ul>
+
+<p><a href="snippets/cap04/ej01.zip">Descargar archivo ZIP con la página HTML</a></p>
+
+<h3 id="ej02">4.1.2 Ejercicio 2</h3>
+
+<p>La página HTML proporcionada incluye una zona llamada ticker en la que se deben mostrar noticias generadas por el servidor. Añadir el código JavaScript necesario para:</p>
+
+<ul>
+<li>De forma periódica cada cierto tiempo (por ejemplo cada segundo) se realiza una petición al servidor mediante AJAX y se muestra el contenido de la respuesta en la zona reservada para las noticias.</li>
+<li>Además del contenido enviado por el servidor, se debe mostrar la hora en la que se ha recibido la respuesta.</li>
+<li>Cuando se pulse el botón "Detener", la aplicación detiene las peticiones periódicas al servidor. Si se vuelve a pulsar sobre ese botón, se reanudan las peticiones periódicas.</li>
+<li>Añadir la lógica de los botones "Anterior" y "Siguiente", que detienen las peticiones al servidor y permiten mostrar los contenidos anteriores o posteriores al que se muestra en ese momento.</li>
+<li>Cuando se recibe una respuesta del servidor, se resalta visualmente la zona llamada ticker.</li>
+<li>Modificar la aplicación para que se reutilice continuamente el mismo objeto <code>XMLHttpRequest</code> para hacer las diferentes peticiones.</li>
+</ul>
+
+<p><a href="snippets/cap04/ej02.zip">Descargar ZIP con la página HTML y el script generaContenidos.php</a></p>
+
+<h3 id="ej03">4.1.3 Ejercicio 3</h3>
+
+<p>Un ejemplo de validación compleja es la que consiste en comprobar si un nombre de usuario escogido está libre o ya lo utiliza otro usuario. Como es una validación que requiere el uso de una base de datos muy grande, no se puede realizar en el navegador del cliente. Utilizando las técnicas mostradas anteriormente y la página web que se proporciona:</p>
+
+<ul>
+<li>Crear un script que compruebe con AJAX y la ayuda del servidor si el nombre escogido por el usuario está libre o no.</li>
+<li>El script del servidor se llama compruebaDisponibilidad.php y el parámetro que contiene el nombre se llama login.</li>
+<li>La respuesta del servidor es "si" o "no", en función de si el nombre de usuario está libre y se puede utilizar o ya ha sido ocupado por otro usuario.</li>
+<li>A partir de la respuesta del servidor, mostrar un mensaje al usuario indicando el resultado de la comprobación.</li>
+</ul>
+
+<p><a href="snippets/cap04/ej03.zip">Descargar ZIP con la página HTML y el script compruebaDisponibilidad.php</a></p>
+
+<h3 id="ej04">4.1.4 Ejercicio 4</h3>
+
+<p>Normalmente, cuando se valida la disponibilidad de un nombre de usuario, se muestra una lista de valores alternativos en el caso de que el nombre elegido no esté disponible. Modificar el ejercicio de comprobación de disponibilidad de los nombres para que permita mostrar una serie de valores alternativos devueltos por el servidor.</p>
+
+<p>El script del servidor se llama <code>compruebaDisponibilidadXML.php</code> y el parámetro que contiene el nombre se llama <code>login</code>. La respuesta del servidor es un documento XML con la siguiente estructura:</p>
+
+<p>Si el nombre de usuario está libre:</p>
+
+<div class="code xml">
+<pre class="xml"><span class="sc3"><span class="re1">&lt;respuesta<span class="re2">&gt;</span></span></span>
+  <span class="sc3"><span class="re1">&lt;disponible<span class="re2">&gt;</span></span></span>si<span class="sc3"><span class="re1">&lt;/disponible<span class="re2">&gt;</span></span></span>
+<span class="sc3"><span class="re1">&lt;/respuesta<span class="re2">&gt;</span></span></span></pre>
+</div>
+
+<p>Si el nombre de usuario está ocupado:</p>
+
+<div class="code xml">
+<pre class="xml"><span class="sc3"><span class="re1">&lt;respuesta<span class="re2">&gt;</span></span></span>
+  <span class="sc3"><span class="re1">&lt;disponible<span class="re2">&gt;</span></span></span>no<span class="sc3"><span class="re1">&lt;/disponible<span class="re2">&gt;</span></span></span>
+  <span class="sc3"><span class="re1">&lt;alternativas<span class="re2">&gt;</span></span></span>
+    <span class="sc3"><span class="re1">&lt;login<span class="re2">&gt;</span></span></span>...<span class="sc3"><span class="re1">&lt;/login<span class="re2">&gt;</span></span></span>
+    <span class="sc3"><span class="re1">&lt;login<span class="re2">&gt;</span></span></span>...<span class="sc3"><span class="re1">&lt;/login<span class="re2">&gt;</span></span></span>
+    ...
+    <span class="sc3"><span class="re1">&lt;login<span class="re2">&gt;</span></span></span>...<span class="sc3"><span class="re1">&lt;/login<span class="re2">&gt;</span></span></span>
+  <span class="sc3"><span class="re1">&lt;/alternativas<span class="re2">&gt;</span></span></span>
+<span class="sc3"><span class="re1">&lt;/respuesta<span class="re2">&gt;</span></span></span></pre>
+</div>
+
+<p>Los nombres de usuario alternativos se deben mostrar en forma de lista de elementos (<code>&lt;ul&gt;&lt;/ul&gt;</code>).</p>
+
+<p>Modificar la lista anterior para que muestre enlaces para cada uno de los nombres alternativos. Al pinchar sobre el enlace de un nombre alternativo, se copia en el cuadro de texto del login del usuario.</p>
+
+<p><a href="snippets/cap04/ej04.zip">Descargar archivo ZIP con el script compruebaDisponibilidadXML.php</a></p>
+
+<h3 id="ej05">4.1.5 Ejercicio 5</h3>
+
+<p>Rehacer el ejercicio 4 para procesar respuestas del servidor en formato JSON. Los cambios producidos son:</p>
+
+<ol>
+<li>El script del servidor se llama compruebaDisponibilidadJSON.php y el parámetro que contiene el nombre se llama login.</li>
+<li>La respuesta del servidor es un objeto JSON con la siguiente estructura:</li>
+</ol>
+
+<p>El nombre de usuario está libre:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="br0">&#123;</span> disponible<span class="sy0">:</span> <span class="st0">&quot;si&quot;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>El nombre de usuario está ocupado:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="br0">&#123;</span> disponible<span class="sy0">:</span> <span class="st0">&quot;no&quot;</span><span class="sy0">,</span> alternativas<span class="sy0">:</span> <span class="br0">&#91;</span><span class="st0">&quot;...&quot;</span><span class="sy0">,</span> <span class="st0">&quot;...&quot;</span><span class="sy0">,</span> ...<span class="sy0">,</span> <span class="st0">&quot;...&quot;</span><span class="br0">&#93;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p><a href="snippets/cap04/ej05.zip">Descargar archivo ZIP con el script compruebaDisponibilidadJSON.php</a></p>
+
+<h3 id="ej06">4.1.6 Ejercicio 6</h3>
+
+<p>Crear un script que cargue de forma dinámica mediante AJAX la lista de provincias de un país y la lista de los municipios de cada provincia seleccionada.</p>
+
+<p>1) Definir el código HTML de las dos listas desplegables vacías.
+2) Cuando se cargue la página, cargar la lista de provincias en la primera lista desplegable. El script del servidor se llama <code>cargaProvinciasXML.php</code>. El formato de la respuesta es XML, con la siguiente estructura:</p>
+
+<div class="code xml">
+<pre class="xml"><span class="sc3"><span class="re1">&lt;provincias<span class="re2">&gt;</span></span></span>
+  <span class="sc3"><span class="re1">&lt;provincia<span class="re2">&gt;</span></span></span>
+    <span class="sc3"><span class="re1">&lt;codigo<span class="re2">&gt;</span></span></span>01<span class="sc3"><span class="re1">&lt;/codigo<span class="re2">&gt;</span></span></span>
+    <span class="sc3"><span class="re1">&lt;nombre<span class="re2">&gt;</span></span></span>Álava<span class="sc3"><span class="re1">&lt;/nombre<span class="re2">&gt;</span></span></span>
+  <span class="sc3"><span class="re1">&lt;/provincia<span class="re2">&gt;</span></span></span>
+  ...
+<span class="sc3"><span class="re1">&lt;/provincias<span class="re2">&gt;</span></span></span></pre>
+</div>
+
+<p>Para insertar las opciones en la lista desplegable, se pueden utilizar dos técnicas:</p>
+
+<ul>
+<li>Propiedad <code>innerHTML</code> de la lista y código HTML de cada etiqueta <code>&lt;option&gt;</code>.</li>
+<li>Crear elementos de tipo opción (<code>new Option(nombre, valor</code>)) y añadirlo al array <code>options[]</code> de la lista desplegable.</li>
+</ul>
+
+<p>3) Añadir de forma semántica el evento adecuado a la lista de provincias para que cuando se seleccione una provincia, se carguen automáticamente todos sus municipios en la otra lista.
+4) Cuando se seleccione una determinada provincia, se carga mediante AJAX la lista completa de municipios en la otra lista desplegable. El script del servidor se llama <code>cargaMunicipiosXML.php</code>. El parámetro que se debe enviar al servidor es el código de la provincia y el parámetro se llama <code>provincia</code>. El método que espera el servidor es POST. El formato de la respuesta es XML, con la siguiente estructura:</p>
+
+<div class="code xml">
+<pre class="xml"><span class="sc3"><span class="re1">&lt;municipios<span class="re2">&gt;</span></span></span>
+  <span class="sc3"><span class="re1">&lt;municipio<span class="re2">&gt;</span></span></span>
+    <span class="sc3"><span class="re1">&lt;codigo<span class="re2">&gt;</span></span></span>0014<span class="sc3"><span class="re1">&lt;/codigo<span class="re2">&gt;</span></span></span>
+    <span class="sc3"><span class="re1">&lt;nombre<span class="re2">&gt;</span></span></span>Alegría-Dulantzi<span class="sc3"><span class="re1">&lt;/nombre<span class="re2">&gt;</span></span></span>
+  <span class="sc3"><span class="re1">&lt;/municipio<span class="re2">&gt;</span></span></span>
+  ...
+<span class="sc3"><span class="re1">&lt;/municipios<span class="re2">&gt;</span></span></span></pre>
+</div>
+
+<p><a href="snippets/cap04/ej06.zip">Descargar archivo ZIP con los scripts cargaProvinciasXML.php y cargaMunicipiosXML.php</a></p>
+
+<h3 id="ej07">4.1.7 Ejercicio 7</h3>
+
+<p>Modificar el ejercicio anterior para soportar las respuestas del servidor en formato JSON. Los cambios introducidos son los siguientes:</p>
+
+<p>1) El script del servidor utilizado para cargar las provincias se llama cargaProvinciasJSON.php y la respuesta del servidor tiene el siguiente formato:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="br0">&#123;</span> <span class="st0">&quot;01&quot;</span><span class="sy0">:</span> <span class="st0">&quot;Álava/Araba&quot;</span><span class="sy0">,</span>  <span class="st0">&quot;02&quot;</span><span class="sy0">:</span> <span class="st0">&quot;Albacete&quot;</span><span class="sy0">,</span>  <span class="st0">&quot;03&quot;</span><span class="sy0">:</span> <span class="st0">&quot;Alicante/Alacant&quot;</span><span class="sy0">,</span> ...  <span class="br0">&#125;</span></pre>
+</div>
+
+<p>2) El script del servidor utilizado para cargar los municipios se llama <code>cargaMunicipiosJSON.php</code> y la respuesta del servidor tiene el siguiente formato:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="br0">&#123;</span> <span class="st0">&quot;0014&quot;</span><span class="sy0">:</span> <span class="st0">&quot;Alegría-Dulantzi&quot;</span><span class="sy0">,</span>  <span class="st0">&quot;0029&quot;</span><span class="sy0">:</span> <span class="st0">&quot;Amurrio&quot;</span><span class="sy0">,</span>  ...  <span class="br0">&#125;</span></pre>
+</div>
+
+<p><a href="snippets/cap04/ej07.zip">Descargar archivo ZIP con los scripts cargaProvinciasJSON.php y cargaMunicipiosJSON.php</a></p>
+
+<h2 id="capitulo-3">4.2 Capítulo 3</h2>
+
+<h3 id="ej08">4.2.1 Ejercicio 8</h3>
+
+<p>Se propone la construcción de un teclado virtual que permita escribir los contenidos en diversos idiomas y alfabetos. El script hace un uso intensivo de elementos de AJAX como los eventos, DOM, javascript avanzado, JSON y el objeto <code>XMLHttpRequest</code>.</p>
+
+<p>Cada uno de los teclados correspondientes a un idioma se carga desde el servidor, para no sobrecargar la aplicación. El teclado de un idioma concreto está formado por varios teclados alternativos o variantes. Así, se encuentra el teclado <code>normal</code> para las teclas que se muestran inicialmente, el teclado <code>caps</code> con las teclas que se escriben al pulsar sobre la tecla <code>Bloq. Mayúsculas</code>, el teclado <code>shift</code> que contiene los símbolos que se escriben al pulsar sobre la tecla <code>Shift</code> y el teclado <code>altgr</code> que contiene los símbolos que se pueden escribir después de pulsar la tecla <code>Alt Gr</code>.</p>
+
+<p>Por tanto, cada idioma tiene cuatro teclados diferentes: <code>normal</code>, <code>caps</code>, <code>shift</code> y <code>altgr</code>. Inicialmente, el script proporciona el objeto <code>teclados</code> con un elemento llamado <code>es</code> que contiene los cuatro teclados correspondientes al idioma español.</p>
+
+<div class="figure" id="figure-4-1">
+    <img src="images/cap04/teclado-normal.png" alt="Detalle del teclado para el idioma español y la variante &quot;normal&quot;" />
+
+    <p class="caption"><strong>Figura 4.1</strong> Detalle del teclado para el idioma español y la variante &quot;normal&quot;</p>
+</div>
+
+
+<div class="figure" id="figure-4-2">
+    <img src="images/cap04/teclado-caps.png" alt="Detalle del teclado para el idioma español y la variante &quot;caps&quot;" />
+
+    <p class="caption"><strong>Figura 4.2</strong> Detalle del teclado para el idioma español y la variante &quot;caps&quot;</p>
+</div>
+
+
+<div class="figure" id="figure-4-3">
+    <img src="images/cap04/teclado-shift.png" alt="Detalle del teclado para el idioma español y la variante &quot;shift&quot;" />
+
+    <p class="caption"><strong>Figura 4.3</strong> Detalle del teclado para el idioma español y la variante &quot;shift&quot;</p>
+</div>
+
+
+<div class="figure" id="figure-4-4">
+    <img src="images/cap04/teclado-altgr.png" alt="Detalle del teclado para el idioma español y la variante &quot;altgr&quot;" />
+
+    <p class="caption"><strong>Figura 4.4</strong> Detalle del teclado para el idioma español y la variante &quot;altgr&quot;</p>
+</div>
+
+
+<ol>
+<li>Crear una función llamada <code>cargaTeclado()</code> que muestre en cada tecla virtual el valor de la tecla correspondiente al teclado de un idioma y una variante determinados.</li>
+<li>Al cargar la página, se debe ejecutar la función <code>cargaTeclado()</code>. Previamente, se debe establecer el valor inicial de dos variables globales llamadas <code>tecladoIdioma</code> y <code>tecladoVariante</code>. En la misma función <code>cargaTeclado()</code>, se debe asignar un evento a cada tecla activa para que al pulsar con el ratón sobre ella, se ejecute la función <code>pulsaTecla()</code>.</li>
+<li>En la función <code>pulsaTecla()</code> se obtiene el carácter de la tecla que se ha pulsado correspondiente al teclado activo en ese momento. La tecla se añade a un array global llamado <code>teclasPulsadas</code>. Por último, desde la función <code>pulsaTecla()</code> se llama a una función <code>mostrarContenidos()</code> que actualiza el texto mostrado en el área reservada para mostrar las teclas pulsadas.</li>
+<li>Añadir la lógica para tratar las "<em>teclas especiales</em>". Para ello, añadir un evento adecuado que llame a la función <code>pulsaTeclaEspecial()</code> cuando el usuario pulse sobre <code>Enter</code>, <code>Tabulador</code>, <code>Barra Espaciadora</code> y <code>Borrado (BackSpace)</code>. En cada caso, se debe añadir al array de teclas pulsadas el carácter correspondiente: <code>\n</code>, <code>\t</code>, espacio en blanco y el borrado de la última tecla pulsada.</li>
+<li>Modificar la función <code>mostrarContenidos()</code> para que antes de mostrar las teclas que se han pulsado, convierta los caracteres especiales en caracteres correctos para mostrarlos en un elemento HTML: las nuevas líneas (<code>\n</code>) se transforman en <code>&lt;br/&gt;</code>, los espacios en blanco se transforman en <code>&amp;nbsp;</code> y el tabulador (<code>\t</code>) se transforma en <code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</code>.</li>
+<li>Cuando se pulsa la tecla <code>Bloq. Mayús.</code> o <code>Shift</code> o <code>Alt Gr</code>, se debe cambiar la variante del teclado actual. Para ello, existen las variantes <code>caps</code> para las mayúsculas, <code>shift</code> para los símbolos de la tecla <code>Shift</code> y <code>altgr</code> para los símbolos que aparecen cuando se pulsa la tecla <code>AltGr</code>. Añadir a estas teclas especiales el evento adecuado para que se ejecute la función <code>pulsaTeclaEspecial()</code> en la que se deben realizar las tareas que correspondan a cada tecla. Además, debería crearse una variable global llamada estado que almacene en todo momento el estado de pulsación de estas teclas especiales, ya que el resultado no es el mismo si se pulsa la tecla de mayúsculas estando o no estando pulsada anteriormente.</li>
+<li>Una vez configurado el script básico del teclado virtual, se van a añadir los elementos relativos a la comunicación con el servidor. En primer lugar, al cargar la página se muestran en una lista desplegable todos los idiomas disponibles. El script del servidor se llama <code>tecladoVirtual.php</code> y el envío de parámetros se realiza mediante <code>POST</code>. Para cargar los idiomas disponibles, el parámetro que se debe utilizar es accion y su valor es <code>listaIdiomas</code>. La respuesta del servidor es un objeto JSON con los códigos y nombres de cada idioma, además del código del idioma que se carga al principio:</li>
+</ol>
+
+<div class="code javascript">
+<pre class="javascript"><span class="br0">&#123;</span>
+    idiomas<span class="sy0">:</span> <span class="br0">&#123;</span> es<span class="sy0">:</span> <span class="st0">&quot;Español&quot;</span><span class="sy0">,</span>
+               de<span class="sy0">:</span> <span class="st0">&quot;Alemán&quot;</span><span class="sy0">,</span>
+               ru<span class="sy0">:</span> <span class="st0">&quot;Ruso&quot;</span><span class="sy0">,</span>
+               el<span class="sy0">:</span> <span class="st0">&quot;Griego&quot;</span><span class="sy0">,</span>
+               ...
+             <span class="br0">&#125;</span><span class="sy0">,</span>
+    defecto<span class="sy0">:</span> <span class="st0">&quot;es&quot;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="figure" id="figure-4-5">
+    <img src="images/cap04/listado-idiomas.png" alt="Lista desplegable con los idiomas disponibles para el teclado virtual" />
+
+    <p class="caption"><strong>Figura 4.5</strong> Lista desplegable con los idiomas disponibles para el teclado virtual</p>
+</div>
+
+
+<ol>
+<li>Cuando se cambie el idioma en la lista desplegable, se debe cargar automáticamente el teclado correspondiente a ese idioma. El primer teclado que se muestra al cargar la página es el correspondiente al idioma por defecto indicado por el servidor.</li>
+</ol>
+
+<p>Los teclados de cada idioma con todas sus variantes también se descargan desde el servidor. El script es <code>tecladoVirtual.php</code>, en este caso la acción es <code>cargaTeclado</code> y se debe pasar otro parámetro llamado <code>idioma</code> con el código del idioma cuyo teclado se quiere cargar desde el servidor.</p>
+
+<p>La respuesta del servidor es la siguiente:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="br0">&#123;</span>
+    normal<span class="sy0">:</span>
+        <span class="br0">&#91;</span><span class="st0">&quot;&amp;#x00BA;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;#x0031;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;#x0032;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;#x0033;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;#x0034;&quot;</span><span class="sy0">,</span>
+         <span class="st0">&quot;&amp;#x0035;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;#x0036;&quot;</span><span class="sy0">,</span> ...<span class="sy0">,</span> <span class="st0">&quot;&amp;#x002E;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;#x002D;&quot;</span><span class="br0">&#93;</span><span class="sy0">,</span>
+    caps<span class="sy0">:</span>
+        <span class="br0">&#91;</span><span class="st0">&quot;&amp;#x00BA;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;#x0031;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;#x0032;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;#x0033;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;#x0034;&quot;</span><span class="sy0">,</span>
+         <span class="st0">&quot;&amp;#x0035;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;#x0036;&quot;</span><span class="sy0">,</span> ...<span class="sy0">,</span> <span class="st0">&quot;&amp;#x002E;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;#x002D;&quot;</span><span class="br0">&#93;</span><span class="sy0">,</span>
+    shift<span class="sy0">:</span>
+        <span class="br0">&#91;</span><span class="st0">&quot;&amp;#x00AA;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;#x0021;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;#x0022;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;#x0027;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;#x0024;&quot;</span><span class="sy0">,</span>
+         <span class="st0">&quot;&amp;#x0025;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;#x0026;&quot;</span><span class="sy0">,</span> ...<span class="sy0">,</span> <span class="st0">&quot;&amp;#x003A;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;#x005F;&quot;</span><span class="br0">&#93;</span><span class="sy0">,</span>
+    altgr<span class="sy0">:</span>
+        <span class="br0">&#91;</span><span class="st0">&quot;&amp;#x005C;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;#x007C;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;#x0040;&quot;</span><span class="sy0">,</span> <span class="st0">&quot;&amp;#x0023;&quot;</span><span class="sy0">,,,</span> <span class="st0">&quot;&amp;#x00AC;&quot;</span><span class="sy0">,</span>
+         <span class="sy0">,,,,,,,,,,,,,,,,</span> <span class="st0">&quot;&amp;#x005B;&quot;</span><span class="sy0">,</span><span class="st0">&quot;&amp;#x005D;&quot;</span><span class="sy0">,,,,,,,,,,,</span> <span class="st0">&quot;&amp;#x007B;&quot;</span><span class="sy0">,</span>
+         <span class="st0">&quot;&amp;#x007D;&quot;</span><span class="sy0">,,,,,,,,,,</span><span class="st0">&quot;&quot;</span><span class="br0">&#93;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="figure" id="figure-4-6">
+    <img src="images/cap04/teclado-ru-normal.png" alt="Detalle del teclado para el idioma ruso y la variante &quot;normal&quot;" />
+
+    <p class="caption"><strong>Figura 4.6</strong> Detalle del teclado para el idioma ruso y la variante &quot;normal&quot;</p>
+</div>
+
+
+<div class="figure" id="figure-4-7">
+    <img src="images/cap04/teclado-ru-normal.png" alt="Detalle del teclado para el idioma griego y la variante &quot;normal&quot;" />
+
+    <p class="caption"><strong>Figura 4.7</strong> Detalle del teclado para el idioma griego y la variante &quot;normal&quot;</p>
+</div>
+
+
+<p>Si se utiliza <code>net.CargadorContenidoscompleto</code>, puede ser útil emplear el último parámetro que indica si la petición al servidor es síncrona o asíncrona. En este caso, debería ser síncrona, ya que el resto del programa no puede seguir trabajando hasta que se haya cargado completamente el teclado solicitado.</p>
+
+<ol>
+<li>Por último, se va a añadir la característica de autoguardado. Para ello, cada 30 segundos se envía el contenido del usuario al servidor para almacenarlo de forma segura. El servidor devuelve el texto que ha guardado y se muestra en la página para comprar el texto del usuario y el texto guardado. El script del servidor se llama <code>tecladoVirtual.php</code>, la acción es <code>guardar</code> y el parámetro <code>contenido</code> es el que indica el contenido creado por el usuario.</li>
+<li>Se puede añadir una pequeña mejora visual al teclado virtual: existe una clase de CSS llamada <code>pulsada</code> y que se puede utilizar para resaltar de forma clara la tecla que se ha pulsado. Utilizar esa clase para iluminar durante un breve espacio de tiempo la tecla pulsada en cada momento.</li>
+<li>Otras posibles mejoras: funcionamiento del teclado numérico, funcionamiento de los acentos, manejo de los LED del teclado, etc.</li>
+</ol>
+
+<p><a href="snippets/cap04/ej08.zip">Descargar archivo ZIP con la página HTML, las imágenes y el script tecladoVirtual.php</a></p>
+
+<h3 id="ej09">4.2.2 Ejercicio 9</h3>
+
+<p>A partir del formulario proporcionado, añadir la opción de autocompletar el nombre del municipio que está escribiendo el usuario. El esquema del funcionamiento propuesto es el siguiente:</p>
+
+<ol>
+<li>Al cargar la página, se debe crear un elemento HTML de tipo <code>&lt;div&gt;</code> en el que se van a mostrar las sugerencias enviadas por el servidor. Además, se debe establecer el evento de teclado adecuado en el cuadro de texto y también se debe posicionar el cursor en ese cuadro de texto para poder escribir en el directamente.</li>
+<li>Cuando se pulse una tecla sobre el cuadro de texto, se debe ejecutar la función <code>autocompleta()</code>. Desde esta función, se debe llamar a la función responsable de obtener la lista de municipios del servidor. El script se llama <code>autocompletaMunicipios.php</code>, el parámetro que se envía mediante <code>POST</code>, se llama <code>municipio</code> y debe contener la cadena de texto escrita por el usuario.</li>
+</ol>
+
+<p>El servidor responde con un array en formato JSON con la lista de municipios cuyo nombre comienza por el texto enviado. Ejemplo de respuesta del servidor:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="br0">&#91;</span> <span class="st0">&quot;Alegría-Dulantzi&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Amurrio&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Añana&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Aramaio&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Armiñón&quot;</span><span class="sy0">,</span> ... <span class="br0">&#93;</span></pre>
+</div>
+
+<ol>
+<li>Una vez obtenido el array de sugerencias, se debe mostrar en forma de lista de elementos (etiqueta <code>&lt;ul&gt;</code> de HTML). Para transformar el array en la lista <code>&lt;ul&gt;</code>, modificar el <code>prototype</code> del objeto <code>Array</code> y añadir una función específica que realice la transformación.</li>
+<li>Modificar la función <code>autocompleta()</code> para tener en consideración 3 teclas especiales: las flechas superior e inferior y la tecla <code>Enter</code>. Cuando se utilizan las flechas del teclado hacia arriba y hacia abajo, se van seleccionando los elementos de la lista. Cuando se pulsa el <code>Enter</code>, se selecciona el elemento copiando su valor al cuadro de texto y ocultando la lista de sugerencias.</li>
+<li>Para mejorar el rendimiento de la aplicación, añadir una cache para las sugerencias. Cada vez que se recibe una lista de sugerencias del servidor, se almacena en un objeto que relaciona el texto que ha introducido el usuario y la respuesta del servidor. Ejemplo:</li>
+</ol>
+
+<div class="code javascript">
+<pre class="javascript"><span class="br0">&#123;</span>
+    <span class="st0">&quot;a&quot;</span><span class="sy0">:</span>
+        <span class="br0">&#91;</span><span class="st0">&quot;Ababuj&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Abades&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Abadía&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Abadín&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Abadiño&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Abáigar&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Abajas&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Abaltzisketa&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Abánades&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Abanilla&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Abanto y Ciérvana-Abanto Zierbena&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Abanto&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Abarán&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Abarca de Campos&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Abárzuza&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Abaurregaina/Abaurrea Alta&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Abaurrepea/Abaurrea Baja&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Abegondo&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Abejar&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Abejuela&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Abella de la Conca&quot;</span><span class="br0">&#93;</span><span class="sy0">,</span>
+    <span class="st0">&quot;al&quot;</span><span class="sy0">:</span>
+        <span class="br0">&#91;</span><span class="st0">&quot;Alacón&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Aladrén&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Alaejos&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Alagón&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Alaior&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Alájar&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Alajeró&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Alameda de Gardón (La)&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Alameda de la Sagra&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Alameda del Valle&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Alameda&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Alamedilla (La)&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Alamedilla&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Alamillo&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Alaminos&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Alamús (Els)&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Alange&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Alanís&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Alaquàs&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Alar del Rey&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Alaraz&quot;</span><span class="br0">&#93;</span><span class="sy0">,</span>
+    ...
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>De esta forma, antes de realizar una petición al servidor, se comprueba si ya está disponible una lista de sugerencias para ese texto. Además, cuando se realiza una consulta al servidor, la respuesta se almacena en la cache para su posible reutilización futura.</p>
+
+<ol>
+<li>Mostrar un mensaje adecuado cuando el servidor devuelva un array vacío por no haber sugerencias para el texto introducido por el usuario.</li>
+</ol>
+
+<p><a href="snippets/cap04/ej09.zip">Descargar archivo ZIP con el script autocompletaMunicipios.php</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-4.html#ejercicios">Ejercicios</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.1</span>
+                        <a class="internal" href="capitulo-4.html#capitulo-2">Capítulo 2</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.2</span>
+                        <a class="internal" href="capitulo-4.html#capitulo-3">Capítulo 3</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

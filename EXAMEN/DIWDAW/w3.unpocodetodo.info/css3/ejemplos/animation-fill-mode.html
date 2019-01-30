@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  <meta name="viewport" content="width=device-width" />
+  
+  <meta name="description" content="La propiedad animation-fill-mode CSS3 especifica como debe comportarse el elemento antes y despu&eacute;s de la animaci&oacute;n." />
+  <meta name="keywords" content="ejemplo, animation-fill-mode, none, forwards, backwards, both, CSS3, HTML5, "/>
+  <meta name="author" content="enxaneta.info" />
+  <meta property="og:title" content="Fichas con pesta&ntilde;as (tabs)" /> 
+  <meta property="og:type" content="website" /> 
+  <meta property="og:image" content="http://w3.unpocodetodo.info/images/animation-fill-mode.png" />  
+  <meta property="og:url" content="w3.unpocodetodo.info/ejemplos/texto3d.html" /> 
+  <meta property="og:site_name" content="w3.unpocodetodo.info" /> 
+  <meta property="og:description" content="La propiedad animation-fill-mode CSS3 especifica como debe comportarse el elemento antes y despu&eacute;s de la animaci&oacute;n." /> 
+  
+  <link rel="icon" type="image/png" href="../../images/w3.png" />
+  <!--<link rel="icon" type="image/png" href="http://w3.unpocodetodo.info/img/favicon.png">-->
+  <!-- 57x57 older iPhone and Android devices -->
+  <!--<link rel="apple-touch-icon-precomposed" href="http://w3.unpocodetodo.infoimages/apple-touch-icon-precomposed.png">-->
+  <!-- iPad 1 and 2 & iPad mini -->
+  <link rel="apple-touch-icon" sizes="72x72" href="../../images/apple-touch-icon-72x72.png">
+  <!-- iPhone 4, 4S, 5 and iPod Touch -->
+  <link rel="apple-touch-icon" sizes="114x114" href="../../images/apple-touch-icon-114x114.png">
+  <!-- iPad 3rd gen -->
+  <link rel="apple-touch-icon" sizes="144x144" href="../../images/apple-touch-icon-144x144.png"> 
+  
+
+<title>animation-fill-mode</title>
+<style>
+*{ margin:0; padding:0; box-sizing:border-box;}
+p{ margin-bottom:30px;}
+.wrapper{ width:600px; min-height:500px; margin:0 auto; border:1px solid #d9d9d9; padding:20px;}
+
+.animFillMode{ 
+	width:125px; 
+	height:125px; 
+	background-color:#00bb00; 
+	border-radius:50%; 
+	border:60px dotted red;
+	margin-bottom:30px; 
+	margin-left:40px;}
+
+
+.animFillMode.none{
+-webkit-animation: fillMode  5s linear 1s 1 normal none;
+animation:  fillMode  5s linear 1s 1 normal none;
+}
+.animFillMode.forwards{
+-webkit-animation: fillMode  5s linear 1s 1 normal forwards;
+animation:  fillMode  5s linear 1s 1 normal forwards;
+}
+
+.animFillMode.backwards{
+-webkit-animation: fillMode  0s linear 1s 1 normal backwards;
+animation:  fillMode  5s linear 1s 1 normal backwards;
+}
+.animFillMode.both{
+-webkit-animation: fillMode  5s linear 1s 1 normal both;
+animation:  fillMode  5s linear 1s 1 normal both;
+}
+
+@-webkit-keyframes fillMode {
+  0% {-webkit-transform:translateX(100px) rotate(100deg);}
+  10% {-webkit-transform:translateX(-80px) rotate(-80deg);}
+  90% {-webkit-transform:translateX(360px) rotate(360deg);}
+  100% {-webkit-transform:translateX(360px) rotate(360deg);}
+}
+@keyframes fillMode {
+  0% {transform:translateX(100px) rotate(100deg);}
+  10% {transform:translateX(-80px) rotate(-80deg);}
+  90% {transform:translateX(360px) rotate(360deg);}
+  100% {transform:translateX(360px) rotate(360deg);}
+}
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+<p>animation-fill-mode: none | forwards | backwards | both;</p>
+<p><input class="restablecer" type="button" value="restablecer" /></p>
+<p>animation-fill-mode: none</p>
+<div class="animFillMode" id="none"></div>
+<p>animation-fill-mode: forwards</p>
+<div class="animFillMode" id="forwards"></div>
+<p>animation-fill-mode: backwards</p>
+<div class="animFillMode" id="backwards"></div>
+<p>animation-fill-mode: both</p>
+<div class="animFillMode" id="both"></div>
+<p><input class="restablecer" type="button" value="restablecer" /></p>
+</div>
+
+
+<script>
+
+var fillClassName;
+var animFillMode = document.querySelectorAll('.animFillMode'); 
+for( var i = 0; i<animFillMode.length; i++){
+	animFillMode[i].addEventListener('click', function(e){
+		fillClassName = this.id; 
+		if(this.classList.contains(fillClassName)){this.classList.remove(fillClassName);
+		e.preventDefault();
+		}else{
+        this.classList.add(fillClassName);
+		}
+  }); 
+}
+ 
+var restablecer = document.querySelectorAll('.restablecer');
+for( var r=0; r<restablecer.length; r++){
+restablecer[r].addEventListener('click', function(){
+for( var j = 0; j<animFillMode.length; j++){
+	fillClassName = animFillMode[j].id;
+	if(animFillMode[j].classList.contains(fillClassName)){animFillMode[j].classList.remove(fillClassName);}
+	}	
+});
+}
+</script>
+</body>
+</html>

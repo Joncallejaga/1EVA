@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="08/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Arrays | JavaScript</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">JavaScript</a></h1>
+        <p class="span3">
+                        <a href="capitulo-9.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-11.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="arrays"><span>Capítulo 10</span> Arrays</h1>
+        <p>Un array es una asignación lineal de memoria donde los elementos son accedidos a través de índices numéricos, siendo además una estructura de datos muy rápida. Desafortunadamente, JavaScript no utiliza este tipo de arrays. En su lugar, JavaScript ofrece un objeto que dispone de características que le hacen parecer un array. Internamente, convierte los índices del array en <code>strings</code> que son utilizados como nombres de propiedades, haciéndolo sensiblemente más lento que un array.</p>
+
+<h2 id="representacion-de-un-array">10.1 Representación de un array</h2>
+
+<p>JavaScript ofrecen una manera muy cómoda para crear y representar arrays. Una representación de un array consiste en una pareja de corchetes (<code>[</code> <code>]</code>) que contienen cero o más expresiones. El primer valor recibe la propiedad de nombre '0', la segunda la propiedad de nombre '1', y así sucesivamente. Se define de la siguiente manera:</p>
+
+<p><img src="images/diagrams/array-literal.png" alt="Diagrama de representación de array"></p>
+
+<p>Algunos ejemplos de declaración de arrays:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> empty <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> numbers <span class="sy0">=</span> <span class="br0">&#91;</span>
+    <span class="st0">'zero'</span><span class="sy0">,</span> <span class="st0">'one'</span><span class="sy0">,</span> <span class="st0">'two'</span><span class="sy0">,</span> <span class="st0">'three'</span><span class="sy0">,</span> <span class="st0">'four'</span><span class="sy0">,</span>
+    <span class="st0">'five'</span><span class="sy0">,</span> <span class="st0">'six'</span><span class="sy0">,</span> <span class="st0">'seven'</span><span class="sy0">,</span> <span class="st0">'eight'</span><span class="sy0">,</span> <span class="st0">'nine'</span>
+<span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+empty<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>        <span class="co1">// undefined</span>
+numbers<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>      <span class="co1">// 'one'</span>
+&nbsp;
+empty.<span class="me1">length</span>    <span class="co1">// 0</span>
+numbers.<span class="me1">length</span>  <span class="co1">// 10</span></pre>
+</div>
+
+<p>Si representasemos el array como un objeto</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> numbers_object <span class="sy0">=</span> <span class="br0">&#123;</span>
+    <span class="st0">'0'</span><span class="sy0">:</span> <span class="st0">'zero'</span><span class="sy0">,</span> <span class="st0">'1'</span><span class="sy0">:</span> <span class="st0">'one'</span><span class="sy0">,</span>    <span class="st0">'2'</span><span class="sy0">:</span> <span class="st0">'two'</span><span class="sy0">,</span>
+    <span class="st0">'3'</span><span class="sy0">:</span> <span class="st0">'three'</span><span class="sy0">,</span> <span class="st0">'4'</span><span class="sy0">:</span> <span class="st0">'four'</span><span class="sy0">,</span> <span class="st0">'5'</span><span class="sy0">:</span> <span class="st0">'five'</span><span class="sy0">,</span>
+    <span class="st0">'6'</span><span class="sy0">:</span> <span class="st0">'six'</span><span class="sy0">,</span> <span class="st0">'7'</span><span class="sy0">:</span> <span class="st0">'seven'</span><span class="sy0">,</span> <span class="st0">'8'</span><span class="sy0">:</span> <span class="st0">'eight'</span><span class="sy0">,</span>
+    <span class="st0">'9'</span><span class="sy0">:</span> <span class="st0">'nine'</span>
+<span class="br0">&#93;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>se produce un efecto similar. Ambas representaciones contienen 10 propiedades, y ests propiedades tienen exactamente los mismos nombres y valores. La diferencia radica en que <code>numbers</code> hereda de <code>Array.prototype</code>, mientras que <code>numbers_object</code> lo hace de <code>Object.prototype</code>, por lo que <code>numbers</code> hereda una serie de métodos que <em>convierten</em> a <code>numbers</code> en un array.</p>
+
+<p>En la mayoría de los lenguajes de programación, se requiere que todos los elementos de un array sean del mismo tipo, pero en JavaScript eso no ocurre. Un array puede contener una mezcla valores:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> misc <span class="sy0">=</span> <span class="br0">&#91;</span>
+    <span class="st0">'string'</span><span class="sy0">,</span> <span class="nu0">98.6</span><span class="sy0">,</span> <span class="kw2">true</span><span class="sy0">,</span> <span class="kw2">false</span><span class="sy0">,</span> <span class="kw2">null</span><span class="sy0">,</span> <span class="kw2">undefined</span><span class="sy0">,</span>
+    <span class="br0">&#91;</span><span class="st0">'nested'</span><span class="sy0">,</span> <span class="st0">'array'</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="br0">&#123;</span>object<span class="sy0">:</span> <span class="kw2">true</span><span class="br0">&#125;</span><span class="sy0">,</span> <span class="kw2">NaN</span><span class="sy0">,</span>
+    <span class="kw2">Infinity</span>
+<span class="br0">&#93;</span><span class="sy0">;</span>
+misc.<span class="me1">length</span> <span class="co1">// 10</span></pre>
+</div>
+
+<h2 id="propiedad-length">10.2 Propiedad length</h2>
+
+<p>Todo array tiene una propiedad <code>length</code>. A diferencia de otros lenguajes, la longitud del array no es fija, y podemos añadir elementos de manera dinámica. Esto hace que la propiedad <code>length</code> varíe, y tenga en cuenta los nuevos elementos. La propiedad <code>length</code> hace referencia al mayor índice presente en el array, más uno. Esto es:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myArray <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">;</span>
+myArray.<span class="me1">length</span>              <span class="co1">// 0</span>
+&nbsp;
+myArray<span class="br0">&#91;</span><span class="nu0">1000000</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+myArray.<span class="me1">length</span>              <span class="co1">// 1000001</span>
+&nbsp;
+<span class="co1">// myArray contiene un elemento!</span></pre>
+</div>
+
+<p>La propiedad <code>length</code> puede indicarse de manera explícita. Aumentando su valor, no vamos a reservar más espacio para el array, pero si disminuimos su valor, haciendo que sea menor que el número de elementos del array, eliminará los elementos cuyo índice sea mayor que el nuevo <code>length</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript">numbers.<span class="me1">length</span> <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span> <span class="co1">// numbers es ['zero', 'one', 'two']</span></pre>
+</div>
+
+<h2 id="borrado-2">10.3 Borrado</h2>
+
+<p>Como los arrays de JavaScript son realmente objetos, podemos utilizar el operador <code>delete</code> para eliminar elementos de un array:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">delete</span> numbers<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="sy0">;</span>
+<span class="co1">// numbers es ['zero', 'one', undefined, 'shi', 'go']</span></pre>
+</div>
+
+<p>Desafortunadamente, esto deja un espacio en el array. Esto es porque los elementos a la derecha del elemento eliminado conservan sus nombres. Para este caso, JavaScript incorpora una función <code>splice</code>, que permite eliminar y reemplazar elementos de un array. El primer argumento indica el por qué elemento comenzar a reemplazar, y el segundo argumento el número de elementos a eliminar.</p>
+
+<div class="code javascript">
+<pre class="javascript">numbers.<span class="me1">splice</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">// numbers es ['zero', 'one', 'shi', 'go']</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 12</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej12">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-10.html#arrays">Arrays</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.1</span>
+                        <a class="internal" href="capitulo-10.html#representacion-de-un-array">Representación de un array</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.2</span>
+                        <a class="internal" href="capitulo-10.html#propiedad-length">Propiedad length</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.3</span>
+                        <a class="internal" href="capitulo-10.html#borrado-2">Borrado</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

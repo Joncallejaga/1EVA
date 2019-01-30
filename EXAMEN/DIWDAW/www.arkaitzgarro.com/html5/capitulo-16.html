@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="28/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>History | HTML5</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">HTML5</a></h1>
+        <p class="span3">
+                        <a href="capitulo-15.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-17.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="history"><span>Capítulo 16</span> History</h1>
+        <p>El <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/history.html">API <code>history</code></a> de HTML es la manera estándar de manipular el historial de navegación a través de JavaScript. Partes de esta API ya se encontraban disponibles en versiones anteriores de HTML. Ahora, HTML5 incluye una nueva manera de añadir entradas al historial de navegación, modificando la URL pero sin actualizar la página actual, y eventos que se disparan cuando el usuario a eliminado estas entradas, pulsando el botón de volver del navegador. Esto quiere decir que la barra de direcciones sigue funcionando de la misma manera, identificando los recursos de manera única, aún cuando las aplicaciones hacen un uso intensivo de JavaScript sin recargar la página.</p>
+
+<p>Como sabemos, una URL representa un recurso único. Podemos enlazarlo directamente, almacenarlo como favorito, los motores de búsqueda pueden analizar su contenido, podemos copiarlo y enviarlo por email... La URL realmente importa.</p>
+
+<p>Así pues, lo que queremos es que contenidos únicos dispongan de una URL única. Hasta ahora, el comportamiento normal de los navegadores recargar de nuevo la página si modificábamos la URL, realizando una nueva petición y obteniendo de nuevo todos los recursos del servidor. No había manera de decir al navegador que cambiase la URL pero descargase únicamente la mitad de la página. El API <code>history</code> de HTML5 permite precisamente esto. En lugar de solicitar la carga de toda la página, podemos utilizar JavaScript para cargar únicamente los contenidos que deseemos.</p>
+
+<p>La idea es la siguiente. Imaginemos que tenemos una página A y otra página B, que comparten el 90% de su contenido. Cuando un usuario se encuentra en la página A, y quiere navegar a la B, lo normal es realizar una petición completa. En lugar de realizar esta petición, interrumpimos esta navegación y realizamos los siguientes pasos de manera manual:</p>
+
+<ol>
+<li>Cargar el 10% de contenido diferente de la página B, a través de algún método como AJAX.</li>
+<li>Cambiar el contenido, utilizando <code>innerHTML</code> u otros métodos del DOM. Es posible que tengamos que reiniciar los eventos asociados a los elementos.</li>
+<li>Actualizamos la URL del navegador, indicando la dirección de la página B, utilizando el API <code>history</code> de HTML5.</li>
+</ol>
+
+<p>Tras realizar estos pasos, disponemos de un DOM exacto al de la página B, como si hubiésemos navegado hasta ella, pero sin realizar una petición completa.</p>
+
+<h2 id="api">16.1 API</h2>
+
+<p>El API de HTML4 ya incluía algunos métodos básicos para movernos a través del historial de navegación, como eran <code>history.back();</code>, <code>history.forward()</code> y <code>history.go(n)</code>. Sin embargo, estos métodos no permitían modificar la pila del historial, por lo que no eran de gran utilidad. HTML5 ha introducido dos nuevos métodos que nos permiten añadir y modificar las entradas del historial, concretamente <code>history.pushState()</code> y <code>history.replaceState()</code>. Además de estos métodos, se ha añadido también un evento <code>window.onpopstate</code>, que es lanzado cada vez que alguna de las entradas de <code>history</code> cambia.</p>
+
+<h3 id="metodo-pushstate">16.1.1 Método <code>pushState()</code></h3>
+
+<p>Supongamos que estamos visitando <code>http://www.arkaitzgarro.com/html5/index.html</code> y a través de un <em>script</em> realizamos la siguiente operación:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> stateObj <span class="sy0">=</span> <span class="br0">&#123;</span> foo<span class="sy0">:</span> <span class="st0">&quot;bar&quot;</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+history.<span class="me1">pushState</span><span class="br0">&#40;</span>stateObj<span class="sy0">,</span> <span class="st0">&quot;Demos&quot;</span><span class="sy0">,</span> <span class="st0">&quot;demos.html&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Esto va a provocar que en la barra de direcciones se muestre <code>http://www.arkaitzgarro.com/html5/demos.html</code>, pero el navegador no va a cargar <code>demos.html</code> ni va a comprobar su existencia. En este punto, si navegamos a otra página como <code>http://www.google.es/</code>, y después presionamos el botón de volver, en la URL se mostrará <code>http://www.arkaitzgarro.com/html5/demos.html</code> y la página lanzará el evento <code>popstate</code>, donde el <em>estado</em> contiene una copia de <code>stateObj</code>. La página que se mostrará será <code>index.html</code>, pero deberemos realizar un trabajo extra al lanzarse el evento para mostrar el contenido correcto.</p>
+
+<p>El método <code>pushState()</code> toma tres parámetros: un objeto de <em>estado</em>, un título y una URL:</p>
+
+<ul>
+<li>El objeto de <strong>estado</strong>: es un objeto de JavaScript asociado con la nueva entrada del historial creada con <code>pushState()</code>. Cada vez que el usuario navega al estado creado, el evento <code>popstate</code> es disparado, y la propiedad <code>state</code> del evento contiene una copia de este objeto. Este objeto puede representar cualquier que se pueda serializar. Como este objeto se almacena en el disco, es posible recuperarlo aunque el navegador se cierre. Los navegadores imponen un límite de tamaño a la hora de almacenar estados (en el caso de Firefox <code>640KB</code>). Si se necesita más espacio, es recomendable utilizar <code>sessionStorage</code> o <code>localStorage</code>.</li>
+<li>El <strong>título</strong>: representa el nuevo título de la página a la que <em>navegamos</em>.</li>
+<li>La nueva <strong>URL</strong>: corresponde con la nueva URL que se añade al historial de navegación. Esta URL puede ser absoluta o relativa, la única restricción es que corresponda al dominio del documento actual. Si no se especifica este parámetro, la URL corresponde con el documento actual.</li>
+</ul>
+
+<p>En esencia, ejecutar el método <code>pushState()</code> es similar a definir <code>window.location = "#foo"</code>, ya que en ambos casos se crea y activa una nueva entrada en el historial asociada con el documento actual. Pero <code>pushState()</code> ofrece las siguientes ventajas:</p>
+
+<ul>
+<li>La nueva URL puede ser cualquier URL dentro del dominio actual. En cambio, <code>window.location = "#foo"</code> se mantiene siempre en el documento actual.</li>
+<li>No es necesario cambiar la URL actual para añadir una nueva entrada y almacenar datos asociados.</li>
+<li>Podemos asociar datos a una nueva entrada en el historial. Con el enfoque basado en <code>hash</code> (#), los datos tenemos que añadirlos a la URL.</li>
+</ul>
+
+<h3 id="metodo-replacestate">16.1.2 Método <code>replaceState()</code></h3>
+
+<p>El método <code>history.replaceState()</code> funciona de manera similar a <code>history.pushState()</code>, a excepción de que <code>replaceState()</code> modifica la entrada actual del historial, en lugar de añadir una nueva. Éste método es útil cuando queremos actualizar el objeto de estado de la entrada actual en respuesta a una acción del usuario.</p>
+
+<h3 id="evento-popstate">16.1.3 Evento <code>popstate</code></h3>
+
+<p>El evento <code>popstate</code> es lanzado cada vez que la entrada actual del historial cambia por otra entrada existente en el mismo documento. Si la entrada del historial que está siendo activada fue creada a través de <code>history.pushState()</code> o se modificó con <code>history.replaceState()</code>, el evento <code>popstate</code> recibe como parámetro una copia del estado de la entrada del historial.</p>
+
+<p>Éste evento no se lanza cuando se llama a <code>history.pushState()</code> o <code>history.replaceState()</code>. Únicamente se dispara realizando una acción en el navegador como pulsando el botón <em>atrás</em> o ejecutando <code>history.back()</code> en JavaScript. Un ejemplo de este comportamiento:</p>
+
+<div class="code javascript">
+<pre class="javascript">window.<span class="me1">onpopstate</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>event<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    alert<span class="br0">&#40;</span>document.<span class="me1">location</span> <span class="sy0">+</span> <span class="st0">&quot;, state: &quot;</span> <span class="sy0">+</span> JSON.<span class="me1">stringify</span><span class="br0">&#40;</span>event.<span class="me1">state</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+history.<span class="me1">pushState</span><span class="br0">&#40;</span><span class="br0">&#123;</span>page<span class="sy0">:</span> <span class="nu0">1</span><span class="br0">&#125;</span><span class="sy0">,</span> <span class="st0">&quot;title 1&quot;</span><span class="sy0">,</span> <span class="st0">&quot;?page=1&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+history.<span class="me1">pushState</span><span class="br0">&#40;</span><span class="br0">&#123;</span>page<span class="sy0">:</span> <span class="nu0">2</span><span class="br0">&#125;</span><span class="sy0">,</span> <span class="st0">&quot;title 2&quot;</span><span class="sy0">,</span> <span class="st0">&quot;?page=2&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+history.<span class="me1">replaceState</span><span class="br0">&#40;</span><span class="br0">&#123;</span>page<span class="sy0">:</span> <span class="nu0">3</span><span class="br0">&#125;</span><span class="sy0">,</span> <span class="st0">&quot;title 3&quot;</span><span class="sy0">,</span> <span class="st0">&quot;?page=3&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// alerts &quot;http://example.com/index.html?page=1, state: {&quot;page&quot;:1}&quot;</span>
+history.<span class="me1">back</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">// alerts &quot;http://example.com/index.html, state: null</span>
+history.<span class="me1">back</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">// alerts &quot;http://example.com/index.html?page=3, state: {&quot;page&quot;:3}</span>
+history.<span class="me1">go</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Cuando la página se carga, por ejemplo al reiniciar el navegador, tango Chrome como Safari lanzan el evento <code>popstate</code>, pero no es el caso de Firefox. Sin embargo, en este caso, es posible acceder a los datos almacenados en <code>pushState</code> desde la propiedad <code>state</code> del objeto <code>history</code>.</p>
+
+<div class="code javascript">
+<pre class="javascript">window.<span class="me1">onload</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> currentState <span class="sy0">=</span> history.<span class="me1">state</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-16.html#history">History</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>16.1</span>
+                        <a class="internal" href="capitulo-16.html#api">API</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

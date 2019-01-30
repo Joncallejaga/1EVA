@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="15/04/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Tipos primitivos de dato | Java</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">Java</a></h1>
+        <p class="span3">
+                        <a href="capitulo-2.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-4.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="tipos-primitivos-de-dato"><span>Capítulo 3</span> Tipos primitivos de dato</h1>
+        <p>Todo lenguaje de programación consta de elementos específicos que permiten realizar las operaciones básicas de la programación: tipos de datos, operadores e instrucciones o sentencias. En este apartado se introducen los distintos tipos de dato que pueden emplearse en la programación con Java. En concreto, se presentan los tipos primitivos en Java, así como las constantes y las variables. En los capítulos sucesivos se mostrarán el resto de elementos básicos de programación, incluyendo otras estructuras de datos más complejas.</p>
+
+<h2 id="categorias-de-tipos-de-datos">3.1 Categorías de tipos de datos</h2>
+
+<p>Los tipos de datos utilizados en Java se pueden clasificar según diferentes categorías:</p>
+
+<p>De acuerdo con el tipo de información que representan. Esta correspondencia determina los valores que un dato puede tomar y las operaciones que se pueden realizar con él. Según este punto de vista, pueden clasificarse en:</p>
+
+<ul>
+<li>Datos de tipo <strong>primitivo</strong>: representan un único dato simple que puede ser de tipo <code>char, byte, short, int, long, float, double, boolean</code>. Por ejemplo: <code>‘a’, 12345, 750.68, False</code>,... Cada tipo de dato presenta un conjunto de valores o constantes literales.</li>
+<li>Variables <em>referencia</em> (variables <em>arrays</em>, de una clase/instancias, interfaces . ..). Se implementan mediante un nombre o referencia (puntero) que contiene la dirección en memoria de un valor o conjunto de valores (objeto creado con <code>new</code>).</li>
+</ul>
+
+<p>Según cambie su valor o no durante la ejecución del programa. En este caso, se tienen:</p>
+
+<ul>
+<li><strong>Variables</strong>: sirven para almacenar datos durante la ejecución del programa; el valor asociado puede cambiar varias veces durante la ejecución del programa.</li>
+<li><strong>Constantes o variables finales</strong>: también sirven para almacenar datos pero una vez asignado el valor, éste no puede modificarse posteriormente.</li>
+</ul>
+
+<p>Según su papel en el programa. Pueden ser:</p>
+
+<ul>
+<li>Variables <em>miembro</em> de una clase. Se definen dentro de una clase, fuera de los métodos. Pueden ser de tipos primitivos o referencias y también variables o constantes.</li>
+<li>Variables <em>locales</em>. Se definen dentro de un método o, en general, dentro de cualquier bloque de sentencias entre llaves <code>{}</code>. La variable desaparece una vez finalizada la ejecución del método o del bloque de sentencias. También pueden ser de tipos primitivos o referencias.</li>
+</ul>
+
+<p>A continuación se describen cada uno de estos tipos de dato.</p>
+
+<h2 id="tipos-de-dato-primitivos-en-java">3.2 Tipos de dato primitivos en Java</h2>
+
+<p>A todo dato (constante, variable o expresión) le corresponde un <strong>tipo</strong> específico en Java. Como se ha indicado anteriormente un tipo de dato determina los valores que pueden asignarse a un dato, el formato de representación correspondiente y las operaciones que pueden realizarse con dicho dato.</p>
+
+<p>En Java casi todo es un objeto. Existen algunas excepciones como, por ejemplo, los tipos primitivos, tales como <code>int, char</code>, etc., que no se consideran objetos y se tratan de forma especial. Java tiene un conjunto de tipos <em>primitivos</em> para representar datos enteros (cuatro tipos diferentes), para datos numéricos reales en coma flotante (dos tipos diferentes), para caracteres y para datos lógicos o booleanos. Cada uno de ellos tiene <strong>idéntico</strong> tamaño y comportamiento en todas las versiones de Java y para cualquier tipo de ordenador. Esto implica que no hay directivas de compilación condicionales y asegura la <strong>portabilidad</strong> de los programas a diferencia de lo que ocurre, por ejemplo, con el lenguaje de programación C.</p>
+
+<ul>
+<li><strong>Nota de interés</strong>. En otros lenguajes de programación el formato y tamaño de los tipos de dato primitivos puede depender de la plataforma o sistema operativo en la que se ejecute el programa. Sin embargo Java especifica el tamaño y formato de todos los tipos de dato primitivos para que el programador no tenga que preocuparse sobre las dependencias del sistema.</li>
+</ul>
+
+<p>Por otro lado, a partir de estos tipos primitivos de dato pueden construirse otros tipos de datos compuestos, <em>arrays</em>, clases e interfaces. En la siguiente tabla se muestran los tipos de dato primitivos de Java con el intervalo de representación de valores que puede tomar y el tamaño en memoria correspondiente.</p>
+
+<div class="figure" id="figure-3-1">
+    <img src="images/cap03/tipos-de-dato.png" alt="Tipos de dato primitivos de Java" />
+
+    <p class="caption"><strong>Figura 3.1</strong> Tipos de dato primitivos de Java</p>
+</div>
+
+
+<p>Los tipos de datos numéricos en Java no pueden representar cualquier número entero o real. Por ejemplo, el tipo de dato entero <code>int</code> tiene un intervalo de representación entre -2147483648 y 2147483647. Si se desea representar el valor correspondiente a la población mundial del planeta (más de 6 mil millones de habitantes) no puede hacerse con dato de tipo <code>int</code>.</p>
+
+<p>Los datos de tipo <code>double</code> no tienen tanta limitación. Pueden alcanzar un valor del orden de 10308, pero tienen otro problema: la precisión. En concreto, el tipo <code>double</code> tiene una precisión de 15 dígitos significativos cómo se detallará más adelante.</p>
+
+<h2 id="literales-o-constantes-literales-de-tipos-de-dato-primitivos">3.3 Literales o constantes literales de tipos de dato primitivos</h2>
+
+<p>Un <strong>literal</strong>, valor literal ó constante literal es una constante cuyo nombre o identificador es la representación escrita de su valor y tiene ya ese significado en el código fuente de un programa Java. Seguidamente se muestran algunos ejemplos de <strong>valores o constantes literales</strong> pertenecientes a los tipos primitivos que pueden utilizarse directamente en un programa fuente de Java.</p>
+
+<p>Las constantes literales <strong>booleanas</strong> son <code>false</code> y <code>true</code>.</p>
+
+<p>Las constantes literales de tipo carácter aparecen entre comillas simples. Como ya se ha comentado anteriormente, los caracteres, cadenas e identificadores en Java se componen de caracteres pertenecientes al conjunto de caracteres Unicode (<code>http://www.unicode.org</code>). Un dato de tipo caracter representa un único carácter. El formato de Unicode utiliza 16 bits (2 bytes) para poder codificar un total de 65536 caracteres diferentes que incluyen caracteres y símbolos procedentes de distintas lenguas del mundo. En este conjunto de caracteres encontramos letras mayúsculas (‘A’, ‘B’, ‘C’,...), letras minúsculas (‘a’, ‘b’, ‘c’,...), signos de puntuación (‘,’ ‘;’ ‘:’ ...), dígitos (‘0’, ‘1’, ‘2’,...), símbolos especiales (‘#’, ‘&amp;’, ‘%’,...) y caracteres de control (tabulador, retorno de carro,...).</p>
+
+<p>Hay algunos caracteres que pueden causar algún problema en el código fuente de un programa Java debido a que se utilizan para tareas específicas dentro del lenguaje. Por ejemplo, como se verá más adelante, el carácter correspondiente a las comillas dobles (") se emplea para delimitar una cadena de caracteres. Para solucionar este inconveniente, existen diferentes formas de indicar una constante literal de tipo carácter. Por ejemplo:</p>
+
+<div class="code java">
+<pre class="java">‘t’ <span class="co1">// Representa la letra minúscula, con comillas simples </span>
+\t <span class="co1">// Con la barra de pendiente negativa: secuencia de escape</span>
+\u0234 <span class="co1">// Con la barra y la letra u: secuencia Unicode</span></pre>
+</div>
+
+<p>Una <em>secuencia de escape</em> es una serie de caracteres que comienza por el carácter \ seguido de una letra, un conjunto de dígitos o la letra u seguida de un conjunto de dígitos y que representa a un carácter. En este último caso, la secuencia de caracteres o secuencia de escape <code>\uxxx</code> puede emplearse en cualquier lugar en un programa de Java para representar un carácter Unicode, siendo <code>xxxx</code> una secuencia de cuatro dígitos hexadecimales. En la siguiente tabla se muestran algunos ejemplos de secuencias de escape.</p>
+
+<div class="figure" id="figure-3-2">
+    <img src="images/cap03/caracteres.png" alt="Caracteres representados por secuencias de escape" />
+
+    <p class="caption"><strong>Figura 3.2</strong> Caracteres representados por secuencias de escape</p>
+</div>
+
+
+<p>Aunque en realidad una cadena no es un tipo primitivo de Java pueden construirse constantes literales de <strong>cadenas</strong> de caracteres. Las constantes literales de cadenas de texto se indican entre comillas <strong>dobles</strong>. Por ejemplo:</p>
+
+<div class="code java">
+<pre class="java"><span class="st0">&quot;Hola, mundo&quot;</span> <span class="co1">// Con comillas dobles: indica una cadena</span></pre>
+</div>
+
+<p>Al construir una cadena de caracteres se puede incluir cualquier carácter Unicode excepto un carácter de nueva línea. Si se desea incluir un salto de línea en una cadena de caracteres debe utilizarse la secuencia de escape <code>\n</code>.</p>
+
+<p>Las constantes <strong>enteras</strong> son secuencias de dígitos octales, decimales o hexadecimales en las que no se emplea el punto o coma decimal. Si comienza por un 0 indica un formato <strong>octal</strong>. Si comienza por un <code>0x</code> ó <code>0X</code> indica un formato <strong>hexadecimal</strong>. El resto se considera en formato decimal. Las constantes de tipo <code>long</code> se indican con una <code>l</code> o una <code>L</code> al final. Normalmente se emplea la L para no confundir con el 1 (uno). Si no se indica ninguna de estas terminaciones se supone un tipo <code>int</code>. A continuación se muestran algunos ejemplos de constantes enteras:</p>
+
+<div class="code java">
+<pre class="java"><span class="nu0">34</span> <span class="co1">// de tipo int, solo digitos </span>
+<span class="sy0">-</span><span class="nu0">78</span> <span class="co1">// digitos sin punto decimal </span>
+034 <span class="co1">// en octal (equivale al 28 decimal) </span>
+0x1C <span class="co1">// en hexadecimal (equivale al 28 decimal)</span>
+875L <span class="co1">// de tipo long</span></pre>
+</div>
+
+<p>Las constantes <strong>reales</strong> o en coma flotante se expresan con coma decimal y opcionalmente seguidos de un exponente. El valor puede finalizarse con una f o una F para indica el formato <code>float</code> (por defecto es <code>double</code>). Por ejemplo:</p>
+
+<div class="code java">
+<pre class="java"><span class="nu0">15.2</span> <span class="co1">// de tipo double</span>
+15.2D <span class="co1">// el mismo valor</span>
+1.52e1 <span class="co1">// el mismo valor</span>
+0.152E2 <span class="co1">// el mismo valor </span>
+.8e10 <span class="co1">// de tipo double </span>
+15.8f <span class="co1">// de tipo float </span>
+15.8F <span class="co1">// tambien de tipo float</span></pre>
+</div>
+
+<p>Como se verá más adelante cada tipo de dato primitivo tiene una clase correspondiente (<code>Boolean, Character, Byte, Short, Integer, Long, Float y Double</code>), llamadas <em>wrappers</em>, que definen también constantes y métodos útiles.</p>
+
+<h2 id="formato-de-representacion-de-los-datos-numericos-reales">3.4 Formato de representación de los datos numéricos reales</h2>
+
+<p>Los números reales se representan en el ordenador según un formato de coma flotante. Los bits empleados para la representación de un valor real se dividen en dos componentes: <strong>mantisa y exponente</strong>. En el sistema binario, la expresión matemática que relaciona la mantisa, el exponente y el valor del número real representado es:</p>
+
+<p>Valor = mantisa · 2<sup>exponente</sup></p>
+
+<p>Un número real de tipo <code>float</code> utiliza 32 bits de los cuales 24 son para la mantisa y 8 para el exponente. La mantisa representa un valor entre –1.0 y 1.0 y el exponente representa la potencia de 2 necesaria para igualar la mantisa al valor que se quiere representar conjuntamente.</p>
+
+<p>Los números reales se caracterizan por dos magnitudes: la <strong>precisión</strong> y el <strong>intervalo de representación</strong>. La precisión es el número de dígitos significativos con los que se puede representar un número y el intervalo de representación es la diferencia entre el mayor y el menor número que se pueden representar.</p>
+
+<p>La precisión de un número real depende del número de bits de su mantisa mientras que el intervalo depende del número de bits de su exponente.</p>
+
+<p>Una mantisa de 24 bits como en el caso del tipo float puede representar aproximadamente +/-2<sup>23</sup>, o sea, cerca de 7 dígitos decimales significativos.</p>
+
+<p>Un exponente de 8 bits puede representar multiplicadores entre 2<sup>-128</sup> y 2<sup>127</sup> de forma que el intervalo de representación es de 10<sup>-38</sup> a 10<sup>38</sup> aproximadamente. En consecuencia los datos de tipo <code>float</code> tienen un intervalo de representación mucho mayor en el mayor de los enteros pero con sólo siete dígitos significativos de precisión.</p>
+
+<p>Cuando un valor con más de siete cifras significativas se almacena en una variable de tipo <code>float</code> sólo se consideran los siete dígitos decimales más significativos. Los dígitos restantes se pierden. Por ejemplo si se almacena el valor 1234,56789 en una variable de tipo <code>float</code>, el valor se redondeará a 1234,568. Esta diferencia entre el valor original y el valor representado en el ordenador se denomina error de redondeo. Por este motivo, es muy importante seleccionar el tipo de dato numérico real con la precisión suficiente con el fin de considerar las cifras necesarias para resolver un problema particular correctamente.</p>
+
+<p>Por su parte, un número real de tipo <code>double</code> utiliza 64 bits en la memoria del ordenador dividida en 53 bits para la mantisa y 11 para el exponente. Una mantisa de 53 bits permite representar entre 15 y 16 dígitos decimales significativos así que la precisión es de 15 dígitos decimales. Un exponente de 11 bits permite representar multiplicadores entre 2<sup>-1024</sup> y 2<sup>1024</sup>, de forma que el intervalo de representación va de 10<sup>-308</sup> y 10<sup>308</sup> aproximadamente.</p>
+
+<p>Una constante real se distingue de un entero porque contiene un punto decimal (no una coma) y/o un exponente. Si la constante es positiva puede escribirse con o sin el signo +. El tipo de una constante real se puede especificar añadiendo la letra <code>F</code> para el tipo <code>float</code> o la letra <code>D</code> para <code>double</code>. Por defecto, una constante real es de tipo <code>double</code>. En este caso debe estar en el intervalo de representación comprendido entre los valores numéricos reales -1.79769313486231570E+308 y 1.79769313486231570E+308.</p>
+
+<p><strong>Nota de interés</strong></p>
+
+<p>En la programación con Java es recomendable emplear el tipo double cuando se trabaja con tipos de dato reales, considerando el funcionamiento de los algoritmos y métodos matemáticos y de los recursos de los sistemas informáticos que se emplean en la actualidad.</p>
+
+<h2 id="declaraciones-de-variables">3.5 Declaraciones de variables</h2>
+
+<p>Una <strong>variable</strong> es un espacio de la memoria correspondiente a un dato cuyo valor puede modificarse durante la ejecución de un programa y que está asociado a un <strong>identificador</strong>. Toda variable ha de declararse antes de ser usada en el código de un programa en Java. En la declaración de una variable debe indicarse explícitamente el identificador de la variable y el <strong>tipo</strong> de dato asociado. El tipo de dato determina el espacio reservado en memoria, los diferentes valores que puede tomar la variable y las operaciones que pueden realizarse con ella. La <strong>declaración</strong> de una variable en el código fuente de un programa de Java puede hacerse de la siguiente forma:</p>
+
+<pre><code>tipo_de_dato identificador_de_la_variable;
+</code></pre>
+
+<p>O bien, la declaración de múltiples variables (con los correspondientes identificadores separados por comas) del mismo tipo:</p>
+
+<div class="code java">
+<pre class="java">tipo_de_dato ident_1, ident_2, . . . , ident_n<span class="sy0">;</span></pre>
+</div>
+
+<p>Por ejemplo:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw4">int</span> n<span class="sy0">;</span>
+<span class="kw4">double</span> x, y<span class="sy0">;</span></pre>
+</div>
+
+<p>En el primer ejemplo se declara <code>n</code> como una variable de tipo <code>int</code>. En el segundo ejemplo se declaran dos variables <code>x</code> e <code>y</code> de tipo <code>double</code>. En Java una variable queda definida únicamente dentro del bloque de sentencias (entre llaves { } ) en el que ha sido declarada. De esta forma queda determinado su ámbito o alcance (<em>scope</em>) en el que puede emplearse.</p>
+
+<p>El identificador elegido para designar una variable debe respetar las normas de construcción de identificadores de Java. Además, por convención:</p>
+
+<ul>
+<li>los identificadores de las variables comienzan con una letra minúscula. Por ejemplo: <code>n, x2, mes, clave, suma, ó nombre</code>.</li>
+<li>si el identificador es una palabra compuesta, las palabras restantes comienzan por una letra mayúscula. Por ejemplo: <code>esDivisible</code>.</li>
+<li>El carácter del subrayado puede emplearse en cualquier lugar del identificador de una variable pero suele emplearse para separar nombres en identificadores de constantes.</li>
+</ul>
+
+<p>La declaración e inicialización de una variable de tipo primitivo puede realizarse de forma simultánea en la misma línea empleando el operador asignación <code>=</code>. Por ejemplo:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw4">int</span> n <span class="sy0">=</span> <span class="nu0">15</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Independientemente de haber inicializado o no, el valor asignado a la variable puede modificarse las veces que se quiera durante la ejecución del programa. También puede realizarse la declaración e inicialización de varias variables del mismo tipo primitivo en la misma línea separándolas por comas. Por ejemplo:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw4">double</span> x <span class="sy0">=</span> <span class="nu0">12.5</span>, y <span class="sy0">=</span> <span class="nu0">25.0</span><span class="sy0">;</span></pre>
+</div>
+
+<p>En el caso de que no se inicialice explícitamente la variable, ésta toma el valor 0 si es numérica, <code>false</code> si es booleana y <code>‘\0’</code> si es de tipo carácter.</p>
+
+<p>Como se verá más adelante, la declaración de un objeto o instancia equivalente se realiza empleando la palabra <code>new</code>. Por ejemplo:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw3">Integer</span> n <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Integer</span><span class="br0">&#40;</span><span class="nu0">15</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Esta declaración y el tipo de dato (clase) <code>Integer</code> se verá más adelante con detenimiento.</p>
+
+<h2 id="declaracion-de-variables-final-o-constantes">3.6 Declaración de variables final o constantes</h2>
+
+<p>Las variables finales en Java son similares a las constantes empleadas en otros lenguajes de programación. Una vez inicializada una variable final su valor no puede ser modificado. La declaración de variables <em>finales</em> o <strong>constantes</strong> se realiza empleando la palabra reservada <code>final</code> antes del identificador del tipo de dato. Por ejemplo:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">final</span> <span class="kw4">int</span> MAXIMO <span class="sy0">=</span> <span class="nu0">15</span><span class="sy0">;</span></pre>
+</div>
+
+<p>La asignación de valor se puede posponer en el código, aunque en ningún caso su valor puede modificarse una vez ha sido inicializada ya que se generaría un error. Ejemplo de inicialización posterior a la declaración de la constante:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">final</span> <span class="kw4">int</span> MAXIMO<span class="sy0">;</span>
+... 
+MAXIMO <span class="sy0">=</span> <span class="nu0">15</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Al igual que ocurre con las variables, el identificador elegido para designar una constante debe respetar las normas de construcción de identificadores de Java. Por convención:</p>
+
+<ul>
+<li>Los identificadores de las constantes se componen de letras mayúsculas. Por ejemplo: <code>MAXIMO</code>.</li>
+<li>El carácter de subrayado (_) es aceptable en cualquier lugar dentro de un identificador, pero se suele emplear sólo para separar palabras dentro de los identificadores de las constantes. Por ejemplo: <code>MAXIMO_VALOR</code>.</li>
+</ul>
+
+<h2 id="conversiones-entre-tipos-de-dato">3.7 Conversiones entre tipos de dato</h2>
+
+<p>El proceso consiste en almacenar el valor de una variable de un determinado tipo primitivo en otra variable de distinto tipo. Suele ser una operación más o menos habitual en un programa y la mayoría de los lenguajes de programación facilitan algún mecanismo para llevarla a cabo. En cualquier caso, no todas las conversiones entre los distintos tipos de dato son posibles. Por ejemplo, en Java no es posible convertir valores booleanos a ningún otro tipo de dato y viceversa. Además, en caso de que la conversión sea posible es importante evitar la pérdida de información en el proceso. En general, existen dos categorías de conversiones:</p>
+
+<ul>
+<li>De ensanchamiento o promoción. Por ejemplo: pasar de un valor entero a un real.</li>
+<li>De estrechamiento o contracción. Por ejemplo: pasar de un valor real a un entero.</li>
+</ul>
+
+<p>Las conversiones de promoción transforman un dato de un tipo a otro con el mismo o mayor espacio en memoria para almacenar información. En estos casos puede haber una cierta pérdida de precisión al convertir un valor entero a real al desechar algunos dígitos significativos. Las conversiones de promoción en Java se resumen en la siguiente tabla.</p>
+
+<div class="figure" id="figure-3-3">
+    <img src="images/cap03/promocion.png" alt="Conversiones de promoción entre tipos de dato en Java" />
+
+    <p class="caption"><strong>Figura 3.3</strong> Conversiones de promoción entre tipos de dato en Java</p>
+</div>
+
+
+<p>Las conversiones de contracción son más comprometidas ya que transforman un dato de un tipo a otro con menor espacio en memoria para almacenar información. En estos casos se corre el riesgo de perder o alterar sensiblemente la información. Las conversiones de contracción en Java se resumen en la siguiente tabla.</p>
+
+<div class="figure" id="figure-3-4">
+    <img src="images/cap03/contraccion.png" alt="Conversiones de contracción entre tipos de dato en Java" />
+
+    <p class="caption"><strong>Figura 3.4</strong> Conversiones de contracción entre tipos de dato en Java</p>
+</div>
+
+
+<p>Tanto las conversiones de promoción como las de contracción se realizan por medio de los siguientes mecanismos:</p>
+
+<ul>
+<li>Por <strong>asignación</strong>: cuando una variable de un determinado tipo se asigna a una variable de otro tipo. Sólo admite conversiones de <strong>promoción</strong>. Por ejemplo: si <code>n</code> es una variable de tipo <code>int</code> que vale <code>25</code> y <code>x</code> es una variable de tipo <code>double</code>, entonces se produce una conversión por asignación al ejecutarse la sentencia <br/> <code>x = n</code>; <br/> la variable x toma el valor <code>82.0</code> (valor en formato real). El valor de <code>n</code> no se modifica.</li>
+<li>Por <strong>promoción aritmética</strong>: como resultado de una operación aritmética. Como en el caso anterior, sólo admite conversiones de <strong>promoción</strong>. Por ejemplo, si <code>producto</code> y <code>factor1</code> son variables de tipo <code>double</code> y <code>factor2</code> es de tipo <code>int</code> entonces la ejecutarse la sentencia <br/> <code>producto = factor1 * factor2;</code> <br/> el valor de <code>factor2</code> se convierte internamente en un valor en formato real para realizar la operación aritmética que genera un resultado de tipo double. El valor almacenado en formato entero en la variable <code>factor2</code> no se modifica.</li>
+<li>Con <strong>casting o "moldes"</strong>: con operadores que producen la conversión entre tipos. Admite las conversiones de promoción y de contracción indicadas anteriormente. Por ejemplo: si se desea convertir un valor de tipo <code>double</code> a un valor de tipo <code>int</code> se utilizará el siguiente código <br/>
+<code>int n;
+double x = 82.4;
+n = (int) x;</code>
+<br/> la variable <code>n</code> toma el valor <code>82</code> (valor en formato entero). El valor de <code>x</code> no se modifica. 
+El código fuente del siguiente programa ilustra algunas de las conversiones que pueden realizarse entre datos de tipo numérico.</li>
+</ul>
+
+<div class="code java">
+<pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> Conversiones <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main <span class="br0">&#40;</span><span class="kw3">String</span> <span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> a <span class="sy0">=</span> <span class="nu0">2</span><span class="sy0">;</span>
+        <span class="kw4">double</span> b <span class="sy0">=</span> <span class="nu0">3.0</span><span class="sy0">;</span>
+        <span class="kw4">float</span> c <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">float</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="nu0">20000</span><span class="sy0">*</span>a<span class="sy0">/</span>b <span class="sy0">+</span> <span class="nu0">5</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Valor en formato float: &quot;</span> <span class="sy0">+</span> c<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Valor en formato double: &quot;</span> <span class="sy0">+</span> <span class="br0">&#40;</span><span class="kw4">double</span><span class="br0">&#41;</span> c<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Valor en formato byte: &quot;</span> <span class="sy0">+</span> <span class="br0">&#40;</span><span class="kw4">byte</span><span class="br0">&#41;</span> c<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Valor en formato short: &quot;</span> <span class="sy0">+</span> <span class="br0">&#40;</span><span class="kw4">short</span><span class="br0">&#41;</span> c<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Valor en formato int: &quot;</span> <span class="sy0">+</span> <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> c<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Valor en formato long: &quot;</span> <span class="sy0">+</span> <span class="br0">&#40;</span><span class="kw4">long</span><span class="br0">&#41;</span> c<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Ejemplo de compilación y ejecución del programa anterior y salida por pantalla correspondiente:</p>
+
+<div class="code bash">
+<pre class="bash">$<span class="sy0">&gt;</span>javac Conversiones.java
+&nbsp;
+$<span class="sy0">&gt;</span>java Conversiones
+Valor en formato float: <span class="nu0">13338.333</span>
+Valor en formato double: <span class="nu0">13338.3330078125</span>
+Valor en formato byte: <span class="nu0">26</span>
+Valor en formato short: <span class="nu0">13338</span>
+Valor en formato int: <span class="nu0">13338</span>
+Valor en formato long: <span class="nu0">13338</span></pre>
+</div>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-3.html#tipos-primitivos-de-dato">Tipos primitivos de dato</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.1</span>
+                        <a class="internal" href="capitulo-3.html#categorias-de-tipos-de-datos">Categorías de tipos de datos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.2</span>
+                        <a class="internal" href="capitulo-3.html#tipos-de-dato-primitivos-en-java">Tipos de dato primitivos en Java</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.3</span>
+                        <a class="internal" href="capitulo-3.html#literales-o-constantes-literales-de-tipos-de-dato-primitivos">Literales o constantes literales de tipos de dato primitivos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.4</span>
+                        <a class="internal" href="capitulo-3.html#formato-de-representacion-de-los-datos-numericos-reales">Formato de representación de los datos numéricos reales</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.5</span>
+                        <a class="internal" href="capitulo-3.html#declaraciones-de-variables">Declaraciones de variables</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.6</span>
+                        <a class="internal" href="capitulo-3.html#declaracion-de-variables-final-o-constantes">Declaración de variables final o constantes</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>3.7</span>
+                        <a class="internal" href="capitulo-3.html#conversiones-entre-tipos-de-dato">Conversiones entre tipos de dato</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

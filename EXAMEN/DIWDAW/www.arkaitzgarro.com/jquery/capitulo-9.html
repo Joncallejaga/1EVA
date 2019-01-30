@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="14/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Mejores Prácticas para Aumentar el Rendimiento | jQuery</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">jQuery</a></h1>
+        <p class="span3">
+                        <a href="capitulo-8.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-10.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="mejores-practicas-para-aumentar-el-rendimiento"><span>Capítulo 9</span> Mejores Prácticas para Aumentar el Rendimiento</h1>
+        <p>Este capítulo cubre numerosas mejores prácticas de JavaScript y jQuery,sin un orden en particular. Muchas de estas prácticas están basadas en la presentación <a href="http://paulirish.com/perf">jQuery Anti-Patterns for Performance</a> (en inglés) de Paul Irish.</p>
+
+<h2 id="guardar-la-longitud-en-bucles">9.1 Guardar la Longitud en Bucles</h2>
+
+<p>En un bucle, no es necesario acceder a la longitud de un vector cada vez que se evalúa la condición; dicho valor se puede guardar previamente en una variable.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myLength <span class="sy0">=</span> myArray.<span class="me1">length</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw1">var</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> myLength<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// do stuff</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="anadir-nuevo-contenido-por-fuera-de-un-bucle">9.2 Añadir Nuevo Contenido por Fuera de un Bucle</h2>
+
+<p>Si va a insertar muchos elementos en el DOM, hágalo todo de una sola vez, no de una por vez.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// mal</span>
+$.<span class="me1">each</span><span class="br0">&#40;</span>myArray<span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>i<span class="sy0">,</span> item<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+   <span class="kw1">var</span> newListItem <span class="sy0">=</span> <span class="st0">'&lt;li&gt;'</span> <span class="sy0">+</span> item <span class="sy0">+</span> <span class="st0">'&lt;/li&gt;'</span><span class="sy0">;</span>
+   $<span class="br0">&#40;</span><span class="st0">'#ballers'</span><span class="br0">&#41;</span>.<span class="me1">append</span><span class="br0">&#40;</span>newListItem<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// mejor: realizar esto</span>
+<span class="kw1">var</span> frag <span class="sy0">=</span> document.<span class="me1">createDocumentFragment</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+$.<span class="me1">each</span><span class="br0">&#40;</span>myArray<span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>i<span class="sy0">,</span> item<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> newListItem <span class="sy0">=</span> <span class="st0">'&lt;li&gt;'</span> <span class="sy0">+</span> item <span class="sy0">+</span> <span class="st0">'&lt;/li&gt;'</span><span class="sy0">;</span>
+    frag.<span class="me1">appendChild</span><span class="br0">&#40;</span>newListItem<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+$<span class="br0">&#40;</span><span class="st0">'#ballers'</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">appendChild</span><span class="br0">&#40;</span>frag<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// o esto:</span>
+<span class="kw1">var</span> myHtml <span class="sy0">=</span> <span class="st0">''</span><span class="sy0">;</span>
+&nbsp;
+$.<span class="me1">each</span><span class="br0">&#40;</span>myArray<span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>i<span class="sy0">,</span> item<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    myHtml <span class="sy0">+=</span> <span class="st0">'&lt;li&gt;'</span> <span class="sy0">+</span> item <span class="sy0">+</span> <span class="st0">'&lt;/li&gt;'</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+$<span class="br0">&#40;</span><span class="st0">'#ballers'</span><span class="br0">&#41;</span>.<span class="me1">html</span><span class="br0">&#40;</span>myHtml<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="no-repetirse">9.3 No Repetirse</h2>
+
+<p>No se repita; realice las cosas una vez y sólo una, caso contrario lo estará haciendo mal.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// MAL</span>
+<span class="kw1">if</span> <span class="br0">&#40;</span>$eventfade.<span class="me1">data</span><span class="br0">&#40;</span><span class="st0">'currently'</span><span class="br0">&#41;</span> <span class="sy0">!=</span> <span class="st0">'showing'</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    $eventfade.<span class="me1">stop</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#40;</span>$eventhover.<span class="me1">data</span><span class="br0">&#40;</span><span class="st0">'currently'</span><span class="br0">&#41;</span> <span class="sy0">!=</span> <span class="st0">'showing'</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    $eventhover.<span class="me1">stop</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#40;</span>$spans.<span class="me1">data</span><span class="br0">&#40;</span><span class="st0">'currently'</span><span class="br0">&#41;</span> <span class="sy0">!=</span> <span class="st0">'showing'</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    $spans.<span class="me1">stop</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="co1">// BIEN</span>
+<span class="kw1">var</span> $elems <span class="sy0">=</span> <span class="br0">&#91;</span>$eventfade<span class="sy0">,</span> $eventhover<span class="sy0">,</span> $spans<span class="br0">&#93;</span><span class="sy0">;</span>
+$.<span class="me1">each</span><span class="br0">&#40;</span>$elems<span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>i<span class="sy0">,</span>elem<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>elem.<span class="me1">data</span><span class="br0">&#40;</span><span class="st0">'currently'</span><span class="br0">&#41;</span> <span class="sy0">!=</span> <span class="st0">'showing'</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        elem.<span class="me1">stop</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="cuidado-con-las-funciones-anonimas">9.4 Cuidado con las Funciones Anónimas</h2>
+
+<p>No es aconsejable utilizar de sobremanera las funciones anónimas. Estas son difíciles de depurar, mantener, probar o reutilizar. En su lugar,utilice un objeto literal para organizar y nombrar sus controladores y funciones de devolución de llamada.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// MAL</span>
+$<span class="br0">&#40;</span>document<span class="br0">&#41;</span>.<span class="me1">ready</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    $<span class="br0">&#40;</span><span class="st0">'#magic'</span><span class="br0">&#41;</span>.<span class="me1">click</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        $<span class="br0">&#40;</span><span class="st0">'#yayeffects'</span><span class="br0">&#41;</span>.<span class="me1">slideUp</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="co1">// ...</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    $<span class="br0">&#40;</span><span class="st0">'#happiness'</span><span class="br0">&#41;</span>.<span class="me1">load</span><span class="br0">&#40;</span>url <span class="sy0">+</span> <span class="st0">' #unicorns'</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="co1">// ...</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// MEJOR</span>
+<span class="kw1">var</span> PI <span class="sy0">=</span> <span class="br0">&#123;</span>
+    onReady <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        $<span class="br0">&#40;</span><span class="st0">'#magic'</span><span class="br0">&#41;</span>.<span class="me1">click</span><span class="br0">&#40;</span>PI.<span class="me1">candyMtn</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        $<span class="br0">&#40;</span><span class="st0">'#happiness'</span><span class="br0">&#41;</span>.<span class="me1">load</span><span class="br0">&#40;</span>PI.<span class="me1">url</span> <span class="sy0">+</span> <span class="st0">' #unicorns'</span><span class="sy0">,</span> PI.<span class="me1">unicornCb</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    candyMtn <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        $<span class="br0">&#40;</span><span class="st0">'#yayeffects'</span><span class="br0">&#41;</span>.<span class="me1">slideUp</span><span class="br0">&#40;</span>PI.<span class="me1">slideCb</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    slideCb <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span><span class="sy0">,</span>
+&nbsp;
+    unicornCb <span class="sy0">:</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+$<span class="br0">&#40;</span>document<span class="br0">&#41;</span>.<span class="me1">ready</span><span class="br0">&#40;</span>PI.<span class="me1">onReady</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="optimizacion-de-selectores">9.5 Optimización de Selectores</h2>
+
+<p>La optimización de selectores es menos importante de lo que solía ser, debido a la implementación en algunos navegadores de<code>document.querySelectorAll()</code>, pasando la carga de jQuery hacia el navegador. Sin embargo, existen algunos consejos que debe tener en cuenta.</p>
+
+<h3 id="selectores-basados-en-id">9.5.1 Selectores basados en ID</h3>
+
+<p>Siempre es mejor comenzar las selecciones con un ID.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// rápido</span>
+$<span class="br0">&#40;</span><span class="st0">'#container div.robotarm'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// super-rápido</span>
+$<span class="br0">&#40;</span><span class="st0">'#container'</span><span class="br0">&#41;</span>.<span class="me1">find</span><span class="br0">&#40;</span><span class="st0">'div.robotarm'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+El ejemplo que utiliza `$.<span class="me1">fn</span>.<span class="me1">find</span>` es más rápido debido a que la primera selección utiliza el motor de selección interno <span class="br0">&#91;</span>Sizzle<span class="br0">&#93;</span><span class="br0">&#40;</span>http<span class="sy0">:</span><span class="co1">//sizzlejs.com/) — mientras que la selección realizada únicamente por ID utiliza `document.getElementById()`, el cual es extremadamente rápido debido a que es una función nativa del navegador.</span></pre>
+</div>
+
+<h3 id="especificidad">9.5.2 Especificidad</h3>
+
+<p>Trate de ser especifico para el lado derecho de la selección y menos específico para el izquierdo.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// no optimizado</span>
+$<span class="br0">&#40;</span><span class="st0">'div.data .gonzalez'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// optimizado</span>
+$<span class="br0">&#40;</span><span class="st0">'.data td.gonzalez'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Use en lo posible <code>etiqueta.clase</code> del lado derecho de la selección, y solo <code>etiqueta</code> o <code>.clase</code> en la parte izquierda.</p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'.data table.attendees td.gonzalez'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// mucho mejor: eliminar la parte media de ser posible</span>
+$<span class="br0">&#40;</span><span class="st0">'.data td.gonzalez'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>La segunda selección tiene mejor rendimiento debido a que atraviesa menos capas para buscar el elemento.</p>
+
+<h3 id="evitar-el-selector-universal">9.5.3 Evitar el Selector Universal</h3>
+
+<p>Selecciones en donde se especifica de forma implícita o explícita una selección universal puede resultar muy lento.</p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'.buttons &gt; *'</span><span class="br0">&#41;</span><span class="sy0">;</span>      <span class="co1">// muy lento</span>
+$<span class="br0">&#40;</span><span class="st0">'.buttons'</span><span class="br0">&#41;</span>.<span class="me1">children</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// mucho mejor</span>
+&nbsp;
+$<span class="br0">&#40;</span><span class="st0">'.gender :radio'</span><span class="br0">&#41;</span><span class="sy0">;</span>       <span class="co1">// selección universal implícita</span>
+$<span class="br0">&#40;</span><span class="st0">'.gender *:radio'</span><span class="br0">&#41;</span><span class="sy0">;</span>      <span class="co1">// misma forma, pero de forma explícita</span>
+$<span class="br0">&#40;</span><span class="st0">'.gender input:radio'</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// mucho mejor</span></pre>
+</div>
+
+<h2 id="utilizar-la-delegacion-de-eventos">9.6 Utilizar la Delegación de Eventos</h2>
+
+<p>La delegación de eventos permite vincular un controlador de evento a un elemento contenedor (por ejemplo, una lista desordenada) en lugar de múltiples elementos contenidos (por ejemplo, los ítems de una lista). jQuery hace fácil este trabajo a través de <code>$.fn.live</code> y<code>$.fn.delegate</code>. En lo posible, es recomendable utilizar <code>$.fn.delegate</code> en lugar de <code>$.fn.live</code>, ya que elimina la necesidad de una selección y su contexto explícito reduce la carga en aproximadamente un 80%.</p>
+
+<p>Además, la delegación de eventos permite añadir nuevos elementos contenedores a la página sin tener que volver a vincular sus controladores de eventos.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// mal (si existen muchos items en la lista)</span>
+$<span class="br0">&#40;</span><span class="st0">'li.trigger'</span><span class="br0">&#41;</span>.<span class="me1">click</span><span class="br0">&#40;</span>handlerFn<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// mejor: delegación de eventos con $.fn.live</span>
+$<span class="br0">&#40;</span><span class="st0">'li.trigger'</span><span class="br0">&#41;</span>.<span class="me1">live</span><span class="br0">&#40;</span><span class="st0">'click'</span><span class="sy0">,</span> handlerFn<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// mucho mejor: delegación de eventos con $.fn.delegate</span>
+<span class="co1">// permite especificar un contexto de forma fácil</span>
+$<span class="br0">&#40;</span><span class="st0">'#myList'</span><span class="br0">&#41;</span>.<span class="me1">delegate</span><span class="br0">&#40;</span><span class="st0">'li.trigger'</span><span class="sy0">,</span> <span class="st0">'click'</span><span class="sy0">,</span> handlerFn<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="separar-elementos-para-trabajar-con-ellos">9.7 Separar Elementos para Trabajar con Ellos</h2>
+
+<p>En lo posible, hay que evitar la manipulación del DOM. Para ayudar con este propósito, a partir de la versión 1.4, jQuery introduce <code>$.fn.detach</code> el cual permite trabajar elementos de forma separada del DOM para luego insertarlos.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> $table <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="st0">'#myTable'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">var</span> $parent <span class="sy0">=</span> $table.<span class="me1">parent</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+$table.<span class="me1">detach</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">// ... se añaden muchas celdas a la tabla</span>
+$parent.<span class="me1">append</span><span class="br0">&#40;</span>table<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="utilizar-estilos-en-cascada-para-cambios-de-css-en-varios-elementos">9.8 Utilizar Estilos en Cascada para Cambios de CSS en Varios Elementos</h2>
+
+<p>Si va a cambiar el CSS en más de 20 elementos utilizando <code>$.fn.css</code>, considere realizar los cambios de estilos añadiéndolos en una etiqueta <em>style</em>. De esta forma se incrementa un 60% el rendimiento.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// correcto hasta 20 elementos, lento en más elementos</span>
+$<span class="br0">&#40;</span><span class="st0">'a.swedberg'</span><span class="br0">&#41;</span>.<span class="me1">css</span><span class="br0">&#40;</span><span class="st0">'color'</span><span class="sy0">,</span> <span class="st0">'#asd123'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+$<span class="br0">&#40;</span><span class="st0">'&lt;style type=&quot;text/css&quot;&gt;a.swedberg { color : #asd123 }&lt;/style&gt;'</span><span class="br0">&#41;</span>
+    .<span class="me1">appendTo</span><span class="br0">&#40;</span><span class="st0">'head'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="utilizar-data-en-lugar-de-fndata">9.9 Utilizar <code>$.data</code> en Lugar de <code>$.fn.data</code></h2>
+
+<p>Utilizar <code>$.data</code> en un elemento del DOM en lugar de <code>$.fn.data</code> en una selección puede ser hasta 10 veces más rápido. Antes de realizarlo, este seguro de comprender la diferencia entre un elemento DOM y una selección jQuery.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// regular</span>
+$<span class="br0">&#40;</span>elem<span class="br0">&#41;</span>.<span class="me1">data</span><span class="br0">&#40;</span>key<span class="sy0">,</span>value<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// 10 veces más rápido</span>
+$.<span class="me1">data</span><span class="br0">&#40;</span>elem<span class="sy0">,</span>key<span class="sy0">,</span>value<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="no-actuar-en-elementos-no-existentes">9.10 No Actuar en Elementos no Existentes</h2>
+
+<p>jQuery no le dirá si esta tratando de ejecutar código en una selección vacía — esta se ejecutará como si nada estuviera mal. Dependerá de usted comprobar si la selección contiene elementos.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// MAL: el código a continuación ejecuta tres funciones</span>
+<span class="co1">// sin comprobar si existen elementos</span>
+<span class="co1">// en la selección</span>
+$<span class="br0">&#40;</span><span class="st0">'#nosuchthing'</span><span class="br0">&#41;</span>.<span class="me1">slideUp</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Mejor</span>
+<span class="kw1">var</span> $mySelection <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="st0">'#nosuchthing'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">if</span> <span class="br0">&#40;</span>$mySelection.<span class="me1">length</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> $mySelection.<span class="me1">slideUp</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+&nbsp;
+<span class="co1">// MUCHO MEJOR: añadir una extensión doOnce</span>
+jQuery.<span class="me1">fn</span>.<span class="me1">doOnce</span> <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span>func<span class="br0">&#41;</span><span class="br0">&#123;</span>
+    <span class="kw1">this</span>.<span class="me1">length</span> <span class="sy0">&amp;&amp;</span> func.<span class="me1">apply</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">return</span> <span class="kw1">this</span><span class="sy0">;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;
+&nbsp;
+$<span class="br0">&#40;</span><span class="st0">'li.cartitems'</span><span class="br0">&#41;</span>.<span class="me1">doOnce</span><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+&nbsp;
+    <span class="co1">// realizar algo</span>
+&nbsp;
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Este consejo es especialmente aplicable para widgets de jQuery UI, los cuales poseen mucha carga incluso cuando la selección no contiene elementos.</p>
+
+<h2 id="definicion-de-variables">9.11 Definición de Variables</h2>
+
+<p>Las variables pueden ser definidas en una sola declaración en lugar de varias.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// antiguo</span>
+<span class="kw1">var</span> test <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+<span class="kw1">var</span> test2 <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span><span class="sy0">;</span>
+<span class="kw1">var</span> test3 <span class="sy0">=</span> test2<span class="br0">&#40;</span>test<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// mejor forma</span>
+<span class="kw1">var</span> test <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">,</span>
+    test2 <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span><span class="sy0">,</span>
+    test3 <span class="sy0">=</span> test2<span class="br0">&#40;</span>test<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>En funciones autoejecutables, las definiciones de variables pueden pasarse todas juntas.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="br0">&#40;</span><span class="kw1">function</span><span class="br0">&#40;</span>foo<span class="sy0">,</span> bar<span class="br0">&#41;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h2 id="condicionales">9.12 Condicionales</h2>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// antiguo</span>
+<span class="kw1">if</span> <span class="br0">&#40;</span>type <span class="sy0">==</span> <span class="st0">'foo'</span> <span class="sy0">||</span> type <span class="sy0">==</span> <span class="st0">'bar'</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+&nbsp;
+<span class="co1">// mejor</span>
+<span class="kw1">if</span> <span class="br0">&#40;</span><span class="co2">/^(foo|bar)$/</span>.<span class="me1">test</span><span class="br0">&#40;</span>type<span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span>
+&nbsp;
+<span class="co1">// búsqueda en objeto literal</span>
+<span class="kw1">if</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="br0">&#123;</span> foo <span class="sy0">:</span> <span class="nu0">1</span><span class="sy0">,</span> bar <span class="sy0">:</span> <span class="nu0">1</span> <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="br0">&#91;</span>type<span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> ... <span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="no-tratar-a-jquery-como-si-fuera-una-caja-negra">9.13 No Tratar a jQuery como si fuera una Caja Negra</h2>
+
+<p>Utilice el código fuente de la biblioteca como si fuera su documentación — guarde el enlace <a href="http://bit.ly/jqsource">http://bit.ly/jqsource</a> como marcador para tener de referencia.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-9.html#mejores-practicas-para-aumentar-el-rendimiento">Mejores Prácticas para Aumentar el Rendimiento</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.1</span>
+                        <a class="internal" href="capitulo-9.html#guardar-la-longitud-en-bucles">Guardar la Longitud en Bucles</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.2</span>
+                        <a class="internal" href="capitulo-9.html#anadir-nuevo-contenido-por-fuera-de-un-bucle">Añadir Nuevo Contenido por Fuera de un Bucle</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.3</span>
+                        <a class="internal" href="capitulo-9.html#no-repetirse">No Repetirse</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.4</span>
+                        <a class="internal" href="capitulo-9.html#cuidado-con-las-funciones-anonimas">Cuidado con las Funciones Anónimas</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.5</span>
+                        <a class="internal" href="capitulo-9.html#optimizacion-de-selectores">Optimización de Selectores</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.6</span>
+                        <a class="internal" href="capitulo-9.html#utilizar-la-delegacion-de-eventos">Utilizar la Delegación de Eventos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.7</span>
+                        <a class="internal" href="capitulo-9.html#separar-elementos-para-trabajar-con-ellos">Separar Elementos para Trabajar con Ellos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.8</span>
+                        <a class="internal" href="capitulo-9.html#utilizar-estilos-en-cascada-para-cambios-de-css-en-varios-elementos">Utilizar Estilos en Cascada para Cambios de CSS en Varios Elementos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.9</span>
+                        <a class="internal" href="capitulo-9.html#utilizar-data-en-lugar-de-fndata">Utilizar <code>$.data</code> en Lugar de <code>$.fn.data</code></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.10</span>
+                        <a class="internal" href="capitulo-9.html#no-actuar-en-elementos-no-existentes">No Actuar en Elementos no Existentes</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.11</span>
+                        <a class="internal" href="capitulo-9.html#definicion-de-variables">Definición de Variables</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.12</span>
+                        <a class="internal" href="capitulo-9.html#condicionales">Condicionales</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>9.13</span>
+                        <a class="internal" href="capitulo-9.html#no-tratar-a-jquery-como-si-fuera-una-caja-negra">No Tratar a jQuery como si fuera una Caja Negra</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

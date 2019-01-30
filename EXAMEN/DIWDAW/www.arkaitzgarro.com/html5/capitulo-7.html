@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="28/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Canvas | HTML5</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">HTML5</a></h1>
+        <p class="span3">
+                        <a href="capitulo-6.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-8.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="canvas"><span>Capítulo 7</span> Canvas</h1>
+        <p>El elemento <code>canvas</code> proporciona un API para dibujar líneas, formas, imágenes, texto, etc en 2D, sobre el <em>lienzo</em> que del elemento. Este API ya está siento utilizado de manera exhaustiva, en la creación de fondos interactivos, elementos de navegación, herramientas de dibujado, juegos o emuladores. Éste elemento <code>canvas</code> es uno de los elementos que cuenta con una de las mayores especificaciones dentro de HTML5. De hecho, el API de dibujado en 2D se ha separado en un documento a parte.</p>
+
+<p>Un ejemplo de lo que se puede llegar a crear, es la recreación del programa MS Paint incluido en Windows 95.</p>
+
+<div class="figure" id="figure-7-1">
+    <img src="images/cap07/canvaspaint.png" alt="MS Paint desarrollado sobre canvas" />
+
+    <p class="caption"><strong>Figura 7.1</strong> MS Paint desarrollado sobre canvas</p>
+</div>
+
+
+<h2 id="elementos-basicos">7.1 Elementos básicos</h2>
+
+<p>Para comenzar a utilizar el elemento <code>canvas</code>, debemos colocarlo en el documento. El marcado es extremadamente sencillo:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">canvas</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;tutorial&quot;</span> <span class="kw3">width</span><span class="sy0">=</span><span class="st0">&quot;150&quot;</span> <span class="kw3">height</span><span class="sy0">=</span><span class="st0">&quot;150&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">canvas</span>&gt;</span></pre>
+</div>
+
+<p>Éste nos recuerda mucho al elemento <code>img</code>, pero sin los atributos <code>src</code> y <code>alt</code>. En realidad, el elemento <code>canvas</code> solamente tiene los dos atributos mostrados en el ejemplo anterior: <code>width</code> y <code>height</code>, ambos opcionales y que pueden establecerse mediante las propiedades DOM. Cuando estos dos atributos no se especifican, el lienzo (<em>canvas</em>) inicial será de <code>300px</code> de ancho por <code>150px</code> de alto. Este elemento, además y como muchos otros, pueden modificarse utilizando CSS. Podemos aplicar cualquier estilo, pero las reglas afectarán al elemento, no a lo dibujado en el lienzo.</p>
+
+<p>En la actualidad, todos los navegadores son compatibles con el elemento <code>canvas</code>, la diferencia entre ellos radica en qué funcionalidades del API han implementado.</p>
+
+<p>Ahora que el elemento <code>canvas</code> está definido en el documento, la manera de dibujar en él es a través de JavaScript. El primer paso es obtener el <strong>contexto</strong> de dibujado. <code>&lt;canvas&gt;</code> crea una superficie de dibujo de tamaño fijo que expone uno o más <strong>contextos</strong> de representación, que se utilizan para crear y manipular el contenido mostrado. En el contexto de representación 2D, (existe otro contexto de representación en 3D, llamado WebGL), el <code>canvas</code> está inicialmente en blanco y, para mostrar algo, es necesario el acceso de un <code>script</code> al contexto de representación para que pueda dibujar en él. El método DOM <code>getContext</code> sirve para obtener el contexto de representación y sus funciones de dibujo.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> canvas <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">'tutorial'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">var</span> ctx <span class="sy0">=</span> canvas.<span class="me1">getContext</span><span class="br0">&#40;</span><span class="st0">'2d'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>El siguiente ejemplo dibujaría dos rectángulos que se cruzan, uno de los cuales tiene transparencia <em>alfa</em>.</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">html</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">script</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;application/javascript&quot;</span>&gt;</span>
+      window.onload = function() {
+        var canvas = document.getElementById(&quot;canvas&quot;);
+        if (canvas.getContext) {
+          var ctx = canvas.getContext(&quot;2d&quot;);
+          ctx.fillStyle = &quot;rgb(200,0,0)&quot;;
+          ctx.fillRect (10, 10, 55, 50);
+          ctx.fillStyle = &quot;rgba(0, 0, 200, 0.5)&quot;;
+          ctx.fillRect (30, 30, 55, 50);
+        }
+      };
+   <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">script</span>&gt;</span>
+  <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">canvas</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;canvas&quot;</span> <span class="kw3">width</span><span class="sy0">=</span><span class="st0">&quot;150&quot;</span> <span class="kw3">height</span><span class="sy0">=</span><span class="st0">&quot;150&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">canvas</span>&gt;</span>
+  <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<div class="figure" id="figure-7-2">
+    <img src="images/cap07/rectangulos.png" alt="Rectángulos semitransparentes en canvas" />
+
+    <p class="caption"><strong>Figura 7.2</strong> Rectángulos semitransparentes en canvas</p>
+</div>
+
+
+<h2 id="dibujar-formas">7.2 Dibujar formas</h2>
+
+<p>Para empezar a dibujar formas, es necesario hablar primero de la cuadrícula del <code>canvas</code> o espacio de coordenadas. Normalmente, una unidad en la cuadrícula corresponde a un px en el lienzo. El punto de origen de esta cuadrícula se coloca en la esquina superior izquierda (coordenadas(0,0)). Todos los elementos se colocan con relación a este origen.</p>
+
+<p>Desgraciadamente, <code>canvas</code> solamente admite una forma primitiva: los rectángulos, por lo que el resto de las formas deberán crearse mediante la combinación de una o más funciones.</p>
+
+<p>Existen tres funciones que dibujan un rectángulo en el lienzo:</p>
+
+<ul>
+<li><code>fillRect(x,y,width,height)</code>: dibuja un rectángulo relleno .</li>
+<li><code>strokeRect(x,y,width,height)</code>: dibuja un contorno rectangular .</li>
+<li><code>clearRect(x,y,width,height)</code>: borra el área especificada y hace que sea totalmente transparente.</li>
+</ul>
+
+<p>Cada una de estas funciones tiene los mismos parámetros. <code>x</code> e <code>y</code> especifican la posición en el lienzo. <code>width</code> es la anchura y <code>height</code> la altura.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> canvas <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">'tutorial'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">var</span> ctx <span class="sy0">=</span> canvas.<span class="me1">getContext</span><span class="br0">&#40;</span><span class="st0">'2d'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ctx.<span class="me1">fillRect</span><span class="br0">&#40;</span><span class="nu0">25</span><span class="sy0">,</span><span class="nu0">25</span><span class="sy0">,</span><span class="nu0">100</span><span class="sy0">,</span><span class="nu0">100</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ctx.<span class="me1">clearRect</span><span class="br0">&#40;</span><span class="nu0">45</span><span class="sy0">,</span><span class="nu0">45</span><span class="sy0">,</span><span class="nu0">60</span><span class="sy0">,</span><span class="nu0">60</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ctx.<span class="me1">strokeRect</span><span class="br0">&#40;</span><span class="nu0">50</span><span class="sy0">,</span><span class="nu0">50</span><span class="sy0">,</span><span class="nu0">50</span><span class="sy0">,</span><span class="nu0">50</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>La función <code>fillRect</code> dibuja un gran cuadrado negro de 100x100 px. La función <code>clearRect</code> elimina un cuadrado de 60x60 px del centro y finalmente el <code>strokeRect</code> dibuja un contorno rectangular de 50x50 px en el interior del cuadrado despejado.</p>
+
+<p>A diferencia de las funciones de rutas que veremos en la siguiente sección, las tres funciones de rectángulo se dibujan inmediatamente en el lienzo.</p>
+
+<div class="figure" id="figure-7-3">
+    <img src="images/cap07/rectangulos_clear.png" alt="Dibujado de rectángulos en canvas" />
+
+    <p class="caption"><strong>Figura 7.3</strong> Dibujado de rectángulos en canvas</p>
+</div>
+
+
+<h2 id="rutas">7.3 Rutas</h2>
+
+<p>Gracias al API 2D, es posible movernos a través del canvas y dibujar líneas y formas. Las rutas son utilizadas para dibujar formas (líneas, curvas, polígonos, etc) que de otra forma no podríamos conseguir.</p>
+
+<p>El primer paso para crear una ruta es llamar al método <code>beginPath</code>. Internamente, las rutas se almacenan como una lista de subrutas (líneas, arcos, etc.) que, en conjunto, forman una figura. Cada vez que se llama a este método, la lista se pone a cero y podemos empezar a dibujar nuevas formas. El paso final sería llamar al método <code>closePath</code>: este método intenta cerrar la forma trazando una línea recta desde el punto actual hasta el inicial. Si la forma ya se ha cerrado o hay solo un punto en la lista, esta función no hace nada.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> canvas  <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">'tutorial'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">var</span> context <span class="sy0">=</span> canvas.<span class="me1">getContext</span><span class="br0">&#40;</span><span class="st0">'2d'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">context.beginPath();
+//... path drawing operations
+context.closePath();</pre>
+</div>
+
+<p>El siguiente paso es dibujar la forma como tal. Para ello, disponemos de algunas funciones de dibujado de líneas y arcos, que especifican las rutas a dibujar.</p>
+
+<h3 id="metodo-lineto">7.3.1 Método <code>lineTo</code></h3>
+
+<p>Para dibujar líneas rectas utilizamos el método <code>lineTo</code>. Este método toma dos argumentos <code>x</code> e <code>y</code>, que son las coordenadas del punto final de la línea. El punto de partida depende de las rutas anteriores.</p>
+
+<p>En el siguiente ejemplo se dibujan dos triángulos, uno relleno y el otro únicamente trazado. En primer lugar se llama al método <code>beginPath</code> para iniciar una nueva ruta. A continuación, utilizamos el método <code>moveTo</code> para mover el punto de partida hasta la posición deseada. Finalmente se dibujan dos líneas que forman dos lados del triángulo. Al llamar al método <code>closePath</code>, éste traza una línea al origen, completando el triángulo.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// Triángulo relleno</span>
+ctx.<span class="me1">beginPath</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ctx.<span class="me1">moveTo</span><span class="br0">&#40;</span><span class="nu0">25</span><span class="sy0">,</span><span class="nu0">25</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ctx.<span class="me1">lineTo</span><span class="br0">&#40;</span><span class="nu0">105</span><span class="sy0">,</span><span class="nu0">25</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ctx.<span class="me1">lineTo</span><span class="br0">&#40;</span><span class="nu0">25</span><span class="sy0">,</span><span class="nu0">105</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ctx.<span class="me1">closePath</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ctx.<span class="me1">fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// Triángulo trazado</span>
+ctx.<span class="me1">beginPath</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ctx.<span class="me1">moveTo</span><span class="br0">&#40;</span><span class="nu0">125</span><span class="sy0">,</span><span class="nu0">125</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ctx.<span class="me1">lineTo</span><span class="br0">&#40;</span><span class="nu0">125</span><span class="sy0">,</span><span class="nu0">45</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ctx.<span class="me1">lineTo</span><span class="br0">&#40;</span><span class="nu0">45</span><span class="sy0">,</span><span class="nu0">125</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ctx.<span class="me1">closePath</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ctx.<span class="me1">stroke</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>En ambos casos utilizamos dos funciones de <em>pintado</em> diferentes: <code>stroke</code> y <code>fill</code>. <code>Stroke</code> se utiliza para dibujar una forma con contorno, mientras que <code>fill</code> se utiliza para pintar una forma sólida.</p>
+
+<h3 id="arcos">7.3.2 Arcos</h3>
+
+<p>Para dibujar arcos o círculos se utiliza el método <code>arc</code> (la especificación también describe el método <code>arcTo</code>). Este método toma cinco parámetros: <code>x</code> e <code>y</code>, el radio, <code>startAngle</code> y <code>endAngle</code> (que definen los puntos de inicio y final del arco en radianes) y <code>anticlockwise</code> (un valor booleano que, cuando tiene valor <code>true</code> dibuja el arco de modo levógiro y viceversa cuando es <code>false</code>).</p>
+
+<p>Un ejemplo algo más complejo que los anteriores utilizando el método <code>arc</code> sería:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">for</span><span class="br0">&#40;</span><span class="kw1">var</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span><span class="nu0">4</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw1">var</span> j<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>j<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>j<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        ctx.<span class="me1">beginPath</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">var</span> x              <span class="sy0">=</span> <span class="nu0">25</span><span class="sy0">+</span>j<span class="sy0">*</span><span class="nu0">50</span><span class="sy0">;</span>       <span class="co1">// coordenada x</span>
+        <span class="kw1">var</span> y              <span class="sy0">=</span> <span class="nu0">25</span><span class="sy0">+</span>i<span class="sy0">*</span><span class="nu0">50</span><span class="sy0">;</span>       <span class="co1">// coordenada y</span>
+        <span class="kw1">var</span> radius         <span class="sy0">=</span> <span class="nu0">20</span><span class="sy0">;</span>            <span class="co1">// radio del arco</span>
+        <span class="kw1">var</span> startAngle     <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>             <span class="co1">// punto inicial del círculo</span>
+        <span class="kw1">var</span> endAngle       <span class="sy0">=</span> <span class="kw4">Math</span>.<span class="me1">PI</span><span class="sy0">+</span><span class="br0">&#40;</span><span class="kw4">Math</span>.<span class="me1">PI</span><span class="sy0">*</span>j<span class="br0">&#41;</span><span class="sy0">/</span><span class="nu0">2</span><span class="sy0">;</span> <span class="co1">// punto final</span>
+        <span class="kw1">var</span> anticlockwise  <span class="sy0">=</span> i<span class="sy0">%</span>2<span class="sy0">==</span><span class="nu0">0</span> <span class="sy0">?</span> <span class="kw2">false</span> <span class="sy0">:</span> <span class="kw2">true</span><span class="sy0">;</span>
+        ctx.<span class="me1">arc</span><span class="br0">&#40;</span>x<span class="sy0">,</span>y<span class="sy0">,</span>radius<span class="sy0">,</span>startAngle<span class="sy0">,</span>endAngle<span class="sy0">,</span> anticlockwise<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>i<span class="sy0">&gt;</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            ctx.<span class="me1">fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+            ctx.<span class="me1">stroke</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="figure" id="figure-7-4">
+    <img src="images/cap07/arcos.png" alt="Dibujado de arcos en canvas" />
+
+    <p class="caption"><strong>Figura 7.4</strong> Dibujado de arcos en canvas</p>
+</div>
+
+
+<blockquote>
+  <p><strong>Nota</strong></p>
+  
+  <p>Los métodos <code>arc</code>, <code>bezier</code> y <code>quadratic</code> utilizan radianes, pero si preferimos trabajar en grados, es necesario convertirlo a radianes. Esta el la operación que tenemos que llevar a cabo:</p>
+  
+  <p><code>var radians = degrees * Math.PI / 180;</code></p>
+</blockquote>
+
+<h3 id="metodo-moveto">7.3.3 Método <code>moveTo</code></h3>
+
+<p>Disponemos de la función <code>moveTo</code>, que en realidad, aunque no dibuja nada, podemos imaginárnosla como 'si levantas un lápiz desde un punto a otro en un papel y lo colocas en el siguiente'. Esta función es utilizada para colocar el punto de partida en otro lugar o para dibujar rutas inconexas.</p>
+
+<div class="code javascript">
+<pre class="javascript">ctx.<span class="me1">beginPath</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ctx.<span class="me1">arc</span><span class="br0">&#40;</span><span class="nu0">75</span><span class="sy0">,</span><span class="nu0">75</span><span class="sy0">,</span><span class="nu0">50</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="kw4">Math</span>.<span class="me1">PI</span><span class="sy0">*</span><span class="nu0">2</span><span class="sy0">,</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// círculo exterior</span>
+ctx.<span class="me1">closePath</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ctx.<span class="me1">fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">ctx.fillStyle = '#FFF';
+ctx.beginPath();
+ctx.arc(75,75,35,0,Math.PI,false);   // boca (dextrógiro)
+ctx.closePath();
+ctx.fill();</pre>
+</div>
+
+<div class="code code">
+<pre class="code">ctx.moveTo(65,65);
+ctx.beginPath();
+ctx.arc(60,65,5,0,Math.PI*2,true);  // ojo izquierdo
+ctx.closePath();
+ctx.fill();</pre>
+</div>
+
+<div class="code code">
+<pre class="code">ctx.moveTo(95,65);
+ctx.beginPath();
+ctx.arc(90,65,5,0,Math.PI*2,true);  // ojo derecho
+ctx.closePath();
+ctx.fill();</pre>
+</div>
+
+<div class="figure" id="figure-7-5">
+    <img src="images/cap07/cara_sonriente.png" alt="Dibujar una cara sonriente en canvas" />
+
+    <p class="caption"><strong>Figura 7.5</strong> Dibujar una cara sonriente en canvas</p>
+</div>
+
+
+<h2 id="colores">7.4 Colores</h2>
+
+<p>Si queremos aplicar colores a una forma, hay dos características importantes que podemos utilizar: <code>fillStyle</code> y <code>strokeStyle</code>.</p>
+
+<div class="code javascript">
+<pre class="javascript">fillStyle <span class="sy0">=</span> color
+strokeStyle <span class="sy0">=</span> color</pre>
+</div>
+
+<p><code>strokeStyle</code> se utiliza para configurar el color del contorno de la forma y <code>fillStyle</code> es para el color de relleno. Color puede ser una cadena que representa un valor de color CSS, un objeto degradado o un objeto modelo.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// todos ellos configuran fillStyle a 'naranja' (orange)</span>
+ctx.<span class="me1">fillStyle</span> <span class="sy0">=</span> <span class="st0">&quot;orange&quot;</span><span class="sy0">;</span>
+ctx.<span class="me1">fillStyle</span> <span class="sy0">=</span> <span class="st0">&quot;#FFA500&quot;</span><span class="sy0">;</span>
+ctx.<span class="me1">fillStyle</span> <span class="sy0">=</span> <span class="st0">&quot;rgb(255,165,0)&quot;</span><span class="sy0">;</span>
+ctx.<span class="me1">fillStyle</span> <span class="sy0">=</span> <span class="st0">&quot;rgba(255,165,0,1)&quot;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Ejemplo de <code>fillStyle</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> draw<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw1">var</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span><span class="nu0">6</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw1">var</span> j<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>j<span class="sy0">&lt;</span><span class="nu0">6</span><span class="sy0">;</span>j<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            ctx.<span class="me1">fillStyle</span> <span class="sy0">=</span> <span class="st0">'rgb('</span> <span class="sy0">+</span> <span class="kw4">Math</span>.<span class="me1">floor</span><span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">-</span><span class="nu0">42.5</span><span class="sy0">*</span>i<span class="br0">&#41;</span> <span class="sy0">+</span> <span class="st0">','</span>
+                                    <span class="sy0">+</span> <span class="kw4">Math</span>.<span class="me1">floor</span><span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">-</span><span class="nu0">42.5</span><span class="sy0">*</span>j<span class="br0">&#41;</span> <span class="sy0">+</span> <span class="st0">',0)'</span><span class="sy0">;</span>
+            ctx.<span class="me1">fillRect</span><span class="br0">&#40;</span>j<span class="sy0">*</span><span class="nu0">25</span><span class="sy0">,</span>i<span class="sy0">*</span><span class="nu0">25</span><span class="sy0">,</span><span class="nu0">25</span><span class="sy0">,</span><span class="nu0">25</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Ejemplo de <code>strokeStyle</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> draw<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw1">var</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span><span class="nu0">6</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw1">var</span> j<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>j<span class="sy0">&lt;</span><span class="nu0">6</span><span class="sy0">;</span>j<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            ctx.<span class="me1">strokeStyle</span> <span class="sy0">=</span> <span class="st0">'rgb(0,'</span> <span class="sy0">+</span> <span class="kw4">Math</span>.<span class="me1">floor</span><span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">-</span><span class="nu0">42.5</span><span class="sy0">*</span>i<span class="br0">&#41;</span>
+                                        <span class="sy0">+</span> <span class="st0">','</span> <span class="sy0">+</span>  ath.<span class="me1">floor</span><span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">-</span><span class="nu0">42.5</span><span class="sy0">*</span>j<span class="br0">&#41;</span> <span class="sy0">+</span> <span class="st0">')'</span><span class="sy0">;</span>
+            ctx.<span class="me1">beginPath</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            ctx.<span class="me1">arc</span><span class="br0">&#40;</span><span class="nu0">12.5</span><span class="sy0">+</span>j<span class="sy0">*</span><span class="nu0">25</span><span class="sy0">,</span><span class="nu0">12.5</span><span class="sy0">+</span>i<span class="sy0">*</span><span class="nu0">25</span><span class="sy0">,</span><span class="nu0">10</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="kw4">Math</span>.<span class="me1">PI</span><span class="sy0">*</span><span class="nu0">2</span><span class="sy0">,</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            ctx.<span class="me1">stroke</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="degradados-y-patrones">7.5 Degradados y patrones</h2>
+
+<p>A través del contexto, es posible generar degradados lineales, radiales o rellenos a través de patrones, que pueden ser utilizados en el método <code>fillStyle</code> del canvas. Los degradados funcionan de una manera similar a los definidos en CSS3, donde se especifican el inicio y los pasos de color para el degradado.</p>
+
+<p>Los patrones, por otra parte, permiten definir una imagen como origen y especificar el patrón de repetido, de nuevo de manera similar a como se realizaba con la propiedad <code>background-image</code> de CSS. Lo que hace interesante al método <code>createPattern</code> es que como origen podemos utilizar una imagen, un canvas o un elemento de vídeo.</p>
+
+<p>Un simple gradiente se crea de la siguiente manera:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> canvas <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">'tutorial'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">var</span> ctx <span class="sy0">=</span> canvas.<span class="me1">getContext</span><span class="br0">&#40;</span><span class="st0">'2d'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">var</span> gradient <span class="sy0">=</span> ctx.<span class="me1">createLinearGradient</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> canvas.<span class="me1">height</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">gradient.addColorStop(0, '#fff');
+gradient.addColorStop(1, '#000');
+ctx.fillStyle = gradient;
+ctx.fillRect(0, 0, canvas.width, canvas.height);</pre>
+</div>
+
+<p>El código anterior creamos un degradado lineal al que aplicamos dos pasos de color. Los argumentos de <code>createLinearGradient</code> son el punto de inicio del degradado (<code>x1</code> e <code>y1</code>) y el punto final del degradado (<code>x2</code> e <code>y2</code>). En este caso el degradado comienza en la esquina superior izquierda, y termina en la esquina inferior izquierda. Utilizamos este degradado para pintar el fondo de un rectángulo.</p>
+
+<div class="figure" id="figure-7-6">
+    <img src="images/cap07/gradiente_lineal.png" alt="Degradado lineal" />
+
+    <p class="caption"><strong>Figura 7.6</strong> Degradado lineal</p>
+</div>
+
+
+<p>Los degradados radiales son muy similares, con la excepción que definimos el radio después de cada coordenada:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> canvas <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">'tutorial'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">var</span> ctx <span class="sy0">=</span> canvas.<span class="me1">getContext</span><span class="br0">&#40;</span><span class="st0">'2d'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+gradient <span class="sy0">=</span> ctx.<span class="me1">createRadialGradient</span><span class="br0">&#40;</span>canvas.<span class="me1">width</span><span class="sy0">/</span><span class="nu0">2</span><span class="sy0">,</span>
+                                    canvas.<span class="me1">height</span><span class="sy0">/</span><span class="nu0">2</span><span class="sy0">,</span>
+                                    <span class="nu0">0</span><span class="sy0">,</span>
+                                    canvas.<span class="me1">width</span><span class="sy0">/</span><span class="nu0">2</span><span class="sy0">,</span>
+                                    canvas.<span class="me1">height</span><span class="sy0">/</span><span class="nu0">2</span><span class="sy0">,</span>
+                                    <span class="nu0">150</span><span class="br0">&#41;</span><span class="sy0">;</span>
+gradient.<span class="me1">addColorStop</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="st0">'#fff'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+gradient.<span class="me1">addColorStop</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="st0">'#000'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+ctx.<span class="me1">fillStyle</span> <span class="sy0">=</span> gradient<span class="sy0">;</span>
+ctx.<span class="me1">fillRect</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> canvas.<span class="me1">width</span><span class="sy0">,</span> canvas.<span class="me1">width</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>La única diferencia es la manera en la que se ha creado el degradado. En este ejemplo, el primer punto del degradado se define en el centro del canvas, con radio cero. El siguiente punto se define con un radio de <code>150px</code> pero su origen es el mismo, lo que produce un degradado circular.</p>
+
+<div class="figure" id="figure-7-7">
+    <img src="images/cap07/gradiente_radial.png" alt="Degradado radial" />
+
+    <p class="caption"><strong>Figura 7.7</strong> Degradado radial</p>
+</div>
+
+
+<p>Los patrones son incluso más sencillos de utilizar. Es necesaria una fuente (como una imagen, un canvas o un elemento de vídeo) y posteriormente utilizamos esta fuente en el método <code>createPattern</code> y el resultado de éste en el método <code>fillStyle</code>. La única consideración a tener en cuenta es que, al utilizar elementos de imagen o vídeo, éstos tienen que haber terminado de cargarse para poder utilizarlos. En el siguiente ejemplo, expandimos el canvas para que ocupe toda la ventana, y cuando se carga la imagen, la utilizamos como patrón de repetición.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> canvas <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">'tutorial'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">var</span> img <span class="sy0">=</span> document.<span class="me1">createElement</span><span class="br0">&#40;</span><span class="st0">'img'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">var</span> ctx <span class="sy0">=</span> canvas.<span class="me1">getContext</span><span class="br0">&#40;</span><span class="st0">'2d'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+canvas.<span class="me1">width</span> <span class="sy0">=</span> window.<span class="me1">innerWidth</span><span class="sy0">;</span>
+canvas.<span class="me1">height</span> <span class="sy0">=</span> window.<span class="me1">innerHeight</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">img.onload = function () {
+    ctx.fillStyle = ctx.createPattern(this, 'repeat');
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+};
+img.src = 'avatar.jpg';</pre>
+</div>
+
+<div class="figure" id="figure-7-8">
+    <img src="images/cap07/patrones.png" alt="Uso de patrones en canvas" />
+
+    <p class="caption"><strong>Figura 7.8</strong> Uso de patrones en canvas</p>
+</div>
+
+
+<h2 id="transparencias">7.6 Transparencias</h2>
+
+<p>Además de dibujar formas opacas en el lienzo, también podemos dibujar formas semitransparentes. Esto se hace mediante el establecimiento de la propiedad <code>globalAlpha</code> o podríamos asignar un color semitransparente al trazo y/o al estilo de relleno.</p>
+
+<div class="code javascript">
+<pre class="javascript">globalAlpha <span class="sy0">=</span> transparency value</pre>
+</div>
+
+<p>Esta propiedad aplica un valor de transparencia a todas las formas dibujadas en el lienzo y puede ser útil si deseas dibujar un montón de formas en el lienzo con una transparencia similar; ya que debido a que las propiedades <code>strokeStyle</code> y <code>fillStyle</code> aceptan valores de color CSS3, podemos utilizar la siguiente notación para asignarles un color transparente.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> draw<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// dibujar fondo</span>
+    ctx.<span class="me1">fillStyle</span> <span class="sy0">=</span> <span class="st0">'#FD0'</span><span class="sy0">;</span>
+    ctx.<span class="me1">fillRect</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">75</span><span class="sy0">,</span><span class="nu0">75</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    ctx.<span class="me1">fillStyle</span> <span class="sy0">=</span> <span class="st0">'#6C0'</span><span class="sy0">;</span>
+    ctx.<span class="me1">fillRect</span><span class="br0">&#40;</span><span class="nu0">75</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">75</span><span class="sy0">,</span><span class="nu0">75</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    ctx.<span class="me1">fillStyle</span> <span class="sy0">=</span> <span class="st0">'#09F'</span><span class="sy0">;</span>
+    ctx.<span class="me1">fillRect</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">75</span><span class="sy0">,</span><span class="nu0">75</span><span class="sy0">,</span><span class="nu0">75</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    ctx.<span class="me1">fillStyle</span> <span class="sy0">=</span> <span class="st0">'#F30'</span><span class="sy0">;</span>
+    ctx.<span class="me1">fillRect</span><span class="br0">&#40;</span><span class="nu0">75</span><span class="sy0">,</span><span class="nu0">75</span><span class="sy0">,</span><span class="nu0">150</span><span class="sy0">,</span><span class="nu0">150</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    ctx.<span class="me1">fillStyle</span> <span class="sy0">=</span> <span class="st0">'#FFF'</span><span class="sy0">;</span>
+    <span class="co1">// establecer valor de transparencia</span>
+    ctx.<span class="me1">globalAlpha</span> <span class="sy0">=</span> <span class="nu0">0.2</span><span class="sy0">;</span>
+    <span class="co1">// Dibujar círculos semitransparentes</span>
+    <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw1">var</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span><span class="nu0">7</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        ctx.<span class="me1">beginPath</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        ctx.<span class="me1">arc</span><span class="br0">&#40;</span><span class="nu0">75</span><span class="sy0">,</span><span class="nu0">75</span><span class="sy0">,</span><span class="nu0">10</span><span class="sy0">+</span><span class="nu0">10</span><span class="sy0">*</span>i<span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="kw4">Math</span>.<span class="me1">PI</span><span class="sy0">*</span><span class="nu0">2</span><span class="sy0">,</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        ctx.<span class="me1">fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="transformaciones">7.7 Transformaciones</h2>
+
+<p>Al igual que tenemos la posibilidad mover el <em>lápiz</em> por el canvas con el método <code>moveTo</code>, podemos definir algunas transformaciones como rotación, escalado, transformación y traslación (similares a las conocidas de CSS3).</p>
+
+<h3 id="metodo-translate">7.7.1 Método <code>translate</code></h3>
+
+<p>Éste método traslada el centro de coordenadas desde su posición por defecto (0, 0) a la posición indicada.</p>
+
+<div class="code javascript">
+<pre class="javascript">ctx.<span class="me1">translate</span><span class="br0">&#40;</span>x<span class="sy0">,</span> y<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="metodo-rotate">7.7.2 Método <code>rotate</code></h3>
+
+<p>Éste método inicia la rotación desde su posición por defecto (0,0). Si se rota el canvas desde esta posición, el contenido podría desaparecer por los límites del lienzo, por lo que es necesario definir un nuevo origen para la rotación, dependiendo del resultado deseado.</p>
+
+<div class="code javascript">
+<pre class="javascript">ctx.<span class="me1">rotate</span><span class="br0">&#40;</span>angle<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Éste método sólo precisa tomar un parámetro, que es el ángulo de rotación que se aplicará al marco. Este parámetro es una rotación dextrógira medida en radianes.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> draw<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    ctx.<span class="me1">translate</span><span class="br0">&#40;</span><span class="nu0">75</span><span class="sy0">,</span><span class="nu0">75</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">for</span> <span class="br0">&#40;</span>i<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span>i<span class="sy0">&lt;</span><span class="nu0">6</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="co1">// Desplazarse or los anillos (desde dentro hacia fuera)</span>
+        ctx.<span class="me1">save</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        ctx.<span class="me1">fillStyle</span> <span class="sy0">=</span> <span class="st0">'rgb('</span><span class="sy0">+</span><span class="br0">&#40;</span><span class="nu0">51</span><span class="sy0">*</span>i<span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">','</span><span class="sy0">+</span><span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">-</span><span class="nu0">51</span><span class="sy0">*</span>i<span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">',255)'</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span>j<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>j<span class="sy0">&lt;</span>i<span class="sy0">*</span><span class="nu0">6</span><span class="sy0">;</span>j<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="co1">// dibujar puntos individuales</span>
+            ctx.<span class="me1">rotate</span><span class="br0">&#40;</span><span class="kw4">Math</span>.<span class="me1">PI</span><span class="sy0">*</span><span class="nu0">2</span><span class="sy0">/</span><span class="br0">&#40;</span>i<span class="sy0">*</span><span class="nu0">6</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            ctx.<span class="me1">beginPath</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            ctx.<span class="me1">arc</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span>i<span class="sy0">*</span><span class="nu0">12.5</span><span class="sy0">,</span><span class="nu0">5</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="kw4">Math</span>.<span class="me1">PI</span><span class="sy0">*</span><span class="nu0">2</span><span class="sy0">,</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            ctx.<span class="me1">fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        ctx.<span class="me1">restore</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h3 id="metodo-scale">7.7.3 Método <code>scale</code></h3>
+
+<p>El siguiente método de transformación es el escalado. Se utiliza para aumentar o disminuir las unidades del tamaño de nuestro marco. Este método puede usarse para dibujar formas ampliadas o reducidas.</p>
+
+<div class="code javascript">
+<pre class="javascript">ctx.<span class="me1">scale</span><span class="br0">&#40;</span>x<span class="sy0">,</span> y<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p><code>x</code> e <code>y</code> definen el factor de escala en la dirección horizontal y vertical respectivamente. Los valores menores que 1.0 reducen el tamaño de la unidad y los valores mayores que 1.0 aumentan el tamaño de la unidad. Por defecto, una unidad en el área de trabajo equivale exactamente a un píxel. Si aplicamos, por ejemplo, un factor de escalado de 0.5, la unidad resultante será 0.5 píxeles, de manera que las formas se dibujarán a mitad de su tamaño.</p>
+
+<h2 id="animaciones">7.8 Animaciones</h2>
+
+<p>Como estamos utilizando <em>scripts</em> para controlar los elementos <code>canvas</code>, resulta muy fácil hacer animaciones (interactivas). Sin embargo, el elemento <code>canvas</code> no fue diseñado para ser utilizado de esta manera (a diferencia de <em>flash</em>) por lo que existen limitaciones.</p>
+
+<p>Probablemente, la mayor limitación es que una vez que se dibuja una forma, se queda de esa manera. Si necesitamos moverla, tenemos que volver a dibujar dicha forma y todo lo que se dibujó anteriormente.</p>
+
+<p>Los pasos básicos a seguir son los siguientes:</p>
+
+<ol>
+<li>Borrar el lienzo: a menos que las formas que se dibujen llenen el lienzo completo (por ejemplo, una imagen de fondo), se necesitará borrar cualquier forma que se haya dibujado con anterioridad. La forma más sencilla de hacerlo es utilizando el método <code>clearRect</code>.</li>
+<li>Guardar el estado de <code>canvas</code>: si se va a modificar alguna configuración (estilos, transformaciones) que afectan al estado de <code>canvas</code>.</li>
+<li>Dibujar formas animadas: representación del marco.</li>
+<li>Restaurar el estado de canvas: restaurar el estado antes de dibujar un nuevo marco.</li>
+</ol>
+
+<h3 id="control">7.8.1 Control</h3>
+
+<p>Las formas se dibujan en el lienzo mediante el uso de los métodos <code>canvas</code> directamente o llamando a funciones personalizadas. Necesitamos una manera de ejecutar nuestras funciones de dibujo en un período de tiempo. Hay dos formas de controlar una animación como ésta. En primer lugar está las funciones <code>setInterval</code> y <code>setTimeout</code>, que se pueden utilizar para llamar a una función específica durante un período determinado de tiempo.</p>
+
+<div class="code javascript">
+<pre class="javascript">setInterval <span class="br0">&#40;</span>animateShape<span class="sy0">,</span> <span class="nu0">500</span><span class="br0">&#41;</span><span class="sy0">;</span>
+setTimeout <span class="br0">&#40;</span>animateShape<span class="sy0">,</span> <span class="nu0">500</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>El segundo método que podemos utilizar para controlar una animación es el <em>input</em> del usuario. Si quisiéramos hacer un juego, podríamos utilizar los eventos de teclado o de ratón para controlar la animación. Al establecer <code>EventListeners</code>, capturamos cualquier interacción del usuario y ejecutamos nuestras funciones de animación.</p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 7</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej07">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-7.html#canvas">Canvas</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.1</span>
+                        <a class="internal" href="capitulo-7.html#elementos-basicos">Elementos básicos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.2</span>
+                        <a class="internal" href="capitulo-7.html#dibujar-formas">Dibujar formas</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.3</span>
+                        <a class="internal" href="capitulo-7.html#rutas">Rutas</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.4</span>
+                        <a class="internal" href="capitulo-7.html#colores">Colores</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.5</span>
+                        <a class="internal" href="capitulo-7.html#degradados-y-patrones">Degradados y patrones</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.6</span>
+                        <a class="internal" href="capitulo-7.html#transparencias">Transparencias</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.7</span>
+                        <a class="internal" href="capitulo-7.html#transformaciones">Transformaciones</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.8</span>
+                        <a class="internal" href="capitulo-7.html#animaciones">Animaciones</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

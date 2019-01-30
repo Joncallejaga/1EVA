@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="15/04/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Sentencia return y métodos | Java</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">Java</a></h1>
+        <p class="span3">
+                        <a href="capitulo-7.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-9.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="sentencia-return-y-metodos"><span>Capítulo 8</span> Sentencia return y métodos</h1>
+        <p>La sentencia return se emplea para salir de la secuencia de ejecución de las sentencias de un método y, opcionalmente, devolver un valor. Tras la salida del método se vuelve a la secuencia de ejecución del programa al lugar de llamada de dicho método.</p>
+
+<p>Sintaxis:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">return</span> expresion<span class="sy0">;</span></pre>
+</div>
+
+<h2 id="declaracion-y-uso-de-metodos">8.1 Declaración y uso de métodos</h2>
+
+<p>Un <em>método</em> es un trozo de código que puede ser llamado o invocado por el programa principal o por otro método para realizar alguna tarea específica. El término <em>método</em> en Java es equivalente al de subprograma, rutina, subrutina, procedimiento o función en otros lenguajes de programación. El método es llamado por su nombre o identificador seguido por una secuencia de parámetros o argumentos (datos utilizados por el propio método para sus cálculos) entre paréntesis. Cuando el método finaliza sus operaciones, devuelve habitualmente un valor simple al programa que lo llama, que utiliza dicho valor de la forma que le convenga. El tipo de dato devuelto por la sentencia <code>return</code> debe coincidir con el tipo de dato declarado en la cabecera del método.</p>
+
+<p>Sintaxis de declaración de un método:</p>
+
+<div class="code java">
+<pre class="java"><span class="br0">&#91;</span>modificadores<span class="br0">&#93;</span> TipoDeDato identificadorMetodo <span class="br0">&#40;</span>parametros formales<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    declaraciones de variables locales<span class="sy0">;</span> 
+    sentencia_1<span class="sy0">;</span> 
+    sentencia_2<span class="sy0">;</span>
+    ... 
+    sentencia_n<span class="sy0">;</span> 
+    <span class="co1">// dentro de estas sentencias se incluye al menos un return </span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La primera línea de código corresponde a la cabecera del método. Los <em>modificadores</em> especifican cómo puede llamarse al método, el <em>tipo de dato</em> indica el tipo de valor que devuelve la llamada al método y los <em>parámetros</em> (entre paréntesis) introducen información para la ejecución del método. Si no existen parámetros explícitos se dejan los paréntesis vacíos. A continuación, las sentencias entre llaves componen el cuerpo del método. Dentro del cuerpo del método se localiza, al menos, una sentencia <code>return</code>.</p>
+
+<p><strong>Un ejemplo sencillo</strong></p>
+
+<p>Seguidamente se muestra un ejemplo de declaración y uso de un método que devuelve el cubo de un valor numérico real con una sentencia <code>return</code>:</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/** 
+ * Demostracion del metodo cubo 
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> PruebaCubo <span class="br0">&#123;</span> 
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main <span class="br0">&#40;</span><span class="kw3">String</span> <span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;El cubo de 7.5 es: &quot;</span> <span class="sy0">+</span> cubo<span class="br0">&#40;</span><span class="nu0">7.5</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// llamada</span>
+    <span class="br0">&#125;</span> 
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">double</span> cubo <span class="br0">&#40;</span><span class="kw4">double</span> x<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="co1">// declaracion</span>
+        <span class="kw1">return</span> x<span class="sy0">*</span>x<span class="sy0">*</span>x<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>A diferencia de otros lenguajes de programación, como Pascal, en Java, la declaración del método puede realizarse en el código fuente después de la llamada al propio método. En el caso anterior, <code>public</code> y <code>static</code> son los modificadores especificados en la cabecera del método. El uso de estos dos modificadores permite que el tipo de método sea similar al de una función global de Pascal o C. El identificador <code>double</code> hace referencia al tipo de dato que devuelve la llamada al método, <code>cubo</code> es el identificador del método y <code>x</code> es el identificador del parámetro en la declaración de la cabecera del método (parámetro <em>formal</em>). Ejemplo de ejecución del código anterior y salida correspondiente por pantalla:</p>
+
+<div class="code bash">
+<pre class="bash">$<span class="sy0">&gt;</span>java PruebaCubo
+El cubo de <span class="nu0">7.5</span> es: <span class="nu0">421.875</span></pre>
+</div>
+
+<p>En Java, los métodos suelen ir asociados con los objetos o instancias en particular a los que operan (métodos <em>de instancia</em>). Los métodos que no necesitan o trabajan con objetos (y sí con números, por ejemplo) se denominan métodos <em>estáticos</em> o <em>de clase</em> y se declaran con el modificador <code>static</code>. Los métodos estáticos o de clase son equivalentes a las rutinas (funciones o procedimientos) de los lenguajes que no emplean la programación orientada a objetos. Por ejemplo, el método <code>sqrt</code> de la clase <code>Math</code> es un método estático. También lo es el método <code>cubo</code> del ejemplo anterior. Por otro lado, todo programa o aplicación Java tiene un método principal <code>main</code> que será siempre un método <em>estático</em>.</p>
+
+<p>¿Por qué se emplea la palabra <code>static</code> para los métodos de clase?. El significado o la acepción más común de la palabra estático (<em>que permanece quieto en un lugar</em>) parece no tener nada que ver con lo que hacen los métodos <em>estáticos</em>. Java emplea la palabra <code>static</code> porque C++ lo utiliza en el mismo contexto: para designar métodos de clase. Aprovechando su empleo en variables que tienen una única localización en memoria para diferentes llamadas a métodos, C++ lo empezó a utilizar en la designación de los métodos <em>de clase</em> para diferenciarlos de los métodos <em>de instancia</em> y no confundir al compilador. El problema es que nadie pensó en que el uso de la palabra <code>static</code> pudiera causar confusiones <em>humanas</em>.</p>
+
+<h2 id="return-y-void">8.2 Return y void</h2>
+
+<p>En algunas ocasiones, no es necesario que el método estático tenga que devolver un valor al finalizar su ejecución. En este caso, el tipo de dato que debe indicar en la cabecera de declaración del método es el tipo <code>void</code> y la sentencia <code>return</code> no viene seguida de ninguna expresión.</p>
+
+<p>Sintaxis:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">return</span><span class="sy0">;</span></pre>
+</div>
+
+<p>En el siguiente código se incluye un ejemplo de método que no devuelve un valor (de tipo <code>void</code>):</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/** 
+ * Demostracion del metodo tabla
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> PruebaTabla <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main <span class="br0">&#40;</span><span class="kw3">String</span> <span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        tabla<span class="br0">&#40;</span><span class="nu0">4</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        tabla<span class="br0">&#40;</span><span class="nu0">7</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span> 
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> tabla <span class="br0">&#40;</span><span class="kw4">int</span> n<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="co1">// ejemplo de llamada</span>
+        <span class="co1">// de tipo void</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Tabla de multiplicar del numero &quot;</span> <span class="sy0">+</span> n<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;=</span><span class="nu0">10</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> 
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>n <span class="sy0">+</span> <span class="st0">&quot; x &quot;</span> <span class="sy0">+</span> i <span class="sy0">+</span> <span class="st0">&quot; = &quot;</span> <span class="sy0">+</span> producto<span class="br0">&#40;</span>n,i<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">return</span><span class="sy0">;</span> <span class="co1">// No devuelve ningun valor</span>
+    <span class="br0">&#125;</span> 
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">int</span> producto <span class="br0">&#40;</span><span class="kw4">int</span> a, <span class="kw4">int</span> b<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> a<span class="sy0">*</span>b<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Si no hay sentencia <code>return</code> dentro de un método, su ejecución continúa hasta que se alcanza el final del método y entonces se devuelve la secuencia de ejecución al lugar dónde se invocó al método.</p>
+
+<p>Un método cuyo tipo de retorno no es <code>void</code> necesita siempre devolver algo. Si el código de un método contiene varias sentencias <code>if</code> debe asegurarse de que cada una de las posibles opciones devuelve un valor. En caso contrario, se generaría un error de compilación. Por ejemplo:</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/** 
+ * Demostracion de la funcion esPositivo
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> PruebaPositivo <span class="br0">&#123;</span> 
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main <span class="br0">&#40;</span><span class="kw3">String</span> <span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">5</span><span class="sy0">;</span> i<span class="sy0">&gt;=-</span><span class="nu0">5</span><span class="sy0">;</span> i<span class="sy0">--</span><span class="br0">&#41;</span> 
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>i <span class="sy0">+</span> <span class="st0">&quot; es positivo: &quot;</span> <span class="sy0">+</span> esPositivo<span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">boolean</span> esPositivo<span class="br0">&#40;</span><span class="kw4">int</span> x<span class="br0">&#41;</span> <span class="br0">&#123;</span> 
+        <span class="kw1">if</span> <span class="br0">&#40;</span>x<span class="sy0">&lt;</span><span class="nu0">0</span><span class="br0">&#41;</span> <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span> 
+        <span class="kw1">if</span> <span class="br0">&#40;</span>x<span class="sy0">&gt;</span><span class="nu0">0</span><span class="br0">&#41;</span> <span class="kw1">return</span> <span class="kw2">true</span><span class="sy0">;</span> 
+        <span class="co1">// Error: retorno perdido si x es igual a cero.</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Ejemplo de intento de compilación del código anterior:</p>
+
+<div class="code bash">
+<pre class="bash">$<span class="sy0">&gt;</span>javac PruebaPositivo.java
+pruebaPositivo.java:<span class="nu0">14</span>: missing <span class="kw3">return</span> statement
+        <span class="br0">&#125;</span>
+        ^</pre>
+</div>
+
+<h2 id="recursion">8.3 Recursión</h2>
+
+<p>Java permite la <em>recursión</em> o <em>recurrencia</em> en la programación de métodos. La recursión consiste en que un método se llame a sí mismo. Un ejemplo muy típico de empleo de la recursión puede verse en la construcción de un método que devuelva el factorial de un entero. Se basa en el hecho de que n! es igual a n·(n-1)! si n es mayor que 1. Por ejemplo:</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/**
+ * Demostracion de la funcion recursiva factorial
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> PruebaFactorialR <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main <span class="br0">&#40;</span><span class="kw3">String</span> <span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span> i<span class="sy0">&lt;=</span><span class="nu0">20</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Factorial de &quot;</span> <span class="sy0">+</span> i <span class="sy0">+</span> <span class="st0">&quot; = &quot;</span> <span class="sy0">+</span> factorialR<span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">long</span> factorialR <span class="br0">&#40;</span><span class="kw4">int</span> n<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>n<span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span>
+            <span class="kw1">return</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw1">else</span>
+            <span class="kw1">return</span> n <span class="sy0">*</span> factorialR<span class="br0">&#40;</span>n<span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>En la construcción de métodos recursivos es importante evitar el problema de la recursión infinita. Es decir, que en algún caso, la ejecución del método definido de forma recursiva no implique una nueva llamada al propio método.</p>
+
+<h2 id="sobrecarga-de-metodos">8.4 Sobrecarga de métodos</h2>
+
+<p>Java permite asignar el mismo identificador a distintos métodos, cuya diferencia reside en el tipo o número de parámetros que utilicen. Esto resulta especialmente conveniente cuando se desea llevar a cabo la misma tarea en difererente número o tipos de variables. La <code>sobrecarga</code> (<code>overloading</code>) de los métodos puede resultar muy útil al efectuar llamadas a un método, ya que en lugar de tener que recordar identificadores de métodos distintos, basta con recordar uno sólo. El compilador se encarga de averiguar cuál de los métodos que comparten identificador debe ejecutar. Por ejemplo:</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/**
+ * Demostracion de metodos sobrecargados * A. Garcia-Beltran - marzo, 2002
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> PruebaSobrecarga <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main <span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> a<span class="sy0">=</span><span class="nu0">34</span><span class="sy0">;</span>
+        <span class="kw4">int</span> b<span class="sy0">=</span><span class="nu0">12</span><span class="sy0">;</span>
+        <span class="kw4">int</span> c<span class="sy0">=</span><span class="nu0">56</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;a = &quot;</span> <span class="sy0">+</span> a <span class="sy0">+</span> <span class="st0">&quot;; b = &quot;</span> <span class="sy0">+</span> b <span class="sy0">+</span> <span class="st0">&quot;; c = &quot;</span> <span class="sy0">+</span> c<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="co1">// El primer método</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;El mayor de a y b es: &quot;</span> <span class="sy0">+</span> mayor<span class="br0">&#40;</span>a,b<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="co1">// El segundo método</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;El mayor de a, b y c es: &quot;</span> <span class="sy0">+</span> mayor<span class="br0">&#40;</span>a,b,c<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co1">// Definicion de mayor de dos numeros enteros</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">int</span> mayor <span class="br0">&#40;</span><span class="kw4">int</span> x, <span class="kw4">int</span> y<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> x<span class="sy0">&gt;</span>y <span class="sy0">?</span> x <span class="sy0">:</span> y<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co1">// Definicion de mayor de tres numeros enteros</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">int</span> mayor <span class="br0">&#40;</span><span class="kw4">int</span> x, <span class="kw4">int</span> y, <span class="kw4">int</span> z<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> mayor<span class="br0">&#40;</span>mayor<span class="br0">&#40;</span>x,y<span class="br0">&#41;</span>,z<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Ejemplo de salida por pantalla:</p>
+
+<div class="code bash">
+<pre class="bash">$<span class="sy0">&gt;</span>java PruebaSobrecarga
+a = <span class="nu0">34</span>; b = <span class="nu0">12</span>; c = <span class="nu0">56</span>
+El mayor de a y b es: <span class="nu0">34</span> El mayor de a, b y c es: <span class="nu0">56</span></pre>
+</div>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-8.html#sentencia-return-y-metodos">Sentencia return y métodos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.1</span>
+                        <a class="internal" href="capitulo-8.html#declaracion-y-uso-de-metodos">Declaración y uso de métodos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.2</span>
+                        <a class="internal" href="capitulo-8.html#return-y-void">Return y void</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.3</span>
+                        <a class="internal" href="capitulo-8.html#recursion">Recursión</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.4</span>
+                        <a class="internal" href="capitulo-8.html#sobrecarga-de-metodos">Sobrecarga de métodos</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

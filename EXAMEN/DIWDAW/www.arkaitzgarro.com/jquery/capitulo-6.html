@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="14/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Efectos | jQuery</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">jQuery</a></h1>
+        <p class="span3">
+                        <a href="capitulo-5.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-7.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="efectos"><span>Capítulo 6</span> Efectos</h1>
+        <h2 id="introduccion-4">6.1 Introducción</h2>
+
+<p>Con jQuery, agregar efectos a una página es muy fácil. Estos efectos poseen una configuración predeterminada pero también es posible proveerles parámetros personalizados. Además es posible crear animaciones particulares estableciendo valores de propiedades CSS.</p>
+
+<p>Para una completa documentación sobre los diferentes tipos de efectos puede visitar la sección <code>effects</code>: <a href="http://api.jquery.com/category/effects/">http://api.jquery.com/category/effects/</a>.</p>
+
+<h2 id="efectos-incorporados-en-la-biblioteca">6.2 Efectos Incorporados en la Biblioteca</h2>
+
+<p>Los efectos más utilizado ya vienen incorporados dentro de la biblioteca en forma de métodos:</p>
+
+<dl>
+<dt>$.fn.show</dt>
+<dd>Muestra el elemento seleccionado.</dd>
+
+<dt>$.fn.hide</dt>
+<dd>Oculta el elemento seleccionado.</dd>
+
+<dt>$.fn.fadeIn</dt>
+<dd>De forma animada, cambia la opacidad del elemento seleccionado al 100%.</dd>
+
+<dt>$.fn.fadeOut</dt>
+<dd>De forma animada, cambia la opacidad del elemento seleccionado al 0</dd>
+
+<dt>$.fn.slideDown</dt>
+<dd>Muestra el elemento seleccionado con un movimiento de deslizamiento vertical.</dd>
+
+<dt>$.fn.slideUp</dt>
+<dd>Oculta el elemento seleccionado con un movimiento de deslizamiento vertical.</dd>
+
+<dt>$.fn.slideToggle</dt>
+<dd>Muestra o oculta el elemento seleccionado con un movimiento de deslizamiento vertical, dependiendo si actualmente el elemento está visible o no.</dd>
+</dl>
+
+<p><strong>Uso básico de un efecto incorporado</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'h1'</span><span class="br0">&#41;</span>.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="cambiar-la-duracion-de-los-efectos">6.2.1 Cambiar la Duración de los Efectos</h3>
+
+<p>Con la excepción de <code>$.fn.show</code> y <code>$.fn.hide</code>, todos los métodos tienen una duración predeterminada de la animación en 400ms. Este valor es posible cambiarlo.</p>
+
+<p><strong>Configurar la duración de un efecto</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'h1'</span><span class="br0">&#41;</span>.<span class="me1">fadeIn</span><span class="br0">&#40;</span><span class="nu0">300</span><span class="br0">&#41;</span><span class="sy0">;</span>      <span class="co1">// desvanecimiento en 300ms</span>
+$<span class="br0">&#40;</span><span class="st0">'h1'</span><span class="br0">&#41;</span>.<span class="me1">fadeOut</span><span class="br0">&#40;</span><span class="st0">'slow'</span><span class="br0">&#41;</span><span class="sy0">;</span>  <span class="co1">// utilizar una definición de velocidad interna</span></pre>
+</div>
+
+<h4 id="jqueryfxspeeds">6.2.1.1 jQuery.fx.speeds</h4>
+
+<p>jQuery posee un objeto en <code>jQuery.fx.speeds</code> el cual contiene la velocidad predeterminada para la duración de un efecto, así como también los valores para las definiciones <em>"slow"</em> y <em>"fast"</em>.</p>
+
+<div class="code javascript">
+<pre class="javascript">speeds<span class="sy0">:</span> <span class="br0">&#123;</span>
+  slow<span class="sy0">:</span> <span class="nu0">600</span><span class="sy0">,</span>
+  fast<span class="sy0">:</span> <span class="nu0">200</span><span class="sy0">,</span>
+  <span class="co1">// velocidad predeterminada</span>
+  _default<span class="sy0">:</span> <span class="nu0">400</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Por lo tanto, es posible sobrescribir o añadir nuevos valores al objeto. Por ejemplo, puede que quiera cambiar el valor predeterminado del efecto o añadir una velocidad personalizada.</p>
+
+<p><strong>Añadir velocidades personalizadas a <code>jQuery.fx.speeds</code></strong></p>
+
+<div class="code javascript">
+<pre class="javascript">jQuery.<span class="me1">fx</span>.<span class="me1">speeds</span>.<span class="me1">muyRapido</span> <span class="sy0">=</span> <span class="nu0">100</span><span class="sy0">;</span>
+jQuery.<span class="me1">fx</span>.<span class="me1">speeds</span>.<span class="me1">muyLento</span> <span class="sy0">=</span> <span class="nu0">2000</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="realizar-una-accion-cuando-un-efecto-fue-ejecutado">6.2.2 Realizar una Acción Cuando un Efecto fue Ejecutado</h3>
+
+<p>A menudo, querrá ejecutar una acción una vez que la animación haya terminado — ya que si ejecuta la acción antes que la animación haya acabado, puede llegar a alterar la calidad del efecto o afectar a los elementos que forman parte de la misma. [Definición: <em>Las funciones de devolución de llamada</em> (en inglés <em>callback functions</em>) proveen una forma para ejecutar código una vez que un evento haya terminado.] En este caso, el evento que responderá a la función será la conclusión de la animación. Dentro de la función de devolución, la palabra clave <code>this</code> hace referencia al elemento en donde el efecto fue ejecutado y al igual que sucede con los eventos, es posible transformarlo a un objeto jQuery utilizando <code>$(this)</code>.</p>
+
+<p><strong>Ejecutar cierto código cuando una animación haya concluido</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'div.old'</span><span class="br0">&#41;</span>.<span class="me1">fadeOut</span><span class="br0">&#40;</span><span class="nu0">300</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> $<span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span>.<span class="me1">remove</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Note que si la selección no retorna ningún elemento, la función nunca se ejecutará. Este problema lo puede resolver comprobando si la selección devuelve algún elemento; y en caso que no lo haga, ejecutar la función de devolución inmediatamente.</p>
+
+<p><strong>Ejecutar una función de devolución incluso si no hay elementos para animar</strong></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> $thing <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="st0">'#nonexistent'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> cb <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'realizado'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#40;</span>$thing.<span class="me1">length</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  $thing.<span class="me1">fadeIn</span><span class="br0">&#40;</span><span class="nu0">300</span><span class="sy0">,</span> cb<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+  cb<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="efectos-personalizados-con-fnanimate">6.3 Efectos Personalizados con <code>$.fn.animate</code></h2>
+
+<p>Es posible realizar animaciones en propiedades CSS utilizando el método <code>$.fn.animate</code>. Dicho método permite realizar una animación estableciendo valores a propiedades CSS o cambiando sus valores actuales.</p>
+
+<p><strong>Efectos personalizados con <code>$.fn.animate</code></strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'div.funtimes'</span><span class="br0">&#41;</span>.<span class="me1">animate</span><span class="br0">&#40;</span>
+  <span class="br0">&#123;</span>
+      left <span class="sy0">:</span> <span class="st0">&quot;+=50&quot;</span><span class="sy0">,</span>
+      opacity <span class="sy0">:</span> <span class="nu0">0.25</span>
+  <span class="br0">&#125;</span><span class="sy0">,</span>
+  <span class="nu0">300</span><span class="sy0">,</span> <span class="co1">// duration</span>
+  <span class="kw1">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'realizado'</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// función de devolución de llamada</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<blockquote>
+  <p><strong>Nota</strong></p>
+  
+  <p>Las propiedades relacionadas al color no pueden ser animadas utilizando el método <code>$.fn.animate</code>, pero es posible hacerlo a través de la extensión <a href="http://plugins.jquery.com/files/jquery.color.js.txt">color plugin</a>. Más adelante en el libro de discutirá la utilización de extensiones.</p>
+</blockquote>
+
+<h3 id="easing">6.3.1 Easing</h3>
+
+<p>[Definición: El concepto de <em>Easing</em> describe la manera en que un efecto ocurre — es decir, si la velocidad durante la animación es constante o no.] jQuery incluye solamente dos métodos de easing: <em>swing</em> y <em>linear</em>. Si desea transiciones más naturales en las animaciones, existen varias extensiones que lo permiten.</p>
+
+<p>A partir de la versión 1.4 de la biblioteca, es posible establecer el tipo de transición por cada propiedad utilizando el método <code>$.fn.animate</code>.</p>
+
+<p><strong>Transición de easing por cada propiedad</strong></p>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'div.funtimes'</span><span class="br0">&#41;</span>.<span class="me1">animate</span><span class="br0">&#40;</span>
+  <span class="br0">&#123;</span>
+      left <span class="sy0">:</span> <span class="br0">&#91;</span> <span class="st0">&quot;+=50&quot;</span><span class="sy0">,</span> <span class="st0">&quot;swing&quot;</span> <span class="br0">&#93;</span><span class="sy0">,</span>
+      opacity <span class="sy0">:</span> <span class="br0">&#91;</span> <span class="nu0">0.25</span><span class="sy0">,</span> <span class="st0">&quot;linear&quot;</span> <span class="br0">&#93;</span>
+  <span class="br0">&#125;</span><span class="sy0">,</span>
+  <span class="nu0">300</span>
+<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Para más detalles sobre las opciones de easing, consulte <a href="http://api.jquery.com/animate/">http://api.jquery.com/animate/</a>.</p>
+
+<h2 id="control-de-los-efectos">6.4 Control de los Efectos</h2>
+
+<p>jQuery provee varias herramientas para el manejo de animaciones.</p>
+
+<dl>
+<dt>$.fn.stop</dt>
+<dd>Detiene las animaciones que se están ejecutando en el elemento seleccionado.</dd>
+
+<dt>$.fn.delay</dt>
+<dd>Espera un tiempo determinado antes de ejecutar la próxima animación.</dd>
+</dl>
+
+<div class="code javascript">
+<pre class="javascript">$<span class="br0">&#40;</span><span class="st0">'h1'</span><span class="br0">&#41;</span>.<span class="me1">show</span><span class="br0">&#40;</span><span class="nu0">300</span><span class="br0">&#41;</span>.<span class="me1">delay</span><span class="br0">&#40;</span><span class="nu0">1000</span><span class="br0">&#41;</span>.<span class="me1">hide</span><span class="br0">&#40;</span><span class="nu0">300</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<dl>
+<dt>jQuery.fx.off</dt>
+<dd>Si el valor es verdadero (<em>true</em>), no existirán transiciones para las animaciones; y a los elementos se le establecerá el estado final de la animación. Este método puede ser especialmente útil cuando se esta trabajando con navegadores antiguos.</dd>
+</dl>
+
+<h2 id="ejercicios-4">6.5 Ejercicios</h2>
+
+<h3 id="mostrar-texto-oculto">6.5.1 Mostrar Texto Oculto</h3>
+
+<p>Abra el archivo <code>/ejercicios/index.html</code> en el navegador. Realice el ejercicio utilizando el archivo <code>/ejercicios/js/blog.js</code>. La tarea es añadir alguna interactividad a la sección blog de la página:</p>
+
+<ul>
+<li>Al hacer click en alguno de los titulares del <em>div #blog</em>, se debe mostrar el párrafo correspondiente con un efecto de deslizamiento;</li>
+<li>Al hacer click en otro titular, se debe ocultar el párrafo mostrado con un efecto de deslizamiento y mostrar nuevamente el párrafo correspondiente también con un efecto de deslizamiento. Ayuda: No se olvide de utilizar el selector <code>:visible</code>.</li>
+</ul>
+
+<h3 id="crear-un-menu-desplegable">6.5.2 Crear un Menú Desplegable</h3>
+
+<p>Abra el archivo <code>/ejercicios/index.html</code> en el navegador. Realice el ejercicio utilizando el archivo <code>/ejercicios/js/navigation.js</code>. La tarea es poder desplegar los ítems del menú superior de la página:</p>
+
+<ul>
+<li>Al pasar el puntero del ratón por encima de un ítem del menú, se debe mostrar su submenú en caso que exista;</li>
+<li>Al no estar más encima de un ítem, el submenú se debe ocultar.</li>
+</ul>
+
+<p>Para poder realizarlo, utilice el método <code>$.fn.hover</code> para añadir o remover una clase en el submenú para poder controlar si debe estar oculto o visible (El archivo <code>/ejercicios/css/styles.css</code> incluye una clase "hover" para este propósito)</p>
+
+<h3 id="crear-un-slideshow">6.5.3 Crear un Slideshow</h3>
+
+<p>Abra el archivo <code>/ejercicios/index.html</code> en el navegador. Realice el ejercicio utilizando el archivo <code>/ejercicios/js/slideshow.js</code>. La tarea es añadir un slideshow a la página con JavaScript.</p>
+
+<ol>
+<li>Mover el elemento <em>#slideshow</em> a la parte superior de la página;</li>
+<li>Escribir un código que permita mostrar los ítems de forma cíclica, mostrando un ítem por unos segundos, luego ocultándolo con un efecto <em>fade out</em> y mostrando el siguiente con un efecto <em>fade in</em>;</li>
+<li>Una vez llegado al último ítem de la lista, comenzar de nuevo con el primero;</li>
+</ol>
+
+<p>Para un desafío mayor, realice un área de navegación por debajo del slideshow que muestre cuantas imágenes existen y en cual se encuentra (ayuda: <code>$.fn.prevAll</code> puede resultar útil).</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-6.html#efectos">Efectos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>6.1</span>
+                        <a class="internal" href="capitulo-6.html#introduccion-4">Introducción</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>6.2</span>
+                        <a class="internal" href="capitulo-6.html#efectos-incorporados-en-la-biblioteca">Efectos Incorporados en la Biblioteca</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>6.3</span>
+                        <a class="internal" href="capitulo-6.html#efectos-personalizados-con-fnanimate">Efectos Personalizados con <code>$.fn.animate</code></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>6.4</span>
+                        <a class="internal" href="capitulo-6.html#control-de-los-efectos">Control de los Efectos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>6.5</span>
+                        <a class="internal" href="capitulo-6.html#ejercicios-4">Ejercicios</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

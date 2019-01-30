@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="08/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>JSON | JavaScript</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">JavaScript</a></h1>
+        <p class="span3">
+                        <a href="capitulo-11.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-13.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="json"><span>Capítulo 12</span> JSON</h1>
+        <p>JavaScript Object Notation (JSON) es un formato de intercambio de datos muy ligero y está basdo en la notación para la representación de objetos. A pesar de estar basado en JavaScript, es independiente del lenguaje. Puede ser utilizado para intercambiar datos entre programas escritos en lenguajes totalmente diferentes. Es un formato de texto, por lo que puede ser leído por máquinas y humanos, he implementado de una manera muy sencilla. Para acceder a toda la información sobre JSON, acceder a <a href="http://www.JSON.org/">http://www.JSON.org/</a>.</p>
+
+<h2 id="sintaxis-json">12.1 Sintaxis JSON</h2>
+
+<p>JSON define seis tipos de valores: <code>objects</code>, <code>arrays</code>, <code>strings</code>, <code>numbers</code>, <code>booleans</code> y el valor especial <code>null</code>. Los espacios (espacios en blanco, tabuladores, retornos de carro y nueva línea) pueden introducirse antes o después de cualquier valor, sin afectar a los valores representados. Esto hace que un texto JSON sea mucho más fácil de leer por humanos.</p>
+
+<p>Un objeto JSON es un contenedor, no ordenado de parejas clave/valor. Una clave puede ser un string, y un valor puede ser un valor JSON (tanto un array como un objeto). Los objetos JSON se pueden anidar hasta cualquier profundidad. Un array JSON es una secuencia ordenada de valores, donde un valor puede ser un valor JSON (tanto un array como un objeto).</p>
+
+<p>La gran mayoría de lenguajes incluyen características para trabajar de manera cómoda con valores JSON en ambos sentidos: partiendo de un objeto u array para convertirlo a una cadena de caracteres, o a partir de una cadena de caracteres, obtener los valores JSON.</p>
+
+<p>La sintaxis de los valores JSON es la siguiente:</p>
+
+<p><img src="images/diagrams/json-value.png" alt="Diagrama de representación de un valor JSON"></p>
+
+<p><img src="images/diagrams/json-object.png" alt="Diagrama de representación de un objeto JSON"></p>
+
+<p><img src="images/diagrams/json-array.png" alt="Diagrama de representación de un array JSON"></p>
+
+<p><img src="images/diagrams/json-value.png" alt="Diagrama de representación de un valor JSON"></p>
+
+<p><img src="images/diagrams/json-value.png" alt="Diagrama de representación de un valor JSON"></p>
+
+<h2 id="utilizando-json-de-manera-segura">12.2 Utilizando JSON de manera segura</h2>
+
+<p>Utilizar JSON es realmente sencillo, ya que JSON es JavaScript. Un cadena de texto JSON puede convertirse en una estructura de datos de JavaScript utilizando la función <code>eval</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myData <span class="sy0">=</span> eval<span class="br0">&#40;</span><span class="st0">'('</span> <span class="sy0">+</span> myJSONText <span class="sy0">+</span> <span class="st0">')'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>La utilización de la función <code>eval</code> conlleva graves problemas de seguridad, por lo que su uso está totalmente desaconsejado. En su lugar, es recomendable utilizar el método <code>JSON.parse</code>, disponible en <a href="https://github.com/douglascrockford/JSON-js">github</a>. El método JSON.parse lanzará una excepción si la cadena que se intenta evaluar contiene un error.</p>
+
+<p>Otro de los problemas puede venir de la interacción con el servidor y la propiedad <code>innerHTML</code> de los elementos del DOM. Un patrón común en los desarrollos con AJAX, es que el servidor devuelva un código HTML que nosotros asignamos directamente a un elemento del documento. Si el código HTML contiene una etiqueta <code>script</code>, entonces un script malicioso puede actuar.</p>
+
+<p>¿Pero qué es lo realmente peligroso? Si un script consigue ejecutarse en una página, éste obtiene acceso al estado y las capacidades de la página. Puede interactuar con el servidor (sin que este pueda distingir una petición legítima de una maliciosa). Puede acceder al objeto global de JavaScript, a todos los datos de la aplicación (variables de JavaScript), al DOM y todo lo que el usuario está viendo e interactuando... De la misma manera que si el <code>script</code> hubiese sido programado por nosotros.</p>
+
+<p>Este peligro viene dado por los objetos globales de JavaScript, no por AJAX, JSON, XMLHttpRequest o la Web 2.0. Simplemente el peligro está ahí desde la introducción de JavaScript en los navegadores, y seguirá ahí hasta que JavaScript sea reemplazado o reparado.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-12.html#json">JSON</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>12.1</span>
+                        <a class="internal" href="capitulo-12.html#sintaxis-json">Sintaxis JSON</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>12.2</span>
+                        <a class="internal" href="capitulo-12.html#utilizando-json-de-manera-segura">Utilizando JSON de manera segura</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

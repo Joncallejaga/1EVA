@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Paneles desplegables</title>
+
+<style>
+*{padding:0; margin:0;font-size:16px; font-family:Georgia, "Times New Roman", Times, serif; line-height:150%; color:#222;}
+ul{ list-style:none; margin:10px;}
+h1{ font-size:175%; line-height:90%; margin:25px 0;}
+h1 small{ font-size:65%; color:#aaa;}
+code{ font-family:"Lucida Console", Monaco, monospace;}
+#wrapper{ width:250px; height:100%; margin:10px auto; border:1px solid #d9d9d9; padding:20px;}
+
+p{ padding:15px 0;}
+label{ 
+	display:inline-block; 
+	width:235px; 
+	height:25px; 
+	padding:0; 
+	padding:5px 0 0 15px; 
+	margin:0;  
+	border:1px solid #d9d9d9;
+	font-weight:bold;
+} 
+div.tab{margin-bottom:2px;}
+div.cont{ width:100%; border:1px solid transparent; height:0; overflow:hidden;}
+input[name="tab"] {position: absolute;left: -1000em; }
+
+
+@-webkit-keyframes abrirTab {   
+     0%   { height: 0;}   
+     100% { height: 120px;}  
+  }
+@keyframes abrirTab {   
+     0%   { height: 0;}   
+     100% { height: 120px;}  
+  }  
+@-webkit-keyframes cerrarTab {   
+     0%   { height: 120px;}   
+     100% { height: 0;}  
+  } 
+@keyframes cerrarTab {   
+     0%   { height: 120px;}   
+     100% { height: 0;}  
+  }   
+input ~ div.cont{ animation-name: cerrarTab; animation-duration: .5s;  } 
+input:checked ~ div.cont{
+	height: 120px; 
+	border-color:#d9d9d9; 
+	border-top:none; 
+	margin-bottom:4px; 
+	-webkit-animation-name: abrirTab; 
+	-webkit-animation-duration: .5s;
+	animation-name: abrirTab; 
+	animation-duration: .5s;
+	}
+
+</style>
+</head>
+
+<body>
+
+<div id="wrapper">
+<h1>Paneles desplegables<br><small>(con @keyframes)</small></h1>
+
+<p>No funciona si la altura de los paneles es <code>height:100%</code></p>
+
+<div class="tabs">
+
+	<div class="tab">
+    <input type="radio" name="tab" id="radio1" checked value="1" /><label for="radio1">Juan Caraculiambro</label>
+    <div class="cont">
+    <ul>
+    <li>Avenida Malindret no 13</li>
+    <li>Valdovinos</li>
+    <li>t&eacute;l: 999 50 60 70</li>
+    <li>caraculiambro@ejemplo.com</li>
+    </ul>
+    </div> 
+    </div>
+    
+	<div class="tab">
+    <input type="radio" name="tab" id="radio2" value="2" /><label for="radio2">Lope Tocho</label>
+    <div class="cont">
+    <ul>
+    <li>Calle Micomicona no 69</li>
+    <li>Tolosa</li>
+    <li>t&eacute;l: 999 20 30 40</li>
+    <li>lopeptotxo@ejemplo.com</li>
+    </ul>
+    </div> 
+    </div>
+    
+	<div class="tab">
+    <input type="radio" name="tab" id="radio3" value="3" /><label for="radio3">Boliche Brandabarbar&aacute;n</label>
+    <div class="cont">
+    <ul>
+    <li>Calle de Las Tres Arabias no 3</li>
+    <li>Puerto L&aacute;pice</li>
+    <li>t&eacute;l: 999 80 90 00</li>
+    <li>barbaarran@ejemplo.com</li>
+    </ul>
+    </div> 
+    </div>
+    
+</div>
+
+
+</div>
+</body>q
+</html>

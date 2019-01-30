@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="28/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Qué es Modernizr | HTML5</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">HTML5</a></h1>
+        <p class="span3">
+                        <a href="capitulo-3.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-5.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="que-es-modernizr"><span>Capítulo 4</span> Qué es Modernizr</h1>
+        <p><a href="http://www.modernizr.com"><strong>Modernizr</strong></a> es una librería JavaScript que nos permite conocer la compatibilidad del navegador con tecnologías <strong>HTML5</strong> y <strong>CSS3</strong>, lo que nos permitirá desarrollar sitios web que se adapten a las capacidades cada navegador.</p>
+
+<p>Este <em>framework</em> es un paquete de detección de las capacidades de un navegador relativas a HTML5 y CSS3, esto es, una librería JavaScript que nos informará cuáles de las funcionalidades de estas tecnologías están disponibles en el navegador del usuario, para utilizarlas, o no, en cada caso.</p>
+
+<p>Sabiendo que nuestro navegador soporta ciertas capacidades de CSS3 o de HTML5, podremos utilizarlas con libertad. De modo contrario, si sabemos que un navegador no es compatible con determinada funcionalidad, podremos implementar variantes que sí soporte y así crear sitios web que se adaptan perfectamente al cliente web de cada visitante.</p>
+
+<p>Existen dos herramientas principales en Modernizr que se pueden utilizar para detectar las funcionalidades que están presentes en un navegador. Una la podemos utilizar a través de JavaScript y otra directamente sobre código CSS. En resumen, con Modernizr podemos detectar las funcionalidades disponibles de CSS3 y HTML5.</p>
+
+<h2 id="anadir-modernizr-a-una-pagina">4.1 Añadir Modernizr a una página</h2>
+
+<p>El primer paso consistirá en <a href="http://modernizr.com/download/">descargar el archivo</a> con el código fuente de Modernizr. Se trata de un archivo con código JavaScript que podemos encontrar en dos variantes:</p>
+
+<ul>
+<li><strong>Development</strong>: contiene el código fuente completo, sin comprimir y con comentarios. Debemos utilizar esta variante únicamente en desarrollo o cuando queremos acceder a su código, para comprenderlo o ampliarlo.</li>
+<li><strong>Production</strong>: es recomendable (o más bien obligatorio) utilizar esta variante cuando pasamos a un entornos de producción. Al descargarnos Modernizr, tenemos la posibilidad de generar una librería únicamente con las funcionalidades que queremos detectar, lo que nos permitirá ahorrarnos una importante cantidad de <code>KB</code> innecesarios.</li>
+</ul>
+
+<p>Una vez que hemos descargado nuestra librería, debemos incluirla en el código HTML de la página, de la misma manera que incluimos scripts JavaScript.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="sy0">&lt;</span>script src<span class="sy0">=</span><span class="st0">&quot;/js/lib/vendor/modernizr-custom.min.js&quot;</span><span class="sy0">&gt;&lt;/</span>script<span class="sy0">&gt;</span></pre>
+</div>
+
+<blockquote>
+  <p>Según podemos leer en la documentación de Modernizr, se aconseja colocar el script dentro del HEAD, porque debe cargarse antes del BODY de la página, debido a un componente que quizás utilicemos, para permitir HTML5 en Internet Explorer, llamado HTML5 Shiv. Además, se recomienda colocarlo después de los estilos CSS para evitar un comportamiento poco deseable llamado FOUC, por el cual puede mostrarse, por un pequeño espacio de tiempo, la página sin los estilos CSS aplicados.</p>
+</blockquote>
+
+<p>A partir de este momento tendremos disponibles nuestros scripts de detección de funcionalidades así como una serie de clases CSS que nos ayudarán a aplicar estilos solo cuando los navegadores los soporten.</p>
+
+<h2 id="objeto-modernizr">4.2 Objeto Modernizr</h2>
+
+<p>Cuando tenemos Modernizr cargado en nuestra página, se crea automáticamente un objeto JavaScript que tiene una serie de propiedades que nos indican si están o no disponibles cada una de las funcionalidades presentes en CSS3 y HTML5. Las mencionadas propiedades contienen simplemente valores booleanos (<em>true</em> o <em>false</em>) que podemos consultar para saber si están o no disponibles las funcionalidades que deseamos utilizar.</p>
+
+<p>El uso es tan sencillo como se indica a continuación:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">if</span> <span class="br0">&#40;</span>Modernizr.<span class="me1">boxshadow</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+   <span class="co1">// Podemos aplicar sombras!</span>
+<span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+   <span class="co1">// La propiedad box-shadow no está disponible</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Aquí estamos consultando la propiedad <code>boxshadow</code> del objeto Modernizr. Esta propiedad nos indica si el navegador es compatible con el atributo <code>box-shadow</code> de CSS3, que sirve para crear cajas de contenido con sombreado.</p>
+
+<p>Ahora veamos otro ejemplo similar que detectaría si está disponible el elemento <code>canvas</code> del HTML5.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">if</span> <span class="br0">&#40;</span>Modernizr.<span class="me1">canvas</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+   <span class="co1">// Podemos utilizar canvas!</span>
+<span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+   <span class="co1">// El elemento canvas no está disponible</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Este es un simple ejemplo que comprueba si están disponibles ciertas propiedades y funcionalidades de CSS3 y HTML5. Lógicamente, tendremos que desarrollar las funcionalidades que correspondan en cada caso. El listado completo de propiedades del objeto para la detección de funcionalidades HTML5 y CSS3 se puede encontrar en la propia <a href="http://modernizr.com/docs/">documentación de Modernizr</a>.</p>
+
+<h2 id="clases-css-en-modernizr">4.3 Clases CSS en Modernizr</h2>
+
+<p>Cuando tenemos Modernizr cargado en nuestra página, éste crea automáticamente una serie de clases que asigna al elemento <code>html</code> del documento. Cada una de estas clases hace referencia a las características que soporta el navegador, permitiendo desde CSS adaptar la interfaz según las funcionalidades. Un ejemplo de las clases que crea en un navegador de escritorio moderno:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">html</span> <span class="kw3">lang</span><span class="sy0">=</span><span class="st0">&quot;en&quot;</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot; js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths&quot;</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+    ...
+    <span class="sc2">&lt;<span class="kw2">script</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;/js/lib/vendor/modernizr-custom.min.js&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">script</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;elemento&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>Todo el proceso es automático y la creación de cada una de esas clases se realizará únicamente en caso de que el navegador sea compatible con cada una de las características de CSS3 y HTML5.</p>
+
+<p>La manera de utilizar estas clases es muy sencilla. Pensemos en que queremos aplicar sombra a un elemento con CSS3 en los navegadores que lo permitan y emular ese sombreado por medio de estilos CSS clásicos en los navegadores que no soporten el atributo <code>box-shadow</code>. Lo único que tenemos que hacer es aplicar los estilos <em>clásicos</em> al elemento que deseemos:</p>
+
+<div class="code css">
+<pre class="css">.elemento<span class="br0">&#123;</span>
+   <span class="kw1">border-left</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="kw2">solid</span> <span class="re0">#ccc</span><span class="sy0">;</span>
+   <span class="kw1">border-top</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="kw2">solid</span> <span class="re0">#ccc</span><span class="sy0">;</span>
+   <span class="kw1">border-bottom</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="kw2">solid</span> <span class="re0">#666</span><span class="sy0">;</span>
+   <span class="kw1">border-right</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="kw2">solid</span> <span class="re0">#666</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Posteriormente, si nuestro navegador es compatible con el atributo <code>box-shadow</code> de CSS3, Modernizr habrá incluido la clase "boxshadow" en el elemento <code>html</code>. Nosotros podemos utilizar dicha clase CSS para aplicar estilos que sabemos que solo acabarán afectando a los navegadores que soporten el atributo <code>box-shadow</code>.</p>
+
+<div class="code css">
+<pre class="css"><span class="re1">.boxshadow</span> .elemento<span class="br0">&#123;</span>
+   <span class="kw1">border</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="kw2">solid</span> <span class="re0">#ccc</span><span class="sy0">;</span>
+   box-shadow<span class="sy0">:</span> <span class="re0">#999</span> <span class="re3">3px</span> <span class="re3">3px</span> <span class="re3">3px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Como se puede ver, hemos sobrescrito la regla CSS para el borde y además hemos aplicado la propiedad <code>box-shadow</code>. El efecto conseguido es que los navegadores modernos, que son capaces de procesar el atributo <code>box-shadow</code>, mostrarán una sombra CSS3 y los no compatibles con esta propiedad al menos mostrarán unos estilos para los que sí son compatibles.</p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 3</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej03">Ver enunciado</a></p>
+
+<h2 id="el-metodo-load">4.4 El método <code>load()</code></h2>
+
+<p>El método <code>Modernizr.load()</code> es una sencilla manera para cargar librerías sólo cuando los usuarios las necesitan, es decir, cuando una funcionalidad en concreto está (o no) disponible. Es una buena manera de ahorrar ancho de banda y mejorar un poco más el rendimiento de la aplicación.</p>
+
+<p>Por ejemplo, pensemos en que estamos desarrollando una aplicación basada en el API de geolocalización de HTML5. Con Modernizr podemos saber si el navegador ofrece soporte a ese API, mediante la propiedad <code>Modernizr.geolocation</code>. Si deseamos cargar unos recursos u otros dependiendo de la disponibilidad de esta funcionalidad, el método <code>Modernizr.load()</code> nos podrá ahorrar algo de código fuente y de paso acelerar nuestra página en algunas ocasiones. Con éste método podemos indicar a los navegadores que no soporten ese API que carguen el <em>polyfill</em> correspondiente, de modo que se pueda utilizar esa característica de HTML5 en ellos también.</p>
+
+<p>La sintaxis de <code>Modernizr.load()</code> es bastante sencilla de comprender. Un ejemplo sencillo:</p>
+
+<div class="code javascript">
+<pre class="javascript">Modernizr.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#123;</span>
+  test<span class="sy0">:</span> Modernizr.<span class="me1">geolocation</span><span class="sy0">,</span>
+  yep <span class="sy0">:</span> <span class="st0">'geo.js'</span><span class="sy0">,</span>
+  nope<span class="sy0">:</span> <span class="st0">'geo-polyfill.js'</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>En este ejemplo, se decide que <em>script</em> se debe cargar, en función de si la geolocalización esta soportada por el navegador o no. De esta manera, nos ahorramos el tener que descargar código que el navegador no soporta y por lo tanto, no necesita.</p>
+
+<p><code>Modernizr.load()</code> es simple y eficaz, pero podemos utilizarlo de manera más compleja, como se muestra en el siguiente ejemplo:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="co1">// Give Modernizr.load a string, an object, or an array of strings and objects</span>
+Modernizr.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#91;</span>
+  <span class="co1">// Presentational polyfills</span>
+  <span class="br0">&#123;</span>
+    <span class="co1">// Logical list of things we would normally need</span>
+    test <span class="sy0">:</span> Modernizr.<span class="me1">fontface</span> <span class="sy0">&amp;&amp;</span> Modernizr.<span class="me1">canvas</span> <span class="sy0">&amp;&amp;</span> Modernizr.<span class="me1">cssgradients</span><span class="sy0">,</span>
+    <span class="co1">// Modernizr.load loads css and javascript by default</span>
+    nope <span class="sy0">:</span> <span class="br0">&#91;</span><span class="st0">'presentational-polyfill.js'</span><span class="sy0">,</span> <span class="st0">'presentational.css'</span><span class="br0">&#93;</span>
+  <span class="br0">&#125;</span><span class="sy0">,</span>
+  <span class="co1">// Functional polyfills</span>
+  <span class="br0">&#123;</span>
+    <span class="co1">// This just has to be truthy</span>
+    test <span class="sy0">:</span> Modernizr.<span class="me1">websockets</span> <span class="sy0">&amp;&amp;</span> window.<span class="me1">JSON</span><span class="sy0">,</span>
+    <span class="co1">// socket-io.js and json2.js</span>
+    nope <span class="sy0">:</span> <span class="st0">'functional-polyfills.js'</span><span class="sy0">,</span>
+    <span class="co1">// You can also give arrays of resources to load.</span>
+    both <span class="sy0">:</span> <span class="br0">&#91;</span> <span class="st0">'app.js'</span><span class="sy0">,</span> <span class="st0">'extra.js'</span> <span class="br0">&#93;</span><span class="sy0">,</span>
+    complete <span class="sy0">:</span> <span class="kw1">function</span> <span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="co1">// Run this after everything in this group has downloaded</span>
+      <span class="co1">// and executed, as well everything in all previous groups</span>
+      myApp.<span class="me1">init</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span><span class="sy0">,</span>
+  <span class="co1">// Run your analytics after you've already kicked off all the rest</span>
+  <span class="co1">// of your app.</span>
+  <span class="st0">'post-analytics.js'</span>
+<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 4</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej04">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-4.html#que-es-modernizr">Qué es Modernizr</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.1</span>
+                        <a class="internal" href="capitulo-4.html#anadir-modernizr-a-una-pagina">Añadir Modernizr a una página</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.2</span>
+                        <a class="internal" href="capitulo-4.html#objeto-modernizr">Objeto Modernizr</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.3</span>
+                        <a class="internal" href="capitulo-4.html#clases-css-en-modernizr">Clases CSS en Modernizr</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.4</span>
+                        <a class="internal" href="capitulo-4.html#el-metodo-load">El método <code>load()</code></a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

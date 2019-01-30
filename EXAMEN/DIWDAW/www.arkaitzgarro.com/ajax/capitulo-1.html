@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="14/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Introducción | AJAX</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">AJAX</a></h1>
+        <p class="span3">
+                        <a href="index.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-2.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="introduccion"><span>Capítulo 1</span> Introducción</h1>
+        <p>El término AJAX se presentó por primera vez en el artículo "<a href="http://www.adaptivepath.com/publications/essays/archives/000385.php">Ajax: A New Approach to Web Applications</a>" publicado por Jesse James Garrett el 18 de Febrero de 2005. Hasta ese momento, no existía un término normalizado que hiciera referencia a un nuevo tipo de aplicación web que estaba apareciendo.</p>
+
+<p>En realidad, el término AJAX es un acrónimo de <em>Asynchronous JavaScript + XM</em>L, que se puede traducir como "JavaScript asíncrono + XML".</p>
+
+<p>El artículo define AJAX de la siguiente forma:</p>
+
+<blockquote>
+  <p>Ajax no es una tecnología en sí mismo. En realidad, se trata de varias tecnologías independientes que se unen de formas nuevas y sorprendentes.</p>
+</blockquote>
+
+<p>Las tecnologías que forman AJAX son:</p>
+
+<ul>
+<li>XHTML y CSS, para crear una presentación basada en estándares.</li>
+<li>DOM, para la interacción y manipulación dinámica de la presentación.</li>
+<li>XML, XSLT y JSON, para el intercambio y la manipulación de información.</li>
+<li>XMLHttpRequest, para el intercambio asíncrono de información.</li>
+<li>JavaScript, para unir todas las demás tecnologías.</li>
+</ul>
+
+<div class="figure" id="figure-1-1">
+    <img src="images/cap01/tecnologias.png" alt="Tecnologías agrupadas bajo el concepto de AJAX" />
+
+    <p class="caption"><strong>Figura 1.1</strong> Tecnologías agrupadas bajo el concepto de AJAX</p>
+</div>
+
+
+<p>Desarrollar aplicaciones AJAX requiere un conocimiento avanzado de todas y cada una de las tecnologías anteriores.</p>
+
+<p>En las aplicaciones web tradicionales, las acciones del usuario en la página (pinchar en un botón, seleccionar un valor de una lista, etc.) desencadenan llamadas al servidor. Una vez procesada la petición del usuario, el servidor devuelve una nueva página HTML al navegador del usuario.</p>
+
+<p>En el siguiente esquema, la imagen de la izquierda muestra el modelo tradicional de las aplicaciones web. La imagen de la derecha muestra el nuevo modelo propuesto por AJAX:</p>
+
+<div class="figure" id="figure-1-2">
+    <img src="images/cap01/clasic-ajax-model.png" alt="Comparación gráfica del modelo tradicional de aplicación web y del nuevo modelo propuesto por AJAX." />
+
+    <p class="caption"><strong>Figura 1.2</strong> Comparación gráfica del modelo tradicional de aplicación web y del nuevo modelo propuesto por AJAX.</p>
+</div>
+
+
+<p>Esta técnica tradicional para crear aplicaciones web funciona correctamente, pero no crea una buena sensación al usuario. Al realizar peticiones continuas al servidor, el usuario debe esperar a que se recargue la página con los cambios solicitados. Si la aplicación debe realizar peticiones continuas, su uso se convierte en algo molesto</p>
+
+<p>AJAX permite mejorar completamente la interacción del usuario con la aplicación, evitando las recargas constantes de la página, ya que el intercambio de información con el servidor se produce en un segundo plano.</p>
+
+<p>Las aplicaciones construidas con AJAX eliminan la recarga constante de páginas mediante la creación de un elemento intermedio entre el usuario y el servidor. La nueva capa intermedia de AJAX mejora la respuesta de la aplicación, ya que el usuario nunca se encuentra con una ventana del navegador vacía esperando la respuesta del servidor.</p>
+
+<p>El siguiente esquema muestra la diferencia más importante entre una aplicación web tradicional y una aplicación web creada con AJAX. La imagen superior muestra la interación síncrona propia de las aplicaciones web tradicionales. La imagen inferior muestra la comunicación asíncrona de las aplicaciones creadas con AJAX.</p>
+
+<div class="figure" id="figure-1-3">
+    <img src="images/cap01/clasic-ajax-time.png" alt="Comparación entre las comunicaciones síncronas de las aplicaciones web tradicionales y las comunicaciones asíncronas de las aplicaciones AJAX" />
+
+    <p class="caption"><strong>Figura 1.3</strong> Comparación entre las comunicaciones síncronas de las aplicaciones web tradicionales y las comunicaciones asíncronas de las aplicaciones AJAX</p>
+</div>
+
+
+<p>Las peticiones HTTP al servidor se sustituyen por peticiones JavaScript que se realizan al elemento encargado de AJAX. Las peticiones más simples no requieren intervención del servidor, por lo que la respuesta es inmediata. Si la interacción requiere una respuesta del servidor, la petición se realiza de forma asíncrona mediante AJAX. En este caso, la interacción del usuario tampoco se ve interrumpida por recargas de página o largas esperas por la respuesta del servidor.</p>
+
+<p>Desde su aparición, se han creado cientos de aplicaciones web basadas en AJAX. En la mayoría de casos, AJAX puede sustituir completamente a otras técnicas como Flash. Además, en el caso de las aplicaciones web más avanzadas, pueden llegar a sustituir a las aplicaciones de escritorio.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-1.html#introduccion">Introducción</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

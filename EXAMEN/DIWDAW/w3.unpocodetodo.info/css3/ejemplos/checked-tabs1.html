@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  <meta name="viewport" content="width=device-width" />
+  
+  <meta name="description" content="Ejemplo de fichas con pesta&ntilde;as (tabs) utilizando el selector :checked de CSS3." />
+  <meta name="keywords" content="ejemplo, fichas, pestañas,selector, checked, CSS3, HTML5, "/>
+  <meta name="author" content="enxaneta.info" />
+  <meta property="og:title" content="Fichas con pesta&ntilde;as (tabs)" /> 
+  <meta property="og:type" content="website" /> 
+  <meta property="og:image" content="http://w3.unpocodetodo.info/images/w3_og.png" />  
+  <meta property="og:url" content="w3.unpocodetodo.info/ejemplos/texto3d.html" /> 
+  <meta property="og:site_name" content="w3.unpocodetodo.info" /> 
+  <meta property="og:description" content="Ejemplo de fichas con pesta&ntilde;as (tabs) utilizando el selector :checked de CSS3." /> 
+  
+  <link rel="icon" type="image/png" href="../../images/w3.png" />
+  <!--<link rel="icon" type="image/png" href="http://w3.unpocodetodo.info/img/favicon.png">-->
+  <!-- 57x57 older iPhone and Android devices -->
+  <!--<link rel="apple-touch-icon-precomposed" href="http://w3.unpocodetodo.infoimages/apple-touch-icon-precomposed.png">-->
+  <!-- iPad 1 and 2 & iPad mini -->
+  <link rel="apple-touch-icon" sizes="72x72" href="../../images/apple-touch-icon-72x72.png">
+  <!-- iPhone 4, 4S, 5 and iPod Touch -->
+  <link rel="apple-touch-icon" sizes="114x114" href="../../images/apple-touch-icon-114x114.png">
+  <!-- iPad 3rd gen -->
+  <link rel="apple-touch-icon" sizes="144x144" href="../../images/apple-touch-icon-144x144.png"> 
+  
+
+<title>Fichas con pesta&ntilde;as</title>
+<style>
+*{padding:0; margin:0;font-size:16px; font-family:Georgia, "Times New Roman", Times, serif; line-height:150%; color:#222;}
+*, *:before, *:after { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+h1{ font-size:175%; line-height:80%; margin:25px 0;}
+h1 small{ font-size:65%; color:#aaa;}
+
+
+#wrapper{ width:90%; height:100%; margin:10px auto; border:1px solid #d9d9d9; padding:20px;}
+
+p{ padding:15px;}
+
+input[name="tab"] {position: absolute;left: -1000em;}
+label{ 
+	display:inline-block; 
+	text-align:center; 
+	width:100px; 
+	height:30px; 
+	padding:5px 0; 
+	margin:0;  
+	border:1px solid #d9d9d9;
+	border-right:none;
+	background-color:#ededed;
+	float:left;
+	position:relative;
+	top:2px;
+	z-index:99;
+} 
+label:last-of-type{border-right:1px solid #d9d9d9;}
+
+div.cont{float:left; border:1px solid #d9d9d9; opacity:0; display:none;}
+
+input:checked+label{ border-bottom:none; background-color:white;}
+
+
+@keyframes cambiaTab {   
+     0%   { opacity: 0;}   
+     100% { opacity: 1;}  
+  }
+@-webkit-keyframes cambiaTab {   
+     0%   { opacity: 0;}   
+     100% { opacity: 1;}  
+  }
+
+input[value="1"]:checked ~ div.contenedor div.cont:nth-child(1),
+input[value="2"]:checked ~ div.contenedor div.cont:nth-child(2),
+input[value="3"]:checked ~ div.contenedor div.cont:nth-child(3){
+	opacity:1;
+	display:block;
+	-webkit-animation-name: cambiaTab; 
+	-webkit-animation-duration: 1s;
+	animation-name: cambiaTab; 
+	animation-duration: 1s;
+	}
+
+.clearfix{ clear:both;}
+.otras h3{padding:30px 0 10px 0;}
+.otras p{ padding:10px 0;}
+
+</style>
+</head>
+
+<body>
+
+<div id="wrapper">
+<h1>Fichas con pesta&ntilde;as<br><small>( un ejemplo minimalista )</small></h1>
+
+
+    <input type="radio" name="tab" id="radio1" checked value="1"/><label for="radio1">Tab 1</label>
+    <input type="radio" name="tab" id="radio2" value="2" /><label for="radio2">Tab 2</label>
+    <input type="radio" name="tab" id="radio3" value="3" /><label for="radio3">Tab 3</label>
+
+    
+    
+<div class="contenedor">    
+    <div class="cont">
+    <p>A Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+    </div>
+    
+    <div class="cont">
+    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+    </div>
+
+    <div class="cont">
+    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+    </div> 
+ <br class="clearfix">   
+  
+    </div><!--<div class="contenedor"> --> 
+    
+    
+<div class="otras">
+ <h3>Otras cosas</h3>   
+ <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p></div>  
+ 
+    
+</div><!--<div id="wrapper">-->
+
+
+</body>
+
+</html>

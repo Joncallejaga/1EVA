@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Introducción | CSS 2.1</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">CSS 2.1</a></h1>
+        <p class="span3">
+                        <a href="index.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-2.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="introduccion"><span>Capítulo 1</span> Introducción</h1>
+        <h2 id="que-es-css">1.1 ¿Qué es CSS?</h2>
+
+<p>CSS es un lenguaje de hojas de estilos creado para controlar el aspecto o presentación de los documentos electrónicos definidos con HTML y XHTML. CSS es la mejor forma de separar los contenidos y su presentación y es imprescindible para crear páginas web complejas.</p>
+
+<p>Separar la definición de los contenidos y la definición de su aspecto presenta numerosas ventajas, ya que obliga a crear documentos HTML/XHTML bien definidos y con significado completo (también llamados "<em>documentos semánticos</em>"). Además, mejora la accesibilidad del documento, reduce la complejidad de su mantenimiento y permite visualizar el mismo documento en infinidad de dispositivos diferentes.</p>
+
+<p>Al crear una página web, se utiliza en primer lugar el lenguaje HTML/XHTML para marcar los contenidos, es decir, para designar la función de cada elemento dentro de la página: párrafo, titular, texto destacado, tabla, lista de elementos, etc.</p>
+
+<p>Una vez creados los contenidos, se utiliza el lenguaje CSS para definir el aspecto de cada elemento: color, tamaño y tipo de letra del texto, separación horizontal y vertical entre elementos, posición de cada elemento dentro de la página, etc.</p>
+
+<h2 id="especificacion-oficial">1.2 Especificación oficial</h2>
+
+<p>La especificación o norma oficial que se utiliza actualmente para diseñar páginas web con CSS es la versión CSS 2.1, actualizada por última vez el 7 de junio de 2011 y que se puede consultar libremente en <a href="http://www.w3.org/TR/CSS21/">w3.org/TR/CSS21</a></p>
+
+<p>Desde hace varios años, el organismo W3C trabaja en la elaboración de la próxima versión de CSS, conocida como CSS 3. Esta nueva versión incluye multitud de cambios importantes en todos los niveles y es mucho más avanzada y compleja que CSS 2. Puedes consultar el estado actual de cada componente de CSS 3 en <a href="http://www.w3.org/Style/CSS/current-work">w3.org/Style/CSS/current-work</a>. También existe un <a href="http://www.w3.org/blog/CSS">blog oficial</a> en el que se publican todas las novedades relacionadas con el estándar CSS.</p>
+
+<p>Mientras CSS 3 se convierte en un estandar, los distintos navegadores pueden incluir o no las mejoras propuestas, o incluso añadir las suyas propias. La web <a href="http://caniuse.com/">Can I use...</a> incluye un listado completo de funcionalidades soportadas por los ditintos navegadores.</p>
+
+<h2 id="funcionamiento-basico-de-css">1.3 Funcionamiento básico de CSS</h2>
+
+<p>Antes de que se generalizara el uso de CSS, los diseñadores de páginas web utilizaban etiquetas HTML especiales para modificar el aspecto de los elementos de la página. El siguiente ejemplo muestra una página HTML con estilos definidos sin utilizar CSS:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc0">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span>
+<span class="sc0">  &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</span>
+<span class="sc2">&lt;<span class="kw2">html</span> xmlns<span class="sy0">=</span><span class="st0">&quot;http://www.w3.org/1999/xhtml&quot;</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">meta</span> <span class="kw3">http-equiv</span><span class="sy0">=</span><span class="st0">&quot;Content-Type&quot;</span> <span class="kw3">content</span><span class="sy0">=</span><span class="st0">&quot;text/html; charset=UTF-8&quot;</span> <span class="sy0">/</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Ejemplo de estilos sin CSS<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">h1</span>&gt;&lt;font <span class="kw3">color</span><span class="sy0">=</span><span class="st0">&quot;red&quot;</span> <span class="kw3">face</span><span class="sy0">=</span><span class="st0">&quot;Arial&quot;</span>&gt;</span>Titular de la página<span class="sc2">&lt;<span class="sy0">/</span>font&gt;&lt;<span class="sy0">/</span><span class="kw2">h1</span>&gt;</span>
+  <span class="sc2">&lt;<span class="kw2">p</span>&gt;&lt;font <span class="kw3">color</span><span class="sy0">=</span><span class="st0">&quot;gray&quot;</span> <span class="kw3">face</span><span class="sy0">=</span><span class="st0">&quot;Verdana&quot;</span> <span class="kw3">size</span><span class="sy0">=</span><span class="st0">&quot;2&quot;</span>&gt;</span>Un párrafo de texto no muy largo.<span class="sc2">&lt;<span class="sy0">/</span>font&gt;&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>El ejemplo anterior utiliza la etiqueta <code>&lt;font&gt;</code> con sus atributos <code>color</code>, <code>face</code> y <code>size</code> para definir el color, el tipo y el tamaño de letra de cada elemento de la página.</p>
+
+<p>El problema de utilizar este método para definir el aspecto de los elementos se puede ver claramente con el siguiente ejemplo: si la página tuviera 50 elementos diferentes, habría que insertar 50 etiquetas <code>&lt;font&gt;</code>. Si el sitio web entero se compone de 10.000 páginas diferentes, habría que definir 500.000 etiquetas <code>&lt;font&gt;</code>. Como cada etiqueta <code>&lt;font&gt;</code> tiene tres atributos, habría que definir 1.5 millones de atributos.</p>
+
+<p>Como el diseño de los sitios web está en constante evolución, es habitual modificar cada cierto tiempo el aspecto de las páginas del sitio. Siguiendo con el ejemplo anterior, cambiar el aspecto del sitio requeriría modificar 500.000 etiquetas y 1.5 millones de atributos.</p>
+
+<p>La solución que propone CSS es mucho mejor, como se puede ver en el siguiente ejemplo:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc0">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span>
+<span class="sc0">    &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</span>
+<span class="sc2">&lt;<span class="kw2">html</span> xmlns<span class="sy0">=</span><span class="st0">&quot;http://www.w3.org/1999/xhtml&quot;</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">meta</span> <span class="kw3">http-equiv</span><span class="sy0">=</span><span class="st0">&quot;Content-Type&quot;</span> <span class="kw3">content</span><span class="sy0">=</span><span class="st0">&quot;charset=UTF-8&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Ejemplo de estilos con CSS<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">style</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text/css&quot;</span>&gt;</span>
+        h1 { color: red;  font-family: Arial;   font-size: large;  }
+        p  { color: gray; font-family: Verdana; font-size: medium; }
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">style</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">h1</span>&gt;</span>Titular de la página<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h1</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Un párrafo de texto no muy largo.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>CSS permite separar los contenidos de la página y la información sobre su aspecto. En el ejemplo anterior, dentro de la propia página HTML se crea una zona especial en la que se incluye toda la información relacionada con los estilos de la página.</p>
+
+<p>Utilizando CSS, se pueden establecer los mismos estilos con menos esfuerzo y sin ensuciar el código HTML de los contenidos con etiquetas <code>&lt;font&gt;</code>. Como se verá más adelante, la etiqueta <code>&lt;style&gt;</code> crea una zona especial donde se incluyen todas las reglas CSS que se aplican en la página.</p>
+
+<p>En el ejemplo anterior, dentro de la zona de CSS se indica que todas las etiquetas <code>&lt;h1&gt;</code> de la página se deben ver de color rojo, con un tipo de letra Arial y con un tamaño de letra grande. Además, las etiquetas <code>&lt;p&gt;</code> de la página se deben ver de color gris, con un tipo de letra Verdana y con un tamaño de letra medio.</p>
+
+<p>Definir los estilos de esta forma ahorra miles de etiquetas y millones de atributos respecto a la solución anterior, pero sigue sin ser una solución ideal. Como los estilos CSS sólo se aplican en la página que los incluye, si queremos que las 10.000 páginas diferentes del sitio tengan el mismo aspecto, se deberían copiar 10.000 veces esas mismas reglas CSS. Más adelante se explica la solución que propone CSS para evitar este problema.t</p>
+
+<h2 id="como-incluir-css-en-un-documento-xhtml">1.4 Cómo incluir CSS en un documento XHTML</h2>
+
+<p>Una de las principales características de CSS es su flexibilidad y las diferentes opciones que ofrece para realizar una misma tarea. De hecho, existen tres opciones para incluir CSS en un documento HTML.</p>
+
+<h3 id="incluir-css-en-el-mismo-documento-html">1.4.1 Incluir CSS en el mismo documento HTML</h3>
+
+<p>Los estilos se definen en una zona específica del propio documento HTML. Se emplea la etiqueta <code>&lt;style&gt;</code> de HTML y solamente se pueden incluir en la cabecera del documento (sólo dentro de la sección <code>&lt;head&gt;</code>).</p>
+
+<p>Ejemplo:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc0">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span>
+<span class="sc0">    &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</span>
+<span class="sc2">&lt;<span class="kw2">html</span> xmlns<span class="sy0">=</span><span class="st0">&quot;http://www.w3.org/1999/xhtml&quot;</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">meta</span> <span class="kw3">http-equiv</span><span class="sy0">=</span><span class="st0">&quot;Content-Type&quot;</span> <span class="kw3">content</span><span class="sy0">=</span><span class="st0">&quot;text/html; charset=UTF-8&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Ejemplo de estilos CSS en el propio documento<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">style</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text/css&quot;</span>&gt;</span>
+        p { color: black; font-family: Verdana; }
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">style</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Un párrafo de texto.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>Este método se emplea cuando se define un número pequeño de estilos o cuando se quieren incluir estilos específicos en una determinada página HTML que completen los estilos que se incluyen por defecto en todas las páginas del sitio web.</p>
+
+<p>El principal inconveniente es que si se quiere hacer una modificación en los estilos definidos, es necesario modificar todas las páginas que incluyen el estilo que se va a modificar.</p>
+
+<p>Los ejemplos mostrados en este libro utilizan este método para aplicar CSS al contenido HTML de las páginas. De esta forma el código de los ejemplos es más conciso y se aprovecha mejor el espacio.</p>
+
+<h3 id="definir-css-en-un-archivo-externo">1.4.2 Definir CSS en un archivo externo</h3>
+
+<p>En este caso, todos los estilos CSS se incluyen en un archivo de tipo CSS que las páginas HTML enlazan mediante la etiqueta <link>. Un archivo de tipo CSS no es más que un archivo simple de texto cuya extensión es .css Se pueden crear todos los archivos CSS que sean necesarios y cada página HTML puede enlazar tantos archivos CSS como necesite.</p>
+
+<p>Si se quieren incluir los estilos del ejemplo anterior en un archivo CSS externo, se deben seguir los siguientes pasos:</p>
+
+<p>1) Se crea un archivo de texto y se le añade solamente el siguiente contenido:</p>
+
+<div class="code css">
+<pre class="css">p <span class="br0">&#123;</span> <span class="kw1">color</span><span class="sy0">:</span> <span class="kw1">black</span><span class="sy0">;</span> <span class="kw1">font-family</span><span class="sy0">:</span> Verdana<span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>2) Se guarda el archivo de texto con el nombre estilos.css Se debe poner especial atención a que el archivo tenga extensión .css y no .txt</p>
+
+<p>3) En la página HTML se enlaza el archivo CSS externo mediante la etiqueta <code>&lt;link&gt;</code>:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc0">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span>
+<span class="sc0">    &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</span>
+<span class="sc2">&lt;<span class="kw2">html</span> xmlns<span class="sy0">=</span><span class="st0">&quot;http://www.w3.org/1999/xhtml&quot;</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">meta</span> <span class="kw3">http-equiv</span><span class="sy0">=</span><span class="st0">&quot;Content-Type&quot;</span> <span class="kw3">content</span><span class="sy0">=</span><span class="st0">&quot;text/html; charset=UTF-8&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Ejemplo de estilos CSS en un archivo externo<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">link</span> <span class="kw3">rel</span><span class="sy0">=</span><span class="st0">&quot;stylesheet&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text/css&quot;</span></span>
+<span class="sc2">        <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;/css/estilos.css&quot;</span> <span class="kw3">media</span><span class="sy0">=</span><span class="st0">&quot;screen&quot;</span> <span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Un párrafo de texto.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>Cuando el navegador carga la página HTML anterior, antes de mostrar sus contenidos también descarga los archivos CSS externos enlazados mediante la etiqueta <code>&lt;link&gt;</code> y aplica los estilos a los contenidos de la página.</p>
+
+<p>Normalmente, la etiqueta <code>&lt;link&gt;</code> incluye cuatro atributos cuando enlaza un archivo CSS:</p>
+
+<ul>
+<li><code>rel</code>: indica el tipo de relación que existe entre el recurso enlazado (en este caso, el archivo CSS) y la página HTML. Para los archivos CSS, siempre se utiliza el valor stylesheet</li>
+<li><code>type</code>: indica el tipo de recurso enlazado. Sus valores están estandarizados y para los archivos CSS su valor siempre es text/css</li>
+<li><code>href</code>: indica la URL del archivo CSS que contiene los estilos. La URL indicada puede ser relativa o absoluta y puede apuntar a un recurso interno o externo al sitio web.</li>
+<li><code>media</code>: indica el medio en el que se van a aplicar los estilos del archivo CSS. Más adelante se explican en detalle los medios CSS y su funcionamiento.
+De todas las formas de incluir CSS en las páginas HTML, esta es la más utilizada con mucha diferencia. La principal ventaja es que se puede incluir un mismo archivo CSS en multitud de páginas HTML, por lo que se garantiza la aplicación homogénea de los mismos estilos a todas las páginas que forman un sitio web.</li>
+</ul>
+
+<p>Con este método, el mantenimiento del sitio web se simplifica al máximo, ya que un solo cambio en un solo archivo CSS permite variar de forma instantánea los estilos de todas las páginas HTML que enlazan ese archivo.</p>
+
+<p>Aunque generalmente se emplea la etiqueta <code>&lt;link&gt;</code> para enlazar los archivos CSS externos, también se puede utilizar la etiqueta <code>&lt;style&gt;</code>. La forma alternativa de incluir un archivo CSS externo se muestra a continuación:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc0">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span>
+<span class="sc0">    &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</span>
+<span class="sc2">&lt;<span class="kw2">html</span> xmlns<span class="sy0">=</span><span class="st0">&quot;http://www.w3.org/1999/xhtml&quot;</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">meta</span> <span class="kw3">http-equiv</span><span class="sy0">=</span><span class="st0">&quot;Content-Type&quot;</span> <span class="kw3">content</span><span class="sy0">=</span><span class="st0">&quot;text/html; charset=UTF-8&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Ejemplo de estilos CSS en un archivo externo<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">style</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text/css&quot;</span> <span class="kw3">media</span><span class="sy0">=</span><span class="st0">&quot;screen&quot;</span>&gt;</span>
+      @import '/css/estilos.css';
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">style</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Un párrafo de texto.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>En este caso, para incluir en la página HTML los estilos definidos en archivos CSS externos se utiliza una regla especial de tipo <code>@import</code>. Las reglas de tipo @import siempre preceden a cualquier otra regla CSS (con la única excepción de la regla <code>@charset</code>).</p>
+
+<p>La URL del archivo CSS externo se indica mediante una cadena de texto encerrada con comillas simples o dobles o mediante la palabra reservada url(). De esta forma, las siguientes reglas <code>@import</code> son equivalentes:</p>
+
+<div class="code css">
+<pre class="css"><span class="co1">@import '/css/estilos.css';</span>
+<span class="co1">@import &quot;/css/estilos.css&quot;;</span>
+<span class="co1">@import url('/css/estilos.css');</span>
+<span class="co1">@import url(&quot;/css/estilos.css&quot;);</span></pre>
+</div>
+
+<h3 id="incluir-css-en-los-elementos-html">1.4.3 Incluir CSS en los elementos HTML</h3>
+
+<p>El último método para incluir estilos CSS en documentos HTML es el peor y el menos utilizado, ya que tiene los mismos problemas que la utilización de las etiquetas <code>&lt;font&gt;</code>.</p>
+
+<p>Ejemplo:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc0">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span>
+<span class="sc0">  &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</span>
+<span class="sc2">&lt;<span class="kw2">html</span> xmlns<span class="sy0">=</span><span class="st0">&quot;http://www.w3.org/1999/xhtml&quot;</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">meta</span> <span class="kw3">http-equiv</span><span class="sy0">=</span><span class="st0">&quot;Content-Type&quot;</span> <span class="kw3">content</span><span class="sy0">=</span><span class="st0">&quot;text/html; charset=UTF-8&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Ejemplo de estilos CSS en el propio documento<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">style</span><span class="sy0">=</span><span class="st0">&quot;color: black; font-family: Verdana;&quot;</span>&gt;</span>Un párrafo de texto.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>Esta forma de incluir CSS directamente en los elementos HTML solamente se utiliza en determinadas situaciones en las que se debe incluir un estilo muy específico para un solo elemento concreto.</p>
+
+<h2 id="glosario-basico">1.5 Glosario básico</h2>
+
+<p>CSS define una serie de términos que permiten describir cada una de las partes que componen los estilos CSS. El siguiente esquema muestra las partes que forman un estilo CSS muy básico:</p>
+
+<div class="figure" id="figure-1-1">
+    <img src="images/cap01/componentes.png" alt="Componentes de un estilo CSS básico" />
+
+    <p class="caption"><strong>Figura 1.1</strong> Componentes de un estilo CSS básico</p>
+</div>
+
+
+<p>Los diferentes términos se definen a continuación:</p>
+
+<ul>
+<li>Regla: cada uno de los estilos que componen una hoja de estilos CSS. Cada regla está compuesta de una parte de "<em>selectores</em>", un símbolo de "<em>llave de apertura</em>" ({), otra parte denominada "<em>declaración</em>" y por último, un símbolo de "<em>llave de cierre</em>" (}).</li>
+<li>Selector: indica el elemento o elementos HTML a los que se aplica la regla CSS.</li>
+<li>Declaración: especifica los estilos que se aplican a los elementos. Está compuesta por una o más propiedades CSS.</li>
+<li>Propiedad: característica que se modifica en el elemento seleccionado, como por ejemplo su tamaño de letra, su color de fondo, etc.</li>
+<li>Valor: establece el nuevo valor de la característica modificada en el elemento.
+Un archivo CSS puede contener un número ilimitado de reglas CSS, cada regla se puede aplicar a varios selectores diferentes y cada declaración puede incluir tantos pares propiedad/valor como se desee.</li>
+</ul>
+
+<p>El estándar CSS 2.1 define 115 propiedades, cada una con su propia lista de valores permitidos. Por su parte, los últimos borradores del estándar CSS 3 ya incluyen 239 propiedades.</p>
+
+<h2 id="medios-css">1.6 Medios CSS</h2>
+
+<p>Una de las características más importantes de las hojas de estilos CSS es que permiten definir diferentes estilos para diferentes medios o dispositivos: pantallas, impresoras, móviles, proyectores, etc.</p>
+
+<p>Además, CSS define algunas propiedades específicamente para determinados medios, como por ejemplo la paginación y los saltos de página para los medios impresos o el volumen y tipo de voz para los medios de audio. La siguiente tabla muestra el nombre que CSS utiliza para identificar cada medio y su descripción:</p>
+
+<div class="table" id="table-1-1">
+
+    <table>
+<thead>
+<tr>
+  <th>Medio</th>
+  <th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>all</td>
+  <td>Todos los medios definidos</td>
+</tr>
+<tr>
+  <td>braille</td>
+  <td>Dispositivos táctiles que emplean el sistema braille</td>
+</tr>
+<tr>
+  <td>embosed</td>
+  <td>Impresoras braille</td>
+</tr>
+<tr>
+  <td>handheld</td>
+  <td>Dispositivos de mano: móviles, PDA, etc.</td>
+</tr>
+<tr>
+  <td>print</td>
+  <td>Impresoras y navegadores en el modo "Vista Previa para Imprimir"</td>
+</tr>
+<tr>
+  <td>projection</td>
+  <td>Proyectores y dispositivos para presentaciones</td>
+</tr>
+<tr>
+  <td>screen</td>
+  <td>Pantallas de ordenador</td>
+</tr>
+<tr>
+  <td>speech</td>
+  <td>Sintetizadores para navegadores de voz utilizados por personas discapacitadas</td>
+</tr>
+<tr>
+  <td>tty</td>
+  <td>Dispositivos textuales limitados como teletipos y terminales de texto</td>
+</tr>
+<tr>
+  <td>tv</td>
+  <td>Televisores y dispositivos con resolución baja</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Los medios más utilizados actualmente son <code>screen</code> (para definir el aspecto de la página en pantalla) y <code>print</code> (para definir el aspecto de la página cuando se imprime), seguidos de <code>handheld</code> (que define el aspecto de la página cuando se visualiza mediante un dispositivo móvil).</p>
+
+<p>La gran ventaja de CSS es que permite modificar los estilos de una página en función del medio en el que se visualiza. Existen cuatro formas diferentes de indicar el medio en el que se deben aplicar los estilos CSS.</p>
+
+<h3 id="medios-definidos-con-las-reglas-de-tipo-media">1.6.1 Medios definidos con las reglas de tipo @media</h3>
+
+<p>Las reglas <code>@media</code> son un tipo especial de regla CSS que permiten indicar de forma directa el medio o medios en los que se aplicarán los estilos incluidos en la regla. Para especificar el medio en el que se aplican los estilos, se incluye su nombre después de <code>@media</code>. Si los estilos se aplican a varios medios, se incluyen los nombres de todos los medios separados por comas.</p>
+
+<p>A continuación se muestra un ejemplo sencillo:</p>
+
+<div class="code css">
+<pre class="css"><span class="co1">@media print {</span>
+  body <span class="br0">&#123;</span> <span class="kw1">font-size</span><span class="sy0">:</span> <span class="re3">10pt</span> <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+<span class="co1">@media screen {</span>
+  body <span class="br0">&#123;</span> <span class="kw1">font-size</span><span class="sy0">:</span> <span class="re3">13px</span> <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+<span class="co1">@media screen, print {</span>
+  body <span class="br0">&#123;</span> <span class="kw1">line-height</span><span class="sy0">:</span> <span class="nu0">1.2</span> <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>El ejemplo anterior establece que el tamaño de letra de la página cuando se visualiza en una pantalla debe ser <code>13 píxel</code>. Sin embargo, cuando se imprimen los contenidos de la página, su tamaño de letra debe ser de <code>10 puntos</code>. Por último, tanto cuando la página se visualiza en una pantalla como cuando se imprimen sus contenidos, el interlineado del texto debe ser de <code>1.2</code> veces el tamaño de letra del texto.</p>
+
+<h3 id="medios-definidos-con-las-reglas-de-tipo-import">1.6.2 Medios definidos con las reglas de tipo @import</h3>
+
+<p>Cuando se utilizan reglas de tipo <code>@import</code> para enlazar archivos CSS externos, se puede especificar el medio en el que se aplican los estilos indicando el nombre del medio después de la URL del archivo CSS:</p>
+
+<div class="code css">
+<pre class="css"><span class="co1">@import url(&quot;estilos_basicos.css&quot;) screen;</span>
+<span class="co1">@import url(&quot;estilos_impresora.css&quot;) print;</span></pre>
+</div>
+
+<p>Las reglas del ejemplo anterior establecen que cuando la página se visualiza por pantalla, se cargan los estilos definidos en el primer archivo CSS. Por otra parte, cuando la página se imprime, se tienen en cuenta los estilos que define el segundo archivo CSS.</p>
+
+<p>Si los estilos del archivo CSS externo deben aplicarse en varios medios, se indican los nombres de todos los medios separados por comas. Si no se indica el medio en una regla de tipo <code>@import</code>, el navegador sobreentiende que el medio es <code>all</code>, es decir, que los estilos se aplican en todos los medios.</p>
+
+<h3 id="medios-definidos-con-la-etiqueta">1.6.3 Medios definidos con la etiqueta</h3>
+
+<p>Si se utiliza la etiqueta <code>&lt;link&gt;</code> para enlazar los archivos CSS externos, se puede utilizar el atributo media para indicar el medio o medios en los que se aplican los estilos de cada archivo:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">link</span> <span class="kw3">rel</span><span class="sy0">=</span><span class="st0">&quot;stylesheet&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text/css&quot;</span> <span class="kw3">media</span><span class="sy0">=</span><span class="st0">&quot;screen&quot;</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;basico.css&quot;</span> <span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">link</span> <span class="kw3">rel</span><span class="sy0">=</span><span class="st0">&quot;stylesheet&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text/css&quot;</span> <span class="kw3">media</span><span class="sy0">=</span><span class="st0">&quot;print, handheld&quot;</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;especial.css&quot;</span> <span class="sy0">/</span>&gt;</span></pre>
+</div>
+
+<p>En este ejemplo, el primer archivo CSS se tiene en cuenta cuando la página se visualiza en la pantalla (<code>media="screen"</code>). Los estilos indicados en el segundo archivo CSS, se aplican al imprimir la página (<code>media="print"</code>) o al visualizarla en un dispositivo móvil (<code>media="handheld"</code>), como por ejemplo en un iPhone.</p>
+
+<p>Si la etiqueta <code>&lt;link&gt;</code> no indica el medio CSS, se sobreentiende que los estilos se deben aplicar a todos los medios, por lo que es equivalente a indicar <code>media="all"</code>.</p>
+
+<h3 id="medios-definidos-mezclando-varios-metodos">1.6.4 Medios definidos mezclando varios métodos</h3>
+
+<p>CSS también permite mezclar los tres métodos anteriores para indicar los medios en los que se aplica cada archivo CSS externo:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">link</span> <span class="kw3">rel</span><span class="sy0">=</span><span class="st0">&quot;stylesheet&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;text/css&quot;</span>  <span class="kw3">media</span><span class="sy0">=</span><span class="st0">&quot;screen&quot;</span> <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;basico.css&quot;</span> <span class="sy0">/</span>&gt;</span>
+@import url(&quot;estilos_seccion.css&quot;) screen;
+@media print {
+  /* Estilos específicos para impresora */
+}</pre>
+</div>
+
+<p>Los estilos CSS que se aplican cuando se visualiza la página en una pantalla se obtienen mediante el recurso enlazado con la etiqueta <code>&lt;link&gt;</code> y mediante el archivo CSS externo incluido con la regla de tipo <code>@import</code>. Además, los estilos aplicados cuando se imprime la página se indican directamente en la página HTML mediante la regla de tipo <code>@media</code>.</p>
+
+<h2 id="comentarios">1.7 Comentarios</h2>
+
+<p>CSS permite incluir comentarios entre sus reglas y estilos. Los comentarios son contenidos de texto que el diseñador incluye en el archivo CSS para su propia información y utilidad. Los navegadores ignoran por completo cualquier comentario de los archivos CSS, por lo que es común utilizarlos para estructurar de forma clara los archivos CSS complejos.</p>
+
+<p>El comienzo de un comentario se indica mediante los caracteres <code>/*</code> y el final del comentario se indica mediante <code>*/</code>, tal y como se muestra en el siguiente ejemplo:</p>
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* Este es un comentario en CSS */</span></pre>
+</div>
+
+<p>Los comentarios pueden ocupar tantas líneas como sea necesario, pero no se puede incluir un comentario dentro de otro comentario:</p>
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* Este es un
+   comentario CSS de varias
+   lineas */</span></pre>
+</div>
+
+<p>Aunque los navegadores ignoran los comentarios, su contenido se envía junto con el resto de estilos, por lo que no se debe incluir en ellos ninguna información sensible o confidencial.</p>
+
+<p>La sintaxis de los comentarios CSS es muy diferente a la de los comentarios HTML, por lo que no deben confundirse:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc-1">&lt;!-- Este es un comentario en HTML --&gt;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc-1">&lt;!-- Este es un</span>
+<span class="sc-1">     comentario HTML de varias</span>
+<span class="sc-1">     lineas --&gt;</span></pre>
+</div>
+
+<h2 id="sintaxis-de-la-definicion-de-cada-propiedad-css">1.8 Sintaxis de la definición de cada propiedad CSS</h2>
+
+<p>A lo largo de los próximos capítulos, se incluyen las definiciones formales de la mayoría de propiedades de CSS. La definición formal se basa en la información recogida en el estándar oficial y se muestra en forma de tabla.</p>
+
+<p>Una de las principales informaciones de cada definición es la lista de posibles valores que admite la propiedad. Para definir la lista de valores permitidos se sigue un formato que es necesario detallar.</p>
+
+<p>Si el valor permitido se indica como una sucesión de palabras sin ningún carácter que las separe (paréntesis, comas, barras, etc.) el valor de la propiedad se debe indicar tal y como se muestra y con esas palabras en el mismo orden.</p>
+
+<p>Si el valor permitido se indica como una sucesión de valores separados por una barra simple (carácter <code>|</code>) el valor de la propiedad debe tomar uno y sólo uno de los valores indicados. Por ejemplo, la notación <code>&lt;porcentaje&gt; | &lt;medida&gt; | inherit</code> indica que la propiedad solamente puede tomar como valor la palabra reservada <code>inherit</code> o un porcentaje o una medida.</p>
+
+<p>Si el valor permitido se indica como una sucesión de valores separados por una barra doble (símbolo <code>||</code>) el valor de la propiedad puede tomar uno o más valores de los indicados y en cualquier orden.</p>
+
+<p>Por ejemplo, la notación <code>&lt;color&gt; || &lt;estilo&gt; || &lt;medida&gt;</code> indica que la propiedad puede tomar como valor cualquier combinación de los valores indicados y en cualquier orden. Se podría establecer un color y un estilo, solamente una medida o una medida y un estilo. Además, el orden en el que se indican los valores es indiferente. Opcionalmente, se pueden utilizar paréntesis para agrupar diferentes valores.</p>
+
+<p>Por último, en cada valor o agrupación de valores se puede indicar el tipo de valor: opcional, obligatorio, múltiple o restringido.</p>
+
+<p>El carácter <code>*</code> indica que el valor ocurre cero o más veces; el carácter <code>+</code> indica que el valor ocurre una o más veces; el carácter <code>?</code> indica que el valor es opcional y por último, el carácter <code>{número_1, número_2}</code> indica que el valor ocurre al menos tantas veces como el valor indicado en <code>número_1</code> y como máximo tantas veces como el valor indicado en <code>número_2</code>.</p>
+
+<p>Por ejemplo, el valor <code>[&lt;family-name&gt; , ]*</code> indica que el valor de tipo <code>&lt;family_name&gt;</code> seguido por una coma se puede incluir cero o más veces. El valor <code>&lt;url&gt;? &lt;color&gt;</code> significa que la URL es opcional y el color obligatorio y en el orden indicado. Por último, el valor <code>[&lt;medida&gt; | thick | thin] {1,4}</code> indica que se pueden escribir entre 1 y 4 veces un valor que sea o una medida o la palabra <code>thick</code> o la palabra <code>thin</code>.</p>
+
+<p>No obstante, la mejor forma de entender la notación formal para las propiedades de CSS es observar la definición de cada propiedad y volver a esta sección siempre que sea necesario.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-1.html#introduccion">Introducción</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.1</span>
+                        <a class="internal" href="capitulo-1.html#que-es-css">¿Qué es CSS?</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.2</span>
+                        <a class="internal" href="capitulo-1.html#especificacion-oficial">Especificación oficial</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.3</span>
+                        <a class="internal" href="capitulo-1.html#funcionamiento-basico-de-css">Funcionamiento básico de CSS</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.4</span>
+                        <a class="internal" href="capitulo-1.html#como-incluir-css-en-un-documento-xhtml">Cómo incluir CSS en un documento XHTML</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.5</span>
+                        <a class="internal" href="capitulo-1.html#glosario-basico">Glosario básico</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.6</span>
+                        <a class="internal" href="capitulo-1.html#medios-css">Medios CSS</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.7</span>
+                        <a class="internal" href="capitulo-1.html#comentarios">Comentarios</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>1.8</span>
+                        <a class="internal" href="capitulo-1.html#sintaxis-de-la-definicion-de-cada-propiedad-css">Sintaxis de la definición de cada propiedad CSS</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

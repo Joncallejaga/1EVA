@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="18/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Imágenes y objetos | XHTML</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">XHTML</a></h1>
+        <p class="span3">
+                        <a href="capitulo-6.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-8.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="imagenes-y-objetos"><span>Capítulo 7</span> Imágenes y objetos</h1>
+        <h2 id="imagenes">7.1 Imágenes</h2>
+
+<p>Las imágenes son <strong>uno de los elementos más importantes</strong> de las páginas web. Podríamos decir que existen dos tipos de imagen, las imágenes de <strong>contenido</strong> de una web, que proporcionan y complementan la información y otras imágenes (pequeños iconos en listas, fondos de página, etc.) que aunque también se pueden incluir en el código HTML mediante la etiqueta <code>&lt;img&gt;</code> que explicaremos a continuación, es más correcto emplear hojas de estilo <strong>CSS</strong> para mostrarlas.</p>
+
+<p>La etiqueta <code>&lt;img&gt;</code> tiene varios atributos:</p>
+
+<div class="table" id="table-7-1">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;img&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left"><code>src="url"</code> Indica la URL de la imagen que se muestra.<br /> <code>alt="texto"</code> Descripción corta de la imagen<br /> <code>longdesc="url"</code> Indica una URL en la que puede encontrarse una descripción más detallada de la imagen. Se emplea con las imágenes complejas que necesitan mucha información para ser descritas<br /> <code>name="texto"</code> Nombre del elemento imagen<br /> <code>height="unidad_de_medida"</code> Indica la altura con la que se debe mostrar la imagen (no es obligatorio que coincida con la altura original de la imagen)<br /> <code>width="unidad_de_medida"</code> Indica la anchura con la que se debe mostrar la imagen (no es obligatorio que coincida con la anchura original de la imagen)</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En línea y etiqueta vacía</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplea para incluir imágenes en los documentos</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>De todos estos atributos, solamente hay dos requeridos, que son <code>src</code> y <code>alt</code>, que proporcionan la información suficiente para establecer la URL de la imagen y describir su contenido mediante un texto breve (menos de 1024 caracteres).</p>
+
+<p>Aunque <code>&lt;img&gt;</code> es una etiqueta vacía (por lo que no necesita etiqueta de cierre), lo más correcto (y válido para una página XHTML) sería incluir <code>/&gt;</code> al final de ésta, ya que de esta manera se considera una etiqueta cerrada.</p>
+
+<p>En teoría no existe ninguna restricción sobre el <strong>formato gráfico</strong> de la imagen. No obstante, la recomendación es utilizar uno de los tres siguientes formatos gráficos que entienden todos los navegadores modernos: <strong>GIF, JPG y PNG</strong>. El formato PNG presenta el inconveniente de que los navegadores obsoletos como Internet Explorer 6 no muestran correctamente las imágenes con transparencias de 24 bits.</p>
+
+<p>Un ejemplo sencillo para incluir una imagen sería:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;/imagenes/logotipo.gif&quot;</span> <span class="kw3">alt</span><span class="sy0">=</span><span class="st0">&quot;Logotipo&quot;</span> <span class="sy0">/</span>&gt;</span></pre>
+</div>
+
+<p>En este ejemplo, encontramos que la imagen <code>logotipo.gif</code> se encuentra en el directorio <code>(/imagenes/)</code>. Se trata de una estrategia habitual en la mayoría de sitios web: guardar todas las imágenes de contenido en un directorio especial independiente del resto de contenidos HTML. Además, el directorio siempre suele llamarse de la misma manera: <em>imagenes</em> o <em>images</em> en inglés.</p>
+
+<p>Los atributos <code>width</code> y <code>height</code> se utilizan para indicar la anchura y altura con la que se muestran las imágenes. Como ya hemos comentado, HTML estructura de forma correcta los contenidos de la página y CSS define el aspecto gráfico con el que se muestran los contenidos. Por esta razón, la anchura y la altura con la que se muestra una imagen es parte de su aspecto gráfico, por lo que debería ser propio de <strong>CSS</strong> y no de <strong>HTML</strong>.</p>
+
+<p>Sin embargo, en la práctica no es viable establecer la anchura y altura de todas las imágenes de contenidos mediante CSS. Si el sitio web dispone de muchas imágenes, la sobrecarga de estilos diferentes que debería definir CSS sería contraproducente. Por este motivo, los atributos <code>width</code> y <code>height</code> son la <strong>excepción</strong> a la norma de que el <strong>código HTML</strong> no haga referencia al aspecto de los contenidos.</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;/imagenes/f01.jpg&quot;</span> <span class="kw3">alt</span><span class="sy0">=</span><span class="st0">&quot;Fotografía 1&quot;</span> <span class="kw3">width</span><span class="sy0">=</span><span class="st0">&quot;200&quot;</span> <span class="kw3">height</span><span class="sy0">=</span><span class="st0">&quot;350&quot;</span> <span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;/imagenes/f02.jpg&quot;</span> <span class="kw3">alt</span><span class="sy0">=</span><span class="st0">&quot;Fotografía 2&quot;</span> <span class="kw3">width</span><span class="sy0">=</span><span class="st0">&quot;330&quot;</span> <span class="kw3">height</span><span class="sy0">=</span><span class="st0">&quot;220&quot;</span> <span class="sy0">/</span>&gt;</span></pre>
+</div>
+
+<p>Si el valor del atributo <code>width</code> o <code>height</code> se indica mediante un número entero, el navegador supone que hace referencia a la unidad de medida pixel. Por tanto, en el ejemplo anterior, la primera foto se muestra con una anchura de 200 pixel y una altura de 350 pixel.</p>
+
+<p>También es posible indicar la anchura y altura en forma de porcentaje. En este caso, el porcentaje hace referencia a la altura/anchura del elemento en el que está contenida la imagen. Si la imagen no se encuentra dentro de ningún otro elemento, hace referencia a la anchura/altura total de la página.</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">div</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;/imagenes/f01.jpg&quot;</span> <span class="kw3">alt</span><span class="sy0">=</span><span class="st0">&quot;Fotografía 1&quot;</span> <span class="kw3">width</span><span class="sy0">=</span><span class="st0">&quot;30%&quot;</span> <span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre>
+</div>
+
+<p>El ejemplo anterior mezcla los dos tipos de medidas que se pueden utilizar, para indicar que la foto tiene una anchura igual al 30% de la anchura del elemento <code>&lt;div&gt;</code> que la contiene y una altura de 350 pixel.</p>
+
+<p>La <strong>anchura/altura</strong> con la que se muestra una imagen no tiene que coincidir obligatoriamente con la anchura/altura real de la imagen. Sin embargo, cuando estos valores no coinciden, las imágenes se muestran deformadas. Si solamente se establece la altura o anchura de la imagen, el navegador calcula la el otro valor necesario para que se mantenga la proporción de la imagen.</p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 10</p>
+</div>
+
+<p><a class="internal" href="capitulo-14.html#ej10">Ver enunciado</a></p>
+
+<h2 id="mapas">7.2 Mapas</h2>
+
+<p>Aunque el uso de los <strong>mapas de imagen</strong> se ha reducido mucho en los últimos años, aún se utilizan en algunos sitios especializados. La mayoría de mapas se realiza hoy en día mediante <em>Flash</em>, aunque algunos sitios siguen recurriendo a los mapas de imagen.</p>
+
+<p>Un <strong>mapa de imagen</strong> permite definir diferentes zonas <em>"pinchables"</em> dentro de una imagen. El usuario puede pinchar sobre cada una de las zonas definidas y cada una de ellas puede apuntar a una <strong>URL diferente</strong>. Una imagen que muestre un mapa de todos los continentes puede definir una zona diferente para cada continente. De esta forma, el usuario puede pinchar sobre la zona correspondiente a cada continente.</p>
+
+<p>Las zonas o regiones que se pueden definir en una imagen se crean mediante rectángulos, círculos y polígonos. Para crear un mapa de imagen, en primer lugar se inserta la imagen original mediante la etiqueta <code>&lt;img&gt;</code>. A continuación, se utiliza la etiqueta <code>&lt;map&gt;</code> para definir las zonas o regiones de la imagen. Cada zona se define mediante la etiqueta <code>&lt;area&gt;</code>.</p>
+
+<div class="table" id="table-7-2">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;map&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left"><code>name="texto"</code> Nombre que identifica de forma única al mapa definido (es obligatorio indicar un nombre único)</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En bloque y en línea</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplea para definir mapas de imagen</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<div class="table" id="table-7-3">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;area&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos y foco</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left"><code>href="url"</code> URL a la que se accede al pinchar sobre el área <br /> <code>nohref="nohref"</code> Se emplea para las áreas que no son seleccionables <br /> <code>shape="default | rect | circle | poly"</code> Indica el tipo de área que se define (toda la imagen, rectangular, circular o poligonal) <br /> <code>coords="lista de números"</code> Se trata de una lista de números separados por comas que representan las coordenadas del área.<br />Rectangular = X1,Y1,X2,Y2 (coordenadas X e Y del vértice superior izquierdo y coordenadas X e Y del vértice inferior derecho)<br /> Circular = X1,Y1,R (coordenadas X e Y del centro y radio del círculo) <br />Poligonal = X1,Y1,X2,Y2,...,XnYn (coordenadas de los vértices del polígono. Si las últimas coordenadas no son iguales que las primeras, se cierra automáticamente el polígono uniendo ambos vértices)</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">Etiqueta vacía</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplea para definir las distintas áreas que forman un mapa de imagen</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Si una imagen utiliza un mapa de imagen, se debe indicar mediante el atributo <code>usemap</code>. El valor del atributo debe ser el nombre del mapa de imagen definido en otra parte del mismo documento HTML:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;mapa_mundo.gif&quot;</span> <span class="kw3">usemap</span><span class="sy0">=</span><span class="st0">&quot;#continentes&quot;</span> <span class="sy0">/</span>&gt;</span>
+...
+<span class="sc2">&lt;<span class="kw2">map</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;continentes&quot;</span>&gt;</span>
+    ...
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">map</span>&gt;</span></pre>
+</div>
+
+<p>Las áreas se definen mediante el atributo <code>shape</code> que indica el tipo de área y <code>coords</code> que es una lista de coordenadas cuyo significado depende del tipo de área definido. El enlace de cada área se define mediante el atributo <code>href</code>, con la misma sintaxis y significado que para los enlaces normales.</p>
+
+<p>El siguiente ejemplo muestra una imagen sencilla que contiene cuatro figuras geométricas:</p>
+
+<div class="figure" id="figure-7-1">
+    <img src="images/cap07/ejemplo_mapa_imagen.png" alt="Mapa imagen" />
+
+    <p class="caption"><strong>Figura 7.1</strong> Mapa imagen</p>
+</div>
+
+
+<p>Utilizando un círculo, dos rectángulos y un polígono se pueden definir fácilmente cuatro zonas <em>pinchables</em> en la imagen mediante el siguiente código HTML:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">img</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;imagen.gif&quot;</span> <span class="kw3">usemap</span><span class="sy0">=</span><span class="st0">&quot;#mapa_zonas&quot;</span> <span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="kw2">map</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;mapa_zonas&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">area</span> <span class="kw3">shape</span><span class="sy0">=</span><span class="st0">&quot;rect&quot;</span> <span class="kw3">coords</span><span class="sy0">=</span><span class="st0">&quot;20,25,84,113&quot;</span></span>
+<span class="sc2">        <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;rectangulo.html&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">area</span> <span class="kw3">shape</span><span class="sy0">=</span><span class="st0">&quot;polygon&quot;</span> <span class="kw3">coords</span><span class="sy0">=</span><span class="st0">&quot;90,25,162,26,163,96,89,25,90,24&quot;</span></span>
+<span class="sc2">        <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;triangulo.html&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">area</span> <span class="kw3">shape</span><span class="sy0">=</span><span class="st0">&quot;circle&quot;</span> <span class="kw3">coords</span><span class="sy0">=</span><span class="st0">&quot;130,114,29&quot;</span></span>
+<span class="sc2">        <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;circulo.html&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">area</span> <span class="kw3">shape</span><span class="sy0">=</span><span class="st0">&quot;rect&quot;</span> <span class="kw3">coords</span><span class="sy0">=</span><span class="st0">&quot;19,156,170,211&quot;</span></span>
+<span class="sc2">        <span class="kw3">href</span><span class="sy0">=</span><span class="st0">&quot;mailto:rectangulo@direccion.com&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">area</span> <span class="kw3">shape</span><span class="sy0">=</span><span class="st0">&quot;default&quot;</span> <span class="kw3">nohref</span><span class="sy0">=</span><span class="st0">&quot;nohref&quot;</span> <span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">map</span>&gt;</span></pre>
+</div>
+
+<h2 id="objetos">7.3 Objetos</h2>
+
+<p>Además de las imágenes, HTML permite incluir en las páginas web otros elementos mucho más complejos, como <strong>applets de Java</strong> y <strong>vídeos en formato QuickTime o Flash</strong>. La mayoría de este tipo de contenidos no los interpreta el navegador directamente, sino que hace uso de pequeños programas llamados <em><strong>plugins</strong></em> y que se encargan de tratar con este tipo de elementos complejos.</p>
+
+<p>La etiqueta <code>&lt;object&gt;</code> es la que permite <em>"embeber"</em> o incluir en las páginas HTML cualquier tipo de contenido complejo:</p>
+
+<div class="table" id="table-7-4">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;object&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left"><code>data="url"</code> Indica la URL de los datos que utiliza el objeto <br /> <code>classid, codebase, codetype</code> Información específica que depende del tipo de objeto <br /> <code>type</code> Indica el tipo de contenido de los datos <br /> <code>height="unidad_de_medida"</code> Indica la altura con la que se debe mostrar el objeto <br /> <code>width="unidad_de_medida"</code> Indica la anchura con la que se debe mostrar el objeto</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En bloque y en línea</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplea para embeber objetos en los documentos</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Los posibles valores de <code>type</code> están estandarizados y coinciden con los del atributo <code>type</code> de la etiqueta <code>&lt;a&gt;</code> que explicamos anteriormente.</p>
+
+<p>El propio estándar de HTML incluye ejemplos de uso de esta etiqueta. Incluir un vídeo en formato MPEG:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">object</span> <span class="kw3">data</span><span class="sy0">=</span><span class="st0">&quot;PlanetaTierra.mpeg&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;application/mpeg&quot;</span> <span class="sy0">/</span>&gt;</span></pre>
+</div>
+
+<p>También se pueden incluir varias versiones alternativas de un mismo contenido. Así, si el navegador no es capaz de interpretar el formato por defecto, puede optar por cualquiera de los otros formatos alternativos:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">object</span> <span class="kw3">title</span><span class="sy0">=</span><span class="st0">&quot;La Tierra vista desde el espacio&quot;</span></span>
+<span class="sc2">    <span class="kw3">classid</span><span class="sy0">=</span><span class="st0">&quot;http://www.observer.mars/TheEarth.py&quot;</span>&gt;</span>
+    <span class="sc-1">&lt;!-- Formato alternativo en forma de vídeo --&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">object</span> <span class="kw3">data</span><span class="sy0">=</span><span class="st0">&quot;PlanetaTierra.mpeg&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;application/mpeg&quot;</span>&gt;</span>
+        <span class="sc-1">&lt;!-- Otro formato alternativo mediante una imagen GIF --&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">object</span> <span class="kw3">data</span><span class="sy0">=</span><span class="st0">&quot;PlanetaTierra.gif&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;image/gif&quot;</span>&gt;</span>
+            <span class="sc-1">&lt;!-- Si el navegador no soporta ningún formato,</span>
+<span class="sc-1">                se muestra el siguiente texto --&gt;</span>
+            La <span class="sc2">&lt;<span class="kw2">strong</span>&gt;</span>Tierra<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">strong</span>&gt;</span> vista desde el espacio.
+        <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">object</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">object</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">object</span>&gt;</span></pre>
+</div>
+
+<p>A los objetos también se les puede pasar información adicional en forma de parámetros mediante la etiqueta <code>&lt;param&gt;</code>:</p>
+
+<div class="table" id="table-7-5">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;param&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">id</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left"><code>name="texto"</code> Indica el nombre del parámetro <br /> <code>value="texto"</code> Indica el valor del parámetro</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">Etiqueta vacía</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplea para indicar el valor de los parámetros del objeto</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Las etiquetas <code>&lt;param&gt;</code> siempre se incluyen en el interior de las etiquetas <code>&lt;object&gt;</code>:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">object</span> <span class="kw3">data</span><span class="sy0">=</span><span class="st0">&quot;...&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;...&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">param</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;parametro1&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;40&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">param</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;parametro2&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;20&quot;</span> <span class="sy0">/</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">param</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;parametro3&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;texto de prueba&quot;</span> <span class="sy0">/</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">object</span>&gt;</span></pre>
+</div>
+
+<p>Uno de los principales inconvenientes de <code>&lt;object&gt;</code> es la forma de incluir vídeos en formato <em>Flash</em> en las páginas HTML. Si se utiliza el siguiente código:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">object</span> <span class="kw3">data</span><span class="sy0">=</span><span class="st0">&quot;nombre_video.swf&quot;</span> <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;application/x-shockwave-flash&quot;</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">object</span>&gt;</span></pre>
+</div>
+
+<p>El elemento anterior es correcto desde el punto de vista técnico, pero provoca que algunos navegadores como Internet Explorer no visualicen el vídeo hasta que se ha descargado completamente. Si se trata de un vídeo largo, esta solución no es válida para el usuario.</p>
+
+<p>Por este motivo, se utiliza una solución alternativa para incluir vídeos <em>Flash</em> en las páginas HTML: el uso de la etiqueta <code>&lt;embed&gt;</code>. Pero aunque esta solución funciona correctamente, no se trata de una solución válida desde el punto de vista del <strong>estándar de XHTML</strong>, por lo que las páginas que incluyan esta solución no pasarán correctamente el proceso de validación.</p>
+
+<div class="table" id="table-7-6">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;embed&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left"><code>src="url"</code> Indica la URL del archivo u objeto que se incluye en la página <br /> <code>type="tipo_de_contenido"</code> Indica el tipo de contenido del objeto (<em>flash</em>, quicktime, java, etc.) <br /> <code>height="unidad_de_medida"</code> Indica la altura con la que se debe mostrar el objeto <br /> <code>width="unidad_de_medida"</code> Indica la anchura con la que se debe mostrar el objeto</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En bloque</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplea para embeber objetos en los documentos</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Este es el motivo por el que los sitios web más populares de vídeos en formato Flash proporcionan un código similar al siguiente para incluir sus vídeos en las páginas HTML:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">object</span> <span class="kw3">width</span><span class="sy0">=</span><span class="st0">&quot;425&quot;</span> <span class="kw3">height</span><span class="sy0">=</span><span class="st0">&quot;350&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">param</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;movie&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;http://www.youtube.com/v/MsH0rBWCYjs&quot;</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">param</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">param</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;wmode&quot;</span> <span class="kw3">value</span><span class="sy0">=</span><span class="st0">&quot;transparent&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">param</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">embed</span> <span class="kw3">src</span><span class="sy0">=</span><span class="st0">&quot;http://www.youtube.com/v/MsH0rBWCYjs&quot;</span></span>
+<span class="sc2">        <span class="kw3">type</span><span class="sy0">=</span><span class="st0">&quot;application/x-shockwave-flash&quot;</span> wmode<span class="sy0">=</span><span class="st0">&quot;transparent&quot;</span></span>
+<span class="sc2">        <span class="kw3">width</span><span class="sy0">=</span><span class="st0">&quot;425&quot;</span> <span class="kw3">height</span><span class="sy0">=</span><span class="st0">&quot;350&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">embed</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">object</span>&gt;</span></pre>
+</div>
+
+<p>Una vez más, se debe tener en cuenta que la solución anterior de utilizar la etiqueta <code>&lt;embed&gt;</code> es correcta desde el punto de vista del usuario (no tiene que esperar a que el vídeo se descargue completamente para poder verlo) pero <strong>no es una solución técnicamente válida</strong>, ya que la etiqueta <code>&lt;embed&gt;</code> no es parte del estándar XHTML.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-7.html#imagenes-y-objetos">Imágenes y objetos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.1</span>
+                        <a class="internal" href="capitulo-7.html#imagenes">Imágenes</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.2</span>
+                        <a class="internal" href="capitulo-7.html#mapas">Mapas</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>7.3</span>
+                        <a class="internal" href="capitulo-7.html#objetos">Objetos</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

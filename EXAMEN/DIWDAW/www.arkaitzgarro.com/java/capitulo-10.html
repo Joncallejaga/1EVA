@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="15/04/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Clases estándar de Java (I) | Java</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">Java</a></h1>
+        <p class="span3">
+                        <a href="capitulo-9.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-11.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="clases-estandar-de-java-i"><span>Capítulo 10</span> Clases estándar de Java (I)</h1>
+        <p>Uno de los puntos fuertes de Java es la gran cantidad de clases <strong>predefinidas</strong> que posee. Dichas clases pueden ser utilizadas por los programadores sin necesidad de <em>reinventar la rueda</em>. En este capítulo se presentan algunas de las clases predefinidas de Java que se suelen utilizar más en la construcción de programas.</p>
+
+<h2 id="clases-contenedoras-o-wrappers">10.1 Clases contenedoras o wrappers</h2>
+
+<p>En Java existen una serie de clases predefinidas equivalentes a los tipos primitivos denominadas <em>wrappers</em>, clases contenedoras o envoltorios. Como muestra la siguiente tabla el identificador de cada una de estas clases es el mismo que el del tipo primitivo correspondiente pero con la letra inicial en mayúsculas (salvo <code>int</code> - <code>Integer</code> y <code>char</code> - <code>Character</code>). Cada una de estas clases declaran un conjunto de métodos de gran utilidad.</p>
+
+<div class="figure" id="figure-10-1">
+    <img src="images/cap10/tipos-primitivos.png" alt="Tipos primitivos y clases contenedoras correspondientes" />
+
+    <p class="caption"><strong>Figura 10.1</strong> Tipos primitivos y clases contenedoras correspondientes</p>
+</div>
+
+
+<p>El uso de estas clases puede ser especialmente interesante para realizar determinadas operaciones mediante los métodos que implementan. En la siguiente sección se analiza el uso de la clase <code>Character</code>.</p>
+
+<h2 id="objetos-de-la-clase-character">10.2 Objetos de la clase <code>Character</code></h2>
+
+<p>La clase predefinida <code>Character</code> permite trabajar con instancias a las que se les puede asociar un único carácter Unicode. Esta clase incluye un conjunto de métodos que facilitan la manipulación de datos de tipo primitivo <code>char</code>.</p>
+
+<div class="figure" id="figure-10-2">
+    <img src="images/cap10/character.jpg" alt="Métodos de la clase <code>Character</code>" />
+
+    <p class="caption"><strong>Figura 10.2</strong> Métodos de la clase <code>Character</code></p>
+</div>
+
+
+<p>El siguiente código muestra como crear referencias e instancias de la clase <code>Character</code>:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw3">Character</span> a1<span class="sy0">;</span> 
+a1 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Character</span><span class="br0">&#40;</span><span class="st0">'A'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw3">Character</span> a2 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Character</span><span class="br0">&#40;</span><span class="st0">'B'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="figure" id="figure-10-3">
+    <img src="images/cap10/character2.png" alt="Otros métodos de la clase <code>Character</code>" />
+
+    <p class="caption"><strong>Figura 10.3</strong> Otros métodos de la clase <code>Character</code></p>
+</div>
+
+
+<h2 id="objetos-de-la-clase-string">10.3 Objetos de la clase <code>String</code></h2>
+
+<p><code>String</code> es una clase predefinida y especial de Java definida en la librería o paquete <code>java.lang</code> y orientada a manejar cadenas constantes de caracteres. Una instancia de la clase <code>String</code> es inmutable, es decir, una vez que se ha creado y se le ha asignado un valor, éste no puede modificarse (añadiendo, eliminando o cambiando caracteres). El siguiente código muestra diferentes ejemplos de creación de referencias e instancias de la clase <code>String</code>:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw3">String</span> cortesia <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">String</span><span class="br0">&#40;</span><span class="st0">&quot;Buenos dias&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+<span class="co1">// O bien, al ser una clase muy habitual en la forma abreviada:</span>
+<span class="kw3">String</span> saludo <span class="sy0">=</span> <span class="st0">&quot;Hola&quot;</span><span class="sy0">;</span> 
+<span class="co1">// O tambien: </span>
+<span class="kw3">String</span> despedida<span class="sy0">;</span> 
+despedida <span class="sy0">=</span> <span class="st0">&quot;Adios&quot;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Como se ha visto anteriormente, las constantes de la clase <code>String</code> o cadenas literales se indican entre comillas dobles. Estas comillas no se consideran parte de la cadena.</p>
+
+<div class="figure" id="figure-10-4">
+    <img src="images/cap10/string.png" alt="Representacion gráfica de los objetos de la clase <code>String</code> en memoria" />
+
+    <p class="caption"><strong>Figura 10.4</strong> Representacion gráfica de los objetos de la clase <code>String</code> en memoria</p>
+</div>
+
+
+<h2 id="operaciones-con-instancias-de-la-clase-string">10.4 Operaciones con instancias de la clase <code>String</code></h2>
+
+<p>Al ser un objeto, una instancia de la clase <code>String</code> no sigue las normas de manipulación de los datos de tipo primitivo con excepción del operador concatenación. El operador + realiza una concatenación cuando, al menos, un operando es un <code>String</code>. El otro operando puede ser de un tipo primitivo. El resultado es una nueva instancia de tipo <code>String</code>. Por ejemplo:</p>
+
+<div class="code java">
+<pre class="java"><span class="st0">&quot;casa&quot;</span> <span class="sy0">+</span> <span class="st0">&quot;blanca&quot;</span>   <span class="co1">// Genera &quot;casablanca&quot;</span>
+<span class="st0">&quot;capitulo&quot;</span> <span class="sy0">+</span> <span class="nu0">5</span>      <span class="co1">// Genera &quot;indice5&quot;</span>
+<span class="nu0">5</span> <span class="sy0">+</span> <span class="st0">&quot;capitulo&quot;</span>      <span class="co1">// Genera &quot;5capitulo&quot;</span>
+<span class="st0">&quot;x&quot;</span> <span class="sy0">+</span> <span class="nu0">2</span> <span class="sy0">+</span> <span class="nu0">3</span>         <span class="co1">// Genera &quot;x23&quot;</span>
+<span class="nu0">2</span> <span class="sy0">+</span> <span class="nu0">3</span> <span class="sy0">+</span> <span class="st0">&quot;x&quot;</span>         <span class="co1">// Genera &quot;5x&quot;: cuidado con la prioridad de los operadores</span>
+<span class="nu0">2</span> <span class="sy0">+</span> <span class="br0">&#40;</span><span class="nu0">3</span> <span class="sy0">+</span> <span class="st0">&quot;x&quot;</span><span class="br0">&#41;</span>       <span class="co1">// Genera &quot;23x&quot;</span></pre>
+</div>
+
+<p>También puede emplearse el operador <code>+=</code>, de forma que la sentencia <code>a+=b</code> es equivalente a la sentencia <code>a = a+b</code>.</p>
+
+<p>La comparación de dos objetos <code>String</code> no se realiza con el operador igualdad (<code>==</code>), ya que se compararían las referencias, sino que se realiza con el método <code>equals</code>, de forma que <code>cadena1.equals(cadena2)</code> devuelve <code>true</code> si <code>cadena1</code> y <code>cadena2</code> hacen referencia a un mismo valor. Los métodos más importantes de la clase <code>String</code> se resumen en la siguiente tabla.</p>
+
+<div class="figure" id="figure-10-5">
+    <img src="images/cap10/string2.png" alt="Métodos de la clase <code>String</code>" />
+
+    <p class="caption"><strong>Figura 10.5</strong> Métodos de la clase <code>String</code></p>
+</div>
+
+
+<p>Para visualizar por pantalla el contenido de un objeto <code>String</code> pueden emplearse los métodos <code>print</code> y <code>println</code> de la clase estándar <code>System.out</code>.</p>
+
+<div class="code java">
+<pre class="java"><span class="kw1">if</span> <span class="br0">&#40;</span>saludo.<span class="me1">equals</span><span class="br0">&#40;</span>despedida<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>saludo<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">else</span>
+    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>despedida<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>La longitud de una cadena puede obtenerse con el método <code>length</code> perteneciente a la clase <code>String</code> que devuelve un valor entero que indica el número de caracteres que componen la cadena:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw3">String</span> despedida <span class="sy0">=</span> <span class="st0">&quot;Adios&quot;</span><span class="sy0">;</span> 
+<span class="kw4">int</span> longitud <span class="sy0">=</span> despedida.<span class="me1">length</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// longitud toma el valor 5</span>
+longitud <span class="sy0">=</span> <span class="st0">&quot;Hasta luego&quot;</span>.<span class="me1">length</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// longitud toma el valor 11</span></pre>
+</div>
+
+<p>Una cadena de longitud igual a <code>0</code>, que no contiene ningún carácter, se denomina cadena vacía y se representa como "". Por otro lado, el método <code>charAt</code> devuelve el carácter cuya posición indica el parámetro de la llamada, teniendo en cuenta que las posiciones se indican con valores enteros y que el <code>0</code> corresponde al primer carácter de la cadena.</p>
+
+<div class="code java">
+<pre class="java"><span class="kw4">char</span> c <span class="sy0">=</span> despedida.<span class="me1">charAt</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// c toma el valor 'i'</span></pre>
+</div>
+
+<div class="figure" id="figure-10-6">
+    <img src="images/cap10/caracteres.png" alt="Posiciones correspondientes a los caracteres que componen una cadena" />
+
+    <p class="caption"><strong>Figura 10.6</strong> Posiciones correspondientes a los caracteres que componen una cadena</p>
+</div>
+
+
+<h2 id="otros-metodos-para-trabajar-con-objetos-de-la-clase-string">10.5 Otros métodos para trabajar con objetos de la clase <code>String</code></h2>
+
+<p>El método <code>substring</code>, con los parámetros enteros <code>inicio</code> y <code>fin</code>, devuelve una nueva subcadena contenida en la de origen. Si sólo se le indica el primer parámetro, devuelve la cadena a partir del carácter indicado hasta el final de la cadena original. Por ejemplo:</p>
+
+<div class="code java">
+<pre class="java"><span class="kw3">String</span> despedida <span class="sy0">=</span> <span class="st0">&quot;Adios&quot;</span><span class="sy0">;</span>
+ <span class="kw3">String</span> s1 <span class="sy0">=</span> despedida.<span class="me1">substring</span><span class="br0">&#40;</span><span class="nu0">1</span>,<span class="nu0">3</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// s1 toma el valor &quot;di&quot;</span>
+<span class="kw3">String</span> s2 <span class="sy0">=</span> despedida.<span class="me1">substring</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>   <span class="co1">// s2 toma el valor &quot;dios&quot;</span></pre>
+</div>
+
+<p>El listado compelto de métodos disponibles para la clase <code>String</code>, puede encontrarse en la API oficial de Java <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html">http://docs.oracle.com/javase/7/docs/api/java/lang/String.html</a>.</p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-10.html#clases-estandar-de-java-i">Clases estándar de Java (I)</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.1</span>
+                        <a class="internal" href="capitulo-10.html#clases-contenedoras-o-wrappers">Clases contenedoras o wrappers</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.2</span>
+                        <a class="internal" href="capitulo-10.html#objetos-de-la-clase-character">Objetos de la clase <code>Character</code></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.3</span>
+                        <a class="internal" href="capitulo-10.html#objetos-de-la-clase-string">Objetos de la clase <code>String</code></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.4</span>
+                        <a class="internal" href="capitulo-10.html#operaciones-con-instancias-de-la-clase-string">Operaciones con instancias de la clase <code>String</code></a>
+                    </li>
+                                    <li class="level-2">
+                        <span>10.5</span>
+                        <a class="internal" href="capitulo-10.html#otros-metodos-para-trabajar-con-objetos-de-la-clase-string">Otros métodos para trabajar con objetos de la clase <code>String</code></a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

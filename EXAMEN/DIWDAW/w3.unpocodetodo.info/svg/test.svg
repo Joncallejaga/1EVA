@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!--Scalable Vector Graphic-->
+<svg version="1.1" 
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     xmlns:ev="http://www.w3.org/2001/xml-events"     
+     baseProfile="full">
+<path id="Yin" d="M125, 100 a37.5,40 0 0,1  80,0 a80,80 0 0,1  -160,0 a40,40 0 0,0  80,0" fill="#000" stroke="#000" stroke-width="1"></path>
+<circle cx="85" cy="100" r="8" fill="#f00"></circle>
+<path id="Yang" d="M125, 100 a40,40 0 0,1  -80,0 a80,80 0 0,1  160,0 a40,40 0 0,0  -80,0" fill="none" stroke="#000" stroke-width="1"></path>
+<circle cx="170" cy="100" r="8" fill="#f00"></circle>
+</svg>

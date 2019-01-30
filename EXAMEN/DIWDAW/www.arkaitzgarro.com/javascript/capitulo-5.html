@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="08/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Estructuras de control | JavaScript</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">JavaScript</a></h1>
+        <p class="span3">
+                        <a href="capitulo-4.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-6.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="estructuras-de-control"><span>Capítulo 5</span> Estructuras de control</h1>
+        <h2 id="estructura-ifelse">5.1 Estructura if...else</h2>
+
+<p>La estructura más utilizada en JavaScript y en la mayoría de lenguajes de programación es la estructura <code>if</code>. Se emplea para tomar decisiones en función de una condición. Su definición formal es:</p>
+
+<p><img src="images/diagrams/if-statement.png" alt="Diagrama de definición de la sentencia if"></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">if</span><span class="br0">&#40;</span>condicion<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  ...
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Si la condición se cumple (es decir, si su valor es <code>true</code>) se ejecutan todas las instrucciones que se encuentran dentro del bloque <code>{...}</code>. Si la condición no se cumple (es decir, si su valor es <code>false</code>) no se ejecuta ninguna instrucción contenida en <code>{...}</code> y el programa continúa ejecutando el resto de instrucciones del script.</p>
+
+<p>Ejemplo:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> mostrarMensaje <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">if</span><span class="br0">&#40;</span>mostrarMensaje<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Hola Mundo&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>En el ejemplo anterior, el mensaje sí que se muestra al usuario ya que la variable <code>mostrarMensaje</code> tiene un valor de <code>true</code> y por tanto, el programa entra dentro del bloque de instrucciones del <code>if</code>.</p>
+
+<p>El ejemplo se podría reescribir también como:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> mostrarMensaje <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">if</span><span class="br0">&#40;</span>mostrarMensaje <span class="sy0">==</span> <span class="kw2">true</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Hola Mundo&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>En este caso, la condición es una comparación entre el valor de la variable <code>mostrarMensaje</code> y el valor <code>true</code>. Como los dos valores coinciden, la igualdad se cumple y por tanto la condición es cierta, su valor es <code>true</code> y se ejecutan las instrucciones contenidas en ese bloque del <code>if</code>.</p>
+
+<p>La comparación del ejemplo anterior suele ser el origen de muchos errores de programación, al confundir los operadores <code>==</code> y <code>=</code>. Las comparaciones siempre se realizan con el operador <code>==</code>, ya que el operador <code>=</code> solamente asigna valores:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> mostrarMensaje <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// Se comparan los dos valores</span>
+<span class="kw1">if</span><span class="br0">&#40;</span>mostrarMensaje <span class="sy0">==</span> <span class="kw2">false</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  ...
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="co1">// Error - Se asigna el valor &quot;false&quot; a la variable</span>
+<span class="kw1">if</span><span class="br0">&#40;</span>mostrarMensaje <span class="sy0">=</span> <span class="kw2">false</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  ...
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La condición que controla el <code>if()</code> puede combinar los diferentes operadores lógicos y relacionales mostrados anteriormente:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> mostrado <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">if</span><span class="br0">&#40;</span><span class="sy0">!</span>mostrado<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Es la primera vez que se muestra el mensaje&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Los operadores <code>AND</code> y <code>OR</code> permiten encadenar varias condiciones simples para construir condiciones complejas:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> mostrado <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+<span class="kw1">var</span> usuarioPermiteMensajes <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">if</span><span class="br0">&#40;</span><span class="sy0">!</span>mostrado <span class="sy0">&amp;&amp;</span> usuarioPermiteMensajes<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Es la primera vez que se muestra el mensaje&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La condición anterior está formada por una operación <code>AND</code> sobre dos variables. A su vez, a la primera variable se le aplica el operador de negación antes de realizar la operación <code>AND</code>. De esta forma, como el valor de <code>mostrado</code> es <code>false</code>, el valor <code>!mostrado</code> sería <code>true</code>. Como la variable <code>usuarioPermiteMensajes</code> vale <code>true</code>, el resultado de <code>!mostrado &amp;&amp; usuarioPermiteMensajes</code> sería igual a <code>true &amp;&amp; true</code>, por lo que el resultado final de la condición del <code>if()</code> sería <code>true</code> y por tanto, se ejecutan las instrucciones que se encuentran dentro del bloque del <code>if()</code>.</p>
+
+<p>En ocasiones, las decisiones que se deben realizar no son del tipo <em>"si se cumple la condición, hazlo; si no se cumple, no hagas nada"</em>. Normalmente las condiciones suelen ser del tipo <em>"si se cumple esta condición, hazlo; si no se cumple, haz esto otro"</em>.</p>
+
+<p>Para este segundo tipo de decisiones, existe una variante de la estructura <code>if</code> llamada <code>if...else</code>. Su definición formal es la siguiente:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">if</span><span class="br0">&#40;</span>condicion<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  ...
+<span class="br0">&#125;</span>
+<span class="kw1">else</span> <span class="br0">&#123;</span>
+  ...
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Si la condición se cumple (es decir, si su valor es <code>true</code>) se ejecutan todas las instrucciones que se encuentran dentro del <code>if()</code>. Si la condición no se cumple (es decir, si su valor es <code>false</code>) se ejecutan todas las instrucciones contenidas en <code>else { }</code>. Ejemplo:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> edad <span class="sy0">=</span> <span class="nu0">18</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">if</span><span class="br0">&#40;</span>edad <span class="sy0">&gt;=</span> <span class="nu0">18</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Eres mayor de edad&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Todavía eres menor de edad&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Si el valor de la variable <code>edad</code> es mayor o igual que el valor numérico <code>18</code>, la condición del <code>if()</code> se cumple y por tanto, se ejecutan sus instrucciones y se muestra el mensaje <code>"Eres mayor de edad"</code>. Sin embargo, cuando el valor de la variable <code>edad</code> no es igual o mayor que <code>18</code>,la condición del <code>if()</code> no se cumple, por lo que automáticamente se ejecutan todas las instrucciones del bloque <code>else { }</code>. En este caso, se mostraría el mensaje <code>"Todavía eres menor de edad"</code>.</p>
+
+<p>El siguiente ejemplo compara variables de tipo cadena de texto:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> nombre <span class="sy0">=</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span></pre>
+</div>
+
+<pre><code>if(nombre == "") {
+  console.log("Aún no nos has dicho tu nombre");
+} else {
+  console.log("Hemos guardado tu nombre");
+}
+</code></pre>
+
+<p>La condición del <code>if()</code> anterior se construye mediante el operador <code>==</code>, que es el que se emplea para comparar dos valores (no confundir con el operador <code>=</code> que se utiliza para asignar valores). En el ejemplo anterior, si la cadena de texto almacenada en la variable <code>nombre</code> es vacía (es decir, es igual a <code>""</code>) se muestra el mensaje definido en el <code>if()</code>. En otro caso, se muestra el mensaje definido en el bloque <code>else { }</code>.</p>
+
+<p>La estructura <code>if...else</code> se puede encadenar para realizar varias comprobaciones seguidas:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">if</span><span class="br0">&#40;</span>edad <span class="sy0">&lt;</span> <span class="nu0">12</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Todavía eres muy pequeño&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>edad <span class="sy0">&lt;</span> <span class="nu0">19</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Eres un adolescente&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>edad <span class="sy0">&lt;</span> <span class="nu0">35</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Aun sigues siendo joven&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Piensa en cuidarte un poco más&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>No es obligatorio que la combinación de estructuras <code>if...else</code> acabe con la instrucción <code>else</code>, ya que puede terminar con una instrucción de tipo <code>else if()</code>.</p>
+
+<h2 id="estructura-switch">5.2 Estructura switch</h2>
+
+<p>La estructura <code>switch</code> es muy útil cuando la condición que evaluamos puede tomar muchos valores. Si utilizasemos una sentencia <code>if...else</code>, tendríamos que repetir la condición para los distintos valores.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">if</span><span class="br0">&#40;</span>dia <span class="sy0">==</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Hoy es lunes.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>dia <span class="sy0">==</span> <span class="nu0">2</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Hoy es martes.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>dia <span class="sy0">==</span> <span class="nu0">3</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Hoy es miércoles.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>dia <span class="sy0">==</span> <span class="nu0">4</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Hoy es jueves.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>dia <span class="sy0">==</span> <span class="nu0">5</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Hoy es viernes.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>dia <span class="sy0">==</span> <span class="nu0">6</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Hoy es sábado.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>dia <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Hoy es domingo.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>En este caso es más conveniente utilizar una estructura de control de tipo <code>switch</code>, ya que permite ahorrarnos trabajo y producir un código más limpio. Su definición formal es la siguiente:</p>
+
+<p><img src="images/diagrams/switch-statement.png" alt="Diagrama de definición de la sentencia switch"></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">switch</span><span class="br0">&#40;</span>dia<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">case</span> <span class="nu0">1</span><span class="sy0">:</span> console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Hoy es lunes.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="kw1">break</span><span class="sy0">;</span>
+  <span class="kw1">case</span> <span class="nu0">2</span><span class="sy0">:</span> console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Hoy es martes.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="kw1">break</span><span class="sy0">;</span>
+  <span class="kw1">case</span> <span class="nu0">3</span><span class="sy0">:</span> console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Hoy es miércoles.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="kw1">break</span><span class="sy0">;</span>
+  <span class="kw1">case</span> <span class="nu0">4</span><span class="sy0">:</span> console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Hoy es jueves.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="kw1">break</span><span class="sy0">;</span>
+  <span class="kw1">case</span> <span class="nu0">5</span><span class="sy0">:</span> console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Hoy es viernes.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="kw1">break</span><span class="sy0">;</span>
+  <span class="kw1">case</span> <span class="nu0">6</span><span class="sy0">:</span> console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Hoy es sábado.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="kw1">break</span><span class="sy0">;</span>
+  <span class="kw1">case</span> <span class="nu0">0</span><span class="sy0">:</span> console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Hoy es domingo.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="kw1">break</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La cláusula <code>case</code> no tiene por qué ser una constante, sino que puede ser una expresión al igual que en la estructura <code>if</code>. El comportamiento por defecto de la estructura <code>switch</code>es seguir evaluando el resto de cláusulas, aún cuando una de ellas haya cumplido la condición. Para evitar ese comportamiento, es necesario utilizar la sentencia <code>break</code> en las cláusulas que deseemos.</p>
+
+<p><img src="images/diagrams/case-clause.png" alt="Diagrama de definición de la cláusula case"></p>
+
+<h2 id="estructura-while">5.3 Estructura while</h2>
+
+<p>La estructura <code>while</code> ejecuta un simple bucle, mientras se cumpla la condición. Su definición formal es la siguiente:</p>
+
+<p><img src="images/diagrams/while-statement.png" alt="Diagrama de definición de la sentencia while"></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> veces <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+&nbsp;
+while<span class="br0">&#40;</span>veces <span class="sy0">&lt;</span> <span class="nu0">7</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Mensaje &quot;</span> <span class="sy0">+</span> veces<span class="br0">&#41;</span><span class="sy0">;</span>
+  veces<span class="sy0">++;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La idea del funcionamiento de un bucle <code>while</code> es la siguiente: "mientras la condición indicada se siga cumpliendo, repite la ejecución de las instrucciones definidas dentro del <code>while</code>. Es importante modificar los valores de las variables incluidas dentro de la condición, ya que otra manera, el bucle se repetiría de manera indefinida, perjudicando la ejecución de la página y bloqueando la ejecución del resto del script.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> veces <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+&nbsp;
+while<span class="br0">&#40;</span>veces <span class="sy0">&lt;</span> <span class="nu0">7</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Mensaje &quot;</span> <span class="sy0">+</span> veces<span class="br0">&#41;</span><span class="sy0">;</span>
+  veces <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>En este ejemplo, se mostraría de manera infinita una alerta con el texto "Mensaje 0".</p>
+
+<h2 id="estructura-for">5.4 Estructura for</h2>
+
+<p>La estructura <code>for</code> permite realizar bucles de una forma muy sencilla. Su definición formal es la siguiente:</p>
+
+<p><img src="images/diagrams/for-statement.png" alt="Diagrama de definición de la sentencia while"></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">for</span><span class="br0">&#40;</span>inicializacion<span class="sy0">;</span> condicion<span class="sy0">;</span> actualizacion<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  ...
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La idea del funcionamiento de un bucle <code>for</code> es la siguiente: <em>"mientras la condición indicada se siga cumpliendo, repite la ejecución de las instrucciones definidas dentro del for. Además, después de cada repetición, actualiza el valor de las variables que se utilizan en la condición"</em>.</p>
+
+<ul>
+<li>La "inicialización" es la zona en la que se establece los valores iniciales de las variables que controlan la repetición.</li>
+<li>La "condición" es el único elemento que decide si continua o se detiene la repetición.</li>
+<li>La "actualización" es el nuevo valor que se asigna después de cada repetición a las variables que controlan la repetición.
+var mensaje = "Hola, estoy dentro de un bucle";</li>
+</ul>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">for</span><span class="br0">&#40;</span><span class="kw1">var</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> <span class="nu0">5</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span>mensaje<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La parte de la inicialización del bucle consiste en:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Por tanto, en primer lugar se crea la variable <code>i</code> y se le asigna el valor de <code>0</code>. Esta zona de inicialización solamente se tiene en consideración justo antes de comenzar a ejecutar el bucle. Las siguientes repeticiones no tienen en cuenta esta parte de inicialización.</p>
+
+<p>La zona de condición del bucle es:</p>
+
+<div class="code javascript">
+<pre class="javascript">i <span class="sy0">&lt;</span> <span class="nu0">5</span></pre>
+</div>
+
+<p>Los bucles se siguen ejecutando mientras se cumplan las condiciones y se dejan de ejecutar justo después de comprobar que la condición no se cumple. En este caso, mientras la variable <code>i</code> valga menos de <code>5</code> el bucle se ejecuta indefinidamente.</p>
+
+<p>Como la variable <code>i</code> se ha inicializado a un valor de <code>0</code> y la condición para salir del bucle es que <code>i</code> sea menor que <code>5</code>, si no se modifica el valor de <code>i</code> de alguna forma, el bucle se repetiría indefinidamente.</p>
+
+<p>Por ese motivo, es imprescindible indicar la zona de actualización, en la que se modifica el valor de las variables que controlan el bucle:</p>
+
+<div class="code javascript">
+<pre class="javascript">i<span class="sy0">++</span></pre>
+</div>
+
+<p>En este caso, el valor de la variable <code>i</code> se incrementa en una unidad después de cada repetición. La zona de actualización se ejecuta después de la ejecución de las instrucciones que incluye el <code>for</code>.</p>
+
+<p>Así, durante la ejecución de la quinta repetición el valor de <code>i</code> será <code>4</code>. Después de la quinta ejecución, se actualiza el valor de <code>i</code>, que ahora valdrá <code>5</code>. Como la condición es que <code>i</code> sea menor que <code>5</code>, la condición ya no se cumple y las instrucciones del <code>for</code> no se ejecutan una sexta vez.</p>
+
+<p>Normalmente, la variable que controla los bucles <code>for</code> se llama <code>i</code>, ya que recuerda a la palabra índice y su nombre tan corto ahorra mucho tiempo y espacio.</p>
+
+<p>El ejemplo anterior que mostraba los días de la semana contenidos en un array se puede rehacer de forma más sencilla utilizando la estructura <code>for</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> dias <span class="sy0">=</span> <span class="br0">&#91;</span><span class="st0">&quot;Lunes&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Martes&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Miércoles&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Jueves&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Viernes&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Sábado&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Domingo&quot;</span><span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">for</span><span class="br0">&#40;</span><span class="kw1">var</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;</span><span class="nu0">7</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span>dias<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h2 id="estructura-forin">5.5 Estructura for...in</h2>
+
+<p>Una estructura de control derivada de <code>for</code> es la estructura <code>for...in</code>. Su definición exacta implica el uso de objetos, permitiendo recorrer las propiedades de un objeto. En cada iteración, un nuevo nombre de propiedad del objeto es asignada a la variable:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">for</span><span class="br0">&#40;</span>propiedad <span class="kw1">in</span> object<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">if</span> <span class="br0">&#40;</span>object.<span class="kw3">hasOwnProperty</span><span class="br0">&#40;</span>propiedad<span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    ...
+  <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Suele ser conveniente comprobar que la propiedad pertenece efectivamente al objeto, a través de <code>object.hasOwnProperty(propiedad)</code>. De la misma manera que podemos recorrer las propiedades de un objeto, es posible adaptar este comportamiento a los arrays:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">for</span><span class="br0">&#40;</span>indice <span class="kw1">in</span> array<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  ...
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Si se quieren recorrer todos los elementos que forman un array, la estructura <code>for...in</code> es la forma más eficiente de hacerlo, como se muestra en el siguiente ejemplo:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> dias <span class="sy0">=</span> <span class="br0">&#91;</span><span class="st0">&quot;Lunes&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Martes&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Miércoles&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Jueves&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Viernes&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Sábado&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Domingo&quot;</span><span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">for</span><span class="br0">&#40;</span>i <span class="kw1">in</span> dias<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  console.<span class="me1">log</span><span class="br0">&#40;</span>dias<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La variable que se indica como indice es la que se puede utilizar dentro del bucle <code>for...in</code> para acceder a los elementos del array. De esta forma, en la primera repetición del bucle la variable <code>i</code> vale <code>0</code> y en la última vale <code>6</code>.</p>
+
+<p>Esta estructura de control es la más adecuada para recorrer arrays (y objetos), ya que evita tener que indicar la inicialización y las condiciones del bucle <code>for</code> simple y funciona correctamente cualquiera que sea la longitud del array. De hecho, sigue funcionando igual aunque varíe el número de elementos del array.</p>
+
+<h2 id="estructura-try">5.6 Estructura try</h2>
+
+<p>La estructura <code>try</code> consiste en un bloque de código que se ejecuta de manera normal, y captura cualquier excepción que se pueda producir en ese bloque de sentencias. Su definición formal es la siguiente:</p>
+
+<p><img src="images/diagrams/try-statement.png" alt="Diagrama de definición de la sentencia try"></p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">try</span> <span class="br0">&#123;</span>
+    funcion_que_no_existe<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> <span class="kw1">catch</span><span class="br0">&#40;</span>ex<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">&quot;Error detectado: &quot;</span> <span class="sy0">+</span> ex.<span class="me1">description</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>En este ejemplo, llamamos a una función que no está definida, y por lo tanto provoca una excepción en JavaScript. Este error es <em>capturado</em> por la  cláusula <code>catch</code>, que contiene una serie de sentencias que indican que acciones realizar con esa excepción que acaba de producirse. Si no se produce ninguna excepción en el bloque <code>try</code>, no se ejecuta el bloque dentro de <code>catch</code>.</p>
+
+<h3 id="la-clausula-finally">5.6.1 La cláusula finally</h3>
+
+<p>La cláusula <code>finally</code> contiene las sentencias a ejecutar después de los bloques <code>try</code> y <code>catch</code>. Las sentencias incluidas en este bloque se ejecutan siempre, se haya producido una excepción o no. Un ejemplo clásico de utilización de la cláusula <code>finally</code>, es la de liberar recursos que el script ha solicitado.</p>
+
+<div class="code javascript">
+<pre class="javascript">abrirFichero<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw1">try</span> <span class="br0">&#123;</span>
+   escribirFichero<span class="br0">&#40;</span>datos<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> <span class="kw1">catch</span><span class="br0">&#40;</span>ex<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// Tratar la excepción</span>
+<span class="br0">&#125;</span> <span class="kw1">finally</span> <span class="br0">&#123;</span>
+   cerrarFichero<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// siempre se cierra el recurso</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 3</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej03">Ver enunciado</a></p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 4</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej04">Ver enunciado</a></p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 5</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej05">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-5.html#estructuras-de-control">Estructuras de control</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.1</span>
+                        <a class="internal" href="capitulo-5.html#estructura-ifelse">Estructura if...else</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.2</span>
+                        <a class="internal" href="capitulo-5.html#estructura-switch">Estructura switch</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.3</span>
+                        <a class="internal" href="capitulo-5.html#estructura-while">Estructura while</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.4</span>
+                        <a class="internal" href="capitulo-5.html#estructura-for">Estructura for</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.5</span>
+                        <a class="internal" href="capitulo-5.html#estructura-forin">Estructura for...in</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>5.6</span>
+                        <a class="internal" href="capitulo-5.html#estructura-try">Estructura try</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

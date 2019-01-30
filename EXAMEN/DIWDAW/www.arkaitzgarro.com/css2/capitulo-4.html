@@ -1,0 +1,1038 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="22/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Modelo de cajas | CSS 2.1</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">CSS 2.1</a></h1>
+        <p class="span3">
+                        <a href="capitulo-3.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-5.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="modelo-de-cajas"><span>Capítulo 4</span> Modelo de cajas</h1>
+        <p>El modelo de cajas o "<em>box model</em>" es seguramente la característica más importante del lenguaje de hojas de estilos CSS, ya que condiciona el diseño de todas las páginas web. El modelo de cajas es el comportamiento de CSS que hace que todos los elementos de las páginas se representen mediante cajas rectangulares.</p>
+
+<p>Las cajas de una página se crean automáticamente. Cada vez que se inserta una etiqueta HTML, se crea una nueva caja rectangular que encierra los contenidos de ese elemento. La siguiente imagen muestra las tres cajas rectangulares que crean las tres etiquetas HTML que incluye la página:</p>
+
+<div class="figure" id="figure-4-1">
+    <img src="images/cap04/boxmodel.png" alt="Las cajas se crean automáticamente al definir cada elemento HTML" />
+
+    <p class="caption"><strong>Figura 4.1</strong> Las cajas se crean automáticamente al definir cada elemento HTML</p>
+</div>
+
+
+<p>Las cajas de las páginas no son visibles a simple vista porque inicialmente no muestran ningún color de fondo ni ningún borde. La siguiente imagen muestra las cajas que forman la página web de <a href="http://www.alistapart.com/">http://www.alistapart.com/</a> después de forzar a que todas las cajas muestren su borde:</p>
+
+<div class="figure" id="figure-4-2">
+    <img src="images/cap04/alistapart.png" alt="Cajas que forman la página alistapart.com" />
+
+    <p class="caption"><strong>Figura 4.2</strong> Cajas que forman la página alistapart.com</p>
+</div>
+
+
+<p>Los navegadores crean y colocan las cajas de forma automática, pero CSS permite modificar todas sus características. Cada una de las cajas está formada por seis partes, tal y como muestra la siguiente imagen:</p>
+
+<div class="figure" id="figure-4-3">
+    <img src="images/cap04/boxmodel_2d.png" alt="Representación bidimensional del box model de CSS" />
+
+    <p class="caption"><strong>Figura 4.3</strong> Representación bidimensional del box model de CSS</p>
+</div>
+
+
+<p>Las partes que componen cada caja y su orden de visualización desde el punto de vista del usuario son las siguientes:</p>
+
+<ul>
+<li>Contenido (<em>content</em>): se trata del contenido HTML del elemento (las palabras de un párrafo, una imagen, el texto de una lista de elementos, etc.)</li>
+<li>Relleno (<em>padding</em>): espacio libre opcional existente entre el contenido y el borde.</li>
+<li>Borde (<em>border</em>): línea que encierra completamente el contenido y su relleno.</li>
+<li>Imagen de fondo (<em>background image</em>): imagen que se muestra por detrás del contenido y el espacio de relleno.</li>
+<li>Color de fondo (<em>background color</em>): color que se muestra por detrás del contenido y el espacio de relleno.</li>
+<li>Margen (<em>margin</em>): separación opcional existente entre la caja y el resto de cajas adyacentes.</li>
+</ul>
+
+<p>El relleno y el margen son transparentes, por lo que en el espacio ocupado por el relleno se muestra el color o imagen de fondo (si están definidos) y en el espacio ocupado por el margen se muestra el color o imagen de fondo de su elemento padre (si están definidos). Si ningún elemento padre tiene definido un color o imagen de fondo, se muestra el color o imagen de fondo de la propia página (si están definidos).</p>
+
+<p>Si una caja define tanto un color como una imagen de fondo, la imagen tiene más prioridad y es la que se visualiza. No obstante, si la imagen de fondo no cubre totalmente la caja del elemento o si la imagen tiene zonas transparentes, también se visualiza el color de fondo. Combinando imagenes transparentes y colores de fondo se pueden lograr efectos gráficos muy interesantes.</p>
+
+<h2 id="anchura-y-altura">4.1 Anchura y altura</h2>
+
+<h3 id="anchura">4.1.1 Anchura</h3>
+
+<p>La propiedad CSS que controla la anchura de la caja de los elementos se denomina <code>width</code>.</p>
+
+<div class="table" id="table-4-1">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>width</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">unidad de medida &#124; porcentaje &#124; auto &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos, salvo los elementos en línea que no sean imágenes, las filas de tabla y los grupos de filas de tabla</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">auto</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Establece la anchura de un elemento</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>La propiedad <code>width</code> no admite valores negativos y los valores en porcentaje se calculan a partir de la anchura de su elemento padre. El valor <code>inherit</code> indica que la anchura del elemento se hereda de su elemento padre. El valor <code>auto</code>, que es el que se utiliza si no se establece de forma explícita un valor a esta propiedad, indica que el navegador debe calcular automáticamente la anchura del elemento, teniendo en cuenta sus contenidos y el sitio disponible en la página.</p>
+
+<p>El siguiente ejemplo establece el valor de la anchura del elemento <code>&lt;div&gt;</code> lateral:</p>
+
+<div class="code html">
+<pre class="html5">#lateral { width: 200px; }
+&nbsp;
+<span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;lateral&quot;</span>&gt;</span>
+    ...
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre>
+</div>
+
+<p>CSS define otras dos propiedades relacionadas con la anchura de los elementos: <code>min-width</code> y <code>max-width</code>, que se verán más adelante.</p>
+
+<h3 id="altura">4.1.2 Altura</h3>
+
+<p>La propiedad CSS que controla la altura de los elementos se denomina <code>height</code>.</p>
+
+<div class="table" id="table-4-2">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>height</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">unidad de medida &#124; porcentaje &#124; auto &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos, salvo los elementos en línea que no sean imágenes, las filas de tabla y los grupos de filas de tabla</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">auto</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Establece la altura de un elemento</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Al igual que sucede con <code>width</code>, la propiedad <code>height</code> no admite valores negativos. Si se indica un porcentaje, se toma como referencia la altura del elemento padre. Si el elemento padre no tiene una altura definida explícitamente, se asigna el valor <code>auto</code> a la altura.</p>
+
+<p>El valor <code>inherit</code> indica que la altura del elemento se hereda de su elemento padre. El valor auto, que es el que se utiliza si no se establece de forma explícita un valor a esta propiedad, indica que el navegador debe calcular automáticamente la altura del elemento, teniendo en cuenta sus contenidos y el sitio disponible en la página.</p>
+
+<p>El siguiente ejemplo establece el valor de la altura del elemento <code>&lt;div&gt;</code> de cabecera:</p>
+
+<div class="code html">
+<pre class="html5">#cabecera { height: 60px; }
+&nbsp;
+<span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;cabecera&quot;</span>&gt;</span>
+  ...
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre>
+</div>
+
+<p>CSS define otras dos propiedades relacionadas con la altura de los elementos: <code>min-height</code> y <code>max-height</code>, que se verán más adelante.</p>
+
+<h2 id="margen-y-relleno">4.2 Margen y relleno</h2>
+
+<h3 id="margen">4.2.1 Margen</h3>
+
+<p>CSS define cuatro propiedades para controlar cada uno de los márgenes horizontales y verticales de un elemento.</p>
+
+<div class="table" id="table-4-3">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedades</th>
+  <th align="left"><code>margin-top, margin-right, margin-bottom, margin-left</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">unidad de medida &#124; porcentaje &#124; auto &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos, salvo margin-top y margin-bottom que sólo se aplican a los elementos de bloque y a las imágenes</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">0</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Establece cada uno de los márgenes horizontales y verticales de un elemento</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Cada una de las propiedades establece la separación entre el borde lateral de la caja y el resto de cajas adyacentes:</p>
+
+<div class="figure" id="figure-4-4">
+    <img src="images/cap04/margen.png" alt="Las cuatro propiedades relacionadas con los márgenes" />
+
+    <p class="caption"><strong>Figura 4.4</strong> Las cuatro propiedades relacionadas con los márgenes</p>
+</div>
+
+
+<p>Las unidades más utilizadas para indicar los márgenes de un elemento son los píxeles (cuando se requiere una precisión total), los <code>em</code> (para hacer diseños que mantengan las proporciones) y los porcentajes (para hacer diseños líquidos o fluidos).</p>
+
+<p>El siguiente ejemplo añade un margen izquierdo al segundo párrafo:</p>
+
+<div class="code css">
+<pre class="css"><span class="re1">.destacado</span> <span class="br0">&#123;</span>
+  <span class="kw1">margin-left</span><span class="sy0">:</span> <span class="re3">2em</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam et elit.
+Vivamus placerat lorem. Maecenas sapien. Integer ut massa. Cras diam ipsum,
+laoreet non, tincidunt a, viverra sed, tortor.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+&nbsp;
+<span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;destacado&quot;</span>&gt;</span>Vestibulum lectus diam, luctus vel, venenatis
+ultrices, cursus vel, tellus. Etiam placerat erat non sem. Nulla
+molestie odio non nisl tincidunt faucibus.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+&nbsp;
+<span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Aliquam euismod sapien eu libero. Ut tempor orci at nulla. Nam in eros
+egestas massa vehicula nonummy. Morbi posuere, nibh ultricies consectetuer
+tincidunt, risus turpis laoreet elit, ut tincidunt risus sem et nunc.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<p>A continuación se muestra el aspecto del ejemplo anterior en cualquier navegador:</p>
+
+<div class="figure" id="figure-4-5">
+    <img src="images/cap04/margin-left.png" alt="Ejemplo de propiedad margin-left" />
+
+    <p class="caption"><strong>Figura 4.5</strong> Ejemplo de propiedad margin-left</p>
+</div>
+
+
+<p>Los márgenes verticales (<code>margin-top</code> y <code>margin-bottom</code>) sólo se pueden aplicar a los elementos de bloque y las imágenes, mientras que los márgenes laterales (<code>margin-left</code> y <code>margin-right</code>) se pueden aplicar a cualquier elemento, tal y como muestra la siguiente imagen:</p>
+
+<div class="figure" id="figure-4-6">
+    <img src="images/cap04/margen-vertical.png" alt="Los márgenes verticales sólo se aplican a los elementos de bloque e imágenes" />
+
+    <p class="caption"><strong>Figura 4.6</strong> Los márgenes verticales sólo se aplican a los elementos de bloque e imágenes</p>
+</div>
+
+
+<p>La imagen anterior muestra el resultado de aplicar los mismos márgenes a varios enlaces (elementos en línea) y varios párrafos (elementos de bloque). En los elementos en línea los márgenes verticales no tienen ningún efecto, por lo que los enlaces no muestran ninguna separación vertical, al contrario de lo que sucede con los párrafos. Sin embargo, los márgenes laterales funcionan sobre cualquier tipo de elemento, por lo que los enlaces se muestran separados entre sí y los párrafos aumentan su separación con los bordes laterales de su elemento contenedor.</p>
+
+<p>Además de las cuatro propiedades que controlan cada uno de los márgenes del elemento, CSS define una propiedad especial que permite establecer los cuatro márgenes de forma simultánea. Estas propiedades especiales se denominan "<em>propiedades shorthand</em>" y CSS define varias propiedades de este tipo, como se verá más adelante.</p>
+
+<p>La propiedad que permite definir de forma simultanea los cuatro márgenes se denomina <code>margin</code>.</p>
+
+<div class="table" id="table-4-4">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>margin</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">( unidad de medida &#124; porcentaje &#124; auto ) {1, 4} &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos salvo algunos casos especiales de elementos mostrados como tablas</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Establece de forma directa todos los márgenes de un elemento</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>La notación <code>{1, 4}</code> de la definición anterior significa que la propiedad <code>margin</code> admite entre uno y cuatro valores, con el siguiente significado:</p>
+
+<ul>
+<li>Si solo se indica un valor, todos los márgenes tienen ese valor.</li>
+<li>Si se indican dos valores, el primero se asigna al margen superior e inferior y el segundo se asigna a los márgenes izquierdo y derecho.</li>
+<li>Si se indican tres valores, el primero se asigna al margen superior, el tercero se asigna al margen inferior y el segundo valor se asigna los márgenes izquierdo y derecho.</li>
+<li>Si se indican los cuatro valores, el orden de asignación es: margen superior, margen derecho, margen inferior y margen izquierdo.</li>
+</ul>
+
+<p>El ejemplo anterior de márgenes se puede reescribir utilizando la propiedad <code>margin</code>:</p>
+
+<p>Código CSS original:</p>
+
+<div class="code css">
+<pre class="css">div img <span class="br0">&#123;</span>
+  <span class="kw1">margin-top</span><span class="sy0">:</span> <span class="re3">.5em</span><span class="sy0">;</span>
+  <span class="kw1">margin-bottom</span><span class="sy0">:</span> <span class="re3">.5em</span><span class="sy0">;</span>
+  <span class="kw1">margin-left</span><span class="sy0">:</span> <span class="re3">1em</span><span class="sy0">;</span>
+  <span class="kw1">margin-right</span><span class="sy0">:</span> <span class="re3">.5em</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Alternativa directa:</p>
+
+<div class="code css">
+<pre class="css">div img <span class="br0">&#123;</span>
+  <span class="kw1">margin</span><span class="sy0">:</span> <span class="re3">.5em</span> <span class="re3">.5em</span> .5m <span class="re3">1em</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Otra alternativa:</p>
+
+<div class="code css">
+<pre class="css">div img <span class="br0">&#123;</span>
+  <span class="kw1">margin</span><span class="sy0">:</span> <span class="re3">.5em</span><span class="sy0">;</span>
+  <span class="kw1">margin-left</span><span class="sy0">:</span> <span class="re3">1em</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>El comportamiento de los márgenes verticales es más complejo de lo que se puede imaginar. Cuando se juntan dos o más márgenes verticales, se fusionan de forma automática y la altura del nuevo margen será igual a la altura del margen más alto de los que se han fusionado.</p>
+
+<div class="figure" id="figure-4-7">
+    <img src="images/cap04/fusion-vertical.png" alt="Fusión automática de los márgenes verticales" />
+
+    <p class="caption"><strong>Figura 4.7</strong> Fusión automática de los márgenes verticales</p>
+</div>
+
+
+<p>De la misma forma, si un elemento está contenido dentro de otro elemento, sus márgenes verticales se fusionan y resultan en un nuevo margen de la misma altura que el mayor margen de los que se han fusionado:</p>
+
+<div class="figure" id="figure-4-8">
+    <img src="images/cap04/fusion-interior.png" alt="Fusión automática de los márgenes interiores" />
+
+    <p class="caption"><strong>Figura 4.8</strong> Fusión automática de los márgenes interiores</p>
+</div>
+
+
+<p>Aunque en principio puede parecer un comportamiento extraño, la razón por la que se propuso este mecanismo de fusión automática de márgenes verticales es el de dar uniformidad a las páginas web habituales. En una página con varios párrafos, si no se diera este comportamiento y se estableciera un determinado margen a todos los párrafos, el primer párrafo no mostraría un aspecto homogéneo respecto de los demás.</p>
+
+<div class="figure" id="figure-4-9">
+    <img src="images/cap04/fusion-motivo.png" alt="Motivo por el que se fusionan automáticamente los márgenes verticales" />
+
+    <p class="caption"><strong>Figura 4.9</strong> Motivo por el que se fusionan automáticamente los márgenes verticales</p>
+</div>
+
+
+<p>En el caso de un elemento que se encuentra en el interior de otro y sus márgenes se fusionan de forma automática, se puede evitar este comportamiento añadiendo un pequeño relleno (<code>padding: 1px</code>) o un borde (<code>border: 1px solid transparent</code>) al elemento contenedor.</p>
+
+<h3 id="relleno">4.2.2 Relleno</h3>
+
+<p>CSS define cuatro propiedades para controlar cada uno de los espacios de relleno horizontales y verticales de un elemento.</p>
+
+<div class="table" id="table-4-5">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedades</th>
+  <th align="left"><code>padding-top, padding-right, padding-bottom, padding-left</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">unidad de medida &#124; porcentaje &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos excepto algunos elementos de tablas como grupos de cabeceras y grupos de pies de tabla</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">0</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Establece cada uno de los rellenos horizontales y verticales de un elemento</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Cada una de estas propiedades establece la separación entre el contenido y los bordes laterales de la caja del elemento:</p>
+
+<div class="figure" id="figure-4-10">
+    <img src="images/cap04/padding.png" alt="Las cuatro propiedades relacionadas con los rellenos" />
+
+    <p class="caption"><strong>Figura 4.10</strong> Las cuatro propiedades relacionadas con los rellenos</p>
+</div>
+
+
+<p>Como sucede con los márgenes, CSS también define una propiedad de tipo "<em>shorthand</em>" llamada <code>padding</code> para establecer los cuatro rellenos de un elemento de forma simultánea.</p>
+
+<div class="table" id="table-4-6">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>padding</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">( unidad de medida &#124; porcentaje ) {1, 4} &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos excepto algunos elementos de tablas como grupos de cabeceras y grupos de pies de tabla</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Establece de forma directa todos los rellenos de los elementos</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>La notación <code>{1, 4}</code> de la definición anterior significa que la propiedad <code>padding</code> admite entre uno y cuatro valores, con el mismo significado que el de la propiedad <code>margin</code>. Ejemplo:</p>
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* Todos los rellenos valen 2em */</span>
+body <span class="br0">&#123;</span><span class="kw1">padding</span><span class="sy0">:</span> <span class="re3">2em</span><span class="br0">&#125;</span>
+<span class="coMULTI">/* Superior e inferior = 1em, Izquierdo y derecho = 2em */</span>
+body <span class="br0">&#123;</span><span class="kw1">padding</span><span class="sy0">:</span> <span class="re3">1em</span> <span class="re3">2em</span><span class="br0">&#125;</span>
+<span class="coMULTI">/* Superior = 1em, derecho = 2em, inferior = 3em, izquierdo = 2em */</span>
+body <span class="br0">&#123;</span><span class="kw1">padding</span><span class="sy0">:</span> <span class="re3">1em</span> <span class="re3">2em</span> <span class="re3">3em</span><span class="br0">&#125;</span>
+<span class="coMULTI">/* Superior = 1em, derecho = 2em, inferior = 3em, izquierdo = 4em */</span>
+body <span class="br0">&#123;</span><span class="kw1">padding</span><span class="sy0">:</span> <span class="re3">1em</span> <span class="re3">2em</span> <span class="re3">3em</span> <span class="re3">4em</span><span class="br0">&#125;</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 3</p>
+</div>
+
+<p><a class="internal" href="capitulo-14.html#ej03">Ver enunciado</a></p>
+
+<h2 id="bordes">4.3 Bordes</h2>
+
+<p>CSS permite modificar el aspecto de cada uno de los cuatro bordes de la caja de un elemento. Para cada borde se puede establecer su anchura o grosor, su color y su estilo, por lo que en total CSS define 20 propiedades relacionadas con los bordes.</p>
+
+<h3 id="anchura-2">4.3.1 Anchura</h3>
+
+<p>La anchura de los bordes se controla con las cuatro propiedades siguientes:</p>
+
+<div class="table" id="table-4-7">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedades</th>
+  <th align="left"><code>border-top-width, border-right-width, border-bottom-width, border-left-width</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">( unidad de medida &#124; thin &#124; medium &#124; thick ) &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">medium</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Establece la anchura de cada uno de los cuatro bordes de los elementos</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>La anchura de los bordes se indica mediante una medida (en cualquier unidad de medida absoluta o relativa) o mediante las palabras clave <code>thin</code> (borde delgado), <code>medium</code> (borde normal) y <code>thick</code> (borde ancho).</p>
+
+<p>La unidad de medida más habitual para establecer el grosor de los bordes es el píxel, ya que es la que permite un control más preciso sobre el grosor. Las palabras clave apenas se utilizan, ya que el estándar CSS no indica explícitamente el grosor al que equivale cada palabra clave, por lo que pueden producirse diferencias visuales entre navegadores. Así por ejemplo, el grosor <code>medium</code> equivale a <code>4px</code> en algunas versiones de Internet Explorer y a <code>3px</code> en el resto de navegadores.</p>
+
+<p>El siguiente ejemplo muestra un elemento con cuatro anchuras diferentes de borde:</p>
+
+<div class="figure" id="figure-4-11">
+    <img src="images/cap04/border-width.png" alt="Ejemplo de propiedad border-width" />
+
+    <p class="caption"><strong>Figura 4.11</strong> Ejemplo de propiedad border-width</p>
+</div>
+
+
+<p>Las reglas CSS utilizadas se muestran a continuación:</p>
+
+<div class="code css">
+<pre class="css">div <span class="br0">&#123;</span>
+  <span class="kw1">border-top-width</span><span class="sy0">:</span> <span class="re3">10px</span><span class="sy0">;</span>
+  <span class="kw1">border-right-width</span><span class="sy0">:</span> <span class="re3">1em</span><span class="sy0">;</span>
+  <span class="kw1">border-bottom-width</span><span class="sy0">:</span> <span class="kw2">thick</span><span class="sy0">;</span>
+  <span class="kw1">border-left-width</span><span class="sy0">:</span> <span class="kw2">thin</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Si se quiere establecer de forma simultánea la anchura de todos los bordes de una caja, es necesario utilizar una propiedad "<em>shorthand</em>" llamada <code>border-width</code>:</p>
+
+<div class="table" id="table-4-8">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>border-width</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">( unidad de medida &#124; thin &#124; medium &#124; thick ) {1, 4} &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">medium</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Establece la anchura de todos los bordes del elemento</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>La propiedad <code>border-width</code> permite indicar entre uno y cuatro valores. El significado de cada caso es el habitual de las propiedades "<em>shorthand</em>":</p>
+
+<div class="code css">
+<pre class="css">p <span class="br0">&#123;</span> <span class="kw1">border-width</span><span class="sy0">:</span> <span class="kw2">thin</span> <span class="br0">&#125;</span>                   <span class="coMULTI">/* thin thin thin thin */</span>
+p <span class="br0">&#123;</span> <span class="kw1">border-width</span><span class="sy0">:</span> <span class="kw2">thin</span> <span class="kw2">thick</span> <span class="br0">&#125;</span>             <span class="coMULTI">/* thin thick thin thick */</span>
+p <span class="br0">&#123;</span> <span class="kw1">border-width</span><span class="sy0">:</span> <span class="kw2">thin</span> <span class="kw2">thick</span> <span class="kw2">medium</span> <span class="br0">&#125;</span>      <span class="coMULTI">/* thin thick medium thick */</span>
+p <span class="br0">&#123;</span> <span class="kw1">border-width</span><span class="sy0">:</span> <span class="kw2">thin</span> <span class="kw2">thick</span> <span class="kw2">medium</span> <span class="kw2">thin</span> <span class="br0">&#125;</span> <span class="coMULTI">/* thin thick medium thin */</span></pre>
+</div>
+
+<p>Si se indica un solo valor, se aplica a los cuatro bordes. Si se indican dos valores, el primero se aplica al borde superior e inferior y el segundo valor se aplica al borde izquierdo y derecho.</p>
+
+<p>Si se indican tres valores, el primero se aplica al borde superior, el segundo se aplica al borde izquierdo y derecho y el tercer valor se aplica al borde inferior. Si se indican los cuatro valores, el orden de aplicación es superior, derecho, inferior e izquierdo.</p>
+
+<h3 id="color">4.3.2 Color</h3>
+
+<p>El color de los bordes se controla con las cuatro propiedades siguientes:</p>
+
+<div class="table" id="table-4-9">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedades</th>
+  <th align="left"><code>border-top-color, border-right-color, border-bottom-color, border-left-color</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">color &#124; transparent &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Establece el color de cada uno de los cuatro bordes de los elementos</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>El ejemplo anterior se puede modificar para mostrar cada uno de los bordes de un color diferente:</p>
+
+<div class="figure" id="figure-4-12">
+    <img src="images/cap04/border-color.png" alt="Ejemplo de propiedad border-color" />
+
+    <p class="caption"><strong>Figura 4.12</strong> Ejemplo de propiedad border-color</p>
+</div>
+
+
+<p>CSS incluye una propiedad "<em>shorthand</em>" llamada <code>border-color</code> para establecer de forma simultánea el color de todos los bordes de una caja:</p>
+
+<div class="table" id="table-4-10">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>border-color</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">( color &#124; transparent ) {1, 4} &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">medium</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Establece el color de todos los bordes del elemento</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>En este caso, al igual que sucede con la propiedad <code>border-width</code>, es posible indicar de uno a cuatro valores y las reglas de aplicación son idénticas a las de la propiedad <code>border-width</code>.</p>
+
+<h3 id="estilo">4.3.3 Estilo</h3>
+
+<p>Por último, CSS permite establecer el estilo de cada uno de los bordes mediante las siguientes propiedades:</p>
+
+<div class="table" id="table-4-11">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedades</th>
+  <th align="left"><code>border-top-style, border-right-style, border-bottom-style, border-left-style</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">none &#124; hidden &#124; dotted &#124; dashed &#124; solid &#124; double &#124; groove &#124; ridge &#124; inset &#124; outset &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">none</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Establece el estilo de cada uno de los cuatro bordes de los elementos</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>El estilo de los bordes sólo se puede indicar mediante alguna de las palabras reservadas definidas por CSS. Como el valor por defecto de esta propiedad es <code>none</code>, los elementos no muestran ningún borde visible a menos que se establezca explícitamente un estilo de borde.</p>
+
+<p>Siguiendo el ejemplo anterior, se puede modificar el estilo de cada uno de los bordes:</p>
+
+<div class="figure" id="figure-4-13">
+    <img src="images/cap04/border-style.png" alt="Ejemplo de propiedad border-style" />
+
+    <p class="caption"><strong>Figura 4.13</strong> Ejemplo de propiedad border-style</p>
+</div>
+
+
+<p>Las reglas CSS necesarias para mostrar los estilos anteriores son las siguientes:</p>
+
+<div class="code css">
+<pre class="css">div <span class="br0">&#123;</span>
+  <span class="kw1">border-top-style</span><span class="sy0">:</span> <span class="kw2">dashed</span><span class="sy0">;</span>
+  <span class="kw1">border-right-style</span><span class="sy0">:</span> <span class="kw2">double</span><span class="sy0">;</span>
+  <span class="kw1">border-bottom-style</span><span class="sy0">:</span> <span class="kw2">dotted</span><span class="sy0">;</span>
+  <span class="kw1">border-left-style</span><span class="sy0">:</span> <span class="kw2">solid</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Los bordes más utilizados son <code>solid</code> y <code>dashed</code>, seguidos de <code>double</code> y <code>dotted</code>. Los estilos <code>none</code> y <code>hidden</code> son idénticos visualmente, pero se diferencian en la forma que los navegadores resuelven los conflictos entre los bordes de las celdas adyacentes en las tablas.</p>
+
+<p>Para establecer de forma simultánea los estilos de todos los bordes de una caja, es necesario utilizar la propiedad "<em>shorthand</em>" llamada <code>border-style</code>:</p>
+
+<div class="table" id="table-4-12">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>border-style</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">(none &#124; hidden &#124; dotted &#124; dashed &#124; solid &#124; double &#124; groove &#124; ridge &#124; inset &#124; outset) {1, 4} &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Establece el estilo de todos los bordes del elemento</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Como es habitual, la propiedad permite indicar de uno a cuatro valores diferentes y las reglas de aplicación son las habituales de las propiedades "<em>shorthand</em>".</p>
+
+<h3 id="propiedades-shorthand">4.3.4 Propiedades shorthand</h3>
+
+<p>Como sucede con los márgenes y los rellenos, CSS define una serie de propiedades de tipo "<em>shorthand</em>" que permiten establecer todos los atributos de los bordes de forma simultánea. CSS incluye una propiedad "<em>shorthand</em>" para cada uno de los cuatro bordes y una propiedad "<em>shorthand</em>" global.</p>
+
+<div class="table" id="table-4-13">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedades</th>
+  <th align="left"><code>border-top, border-right, border-bottom, border-left</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">( unidad de medida_borde &#124;&#124; color_borde &#124;&#124; estilo_borde ) &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Establece el estilo completo de cada uno de los cuatro bordes de los elementos</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>El significado de cada uno de los valores especiales es el siguiente:</p>
+
+<ul>
+<li><code>&lt;medida_borde&gt;</code>: una medida CSS o alguna de las siguientes palabras clave: thin, medium, thick.</li>
+<li><code>&lt;color_borde&gt;</code>: un color de CSS o la palabra clave transparent</li>
+<li><code>&lt;estilo_borde&gt;</code>: una de las siguientes palabras clave: <code>none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset</code>.</li>
+</ul>
+
+<p>Las propiedades "<em>shorthand</em>" permiten establecer alguno o todos los atributos de cada borde. El siguiente ejemplo establece el color y el tipo del borde inferior, pero no su anchura:</p>
+
+<div class="code css">
+<pre class="css">h1 <span class="br0">&#123;</span>
+  <span class="kw1">border-bottom</span><span class="sy0">:</span> <span class="kw2">solid</span> <span class="kw2">red</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>En el ejemplo anterior, la anchura del borde será la correspondiente al valor por defecto (<code>medium</code>). Este otro ejemplo muestra la forma habitual utilizada para establecer el estilo de cada borde:</p>
+
+<div class="code css">
+<pre class="css">div <span class="br0">&#123;</span>
+  <span class="kw1">border-top</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="kw2">solid</span> <span class="re0">#369</span><span class="sy0">;</span>
+  <span class="kw1">border-bottom</span><span class="sy0">:</span> <span class="re3">3px</span> <span class="kw2">double</span> <span class="re0">#369</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Por ultimo, CSS define una propiedad de tipo "<em>shorthand</em>" global para establecer el valor de todos los atributos de todos los bordes de forma directa:</p>
+
+<div class="table" id="table-4-14">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>border</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">( unidad de medida_borde &#124;&#124; color_borde &#124;&#124; estilo_borde ) &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Establece el estilo completo de todos los bordes de los elementos</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Las siguientes reglas CSS son equivalentes:</p>
+
+<div class="code css">
+<pre class="css">div <span class="br0">&#123;</span>
+  <span class="kw1">border-top</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="kw2">solid</span> <span class="kw2">red</span><span class="sy0">;</span>
+  <span class="kw1">border-right</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="kw2">solid</span> <span class="kw2">red</span><span class="sy0">;</span>
+  <span class="kw1">border-bottom</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="kw2">solid</span> <span class="kw2">red</span><span class="sy0">;</span>
+  <span class="kw1">border-left</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="kw2">solid</span> <span class="kw2">red</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+div <span class="br0">&#123;</span> <span class="kw1">border</span><span class="sy0">:</span> <span class="re3">1px</span> <span class="kw2">solid</span> <span class="kw2">red</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Como el valor por defecto de la propiedad <code>border-style</code> es none, si una propiedad <em>shorthand</em> no establece explícitamente el estilo de un borde, el elemento no muestra ese borde:</p>
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* Sólo se establece el color, por lo que el estilo es 
+    &quot;none&quot; y el borde no se muestra */</span>
+div <span class="br0">&#123;</span> <span class="kw1">border</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* Se establece el grosor y el color del borde, pero no
+   su estilo, por lo que es &quot;none&quot; y el borde no se muestra */</span>
+div <span class="br0">&#123;</span> <span class="kw1">border-bottom</span><span class="sy0">:</span> <span class="re3">5px</span> <span class="kw1">blue</span><span class="sy0">;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>Cuando los cuatro bordes no son idénticos pero sí muy parecidos, se puede utilizar la propiedad <code>border</code> para establecer de forma directa los atributos comunes de todos los bordes y posteriormente especificar para cada uno de los cuatro bordes sus propiedades particulares:</p>
+
+<div class="code css">
+<pre class="css">h1 <span class="br0">&#123;</span>
+  <span class="kw1">border</span><span class="sy0">:</span> <span class="kw2">solid</span> <span class="re0">#000</span><span class="sy0">;</span>
+  <span class="kw1">border-top-width</span><span class="sy0">:</span> <span class="re3">6px</span><span class="sy0">;</span>
+  <span class="kw1">border-left-width</span><span class="sy0">:</span> <span class="re3">8px</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 4</p>
+</div>
+
+<p><a class="internal" href="capitulo-14.html#ej04">Ver enunciado</a></p>
+
+<h2 id="margen-relleno-bordes-y-modelo-de-cajas">4.4 Margen, relleno, bordes y modelo de cajas</h2>
+
+<p>La anchura y altura de un elemento no solamente se calculan teniendo en cuenta sus propiedades <code>width</code> y <code>height</code>. El margen, el relleno y los bordes establecidos a un elemento determinan la anchura y altura final del elemento. En el siguiente ejemplo se muestran los estilos CSS de un elemento:</p>
+
+<div class="code css">
+<pre class="css">div <span class="br0">&#123;</span>
+  <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">300px</span><span class="sy0">;</span>
+  <span class="kw1">padding-left</span><span class="sy0">:</span>  <span class="re3">50px</span><span class="sy0">;</span>
+  <span class="kw1">padding-right</span><span class="sy0">:</span> <span class="re3">50px</span><span class="sy0">;</span>
+  <span class="kw1">margin-left</span><span class="sy0">:</span>   <span class="re3">30px</span><span class="sy0">;</span>
+  <span class="kw1">margin-right</span><span class="sy0">:</span>  <span class="re3">30px</span><span class="sy0">;</span>
+  <span class="kw1">border</span><span class="sy0">:</span> <span class="re3">10px</span> <span class="kw2">solid</span> <span class="kw1">black</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La anchura total con la que se muestra el elemento no son los <code>300</code> píxel indicados en la propiedad <code>width</code>, sino que también se añaden todos sus márgenes, rellenos y bordes:</p>
+
+<div class="figure" id="figure-4-14">
+    <img src="images/cap04/anchura.png" alt="La anchura total de un elemento tiene en cuenta los márgenes, rellenos y bordes" />
+
+    <p class="caption"><strong>Figura 4.14</strong> La anchura total de un elemento tiene en cuenta los márgenes, rellenos y bordes</p>
+</div>
+
+
+<p>De esta forma, la anchura del elemento en pantalla sería igual a la suma de la anchura original, los márgenes, los bordes y los rellenos:</p>
+
+<div class="code code">
+<pre class="code">30px + 10px + 50px + 300px + 50px + 10px + 30px = 480 píxel</pre>
+</div>
+
+<p>Así, la anchura/altura establecida con CSS siempre hace referencia a la anchura/altura del contenido. La anchura/altura total del elemento debe tener en cuenta además los valores del resto de partes que componen la caja del box model.</p>
+
+<h2 id="fondos">4.5 Fondos</h2>
+
+<p>El último elemento que forma el box model es el fondo de la caja del elemento. El fondo puede ser un color simple o una imagen. El fondo solamente se visualiza en el área ocupada por el contenido y su relleno, ya que el color de los bordes se controla directamente desde los bordes y las zonas de los márgenes siempre son transparentes.</p>
+
+<p>Para establecer un color o imagen de fondo en la página entera, se debe establecer un fondo al elemento <code>&lt;body&gt;</code>. Si se establece un fondo a la página, como el valor inicial del fondo de los elementos es transparente, todos los elementos de la página se visualizan con el mismo fondo a menos que algún elemento especifique su propio fondo.</p>
+
+<p>CSS define cinco propiedades para establecer el fondo de cada elemento (<code>background-color, background-image, background-repeat, background-attachment, background-position</code>) y otra propiedad de tipo "<em>shorthand</em>" (<code>background</code>).</p>
+
+<div class="table" id="table-4-15">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Propiedad</th>
+  <th align="left"><code>background</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Valores</strong></td>
+  <td align="left">( background-color &#124;&#124; background-image &#124;&#124; background-repeat &#124;&#124; background-attachment &#124;&#124; background-position ) &#124; inherit</td>
+</tr>
+<tr>
+  <td align="right"><strong>Se aplica a</strong></td>
+  <td align="left">Todos los elementos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Valor inicial</strong></td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Establece todas las propiedades del fondo de un elemento</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>El orden en el que se indican las propiedades es indiferente, aunque en general se sigue el formato indicado de color, url de imagen, repetición y posición.</p>
+
+<p>El siguiente ejemplo muestra la ventaja de utilizar la propiedad background:</p>
+
+<div class="code css">
+<pre class="css"><span class="coMULTI">/* Color e imagen de fondo de la página mediante una propiedad shorthand */</span>
+body <span class="br0">&#123;</span> <span class="kw1">background</span><span class="sy0">:</span> <span class="re0">#222d2d</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="co2">./graphics/colorstrip.gif</span><span class="br0">&#41;</span> <span class="kw2">repeat-x</span> <span class="nu0">0</span> <span class="nu0">0</span><span class="sy0">;</span> <span class="br0">&#125;</span>
+&nbsp;
+<span class="coMULTI">/* La propiedad shorthand anterior es equivalente a las siguientes propiedades */</span>
+body <span class="br0">&#123;</span>
+  <span class="kw1">background-color</span><span class="sy0">:</span> <span class="re0">#222d2d</span><span class="sy0">;</span>
+  <span class="kw1">background-image</span><span class="sy0">:</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="st0">&quot;./graphics/colorstrip.gif&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">background-repeat</span><span class="sy0">:</span> <span class="kw2">repeat-x</span><span class="sy0">;</span>
+  <span class="kw1">background-position</span><span class="sy0">:</span> <span class="nu0">0</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>La propiedad background permite asignar todos o sólo algunos de todos los valores que se pueden definir para los fondos de los elementos:</p>
+
+<div class="code css">
+<pre class="css"><span class="kw1">background</span><span class="sy0">:</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="st0">&quot;./graphics/wide/bg-content-secondary.gif&quot;</span><span class="br0">&#41;</span> <span class="kw2">repeat-y</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">background</span><span class="sy0">:</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="st0">&quot;./graphics/wide/footer-content-secondary.gif&quot;</span><span class="br0">&#41;</span> <span class="kw2">no-repeat</span> <span class="kw1">bottom</span> <span class="kw1">left</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">background</span><span class="sy0">:</span> <span class="kw2">transparent</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="st0">&quot;./graphics/navigation.gif&quot;</span><span class="br0">&#41;</span> <span class="kw2">no-repeat</span> <span class="nu0">0</span> <span class="re3">-27px</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">background</span><span class="sy0">:</span> <span class="kw2">none</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">background</span><span class="sy0">:</span> <span class="re0">#293838</span> <span class="kw2">url</span><span class="br0">&#40;</span><span class="st0">&quot;./graphics/icons/icon-permalink-big.gif&quot;</span><span class="br0">&#41;</span> <span class="kw2">no-repeat</span> <span class="kw2">center</span> <span class="kw1">left</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 5</p>
+</div>
+
+<p><a class="internal" href="capitulo-14.html#ej05">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-4.html#modelo-de-cajas">Modelo de cajas</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.1</span>
+                        <a class="internal" href="capitulo-4.html#anchura-y-altura">Anchura y altura</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.2</span>
+                        <a class="internal" href="capitulo-4.html#margen-y-relleno">Margen y relleno</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.3</span>
+                        <a class="internal" href="capitulo-4.html#bordes">Bordes</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.4</span>
+                        <a class="internal" href="capitulo-4.html#margen-relleno-bordes-y-modelo-de-cajas">Margen, relleno, bordes y modelo de cajas</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.5</span>
+                        <a class="internal" href="capitulo-4.html#fondos">Fondos</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

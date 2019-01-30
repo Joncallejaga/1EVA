@@ -1,0 +1,309 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>rueda cromatica</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0" />
+  <meta name="description" content="Selector de Colores. Una herramienta que te ayudara a seleccionar los colores para tu proyecto." />
+  <meta name="keywords" content="Colores,selector de colores, color picker, hex, rgb, hsl, Tono ,Hue ,Saturaci&oacute;n, Saturation, Luminosidad, Lightness , complementarios, triadicos, an&aacute;logos, tetr&aacute;dicos"/>
+  <meta name="author" content="enxaneta.info" />
+  <meta property="og:title" content="Selector de Colores" /> 
+  <meta property="og:type" content="website" /> 
+  <meta property="og:image" content="http://w3.unpocodetodo.info/images/w3_og.png" />  
+  <meta property="og:url" content="w3.unpocodetodo.info/utiles/colores.html" /> 
+  <meta property="og:site_name" content="w3.unpocodetodo.info" /> 
+  <meta property="og:description" content="Selector de Colores. Una herramienta que te ayudara a seleccionar los colores para tu proyecto." /> 
+<link id="favicon" rel="icon" type="image/png" href="../images/w3.png">
+<link href='http://fonts.googleapis.com/css?family=Gabriela' rel='stylesheet' type='text/css'>
+<style>
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section,svg {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+
+
+
+*{ box-sizing : border-box;}
+
+body { background-color: #f9f9f9; color:#333; font-size: 16px; line-height: 120%; font-family: Arial, Helvetica, sans-serif;/*'Gabriela',serif;*/ }
+#wrapper { width:100%;max-width:1000px; margin: 0 auto; padding: 0;}
+
+h1 { font-size: 120%; margin: 1em 0; }
+h4 { font-size: 100%; margin: 1em 0;}
+.italic { font-style: italic; font-family: serif;line-height: 140% }
+.panel { border: 1px solid #d9d9d9; padding: 4%; margin: 10px;}
+.panel.flex-column{ padding: 2%;}
+
+#clientHex input{ height:20px;  box-sizing : content-box; background-color:white; border-radius:none; border: 1px inset #ccc; padding:3px 6px; margin:1em 0}
+#clientHex [type=text]{ width:85%; }
+#clientHex [type=submit]{ width:15px;height:20px; background-color:#d9d9d9;}
+
+
+#lienzoSVG{ margin-bottom:1em; width:100%; height:430px /*padding:35% 1%; box-sizing : content-box;*/}
+[type=range] {width:100%;}
+
+.tooltip { font-size: 10px; background-color: white; padding: 0 10px; border: 1px solid #d9d9d9; display: none; width: 100px; height: auto; position: absolute; left: -40px; top: -70px; z-index: 9; -webkit-filter: drop-shadow(1px 1px 3px #000); filter: drop-shadow(1px 1px 3px #000);box-sizing: content-box; }
+.tooltip:after { content: ""; width: 20px; height: 20px; background-color: white; display: block; position: absolute; bottom: -10px; left: 50px; -webkit-transform : rotate(45deg); -moz-transform : rotate(45deg); -ms-transform : rotate(45deg); transform : rotate(45deg); z-index: 8 }
+.tooltip p { margin-top: 5px; margin-bottom: 5px; }
+.tooltipContainer, .selection { position: relative; }
+.tooltipContainer:hover .tooltip, .selection:hover .tooltip { display: block; }
+.tooltipContainer {height: 40px; width:10%;}
+.flex-row .flex-column .tooltipContainer {width:20%;}
+.tooltipContainer div.tooltip { width: 100px!important; height: auto!important; }
+
+.selection .tooltip { left: -10px; }
+#container .tooltip { left: 40px; }
+#color div.tooltip { left: 30px; top: -50px }
+
+#container {width:200px; height:200px; border: 1px solid #d9d9d9; position: relative; }
+#container .tooltipContainer { width: 100%; height: 100%;}
+#grafico { width:200px; height:200px; border: 1px solid #d9d9d9; position: relative; }
+#grafico canvas{ width:100%;}
+
+.flex-container{
+    display: -webkit-flex;
+	display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.flex-row{
+	-webkit-flex-direction: row;
+	-moz-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row; 
+	 width:100%;
+	 
+	 
+}
+.flex-column{
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column; 
+	width:50%;
+	height:auto;
+	/*padding-bottom:1px;
+
+	margin-bottom:1px;*/
+}		  
+		  
+.flex-container.space-between{
+	-webkit-justify-content: space-between;
+	-moz-justify-content: space-between;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+}
+
+#selectionContainer.flex-container{
+   -webkit-flex-wrap: wrap;
+   -moz-flex-wrap: wrap;
+   -ms-flex-wrap: wrap;
+   flex-wrap: wrap;
+}	  
+		  
+		  
+	  
+		  
+		  
+#selectionContainer .selection { width:25%; height: 100px;}		  
+.select{width:96%}		  
+		  
+		  
+		  
+
+@media only screen and (max-width:550px){
+#wrapper{width:100%}
+.wrapper.flex-container.flex-row{
+	-webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column; 
+	width:100%;
+	}
+
+.wrapper.flex-container.flex-column{margin:10px 0;}	
+.wrapper flex-container flex-row{ }
+
+.wrapper.flex-container.flex-row .flex-column {
+width: 100%; height:auto;
+}
+.panel{ width:100%; margin: 10px 0;}
+.tooltip {left:-45px;}
+#container { width:43vw; height: 43vw;}
+#grafico { width: 43vw; height: 43vw;} 	
+.order1{display:inherit;order : -1;}
+.small-padding-10{ padding-right:10%;}
+#selectionContainer .selection { width:20vw; height: 20vw;}
+#lienzoSVG{width:85vw; height: 85vw; margin:10px auto;}
+#clientHex [type="text"] {width: 80%;}
+.select{width:100%}
+}
+
+
+
+
+@media only screen and (max-width:1000px) and (min-width:551px) {
+#container { width:20vw; height: 20vw; max-width:200px; max-height:200px; border: 1px solid #d9d9d9; position: relative; }
+#grafico { width: 20vw; height: 20vw; max-width:200px; max-height:200px; border: 1px solid #d9d9d9; position: relative; }
+.tooltip {left:-50px;}
+#selectionContainer .selection { width:25%; height: 9vw;}
+#lienzoSVG{width:43vw; height: 43vw; margin-left:auto; margin-right:auto}
+}
+
+
+
+
+
+</style>
+</style>
+</head>
+
+<body>
+<div id="wrapper" class="flex-container flex-column">
+
+
+<div class="wrapper flex-container flex-row">
+<div class="flex-column">
+<div class="panel"> 
+  <h1>Selector de Colores. El color <span id="h1span"></span></h1>
+  <p class="italic">Una aplicaci&oacute;n que te ayudar&aacute; a seleccionar los colores para tu proyecto.</p>
+</div><!--Selector de Colores-->
+</div><!--<div class="flex-column">-->
+<div class="flex-column">
+<div class="panel">
+<form id="clientHex" action="colores.html">
+<p class="italic">El color HEX:</p>
+<input name="hex" type="text" placeholder="abcdef" />
+<input type="submit" value="&#9654;" >
+<p class="italic">Introduzca un color HEX v&aacute;lido, sin la almohadilla (#)</p>
+</form>
+</div><!--<form id="clientHex"-->
+</div><!--<div class="flex-column">-->
+</div>
+
+<div class="wrapper flex-container flex-row">
+
+
+<div class="flex-column">
+
+  <div class="panel"> <svg id = "lienzoSVG" style="border:1px solid #d9d9d9;"> </svg>
+    <p class="range">
+      <label for="s">Saturation <span id="Sval">100</span>%</label>
+      <br>
+      <input type="range" name="s" id="s" min="0" max="100" value="100">
+      <br>
+      <label for="l">Lightness <span id="Lval">50</span>%</label>
+      <br>
+      <input type="range" name="l" id="l" min="0" max="100" value="50">
+    </p>
+ </div>
+ 
+ <div class="panel flex-container space-between" style="height:auto">    
+    <div id="container" class="flex-column"></div>
+    <div id="grafico" class="flex-column">
+      <canvas id= "lienzo" width= "200" height= "200">Su navegador no soporta canvas :( </canvas>
+    </div><!--canvas-->
+  </div>
+</div><!--<div class="flex-container flex-column"> -->   
+  
+<div class="flex-column"> 
+ 
+  <div class="panel small-padding-10">
+    <h4>Tono (Hue)</h4>
+    <div class="sample flex-container flex-row" id="Hcontainer"></div>
+    <h4>Saturaci&oacute;n (Saturation)</h4>
+    <div class="sample flex-container flex-row"  id="Scontainer"></div>
+    <h4>Luminosidad (Lightness)</h4>
+    <div class="sample flex-container flex-row"  id="Lcontainer"></div>
+
+
+<div class="flex-container flex-row">  
+
+<div class="flex-container flex-column">     
+    <div id="compl">
+      <h4>complementarios</h4>
+      <div class="sample flex-container flex-row" id="Ccontainer"></div>
+    </div>
+    
+    <div id="triadic">
+      <h4>triadicos</h4>
+      <div class="sample flex-container flex-row" id="Tcontainer"></div>
+    </div>
+</div>
+<div class="flex-container flex-column">    
+    <div id="analogus">
+      <h4>an&aacute;logos</h4>
+      <div class="sample flex-container flex-row" id="Acontainer"></div>
+    </div>
+    
+    <div id="qAdic">
+      <h4>tetr&aacute;dicos</h4>
+      <div class="sample flex-container flex-row" id="Qcontainer"></div>
+    </div>
+</div> 
+
+   
+</div><!--<div class="flex-container flex-column">  -->
+    
+    
+    
+</div><!--<div class="panel">-->
+  
+  <div class="panel flex-column select">
+  <p class="italic">Haz clic en los colores del panel de muestras para escoger el color.</p>
+    <div id="selectionContainer"  class="flex-container flex-row">
+      
+    </div>
+  </div><!--<div class="panel">--> 
+  
+  
+<div class="panel order1">
+<p class="italic"> Haz clic en la rueda crom&aacute;tica para variar el tono (hue).<br>
+        Utilice los controles deslizantes ( &lt;input type="range"&gt; ) para variar la saturaci&oacute;n y la luminosidad.<br>
+        Al pasar por encima de los colores del panel de muestras, puedes ver y copiar los c&oacute;digos HSL, RGB y HEX de cada color.<br>
+        Haz clic en los colores del panel de muestras para escoger el color.<br>
+        Haz haz doble clic en el color escogido para borrarlo.</p>
+</div><!--<div class="panel">--> 
+  
+</div><!--<div class="flex-container flex-column"> --> 
+
+
+</div><!--<div class="flex-container flex-row">-->
+
+ 
+</div><!--<div id="wrapper">--> 
+
+
+<script src="jS/cromatico.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1050 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="18/02/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Texto | XHTML</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">XHTML</a></h1>
+        <p class="span3">
+                        <a href="capitulo-3.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-5.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="texto"><span>Capítulo 4</span> Texto</h1>
+        <p>La mayor parte de las <strong>páginas HTML</strong> están formadas por <strong>texto</strong> (llegando a ser más del 90% del código de la página).
+Este lenguaje define <em>tags</em> para <strong>estructurar</strong> el contenido y otros para <strong>marcar</strong> elementos importantes dentro del texto.</p>
+
+<p>El proceso de <strong>estructuración</strong> de un texto simple consiste en indicar las diferentes zonas o secciones que componen un texto: como son los párrafos o títulos de sección.</p>
+
+<p>El proceso posterior a estructurar el texto consiste en <strong>marcar</strong> los diferentes elementos dentro de éste: definiciones, abreviaturas, textos importantes, textos modificados, citas a otras referencias, etc.</p>
+
+<p>Un <strong>ejemplo</strong> de texto original y otro de texto estructurado sería:</p>
+
+<div class="figure" id="figure-4-1">
+    <img src="images/cap04/texto_estructurado.png" alt="Resultado de estructurar un texto sencillo" />
+
+    <p class="caption"><strong>Figura 4.1</strong> Resultado de estructurar un texto sencillo</p>
+</div>
+
+
+<p>Este ejemplo muestra una transformación de un párrafo con un <strong>texto simple</strong> a un <strong>texto estructurado y marcado</strong> donde encontramos:</p>
+
+<div class="figure" id="figure-4-2">
+    <img src="images/cap04/texto_estructurado2.png" alt="Resultado de marcar un texto sencillo" />
+
+    <p class="caption"><strong>Figura 4.2</strong> Resultado de marcar un texto sencillo</p>
+</div>
+
+
+<h2 id="como-estructurar-un-texto">4.1 Cómo estructurar un texto</h2>
+
+<h3 id="parrafos">4.1.1 Párrafos</h3>
+
+<div class="table" id="table-4-1">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;p&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En bloque</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Delimita el contenido de un párrafo de texto</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Esta etiqueta <code>&lt;p&gt;</code> permite definir los <strong>párrafos</strong> que forman el texto de una página. Como se puede ver en la tabla anterior, estos párrafos son <strong>elementos en bloque</strong>, por lo que ocupan toda la anchura del navegador. No presentan <strong>atributos</strong> específicos pero sí se les pueden asignar los atributos comunes de HTML básicos, de internacionalización y de eventos.</p>
+
+<p>Un ejemplo de <strong>código HTML</strong> con la etiqueta <code>&lt;p&gt;</code> sería:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">html</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Párrafos<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Este es el texto que forma el primer párrafo de la página.
+        Los párrafos pueden ocupar varias líneas y el navegador se encarga
+        de ajustar su longitud al tamaño de la ventana.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>El segundo párrafo de la página también se define encerrando
+        su texto con la etiqueta p. El navegador también se encarga de
+        separar automáticamente cada párrafo.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>Y un navegador lo visualizaría de esta manera:</p>
+
+<div class="figure" id="figure-4-3">
+    <img src="images/cap04/ejemplo_parrafo.png" alt="Ejemplo de texto HTML estructurado con párrafos" />
+
+    <p class="caption"><strong>Figura 4.3</strong> Ejemplo de texto HTML estructurado con párrafos</p>
+</div>
+
+
+<h3 id="secciones">4.1.2 Secciones</h3>
+
+<div class="table" id="table-4-2">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;h1&gt;</code>,<code>&lt;h2&gt;</code>,<code>&lt;h3&gt;</code>,<code>&lt;h4&gt;</code>,<code>&lt;h5&gt;</code>,<code>&lt;h6&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En bloque</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Define los títulos de las secciones de mayor importancia de la página</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Estas etiquetas <code>&lt;h1&gt;</code>…<code>&lt;h6&gt;</code> definen <strong>títulos de sección</strong>, no secciones completas. Como se puede ver en la tabla anterior y al igual que el <em>tag</em> <code>&lt;p&gt;</code>, estas secciones son <strong>elementos en bloque</strong>, por lo que ocupan toda la anchura del navegador y tampoco presentan <strong>atributos</strong> específicos pero sí se les pueden asignar los atributos comunes de HTML básicos, de internacionalización y de eventos.</p>
+
+<p>Los navegadores asignan de forma automática el tamaño del título de cada sección en función de su importancia, que se puede modificar utilizando las hojas de estilos <strong>CSS</strong>.</p>
+
+<p>Un ejemplo de <strong>código HTML</strong> con la etiqueta <code>&lt;p&gt;</code> más las etiquetas <code>&lt;h1&gt;</code>y <code>&lt;h2&gt;</code> sería:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">html</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Secciones<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">h1</span>&gt;</span>Titular de la página<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h1</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Párrafo de introducción<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>La primera sub-sección<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Párrafo de contenido<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">h2</span>&gt;</span>Otra subsección<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h2</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Más párrafos de contenido<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>Y un navegador lo visualizaría de esta manera:</p>
+
+<div class="figure" id="figure-4-4">
+    <img src="images/cap04/ejemplo_secciones.png" alt="Ejemplo de texto HTML estructurado con párrafos y secciones" />
+
+    <p class="caption"><strong>Figura 4.4</strong> Ejemplo de texto HTML estructurado con párrafos y secciones</p>
+</div>
+
+
+<h2 id="marcado-basico-de-un-texto">4.2 Marcado básico de un texto</h2>
+
+<p>El siguiente paso posterior a la <strong>estructuración</strong> del texto consistiría en el <strong>marcado</strong> de éste. Para el marcado básico de un texto encontraríamos estas etiquetas:</p>
+
+<div class="table" id="table-4-3">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;em&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En línea</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Realza la importancia del texto que encierra - <em>cursiva</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<div class="table" id="table-4-4">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;strong&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En línea</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Realza con la máxima importancia el texto que encierra - <strong>negrita</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Un ejemplo de <strong>código HTML</strong> con las etiquetas <code>&lt;em&gt;</code> y <code>&lt;strong&gt;</code> sería:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">html</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Etiquetas em y strong<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>El lenguaje HTML permite marcar algunos segmentos de texto
+        como <span class="sc2">&lt;<span class="kw2">em</span>&gt;</span>muy importantes<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">em</span>&gt;</span> y otros segmentos como <span class="sc2">&lt;<span class="kw2">strong</span>&gt;</span>los
+        más importantes<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">strong</span>&gt;</span>.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>Y un navegador lo visualizaría de esta manera:</p>
+
+<div class="figure" id="figure-4-5">
+    <img src="images/cap04/em_strong.png" alt="Ejemplo de uso de etiquetas em y strong" />
+
+    <p class="caption"><strong>Figura 4.5</strong> Ejemplo de uso de etiquetas em y strong</p>
+</div>
+
+
+<p>HTML también permite marcar de forma adecuada las modificaciones realizadas en el contenido de una página: el texto que <strong>ha sido eliminado</strong> y el texto que <strong>ha sido añadido</strong>:</p>
+
+<div class="table" id="table-4-5">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;ins&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left"><code>cite="url"</code> Indica la URL de la página en la que se puede obtener más información sobre el motivo por el que se realizó la modificación.<br /><code>datetime="fecha"</code> Especifica la fecha y hora en la que se realizó el cambio</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En bloque y en línea</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplea para marcar una modificación en los contenidos originales consistente en la inserción de un nuevo contenido</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<div class="table" id="table-4-6">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;del&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left"><code>cite="url"</code> Indica la URL de la página en la que se puede obtener más información sobre el motivo por el que se realizó la modificación.<br /><code>datetime="fecha"</code> Especifica la fecha y hora en la que se realizó el cambio</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En bloque y en línea</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplea para marcar una modificación en los contenidos originales consistente en el borrado de cierto contenido</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Por defecto, el texto eliminado (<code>&lt;del&gt;</code>) se muestra tachado y el texto insertado (<code>&lt;ins&gt;</code>) se muestra subrayado.</p>
+
+<p>Un ejemplo de <strong>código HTML</strong> con las etiquetas <code>&lt;ins&gt;</code> y <code>&lt;del&gt;</code> sería:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">html</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Etiquetas ins y del<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>El HTML, acrónimo inglés de Hyper Text Markup Language (lenguaje
+        de <span class="sc2">&lt;<span class="kw2">del</span> <span class="kw3">datetime</span><span class="sy0">=</span><span class="st0">&quot;20091025&quot;</span> <span class="kw3">cite</span><span class="sy0">=</span><span class="st0">&quot;http://www.enlace.com&quot;</span>&gt;</span>marcado de
+        hipertexto<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">del</span>&gt;</span> <span class="sc2">&lt;<span class="kw2">ins</span> <span class="kw3">datetime</span><span class="sy0">=</span><span class="st0">&quot;20091026&quot;</span> <span class="kw3">cite</span><span class="sy0">=</span><span class="st0">&quot;http://enlace.com&quot;</span>&gt;</span>
+        marcas hipertextuales<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">ins</span>&gt;</span>) es un lenguaje de marcación diseñado
+        para estructurar textos y presentarlos en forma de hipertexto.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>Y un navegador lo visualizaría de esta manera:</p>
+
+<div class="figure" id="figure-4-6">
+    <img src="images/cap04/ins_del.png" alt="Ejemplo de uso de etiquetas ins y del" />
+
+    <p class="caption"><strong>Figura 4.6</strong> Ejemplo de uso de etiquetas ins y del</p>
+</div>
+
+
+<p>Además de estas dos, encontramos la etiqueta <code>&lt;blockquote&gt;</code> para incluir citas textuales en las páginas web.</p>
+
+<div class="table" id="table-4-7">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;blockquote&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left"><code>cite="url"</code> Indica la URL de la página en la que se puede obtener más información sobre el motivo por el que se realizó la modificación</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En bloque</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplea para indicar que el texto que encierra es una cita textual de otro texto externo</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Un ejemplo de <strong>código HTML</strong> con la etiqueta <code>&lt;blockquote&gt;</code> sería:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">html</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Etiqueta blockquote<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Según el W3C, el valor del atributo <span class="sc2">&lt;<span class="kw2">em</span>&gt;</span>cite<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">em</span>&gt;</span> en las
+        etiquetas <span class="sc2">&lt;<span class="kw2">strong</span>&gt;</span>blockquote<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">strong</span>&gt;</span> tiene el siguiente
+        significado:<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">blockquote</span> <span class="kw3">cite</span><span class="sy0">=</span><span class="st0">&quot;http://www.w3.org/TR/html401/struct/text.html&quot;</span>&gt;</span>
+        &quot;El valor de este atributo es una dirección URL que indica el
+        documento original de la cita.&quot;<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">blockquote</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>Y un navegador lo visualizaría de esta manera:</p>
+
+<div class="figure" id="figure-4-7">
+    <img src="images/cap04/blockquote.png" alt="Ejemplo de uso de etiqueta blockquote" />
+
+    <p class="caption"><strong>Figura 4.7</strong> Ejemplo de uso de etiqueta blockquote</p>
+</div>
+
+
+<div class="exercise">
+  <p class="title">Ejercicio 2</p>
+</div>
+
+<p><a class="internal" href="capitulo-14.html#ej02">Ver enunciado</a></p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 3</p>
+</div>
+
+<p><a class="internal" href="capitulo-14.html#ej03">Ver enunciado</a></p>
+
+<h2 id="marcado-avanzado-de-un-texto">4.3 Marcado avanzado de un texto</h2>
+
+<p>La etiqueta <code>&lt;abbr&gt;</code> marca las abreviaturas de un texto y la etiqueta <code>&lt;acronym&gt;</code> se emplea para marcar las siglas o acrónimos del texto. En ambos casos, el atributo <code>title</code> se puede utilizar para incluir el significado completo de la abreviatura o sigla. La mayoría de navegadores muestran por defecto un borde inferior punteado para estos elementos.</p>
+
+<div class="table" id="table-4-8">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;abbr&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left"><code>title="texto"</code> Indica el significado completo de la abreviatura</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En línea</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplea para marcar las abreviaturas del texto y proporcionar el significado de esas abreviaturas</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<div class="table" id="table-4-9">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;acronym&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left"><code>title="texto"</code> Indica el significado completo del acrónimo o sigla</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En línea</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplea para marcar las siglas o acrónimos del texto y proporcionar el significado de esas siglas</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Un ejemplo de <strong>código HTML</strong> con la etiqueta <code>&lt;acronym&gt;</code> sería:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">html</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Etiqueta acronym<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>El lenguaje <span class="sc2">&lt;acronym <span class="kw3">title</span><span class="sy0">=</span><span class="st0">&quot;HyperText Markup Language&quot;</span>&gt;</span>
+        HTML<span class="sc2">&lt;<span class="sy0">/</span>acronym&gt;</span> es estandarizado por el <span class="sc2">&lt;acronym <span class="kw3">title</span><span class="sy0">=</span><span class="st0">&quot;World</span>
+<span class="sc2">        Wide Web Consortium&quot;</span>&gt;</span>W3C<span class="sc2">&lt;<span class="sy0">/</span>acronym&gt;</span>.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>Y un navegador lo visualizaría de esta manera:</p>
+
+<div class="figure" id="figure-4-8">
+    <img src="images/cap04/acronym.png" alt="Ejemplo de uso de etiqueta acronym" />
+
+    <p class="caption"><strong>Figura 4.8</strong> Ejemplo de uso de etiqueta acronym</p>
+</div>
+
+
+<p>La etiqueta <code>&lt;dfn&gt;</code> proporciona al usuario la definición de todas las palabras para las que se considere apropiado, y la etiqueta <code>&lt;cite&gt;</code> se utiliza para marcar un texto como una citación:</p>
+
+<div class="table" id="table-4-10">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;dfn&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left"><code>title="texto"</code> Indica el significado completo del término</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En línea</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplea para marcar las definiciones de ciertos términos y proporcionar el significado de esos términos</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Un ejemplo de <strong>código HTML</strong> con la etiqueta <code>&lt;dfn&gt;</code> sería:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Con estos síntomas, podría tratarse de un caso de <span class="sc2">&lt;<span class="kw2">dfn</span> <span class="kw3">title</span><span class="sy0">=</span><span class="st0">&quot;Imagen o sensación subjetiva, propia de un sentido, determinada por otra sensación que afecta a un sentido diferente&quot;</span>&gt;</span>sinestesia<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">dfn</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></pre>
+</div>
+
+<div class="table" id="table-4-11">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;cite&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En línea</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Se emplea para marcar una cita o una referencia a otras fuentes</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>La diferencia entre <code>&lt;cite&gt;</code> y <code>&lt;blockquote&gt;</code> está en que el elemento <code>&lt;cite&gt;</code> marca el autor de la cita (persona, documento, etc.) y <code>&lt;blockquote&gt;</code> marca el contenido de la propia cita.</p>
+
+<p>Un ejemplo de <strong>código HTML</strong> con ambas etiquetas sería:</p>
+
+<div class="code html">
+<pre class="html5">Como dijo <span class="sc2">&lt;<span class="kw2">cite</span>&gt;</span>Mahatma Gandhi<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">cite</span>&gt;</span>:
+<span class="sc2">&lt;<span class="kw2">blockquote</span>&gt;</span>Vive como si fueras a morir mañana y aprende como si fueras a vivir para siempre.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">blockquote</span>&gt;</span></pre>
+</div>
+
+<h2 id="etiqueta-ltspangt">4.4 Etiqueta &lt;span&gt;</h2>
+
+<p>La etiqueta <code>&lt;span&gt;</code> permite agrupar varios elementos en línea seguidos dentro de un mismo bloque (por ejemplo, varias palabras seguidas en un párrafo), para después darles formato con las hojas de estilo <strong>CSS</strong>.
+Se emplea para marcar cualquier elemento que no se puede marcar con las otras etiquetas definidas.</p>
+
+<p>La etiqueta <code>&lt;span&gt;</code> se visualiza por defecto con el mismo aspecto que el texto normal. Por tanto, es habitual utilizar esta etiqueta junto con los atributos <code>id</code> y <code>class</code> para modificar posteriormente su aspecto con <strong>CSS</strong>.</p>
+
+<p>Este <em>tag</em> sólo se puede utilizar, como ya hemos mencionado, para encerrar <strong>contenidos y etiquetas en línea</strong>. Cuando se quieren estructurar elementos en bloque, se utiliza la etiqueta <code>&lt;div&gt;</code>.</p>
+
+<p>Un ejemplo de <strong>código HTML</strong> con la etiqueta <code>&lt;span&gt;</code> sería:</p>
+
+<div class="code html">
+<pre class="html5">Importante: Si quiere ponerse en contacto con nuestra empresa, puede hacerlo en el teléfono <span class="sc2">&lt;<span class="kw2">span</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;telefono&quot;</span>&gt;</span>0034 900 000 000<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">span</span>&gt;</span> o a través de la dirección de correo <span class="sc2">&lt;<span class="kw2">span</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;email&quot;</span>&gt;</span>contacto@empresa.com<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">span</span>&gt;</span></pre>
+</div>
+
+<h2 id="espacios-en-blanco-y-nuevas-lineas">4.5 Espacios en blanco y nuevas líneas</h2>
+
+<h3 id="espacios-en-blanco">4.5.1 Espacios en blanco</h3>
+
+<p>El lenguaje <strong>HTML</strong> considera <strong>espacio en blanco</strong> a: los espacios en blanco, los tabuladores, los retornos de carro y el carácter de nueva línea. HTML ignora todos los espacios en blanco sobrantes, es decir, todos los espacios en blanco que no son el espacio en blanco que separa las palabras.</p>
+
+<p>Un ejemplo de este comportamiento sería:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">html</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Espacios en blanco<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Este primer párrafo no contiene saltos de línea ni otro tipo de espaciado.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Este segundo párrafo sí que contiene saltos
+        de
+        línea
+        y   otro   tipo   de   espaciado.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>Que un navegador visualizaría de esta manera:</p>
+
+<div class="figure" id="figure-4-9">
+    <img src="images/cap04/espacios_en_blanco.png" alt="Ejemplo de uso de la etiqueta p con espacios en blanco y nuevas líneas" />
+
+    <p class="caption"><strong>Figura 4.9</strong> Ejemplo de uso de la etiqueta p con espacios en blanco y nuevas líneas</p>
+</div>
+
+
+<p>Sin embargo, existen alternativas para incluir <strong>espacios en blanco adicionales</strong>. Esto se consigue sustituyendo cada nuevo espacio en blanco por el texto <code>&amp;nbsp;</code>.</p>
+
+<p>Cada texto <code>&amp;nbsp;</code> equivale a un sólo espacio en blanco, por lo que se deben escribir tantos <code>&amp;nbsp;</code> seguidos como espacios en blanco se quieran conseguir.</p>
+
+<p>Si quisiéramos visualizar el texto del ejemplo anterior con todos los espacios adicionales, debería escribirse de esta manera:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">html</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Espacios en blanco<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Este primer párrafo no contiene saltos de línea ni otro tipo de espaciado.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">p</span>&gt;</span>Este segundo párrafo sí que contiene saltos <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+        de <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+        línea <span class="sc2">&lt;<span class="kw2">br</span><span class="sy0">/</span>&gt;</span>
+        y <span class="sc1">&amp;nbsp;&amp;nbsp;</span> otro <span class="sc1">&amp;nbsp;</span> tipo <span class="sc1">&amp;nbsp;</span> de <span class="sc1">&amp;nbsp;</span> espaciado.<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>Que un navegador visualizaría de esta manera:</p>
+
+<div class="figure" id="figure-4-10">
+    <img src="images/cap04/espacios_en_blanco2.png" alt="Ejemplo de uso <code>&amp;nbsp;</code>" />
+
+    <p class="caption"><strong>Figura 4.10</strong> Ejemplo de uso <code>&amp;nbsp;</code></p>
+</div>
+
+
+<p>Este ejemplo de <strong>código HTML</strong> incluye la etiqueta <code>&lt;br/&gt;</code>, que se explica a continuación.</p>
+
+<h3 id="nuevas-lineas">4.5.2 Nuevas líneas</h3>
+
+<p>Para forzar una nueva línea, o lo que es lo mismo, lo equivalente a presionar la tecla <em>Enter</em> o <em>Intro</em> escribiendo un texto, se utiliza el <em>tag</em> <code>&lt;br&gt;</code>. Se trata de una <strong>etiqueta vacía</strong>, es decir, no encierra ningún texto.</p>
+
+<div class="table" id="table-4-12">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;br&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En línea y etiqueta vacía</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Fuerza al navegador a insertar una nueva línea</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Existen varias formas de expresar esta etiqueta. Si bien se puede abrir y cerrar de forma consecutiva (<code>&lt;br&gt;&lt;/br&gt;</code>), la forma de uso más común es abriendo y cerrando un único <em>tag</em> de esta forma: <code>&lt;br/&gt;</code>o <code>&lt;br /&gt;</code>.</p>
+
+<h3 id="texto-preformateado">4.5.3 Texto preformateado</h3>
+
+<p>Existe una manera de mostrar el <strong>texto tal y como está escrito</strong>, respetando los espacios en blanco y las nuevas líneas. Se utiliza, por ejemplo, cuando una página debe mostrar directamente el texto generado por alguna aplicación.</p>
+
+<div class="table" id="table-4-13">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;pre&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En bloque</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Muestra el texto que encierra tal y como está escrito</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Los elementos <code>&lt;pre&gt;</code> son algo especiales, ya que los navegadores les aplican algunas reglas:</p>
+
+<ul>
+<li>Mantienen todos los espacios en blanco (tabuladores, espacios y nuevas líneas)</li>
+<li>Muestra el texto con un tipo de letra de ancho fijo (todas las letras de la misma anchura)</li>
+<li>No se ajusta la longitud de las líneas (las líneas largas producen un <em>scroll</em> horizontal), lo que provoca que la anchura de la página sea superior a la anchura de la ventana del navegador.</li>
+</ul>
+
+<p>Un ejemplo de <strong>código HTML</strong> con la etiqueta <code>&lt;pre&gt;</code> sería:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">html</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>Etiqueta pre<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">pre</span>&gt;</span>
+        La etiqueta pre
+           respeta los espacios en blanco
+              y
+         muestra el texto
+             tal y como
+           está escrito
+        <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+        <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">pre</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<p>Y un navegador lo visualizaría de esta manera:</p>
+
+<div class="figure" id="figure-4-11">
+    <img src="images/cap04/pre.png" alt="Ejemplo de uso de la etiqueta pre" />
+
+    <p class="caption"><strong>Figura 4.11</strong> Ejemplo de uso de la etiqueta pre</p>
+</div>
+
+
+<p>También existe la etiqueta <code>&lt;code&gt;</code> que se utiliza para mostrar código fuente de cualquier lenguaje de programación.</p>
+
+<div class="table" id="table-4-14">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Etiqueta</th>
+  <th align="left"><code>&lt;code&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><strong>Atributos comunes</strong></td>
+  <td align="left">básicos, internacionalización, eventos</td>
+</tr>
+<tr>
+  <td align="right"><strong>Atributos propios</strong></td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="right"><strong>Tipo de elemento</strong></td>
+  <td align="left">En bloque</td>
+</tr>
+<tr>
+  <td align="right"><strong>Descripción</strong></td>
+  <td align="left">Delimita el texto considerado un fragmento de código fuente</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Las reglas que los navegadores aplican a las etiquetas <code>&lt;code&gt;</code> son:</p>
+
+<ul>
+<li>Muestra el texto con un tipo de letra de ancho fijo (todas las letras de la misma anchura)</li>
+</ul>
+
+<p>Sin embargo, no respeta los espacios en blanco ni las líneas, por lo que, en ese sentido, su comportamiento es similar a la etiqueta <code>&lt;p&gt;</code>.</p>
+
+<p>Un ejemplo de <strong>código HTML</strong> con la etiqueta <code>&lt;code&gt;</code> sería:</p>
+
+<div class="code html">
+<pre class="html5"><span class="sc2">&lt;<span class="kw2">html</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">head</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">title</span>&gt;</span>code<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">title</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">head</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">body</span>&gt;</span>
+        <span class="sc2">&lt;<span class="kw2">code</span>&gt;</span>
+            function mostrarMsj(msj)
+            {
+                alert(&quot;El mensaje es: &quot;+msj);
+                mostrado = true;
+            }
+        <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">code</span>&gt;</span>
+    <span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">body</span>&gt;</span>
+<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">html</span>&gt;</span></pre>
+</div>
+
+<div class="figure" id="figure-4-12">
+    <img src="images/cap04/code.png" alt="Ejemplo de uso de la etiqueta code" />
+
+    <p class="caption"><strong>Figura 4.12</strong> Ejemplo de uso de la etiqueta code</p>
+</div>
+
+
+<div class="exercise">
+  <p class="title">Ejercicio 4</p>
+</div>
+
+<p><a class="internal" href="capitulo-14.html#ej04">Ver enunciado</a></p>
+
+<div class="exercise">
+  <p class="title">Ejercicio 5</p>
+</div>
+
+<p><a class="internal" href="capitulo-14.html#ej05">Ver enunciado</a></p>
+
+<h2 id="codificacion-de-caracteres">4.6 Codificación de caracteres</h2>
+
+<p>Existen <strong>caracteres</strong> que se utilizan habitualmente en los textos que no se pueden incluir directamente en las páginas web o que pueden darnos problemas. Estos son:</p>
+
+<ul>
+<li>Los caracteres que utiliza el lenguaje <strong>HTML</strong> para definir sus etiquetas.</li>
+<li>Los caracteres <strong>propios de idiomas que no son el inglés</strong>.</li>
+</ul>
+
+<p>Para los caracteres propios del lenguaje HTML existen algunas expresiones o <strong>entidades HTML</strong> que los sustituyen:</p>
+
+<div class="table" id="table-4-15">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Entidad</th>
+  <th align="left">Caracter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><code>&amp;lt;</code></td>
+  <td align="left">&lt;</td>
+</tr>
+<tr>
+  <td align="right"><code>&amp;gt;</code></td>
+  <td align="left">></td>
+</tr>
+<tr>
+  <td align="right"><code>&amp;amp;</code></td>
+  <td align="left">&amp;</td>
+</tr>
+<tr>
+  <td align="right"><code>&amp;quot;</code></td>
+  <td align="left">"</td>
+</tr>
+<tr>
+  <td align="right"><code>&amp;nbsp;</code></td>
+  <td align="left">espacio en blanco</td>
+</tr>
+<tr>
+  <td align="right"><code>&amp;apos;</code></td>
+  <td align="left">'</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>En cuanto a los caracteres propios de idiomas diferentes al inglés, cuando todos los procesos involucrados (entorno de desarrollo, servidor web y navegador) utilizan la misma codificación de caracteres (por ejemplo, <strong>UTF-8</strong>), el texto se verá correctamente en el navegador. Pero si la codificación cambia sin realizar una conversión correcta, el navegador mostrará caracteres extraños.</p>
+
+<p>La solución más correcta y sencilla es sustituir estos caracteres potencialmente problemáticos por su <strong>entidad HTML</strong>, ya que si se utilizan las entidades HTML en vez de los caracteres problemáticos, es indiferente pasar de una codificación de caracteres a otra diferente.</p>
+
+<div class="table" id="table-4-16">
+
+    <table>
+<thead>
+<tr>
+  <th align="right">Entidad</th>
+  <th align="left">Caracter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="right"><code>&amp;ntilde;</code></td>
+  <td align="left">ñ</td>
+</tr>
+<tr>
+  <td align="right"><code>&amp;Ntilde;</code></td>
+  <td align="left">Ñ</td>
+</tr>
+<tr>
+  <td align="right"><code>&amp;aacute;</code></td>
+  <td align="left">á</td>
+</tr>
+<tr>
+  <td align="right"><code>&amp;eacute;</code></td>
+  <td align="left">é</td>
+</tr>
+<tr>
+  <td align="right"><code>&amp;iacute;</code></td>
+  <td align="left">í</td>
+</tr>
+<tr>
+  <td align="right"><code>&amp;oacute;</code></td>
+  <td align="left">ó</td>
+</tr>
+<tr>
+  <td align="right"><code>&amp;uacute;</code></td>
+  <td align="left">ú</td>
+</tr>
+<tr>
+  <td align="right"><code>&amp;Aacute;</code></td>
+  <td align="left">Á</td>
+</tr>
+<tr>
+  <td align="right"><code>&amp;Eacute;</code></td>
+  <td align="left">É</td>
+</tr>
+<tr>
+  <td align="right"><code>&amp;Iacute;</code></td>
+  <td align="left">Í</td>
+</tr>
+<tr>
+  <td align="right"><code>&amp;Oacute;</code></td>
+  <td align="left">Ó</td>
+</tr>
+<tr>
+  <td align="right"><code>&amp;Uacute;</code></td>
+  <td align="left">Ú</td>
+</tr>
+<tr>
+  <td align="right"><code>&amp;euro;</code></td>
+  <td align="left">€</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p>Puedes consultar la tabla completa de entidades HTML en Wikipedia: <a href="http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references">http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-4.html#texto">Texto</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.1</span>
+                        <a class="internal" href="capitulo-4.html#como-estructurar-un-texto">Cómo estructurar un texto</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.2</span>
+                        <a class="internal" href="capitulo-4.html#marcado-basico-de-un-texto">Marcado básico de un texto</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.3</span>
+                        <a class="internal" href="capitulo-4.html#marcado-avanzado-de-un-texto">Marcado avanzado de un texto</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.4</span>
+                        <a class="internal" href="capitulo-4.html#etiqueta-ltspangt">Etiqueta &lt;span&gt;</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.5</span>
+                        <a class="internal" href="capitulo-4.html#espacios-en-blanco-y-nuevas-lineas">Espacios en blanco y nuevas líneas</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>4.6</span>
+                        <a class="internal" href="capitulo-4.html#codificacion-de-caracteres">Codificación de caracteres</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

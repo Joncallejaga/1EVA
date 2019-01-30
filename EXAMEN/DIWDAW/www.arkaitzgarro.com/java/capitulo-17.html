@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="15/04/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Otras relaciones entre objetos | Java</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">Java</a></h1>
+        <p class="span3">
+                        <a href="capitulo-16.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-18.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="otras-relaciones-entre-objetos"><span>Capítulo 17</span> Otras relaciones entre objetos</h1>
+        <p>Además de la relación de herencia las clases empleadas dentro de una aplicación Java, los objetos pueden estar conectados dentro de un programa con otros tipos de relaciones. Estas relaciones puede ser persistentes si establecen si la comunicación entre objetos se registra de algún modo y por tanto puede ser utilizada en cualquier momento. En el caso de relaciones no persistentes entonces el vínculo entre objetos desaparece tras ser empleado. En cualquier caso, en la mayor parte de los casos la resolución de un problema más o menos complejo exige la colaboración entre objetos. Esta colaboración se puede llevar a cabo mediante el establecimiento de relaciones entre clases (relación de herencia o generalización) o entre instancias (relación de asociación y relación todo-parte: agregación y composición). En el capitulo anterior vimos la relación de herencia. En este capítulo se mostrarán otras relaciones entre objetos.</p>
+
+<h2 id="la-asociacion">17.1 La asociación</h2>
+
+<p>En una asociación, dos instancias A y B relacionadas entre sí existen de forma independiente. No hay una relación <em>fuerte</em>. La creación o desaparición de uno de ellos implica unicamente la creación o destrucción de la relación entre ellos y nunca la creación o destrucción del otro. Por ejemplo, un cliente puede tener varios pedidos de compra o ninguno.</p>
+
+<p>La relación de <strong>asociación</strong> expresa una relación (unidireccional o bidireccional) entre las instancias a partir de las clases conectadas. El sentido en que se recorre la asociación se denomina <strong>navegabilidad</strong> de la asociación. Cada extremo de la asociación se caracteriza por el <strong>rol</strong> o papel que juega en dicha relación el objeto situado en cada extremo. La <strong>cardinalidad</strong> o multiplicidad es el número mínimo y máximo de instancias que pueden relacionarse con la otra instancia del extremo opuesto de la relación. Por defecto es 1. El formato en el que se especifica es (mínima..máxima). Por ejemplo:</p>
+
+<ul>
+<li>1: Uno y sólo uno (por defecto)</li>
+<li>0..1: Cero a uno. También (0,1)</li>
+<li>M..N: Desde M hasta N (enteros naturales)</li>
+<li>0..*: Cero a muchos</li>
+<li>1..*: Uno a muchos (al menos uno)</li>
+<li>1,5,9: Uno o cinco o nueve</li>
+</ul>
+
+<h2 id="la-agregacion-y-la-composicion">17.2 La agregación y la composición</h2>
+
+<p>En una relación <em>todo-parte</em> una instancia forma parte de otra. En la vida real se dice que A <em>está compuesto de</em> B o que A <em>tiene</em> B. La diferencia entre asociación y relación todo-parte radica en la asimetría presente en toda relación todo-parte. En teoría se distingue entre dos tipos de relación todo-parte:</p>
+
+<ul>
+<li>La <strong>agregación</strong> es una asociación binaria que representa una relación todo-parte (<em>pertenece a tiene un, es parte de</em>). Por ejemplo, un centro comercial tiene clientes.</li>
+<li>La <strong>composición</strong> es una agregación <em>fuerte</em> en la que una instancia ‘parte’ está relacionada, como máximo, con una instancia ‘todo’ en un momento dado, de forma que cuando un objeto ‘todo’ es eliminado, también son eliminados sus objetos ‘parte’. Por ejemplo: un rectángulo tiene cuatro vértices, un centro comercial está organizado mediante un conjunto de secciones de venta...</li>
+</ul>
+
+<p>A nivel práctico se suele llamar <em>agregación</em> cuando la relación se plasma mediante referencias (lo que permite que un componente esté referenciado en más de un compuesto). Así, a nivel de implementación una agregación no se diferencia de una asociación binaria. Por ejemplo: un equipo y sus miembros. Por otro lado, se suele llamar <em>composición</em> cuando la relación se conforma en una inclusión por valor (lo que implica que un componente está como mucho en un compuesto, pero no impide que haya objetos componentes no relacionados con ningún compuesto). En este caso si se destruye el compuesto se destruyen sus componentes. Por ejemplo: un ser humano y sus miembros. Algunas relaciones pueden ser consideradas agregaciones o composiciones, en función del contexto en que se utilicen.</p>
+
+<h2 id="la-dependencia-o-relacion-de-uso">17.3 La dependencia o relación de uso</h2>
+
+<p>Una clase A usa una clase B cuando no contiene atributos de la clase B pero, o bien utiliza alguna instancia de la clase B como parámetro en alguno de sus métodos para realizar una operación, o bien accede a sus atributos (clases con métodos <em>amigos</em>).</p>
+
+<h2 id="ejemplos-de-agregacion-o-composicion">17.4 Ejemplos de agregación o composición</h2>
+
+<p>Como se ha comentado anteriormente, la <em>agregación</em> o <em>composición</em> son mecanismos diferentes de la herencia que consiste en que uno o más atributos de una clase pertenecen a una o más clases previamente declaradas. Es decir, un objeto puede componerse de otros pertenecientes a otras clases.</p>
+
+<p>Por ejemplo, la clase <code>Persona</code> se compone de dos variables de instancia, una de la clase <code>String</code> y otra de la clase <code>Fecha</code>:</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/**
+ * Declaracion de la clase Persona
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> Persona <span class="br0">&#123;</span>
+    <span class="kw3">String</span> nombre<span class="sy0">;</span>
+    Fecha fechaNacimiento<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> asignaDatos<span class="br0">&#40;</span><span class="kw3">String</span> nombre, Fecha f<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">nombre</span> <span class="sy0">=</span> nombre<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">fechaNacimiento</span> <span class="sy0">=</span> f<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">String</span> toString<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> nombre <span class="sy0">+</span> <span class="st0">&quot; nacido el dia &quot;</span> <span class="sy0">+</span> fechaNacimiento.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>Se dice que la clase <code>Persona</code> es una agregación de las clases <code>String</code> y <code>Fecha</code>. La clase <code>PruebaPersona</code> muestra un ejemplo de uso de la clase <code>Persona</code>:</p>
+
+<div class="code java">
+<pre class="java"><span class="co3">/**
+ * Ejemplo de uso de la clase Persona
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> PruebaPersona <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main <span class="br0">&#40;</span><span class="kw3">String</span> <span class="br0">&#91;</span><span class="br0">&#93;</span> args <span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        Persona p <span class="sy0">=</span> <span class="kw1">new</span> Persona<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Fecha n <span class="sy0">=</span> <span class="kw1">new</span> Fecha<span class="br0">&#40;</span><span class="nu0">11</span>,<span class="nu0">2</span>,<span class="nu0">2002</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        p.<span class="me1">asignaDatos</span><span class="br0">&#40;</span><span class="st0">&quot;Arkaitz Garro&quot;</span>, n<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>p.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<p>La salida por pantalla al ejecutar el código anterior es:</p>
+
+<div class="code bash">
+<pre class="bash">$<span class="sy0">&gt;</span>java PruebaPersona
+Arkaitz Garro nacido el dia <span class="nu0">11</span><span class="sy0">/</span><span class="nu0">2</span><span class="sy0">/</span><span class="nu0">2002</span></pre>
+</div>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-17.html#otras-relaciones-entre-objetos">Otras relaciones entre objetos</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>17.1</span>
+                        <a class="internal" href="capitulo-17.html#la-asociacion">La asociación</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>17.2</span>
+                        <a class="internal" href="capitulo-17.html#la-agregacion-y-la-composicion">La agregación y la composición</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>17.3</span>
+                        <a class="internal" href="capitulo-17.html#la-dependencia-o-relacion-de-uso">La dependencia o relación de uso</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>17.4</span>
+                        <a class="internal" href="capitulo-17.html#ejemplos-de-agregacion-o-composicion">Ejemplos de agregación o composición</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

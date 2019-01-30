@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Arkaitz Garro" />
+    <meta name="date" content="28/01/2014"/>
+    <meta name="generator" content="easybook 5.0-DEV"/>
+
+    <title>Almacenamiento local | HTML5</title>
+
+    <link rel="stylesheet" href="css/easybook.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39705204-1', 'arkaitzgarro.com');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="item chapter">
+<div class="container">
+<div class="menu">
+    <div class="row">
+        <h1 class="span9"><a href="index.html">HTML5</a></h1>
+        <p class="span3">
+                        <a href="capitulo-7.html"><span>&larr;</span> Anterior</a>
+            
+                        <a href="capitulo-9.html">Siguiente <span>&rarr;</span></a>
+                    </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <h1 id="almacenamiento-local"><span>Capítulo 8</span> Almacenamiento local</h1>
+        <p>El almacenamiento de datos es fundamental en cualquier aplicación web o de escritorio. Hasta ahora, el almacenamiento de datos en la web se realizaba en el servidor, y era necesario algún tipo de conexión con el cliente para trabajar con estos datos. Con HTML5 disponemos de tres tecnologías que permiten que las aplicaciones almacenen datos en los dispositivos cliente. Según las necesidades de la aplicación, la información puede sincronizarse también con el servidor o permanecer siempre en el cliente. Estas son las posibilidades que tenemos:</p>
+
+<ul>
+<li>Web Storage: <a href="http://www.w3.org/TR/webstorage/">http://www.w3.org/TR/webstorage/</a>. Es el sistema de almacenamiento más simple, ya que los datos se almacenan en parejas de clave/valor. Ampliamente soportado por todos los navegadores.</li>
+<li>Web SQL Database: <a href="http://www.w3.org/TR/webdatabase/">http://www.w3.org/TR/webdatabase/</a>. Sistema de almacenamiento basado en SQL. La especificación indica que no va a ser mantenido en el futuro, pero actualmente su uso está muy extendido y es soportado por Chrome, Safari y Opera.</li>
+<li>IndexedDB: <a href="http://www.w3.org/TR/Indexeddb/">http://www.w3.org/TR/Indexeddb/</a>. Sistema de almacenamiento basado en objetos. Actualmente soportado por Chrome, Firefox e Internet Explorer.</li>
+</ul>
+
+<h2 id="web-storage">8.1 Web Storage</h2>
+
+<p>Este API de almacenamiento ofrece dos posibilidades para guardar datos en el navegador: <code>sessionStorage</code> y <code>localStorage</code>. El primero mantiene los datos durante la sesión actual (mientras la ventana o pestaña se mantenga abierta), mientras que el segundo almacena los datos hasta que sean eliminados explícitamente por la aplicación o el usuario. Ambos modos de almacenamiento se encuentran relacionados con el dominio que los ha creado.</p>
+
+<ul>
+<li><code>sessionStorage</code>: objeto global que mantiene un área de almacenamiento disponible a lo largo de la duración de la sesión de la ventana o pestaña. La sesión persiste mientras que la ventana permanezca abierta y sobrevive a recargas de página. Si se abre una nueva página en una pestaña o ventana, una nueva sesión es inicializada, por lo que no es posible acceder a los datos de otra sesión.</li>
+<li><code>localStorage</code>: el almacenamiento local por su parte, funciona de la misma forma que el almacenamiento de sesión, con la excepción de que son capaces de almacenar los datos por dominio y persistir más allá de la sesión actual, aunque el navegador se cierre o el dispositivo se reinicie.</li>
+</ul>
+
+<blockquote>
+  <p><strong>Nota</strong></p>
+  
+  <p>Cuando hacemos referencia la ventana o pestaña, nos estamos refiriendo al objeto <code>window</code>. Una nueva ventana abierta utilizando el método <code>window.open()</code>, pertenece a la misma sesión.</p>
+</blockquote>
+
+<p>Tanto <code>sessionStorage</code> como <code>localStorage</code> forman parte del Web Storage, por lo que comparten el mismo API:</p>
+
+<div class="code javascript">
+<pre class="javascript">readonly attribute unsigned <span class="kw5">long</span> length<span class="sy0">;</span>
+getter DOMString key<span class="br0">&#40;</span><span class="kw1">in</span> unsigned <span class="kw5">long</span> index<span class="br0">&#41;</span><span class="sy0">;</span>
+getter DOMString getItem<span class="br0">&#40;</span><span class="kw1">in</span> DOMString key<span class="br0">&#41;</span><span class="sy0">;</span>
+setter creator <span class="kw1">void</span> setItem<span class="br0">&#40;</span><span class="kw1">in</span> DOMString key<span class="sy0">,</span> <span class="kw1">in</span> any data<span class="br0">&#41;</span><span class="sy0">;</span>
+deleter <span class="kw1">void</span> removeItem<span class="br0">&#40;</span><span class="kw1">in</span> DOMString key<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">void</span> clear<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Este API hace que sea muy sencillo acceder a los datos. El método <code>setItem</code> almacena el valor, y el método <code>getItem</code> lo obtiene, como se muestra a continuación:</p>
+
+<div class="code javascript">
+<pre class="javascript">sessionStorage.<span class="me1">setItem</span><span class="br0">&#40;</span><span class="st0">'twitter'</span><span class="sy0">,</span> <span class="st0">'@starkyhach'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+alert<span class="br0">&#40;</span> sessionStorage.<span class="me1">getItem</span><span class="br0">&#40;</span><span class="st0">'twitter'</span><span class="br0">&#41;</span> <span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// muestra @starkyhach</span></pre>
+</div>
+
+<p>Es importante darse cuenta, que tal y como se indica en el API, el método <code>getItem</code> <em>siempre devuelve un String</em>, por lo que si intentamos almacenar un objeto, el valor devuelto será "[Object object]". El mismo problema ocurre con los número, por lo que es importante tenerlo en cuenta para evitar posibles errores. Por ejemplo:</p>
+
+<div class="code javascript">
+<pre class="javascript">sessionStorage.<span class="me1">setItem</span><span class="br0">&#40;</span><span class="st0">'total'</span><span class="sy0">,</span> <span class="nu0">120</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">function</span> calcularCosteEnvio<span class="br0">&#40;</span>envio<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> sessionStorage.<span class="me1">getItem</span><span class="br0">&#40;</span><span class="st0">'total'</span><span class="br0">&#41;</span> <span class="sy0">+</span> envio<span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+alert<span class="br0">&#40;</span>calcularCosteEnvio<span class="br0">&#40;</span><span class="nu0">25</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>En este caso, esperamos que el coste total (120) se almacene como número, y al añadir el coste del envío, el resultado sea 145. Pero como <code>sessionStorage</code> devuelve un <em>String</em>, el resultado no es el esperado sino 12025.</p>
+
+<h3 id="eliminando-datos">8.1.1 Eliminando datos</h3>
+
+<p>Disponemos de tres formas de eliminar datos del almacenamiento local: utilizando <code>delete</code>, <code>removeItem</code> y <code>clear</code>. El método <code>removeItem</code> toma como parámetro el nombre de la clave a eliminar (el mismo que utilizamos en <code>getItem</code> y <code>setItem</code>), para eliminar un ítem en particular. Por su parte, el método <code>clear</code>, elimina todas las entradas del objeto.</p>
+
+<div class="code javascript">
+<pre class="javascript">sessionStorage.<span class="me1">setItem</span><span class="br0">&#40;</span><span class="st0">'twitter'</span><span class="sy0">,</span> <span class="st0">'@starkyhach'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+sessionStorage.<span class="me1">setItem</span><span class="br0">&#40;</span><span class="st0">'flickr'</span><span class="sy0">,</span> <span class="st0">'starky.hach'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+alert<span class="br0">&#40;</span> sessionStorage.<span class="me1">length</span> <span class="br0">&#41;</span><span class="sy0">;</span>                     <span class="co1">// Muestra 2</span>
+sessionStorage.<span class="me1">removeItem</span><span class="br0">&#40;</span><span class="st0">'twitter'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+alert<span class="br0">&#40;</span> sessionStorage.<span class="me1">length</span> <span class="br0">&#41;</span><span class="sy0">;</span>                     <span class="co1">// Muestra 1</span>
+sessionStorage.<span class="me1">clear</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+alert<span class="br0">&#40;</span> sessionStorage.<span class="me1">length</span> <span class="br0">&#41;</span><span class="sy0">;</span>                     <span class="co1">// Muestra 0</span></pre>
+</div>
+
+<h3 id="almacenando-algo-mas-que-strings">8.1.2 Almacenando algo más que strings</h3>
+
+<p>Una manera de almacenar objetos es utilizando JSON. Como la representación de los objetos en JSON puede realizarse a través de texto, podemos almacenar estas cadenas de texto y recuperarlas posteriormente para convertirlas en objetos.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> videoDetails <span class="sy0">=</span> <span class="br0">&#123;</span>
+        title <span class="sy0">:</span> <span class="st0">'Matrix'</span><span class="sy0">,</span>
+        author <span class="sy0">:</span> <span class="br0">&#91;</span><span class="st0">'Andy Wachowski'</span><span class="sy0">,</span> <span class="st0">'Larry Wachowski'</span><span class="br0">&#93;</span><span class="sy0">,</span>
+        description <span class="sy0">:</span> <span class="st0">'Wake up Neo, the Matrix has you...'</span><span class="sy0">,</span>
+        rating<span class="sy0">:</span> <span class="st0">'-2'</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+sessionStorage.<span class="me1">setItem</span><span class="br0">&#40;</span><span class="st0">'videoDetails'</span><span class="sy0">,</span> JSON.<span class="me1">stringify</span><span class="br0">&#40;</span>videoDetails<span class="br0">&#41;</span> <span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">var</span> videoDetails <span class="sy0">=</span> JSON.<span class="me1">parse</span><span class="br0">&#40;</span>sessionStorage.<span class="me1">getItem</span><span class="br0">&#40;</span><span class="st0">'videoDetails'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="eventos-de-almacenamiento">8.1.3 Eventos de almacenamiento</h3>
+
+<p>Una de las funcionalidades más interesantes de Web Storage es que incluye una serie de eventos que nos indican cuándo se ha producido un cambio en los datos almacenados. Estos eventos no se lanzan en la ventana actual donde se han producido los cambios, sino en el resto de ventadas donde los datos pueden verse afectados.</p>
+
+<p>Esto quiere decir que los eventos para <code>sessionStorage</code> son lanzados en los <code>iframe</code> dentro de la misma página, o en las ventanas abiertas con <code>window.open()</code>. Para <code>localStorage</code>, todas las ventanas abiertas con el mismo origen (protocolo + host + puerto) reciben los eventos.</p>
+
+<p>Cuando se lanzan los eventos, éstos contienen toda la información asociada con el cambio de datos:</p>
+
+<div class="code javascript">
+<pre class="javascript">StorageEvent <span class="br0">&#123;</span>
+    readonly DOMString key<span class="sy0">;</span>
+    readonly any oldValue<span class="sy0">;</span>
+    readonly any newValue<span class="sy0">;</span>
+    readonly DOMString url<span class="sy0">;</span>
+    readonly Storage storageArea<span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<p><code>storageArea</code> hace referencia al objeto <code>sessionStorage</code> o <code>localStorage</code>. Estos eventos se lanzan dentro del objeto <code>window</code>:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> handleStorage<span class="br0">&#40;</span>event<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    event <span class="sy0">=</span> event <span class="sy0">||</span> window.<span class="me1">event</span><span class="sy0">;</span> <span class="co1">// support IE8</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>event.<span class="me1">newValue</span> <span class="sy0">===</span> <span class="kw2">null</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="co1">// it was removed</span>
+        <span class="co1">// Do somthing</span>
+    <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+        <span class="co1">// Do somthing else</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<div class="code code">
+<pre class="code">window.addEventListener('storage', handleStorage, false);
+window.attachEvent('storage', handleStorage);</pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 8</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej08">Ver enunciado</a></p>
+
+<h2 id="web-sql">8.2 Web SQL</h2>
+
+<p>Web SQL es otra manera de almacenar y acceder a datos en el dispositivo. Realmente, no forma parte de la especificación de HTML5, pero es ampliamente utilizado para el desarrollo de aplicaciones web. Como su nombre indica, es una base de datos basada en SQL, más concretamente en <a href="http://sqlite.org">SQLite</a>. La utilización del API se resume en tres simples métodos:</p>
+
+<ul>
+<li><code>openDatabase</code>: abrir (o crear y abrir) una base de datos en el navegador del cliente.</li>
+<li><code>transaction</code>: iniciar una transacción.</li>
+<li><code>executeSql</code>: ejecutar una sentencia SQL.</li>
+</ul>
+
+<p>Como en la mayoría de librearías de JavaScript, el <a href="http://www.w3.org/TR/webdatabase/">API de Web SQL</a> realiza llamadas diferidas a funciones, una vez completadas las operaciones.</p>
+
+<div class="code javascript">
+<pre class="javascript">transaction.<span class="me1">executeSql</span><span class="br0">&#40;</span>sql<span class="sy0">,</span> <span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="kw1">function</span> <span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// my executed code lives here</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Debido a la naturaleza de estas llamadas, significa que el API de Web SQL es asíncrono, por lo que es necesario tener cuidado con el orden en el que se ejecutan las sentencias SQL. Sin embargo, las sentencias SQL se encolan y son ejecutadas en orden, por lo que podemos estar tranquilos en ese sentido: podemos crear tablas y tener la seguridad que van a ser creadas antes de acceder a los datos.</p>
+
+<h3 id="creando-y-abriendo-la-bd">8.2.1 Creando y abriendo la BD</h3>
+
+<p>El uso clásico de la API implica abrir (o crear) la base de datos y ejecutar algunas sentencias SQL. Al abrir la base de datos por primera vez, ésta es creada automáticamente. Es necesario especificar el número de versión de base de datos con el que se desea trabajar, y si no especificamos correctamente éste número de versión, es posible que provoquemos un error del tipo <code>INVALID_STATE_ERROR</code>.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> db <span class="sy0">=</span> openDatabase<span class="br0">&#40;</span><span class="st0">'mydb'</span><span class="sy0">,</span> <span class="st0">'1.0'</span><span class="sy0">,</span> <span class="st0">'My first database'</span><span class="sy0">,</span> <span class="nu0">2</span> <span class="sy0">*</span> <span class="nu0">1024</span> <span class="sy0">*</span> <span class="nu0">1024</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>La última versión de la especificación incluye un quinto argumento en la función <code>openDatabase</code>, pero no es soportado por muchos navegadores. Los valores que pasamos a esta función son los siguientes:</p>
+
+<ol>
+<li>El nombre de la base de datos.</li>
+<li>El número de versión de base de datos con el que deseamos trabajar.</li>
+<li>Un texto descriptivo de la base de datos.</li>
+<li>Tamaño estimado de la base de datos, en <code>bytes</code>.</li>
+</ol>
+
+<p>El valor de retorno de esta función es un objeto que dispone de un método <code>transaction</code>, a través del cual vamos a ejecutar las sentencias SQL.</p>
+
+<h3 id="transacciones">8.2.2 Transacciones</h3>
+
+<p>Ahora que tenemos la base de datos abierta, podemos crear transacciones para ejecutar nuestras sentencias SQL. La idea de utilizar transacciones, en lugar de ejecutar las sentencias directamente, es la posibilidad de realizar <em>rollback</em>. Esto quiere decir, que si la transacción falla por algún motivo, se vuelve al estado inicial, <em>como si nada hubiese pasado</em>.</p>
+
+<div class="code javascript">
+<pre class="javascript">db.<span class="me1">transaction</span><span class="br0">&#40;</span><span class="kw1">function</span> <span class="br0">&#40;</span>tx<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    tx.<span class="me1">executeSql</span><span class="br0">&#40;</span><span class="st0">'DROP TABLE foo'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="co1">// known to fail - so should rollback the DROP statement</span>
+    tx.<span class="me1">executeSql</span><span class="br0">&#40;</span><span class="st0">'INSERT INTO foo (id, text) VALUES (1, &quot;foobar&quot;)'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">,</span> <span class="kw1">function</span> <span class="br0">&#40;</span>err<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    alert<span class="br0">&#40;</span>err.<span class="me1">message</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Una vez listo el objeto transacción (<code>tx</code> en el ejemplo), podemos ejecutar sentencias SQL.</p>
+
+<h3 id="ejecutar-sentencias-sql">8.2.3 Ejecutar sentencias SQL</h3>
+
+<p>El método <code>executeSql</code> es utilizado tanto para sentencias de escritura como de lectura. Incluye protección contra ataques de <a href="http://en.wikipedia.org/wiki/SQL_injection">inyección SQL</a> y proporciona llamadas a métodos (<em>callback</em>) para procesar los resultados devueltos por una consulta SQL.</p>
+
+<p>Su sintaxis es la siguiente:</p>
+
+<div class="code javascript">
+<pre class="javascript">db.<span class="me1">transaction</span><span class="br0">&#40;</span><span class="kw1">function</span> <span class="br0">&#40;</span>tx<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    tx.<span class="me1">executeSql</span><span class="br0">&#40;</span>sqlStatement<span class="sy0">,</span> arguments<span class="sy0">,</span> callback<span class="sy0">,</span> errorCallback<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Donde:</p>
+
+<ol>
+<li><code>sqlStatement</code>: indica la sentencia SQL a ejecutar. Como hemos dicho, puede ser cualquier tipo de sentencia; creación de tabla, insertar un registro, realizar una consulta, etc.</li>
+<li><code>arguments</code>: corresponde con un <em>array</em> de argumentos que pasamos a la sentencia SQL. Es recomendable pasar los argumentos a la sentencia de esta manera, ya que el propio método se ocupa de prevenir inyecciones SQL.</li>
+<li><code>callback</code>: función a ejecutar cuando la transacción se ha realizado de manera correcta. Toma como parámetros la propia transacción y el resultado de la transacción.</li>
+<li><code>erroCallback</code>: función a ejecutar cuando la transacción se ha producido un error en la sentencia SQL. Toma como parámetros la propia transacción y el error producido.</li>
+</ol>
+
+<p>Un ejemplo de selección de registros sería el siguiente:</p>
+
+<div class="code javascript">
+<pre class="javascript">db.<span class="me1">transaction</span><span class="br0">&#40;</span><span class="kw1">function</span> <span class="br0">&#40;</span>tx<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    tx.<span class="me1">executeSql</span><span class="br0">&#40;</span><span class="st0">'SELECT * FROM foo WHERE id = ?'</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span><span class="sy0">,</span>
+                  <span class="kw1">function</span> callback<span class="br0">&#40;</span>tx<span class="sy0">,</span> results<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                      <span class="kw1">var</span> len <span class="sy0">=</span> results.<span class="me1">rows</span>.<span class="me1">length</span><span class="sy0">,</span> i<span class="sy0">;</span>
+                      <span class="kw1">for</span> <span class="br0">&#40;</span>i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> len<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        alert<span class="br0">&#40;</span>results.<span class="me1">rows</span>.<span class="me1">item</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>.<span class="me1">text</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                      <span class="br0">&#125;</span>
+                    <span class="br0">&#125;</span><span class="sy0">,</span>
+                  <span class="kw1">function</span> errorCallback<span class="br0">&#40;</span>tx<span class="sy0">,</span> error<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    alert<span class="br0">&#40;</span>error.<span class="me1">message</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                  <span class="br0">&#125;</span>
+                  <span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>La función de <em>callback</em> recibe como argumentos la transacción (de nuevo) y un objeto que contiene los resultados. Este objeto contiene una propiedad <code>rows</code>, donde <code>rows.item(i)</code> contiene la representación de la fila concreta. Si nuestra tabla contiene un campo que se llama <em>nombre</em>, podemos acceder a dicho campo de la siguiente manera:</p>
+
+<div class="code javascript">
+<pre class="javascript">results.<span class="me1">rows</span>.<span class="me1">item</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>.<span class="me1">nombre</span></pre>
+</div>
+
+<h3 id="crear-tablas">8.2.4 Crear tablas</h3>
+
+<p>La primera tarea a realizar cuando trabajamos con una base de datos es crear las tablas necesarias para almacenar los datos. Como hemos comentado antes, este proceso se realiza a través de una sentencia SQL, dentro de una transacción. Vamos a crear una base de datos para almacenar <em>tweets</em> que posteriormente obtendremos de internet:</p>
+
+<div class="code javascript">
+<pre class="javascript">db <span class="sy0">=</span> openDatabase<span class="br0">&#40;</span><span class="st0">'tweetdb'</span><span class="sy0">,</span> <span class="st0">'1.0'</span><span class="sy0">,</span> <span class="st0">'All my tweets'</span><span class="sy0">,</span> <span class="nu0">2</span> <span class="sy0">*</span> <span class="nu0">1024</span> <span class="sy0">*</span> <span class="nu0">1024</span><span class="br0">&#41;</span><span class="sy0">;</span>
+db.<span class="me1">transaction</span><span class="br0">&#40;</span><span class="kw1">function</span> <span class="br0">&#40;</span>tx<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    tx.<span class="me1">executeSql</span><span class="br0">&#40;</span><span class="st0">'CREATE TABLE IF NOT EXISTS tweets(id, user, date, text)'</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">,</span> getTweets<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="insertar-datos">8.2.5 Insertar datos</h3>
+
+<p>Una vez creada la tabla, el siguiente paso es insertar los datos correspondientes. Vamos a suponer que hemos realizado una petición AJAX a la API de Twitter, que nos ha devuelto una serie de tweets que queremos almacenar en nuestra base de datos. La función <code>getTweets</code> tendría este aspecto:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">function</span> getTweets<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> tweets <span class="sy0">=</span> $.<span class="me1">ajax</span><span class="br0">&#40;</span><span class="br0">&#123;</span>...<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    $.<span class="me1">each</span><span class="br0">&#40;</span>tweets<span class="sy0">,</span> <span class="kw1">function</span><span class="br0">&#40;</span>tweet<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        db.<span class="me1">transaction</span><span class="br0">&#40;</span><span class="kw1">function</span> <span class="br0">&#40;</span>tx<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">var</span> time <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">Date</span><span class="br0">&#40;</span><span class="kw4">Date</span>.<span class="me1">parse</span><span class="br0">&#40;</span>tweet.<span class="me1">created_at</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>.<span class="me1">getTime</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            tx.<span class="me1">executeSql</span><span class="br0">&#40;</span><span class="st0">'INSERT INTO tweets (id, user, date, text) VALUES (?, ?, ?, ?)'</span><span class="sy0">,</span>
+                          <span class="br0">&#91;</span>tweet.<span class="me1">id</span><span class="sy0">,</span> tweet.<span class="me1">from_user</span><span class="sy0">,</span> time <span class="sy0">/</span> <span class="nu0">1000</span><span class="sy0">,</span> tweet.<span class="me1">text</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<blockquote>
+  <p><em>Nota</em></p>
+  
+  <p>Insertando cada tweet en una nueva transacción, nos aseguramos que si se produce un error en alguna de ellas (ya existía el tweet), se van a seguir ejecutando el resto transacciones.</p>
+</blockquote>
+
+<h3 id="obtener-datos">8.2.6 Obtener datos</h3>
+
+<p>Finalmente, una vez que los datos se encuentran almacenados en la base de datos, sólo nos queda consultarlos. Como siempre, ejecutamos las sentencia SQL dentro de una transacción y proveemos la función que procesará los datos obtenidos:</p>
+
+<div class="code javascript">
+<pre class="javascript">db.<span class="me1">transaction</span><span class="br0">&#40;</span><span class="kw1">function</span> <span class="br0">&#40;</span>tx<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    tx.<span class="me1">executeSql</span><span class="br0">&#40;</span><span class="st0">'SELECT * FROM tweets WHERE date &gt; ?'</span><span class="sy0">,</span> <span class="br0">&#91;</span>time<span class="br0">&#93;</span><span class="sy0">,</span>
+                    <span class="kw1">function</span><span class="br0">&#40;</span>tx<span class="sy0">,</span> results<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        <span class="kw1">var</span> html <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">,</span> len <span class="sy0">=</span> results.<span class="me1">rows</span>.<span class="me1">length</span><span class="sy0">;</span>
+                        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw1">var</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> len<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                            html.<span class="me1">push</span><span class="br0">&#40;</span><span class="st0">'&lt;li&gt;'</span> <span class="sy0">+</span> results.<span class="me1">rows</span>.<span class="me1">item</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>.<span class="me1">text</span> <span class="sy0">+</span> <span class="st0">'&lt;/li&gt;'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                        tweetEl.<span class="me1">innerHTML</span> <span class="sy0">=</span> html.<span class="me1">join</span><span class="br0">&#40;</span><span class="st0">''</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 9</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej09">Ver enunciado</a></p>
+
+<h2 id="indexeddb">8.3 IndexedDB</h2>
+
+<p><code>IndexedDB</code> no es una base de datos relacional, sino que se podría llamar un <em>almacén de objetos</em> ya que en la base de datos que creemos, existen almacenes y en su interior añadimos objetos (como el siguiente):</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="br0">&#123;</span>
+    id<span class="sy0">:</span><span class="nu0">21992</span><span class="sy0">,</span>
+    nombre<span class="sy0">:</span> <span class="st0">&quot;Memoria RAM&quot;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<p>En <code>IndexedDB</code>, al igual que en Web SQL, al abrir una base de datos debemos indicar su nombre y la versión concreta. Posteriormente debemos crear los <em>almacenes de objetos</em>, que es muy parecido a un archivador con índices, que nos permite encontrar de una manera muy rápida el objeto que buscamos. Una vez el almacén está listo, podemos almacenar cualquier tipo de objeto con el índice que definamos. No importa el tipo de objeto que almacenemos, ni tienen que tener las mismas propiedades.</p>
+
+<h3 id="creando-y-abriendo-la-bd-2">8.3.1 Creando y abriendo la BD</h3>
+
+<p>De forma similar a como hacíamos en Web SQL, vamos a abrir una base de datos, y trabajar directamente con el objeto que nos devuelve. De nuevo, al igual que en Web SQL, las peticiones a la base de datos se realizan de manera asíncrona.</p>
+
+<div class="code javascript">
+<pre class="javascript">window.<span class="me1">indexedDB</span> <span class="sy0">=</span> window.<span class="me1">indexedDB</span> <span class="sy0">||</span> window.<span class="me1">webkitIndexedDB</span> <span class="sy0">||</span> window.<span class="me1">mozIndexedDB</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">if</span> <span class="br0">&#40;</span><span class="st0">'webkitIndexedDB'</span> <span class="kw1">in</span> window<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    window.<span class="me1">IDBTransaction</span> <span class="sy0">=</span> window.<span class="me1">webkitIDBTransaction</span><span class="sy0">;</span>
+    window.<span class="me1">IDBKeyRange</span> <span class="sy0">=</span> window.<span class="me1">webkitIDBKeyRange</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">var</span> request <span class="sy0">=</span> indexedDB.<span class="me1">open</span><span class="br0">&#40;</span><span class="st0">'videos'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+request.<span class="me1">onerror</span> <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    console.<span class="me1">log</span><span class="br0">&#40;</span><span class="st0">'failed to open indexedDB'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+request.<span class="me1">onsuccess</span> <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">&#40;</span>event<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// handle version control</span>
+    <span class="co1">// then create a new object store</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Ahora que la base de datos esta abierta (y asumiendo que no hay errores), se ejecutará el evento <code>onsuccess</code>. Antes de poder crear almacenes de objetos, tenemos que tener en cuenta los siguiente:</p>
+
+<ul>
+<li>Necesitamos un <em>manejador</em> para poder realizar transacciones de inserción y obtención de datos.</li>
+<li>Hay que especificar la versión de la base de datos. Si no existe una versión definida, significa que la base de datos no está aún creada.</li>
+</ul>
+
+<p>El método <code>onsuccess</code> recibe como parámetro un evento, al igual que lo hace cualquier otro método escuchador de eventos. Dentro de este objeto, encontramos una propiedad llamada <code>target</code>, y dentro de ésta otra propiedad llamada <code>result</code>, que contiene el resultado de la operación. En este caso específico, <code>event.target.result</code> contiene la base de datos que acabamos de abrir.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> db <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> request <span class="sy0">=</span> indexedDB.<span class="me1">open</span><span class="br0">&#40;</span><span class="st0">'videos'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+request.<span class="me1">onsuccess</span> <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">&#40;</span>event<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// cache a copy of the database handle for the future</span>
+    db <span class="sy0">=</span> event.<span class="me1">target</span>.<span class="me1">result</span><span class="sy0">;</span>
+    <span class="co1">// handle version control</span>
+    <span class="co1">// then create a new object store</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+request.<span class="me1">onerror</span> <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">&#40;</span>event<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    alert<span class="br0">&#40;</span><span class="st0">'Something failed: '</span> <span class="sy0">+</span> event.<span class="me1">target</span>.<span class="me1">message</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Es importante indicar que en <code>IndexedDB</code>, los errores que se producen escalan hasta el objeto <code>request</code>. Esto quiere decir, que si un error ocurre en cualquier petición (por ejemplo una consulta de datos), en este caso mostraría una alerta con el error.</p>
+
+<h3 id="control-de-versiones">8.3.2 Control de versiones</h3>
+
+<p>El primer paso tras abrir la base de datos es realizar un control de versiones de la base de datos. Podemos utilizar cualquier cadena de caracteres como identificador de la versión, pero lo lógico es seguir un patrón típico de software, como '0.1', '0.2', etc. Al abrir la base de datos, debemos comprobar si la versión actual de la base de datos coincide con la última versión de la aplicación. Si son diferentes, tendremos que realizar la actualización.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> db <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">,</span> version <span class="sy0">=</span> <span class="st0">'0.1'</span><span class="sy0">;</span>
+&nbsp;
+request.<span class="me1">onsuccess</span> <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">&#40;</span>event<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// cache a copy of the database handle for the future</span>
+    db <span class="sy0">=</span> event.<span class="me1">target</span>.<span class="me1">result</span><span class="sy0">;</span>
+&nbsp;
+    <span class="co1">// handle version control</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>version <span class="sy0">!=</span> db.<span class="me1">version</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="co1">// set the version to 0.1</span>
+        <span class="kw1">var</span> verRequest <span class="sy0">=</span> db.<span class="me1">setVersion</span><span class="br0">&#40;</span>version<span class="br0">&#41;</span><span class="sy0">;</span>
+        verRequest.<span class="me1">onsuccess</span> <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">&#40;</span>event<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="co1">// now we're ready to create the object store!</span>
+        <span class="br0">&#125;</span><span class="sy0">;</span>
+        verRequest.<span class="me1">onerror</span> <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            alert<span class="br0">&#40;</span><span class="st0">'unable to set the version :'</span> <span class="sy0">+</span> version<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 id="crear-almacenes-de-objetos">8.3.3 Crear almacenes de objetos</h3>
+
+<p>Tanto la primera vez que creamos nuestra base de datos, como a la hora de actualizarla, debemos crear los almacenes de objetos correspondientes.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> verRequest <span class="sy0">=</span> db.<span class="me1">setVersion</span><span class="br0">&#40;</span>version<span class="br0">&#41;</span><span class="sy0">;</span>
+verRequest.<span class="me1">onsuccess</span> <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">&#40;</span>event<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> store <span class="sy0">=</span> db.<span class="me1">createObjectStore</span><span class="br0">&#40;</span><span class="st0">'blockbusters'</span><span class="sy0">,</span> <span class="br0">&#123;</span>
+        keyPath<span class="sy0">:</span> <span class="st0">'title'</span><span class="sy0">,</span>
+        autoIncrement<span class="sy0">:</span> <span class="kw2">false</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="co1">// at this point we would notify our code</span>
+    <span class="co1">// that the object store is ready</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Para este ejemplo, hemos creado un único almacén de objetos, pero lo normal es disponer de varios y que puedan relacionarse entre ellos. El método <code>createObjectStore</code> admite dos parámetros:</p>
+
+<ul>
+<li><code>name</code>: indica el nombre del almacén de objetos.</li>
+<li><code>optionalParameters</code>: este parámetro permite definir cual va a ser el índice de los objetos, a través del cual se van a realizar las búsquedas y que por tanto debe ser único. Si no deseamos que este índice se incremente automáticamente al añadir nuevos objetos, también lo podemos indicar aquí. Al añadir un nuevo objeto, es importante asegurarnos que disponga de la propiedad definida como índice, y que su valor sea único.</li>
+</ul>
+
+<p>Es posible que deseemos añadir nuevos índices a nuestros objetos, con el fin de poder realizar búsquedas posteriormente. Podemos realizarlo de la siguiente manera:</p>
+
+<div class="code javascript">
+<pre class="javascript">store.<span class="me1">createIndex</span><span class="br0">&#40;</span><span class="st0">'director'</span><span class="sy0">,</span> <span class="st0">'director'</span><span class="sy0">,</span> <span class="br0">&#123;</span> unique<span class="sy0">:</span> <span class="kw2">false</span> <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Hemos añadido un nuevo índice al almacén, llamado <code>director</code> (primer argumento), y hemos indicado que el nombre de la propiedad del objeto es <code>director</code> (segundo argumento), a través del cual vamos a realizar las búsquedas. Evidentemente, varias películas pueden tener el mismo director, por lo que este valor no puede ser único. De esta manera, podemos almacenar objetos de este tipo:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="br0">&#123;</span>
+    title<span class="sy0">:</span> <span class="st0">&quot;Belly Dance Bruce - Final Strike&quot;</span><span class="sy0">,</span>
+    date<span class="sy0">:</span> <span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">Date</span><span class="br0">&#41;</span>.<span class="me1">getTime</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="co1">// released TODAY!</span>
+    director<span class="sy0">:</span> <span class="st0">&quot;Bruce Awesome&quot;</span><span class="sy0">,</span>
+    length<span class="sy0">:</span> <span class="nu0">169</span><span class="sy0">,</span> <span class="co1">// in minutes</span>
+    rating<span class="sy0">:</span> <span class="nu0">10</span><span class="sy0">,</span>
+    cover<span class="sy0">:</span> <span class="st0">&quot;/images/wobble.jpg&quot;</span>
+<span class="br0">&#125;</span></pre>
+</div>
+
+<h3 id="anadir-objetos-al-almacen">8.3.4 Añadir objetos al almacén</h3>
+
+<p>Disponemos de dos métodos para añadir objetos al almacén: <code>add</code> y <code>put</code>.</p>
+
+<ul>
+<li><code>add</code>: añade un <strong>nuevo</strong> objeto al almacén. Es obligatorio que los nuevos datos no existan en el almacén, de otro modo esto provocaría un error de tipo <code>ConstrainError</code>.</li>
+<li><code>put</code>: en cambio, éste método actualiza el valor del objeto si existe, o lo añade si no existe en el almacén.</li>
+</ul>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> video <span class="sy0">=</span> <span class="br0">&#123;</span>
+    title<span class="sy0">:</span> <span class="st0">&quot;Belly Dance Bruce - Final Strike&quot;</span><span class="sy0">,</span>
+    date<span class="sy0">:</span> <span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">Date</span><span class="br0">&#41;</span>.<span class="me1">getTime</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="co1">// released TODAY!</span>
+    director<span class="sy0">:</span> <span class="st0">&quot;Bruce Awesome&quot;</span><span class="sy0">,</span>
+    length<span class="sy0">:</span> <span class="nu0">169</span><span class="sy0">,</span> <span class="co1">// in minutes</span>
+    rating<span class="sy0">:</span> <span class="nu0">10</span><span class="sy0">,</span>
+    cover<span class="sy0">:</span> <span class="st0">&quot;/images/wobble.jpg&quot;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> myIDBTransaction <span class="sy0">=</span>
+    window.<span class="me1">IDBTransaction</span>
+    <span class="sy0">||</span> window.<span class="me1">webkitIDBTransaction</span>
+    <span class="sy0">||</span> <span class="br0">&#123;</span> READ_WRITE<span class="sy0">:</span> <span class="st0">'readwrite'</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> transaction <span class="sy0">=</span>
+    db.<span class="me1">transaction</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="st0">'blockbusters'</span><span class="br0">&#93;</span><span class="sy0">,</span> myIDBTransaction.<span class="me1">READ_WRITE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">var</span> store <span class="sy0">=</span> transaction.<span class="me1">objectStore</span><span class="br0">&#40;</span><span class="st0">'blockbusters'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">// var request = store.add(video);</span>
+<span class="kw1">var</span> request <span class="sy0">=</span> store.<span class="me1">put</span><span class="br0">&#40;</span>video<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Analizemos las tres últimas líneas, utilizadas para añadir un nuevo objeto al almacén:</p>
+
+<ol>
+<li><code>transaction = db.transaction(['blockbusters'], READ_WRITE)</code>: creamos una nueva transacción de lectura/escritura, sobre los almacenes indicados (en este caso sólo 'blockbusters'), pero podrían ser varios si es necesario. Si no necesitamos que la transacción sea de escritura, podemos indicarlo con la propiedad <code>IDBTransaction.READ_ONLY.</code>.</li>
+<li><code>store = transaction.objectStore('blockbusters')</code>: obtenemos el almacén de objetos sobre el que queremos realizar las operaciones, que debe ser uno de los indicados en la transacción. Con la referencia a este objeto, podemos ejecutar las operaciones de <code>add</code>, <code>put</code>, <code>get</code>, <code>delete</code>, etc.</li>
+<li><code>request = store.put(video)</code>: insertamos el objeto en el almacén. Si la transacción se ha realizado correctamente, se llamará al evento <code>onsuccess</code>, mientras que si ha ocurrido un error, se llamará a <code>onerror</code>.</li>
+</ol>
+
+<h3 id="obtener-objetos-del-almacen">8.3.5 Obtener objetos del almacén</h3>
+
+<p>El proceso para acceder a los objetos almacenados es muy similar a lo realizado para insertarlos. Seguimos necesitando una transacción, pero en este caso de sólo lectura. El proceso es el siguiente:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myIDBTransaction <span class="sy0">=</span>
+    window.<span class="me1">IDBTransaction</span>
+    <span class="sy0">||</span> window.<span class="me1">webkitIDBTransaction</span>
+    <span class="sy0">||</span> <span class="br0">&#123;</span> READ<span class="sy0">:</span> <span class="st0">'read'</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> key <span class="sy0">=</span> <span class="st0">&quot;Belly Dance Bruce - Final Strike&quot;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> transaction <span class="sy0">=</span>
+    db.<span class="me1">transaction</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="st0">'blockbusters'</span><span class="br0">&#93;</span><span class="sy0">,</span> myIDBTransaction.<span class="me1">READ</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">var</span> store <span class="sy0">=</span> transaction.<span class="me1">objectStore</span><span class="br0">&#40;</span><span class="st0">'blockbusters'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">// var request = store.add(video);</span>
+<span class="kw1">var</span> request <span class="sy0">=</span> store.<span class="kw1">get</span><span class="br0">&#40;</span>key<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>En este caso, lo importante es que la clave (la variable <code>key</code>) que hemos pasado al método <code>get</code>, buscará el valor que contiene en la propiedad que hemos definido como <code>keyPath</code> al crear el almacén de objetos.</p>
+
+<blockquote>
+  <p>** Nota **</p>
+  
+  <p>El método <code>get</code> produce el mismo resultado tanto si el objeto existe en el almacén como si no, pero con un valor <code>undefined</code>. Para evitar esta situación, es recomendable utilizar el método <code>openCursor()</code> con la misma clave. Si el objeto no existe, el valor del resultado es <code>null</code>.</p>
+</blockquote>
+
+<p>Para obtener todos los objetos de un almacén, en lugar de un único objeto, debemos hacer uso del método <code>openCursor</code>. Este método acepta como parámetro un objeto de tipo <a href="https://developer.mozilla.org/en-US/docs/IndexedDB/IDBKeyRange">IDBKeyRange</a>, que podemos utilizar para acotar la búsqueda.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> transaction <span class="sy0">=</span>
+    db.<span class="me1">transaction</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="st0">'blockbusters'</span><span class="br0">&#93;</span><span class="sy0">,</span> myIDBTransaction.<span class="me1">READ</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">var</span> store <span class="sy0">=</span> transaction.<span class="me1">objectStore</span><span class="br0">&#40;</span><span class="st0">'blockbusters'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">var</span> data <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> request <span class="sy0">=</span> store.<span class="me1">openCursor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+request.<span class="me1">onsuccess</span> <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">&#40;</span>event<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">var</span> cursor <span class="sy0">=</span> event.<span class="me1">target</span>.<span class="me1">result</span><span class="sy0">;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>cursor<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="co1">// value is the stored object</span>
+        data.<span class="me1">push</span><span class="br0">&#40;</span>cursor.<span class="me1">value</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="co1">// get the next object</span>
+        cursor.<span class="kw1">continue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+        <span class="co1">// we’ve got all the data now, call</span>
+        <span class="co1">// a success callback and pass the</span>
+        <span class="co1">// data object in.</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>En ese ejemplo, abrimos el almacén de objetos al igual que lo hemos venido haciendo, pero en lugar de obtener un único objeto con el método <code>get</code>, abrimos un <em>cursor</em>. Esto nos permite iterar por los objetos devueltos por el cursor, todos como es este caso, o los que cumplan una condición concreta. El objeto en concreto al que apunta el cursor en la iteración actual se encuentra almacenado en su propiedad <code>cursor.value</code>. Avanzar en el cursor, para obtener el siguiente objeto, es tan sencillo como llamar al método <code>continue()</code> del cursor, lo que provocará una nueva llamada al evento <code>onsuccess</code>, siendo nosotros los que tenemos que controlar si el cursor ya no apunta a ningún objeto (<code>cursor === false</code>).</p>
+
+<h3 id="eliminar-objetos-del-almacen">8.3.6 Eliminar objetos del almacén</h3>
+
+<p>La última operación a realizar sobre el almacén de objetos, es eliminar datos existentes. De nuevo, el proceso es prácticamente el mismo que para obtener datos:</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> myIDBTransaction <span class="sy0">=</span>
+    window.<span class="me1">IDBTransaction</span>
+    <span class="sy0">||</span> window.<span class="me1">webkitIDBTransaction</span>
+    <span class="sy0">||</span> <span class="br0">&#123;</span> READ_WRITE<span class="sy0">:</span> <span class="st0">'readwrite'</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">var</span> transaction <span class="sy0">=</span>
+    db.<span class="me1">transaction</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="st0">'blockbusters'</span><span class="br0">&#93;</span><span class="sy0">,</span> myIDBTransaction.<span class="me1">READ_WRITE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">var</span> store <span class="sy0">=</span> transaction.<span class="me1">objectStore</span><span class="br0">&#40;</span><span class="st0">'blockbusters'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">var</span> request <span class="sy0">=</span> store.<span class="kw1">delete</span><span class="br0">&#40;</span>key<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<p>Si queremos eliminar todos los objetos de un almacén, podemos utilizar el método <code>clear()</code>, siguiente el mismo proceso visto anteriormente.</p>
+
+<div class="code javascript">
+<pre class="javascript"><span class="kw1">var</span> request <span class="sy0">=</span> store.<span class="me1">clear</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+</div>
+
+<div class="exercise">
+  <p class="title">Ejercicio 10</p>
+</div>
+
+<p><a class="internal" href="capitulo-18.html#ej10">Ver enunciado</a></p>
+
+    </div>
+
+    <div class="span3">
+        <div class="item local_toc">
+            <h3>Índice de contenidos</h3>
+
+            <ul class="unstyled">
+                                                <li class="level-1">
+                        <span></span>
+                        <a class="internal" href="capitulo-8.html#almacenamiento-local">Almacenamiento local</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.1</span>
+                        <a class="internal" href="capitulo-8.html#web-storage">Web Storage</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.2</span>
+                        <a class="internal" href="capitulo-8.html#web-sql">Web SQL</a>
+                    </li>
+                                    <li class="level-2">
+                        <span>8.3</span>
+                        <a class="internal" href="capitulo-8.html#indexeddb">IndexedDB</a>
+                    </li>
+                                        </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
